@@ -7,13 +7,18 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_drop_down.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
-import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
-class RequestServiceOneScreen extends StatelessWidget {
-  RequestServiceOneScreen({Key? key}) : super(key: key);
+class RequestServiceOneScreen extends StatefulWidget {
+  const RequestServiceOneScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RequestServiceOneScreen> createState() =>
+      _RequestServiceOneScreenState();
+}
+
+class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
   TextEditingController vectorController = TextEditingController();
 
   List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
@@ -23,6 +28,15 @@ class RequestServiceOneScreen extends StatelessWidget {
   List<String> radioList = ["lbl_in_person", "lbl_phone", "lbl_video"];
 
   TextEditingController commentController = TextEditingController();
+
+  String? selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the selected value
+    selectedValue = 'In person';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,13 +126,8 @@ class RequestServiceOneScreen extends StatelessWidget {
                                                 margin: EdgeInsets.only(
                                                     top: 5.v, bottom: 13.v)),
                                             Expanded(
-                                                child: CustomTextFormField(
-                                                    controller:
-                                                        vectorController,
-                                                    margin: EdgeInsets.only(
-                                                        left: 21.h),
-                                                    hintText: "Service needed",
-                                                    suffix: Container(
+                                                child: CustomDropDown(
+                                                    icon: Container(
                                                         margin:
                                                             EdgeInsets.fromLTRB(
                                                                 30.h,
@@ -128,9 +137,15 @@ class RequestServiceOneScreen extends StatelessWidget {
                                                         child: CustomImageView(
                                                             svgPath: ImageConstant
                                                                 .imgVectorGray6004x7)),
-                                                    suffixConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 36.v)))
+                                                    margin: EdgeInsets.only(
+                                                        left: 22.h),
+                                                    hintText:
+                                                        "Select professional",
+                                                    items: dropdownItemList,
+                                                    borderDecoration:
+                                                        DropDownStyleHelper
+                                                            .underLineBlack,
+                                                    onChanged: (value) {}))
                                           ]),
                                       SizedBox(height: 29.v),
                                       Row(
@@ -169,29 +184,51 @@ class RequestServiceOneScreen extends StatelessWidget {
                                       Text("Service type",
                                           style: theme.textTheme.bodyLarge),
                                       SizedBox(height: 8.v),
-                                      Row(children: [
-                                        CustomRadioButton(
-                                            text: "In person",
-                                            value: radioList[0],
-                                            groupValue: servicetype,
-                                            onChange: (value) {
-                                              servicetype = value;
-                                            }),
-                                        CustomRadioButton(
-                                            text: "Phone",
-                                            value: radioList[1],
-                                            groupValue: servicetype,
-                                            onChange: (value) {
-                                              servicetype = value;
-                                            }),
-                                        CustomRadioButton(
-                                            text: "Video",
-                                            value: radioList[2],
-                                            groupValue: servicetype,
-                                            onChange: (value) {
-                                              servicetype = value;
-                                            })
-                                      ])
+                                      Row(
+                                        children: <Widget>[
+                                          Radio(
+                                            fillColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.blue),
+                                            value: 'In person',
+                                            groupValue: selectedValue,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                selectedValue = value;
+                                              });
+                                            },
+                                          ),
+                                          const Text('In person'),
+                                          SizedBox(width: 20.v),
+                                          Radio(
+                                            fillColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.blue),
+                                            value: 'Phone',
+                                            groupValue: selectedValue,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                selectedValue = value;
+                                              });
+                                            },
+                                          ),
+                                          const Text('Phone'),
+                                          SizedBox(width: 20.v),
+                                          Radio(
+                                            fillColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.blue),
+                                            value: 'Video',
+                                            groupValue: selectedValue,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                selectedValue = value;
+                                              });
+                                            },
+                                          ),
+                                          const Text('Video'),
+                                        ],
+                                      ),
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(
@@ -204,10 +241,11 @@ class RequestServiceOneScreen extends StatelessWidget {
                                             crossAxisCount: 4,
                                             mainAxisSpacing: 5.h,
                                             crossAxisSpacing: 5.h),
-                                    physics: NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: 28,
                                     itemBuilder: (context, index) {
-                                      return TimedisplayItemWidget();
+                                      return const TimedisplayItemWidget();
                                     })),
                             CustomTextFormField(
                                 controller: commentController,

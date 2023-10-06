@@ -4,6 +4,7 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
+// ignore: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key})
       : super(

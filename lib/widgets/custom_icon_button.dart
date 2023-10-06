@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomIconButton extends StatelessWidget {
-  CustomIconButton({
+  const CustomIconButton({
     Key? key,
     this.alignment,
     this.margin,
@@ -60,7 +60,7 @@ class CustomIconButton extends StatelessWidget {
                         color: appTheme.black900.withOpacity(0.25),
                         spreadRadius: 2.h,
                         blurRadius: 2.h,
-                        offset: Offset(
+                        offset: const Offset(
                           0,
                           4,
                         ),

@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 
+
 // ignore: must_be_immutable
 class UserexperienceItemWidget extends StatelessWidget {
-  const UserexperienceItemWidget({Key? key})
+  String? title;
+  String? desc;
+  String? buttonName;
+  void Function()? ontap;
+   UserexperienceItemWidget({Key? key,this.title,this.desc,this.buttonName,this.ontap})
       : super(
           key: key,
         );
@@ -14,7 +19,7 @@ class UserexperienceItemWidget extends StatelessWidget {
     return Container(
       height: 150.h,
       width: 342.h,
-      margin: EdgeInsets.symmetric(vertical:8.h),
+      margin: EdgeInsets.symmetric(vertical: 8.h),
       decoration: AppDecoration.outlineBlack900.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder9,
       ),
@@ -30,18 +35,17 @@ class UserexperienceItemWidget extends StatelessWidget {
                     topLeft: Radius.circular(9.h),
                     topRight: Radius.circular(9.h))),
             child: Text(
-              "Request New Service",
+             title!,
               style: CustomTextStyles.titleLargePrimary_1,
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(top: 9.v.v,left: 15.v,right: 15.v),
+            padding: EdgeInsets.only(top: 9.v.v, left: 15.v, right: 15.v),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Explore Our Suite of Essential Services &Get ready for an Amazing 5 Star Experience!",
+                Text(desc!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
@@ -49,16 +53,14 @@ class UserexperienceItemWidget extends StatelessWidget {
                     height: 1.47,
                   ),
                 ),
-               
+
                 Padding(
-                  padding:  EdgeInsets.all(13.h),
+                  padding: EdgeInsets.all(13.h),
                   child: CustomElevatedButton(
-                    onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.requestServiceOneScreen);
-                    },
+                    onTap: ontap,
                     height: 38.v,
                     width: 198.h,
-                    text: "Request Service",
+                    text: buttonName!,
                     buttonTextStyle: CustomTextStyles.titleSmallPrimary,
                   ),
                 ),

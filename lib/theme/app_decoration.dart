@@ -29,10 +29,10 @@ class AppDecoration {
           BoxShadow(
             color: appTheme.black900.withOpacity(0.06),
             spreadRadius: 2.h,
-            blurRadius: 2.h,
-            offset: Offset(
+            blurRadius: 5.h,
+            offset: const Offset(
               0,
-              10,
+              5,
             ),
           ),
         ],
@@ -44,7 +44,7 @@ class AppDecoration {
             color: appTheme.black900.withOpacity(0.09),
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
+            offset: const Offset(
               0,
               4,
             ),
@@ -58,7 +58,7 @@ class AppDecoration {
             color: appTheme.black900.withOpacity(0.12),
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
+            offset: const Offset(
               0,
               8,
             ),
@@ -78,7 +78,7 @@ class AppDecoration {
             color: appTheme.black900.withOpacity(0.25),
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
+            offset: const Offset(
               0,
               10,
             ),
@@ -131,11 +131,3 @@ double get strokeAlignInside => BorderSide.strokeAlignInside;
 double get strokeAlignCenter => BorderSide.strokeAlignCenter;
 
 double get strokeAlignOutside => BorderSide.strokeAlignOutside;
-
-// For Flutter SDK Version 3.7.1 or less.
-
-// StrokeAlign get strokeAlignInside => StrokeAlign.inside;
-//
-// StrokeAlign get strokeAlignCenter => StrokeAlign.center;
-//
-// StrokeAlign get strokeAlignOutside => StrokeAlign.outside;

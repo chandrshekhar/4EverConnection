@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/widgets/custom_checkbox_button.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key})
       : super(
@@ -585,16 +585,26 @@ class SignUpScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 20.v),
-                        CustomCheckboxButton(
-                          text:
-                              "By clicking Register Now, you agree to our Terms of Service and Privacy Policy. You may receive SMS Notifications from us and can opt out any time.",
-                          isExpandedText: true,
-                          value: byclickingregis,
-                          textStyle: CustomTextStyles.bodySmallGray600Light,
-                          onChange: (value) {
-                            byclickingregis = value;
-                          },
+                        Row(
+                          children: [
+                            Checkbox(value: true, onChanged: (value) {}),
+                            const Expanded(
+                              child: Text(
+                                "By clicking Register Now, you agree to our Terms of Service and Privacy Policy. You may receive SMS Notifications from us and can opt out any time.",
+                              ),
+                            )
+                          ],
                         ),
+                        // CustomCheckboxButton(
+                        //   text:
+                        //       "By clicking Register Now, you agree to our Terms of Service and Privacy Policy. You may receive SMS Notifications from us and can opt out any time.",
+                        //   isExpandedText: true,
+                        //   value: byclickingregis,
+                        //   textStyle: CustomTextStyles.bodySmallGray600Light,
+                        //   onChange: (value) {
+                        //     byclickingregis = value;
+                        //   },
+                        // ),
                         CustomElevatedButton(
                           onTap: () {
                             Navigator.pushNamed(context, AppRoutes.loginScreen);

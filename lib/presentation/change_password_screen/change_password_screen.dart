@@ -17,7 +17,7 @@ class ChangePasswordScreen extends StatelessWidget {
 
   TextEditingController confirmpasswordController = TextEditingController();
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

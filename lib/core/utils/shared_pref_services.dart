@@ -10,7 +10,7 @@ class SharedPref {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("userId");
   }
-
+   
   setUserToken({required String userToken}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString("userToken", userToken);

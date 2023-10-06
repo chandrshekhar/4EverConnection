@@ -7,16 +7,27 @@ import '../../core/utils/shared_pref_services.dart';
 import '../../core/utils/toast_widget.dart';
 
 class LoginController extends GetxController {
-  var emailController = TextEditingController().obs;
+  var userNameController = TextEditingController().obs;
   var passwordController = TextEditingController().obs;
   RxBool isLoginLoading = false.obs;
+  RxBool rememberMeCheckBox = false.obs;
   AuthServices authServices = AuthServices();
+
+  RxBool passwordVigiable = false.obs;
+
+  visiablePassword(bool value) {
+    passwordVigiable.value = value;
+  }
+
+  rememberMe(bool value) {
+    rememberMeCheckBox.value = value;
+  }
 
   login(BuildContext context) async {
     if (passwordController.value.text.length >= 8) {
       try {
         Map<String, dynamic> reqModel = {
-          "email": emailController.value.text.trim(),
+          "email": userNameController.value.text.trim(),
           "password": passwordController.value.text.trim(),
           "type": "Patient"
         };

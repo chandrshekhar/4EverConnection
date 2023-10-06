@@ -4,7 +4,12 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 
 // ignore: must_be_immutable
 class UserpasswordItemWidget extends StatelessWidget {
-  const UserpasswordItemWidget({Key? key})
+  void Function()? onTap;
+  String? name;
+  String? desc;
+  String? icon;
+  UserpasswordItemWidget(
+      {Key? key, this.onTap, this.name, this.desc, this.icon})
       : super(
           key: key,
         );
@@ -25,13 +30,13 @@ class UserpasswordItemWidget extends StatelessWidget {
         children: [
           SizedBox(height: 6.v),
           CustomImageView(
-            svgPath: ImageConstant.imgVideocameraLightBlue90001,
+            svgPath: icon!,
             height: 43.adaptSize,
             width: 43.adaptSize,
           ),
           SizedBox(height: 13.v),
           Text(
-            "Password",
+            name!,
             style: theme.textTheme.titleLarge,
           ),
           Padding(
@@ -41,7 +46,7 @@ class UserpasswordItemWidget extends StatelessWidget {
               right: 14.h,
             ),
             child: Text(
-              "Please update your password to provide added security to your account. Protect your information and your money.",
+              desc!,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
@@ -52,6 +57,7 @@ class UserpasswordItemWidget extends StatelessWidget {
           ),
           SizedBox(height: 13.v),
           CustomElevatedButton(
+            onTap: onTap,
             text: "Update",
             rightIcon: Container(
               margin: EdgeInsets.only(left: 16.h),

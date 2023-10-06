@@ -79,35 +79,38 @@ class MyProfileScreen extends StatelessWidget {
                                                               imagePath:
                                                                   ImageConstant
                                                                       .imgImage8,
-                                                              height: 144
-                                                                  .adaptSize,
-                                                              width: 144
-                                                                  .adaptSize,
-                                                              radius: BorderRadius
-                                                                  .circular(
-                                                                      72.h),
-                                                              alignment:
-                                                                  Alignment
-                                                                      .centerLeft),
-                                                          CustomIconButton(
-                                                              height: 35
-                                                                  .adaptSize,
-                                                              width: 35
-                                                                  .adaptSize,
-                                                              margin: EdgeInsets.only(
-                                                                  bottom:
-                                                                      21.v),
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8
-                                                                          .h),
-                                                              alignment:
-                                                                  Alignment
-                                                                      .bottomRight,
-                                                              child: CustomImageView(
-                                                                  svgPath:
-                                                                      ImageConstant
-                                                                          .imgCamera))
+                                                              height:
+                                                                  144.adaptSize,
+                                                              width:
+                                                                  144.adaptSize,
+                                                              radius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          72.h),
+                                                              alignment: Alignment
+                                                                  .centerLeft),
+                                                          Positioned(
+                                                            left: 120.v,
+                                                            child: CustomIconButton(
+                                                                height: 35
+                                                                    .adaptSize,
+                                                                width: 35
+                                                                    .adaptSize,
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        bottom: 21
+                                                                            .v),
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(8
+                                                                            .h),
+                                                                alignment: Alignment
+                                                                    .bottomRight,
+                                                                child: CustomImageView(
+                                                                    svgPath:
+                                                                        ImageConstant
+                                                                            .imgCamera)),
+                                                          )
                                                         ])),
                                                 SizedBox(height: 9.v),
                                                 Text("Ars Kumari",

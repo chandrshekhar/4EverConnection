@@ -1,3 +1,5 @@
+import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
+import 'package:get/get.dart';
 import '../dashboard_screen/widgets/userexperience_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -6,10 +8,9 @@ import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_search_view.dart';
-
-import '../my_profile_screen/my_profile_screen.dart';
 import '../side_bar_draweritem/side_bar_draweritem.dart';
 
+// ignore: must_be_immutable
 class DashboardScreen extends StatelessWidget {
   DashboardScreen({Key? key})
       : super(
@@ -19,9 +20,10 @@ class DashboardScreen extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
+  final dashboardController = Get.put(DashboardController());
+
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
       child: Scaffold(
         key: _key,
@@ -53,6 +55,10 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     actions: [
                       AppbarImage1(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, AppRoutes.notificationsScreen);
+                        },
                         svgPath: ImageConstant.imgCart,
                         margin: EdgeInsets.only(
                           left: 24.h,
@@ -62,10 +68,8 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       AppbarCircleimage(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyProfileScreen()));
+                          Navigator.pushNamed(
+                              context, AppRoutes.myProfileScreen);
                         },
                         imagePath: ImageConstant.imgEllipse1,
                         margin: EdgeInsets.only(
@@ -128,11 +132,24 @@ class DashboardScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: dashboardController.dashboardListData.length,
                   itemBuilder: (context, index) {
-                    return UserexperienceItemWidget();
+                    return UserexperienceItemWidget(
+                      title: dashboardController.dashboardListData[index]
+                          ['title'],
+                      desc: dashboardController.dashboardListData[index]
+                          ['desc'],
+                      ontap: () {
+                        if (index == 0) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.requestServiceOneScreen);
+                        }
+                      },
+                      buttonName: dashboardController.dashboardListData[index]
+                          ['buttonName'],
+                    );
                   },
                 ),
               ),

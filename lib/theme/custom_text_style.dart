@@ -127,11 +127,6 @@ class CustomTextStyles {
 }
 
 extension on TextStyle {
-  TextStyle get poppins {
-    return copyWith(
-      fontFamily: 'Poppins',
-    );
-  }
 
   TextStyle get inter {
     return copyWith(

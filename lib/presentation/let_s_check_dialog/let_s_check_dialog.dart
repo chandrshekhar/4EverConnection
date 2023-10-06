@@ -25,7 +25,7 @@ class LetSCheckDialog extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(),
+          const Spacer(),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 17.h,

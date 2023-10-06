@@ -13,11 +13,10 @@ import 'package:forever_connection/presentation/professional_profile_screen/prof
 import 'package:forever_connection/presentation/relationships_screen/relationships_screen.dart';
 import 'package:forever_connection/presentation/health_profile_screen/health_profile_screen.dart';
 import 'package:forever_connection/presentation/financial_profile_screen/financial_profile_screen.dart';
-import 'package:forever_connection/presentation/my_services_one_tab_container_screen/my_services_one_tab_container_screen.dart';
-import 'package:forever_connection/presentation/my_services_two_screen/my_services_two_screen.dart';
 import 'package:forever_connection/presentation/my_services_screen/my_services_screen.dart';
 import 'package:forever_connection/presentation/password_security_screen/password_security_screen.dart';
 import 'package:forever_connection/presentation/change_password_screen/change_password_screen.dart';
+import '../presentation/notification/notification-screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -34,7 +33,7 @@ class AppRoutes {
 
   static const String requestServiceOneScreen = '/request_service_one_screen';
 
-  static const String requestServiceScreen = '/request_service_screen';
+  // static const String requestServiceScreen = '/request_service_screen';
 
   static const String myProfileScreen = '/my_profile_screen';
 
@@ -64,6 +63,8 @@ class AppRoutes {
 
   static const String changePasswordScreen = '/change_password_screen';
 
+  static const String notificationsScreen = '/notifications_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => LoginScreen(),
@@ -71,7 +72,7 @@ class AppRoutes {
     forgotPasswordScreen: (context) => ForgotPasswordScreen(),
     resetPasswordScreen: (context) => ResetPasswordScreen(),
     dashboardScreen: (context) => DashboardScreen(),
-    requestServiceOneScreen: (context) => RequestServiceOneScreen(),
+    requestServiceOneScreen: (context) => const RequestServiceOneScreen(),
     myProfileScreen: (context) => const MyProfileScreen(),
     snapshotScreen: (context) => SnapshotScreen(),
     personalDetailsScreen: (context) => PersonalDetailsScreen(),
@@ -79,11 +80,9 @@ class AppRoutes {
     relationshipsScreen: (context) => RelationshipsScreen(),
     healthProfileScreen: (context) => HealthProfileScreen(),
     financialProfileScreen: (context) => FinancialProfileScreen(),
-    myServicesOneTabContainerScreen: (context) =>
-        const MyServicesOneTabContainerScreen(),
-    myServicesTwoScreen: (context) => MyServicesTwoScreen(),
-    myServicesScreen: (context) => MyServicesScreen(),
-    passwordSecurityScreen: (context) => const PasswordSecurityScreen(),
+    myServicesScreen: (context) => const MyServicesScreen(),
+    passwordSecurityScreen: (context) => PasswordSecurityScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
+    notificationsScreen: (context) => const NotificationsScreen()
   };
 }

@@ -57,7 +57,7 @@ class SnapshotScreen extends StatelessWidget {
 
   String radioGroup = "";
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -438,7 +438,7 @@ class SnapshotScreen extends StatelessWidget {
                                           margin: EdgeInsets.only(
                                               left: 22.h, top: 2.v),
                                           hintText: "Apt, Ste"),
-                                      Spacer(),
+                                      const Spacer(),
                                       CustomTextFormField(
                                           width: 109.h,
                                           controller:

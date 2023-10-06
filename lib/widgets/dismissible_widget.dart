@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DismissKeyBoard extends StatelessWidget {
   final Widget child;
-  DismissKeyBoard({required this.child});
+  const DismissKeyBoard({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

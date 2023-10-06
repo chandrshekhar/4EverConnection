@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
+// ignore: must_be_immutable
 class CustomRadioButton extends StatelessWidget {
   CustomRadioButton({
     Key? key,
@@ -108,7 +109,6 @@ class CustomRadioButton extends StatelessWidget {
         width: iconSize,
         child: Radio<String>(
           activeColor: Colors.green,
-          
           visualDensity: const VisualDensity(
             vertical: -4,
             horizontal: -4,

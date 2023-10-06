@@ -5,18 +5,17 @@ import 'routes/app_routes.dart';
 import 'theme/theme_helper.dart';
 import 'widgets/dismissible_widget.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ThemeHelper().changeTheme('primary');
-   await ScreenUtil.ensureScreenSize();
-     SystemChrome.setPreferredOrientations(
+  await ScreenUtil.ensureScreenSize();
+  SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

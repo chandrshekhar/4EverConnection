@@ -3,7 +3,8 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/base_button.dart';
 
 class CustomOutlinedButton extends BaseButton {
-  CustomOutlinedButton({
+  // ignore: use_key_in_widget_constructors
+  const CustomOutlinedButton({
     Key? key,
     this.decoration,
     this.leftIcon,
@@ -49,8 +50,8 @@ class CustomOutlinedButton extends BaseButton {
   }
 
   Widget get buildOutlinedButtonWidget => Container(
-        height: this.height ?? 40.v,
-        width: this.width ?? double.maxFinite,
+        height: height ?? 40.v,
+        width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(

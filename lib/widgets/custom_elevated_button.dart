@@ -3,7 +3,8 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/base_button.dart';
 
 class CustomElevatedButton extends BaseButton {
-  CustomElevatedButton({
+   // ignore: use_key_in_widget_constructors
+   const CustomElevatedButton({
     Key? key,
     this.decoration,
     this.leftIcon,
@@ -46,8 +47,8 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget get buildElevatedButtonWidget => Container(
-        height: this.height ?? 54.v,
-        width: this.width ?? double.maxFinite,
+        height: height ?? 54.v,
+        width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,
         child: ElevatedButton(

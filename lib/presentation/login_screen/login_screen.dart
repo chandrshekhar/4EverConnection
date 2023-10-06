@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Auth%20Controller/login_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/widgets/custom_checkbox_button.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key})
       : super(
           key: key,
         );
 
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   bool englishName = false;
+
+  final loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,7 +64,8 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
-                            controller: userNameController,
+                            controller:
+                                loginController.userNameController.value,
                             margin: EdgeInsets.only(left: 22.h),
                             hintText: "Username",
                           ),
@@ -71,9 +74,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 2.v),
                     GestureDetector(
-                      onTap: () {
-                        
-                      },
+                      onTap: () {},
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
@@ -97,26 +98,30 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: CustomTextFormField(
-                            controller: passwordController,
-                            margin: EdgeInsets.only(left: 22.h),
-                            hintText: "Password",
-                            textInputAction: TextInputAction.done,
-                            textInputType: TextInputType.visiblePassword,
-                            suffix: Container(
-                              margin: EdgeInsets.only(
-                                left: 30.h,
-                                top: 7.v,
-                                bottom: 7.v,
+                          child: Obx(
+                            () => CustomTextFormField(
+                              controller:
+                                  loginController.passwordController.value,
+                              margin: EdgeInsets.only(left: 22.h),
+                              hintText: "Password",
+                              textInputAction: TextInputAction.done,
+                              textInputType: TextInputType.visiblePassword,
+                              suffix: InkWell(
+                                onTap: () {
+                                  loginController.visiablePassword(
+                                      !loginController.passwordVigiable.value);
+                                },
+                                child: Icon(
+                                    !loginController.passwordVigiable.value
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
                               ),
-                              child: CustomImageView(
-                                svgPath: ImageConstant.imgShare,
+                              suffixConstraints: BoxConstraints(
+                                maxHeight: 30.v,
                               ),
+                              obscureText:
+                                  loginController.passwordVigiable.value,
                             ),
-                            suffixConstraints: BoxConstraints(
-                              maxHeight: 30.v,
-                            ),
-                            obscureText: true,
                           ),
                         ),
                       ],
@@ -124,7 +129,8 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 16.v),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context,AppRoutes.forgotPasswordScreen);
+                        Navigator.pushNamed(
+                            context, AppRoutes.forgotPasswordScreen);
                       },
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -136,16 +142,25 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16.v),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: CustomCheckboxButton(
                         alignment: Alignment.centerLeft,
-                        text: "Remember me",
-                        value: englishName,
-                        onChange: (value) {
-                          englishName = value;
-                        },
-                      ),
-                    ),
+                        child: Row(
+                          children: [
+                            Obx(
+                              () => Checkbox(
+                                  value:
+                                      loginController.rememberMeCheckBox.value,
+                                  onChanged: (value) {
+                                    loginController.rememberMe(value!);
+                                  }),
+                            ),
+                            const Text(
+                              "Remember Me",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            )
+                          ],
+                        )),
                     SizedBox(height: 44.v),
                     CustomElevatedButton(
                       onTap: () {
@@ -173,7 +188,8 @@ class LoginScreen extends StatelessWidget {
                         padding: EdgeInsets.only(bottom: 28.v),
                         child: InkWell(
                           onTap: () {
-                            Navigator.pushNamed(context,AppRoutes.signUpScreen);
+                            Navigator.pushNamed(
+                                context, AppRoutes.signUpScreen);
                           },
                           child: RichText(
                             text: TextSpan(
@@ -183,7 +199,6 @@ class LoginScreen extends StatelessWidget {
                                   style: CustomTextStyles.bodyMediumGray600,
                                 ),
                                 TextSpan(
-                                  
                                   text: "Register Now",
                                   style: CustomTextStyles
                                       .titleSmallPrimaryContainer,
