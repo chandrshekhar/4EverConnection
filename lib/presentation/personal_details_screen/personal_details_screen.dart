@@ -7,48 +7,21 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
+import '../../Controllers/Personal Details Controller/personal_details-controller.dart';
 
 // ignore_for_file: must_be_immutable
 class PersonalDetailsScreen extends StatefulWidget {
-  PersonalDetailsScreen({Key? key}) : super(key: key);
+  const PersonalDetailsScreen({Key? key}) : super(key: key);
 
   @override
   State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
 }
 
 class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
-  TextEditingController firstNameController = TextEditingController();
-
-  TextEditingController nameController = TextEditingController();
-
-  TextEditingController lastNameController = TextEditingController();
-
-  TextEditingController phoneController = TextEditingController();
-
-  TextEditingController phoneController1 = TextEditingController();
-
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController addressController = TextEditingController();
-
-  TextEditingController aptsteController = TextEditingController();
-
-  TextEditingController zipvalueoneController = TextEditingController();
-
-  TextEditingController dateOfBirthController = TextEditingController();
-
-  List<String> radioList = ["lbl_male", "lbl_female", "lbl_other"];
-  String gender = "lbl_male";
-
-  TextEditingController socialSecurityNController = TextEditingController();
-
-  TextEditingController countryController = TextEditingController();
-
-  TextEditingController countryController1 = TextEditingController();
-
-  String radioGroup = "";
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final personalDetailsController = Get.put(PersonalDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +36,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     margin:
                         EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
                     onTap: () {
-                      onTapArrowleftone(context);
+                      Navigator.pop(context);
                     }),
                 centerTitle: true,
                 title: AppbarTitle(text: "Personal Details"),
@@ -106,7 +79,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          firstNameController,
+                                                          personalDetailsController
+                                                              .firstNameController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       hintText: "First Name"))
@@ -128,7 +103,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          nameController,
+                                                          personalDetailsController
+                                                              .middleNameController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       hintText: "Middle Name"))
@@ -150,7 +127,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          lastNameController,
+                                                          personalDetailsController
+                                                              .lastNameController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       hintText: "Last Name"))
@@ -172,7 +151,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          phoneController,
+                                                          personalDetailsController
+                                                              .mobilePhoneController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 24.h),
                                                       hintText: "Mobile Phone",
@@ -196,7 +177,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          phoneController1,
+                                                          personalDetailsController
+                                                              .homePhoneController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 24.h),
                                                       hintText: "Home Phone",
@@ -220,7 +203,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          emailController,
+                                                          personalDetailsController
+                                                              .personalEmailController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       hintText:
@@ -246,7 +231,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          addressController,
+                                                          personalDetailsController
+                                                              .homeAddressController
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       hintText: "Home Address"))
@@ -267,7 +254,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                       top: 3.v, bottom: 12.v)),
                                               CustomTextFormField(
                                                   width: 113.h,
-                                                  controller: aptsteController,
+                                                  controller:
+                                                      personalDetailsController
+                                                          .aptSteController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h, top: 2.v),
                                                   hintText: "Apt, Ste"),
@@ -283,7 +273,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               CustomTextFormField(
                                                   width: 109.h,
                                                   controller:
-                                                      zipvalueoneController,
+                                                      personalDetailsController
+                                                          .zipController.value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "ZIP")
@@ -305,7 +296,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-                                                          dateOfBirthController,
+                                                          personalDetailsController
+                                                              .dobControlle
+                                                              .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       hintText:
@@ -331,39 +324,44 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                     SizedBox(height: 11.v),
                                     Align(
                                         alignment: Alignment.center,
-                                        child: Row(children: [
-                                          CustomRadioButton(
-                                              text: "Male",
-                                              value: radioList[0],
-                                              groupValue: gender,
-                                              onChange: (value) {
-                                                setState(() {
-                                                  gender = value;
-                                                });
-                                              }),
-                                          CustomRadioButton(
-                                              text: "Female",
-                                              value: radioList[1],
-                                              groupValue: gender,
-                                              margin:
-                                                  EdgeInsets.only(left: 12.h),
-                                              onChange: (value) {
-                                                setState(() {
-                                                  gender = value;
-                                                });
-                                              }),
-                                          CustomRadioButton(
-                                              text: "Other",
-                                              value: radioList[2],
-                                              groupValue: gender,
-                                              margin:
-                                                  EdgeInsets.only(left: 22.h),
-                                              onChange: (value) {
-                                                setState(() {
-                                                  gender = value;
-                                                });
-                                              })
-                                        ])),
+                                        child: Obx(
+                                          () => Row(children: [
+                                            CustomRadioButton(
+                                                text: "Male",
+                                                value: "Male",
+                                                groupValue:
+                                                    personalDetailsController
+                                                        .radioGroup.value,
+                                                onChange: (value) {
+                                                  personalDetailsController
+                                                      .selectGender(value);
+                                                }),
+                                            CustomRadioButton(
+                                                text: "Female",
+                                                value: "Female",
+                                                groupValue:
+                                                    personalDetailsController
+                                                        .radioGroup.value,
+                                                margin:
+                                                    EdgeInsets.only(left: 12.h),
+                                                onChange: (value) {
+                                                  personalDetailsController
+                                                      .selectGender(value);
+                                                }),
+                                            CustomRadioButton(
+                                                text: "Other",
+                                                value: "Other",
+                                                groupValue:
+                                                    personalDetailsController
+                                                        .radioGroup.value,
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
+                                                onChange: (value) {
+                                                  personalDetailsController
+                                                      .selectGender(value);
+                                                })
+                                          ]),
+                                        )),
                                     SizedBox(height: 8.v)
                                   ])),
                           SizedBox(height: 10.v),
@@ -391,7 +389,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      socialSecurityNController,
+                                                      personalDetailsController
+                                                          .sociealsecurityController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 24.h),
                                                   hintText:
@@ -413,7 +413,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   top: 2.v, bottom: 12.v)),
                                           Expanded(
                                               child: CustomTextFormField(
-                                                  controller: countryController,
+                                                  controller:
+                                                      personalDetailsController
+                                                          .countruyofbirthControlle
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "Country of Birth",
@@ -446,7 +449,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      countryController1,
+                                                      personalDetailsController
+                                                          .countryOfCitizenshipControlle
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText:
@@ -464,8 +469,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                           svgPath: ImageConstant
                                                               .imgVectorGray6004x7)),
                                                   suffixConstraints:
-                                                      BoxConstraints(
-                                                          maxHeight: 34.v)))
+                                                      BoxConstraints(maxHeight: 34.v)))
                                         ]),
                                     SizedBox(height: 30.v),
                                     Row(children: [
@@ -484,46 +488,67 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                     Padding(
                                         padding: EdgeInsets.only(
                                             left: 37.h, top: 9.v, bottom: 4.v),
-                                        child: Row(children: [
-                                          CustomRadioButton(
-                                              text: "Yes",
-                                              value: "Yes",
-                                              groupValue: radioGroup,
-                                              onChange: (value) {
-                                                setState(() {
-                                                  radioGroup = value;
-                                                });
-                                              }),
-                                          CustomRadioButton(
-                                              text: "No",
-                                              value: "No",
-                                              groupValue: radioGroup,
-                                              onChange: (value) {
-                                                setState(() {
-                                                  radioGroup = value;
-                                                });
-                                              }),
-                                        ]))
+                                        child: Obx(
+                                          () => Row(children: [
+                                            CustomRadioButton(
+                                                text: "Yes",
+                                                value: "Yes",
+                                                groupValue:
+                                                    personalDetailsController
+                                                        .radioGroupLanguage
+                                                        .value,
+                                                onChange: (value) {
+                                                  personalDetailsController
+                                                      .selectLanguage(value);
+                                                }),
+                                            CustomRadioButton(
+                                                text: "No",
+                                                value: "No",
+                                                groupValue:
+                                                    personalDetailsController
+                                                        .radioGroupLanguage
+                                                        .value,
+                                                onChange: (value) {
+                                                  personalDetailsController
+                                                      .selectLanguage(value);
+                                                }),
+                                          ]),
+                                        ))
                                   ])),
-                          CustomElevatedButton(
-                              text: "Save",
-                              margin: EdgeInsets.only(
-                                  left: 12.h, top: 21.v, right: 12.h),
-                              rightIcon: Container(
-                                  margin: EdgeInsets.only(left: 16.h),
-                                  child: CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgArrowrightPrimary))),
-                          SizedBox(height: 9.v),
-                          Text("Cancel", style: theme.textTheme.titleMedium)
+                         
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.v),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: CustomElevatedButton(
+                                      buttonStyle: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.red)),
+                                      text: "Cancel",
+                                      rightIcon: Container(
+                                          margin: EdgeInsets.only(left: 16.h),
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                          ))),
+                                ),
+                                SizedBox(width: 5.v),
+                                Expanded(
+                                  child: CustomElevatedButton(
+                                      text: "Save",
+                                      rightIcon: Container(
+                                          margin: EdgeInsets.only(left: 16.h),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgArrowrightPrimary))),
+                                ),
+                              ],
+                            ),
+                          ),
+                     
+                          // Text("Cancel", style: theme.textTheme.titleMedium)
                         ]))))));
-  }
-
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
-  onTapArrowleftone(BuildContext context) {
-    Navigator.pop(context);
   }
 }

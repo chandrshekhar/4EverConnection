@@ -15,4 +15,15 @@ class PersonalDetailsController extends GetxController {
   var sociealsecurityController = TextEditingController().obs;
   var countruyofbirthControlle = TextEditingController().obs;
   var countryOfCitizenshipControlle = TextEditingController().obs;
+
+  RxString radioGroup = "Male".obs;
+  RxString radioGroupLanguage = "Yes".obs;
+
+  void selectGender(String selectedvalue) {
+    radioGroup.value = selectedvalue;
+  }
+
+  void selectLanguage(String selectedValue) {
+    radioGroupLanguage.value = selectedValue;
+  }
 }

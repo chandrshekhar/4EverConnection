@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Relationship%20Controller/relationship_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
@@ -7,71 +8,13 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
 
 // ignore_for_file: must_be_immutable
-class RelationshipsScreen extends StatefulWidget {
+class RelationshipsScreen extends StatelessWidget {
   RelationshipsScreen({Key? key}) : super(key: key);
 
-  @override
-  State<RelationshipsScreen> createState() => _RelationshipsScreenState();
-}
-
-class _RelationshipsScreenState extends State<RelationshipsScreen> {
-  TextEditingController relationshipsvaController = TextEditingController();
-
-  TextEditingController firstNameController = TextEditingController();
-
-  TextEditingController nameController = TextEditingController();
-
-  TextEditingController lastNameController = TextEditingController();
-
-  TextEditingController phoneController = TextEditingController();
-
-  TextEditingController phoneController1 = TextEditingController();
-
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController addressController = TextEditingController();
-
-  TextEditingController aptsteController = TextEditingController();
-
-  TextEditingController zipController = TextEditingController();
-
-  TextEditingController dateOfBirthController = TextEditingController();
-
-  String radioGroup = "Male";
-
-  TextEditingController group458Controller = TextEditingController();
-
-  TextEditingController countryController = TextEditingController();
-
-  TextEditingController countryController1 = TextEditingController();
-
-  TextEditingController nameController1 = TextEditingController();
-
-  TextEditingController phoneController2 = TextEditingController();
-
-  TextEditingController businessfaxController = TextEditingController();
-
-  TextEditingController businessemailController = TextEditingController();
-
-  TextEditingController businessController = TextEditingController();
-
-  TextEditingController vectorfourController = TextEditingController();
-
-  TextEditingController myidealController = TextEditingController();
-
-  TextEditingController vectorsevenController = TextEditingController();
-
-  TextEditingController degreeController = TextEditingController();
-
-  TextEditingController vectortenController = TextEditingController();
-
-  TextEditingController addressController1 = TextEditingController();
-
-  TextEditingController aptsteoneController = TextEditingController();
-
-  TextEditingController ziponeController = TextEditingController();
+  final relationshipController = Get.put(RelationShipController());
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +61,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                     EdgeInsets.only(top: 6.v, bottom: 13.v)),
                             Expanded(
                                 child: CustomTextFormField(
-                                    controller: relationshipsvaController,
+                                    controller: relationshipController
+                                        .relationshipsvaController.value,
                                     margin:
                                         EdgeInsets.only(left: 22.h, top: 4.v),
                                     hintText: "Choose Relationship",
@@ -157,7 +101,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: firstNameController,
+                                          controller: relationshipController
+                                              .firstNameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "First Name"))
                                 ]),
@@ -173,7 +118,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: nameController,
+                                          controller: relationshipController
+                                              .middlenameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Middle Name"))
                                 ]),
@@ -189,7 +135,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 3.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: lastNameController,
+                                          controller: relationshipController
+                                              .lastNameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Last Name"))
                                 ]),
@@ -205,7 +152,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 8.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: phoneController,
+                                          controller: relationshipController
+                                              .phoneController.value,
                                           margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Mobile Phone",
                                           textInputType: TextInputType.phone))
@@ -222,7 +170,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 8.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: phoneController1,
+                                          controller: relationshipController
+                                              .homephoneController.value,
                                           margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Home Phone",
                                           textInputType: TextInputType.phone))
@@ -239,7 +188,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 6.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: emailController,
+                                          controller: relationshipController
+                                              .emailController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Personal Email",
                                           textInputType:
@@ -257,7 +207,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 4.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: addressController,
+                                          controller: relationshipController
+                                              .homeaddressController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Home Address"))
                                 ]),
@@ -273,7 +224,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 3.v, bottom: 12.v)),
                                   CustomTextFormField(
                                       width: 113.h,
-                                      controller: aptsteController,
+                                      controller: relationshipController
+                                          .aptsteContoller.value,
                                       margin:
                                           EdgeInsets.only(left: 22.h, top: 2.v),
                                       hintText: "Apt, Ste"),
@@ -285,7 +237,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           left: 43.h, top: 3.v, bottom: 12.v)),
                                   CustomTextFormField(
                                       width: 109.h,
-                                      controller: zipController,
+                                      controller: relationshipController
+                                          .zipController.value,
                                       margin: EdgeInsets.only(left: 22.h),
                                       hintText: "ZIP")
                                 ]),
@@ -301,7 +254,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: dateOfBirthController,
+                                          controller: relationshipController
+                                              .dateOfBirthController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Date of Birth"))
                                 ]),
@@ -322,38 +276,43 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                 child: Padding(
                                     padding: EdgeInsets.only(
                                         left: 30.h, top: 5.v, right: 33.h),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          CustomRadioButton(
-                                              text: "Male",
-                                              value: "Male",
-                                              groupValue: radioGroup,
-                                              onChange: (value) {
-                                                setState(() {
-                                                  radioGroup = value;
-                                                });
-                                              }),
-                                          CustomRadioButton(
-                                              text: "Female",
-                                              value: "Female",
-                                              groupValue: radioGroup,
-                                              onChange: (value) {
-                                                setState(() {
-                                                  radioGroup = value;
-                                                });
-                                              }),
-                                          CustomRadioButton(
-                                              text: "Other",
-                                              value: "Other",
-                                              groupValue: radioGroup,
-                                              onChange: (value) {
-                                                setState(() {
-                                                  radioGroup = value;
-                                                });
-                                              }),
-                                        ]))),
+                                    child: Obx(
+                                      () => Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            CustomRadioButton(
+                                                text: "Male",
+                                                value: "Male",
+                                                groupValue:
+                                                    relationshipController
+                                                        .radioGroup.value,
+                                                onChange: (value) {
+                                                  relationshipController
+                                                      .selectGender(value);
+                                                }),
+                                            CustomRadioButton(
+                                                text: "Female",
+                                                value: "Female",
+                                                groupValue:
+                                                    relationshipController
+                                                        .radioGroup.value,
+                                                onChange: (value) {
+                                                  relationshipController
+                                                      .selectGender(value);
+                                                }),
+                                            CustomRadioButton(
+                                                text: "Other",
+                                                value: "Other",
+                                                groupValue:
+                                                    relationshipController
+                                                        .radioGroup.value,
+                                                onChange: (value) {
+                                                  relationshipController
+                                                      .selectGender(value);
+                                                }),
+                                          ]),
+                                    ))),
                             SizedBox(height: 25.v),
                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -366,7 +325,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 6.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: group458Controller,
+                                          controller: relationshipController
+                                              .socielsecurityNumber.value,
                                           margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Social Security Number",
                                           textInputType: TextInputType.number))
@@ -383,7 +343,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 2.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: countryController,
+                                          controller: relationshipController
+                                              .birthcountryController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Country of Birth",
                                           suffix: Container(
@@ -407,7 +368,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                           top: 2.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller: countryController1,
+                                          controller: relationshipController
+                                              .birthcitizencountryController
+                                              .value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Country of Citizenship",
                                           suffix: Container(
@@ -451,7 +414,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 4.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: nameController1,
+                                              controller: relationshipController
+                                                  .businessnameController.value,
                                               margin:
                                                   EdgeInsets.only(left: 23.h),
                                               hintText: "Business Name"))
@@ -470,7 +434,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 8.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: phoneController2,
+                                              controller: relationshipController
+                                                  .businessphoneController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 24.h),
                                               hintText: "Business Phone",
@@ -491,7 +457,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: businessfaxController,
+                                              controller: relationshipController
+                                                  .businessfaxController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Business Fax"))
@@ -510,8 +477,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  businessemailController,
+                                              controller: relationshipController
+                                                  .businessemailController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Business Email",
@@ -532,7 +500,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: businessController,
+                                              controller: relationshipController
+                                                  .businesswebsitecontroller
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 20.h),
                                               hintText: "Business Website"))
@@ -551,7 +521,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 4.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: vectorfourController,
+                                              controller: relationshipController
+                                                  .businessPositionController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Position",
@@ -578,7 +550,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 3.v, bottom: 14.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: myidealController,
+                                              controller: relationshipController
+                                                  .myidealController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "My Ideal Occupation"))
@@ -598,7 +571,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 6.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: vectorsevenController,
+                                              controller: relationshipController
+                                                  .educationlevelcontroller
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 17.h),
                                               hintText: "Education Level",
@@ -626,7 +601,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 3.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: degreeController,
+                                              controller: relationshipController
+                                                  .degreeController.value,
                                               margin:
                                                   EdgeInsets.only(left: 17.h),
                                               hintText: "Degree"))
@@ -645,7 +621,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 4.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: vectortenController,
+                                              controller: relationshipController
+                                                  .affiliationsController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Affiliations",
@@ -672,7 +649,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 4.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller: addressController1,
+                                              controller: relationshipController
+                                                  .businessAddressaddressController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Business Address",
@@ -700,7 +679,9 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               top: 3.v, bottom: 12.v)),
                                       CustomTextFormField(
                                           width: 113.h,
-                                          controller: aptsteoneController,
+                                          controller: relationshipController
+                                              .businessaptsteoneController
+                                              .value,
                                           margin: EdgeInsets.only(
                                               left: 22.h, top: 2.v),
                                           hintText: "Apt, Ste"),
@@ -714,7 +695,8 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                                               bottom: 12.v)),
                                       CustomTextFormField(
                                           width: 109.h,
-                                          controller: ziponeController,
+                                          controller: relationshipController
+                                              .businessziponeController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "ZIP",
                                           textInputAction: TextInputAction.done)

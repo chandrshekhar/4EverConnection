@@ -6,42 +6,19 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
+
+import '../../Controllers/Professional Details/professional_details_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class ProfessionalProfileScreen extends StatelessWidget {
   ProfessionalProfileScreen({Key? key}) : super(key: key);
-
-  TextEditingController nameController = TextEditingController();
-
-  TextEditingController phoneController = TextEditingController();
-
-  TextEditingController businessfaxoneController = TextEditingController();
-
-  TextEditingController businessemailController = TextEditingController();
-
-  TextEditingController businesswebsiteController = TextEditingController();
-
-  TextEditingController positionvalueController = TextEditingController();
-
-  TextEditingController idealoccupationController = TextEditingController();
-
-  TextEditingController educationlevelController = TextEditingController();
-
-  TextEditingController degreevalueoneController = TextEditingController();
-
-  TextEditingController affiliationsvalController = TextEditingController();
-
-  TextEditingController addressController = TextEditingController();
-
-  TextEditingController aptsteController = TextEditingController();
-
-  TextEditingController zipvalueoneController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final professionalProfileController = Get.put(ProfessionalDetalsController());
 
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
         child: Scaffold(
             backgroundColor: appTheme.lightBlue50,
@@ -53,12 +30,16 @@ class ProfessionalProfileScreen extends StatelessWidget {
                     margin:
                         EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
                     onTap: () {
-                      onTapArrowleftone(context);
+                      Navigator.pop(context);
                     }),
                 centerTitle: true,
                 title: AppbarTitle(text: "Professional Profile"),
                 actions: [
                   AppbarImage1(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRoutes.notificationsScreen);
+                      },
                       svgPath: ImageConstant.imgCart,
                       margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
                 ],
@@ -94,7 +75,10 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   top: 4.v, bottom: 12.v)),
                                           Expanded(
                                               child: CustomTextFormField(
-                                                  controller: nameController,
+                                                  controller:
+                                                      professionalProfileController
+                                                          .businessnameController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 23.h),
                                                   hintText: "Business Name"))
@@ -114,7 +98,10 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   top: 8.v, bottom: 13.v)),
                                           Expanded(
                                               child: CustomTextFormField(
-                                                  controller: phoneController,
+                                                  controller:
+                                                      professionalProfileController
+                                                          .businessphoneController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 24.h),
                                                   hintText: "Business Phone",
@@ -138,7 +125,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      businessfaxoneController,
+                                                      professionalProfileController
+                                                          .businessfaxoneController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "Business Fax"))
@@ -159,7 +148,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      businessemailController,
+                                                      professionalProfileController
+                                                          .businessemailController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "Business Email",
@@ -182,7 +173,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      businesswebsiteController,
+                                                      professionalProfileController
+                                                          .businesswebsiteController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 20.h),
                                                   hintText: "Business Website"))
@@ -203,7 +196,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      positionvalueController,
+                                                      professionalProfileController
+                                                          .positionvalueController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "Position",
@@ -238,7 +233,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      idealoccupationController,
+                                                      professionalProfileController
+                                                          .idealoccupationController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText:
@@ -261,7 +258,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      educationlevelController,
+                                                      professionalProfileController
+                                                          .educationlevelController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 19.h),
                                                   hintText: "Education Level",
@@ -296,7 +295,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      degreevalueoneController,
+                                                      professionalProfileController
+                                                          .degreevalueoneController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 17.h),
                                                   hintText: "Degree"))
@@ -317,7 +318,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                           Expanded(
                                               child: CustomTextFormField(
                                                   controller:
-                                                      affiliationsvalController,
+                                                      professionalProfileController
+                                                          .affiliationsvalController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "Affiliations"))
@@ -338,7 +341,10 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   top: 4.v, bottom: 12.v)),
                                           Expanded(
                                               child: CustomTextFormField(
-                                                  controller: addressController,
+                                                  controller:
+                                                      professionalProfileController
+                                                          .addressController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   hintText: "Business Address"))
@@ -359,7 +365,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   top: 3.v, bottom: 12.v)),
                                           CustomTextFormField(
                                               width: 113.h,
-                                              controller: aptsteController,
+                                              controller:
+                                                  professionalProfileController
+                                                      .aptsteController.value,
                                               margin: EdgeInsets.only(
                                                   left: 22.h, top: 2.v),
                                               hintText: "Apt, Ste"),
@@ -374,7 +382,10 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   bottom: 12.v)),
                                           CustomTextFormField(
                                               width: 109.h,
-                                              controller: zipvalueoneController,
+                                              controller:
+                                                  professionalProfileController
+                                                      .zipvalueoneController
+                                                      .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "ZIP",
@@ -383,25 +394,37 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                         ]),
                                     SizedBox(height: 26.v)
                                   ])),
-                          CustomElevatedButton(
-                              text: "Save",
-                              margin: EdgeInsets.only(
-                                  left: 12.h, top: 17.v, right: 12.h),
-                              rightIcon: Container(
-                                  margin: EdgeInsets.only(left: 16.h),
-                                  child: CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgArrowrightPrimary))),
-                          SizedBox(height: 9.v),
-                          Text("Cancel", style: theme.textTheme.titleMedium)
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.v),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: CustomElevatedButton(
+                                      buttonStyle: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.red)),
+                                      text: "Cancel",
+                                      rightIcon: Container(
+                                          margin: EdgeInsets.only(left: 16.h),
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                          ))),
+                                ),
+                                SizedBox(width: 5.v),
+                                Expanded(
+                                  child: CustomElevatedButton(
+                                      text: "Save",
+                                      rightIcon: Container(
+                                          margin: EdgeInsets.only(left: 16.h),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgArrowrightPrimary))),
+                                ),
+                              ],
+                            ),
+                          ),
                         ]))))));
-  }
-
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
-  onTapArrowleftone(BuildContext context) {
-    Navigator.pop(context);
   }
 }

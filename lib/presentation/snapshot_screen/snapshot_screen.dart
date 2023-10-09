@@ -19,8 +19,7 @@ class SnapshotScreen extends StatefulWidget {
 }
 
 class _SnapshotScreenState extends State<SnapshotScreen> {
-  final snapshotController = Get.put((UserSnapshotController));
-  String radioGroup = "";
+  final snapshotController = Get.put(UserSnapshotController());
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -37,7 +36,7 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                     margin:
                         EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
                     onTap: () {
-                      onTapArrowleftone(context);
+                      Navigator.pop(context);
                     }),
                 centerTitle: true,
                 title: AppbarTitle(text: "Snapshot"),
@@ -72,6 +71,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .firstNameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "First Name"))
                                 ]),
@@ -88,20 +89,29 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .middleNameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Middle Name"))
                                 ]),
-                            SizedBox(height: 40.v),
-                            CustomTextFormField(
-                                hintText: "Last Name",
-                                prefix: Container(
-                                    margin: EdgeInsets.only(
-                                        top: 3.v, right: 22.h, bottom: 3.v),
-                                    child: CustomImageView(
-                                        svgPath: ImageConstant.imgUser)),
-                                prefixConstraints:
-                                    BoxConstraints(maxHeight: 35.v),
-                                contentPadding: EdgeInsets.only(right: 30.h)),
+                            SizedBox(height: 39.v),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomImageView(
+                                      svgPath: ImageConstant.imgUser,
+                                      height: 19.v,
+                                      width: 17.h,
+                                      margin: EdgeInsets.only(
+                                          top: 4.v, bottom: 13.v)),
+                                  Expanded(
+                                      child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .lastNameController.value,
+                                          margin: EdgeInsets.only(left: 22.h),
+                                          hintText: "Last Name"))
+                                ]),
                             SizedBox(height: 42.v),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -115,6 +125,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 1.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .companyNameController.value,
                                           margin: EdgeInsets.only(left: 23.h),
                                           hintText: "Company Name"))
                                 ]),
@@ -155,6 +167,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 3.v, bottom: 14.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .occupationController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Occupation"))
                                 ]),
@@ -171,6 +185,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 3.v, bottom: 14.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .idealOccupationController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Ideal Occupation"))
                                 ]),
@@ -187,6 +203,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 8.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .phoneNumberController.value,
                                           margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Mobile Phone",
                                           textInputType: TextInputType.phone))
@@ -204,6 +222,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 8.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .homePhoneController.value,
                                           margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Home Phone",
                                           textInputType: TextInputType.phone))
@@ -221,6 +241,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 8.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .businessPhoneController.value,
                                           margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Business Phone",
                                           textInputType: TextInputType.phone))
@@ -238,6 +260,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 6.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .businessFaxController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Business Fax"))
                                 ]),
@@ -254,6 +278,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 4.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .homeAddressController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Home Address"))
                                 ]),
@@ -269,6 +295,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                       margin: EdgeInsets.only(
                                           top: 3.v, bottom: 12.v)),
                                   CustomTextFormField(
+                                      controller: snapshotController
+                                          .homeAptSteController.value,
                                       width: 113.h,
                                       margin:
                                           EdgeInsets.only(left: 22.h, top: 2.v),
@@ -280,6 +308,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                       margin: EdgeInsets.only(
                                           left: 43.h, top: 3.v, bottom: 12.v)),
                                   CustomTextFormField(
+                                      controller: snapshotController
+                                          .homeZipController.value,
                                       width: 109.h,
                                       margin: EdgeInsets.only(left: 22.h),
                                       hintText: "ZIP")
@@ -297,6 +327,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                           top: 4.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          controller: snapshotController
+                                              .businessAddressController.value,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Business Address"))
                                 ]),
@@ -312,13 +344,18 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                       margin: EdgeInsets.only(
                                           top: 3.v, bottom: 12.v)),
                                   CustomTextFormField(
+                                      controller: snapshotController
+                                          .businessAptStecontroller.value,
                                       width: 113.h,
                                       margin:
                                           EdgeInsets.only(left: 22.h, top: 2.v),
                                       hintText: "Apt, Ste"),
                                   const Spacer(),
                                   CustomTextFormField(
-                                      width: 109.h, hintText: "ZIP")
+                                      controller: snapshotController
+                                          .businessZipController.value,
+                                      width: 109.h,
+                                      hintText: "ZIP")
                                 ]),
                             SizedBox(height: 20.v)
                           ])),
@@ -347,6 +384,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                               top: 1.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
+                                              controller: snapshotController
+                                                  .spouseController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Spouse"))
@@ -364,6 +403,9 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                               top: 7.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
+                                              controller: snapshotController
+                                                  .spouseLifePartnerPhoneController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 24.h),
                                               hintText:
@@ -384,6 +426,9 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
+                                              controller: snapshotController
+                                                  .personalEmailController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Personal Email",
@@ -403,6 +448,9 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
+                                              controller: snapshotController
+                                                  .businessEmailController
+                                                  .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               hintText: "Business Email",
@@ -422,6 +470,8 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
+                                              controller: snapshotController
+                                                  .websiteUrlController.value,
                                               margin:
                                                   EdgeInsets.only(left: 20.h),
                                               hintText: "Website",
@@ -445,35 +495,29 @@ class _SnapshotScreenState extends State<SnapshotScreen> {
                                 Padding(
                                     padding: EdgeInsets.only(
                                         left: 37.h, top: 9.v, bottom: 2.v),
-                                    child: Row(children: [
-                                      CustomRadioButton(
-                                          text: "Yes",
-                                          value: "Yes",
-                                          groupValue: radioGroup,
-                                          onChange: (value) {
-                                            setState(() {
-                                              radioGroup = value;
-                                            });
-                                          }),
-                                      CustomRadioButton(
-                                          text: "No",
-                                          value: "No",
-                                          groupValue: radioGroup,
-                                          onChange: (value) {
-                                            setState(() {
-                                              radioGroup = value;
-                                            });
-                                          }),
-                                    ]))
+                                    child: Obx(
+                                      () => Row(children: [
+                                        CustomRadioButton(
+                                            text: "Yes",
+                                            value: "Yes",
+                                            groupValue: snapshotController
+                                                .radioGroup.value,
+                                            onChange: (value) {
+                                              snapshotController
+                                                  .languagePreference(value);
+                                            }),
+                                        CustomRadioButton(
+                                            text: "No",
+                                            value: "No",
+                                            groupValue: snapshotController
+                                                .radioGroup.value,
+                                            onChange: (value) {
+                                              snapshotController
+                                                  .languagePreference(value);
+                                            }),
+                                      ]),
+                                    ))
                               ]))
                     ])))));
-  }
-
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
-  onTapArrowleftone(BuildContext context) {
-    Navigator.pop(context);
   }
 }

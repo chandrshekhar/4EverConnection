@@ -23,4 +23,10 @@ class UserSnapshotController extends GetxController {
   var personalEmailController = TextEditingController().obs;
   var businessEmailController = TextEditingController().obs;
   var websiteUrlController = TextEditingController().obs;
+
+  RxString radioGroup = "Yes".obs;
+
+  void languagePreference(String selectedvalue) {
+    radioGroup.value = selectedvalue;
+  }
 }
