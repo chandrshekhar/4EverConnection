@@ -41,7 +41,7 @@ class FinancialProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-    backgroundColor: appTheme.lightBlue50,
+            backgroundColor: appTheme.lightBlue50,
             appBar: CustomAppBar(
                 leadingWidth: 44.h,
                 leading: AppbarImage(
@@ -49,7 +49,7 @@ class FinancialProfileScreen extends StatelessWidget {
                     margin:
                         EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
                     onTap: () {
-                      onTapArrowleftone(context);
+                      Navigator.pop(context);
                     }),
                 centerTitle: true,
                 title: AppbarTitle(text: "Financial Profile"),
@@ -311,94 +311,26 @@ class FinancialProfileScreen extends StatelessWidget {
                                         contentPadding:
                                             EdgeInsets.only(right: 30.h)),
                                     SizedBox(height: 40.v),
-                                    Row(children: [
-                                      CustomImageView(
-                                          svgPath: ImageConstant.imgUser,
-                                          height: 19.v,
-                                          width: 17.h,
-                                          margin: EdgeInsets.only(
-                                              top: 3.v, bottom: 4.v)),
-                                      Padding(
-                                          padding: EdgeInsets.only(left: 22.h),
-                                          child: Text("Outcome",
-                                              style: theme.textTheme.bodyLarge))
-                                    ]),
-                                    SizedBox(height: 4.v),
-                                    Container(
-                                        height: 124.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
+                                    custominputFieldWithContainer(
+                                      title: "Outcome",
+                                      imagePath: ImageConstant.imgUser,
+                                    ),
                                     SizedBox(height: 39.v),
-                                    Row(children: [
-                                      CustomImageView(
-                                          svgPath: ImageConstant.imgMap,
-                                          height: 19.v,
-                                          width: 17.h,
-                                          margin: EdgeInsets.only(top: 7.v)),
-                                      Padding(
-                                          padding: EdgeInsets.only(left: 21.h),
-                                          child: Text("Health Issues",
-                                              style: theme.textTheme.bodyLarge))
-                                    ]),
-                                    SizedBox(height: 5.v),
-                                    Container(
-                                        height: 124.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
+                                    custominputFieldWithContainer(
+                                      title: "Health Issues",
+                                      imagePath: ImageConstant.imgMap,
+                                    ),
                                     SizedBox(height: 39.v),
-                                    Row(children: [
-                                      CustomImageView(
-                                          svgPath: ImageConstant.imgUser,
-                                          height: 19.v,
-                                          width: 17.h,
-                                          margin: EdgeInsets.only(
-                                              top: 4.v, bottom: 3.v)),
-                                      Padding(
-                                          padding: EdgeInsets.only(left: 22.h),
-                                          child: Text("Medications",
-                                              style: theme.textTheme.bodyLarge))
-                                    ]),
-                                    SizedBox(height: 5.v),
-                                    Container(
-                                        height: 124.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
+                                    custominputFieldWithContainer(
+                                      title: "Medications",
+                                      imagePath: ImageConstant.imgUser,
+                                    ),
                                     SizedBox(height: 42.v),
-                                    Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath:
-                                                  ImageConstant.imgCalendar,
-                                              height: 19.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 1.v, bottom: 6.v)),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 22.h),
-                                              child: Text("Age of Siblings",
-                                                  style: theme
-                                                      .textTheme.bodyLarge))
-                                        ]),
-                                    SizedBox(height: 2.v),
-                                    Container(
-                                        height: 124.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
+                                    SizedBox(height: 39.v),
+                                    custominputFieldWithContainer(
+                                      title: "Age of Siblings",
+                                      imagePath: ImageConstant.imgCalendar,
+                                    ),
                                     SizedBox(height: 42.v),
                                     Row(
                                         crossAxisAlignment:
@@ -419,32 +351,13 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       left: 22.h),
                                                   hintText: "Father Age"))
                                         ]),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 40.v, right: 74.h),
-                                        child: Row(children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgEdit,
-                                              height: 18.adaptSize,
-                                              width: 18.adaptSize,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.v)),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 21.h),
-                                              child: Text(
-                                                  "(If death) Age and Cause",
-                                                  style: theme
-                                                      .textTheme.bodyLarge))
-                                        ])),
-                                    SizedBox(height: 4.v),
-                                    Container(
-                                        height: 90.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
+                                    SizedBox(
+                                      height: 40.v,
+                                    ),
+                                    custominputFieldWithContainer(
+                                        title: "(If death) Age and Cause",
+                                        imagePath: ImageConstant.imgEdit,
+                                        controller: editController),
                                     SizedBox(height: 42.v),
                                     Row(
                                         crossAxisAlignment:
@@ -463,58 +376,18 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       motherageController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Mother Age",
-                                                  textInputAction:
-                                                      TextInputAction.done))
+                                                  hintText: "Mother Age"))
                                         ]),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 40.v, right: 74.h),
-                                        child: Row(children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgEdit,
-                                              height: 18.adaptSize,
-                                              width: 18.adaptSize,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.v)),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 21.h),
-                                              child: Text(
-                                                  "(If death) Age and Cause",
-                                                  style: theme
-                                                      .textTheme.bodyLarge))
-                                        ])),
-                                    SizedBox(height: 4.v),
-                                    Container(
-                                        height: 90.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
                                     SizedBox(height: 39.v),
-                                    Row(children: [
-                                      CustomImageView(
-                                          svgPath: ImageConstant.imgEdit,
-                                          height: 18.adaptSize,
-                                          width: 18.adaptSize,
-                                          margin: EdgeInsets.only(
-                                              top: 5.v, bottom: 3.v)),
-                                      Padding(
-                                          padding: EdgeInsets.only(left: 21.h),
-                                          child: Text("Other Health Notes",
-                                              style: theme.textTheme.bodyLarge))
-                                    ]),
-                                    SizedBox(height: 5.v),
-                                    Container(
-                                        height: 90.v,
-                                        width: 342.h,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 1.h))),
-                                    SizedBox(height: 2.v)
+                                    custominputFieldWithContainer(
+                                        title: "(If death) Age and Cause",
+                                        imagePath: ImageConstant.imgEdit,
+                                        controller: editController),
+                                    SizedBox(height: 39.v),
+                                    custominputFieldWithContainer(
+                                        title: "Other Health Notes",
+                                        imagePath: ImageConstant.imgEdit,
+                                        controller: editController),
                                   ])),
                           CustomElevatedButton(
                               text: "Save",
@@ -530,11 +403,34 @@ class FinancialProfileScreen extends StatelessWidget {
                         ]))))));
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
-  onTapArrowleftone(BuildContext context) {
-    Navigator.pop(context);
+  Widget custominputFieldWithContainer(
+      {TextEditingController? controller,
+      required String imagePath,
+      required String title}) {
+    return Column(
+      children: [
+        Row(children: [
+          CustomImageView(
+              svgPath: imagePath,
+              height: 18.adaptSize,
+              width: 18.adaptSize,
+              margin: EdgeInsets.symmetric(vertical: 4.v)),
+          Padding(
+              padding: EdgeInsets.only(left: 21.h),
+              child: Text(title, style: theme.textTheme.bodyLarge))
+        ]),
+        SizedBox(height: 4.v),
+        Container(
+          height: 90.v,
+          width: 342.h,
+          padding: EdgeInsets.all(2.v),
+          decoration: BoxDecoration(
+              border: Border.all(color: appTheme.black900, width: 1.h)),
+          child: TextFormField(
+            controller: controller,
+          ),
+        ),
+      ],
+    );
   }
 }

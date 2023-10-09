@@ -9,9 +9,14 @@ import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
-class RelationshipsScreen extends StatelessWidget {
+class RelationshipsScreen extends StatefulWidget {
   RelationshipsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RelationshipsScreen> createState() => _RelationshipsScreenState();
+}
+
+class _RelationshipsScreenState extends State<RelationshipsScreen> {
   TextEditingController relationshipsvaController = TextEditingController();
 
   TextEditingController firstNameController = TextEditingController();
@@ -34,7 +39,7 @@ class RelationshipsScreen extends StatelessWidget {
 
   TextEditingController dateOfBirthController = TextEditingController();
 
-  String radioGroup = "";
+  String radioGroup = "Male";
 
   TextEditingController group458Controller = TextEditingController();
 
@@ -68,13 +73,11 @@ class RelationshipsScreen extends StatelessWidget {
 
   TextEditingController ziponeController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: appTheme.lightBlue50,
+            backgroundColor: appTheme.lightBlue50,
             resizeToAvoidBottomInset: false,
             appBar: CustomAppBar(
                 leadingWidth: 44.h,
@@ -83,7 +86,7 @@ class RelationshipsScreen extends StatelessWidget {
                     margin:
                         EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
                     onTap: () {
-                     Navigator.pop(context);
+                      Navigator.pop(context);
                     }),
                 centerTitle: true,
                 title: AppbarTitle(text: "Relationships"),
@@ -97,13 +100,12 @@ class RelationshipsScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 11.v),
                 child: Column(children: [
                   Container(
-                     margin: EdgeInsets.only(
-                    left: 12.h, right: 12.h, bottom: 5.v),
+                      margin:
+                          EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
                       padding: EdgeInsets.symmetric(
                           horizontal: 12.h, vertical: 26.v),
                       decoration: AppDecoration.outlineBlack.copyWith(
-                          borderRadius:
-                              BorderRadiusStyle.roundedBorder16),
+                          borderRadius: BorderRadiusStyle.roundedBorder16),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,14 +114,13 @@ class RelationshipsScreen extends StatelessWidget {
                                 svgPath: ImageConstant.imgUser,
                                 height: 19.v,
                                 width: 17.h,
-                                margin: EdgeInsets.only(
-                                    top: 6.v, bottom: 13.v)),
+                                margin:
+                                    EdgeInsets.only(top: 6.v, bottom: 13.v)),
                             Expanded(
                                 child: CustomTextFormField(
-                                    controller:
-                                        relationshipsvaController,
-                                    margin: EdgeInsets.only(
-                                        left: 22.h, top: 4.v),
+                                    controller: relationshipsvaController,
+                                    margin:
+                                        EdgeInsets.only(left: 22.h, top: 4.v),
                                     hintText: "Choose Relationship",
                                     suffix: Container(
                                         margin: EdgeInsets.fromLTRB(
@@ -127,18 +128,17 @@ class RelationshipsScreen extends StatelessWidget {
                                         child: CustomImageView(
                                             svgPath: ImageConstant
                                                 .imgVectorGray6004x7)),
-                                    suffixConstraints: BoxConstraints(
-                                        maxHeight: 34.v)))
+                                    suffixConstraints:
+                                        BoxConstraints(maxHeight: 34.v)))
                           ])),
                   SizedBox(height: 11.v),
                   Container(
-                     margin: EdgeInsets.only(
-                        left: 12.h, right: 12.h, bottom: 5.v),
+                      margin:
+                          EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
                       padding: EdgeInsets.symmetric(
                           horizontal: 11.h, vertical: 12.v),
                       decoration: AppDecoration.outlineBlack.copyWith(
-                          borderRadius:
-                              BorderRadiusStyle.roundedBorder16),
+                          borderRadius: BorderRadiusStyle.roundedBorder16),
                       child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,8 +147,7 @@ class RelationshipsScreen extends StatelessWidget {
                                 style: theme.textTheme.titleMedium),
                             SizedBox(height: 24.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgUser,
@@ -158,16 +157,13 @@ class RelationshipsScreen extends StatelessWidget {
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller:
-                                              firstNameController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          controller: firstNameController,
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "First Name"))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgUser,
@@ -178,14 +174,12 @@ class RelationshipsScreen extends StatelessWidget {
                                   Expanded(
                                       child: CustomTextFormField(
                                           controller: nameController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Middle Name"))
                                 ]),
                             SizedBox(height: 39.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgUser,
@@ -195,16 +189,13 @@ class RelationshipsScreen extends StatelessWidget {
                                           top: 3.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller:
-                                              lastNameController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          controller: lastNameController,
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Last Name"))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgCall,
@@ -215,16 +206,13 @@ class RelationshipsScreen extends StatelessWidget {
                                   Expanded(
                                       child: CustomTextFormField(
                                           controller: phoneController,
-                                          margin: EdgeInsets.only(
-                                              left: 24.h),
+                                          margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Mobile Phone",
-                                          textInputType:
-                                              TextInputType.phone))
+                                          textInputType: TextInputType.phone))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgCall,
@@ -235,16 +223,13 @@ class RelationshipsScreen extends StatelessWidget {
                                   Expanded(
                                       child: CustomTextFormField(
                                           controller: phoneController1,
-                                          margin: EdgeInsets.only(
-                                              left: 24.h),
+                                          margin: EdgeInsets.only(left: 24.h),
                                           hintText: "Home Phone",
-                                          textInputType:
-                                              TextInputType.phone))
+                                          textInputType: TextInputType.phone))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgVector,
@@ -255,20 +240,17 @@ class RelationshipsScreen extends StatelessWidget {
                                   Expanded(
                                       child: CustomTextFormField(
                                           controller: emailController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Personal Email",
-                                          textInputType: TextInputType
-                                              .emailAddress))
+                                          textInputType:
+                                              TextInputType.emailAddress))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgLocation,
+                                      svgPath: ImageConstant.imgLocation,
                                       height: 20.v,
                                       width: 17.h,
                                       margin: EdgeInsets.only(
@@ -276,18 +258,15 @@ class RelationshipsScreen extends StatelessWidget {
                                   Expanded(
                                       child: CustomTextFormField(
                                           controller: addressController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Home Address"))
                                 ]),
                             SizedBox(height: 39.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgLocation,
+                                      svgPath: ImageConstant.imgLocation,
                                       height: 20.v,
                                       width: 17.h,
                                       margin: EdgeInsets.only(
@@ -295,43 +274,35 @@ class RelationshipsScreen extends StatelessWidget {
                                   CustomTextFormField(
                                       width: 113.h,
                                       controller: aptsteController,
-                                      margin: EdgeInsets.only(
-                                          left: 22.h, top: 2.v),
+                                      margin:
+                                          EdgeInsets.only(left: 22.h, top: 2.v),
                                       hintText: "Apt, Ste"),
                                   CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgLocation,
+                                      svgPath: ImageConstant.imgLocation,
                                       height: 20.v,
                                       width: 17.h,
                                       margin: EdgeInsets.only(
-                                          left: 43.h,
-                                          top: 3.v,
-                                          bottom: 12.v)),
+                                          left: 43.h, top: 3.v, bottom: 12.v)),
                                   CustomTextFormField(
                                       width: 109.h,
                                       controller: zipController,
-                                      margin:
-                                          EdgeInsets.only(left: 22.h),
+                                      margin: EdgeInsets.only(left: 22.h),
                                       hintText: "ZIP")
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgCalendar,
+                                      svgPath: ImageConstant.imgCalendar,
                                       height: 19.v,
                                       width: 17.h,
                                       margin: EdgeInsets.only(
                                           top: 4.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller:
-                                              dateOfBirthController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          controller: dateOfBirthController,
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Date of Birth"))
                                 ]),
                             SizedBox(height: 27.v),
@@ -347,68 +318,45 @@ class RelationshipsScreen extends StatelessWidget {
                                       style: theme.textTheme.bodyLarge))
                             ]),
                             Align(
-                                alignment: Alignment.center,
+                                alignment: Alignment.centerLeft,
                                 child: Padding(
                                     padding: EdgeInsets.only(
-                                        left: 37.h,
-                                        top: 11.v,
-                                        right: 33.h),
+                                        left: 30.h, top: 5.v, right: 33.h),
                                     child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.start,
                                         children: [
                                           CustomRadioButton(
                                               text: "Male",
                                               value: "Male",
                                               groupValue: radioGroup,
                                               onChange: (value) {
-                                                radioGroup = value;
+                                                setState(() {
+                                                  radioGroup = value;
+                                                });
                                               }),
-                                          Container(
-                                              height: 16.adaptSize,
-                                              width: 16.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  left: 12.h,
-                                                  top: 6.v,
-                                                  bottom: 4.v),
-                                              decoration: BoxDecoration(
-                                                  color: appTheme
-                                                      .blueGray100,
-                                                  borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                              8.h))),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 10.h),
-                                              child: Text("Female",
-                                                  style: theme.textTheme
-                                                      .bodyLarge)),
-                                          Container(
-                                              height: 16.adaptSize,
-                                              width: 16.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h,
-                                                  top: 6.v,
-                                                  bottom: 4.v),
-                                              decoration: BoxDecoration(
-                                                  color: appTheme
-                                                      .blueGray100,
-                                                  borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                              8.h))),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 10.h),
-                                              child: Text("Other",
-                                                  style: theme.textTheme
-                                                      .bodyLarge))
+                                          CustomRadioButton(
+                                              text: "Female",
+                                              value: "Female",
+                                              groupValue: radioGroup,
+                                              onChange: (value) {
+                                                setState(() {
+                                                  radioGroup = value;
+                                                });
+                                              }),
+                                          CustomRadioButton(
+                                              text: "Other",
+                                              value: "Other",
+                                              groupValue: radioGroup,
+                                              onChange: (value) {
+                                                setState(() {
+                                                  radioGroup = value;
+                                                });
+                                              }),
                                         ]))),
-                            SizedBox(height: 39.v),
+                            SizedBox(height: 25.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
                                       svgPath: ImageConstant.imgCall,
@@ -418,23 +366,17 @@ class RelationshipsScreen extends StatelessWidget {
                                           top: 6.v, bottom: 13.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller:
-                                              group458Controller,
-                                          margin: EdgeInsets.only(
-                                              left: 24.h),
-                                          hintText:
-                                              "Social Security Number",
-                                          textInputType:
-                                              TextInputType.number))
+                                          controller: group458Controller,
+                                          margin: EdgeInsets.only(left: 24.h),
+                                          hintText: "Social Security Number",
+                                          textInputType: TextInputType.number))
                                 ]),
                             SizedBox(height: 40.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgLocation,
+                                      svgPath: ImageConstant.imgLocation,
                                       height: 20.v,
                                       width: 17.h,
                                       margin: EdgeInsets.only(
@@ -442,68 +384,51 @@ class RelationshipsScreen extends StatelessWidget {
                                   Expanded(
                                       child: CustomTextFormField(
                                           controller: countryController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Country of Birth",
                                           suffix: Container(
-                                              margin:
-                                                  EdgeInsets.fromLTRB(
-                                                      30.h,
-                                                      10.v,
-                                                      15.h,
-                                                      10.v),
+                                              margin: EdgeInsets.fromLTRB(
+                                                  30.h, 10.v, 15.h, 10.v),
                                               child: CustomImageView(
                                                   svgPath: ImageConstant
                                                       .imgVectorGray6004x7)),
                                           suffixConstraints:
-                                              BoxConstraints(
-                                                  maxHeight: 34.v)))
+                                              BoxConstraints(maxHeight: 34.v)))
                                 ]),
                             SizedBox(height: 40.v),
                             Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgLocation,
+                                      svgPath: ImageConstant.imgLocation,
                                       height: 20.v,
                                       width: 17.h,
                                       margin: EdgeInsets.only(
                                           top: 2.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
-                                          controller:
-                                              countryController1,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
-                                          hintText:
-                                              "Country of Citizenship",
+                                          controller: countryController1,
+                                          margin: EdgeInsets.only(left: 22.h),
+                                          hintText: "Country of Citizenship",
                                           suffix: Container(
-                                              margin:
-                                                  EdgeInsets.fromLTRB(
-                                                      30.h,
-                                                      10.v,
-                                                      15.h,
-                                                      10.v),
+                                              margin: EdgeInsets.fromLTRB(
+                                                  30.h, 10.v, 15.h, 10.v),
                                               child: CustomImageView(
                                                   svgPath: ImageConstant
                                                       .imgVectorGray6004x7)),
                                           suffixConstraints:
-                                              BoxConstraints(
-                                                  maxHeight: 34.v)))
+                                              BoxConstraints(maxHeight: 34.v)))
                                 ]),
                             SizedBox(height: 14.v)
                           ])),
                   SizedBox(height: 13.v),
                   Container(
-                     margin: EdgeInsets.only(
-                        left: 12.h, right: 12.h, bottom: 5.v),
+                      margin:
+                          EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
                       padding: EdgeInsets.symmetric(
                           horizontal: 11.h, vertical: 25.v),
                       decoration: AppDecoration.outlineBlack.copyWith(
-                          borderRadius:
-                              BorderRadiusStyle.roundedBorder16),
+                          borderRadius: BorderRadiusStyle.roundedBorder16),
                       child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,88 +436,74 @@ class RelationshipsScreen extends StatelessWidget {
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h),
                                 child: Text("Professional Profile",
-                                    style:
-                                        theme.textTheme.titleMedium)),
+                                    style: theme.textTheme.titleMedium)),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 28.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 28.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgFile,
+                                          svgPath: ImageConstant.imgFile,
                                           height: 20.v,
                                           width: 16.h,
                                           margin: EdgeInsets.only(
                                               top: 4.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  nameController1,
-                                              margin: EdgeInsets.only(
-                                                  left: 23.h),
-                                              hintText:
-                                                  "Business Name"))
+                                              controller: nameController1,
+                                              margin:
+                                                  EdgeInsets.only(left: 23.h),
+                                              hintText: "Business Name"))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgCall,
+                                          svgPath: ImageConstant.imgCall,
                                           height: 15.adaptSize,
                                           width: 15.adaptSize,
                                           margin: EdgeInsets.only(
                                               top: 8.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  phoneController2,
-                                              margin: EdgeInsets.only(
-                                                  left: 24.h),
-                                              hintText:
-                                                  "Business Phone",
+                                              controller: phoneController2,
+                                              margin:
+                                                  EdgeInsets.only(left: 24.h),
+                                              hintText: "Business Phone",
                                               textInputType:
                                                   TextInputType.phone))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath: ImageConstant
-                                              .imgVideocamera,
+                                          svgPath: ImageConstant.imgVideocamera,
                                           height: 17.adaptSize,
                                           width: 17.adaptSize,
                                           margin: EdgeInsets.only(
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  businessfaxController,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h),
+                                              controller: businessfaxController,
+                                              margin:
+                                                  EdgeInsets.only(left: 22.h),
                                               hintText: "Business Fax"))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgVector,
+                                          svgPath: ImageConstant.imgVector,
                                           height: 17.adaptSize,
                                           width: 17.adaptSize,
                                           margin: EdgeInsets.only(
@@ -601,98 +512,79 @@ class RelationshipsScreen extends StatelessWidget {
                                           child: CustomTextFormField(
                                               controller:
                                                   businessemailController,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h),
-                                              hintText:
-                                                  "Business Email",
+                                              margin:
+                                                  EdgeInsets.only(left: 22.h),
+                                              hintText: "Business Email",
                                               textInputType:
-                                                  TextInputType
-                                                      .emailAddress))
+                                                  TextInputType.emailAddress))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgGlobe,
+                                          svgPath: ImageConstant.imgGlobe,
                                           height: 17.v,
                                           width: 19.h,
                                           margin: EdgeInsets.only(
                                               top: 6.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  businessController,
-                                              margin: EdgeInsets.only(
-                                                  left: 20.h),
-                                              hintText:
-                                                  "Business Website"))
+                                              controller: businessController,
+                                              margin:
+                                                  EdgeInsets.only(left: 20.h),
+                                              hintText: "Business Website"))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgUser,
+                                          svgPath: ImageConstant.imgUser,
                                           height: 19.v,
                                           width: 17.h,
                                           margin: EdgeInsets.only(
                                               top: 4.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  vectorfourController,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h),
+                                              controller: vectorfourController,
+                                              margin:
+                                                  EdgeInsets.only(left: 22.h),
                                               hintText: "Position",
                                               suffix: Container(
-                                                  margin: EdgeInsets
-                                                      .fromLTRB(
-                                                          30.h,
-                                                          12.v,
-                                                          15.h,
-                                                          12.v),
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      30.h, 12.v, 15.h, 12.v),
                                                   child: CustomImageView(
                                                       svgPath: ImageConstant
                                                           .imgVectorGray6004x7)),
-                                              suffixConstraints:
-                                                  BoxConstraints(
-                                                      maxHeight: 36.v)))
+                                              suffixConstraints: BoxConstraints(
+                                                  maxHeight: 36.v)))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 41.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 41.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath: ImageConstant
-                                              .imgCarGray600,
+                                          svgPath: ImageConstant.imgCarGray600,
                                           height: 17.adaptSize,
                                           width: 17.adaptSize,
                                           margin: EdgeInsets.only(
                                               top: 3.v, bottom: 14.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  myidealController,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h),
-                                              hintText:
-                                                  "My Ideal Occupation"))
+                                              controller: myidealController,
+                                              margin:
+                                                  EdgeInsets.only(left: 22.h),
+                                              hintText: "My Ideal Occupation"))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -706,29 +598,21 @@ class RelationshipsScreen extends StatelessWidget {
                                               top: 6.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  vectorsevenController,
-                                              margin: EdgeInsets.only(
-                                                  left: 17.h),
-                                              hintText:
-                                                  "Education Level",
+                                              controller: vectorsevenController,
+                                              margin:
+                                                  EdgeInsets.only(left: 17.h),
+                                              hintText: "Education Level",
                                               suffix: Container(
-                                                  margin: EdgeInsets
-                                                      .fromLTRB(
-                                                          30.h,
-                                                          12.v,
-                                                          15.h,
-                                                          12.v),
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      30.h, 12.v, 15.h, 12.v),
                                                   child: CustomImageView(
                                                       svgPath: ImageConstant
                                                           .imgVectorGray6004x7)),
-                                              suffixConstraints:
-                                                  BoxConstraints(
-                                                      maxHeight: 36.v)))
+                                              suffixConstraints: BoxConstraints(
+                                                  maxHeight: 36.v)))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 42.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 42.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -742,82 +626,64 @@ class RelationshipsScreen extends StatelessWidget {
                                               top: 3.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  degreeController,
-                                              margin: EdgeInsets.only(
-                                                  left: 17.h),
+                                              controller: degreeController,
+                                              margin:
+                                                  EdgeInsets.only(left: 17.h),
                                               hintText: "Degree"))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgUser,
+                                          svgPath: ImageConstant.imgUser,
                                           height: 19.v,
                                           width: 17.h,
                                           margin: EdgeInsets.only(
                                               top: 4.v, bottom: 13.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  vectortenController,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h),
+                                              controller: vectortenController,
+                                              margin:
+                                                  EdgeInsets.only(left: 22.h),
                                               hintText: "Affiliations",
                                               suffix: Container(
-                                                  margin: EdgeInsets
-                                                      .fromLTRB(
-                                                          30.h,
-                                                          12.v,
-                                                          15.h,
-                                                          12.v),
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      30.h, 12.v, 15.h, 12.v),
                                                   child: CustomImageView(
                                                       svgPath: ImageConstant
                                                           .imgVectorGray6004x7)),
-                                              suffixConstraints:
-                                                  BoxConstraints(
-                                                      maxHeight: 36.v)))
+                                              suffixConstraints: BoxConstraints(
+                                                  maxHeight: 36.v)))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: 1.h, top: 39.v),
+                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgLocation,
+                                          svgPath: ImageConstant.imgLocation,
                                           height: 20.v,
                                           width: 17.h,
                                           margin: EdgeInsets.only(
                                               top: 4.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
-                                              controller:
-                                                  addressController1,
-                                              margin: EdgeInsets.only(
-                                                  left: 22.h),
-                                              hintText:
-                                                  "Business Address",
+                                              controller: addressController1,
+                                              margin:
+                                                  EdgeInsets.only(left: 22.h),
+                                              hintText: "Business Address",
                                               suffix: Container(
-                                                  margin: EdgeInsets
-                                                      .fromLTRB(
-                                                          30.h,
-                                                          12.v,
-                                                          15.h,
-                                                          12.v),
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      30.h, 12.v, 15.h, 12.v),
                                                   child: CustomImageView(
                                                       svgPath: ImageConstant
                                                           .imgVectorGray6004x7)),
-                                              suffixConstraints:
-                                                  BoxConstraints(
-                                                      maxHeight: 36.v)))
+                                              suffixConstraints: BoxConstraints(
+                                                  maxHeight: 36.v)))
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(
@@ -827,22 +693,19 @@ class RelationshipsScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgLocation,
+                                          svgPath: ImageConstant.imgLocation,
                                           height: 20.v,
                                           width: 17.h,
                                           margin: EdgeInsets.only(
                                               top: 3.v, bottom: 12.v)),
                                       CustomTextFormField(
                                           width: 113.h,
-                                          controller:
-                                              aptsteoneController,
+                                          controller: aptsteoneController,
                                           margin: EdgeInsets.only(
                                               left: 22.h, top: 2.v),
                                           hintText: "Apt, Ste"),
                                       CustomImageView(
-                                          svgPath:
-                                              ImageConstant.imgLocation,
+                                          svgPath: ImageConstant.imgLocation,
                                           height: 20.v,
                                           width: 17.h,
                                           margin: EdgeInsets.only(
@@ -852,16 +715,14 @@ class RelationshipsScreen extends StatelessWidget {
                                       CustomTextFormField(
                                           width: 109.h,
                                           controller: ziponeController,
-                                          margin: EdgeInsets.only(
-                                              left: 22.h),
+                                          margin: EdgeInsets.only(left: 22.h),
                                           hintText: "ZIP",
-                                          textInputAction:
-                                              TextInputAction.done)
+                                          textInputAction: TextInputAction.done)
                                     ]))
                           ])),
                   Padding(
-                      padding: EdgeInsets.only(
-                          left: 12.h, top: 18.v, right: 12.h),
+                      padding:
+                          EdgeInsets.only(left: 12.h, top: 18.v, right: 12.h),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -885,17 +746,15 @@ class RelationshipsScreen extends StatelessWidget {
                                 buttonStyle: CustomButtonStyles.fillRed)
                           ])),
                   SizedBox(height: 9.v),
-                   CustomElevatedButton(
-                                width: 167.h,
-                                text: "Cancel",
-                                margin: EdgeInsets.only(left: 8.h),
-                                rightIcon: Container(
-                                    margin: EdgeInsets.only(left: 16.h),
-                                    child: CustomImageView(
-                                        svgPath: ImageConstant
-                                            .imgArrowrightPrimary)),
-                                buttonStyle: CustomButtonStyles.fillLightBlueTL20),
-                  
+                  // CustomElevatedButton(
+                  //     width: 167.h,
+                  //     text: "Cancel",
+                  //     margin: EdgeInsets.only(left: 8.h),
+                  //     rightIcon: Container(
+                  //         margin: EdgeInsets.only(left: 16.h),
+                  //         child: CustomImageView(
+                  //             svgPath: ImageConstant.imgArrowrightPrimary)),
+                  //     buttonStyle: CustomButtonStyles.fillLightBlueTL20),
                 ]))));
   }
 }

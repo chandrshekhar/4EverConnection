@@ -9,9 +9,14 @@ import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
-class PersonalDetailsScreen extends StatelessWidget {
+class PersonalDetailsScreen extends StatefulWidget {
   PersonalDetailsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
+}
+
+class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   TextEditingController firstNameController = TextEditingController();
 
   TextEditingController nameController = TextEditingController();
@@ -32,9 +37,8 @@ class PersonalDetailsScreen extends StatelessWidget {
 
   TextEditingController dateOfBirthController = TextEditingController();
 
-  String gender = "";
-
   List<String> radioList = ["lbl_male", "lbl_female", "lbl_other"];
+  String gender = "lbl_male";
 
   TextEditingController socialSecurityNController = TextEditingController();
 
@@ -48,7 +52,6 @@ class PersonalDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
         child: Scaffold(
             backgroundColor: appTheme.lightBlue50,
@@ -334,7 +337,9 @@ class PersonalDetailsScreen extends StatelessWidget {
                                               value: radioList[0],
                                               groupValue: gender,
                                               onChange: (value) {
-                                                gender = value;
+                                                setState(() {
+                                                  gender = value;
+                                                });
                                               }),
                                           CustomRadioButton(
                                               text: "Female",
@@ -343,7 +348,9 @@ class PersonalDetailsScreen extends StatelessWidget {
                                               margin:
                                                   EdgeInsets.only(left: 12.h),
                                               onChange: (value) {
-                                                gender = value;
+                                                setState(() {
+                                                  gender = value;
+                                                });
                                               }),
                                           CustomRadioButton(
                                               text: "Other",
@@ -352,7 +359,9 @@ class PersonalDetailsScreen extends StatelessWidget {
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
                                               onChange: (value) {
-                                                gender = value;
+                                                setState(() {
+                                                  gender = value;
+                                                });
                                               })
                                         ])),
                                     SizedBox(height: 8.v)
@@ -481,26 +490,19 @@ class PersonalDetailsScreen extends StatelessWidget {
                                               value: "Yes",
                                               groupValue: radioGroup,
                                               onChange: (value) {
-                                                radioGroup = value;
+                                                setState(() {
+                                                  radioGroup = value;
+                                                });
                                               }),
-                                          Container(
-                                              height: 16.adaptSize,
-                                              width: 16.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  left: 24.h,
-                                                  top: 5.v,
-                                                  bottom: 5.v),
-                                              decoration: BoxDecoration(
-                                                  color: appTheme.blueGray100,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.h))),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 10.h),
-                                              child: Text("No",
-                                                  style: theme
-                                                      .textTheme.bodyLarge))
+                                          CustomRadioButton(
+                                              text: "No",
+                                              value: "No",
+                                              groupValue: radioGroup,
+                                              onChange: (value) {
+                                                setState(() {
+                                                  radioGroup = value;
+                                                });
+                                              }),
                                         ]))
                                   ])),
                           CustomElevatedButton(

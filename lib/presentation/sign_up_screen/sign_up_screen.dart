@@ -6,12 +6,17 @@ import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
 // ignore: must_be_immutable
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key})
       : super(
           key: key,
         );
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   String radioGroup = "";
 
   TextEditingController fullNameController = TextEditingController();
@@ -21,6 +26,7 @@ class SignUpScreen extends StatelessWidget {
   TextEditingController addressController = TextEditingController();
 
   TextEditingController addressController1 = TextEditingController();
+
   String radioGroup1 = "";
 
   TextEditingController dateOfBirthController = TextEditingController();
@@ -88,6 +94,7 @@ class SignUpScreen extends StatelessWidget {
                             top: 65.v,
                           ),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomImageView(
                                 svgPath: ImageConstant.imgUser,
@@ -100,49 +107,46 @@ class SignUpScreen extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 22.h),
-                                child: Text(
-                                  "Are you already a client?",
-                                  style: theme.textTheme.bodyLarge,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Are you already a client?",
+                                      style: theme.textTheme.bodyLarge,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        CustomRadioButton(
+                                          text: "Yes",
+                                          value: "Yes",
+                                          groupValue: radioGroup,
+                                          onChange: (value) {
+                                            setState(() {
+                                              radioGroup = value;
+                                            });
+                                          },
+                                        ),
+                                        CustomRadioButton(
+                                          text: "No",
+                                          value: "No",
+                                          groupValue: radioGroup,
+                                          onChange: (value) {
+                                            setState(() {
+                                              radioGroup = value;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Row(
-                          children: [
-                            CustomRadioButton(
-                              text: "Yes",
-                              value: "Yes",
-                              groupValue: radioGroup,
-                              onChange: (value) {
-                                radioGroup = value;
-                              },
-                            ),
-                            Container(
-                              height: 16.adaptSize,
-                              width: 16.adaptSize,
-                              margin: EdgeInsets.only(
-                                left: 24.h,
-                                top: 5.v,
-                                bottom: 5.v,
-                              ),
-                              decoration: BoxDecoration(
-                                color: appTheme.blueGray100,
-                                borderRadius: BorderRadius.circular(
-                                  8.h,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 10.h),
-                              child: Text(
-                                "No",
-                                style: theme.textTheme.bodyLarge,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 36.v),
+                        SizedBox(height: 20.v),
                         Row(
                           children: [
                             CustomImageView(
@@ -278,59 +282,37 @@ class SignUpScreen extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(20.h, 4.v, 20.h, 8.v),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 CustomRadioButton(
                                   text: "Male",
                                   value: "Male",
                                   groupValue: radioGroup1,
                                   onChange: (value) {
-                                    radioGroup1 = value;
+                                    setState(() {
+                                      radioGroup1 = value;
+                                    });
                                   },
                                 ),
-                                Container(
-                                  height: 16.adaptSize,
-                                  width: 16.adaptSize,
-                                  margin: EdgeInsets.only(
-                                    left: 12.h,
-                                    top: 6.v,
-                                    bottom: 4.v,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: appTheme.blueGray100,
-                                    borderRadius: BorderRadius.circular(
-                                      8.h,
-                                    ),
-                                  ),
+                                CustomRadioButton(
+                                  text: "Female",
+                                  value: "Female",
+                                  groupValue: radioGroup1,
+                                  onChange: (value) {
+                                    setState(() {
+                                      radioGroup1 = value;
+                                    });
+                                  },
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10.h),
-                                  child: Text(
-                                    "Female",
-                                    style: theme.textTheme.bodyLarge,
-                                  ),
-                                ),
-                                Container(
-                                  height: 16.adaptSize,
-                                  width: 16.adaptSize,
-                                  margin: EdgeInsets.only(
-                                    left: 14.h,
-                                    top: 6.v,
-                                    bottom: 4.v,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: appTheme.blueGray100,
-                                    borderRadius: BorderRadius.circular(
-                                      8.h,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10.h),
-                                  child: Text(
-                                    "Other",
-                                    style: theme.textTheme.bodyLarge,
-                                  ),
+                                CustomRadioButton(
+                                  text: "Other",
+                                  value: "Other",
+                                  groupValue: radioGroup1,
+                                  onChange: (value) {
+                                    setState(() {
+                                      radioGroup1 = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -567,7 +549,9 @@ class SignUpScreen extends StatelessWidget {
                                     value: "English",
                                     groupValue: radioGroup2,
                                     onChange: (value) {
-                                      radioGroup2 = value;
+                                      setState(() {
+                                        radioGroup2 = value;
+                                      });
                                     },
                                   ),
                                   SizedBox(width: 20.h),
@@ -576,7 +560,9 @@ class SignUpScreen extends StatelessWidget {
                                     value: "Spenish",
                                     groupValue: radioGroup2,
                                     onChange: (value) {
-                                      radioGroup2 = value;
+                                      setState(() {
+                                        radioGroup2 = value;
+                                      });
                                     },
                                   ),
                                 ])
