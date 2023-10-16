@@ -1,10 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
 import '../../Services/Auth Services/auth_services.dart';
 import '../../core/utils/shared_pref_services.dart';
-import '../../core/utils/toast_widget.dart';
+
 
 class LoginController extends GetxController {
   var userNameController = TextEditingController().obs;
@@ -24,29 +27,52 @@ class LoginController extends GetxController {
   }
 
   login(BuildContext context) async {
-    if (passwordController.value.text.length >= 8) {
-      try {
-        Map<String, dynamic> reqModel = {
-          "email": userNameController.value.text.trim(),
-          "password": passwordController.value.text.trim(),
-          "type": "Patient"
-        };
-        isLoginLoading(true);
-        var res = await authServices.loginApi(reqModel: reqModel);
-        if (res['status'] == true) {
-          await SharedPref().setUserToken(userToken: res['data']['auth_token']);
-          isLoginLoading(false);
-        } else {
-          isLoginLoading(false);
-          ToastWidget.errorToast(error: res['error']);
-        }
-      } catch (e) {
-        isLoginLoading(false);
-        ToastWidget.errorToast(error: e.toString());
+    try {
+      Map<String, dynamic> reqModel = {
+        "username": userNameController.value.text.trim(),
+        "password": passwordController.value.text.trim(),
+      };
+      isLoginLoading(true);
+      var res = await authServices.loginApi(reqModel: reqModel);
+      if (kDebugMode) {
+        print("reqModel--> $reqModel");
+        print("res--> $res");
       }
-    } else {
-      ToastWidget.errorToast(error: "All field required");
+      if (res['token'] != null && res['token'] != '') {
+        await SharedPref().setUserToken(userToken: res['token']);
+        if (rememberMeCheckBox.value) {
+          await SharedPref().setUserID(
+              userID: userNameController.value.text,
+              password: passwordController.value.text);
+        } else {
+          userNameController.value.clear();
+          passwordController.value.clear();
+        }
+
+        isLoginLoading(false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.dashboardScreen, (route) => false);
+      }
+    } catch (e) {
+      if (e is DioError) {
+        if (e.type == DioErrorType.connectionTimeout ||
+            e.type == DioErrorType.receiveTimeout ||
+            e.type == DioErrorType.sendTimeout) {
+          TostWidget()
+              .errorToast(title: "Error!", message: "Please check internet");
+        } else if (e.type == DioErrorType.badResponse) {
+          print("bad-> ${e.response!.data}");
+          TostWidget().errorToast(
+              title: "Invalid!",
+              message: "${e.response!.data["non_field_errors"][0]}");
+        } else {
+          TostWidget().errorToast(
+              title: "Error!",
+              message: "Someting went wrong please try after sometime");
+        }
+      }
     }
+    isLoginLoading(false);
   }
 
   logOut(BuildContext context) async {

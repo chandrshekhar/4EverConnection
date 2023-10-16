@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:forever_connection/presentation/document_vault/document_vault.dart';
 import 'package:forever_connection/presentation/splash_screen/splash_screen.dart';
 import 'package:forever_connection/presentation/login_screen/login_screen.dart';
 import 'package:forever_connection/presentation/sign_up_screen/sign_up_screen.dart';
@@ -65,6 +67,8 @@ class AppRoutes {
 
   static const String notificationsScreen = '/notifications_screen';
 
+  static const String documentVaultScreen = '/document_vault_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => LoginScreen(),
@@ -75,7 +79,7 @@ class AppRoutes {
     requestServiceOneScreen: (context) => const RequestServiceOneScreen(),
     myProfileScreen: (context) => const MyProfileScreen(),
     snapshotScreen: (context) => SnapshotScreen(),
-    personalDetailsScreen: (context) => PersonalDetailsScreen(),
+    personalDetailsScreen: (context) => const PersonalDetailsScreen(),
     professionalProfileScreen: (context) => ProfessionalProfileScreen(),
     relationshipsScreen: (context) => RelationshipsScreen(),
     healthProfileScreen: (context) => HealthProfileScreen(),
@@ -83,6 +87,7 @@ class AppRoutes {
     myServicesScreen: (context) => const MyServicesScreen(),
     passwordSecurityScreen: (context) => PasswordSecurityScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
-    notificationsScreen: (context) => const NotificationsScreen()
+    notificationsScreen: (context) => const NotificationsScreen(),
+    documentVaultScreen: (context) => const DocumentVaultScreen()
   };
 }

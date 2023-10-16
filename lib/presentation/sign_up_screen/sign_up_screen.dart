@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatefulWidget {
@@ -19,35 +21,15 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   String radioGroup = "";
 
-  TextEditingController fullNameController = TextEditingController();
-
-  TextEditingController mobileNumberController = TextEditingController();
-
-  TextEditingController addressController = TextEditingController();
-
-  TextEditingController addressController1 = TextEditingController();
-
   String radioGroup1 = "";
-
-  TextEditingController dateOfBirthController = TextEditingController();
-
-  TextEditingController occupationvalueController = TextEditingController();
-
-  TextEditingController addressController2 = TextEditingController();
-
-  TextEditingController zipvalueoneController = TextEditingController();
-
-  TextEditingController nameController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
-  TextEditingController confirmpasswordController = TextEditingController();
 
   String radioGroup2 = "";
 
   bool byclickingregis = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final signUpController = Get.put(SignupController());
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +142,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: fullNameController,
+                                controller:
+                                    signUpController.firstNameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Full Name",
                               ),
@@ -204,7 +187,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: mobileNumberController,
+                                controller: signUpController
+                                    .mobileNumberController.value,
                                 margin: EdgeInsets.only(left: 24.h),
                                 hintText: "Mobile Number",
                                 textInputType: TextInputType.phone,
@@ -227,7 +211,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: addressController,
+                                controller:
+                                    signUpController.emailController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Mail Address",
                               ),
@@ -249,7 +234,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: addressController1,
+                                controller:
+                                    signUpController.addressController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Confirm Mail Address",
                               ),
@@ -281,40 +267,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           alignment: Alignment.center,
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(20.h, 4.v, 20.h, 8.v),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CustomRadioButton(
-                                  text: "Male",
-                                  value: "Male",
-                                  groupValue: radioGroup1,
-                                  onChange: (value) {
-                                    setState(() {
-                                      radioGroup1 = value;
-                                    });
-                                  },
-                                ),
-                                CustomRadioButton(
-                                  text: "Female",
-                                  value: "Female",
-                                  groupValue: radioGroup1,
-                                  onChange: (value) {
-                                    setState(() {
-                                      radioGroup1 = value;
-                                    });
-                                  },
-                                ),
-                                CustomRadioButton(
-                                  text: "Other",
-                                  value: "Other",
-                                  groupValue: radioGroup1,
-                                  onChange: (value) {
-                                    setState(() {
-                                      radioGroup1 = value;
-                                    });
-                                  },
-                                ),
-                              ],
+                            child: Obx(
+                              () => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CustomRadioButton(
+                                    text: "Male",
+                                    value: "Male",
+                                    groupValue:
+                                        signUpController.selectedGender.value,
+                                    onChange: (value) {
+                                      signUpController.genderSelected(value);
+                                    },
+                                  ),
+                                  CustomRadioButton(
+                                    text: "Female",
+                                    value: "Female",
+                                    groupValue:
+                                        signUpController.selectedGender.value,
+                                    onChange: (value) {
+                                      signUpController.genderSelected(value);
+                                    },
+                                  ),
+                                  CustomRadioButton(
+                                    text: "Other",
+                                    value: "Other",
+                                    groupValue:
+                                        signUpController.selectedGender.value,
+                                    onChange: (value) {
+                                      signUpController.genderSelected(value);
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -330,7 +316,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: dateOfBirthController,
+                                controller:
+                                    signUpController.dobController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Date of Birth ",
                               ),
@@ -352,7 +339,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: occupationvalueController,
+                                controller:
+                                    signUpController.occupationController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Occupation ",
                               ),
@@ -374,7 +362,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: addressController2,
+                                controller:
+                                    signUpController.addressController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Address",
                               ),
@@ -395,7 +384,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: addressController2,
+                                controller:
+                                    signUpController.aptController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Apt",
                               ),
@@ -417,7 +407,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: zipvalueoneController,
+                                controller:
+                                    signUpController.zipController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "ZIP",
                               ),
@@ -440,7 +431,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: nameController,
+                                controller: signUpController
+                                    .businessNameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Your Business Name (If any)",
                               ),
@@ -459,7 +451,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: passwordController,
+                                controller:
+                                    signUpController.passwordController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Password",
                                 textInputType: TextInputType.visiblePassword,
@@ -493,7 +486,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                controller: confirmpasswordController,
+                                controller: signUpController
+                                    .cnfPasswordController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Confirm Password",
                                 textInputAction: TextInputAction.done,
@@ -543,29 +537,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   "I want to receive Emails and Text Messages in:",
                                   style: CustomTextStyles.bodySmallGray600_1,
                                 ),
-                                Row(children: [
-                                  CustomRadioButton(
-                                    text: "English",
-                                    value: "English",
-                                    groupValue: radioGroup2,
-                                    onChange: (value) {
-                                      setState(() {
-                                        radioGroup2 = value;
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(width: 20.h),
-                                  CustomRadioButton(
-                                    text: "Spenish",
-                                    value: "Spenish",
-                                    groupValue: radioGroup2,
-                                    onChange: (value) {
-                                      setState(() {
-                                        radioGroup2 = value;
-                                      });
-                                    },
-                                  ),
-                                ])
+                                Obx(
+                                  () => Row(children: [
+                                    CustomRadioButton(
+                                      text: "English",
+                                      value: "English",
+                                      groupValue: signUpController
+                                          .selectedlanguage.value,
+                                      onChange: (value) {
+                                        signUpController
+                                            .languageSelected(value);
+                                      },
+                                    ),
+                                    SizedBox(width: 20.h),
+                                    CustomRadioButton(
+                                      text: "Spenish",
+                                      value: "Spenish",
+                                      groupValue: signUpController
+                                          .selectedlanguage.value,
+                                      onChange: (value) {
+                                        signUpController
+                                            .languageSelected(value);
+                                      },
+                                    ),
+                                  ]),
+                                )
                               ],
                             ),
                           ],

@@ -5,31 +5,49 @@ import '../../Services/Auth Services/auth_services.dart';
 import '../../core/utils/toast_widget.dart';
 
 class SignupController extends GetxController {
-  var nameController = TextEditingController().obs;
-  var phoneNumberController = TextEditingController().obs;
-  var emailController = TextEditingController().obs;
-  var ageController = TextEditingController().obs;
-  var passController = TextEditingController().obs;
-  var confPassController = TextEditingController().obs;
+  final firstNameController = TextEditingController().obs;
+  final lastnameController = TextEditingController().obs;
+  final mobileNumberController = TextEditingController().obs;
+  final emailController = TextEditingController().obs;
+  final dobController = TextEditingController().obs;
+  final occupationController = TextEditingController().obs;
+  final addressController = TextEditingController().obs;
+  final aptController = TextEditingController().obs;
+  final zipController = TextEditingController().obs;
+  final businessNameController = TextEditingController().obs;
+  final passwordController = TextEditingController().obs;
+  final cnfPasswordController = TextEditingController().obs;
+  final languageController = TextEditingController().obs;
   AuthServices authServices = AuthServices();
   RxBool isRegisterLoadng = false.obs;
-  RxString selectedGender = ''.obs;
+  RxString selectedGender = 'Male'.obs;
+  RxString selectedlanguage = 'English'.obs;
 
   genderSelected(value) {
     selectedGender.value = value;
   }
 
+  languageSelected(value) {
+    selectedlanguage.value = value;
+  }
+
   register(BuildContext context) async {
+    List<String> splitStrings = firstNameController.value.text.split(" ");
     try {
       Map<String, dynamic> reqModel = {
-        "name": nameController.value.text.trim(),
-        "email": emailController.value.text.trim(),
-        "gender": selectedGender.value,
-        "phone": phoneNumberController.value.text.trim(),
-        "password": passController.value.text.trim(),
-        "confirm_password": confPassController.value.text.trim(),
-        "age": ageController.value.text.trim(),
-        "type": "user",
+        "first_name": splitStrings[0],
+        "last_name": splitStrings[1],
+        "mobile_number": mobileNumberController.value.text,
+        "email": emailController.value.text,
+        "gender": selectedGender,
+        "date_of_birth": dobController.value.text,
+        "occupation": "",
+        "address": "",
+        "apt": "",
+        "zip": "",
+        "business_name": "",
+        "password": "",
+        "language": languageController.value.text.trim()
       };
       isRegisterLoadng(true);
       var res = await authServices.registerApi(reqModel: reqModel);
@@ -48,13 +66,13 @@ class SignupController extends GetxController {
   }
 
   clearValue() {
-    nameController.value.clear();
+    firstNameController.value.clear();
     emailController.value.clear();
-    phoneNumberController.value.clear();
+    mobileNumberController.value.clear();
     selectedGender.value = '';
     isRegisterLoadng.value = false;
-    ageController.value.clear();
-    passController.value.clear();
-    confPassController.value.clear();
+    addressController.value.clear();
+    passwordController.value.clear();
+    cnfPasswordController.value.clear();
   }
 }

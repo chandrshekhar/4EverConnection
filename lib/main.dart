@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'routes/app_routes.dart';
 import 'theme/theme_helper.dart';
 import 'widgets/dismissible_widget.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(390, 844),
         minTextAdapt: true,
         splitScreenMode: true,
-        child: MaterialApp(
+        child: GetMaterialApp(
           theme: theme,
           title: 'forever_connection',
           debugShowCheckedModeBanner: false,

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
+
+import '../../Controllers/Auth Controller/forgot_password_controller.dart';
 
 // ignore: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {
@@ -10,9 +13,8 @@ class ForgotPasswordScreen extends StatelessWidget {
       : super(
           key: key,
         );
-
   TextEditingController mobileNumberController = TextEditingController();
-
+  final forgetPasswordController = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +29,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 height: 203.v,
                 width: 194.h,
               ),
-               SizedBox(height:50.v),
+              SizedBox(height: 50.v),
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 24.h,
@@ -81,7 +83,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
-                            controller: mobileNumberController,
+                            controller:
+                                forgetPasswordController.emailController.value,
                             margin: EdgeInsets.only(left: 21.h),
                             hintText: "Email ID / Mobile Number",
                             hintStyle: CustomTextStyles.bodyMediumGray600_1,
@@ -91,20 +94,25 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 54.v),
-                    CustomElevatedButton(
-                      onTap: () {
-                        Navigator.pushNamed(context,AppRoutes.resetPasswordScreen);
-                      },
-                      text: "Send Login Link",
-                      rightIcon: Container(
-                        margin: EdgeInsets.only(left: 16.h),
-                        child: CustomImageView(
-                          svgPath: ImageConstant.imgArrowrightPrimary,
-                        ),
-                      ),
+                    SizedBox(height: 80.v),
+                    Obx(
+                      () => forgetPasswordController.isLoginLoading.value
+                          ? const CircularProgressIndicator.adaptive()
+                          : CustomElevatedButton(
+                              onTap: () {
+                                forgetPasswordController
+                                    .sednEmailForOtp(context);
+                              },
+                              text: "Send Login Link",
+                              rightIcon: Container(
+                                margin: EdgeInsets.only(left: 16.h),
+                                child: CustomImageView(
+                                  svgPath: ImageConstant.imgArrowrightPrimary,
+                                ),
+                              ),
+                            ),
                     ),
-                    SizedBox(height: 20.v),
+                    SizedBox(height: 40.v),
                     RichText(
                       text: TextSpan(
                         children: [
@@ -115,7 +123,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                           TextSpan(
                             text: "Login",
                             style: CustomTextStyles.titleSmallPrimaryContainer,
-                            recognizer: TapGestureRecognizer()..onTap = () =>  Navigator.pushNamed(context, AppRoutes.loginScreen),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.pushNamed(
+                                  context, AppRoutes.loginScreen),
                           ),
                         ],
                       ),

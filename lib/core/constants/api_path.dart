@@ -1,11 +1,11 @@
 class ApiPath {
-  static const baseUrl = "http://52.66.31.220";
+  static const baseUrl = "https://4everconnection.com";
   static const storageUrl = "http://52.66.31.220/storage/";
 
   //Authentication
   static const registerUrl = "$baseUrl/api/v1/register";
-  static const loginUrl = "$baseUrl/api/v1/login";
-  static const forgotPasswordSendEmail = "$baseUrl/api/v1/forget-password";
+  static const  loginUrl = "$baseUrl/api-token-auth/";
+  static const forgotPasswordSendEmail = "$baseUrl/api/user/reset-password";
   static const verifyEmailOtp = "$baseUrl/api/v1/otp-verification";
 
   //Home Page symptopm api

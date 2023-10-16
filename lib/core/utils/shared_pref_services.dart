@@ -1,16 +1,18 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
-  setUserID({required String userID}) async {
+  setUserID({required String userID, required String password}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString('userId', userID);
+    prefs.setString('userId', userID);
+    prefs.setString("password", password);
+    return;
   }
 
   getUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("userId");
   }
-   
+
   setUserToken({required String userToken}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString("userToken", userToken);

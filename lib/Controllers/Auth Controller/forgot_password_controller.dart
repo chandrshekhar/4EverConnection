@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Services/Auth Services/auth_services.dart';
 import '../../core/utils/toast_widget.dart';
+import '../../routes/app_routes.dart';
 
 class ForgotPasswordController extends GetxController {
   var emailController = TextEditingController().obs;
@@ -18,14 +19,16 @@ class ForgotPasswordController extends GetxController {
       isLoginLoading(true);
       var res =
           await authServices.sendEmailForForgotpassword(reqModel: reqModel);
-      if (res['status'] == true) {
+      debugPrint(res.toString());
+      if (res['status'] == 200) {
         isLoginLoading(false);
         ToastWidget.successToast(success: res['message']);
+        Navigator.pushNamed(context, AppRoutes.resetPasswordScreen);
 
         // doNavigate(route: const OtpScreen(), context: context);
       } else {
         isLoginLoading(false);
-        ToastWidget.errorToast(error: res['error']);
+        ToastWidget.errorToast(error: res['message']);
       }
     } else {
       isLoginLoading(false);

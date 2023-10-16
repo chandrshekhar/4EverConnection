@@ -145,7 +145,15 @@ class DashboardScreen extends StatelessWidget {
                         if (index == 0) {
                           Navigator.pushNamed(
                               context, AppRoutes.requestServiceOneScreen);
-                        }
+                        } else if (index == 1) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.myServicesScreen);
+                        } else if (index == 2) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.documentVaultScreen);
+                        } else if (index == 3) {
+                        } else if (index == 4) {
+                        } else if (index == 5) {}
                       },
                       buttonName: dashboardController.dashboardListData[index]
                           ['buttonName'],

@@ -98,7 +98,7 @@ class CustomTextFormField extends StatelessWidget {
         hintStyle: hintStyle ?? theme.textTheme.bodyLarge,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
-        suffixIcon: suffix,
+        suffix: suffix,
         suffixIconConstraints: suffixConstraints,
         isDense: true,
         contentPadding: contentPadding ?? EdgeInsets.all(2.h),
@@ -130,6 +130,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
       );
 }
+
 extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get fillPrimary => OutlineInputBorder(
         borderRadius: BorderRadius.circular(3.h),
