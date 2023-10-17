@@ -27,13 +27,6 @@ class DashboardController extends GetxController {
       "buttonTap": () {}
     },
     {
-      "title": "Request New Service",
-      "desc":
-          "Explore Our Suite of Essential Services &Get ready for an Amazing 5 Star Experience!",
-      "buttonName": "Go to my Vault",
-      "buttonTap": () {}
-    },
-    {
       "title": "Support",
       "desc":
           "If you need help we are here for you and 4ever. Feel free to reach out if you have a question.",

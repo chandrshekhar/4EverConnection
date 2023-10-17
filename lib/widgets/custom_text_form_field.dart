@@ -2,34 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    Key? key,
-    this.alignment,
-    this.width,
-    this.margin,
-    this.controller,
-    this.focusNode,
-    this.autofocus = false,
-    this.textStyle,
-    this.obscureText = false,
-    this.textInputAction = TextInputAction.next,
-    this.textInputType = TextInputType.text,
-    this.maxLines,
-    this.hintText,
-    this.hintStyle,
-    this.prefix,
-    this.prefixConstraints,
-    this.suffix,
-    this.suffixConstraints,
-    this.contentPadding,
-    this.borderDecoration,
-    this.fillColor,
-    this.filled = false,
-    this.validator,
-  }) : super(
+  const CustomTextFormField(
+      {Key? key,
+      this.alignment,
+      this.width,
+      this.margin,
+      this.controller,
+      this.focusNode,
+      this.autofocus = false,
+      this.textStyle,
+      this.obscureText = false,
+      this.textInputAction = TextInputAction.next,
+      this.textInputType = TextInputType.text,
+      this.maxLines,
+      this.hintText,
+      this.hintStyle,
+      this.prefix,
+      this.prefixConstraints,
+      this.suffix,
+      this.suffixConstraints,
+      this.contentPadding,
+      this.borderDecoration,
+      this.fillColor,
+      this.filled = false,
+      this.validator,
+      this.readOnly = false})
+      : super(
           key: key,
         );
-
+  final bool readOnly;
   final Alignment? alignment;
 
   final double? width;
@@ -83,6 +84,7 @@ class CustomTextFormField extends StatelessWidget {
         width: width ?? double.maxFinite,
         margin: margin,
         child: TextFormField(
+          readOnly: readOnly,
           controller: controller,
           style: textStyle ?? theme.textTheme.bodyLarge,
           obscureText: obscureText!,
@@ -91,6 +93,7 @@ class CustomTextFormField extends StatelessWidget {
           maxLines: maxLines ?? 1,
           decoration: decoration,
           validator: validator,
+          cursorColor: Colors.black.withOpacity(0.1),
         ),
       );
   InputDecoration get decoration => InputDecoration(

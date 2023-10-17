@@ -77,7 +77,7 @@ class AppRoutes {
     resetPasswordScreen: (context) => ResetPasswordScreen(),
     dashboardScreen: (context) => DashboardScreen(),
     requestServiceOneScreen: (context) => const RequestServiceOneScreen(),
-    myProfileScreen: (context) => const MyProfileScreen(),
+    myProfileScreen: (context) =>  MyProfileScreen(),
     snapshotScreen: (context) => SnapshotScreen(),
     personalDetailsScreen: (context) => const PersonalDetailsScreen(),
     professionalProfileScreen: (context) => ProfessionalProfileScreen(),
@@ -88,6 +88,6 @@ class AppRoutes {
     passwordSecurityScreen: (context) => PasswordSecurityScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
     notificationsScreen: (context) => const NotificationsScreen(),
-    documentVaultScreen: (context) => const DocumentVaultScreen()
+    documentVaultScreen: (context) =>  DocumentVaultScreen()
   };
 }

@@ -4,6 +4,7 @@ import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:get/get.dart';
 
+import '../../Controllers/Documents Vault controller/documents_vault_controller.dart';
 import '../../routes/app_routes.dart';
 import '../../widgets/app_bar/appbar_image.dart';
 import '../../widgets/app_bar/appbar_image_1.dart';
@@ -13,15 +14,13 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_image_view.dart';
 
 // ignore_for_file: must_be_immutable
-class DocumentVaultScreen extends StatefulWidget {
-  const DocumentVaultScreen({Key? key}) : super(key: key);
+class DocumentVaultScreen extends StatelessWidget {
+  DocumentVaultScreen({Key? key}) : super(key: key);
 
-  @override
-  State<DocumentVaultScreen> createState() => _DocumentVaultScreenState();
-}
-
-class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
   List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
+
+  final documentVaultController = Get.put(DocumentsVaultController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +51,7 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 15.h),
+                margin: EdgeInsets.only(bottom: 8.h),
                 padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 30.h),
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -109,79 +108,101 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   )),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: 260.h,
-                      margin: EdgeInsets.symmetric(vertical: 15.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          color: Colors.white),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            minLeadingWidth: 12.h,
-                            leading: CustomImageView(
-                              svgPath: ImageConstant.imgCalendar,
-                            ),
-                            title: const Text("Upload Date",
-                                style: TextStyle(
-                                  color: Color(0xFF6B6B6B),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                )),
-                            subtitle: const Text("12/05/2023",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Color(0xFF1E1E1E),
-                                  fontWeight: FontWeight.w400,
-                                )),
-                            trailing: const Icon(Icons.more_vert),
-                          ),
-                          ListTile(
-                            minLeadingWidth: 12.h,
-                            leading: CustomImageView(
-                              svgPath: ImageConstant.imgUser,
-                            ),
-                            title: const Text("Document Name",
-                                style: TextStyle(
-                                  color: Color(0xFF6B6B6B),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                )),
-                            subtitle: const Text("Birth Certificate",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Color(0xFF1E1E1E),
-                                  fontWeight: FontWeight.w400,
-                                )),
-                          ),
-                          ListTile(
-                            minLeadingWidth: 12.h,
-                            leading: CustomImageView(
-                              svgPath: ImageConstant.imgEdit,
-                            ),
-                            title: const Text("Description",
-                                style: TextStyle(
-                                  color: Color(0xFF6B6B6B),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                )),
-                            subtitle: const Text(
-                                "Lorem ipsum dolor sit amet consectetur. Adipiscing etiam mauris ultricies integer. Vehicula vel ipsum ut morbi.",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Color(0xFF1E1E1E),
-                                  fontWeight: FontWeight.w400,
-                                )),
+              Obx(
+                () => documentVaultController.isLoadingDocument == true
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      )
+                    : documentVaultController.documentValultDataList.isEmpty
+                        ? const Center(
+                            child: Text("No Data Found!"),
                           )
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                        : Expanded(
+                            child: ListView.builder(
+                              itemCount: documentVaultController
+                                  .documentValultDataList.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  height: 260.h,
+                                  margin: EdgeInsets.symmetric(vertical: 5.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: Colors.white),
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        minLeadingWidth: 12.h,
+                                        leading: CustomImageView(
+                                          svgPath: ImageConstant.imgCalendar,
+                                        ),
+                                        title: const Text("Upload Date",
+                                            style: TextStyle(
+                                              color: Color(0xFF6B6B6B),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                        subtitle: Text(
+                                            documentVaultController
+                                                .documentValultDataList[index]
+                                                .publicationDate
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xFF1E1E1E),
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                        trailing: const Icon(Icons.more_vert),
+                                      ),
+                                      ListTile(
+                                        minLeadingWidth: 12.h,
+                                        leading: CustomImageView(
+                                          svgPath: ImageConstant.imgUser,
+                                        ),
+                                        title: const Text("Document Name",
+                                            style: TextStyle(
+                                              color: Color(0xFF6B6B6B),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                        subtitle: Text(
+                                            documentVaultController
+                                                .documentValultDataList[index]
+                                                .name
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xFF1E1E1E),
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                      ),
+                                      ListTile(
+                                        minLeadingWidth: 12.h,
+                                        leading: CustomImageView(
+                                          svgPath: ImageConstant.imgEdit,
+                                        ),
+                                        title: const Text("Description",
+                                            style: TextStyle(
+                                              color: Color(0xFF6B6B6B),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                        subtitle: Text(
+                                            documentVaultController
+                                                .documentValultDataList[index]
+                                                .description
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xFF1E1E1E),
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
               )
             ],
           ),

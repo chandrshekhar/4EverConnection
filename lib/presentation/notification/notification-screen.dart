@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';

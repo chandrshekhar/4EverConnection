@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Controllers/Auth%20Controller/login_controller.dart';
+
 import 'package:forever_connection/core/app_export.dart';
+import '../../Controllers/Auth Controller/login_controller.dart';
+import '../../Controllers/User Profile Controller/user_profile_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class SideBarDraweritem extends StatelessWidget {
-  const SideBarDraweritem({Key? key})
+  const SideBarDraweritem({Key? key, required this.myProfileController})
       : super(
           key: key,
         );
+  final UserProfileController myProfileController;
 
   @override
   Widget build(BuildContext context) {
+    String userName =
+        "${myProfileController.userProfileModel.value.personalData!.firstName ?? ""}  ${myProfileController.userProfileModel.value.personalData!.lastName ?? ""}";
+
     return Drawer(
       child: SingleChildScrollView(
         child: Container(
@@ -40,7 +46,7 @@ class SideBarDraweritem extends StatelessWidget {
                         bottom: 22.v,
                       ),
                       child: Text(
-                        "Austin Cooper",
+                        userName,
                         style: theme.textTheme.titleLarge,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -121,7 +127,6 @@ class SideBarDraweritem extends StatelessWidget {
               makeSideField(
                 onTap: () {
                   LoginController().logOut(context);
-                 
                 },
                 title: "LogOut",
               ),

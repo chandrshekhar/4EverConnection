@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../User Profile Controller/user_profile_controller.dart';
+
 class UserSnapshotController extends GetxController {
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
@@ -28,5 +30,31 @@ class UserSnapshotController extends GetxController {
 
   void languagePreference(String selectedvalue) {
     radioGroup.value = selectedvalue;
+  }
+
+  // user personal data is the snapshot of the user
+  final userPersonal =
+      Get.find<UserProfileController>().userProfileModel.value.personalData;
+
+  getSnapshotData() {
+    firstNameController.value.text = userPersonal!.firstName ?? "";
+    middleNameController.value.text = userPersonal!.middleName ?? "";
+    lastNameController.value.text = userPersonal!.lastName ?? "";
+    occupationController.value.text = "";
+    idealOccupationController.value.text = "";
+    phoneNumberController.value.text = userPersonal!.mobilePhone ?? "";
+    spouseController.value.text = "";
+    homeAddressController.value.text = userPersonal!.homeAddress ?? "";
+    homeZipController.value.text = userPersonal!.homeZip ?? "";
+    personalEmailController.value.text = userPersonal!.personalEmail ?? "";
+
+    languagePreference(userPersonal!.preferredLanguage ?? "");
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    getSnapshotData();
+    super.onInit();
   }
 }

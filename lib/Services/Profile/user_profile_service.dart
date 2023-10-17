@@ -1,13 +1,12 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:forever_connection/Models/user_services_model.dart';
+import 'package:forever_connection/Models/user_profile_model.dart';
+
 import '../../core/constants/api_path.dart';
 import '../../core/utils/shared_pref_services.dart';
 
-class UserServices {
-  final Dio dio = Dio();
-  Future<List<UserServicesModel>> getUserServices() async {
+class UserProfileService {
+  Dio dio = Dio();
+  Future<UserProfileModel> getUserProfile() async {
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -18,12 +17,10 @@ class UserServices {
       };
 
       response = await dio.get(
-        ApiPath.getUserService,
+        ApiPath.getUserProfile,
       );
       if (response.statusCode == 200) {
-        final List<UserServicesModel> userServicesList = (response.data as List)
-            .map((json) => UserServicesModel.fromJson(json))
-            .toList();
+        final userServicesList = UserProfileModel.fromJson(response.data);
 
         // print(userServicesList);
         return userServicesList;

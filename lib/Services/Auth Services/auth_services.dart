@@ -66,17 +66,17 @@ class AuthServices {
     }
   }
 
-  Future<Map> verifyOtp({required Map<String, dynamic> reqModel}) async {
-    Response response;
-    try {
-      dio.options.headers = {
-        'Accept': 'application/json',
-        'Conent-Type': 'application/json',
-      };
-      response = await dio.post("", data: reqModel);
-      return response.data;
-    } catch (error) {
-      return {'status': 1, "message": "Please check your internet connection"};
-    }
-  }
+  // Future<Map> verifyOtp({required Map<String, dynamic> reqModel}) async {
+  //   Response response;
+  //   try {
+  //     dio.options.headers = {
+  //       'Accept': 'application/json',
+  //       'Conent-Type': 'application/json',
+  //     };
+  //     response = await dio.post("", data: reqModel);
+  //     return response.data;
+  //   } catch (error) {
+  //     return {'status': 1, "message": "Please check your internet connection"};
+  //   }
+  // }
 }
