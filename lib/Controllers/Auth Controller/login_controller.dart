@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../../Services/Auth Services/auth_services.dart';
 import '../../core/utils/shared_pref_services.dart';
 
-
 class LoginController extends GetxController {
   var userNameController = TextEditingController().obs;
   var passwordController = TextEditingController().obs;
@@ -34,10 +33,7 @@ class LoginController extends GetxController {
       };
       isLoginLoading(true);
       var res = await authServices.loginApi(reqModel: reqModel);
-      if (kDebugMode) {
-        print("reqModel--> $reqModel");
-        print("res--> $res");
-      }
+     
       if (res['token'] != null && res['token'] != '') {
         await SharedPref().setUserToken(userToken: res['token']);
         if (rememberMeCheckBox.value) {
@@ -75,8 +71,14 @@ class LoginController extends GetxController {
     isLoginLoading(false);
   }
 
+  alreadyLogedIn() {}
+
   logOut(BuildContext context) async {
     await SharedPref().deleteAllData();
-    Navigator.pushNamed(context, AppRoutes.loginScreen);
+    userNameController.value.clear();
+    passwordController.value.clear();
+    rememberMe(false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoutes.loginScreen, (route) => false);
   }
 }

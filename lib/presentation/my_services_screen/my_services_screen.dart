@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Services/user_service_controller.dart';
+import 'package:forever_connection/Models/user_services_model.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
@@ -6,6 +8,8 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_outlined_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 // ignore_for_file: must_be_immutable
 class MyServicesScreen extends StatefulWidget {
@@ -32,8 +36,11 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
 
   int tapIndex = 0;
 
+  final userServiceController = Get.put(UserServicesController());
+
   @override
   Widget build(BuildContext context) {
+    userServiceController.getUserServices();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFFE4F5FF),
@@ -104,20 +111,31 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               child: Text("Completed Services",
                   style: theme.textTheme.titleLarge)),
           tapIndex == 0
-              ? Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return serviceCard();
-                    },
-                  ),
+              ? Obx(
+                  () => userServiceController.isLoading == true
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
+                      : userServiceController.userServicesList.isEmpty
+                          ? const Center(
+                              child: Text("No Service"),
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                itemCount: userServiceController
+                                    .userServicesList.length,
+                                itemBuilder: (context, index) {
+                                  return serviceCard(userServiceController
+                                      .userServicesList[index]);
+                                },
+                              ),
+                            ),
                 )
-              : serviceCard()
+              : Container()
         ]));
   }
 
-  Widget serviceCard() {
+  Widget serviceCard(UserServicesModel userServicesModel) {
     return Container(
       margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 6.v),
       padding: EdgeInsets.all(12.v),
@@ -137,9 +155,9 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       fontSize: 18.v),
                 ),
               ),
-              const Expanded(
+              Expanded(
                   flex: 2,
-                  child: Text('S-6103',
+                  child: Text(userServicesModel.identifier.toString(),
                       style:
                           TextStyle(color: Color(0xFF6B6B6B), fontSize: 15))),
               const Spacer(),
@@ -187,11 +205,12 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       fontSize: 18.v),
                 ),
               ),
-              const Expanded(
+              Expanded(
                   flex: 3,
-                  child: Text('09/022/2023',
-                      style:
-                          TextStyle(color: Color(0xFF6B6B6B), fontSize: 15))),
+                  child: Text(
+                      convertAndFormatDate(userServicesModel.dateCreated!),
+                      style: const TextStyle(
+                          color: Color(0xFF6B6B6B), fontSize: 15))),
             ],
           ),
           Row(
@@ -206,9 +225,9 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       fontSize: 18.v),
                 ),
               ),
-              const Expanded(
+              Expanded(
                   flex: 2,
-                  child: Text('Home Mortgage',
+                  child: Text(userServicesModel.service.toString(),
                       style:
                           TextStyle(color: Color(0xFF6B6B6B), fontSize: 15))),
               const Spacer()
@@ -252,8 +271,8 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                   child: Container(
                     padding: const EdgeInsets.only(left: 2),
                     decoration: BoxDecoration(border: Border.all(width: 0.1)),
-                    child: const CustomTextFormField(
-                      hintText: "\$",
+                    child: CustomTextFormField(
+                      hintText: "\$ ${userServicesModel.balance}",
                     ),
                   )),
               const Spacer(),
@@ -302,6 +321,14 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
         ],
       ),
     );
+  }
+
+  String convertAndFormatDate(String inputDate) {
+    final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
+    final parsedDate = originalFormat.parse(inputDate);
+
+    final outputFormat = DateFormat("dd/MM/yyyy");
+    return outputFormat.format(parsedDate);
   }
 
   // Widget customWidget() {

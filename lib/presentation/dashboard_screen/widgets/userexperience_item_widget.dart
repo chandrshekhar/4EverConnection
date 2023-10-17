@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 
-
 // ignore: must_be_immutable
 class UserexperienceItemWidget extends StatelessWidget {
   String? title;
   String? desc;
   String? buttonName;
   void Function()? ontap;
-   UserexperienceItemWidget({Key? key,this.title,this.desc,this.buttonName,this.ontap})
+  UserexperienceItemWidget(
+      {Key? key, this.title, this.desc, this.buttonName, this.ontap})
       : super(
           key: key,
         );
@@ -17,7 +17,7 @@ class UserexperienceItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.h,
+      height: 152.h,
       width: 342.h,
       margin: EdgeInsets.symmetric(vertical: 8.h),
       decoration: AppDecoration.outlineBlack900.copyWith(
@@ -35,7 +35,7 @@ class UserexperienceItemWidget extends StatelessWidget {
                     topLeft: Radius.circular(9.h),
                     topRight: Radius.circular(9.h))),
             child: Text(
-             title!,
+              title!,
               style: CustomTextStyles.titleLargePrimary_1,
             ),
           ),
@@ -45,7 +45,8 @@ class UserexperienceItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(desc!,
+                Text(
+                  desc!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,

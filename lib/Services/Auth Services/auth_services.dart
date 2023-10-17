@@ -44,7 +44,7 @@ class AuthServices {
       debugPrint(reqModel.toString());
       response =
           await dio.post(ApiPath.forgotPasswordSendEmail, data: reqModel);
-      debugPrint(response.data);
+      print("pandey->${response.data}");
       if (response.statusCode == 200) {
         return {
           'status': response.statusCode,
@@ -73,7 +73,7 @@ class AuthServices {
         'Accept': 'application/json',
         'Conent-Type': 'application/json',
       };
-      response = await dio.post(ApiPath.verifyEmailOtp, data: reqModel);
+      response = await dio.post("", data: reqModel);
       return response.data;
     } catch (error) {
       return {'status': 1, "message": "Please check your internet connection"};

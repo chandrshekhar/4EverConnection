@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Auth%20Controller/login_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 // ignore_for_file: must_be_immutable
@@ -41,6 +42,7 @@ class SideBarDraweritem extends StatelessWidget {
                       child: Text(
                         "Austin Cooper",
                         style: theme.textTheme.titleLarge,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -118,7 +120,8 @@ class SideBarDraweritem extends StatelessWidget {
               ),
               makeSideField(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.loginScreen);
+                  LoginController().logOut(context);
+                 
                 },
                 title: "LogOut",
               ),

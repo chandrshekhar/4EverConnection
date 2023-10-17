@@ -15,6 +15,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         );
   TextEditingController mobileNumberController = TextEditingController();
   final forgetPasswordController = Get.put(ForgotPasswordController());
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,31 +69,43 @@ class ForgotPasswordScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 70.v),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomImageView(
-                          svgPath: ImageConstant.imgVector,
-                          height: 17.adaptSize,
-                          width: 17.adaptSize,
-                          margin: EdgeInsets.only(
-                            top: 2.v,
-                            bottom: 10.v,
+                    Form(
+                      key: _formKey,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomImageView(
+                            svgPath: ImageConstant.imgVector,
+                            height: 17.adaptSize,
+                            width: 17.adaptSize,
+                            margin: EdgeInsets.only(
+                              top: 2.v,
+                              bottom: 10.v,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: CustomTextFormField(
-                            controller:
-                                forgetPasswordController.emailController.value,
-                            margin: EdgeInsets.only(left: 21.h),
-                            hintText: "Email ID / Mobile Number",
-                            hintStyle: CustomTextStyles.bodyMediumGray600_1,
-                            textInputAction: TextInputAction.done,
-                            textInputType: TextInputType.emailAddress,
+                          Expanded(
+                            child: CustomTextFormField(
+                              controller: forgetPasswordController
+                                  .emailController.value,
+                              margin: EdgeInsets.only(left: 21.h),
+                              hintText: "Email ID",
+                              hintStyle: CustomTextStyles.bodyMediumGray600_1,
+                              textInputAction: TextInputAction.done,
+                              textInputType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'This field is required';
+                                }
+                                if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                  return "Please enter a valid email address";
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     SizedBox(height: 80.v),
                     Obx(
@@ -100,8 +113,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                           ? const CircularProgressIndicator.adaptive()
                           : CustomElevatedButton(
                               onTap: () {
-                                forgetPasswordController
-                                    .sednEmailForOtp(context);
+                                if (_formKey.currentState!.validate()) {
+                                  forgetPasswordController
+                                      .sednEmailForOtp(context);
+                                }
                               },
                               text: "Send Login Link",
                               rightIcon: Container(

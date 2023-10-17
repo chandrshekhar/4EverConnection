@@ -23,7 +23,8 @@ class ForgotPasswordController extends GetxController {
       if (res['status'] == 200) {
         isLoginLoading(false);
         ToastWidget.successToast(success: res['message']);
-        Navigator.pushNamed(context, AppRoutes.resetPasswordScreen);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.loginScreen, (route) => false);
 
         // doNavigate(route: const OtpScreen(), context: context);
       } else {

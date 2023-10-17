@@ -75,7 +75,10 @@ class LoginScreen extends StatelessWidget {
                               hintText: "Username",
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter valid userName';
+                                  return 'This field is required';
+                                }
+                                if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                  return "Please enter a valid email address";
                                 }
                                 return null;
                               },
@@ -136,7 +139,10 @@ class LoginScreen extends StatelessWidget {
                                     loginController.passwordVigiable.value,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter valid password date';
+                                    return 'This field is required';
+                                  }
+                                  if (value.length < 7) {
+                                    return "password should be 8 char";
                                   }
                                   return null;
                                 },
