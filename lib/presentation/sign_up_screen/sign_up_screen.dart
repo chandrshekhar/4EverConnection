@@ -145,35 +145,71 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 controller:
                                     signUpController.firstNameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Full Name",
+                                hintText: "First Name",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 2.v),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                "Scan ID",
-                                style: CustomTextStyles.bodyLarge16,
+                        SizedBox(height: 38.v),
+                        Row(
+                          children: [
+                            CustomImageView(
+                              svgPath: ImageConstant.imgUser,
+                              height: 19.v,
+                              width: 17.h,
+                              margin: EdgeInsets.only(
+                                top: 7.v,
+                                bottom: 5.v,
                               ),
-                              CustomImageView(
-                                svgPath: ImageConstant.imgInfo,
-                                height: 13.adaptSize,
-                                width: 13.adaptSize,
-                                margin: EdgeInsets.only(
-                                  left: 8.h,
-                                  top: 5.v,
-                                  bottom: 5.v,
-                                ),
+                            ),
+                            Expanded(
+                              child: CustomTextFormField(
+                                controller:
+                                    signUpController.lastnameController.value,
+                                margin: EdgeInsets.only(left: 22.h),
+                                hintText: "Last Name",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 12.v),
+                        // Align(
+                        //   alignment: Alignment.centerRight,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.end,
+                        //     children: [
+                        //       Text(
+                        //         "Scan ID",
+                        //         style: CustomTextStyles.bodyLarge16,
+                        //       ),
+                        //       CustomImageView(
+                        //         svgPath: ImageConstant.imgInfo,
+                        //         height: 13.adaptSize,
+                        //         width: 13.adaptSize,
+                        //         margin: EdgeInsets.only(
+                        //           left: 8.h,
+                        //           top: 5.v,
+                        //           bottom: 5.v,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+
+                        SizedBox(height: 38.v),
                         Row(
                           children: [
                             CustomImageView(
@@ -192,6 +228,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 margin: EdgeInsets.only(left: 24.h),
                                 hintText: "Mobile Number",
                                 textInputType: TextInputType.phone,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -215,33 +258,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.emailController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Mail Address",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+                                  if (!RegExp(r'\S+@\S+\.\S+')
+                                      .hasMatch(value)) {
+                                    return "Please enter a valid email address";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 38.v),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomImageView(
-                              svgPath: ImageConstant.imgVector,
-                              height: 17.adaptSize,
-                              width: 17.adaptSize,
-                              margin: EdgeInsets.only(
-                                top: 7.v,
-                                bottom: 10.v,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextFormField(
-                                controller:
-                                    signUpController.addressController.value,
-                                margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Confirm Mail Address",
-                              ),
-                            ),
-                          ],
-                        ),
+                        // SizedBox(height: 38.v),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     CustomImageView(
+                        //       svgPath: ImageConstant.imgVector,
+                        //       height: 17.adaptSize,
+                        //       width: 17.adaptSize,
+                        //       margin: EdgeInsets.only(
+                        //         top: 7.v,
+                        //         bottom: 10.v,
+                        //       ),
+                        //     ),
+                        //     Expanded(
+                        //       child: CustomTextFormField(
+                        //         controller:
+                        //             signUpController.addressController.value,
+                        //         margin: EdgeInsets.only(left: 22.h),
+                        //         hintText: "Confirm Mail Address",
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(height: 38.v),
                         Row(
                           children: [
@@ -316,6 +369,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
+                                onTap: () =>
+                                    signUpController.selectDate(context),
                                 controller:
                                     signUpController.dobController.value,
                                 margin: EdgeInsets.only(left: 22.h),
@@ -339,6 +394,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                                 controller:
                                     signUpController.occupationController.value,
                                 margin: EdgeInsets.only(left: 22.h),
@@ -366,6 +428,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.addressController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Address",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -388,6 +457,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.aptController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Apt",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -411,6 +487,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.zipController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "ZIP",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -431,6 +514,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                                 controller: signUpController
                                     .businessNameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
@@ -451,65 +541,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  return null;
+                                },
                                 controller:
                                     signUpController.passwordController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Password",
                                 textInputType: TextInputType.visiblePassword,
-                                suffix: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 30.h,
-                                    top: 6.v,
-                                    bottom: 6.v,
-                                  ),
-                                  child: CustomImageView(
-                                    svgPath: ImageConstant.imgShare,
-                                  ),
+                                suffix: InkWell(
+                                  onTap: () {
+                                    signUpController.visiablePassword(
+                                        !signUpController
+                                            .passwordVigiable.value);
+                                  },
+                                  child: Icon(
+                                      !signUpController.passwordVigiable.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      size: 18.h),
                                 ),
                                 suffixConstraints: BoxConstraints(
-                                  maxHeight: 31.v,
+                                  maxHeight: 30.v,
                                 ),
                                 obscureText: true,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 38.v),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomImageView(
-                              svgPath: ImageConstant.imgCar,
-                              height: 17.adaptSize,
-                              width: 17.adaptSize,
-                              margin: EdgeInsets.symmetric(vertical: 7.v),
-                            ),
-                            Expanded(
-                              child: CustomTextFormField(
-                                controller: signUpController
-                                    .cnfPasswordController.value,
-                                margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Confirm Password",
-                                textInputAction: TextInputAction.done,
-                                textInputType: TextInputType.visiblePassword,
-                                suffix: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 30.h,
-                                    top: 6.v,
-                                    bottom: 6.v,
-                                  ),
-                                  child: CustomImageView(
-                                    svgPath: ImageConstant.imgShare,
-                                  ),
-                                ),
-                                suffixConstraints: BoxConstraints(
-                                  maxHeight: 31.v,
-                                ),
-                                obscureText: true,
-                              ),
-                            ),
-                          ],
-                        ),
+
                         SizedBox(height: 38.v),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -587,20 +651,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         //     byclickingregis = value;
                         //   },
                         // ),
-                        CustomElevatedButton(
-                          onTap: () {
-                            Navigator.pushNamed(context, AppRoutes.loginScreen);
-                          },
-                          width: 342.h,
-                          text: "Sign up",
-                          margin: EdgeInsets.only(top: 30.v),
-                          rightIcon: Container(
-                            margin: EdgeInsets.only(left: 16.h),
-                            child: CustomImageView(
-                              svgPath: ImageConstant.imgArrowrightPrimary,
-                            ),
-                          ),
-                          alignment: Alignment.topCenter,
+                        Obx(
+                          () => signUpController.isRegisterLoadng == true
+                              ? const Center(
+                                  child: CircularProgressIndicator.adaptive())
+                              : CustomElevatedButton(
+                                  onTap: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      signUpController.register(context);
+                                    }
+                                  },
+                                  width: 342.h,
+                                  text: "Sign up",
+                                  margin: EdgeInsets.only(top: 30.v),
+                                  rightIcon: Container(
+                                    margin: EdgeInsets.only(left: 16.h),
+                                    child: CustomImageView(
+                                      svgPath:
+                                          ImageConstant.imgArrowrightPrimary,
+                                    ),
+                                  ),
+                                  alignment: Alignment.topCenter,
+                                ),
                         ),
                         SizedBox(height: 10.v),
                         Align(

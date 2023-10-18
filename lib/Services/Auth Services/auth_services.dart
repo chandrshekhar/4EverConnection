@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
@@ -5,17 +7,23 @@ import 'package:forever_connection/core/constants/api_path.dart';
 class AuthServices {
   final Dio dio = Dio();
   Future<Map> registerApi({required Map<String, dynamic> reqModel}) async {
-    Response response;
-    try {
-      dio.options.headers = {
-        'Accept': 'application/json',
-        'Conent-Type': 'application/json',
-      };
-      response = await dio.post(ApiPath.registerUrl, data: reqModel);
-      return response.data;
-    } catch (error) {
-      return {'status': 1, "message": "Please check your internet connection"};
+    dio.options.headers = {
+      'Accept': 'application/json',
+      'Conent-Type': 'application/json',
+    };
+    var response = await dio.post(ApiPath.registerUrl, data: reqModel);
+    if (kDebugMode) {
+      print("reg--. $response");
     }
+
+    if (response.statusCode == 200) {
+      return {
+        "satus": response.statusCode,
+        "message": response.data['message']
+      };
+    }
+
+    return response.data;
   }
 
   Future<Map> loginApi({required Map<String, dynamic> reqModel}) async {

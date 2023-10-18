@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
+   CustomTextFormField(
       {Key? key,
       this.alignment,
       this.width,
@@ -26,7 +26,7 @@ class CustomTextFormField extends StatelessWidget {
       this.fillColor,
       this.filled = false,
       this.validator,
-      this.readOnly = false})
+      this.readOnly = false, this.onTap})
       : super(
           key: key,
         );
@@ -75,6 +75,8 @@ class CustomTextFormField extends StatelessWidget {
 
   final FormFieldValidator<String>? validator;
 
+  void Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
     return textFormFieldWidget;
@@ -94,6 +96,7 @@ class CustomTextFormField extends StatelessWidget {
           decoration: decoration,
           validator: validator,
           cursorColor: Colors.black.withOpacity(0.1),
+          onTap: onTap,
         ),
       );
   InputDecoration get decoration => InputDecoration(

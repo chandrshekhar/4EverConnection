@@ -33,7 +33,7 @@ class LoginController extends GetxController {
       };
       isLoginLoading(true);
       var res = await authServices.loginApi(reqModel: reqModel);
-     
+
       if (res['token'] != null && res['token'] != '') {
         await SharedPref().setUserToken(userToken: res['token']);
         if (rememberMeCheckBox.value) {
