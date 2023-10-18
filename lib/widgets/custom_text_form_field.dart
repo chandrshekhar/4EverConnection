@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
-   CustomTextFormField(
+  CustomTextFormField(
       {Key? key,
       this.alignment,
       this.width,
@@ -26,7 +26,8 @@ class CustomTextFormField extends StatelessWidget {
       this.fillColor,
       this.filled = false,
       this.validator,
-      this.readOnly = false, this.onTap})
+      this.readOnly = false,
+      this.onTap})
       : super(
           key: key,
         );
@@ -88,7 +89,8 @@ class CustomTextFormField extends StatelessWidget {
         child: TextFormField(
           readOnly: readOnly,
           controller: controller,
-          style: textStyle ?? theme.textTheme.bodyLarge,
+          style: textStyle ??
+              TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           obscureText: obscureText!,
           textInputAction: textInputAction,
           keyboardType: textInputType,
@@ -101,12 +103,13 @@ class CustomTextFormField extends StatelessWidget {
       );
   InputDecoration get decoration => InputDecoration(
         hintText: hintText ?? "",
-        hintStyle: hintStyle ?? theme.textTheme.bodyLarge,
+        hintStyle: hintStyle ??
+            const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
-        suffix: suffix,
         suffixIconConstraints: suffixConstraints,
         isDense: true,
+        suffixIcon: suffix,
         contentPadding: contentPadding ?? EdgeInsets.all(2.h),
         fillColor: fillColor,
         filled: filled,

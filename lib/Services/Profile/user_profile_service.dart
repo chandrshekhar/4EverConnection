@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:forever_connection/Models/user_profile_model.dart';
 
 import '../../core/constants/api_path.dart';
@@ -20,8 +23,9 @@ class UserProfileService {
         ApiPath.getUserProfile,
       );
       if (response.statusCode == 200) {
+        log("User data -- ${response.data}");
         final userServicesList = UserProfileModel.fromJson(response.data);
-
+            
         // print(userServicesList);
         return userServicesList;
       } else {

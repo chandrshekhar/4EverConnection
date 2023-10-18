@@ -5,9 +5,7 @@ class UserProfileModel {
   HealthData? healthData;
   FinancialData? financialData;
   List<HealthInsuranceData>? healthInsuranceData;
-
   List<VaultDocumentData>? vaultDocumentData;
-
   UserProfileModel(
       {personalData,
       professionalData,

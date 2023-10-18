@@ -8,6 +8,7 @@ class UserSnapshotController extends GetxController {
   var middleNameController = TextEditingController().obs;
   var lastNameController = TextEditingController().obs;
   var companyNameController = TextEditingController().obs;
+  var positionController = TextEditingController().obs;
   var occupationController = TextEditingController().obs;
   var idealOccupationController = TextEditingController().obs;
   var phoneNumberController = TextEditingController().obs;
@@ -33,22 +34,52 @@ class UserSnapshotController extends GetxController {
   }
 
   // user personal data is the snapshot of the user
-  final userPersonal =
-      Get.find<UserProfileController>().userProfileModel.value.personalData;
+  final userPersonal = Get.find<UserProfileController>().userProfileModel;
 
   getSnapshotData() {
-    firstNameController.value.text = userPersonal!.firstName ?? "";
-    middleNameController.value.text = userPersonal!.middleName ?? "";
-    lastNameController.value.text = userPersonal!.lastName ?? "";
-    occupationController.value.text = "";
-    idealOccupationController.value.text = "";
-    phoneNumberController.value.text = userPersonal!.mobilePhone ?? "";
+    firstNameController.value.text =
+        userPersonal.value.personalData!.firstName ?? "";
+    middleNameController.value.text =
+        userPersonal.value.personalData!.middleName ?? "";
+    lastNameController.value.text =
+        userPersonal.value.personalData!.lastName ?? "";
+    occupationController.value.text =
+        userPersonal.value.professionalData!.currentOccupation ?? "";
+    companyNameController.value.text =
+        userPersonal.value.professionalData!.businessName ?? "";
+    positionController.value.text =
+        userPersonal.value.professionalData!.position ?? "";
+    idealOccupationController.value.text =
+        userPersonal.value.professionalData!.idealOccupation ?? "";
+    phoneNumberController.value.text =
+        userPersonal.value.personalData!.mobilePhone ?? "";
+    homePhoneController.value.text =
+        userPersonal.value.personalData!.homePhone ?? "";
     spouseController.value.text = "";
-    homeAddressController.value.text = userPersonal!.homeAddress ?? "";
-    homeZipController.value.text = userPersonal!.homeZip ?? "";
-    personalEmailController.value.text = userPersonal!.personalEmail ?? "";
+    homeAddressController.value.text =
+        userPersonal.value.personalData!.homeAddress ?? "";
+    homeZipController.value.text =
+        userPersonal.value.personalData!.homeZip ?? "";
+    businessPhoneController.value.text =
+        userPersonal.value.professionalData!.businessName ?? "";
+    businessFaxController.value.text =
+        userPersonal.value.professionalData!.businessFax ?? "";
+    businessAptStecontroller.value.text =
+        userPersonal.value.professionalData!.businessApt ?? "";
+    businessAddressController.value.text =
+        userPersonal.value.professionalData!.businessAddress ?? "";
+    businessZipController.value.text =
+        userPersonal.value.professionalData!.businessZip ?? "";
+    personalEmailController.value.text =
+        userPersonal.value.personalData!.personalEmail ?? "";
+    // spouseController.value.text = userPersonal.value.relationshipData.
+    businessEmailController.value.text =
+        userPersonal.value.professionalData!.businessEmail ?? "";
+    websiteUrlController.value.text =
+        userPersonal.value.professionalData!.businessWebsite ?? "";
 
-    languagePreference(userPersonal!.preferredLanguage ?? "");
+    languagePreference(
+        userPersonal.value.personalData!.preferredLanguage ?? "");
   }
 
   @override

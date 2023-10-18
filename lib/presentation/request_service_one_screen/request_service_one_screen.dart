@@ -1,3 +1,7 @@
+import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
+import 'package:forever_connection/Controllers/Services/request_service_controller.dart';
+import 'package:get/get.dart';
+
 import '../request_service_one_screen/widgets/timedisplay_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -19,8 +23,6 @@ class RequestServiceOneScreen extends StatefulWidget {
 }
 
 class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
-  TextEditingController vectorController = TextEditingController();
-
   List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
 
   String servicetype = "";
@@ -31,6 +33,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
 
   String? selectedValue;
 
+  final requestServiceController = Get.put(RequestServiceController());
   @override
   void initState() {
     super.initState();
@@ -94,24 +97,25 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                     top: 5.v, bottom: 13.v)),
                                             Expanded(
                                                 child: CustomTextFormField(
-                                                    controller:
-                                                        vectorController,
-                                                    margin: EdgeInsets.only(
-                                                        left: 21.h),
-                                                    hintText: "Select Date",
-                                                    suffix: Container(
-                                                        margin:
-                                                            EdgeInsets.fromLTRB(
-                                                                30.h,
-                                                                10.v,
-                                                                15.h,
-                                                                10.v),
-                                                        child: CustomImageView(
-                                                            svgPath: ImageConstant
-                                                                .imgCalendar)),
-                                                    suffixConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 36.v)))
+                                              onTap: () {
+                                                requestServiceController
+                                                    .selectDate(context);
+                                              },
+                                              controller:
+                                                  requestServiceController
+                                                      .selectDateController
+                                                      .value,
+                                              margin:
+                                                  EdgeInsets.only(left: 21.h),
+                                              readOnly: true,
+                                              hintText: "Select Date",
+                                              suffix: Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      30.h, 10.v, 15.h, 10.v),
+                                                  child: CustomImageView(
+                                                      svgPath: ImageConstant
+                                                          .imgCalendar)),
+                                            ))
                                           ]),
                                       SizedBox(height: 29.v),
                                       Row(

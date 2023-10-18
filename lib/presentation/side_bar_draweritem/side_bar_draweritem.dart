@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:forever_connection/core/app_export.dart';
 import '../../Controllers/Auth Controller/login_controller.dart';
@@ -21,14 +22,14 @@ class SideBarDraweritem extends StatelessWidget {
       child: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: 26.h,
+            horizontal: 26.adaptSize,
             vertical: 19.v,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(right: 10.h),
+                padding: EdgeInsets.only(right: 10.adaptSize),
                 child: Row(
                   children: [
                     CustomImageView(
@@ -36,19 +37,18 @@ class SideBarDraweritem extends StatelessWidget {
                       height: 91.adaptSize,
                       width: 91.adaptSize,
                       radius: BorderRadius.circular(
-                        45.h,
+                        45.adaptSize,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 16.h,
-                        top: 37.v,
-                        bottom: 22.v,
-                      ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Expanded(
                       child: Text(
                         userName,
-                        style: theme.textTheme.titleLarge,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.titleLarge,
                       ),
                     ),
                   ],
@@ -149,7 +149,7 @@ class SideBarDraweritem extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       trailing: Icon(
         Icons.arrow_forward_ios,
-        size: 10.h,
+        size: 10.adaptSize,
       ),
       title: Text(
         title!,
