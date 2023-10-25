@@ -18,7 +18,7 @@ class UserexperienceItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: MediaQuery.of(context).size.height * 0.2,
-      margin: EdgeInsets.only(bottom: 15.h),
+      margin: EdgeInsets.only(bottom: 30.h),
       decoration: AppDecoration.outlineBlack900.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder9,
       ),
@@ -33,17 +33,9 @@ class UserexperienceItemWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(9.h),
                     topRight: Radius.circular(9.h))),
-            child: Row(
-              children: [
-                CustomImageView(
-                  svgPath: "assets/images/iconly_svg_optimized-optimized.svg",
-                  color: Colors.white,
-                ),
-                Text(
-                  title!,
-                  style: CustomTextStyles.titleLargePrimary_1,
-                ),
-              ],
+            child: Text(
+              title!,
+              style: CustomTextStyles.titleLargePrimary_1,
             ),
           ),
           Padding(
