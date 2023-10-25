@@ -5,7 +5,8 @@ import 'package:forever_connection/core/app_export.dart';
 class TimedisplayItemWidget extends StatelessWidget {
   final String time;
   final Color? buttonColor;
-  const TimedisplayItemWidget({Key? key, required this.time, this.buttonColor})
+  final Color? textColor;
+  const TimedisplayItemWidget({Key? key, required this.time, this.buttonColor, this.textColor})
       : super(
           key: key,
         );
@@ -35,6 +36,7 @@ class TimedisplayItemWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium!.copyWith(
                 height: 1.28,
+                color: textColor
               ),
             ),
           ),

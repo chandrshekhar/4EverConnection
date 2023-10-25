@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
-import 'package:forever_connection/presentation/request_service_one_screen/Model/partner_model_list.dart';
-import 'package:forever_connection/presentation/request_service_one_screen/Model/request_service_model.dart';
-import 'package:forever_connection/presentation/request_service_one_screen/Model/slot_model.dart';
-import 'package:forever_connection/presentation/request_service_one_screen/Reppository/service_repository.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Model/partner_model_list.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Model/request_service_model.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Model/slot_model.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Reppository/service_repository.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -15,11 +15,22 @@ class RequestServiceController extends GetxController {
   RxList<PartnerModelList> partnerList = <PartnerModelList>[].obs;
   RxString selectedValue = "In person".obs;
   RxBool isPartnerLoading = false.obs;
-  RxInt partnerId = 0.obs;
+  RxInt partnerId = (-1).obs;
   RxList<SlotModelList> usedSlotList = <SlotModelList>[].obs;
   RxInt activeIndex = (-1).obs;
   RxBool colorNeedToChange = false.obs;
   RxList<int> listOfTimeSlot = <int>[].obs;
+  RxInt serviceNeedId = (-1).obs;
+  RxString selectSlot = "".obs;
+
+
+  setServiceId(int id){
+    serviceNeedId.value=id;
+  }
+
+   selectSlots(String id){
+    selectSlot.value=id;
+  }
 
   setLocalListToEmpty() {
     listOfTimeSlot.value = listOfRawData;

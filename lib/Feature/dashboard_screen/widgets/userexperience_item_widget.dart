@@ -17,30 +17,38 @@ class UserexperienceItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.2,
-      margin: EdgeInsets.symmetric(vertical: 20.h),
+      // height: MediaQuery.of(context).size.height * 0.2,
+      margin: EdgeInsets.only(bottom: 15.h),
       decoration: AppDecoration.outlineBlack900.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder9,
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 46.h,
+            padding: const EdgeInsets.symmetric(vertical: 10),
             alignment: Alignment.center,
             decoration: AppDecoration.fillLightBlue.copyWith(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(9.h),
                     topRight: Radius.circular(9.h))),
-            child: Text(
-              title!,
-              style: CustomTextStyles.titleLargePrimary_1,
+            child: Row(
+              children: [
+                CustomImageView(
+                  svgPath: "assets/images/iconly_svg_optimized-optimized.svg",
+                  color: Colors.white,
+                ),
+                Text(
+                  title!,
+                  style: CustomTextStyles.titleLargePrimary_1,
+                ),
+              ],
             ),
           ),
           Padding(
             padding: EdgeInsets.only(
-                top: 15.h, left: 15.adaptSize, right: 15.adaptSize),
+                top: 10.h, left: 15.adaptSize, right: 15.adaptSize),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

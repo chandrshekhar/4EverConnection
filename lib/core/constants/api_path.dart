@@ -12,9 +12,10 @@ class ApiPath {
   static const professionalServiceList = "$baseUrl/api/services/";
   //reques partner name with service id
   static const pertnerDropDownList = "$baseUrl/api/partners";
-  //slot api call
+  //Add service api call
+  static const addService = "$baseUrl/";
 
   //add notes end point
-
   static const addNotesUrl = "$baseUrl/api/notes/";
+  static const myNotesList = "$baseUrl/api/notes/";
 }

@@ -126,4 +126,6 @@ class ImageConstant {
   static String imgVectorstroke = '$imagePath/img_vectorstroke.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String serviceImage = "assets/images/Vector.svg";
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/presentation/My%20Notes/Controller/my_notes_controller.dart';
+import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
