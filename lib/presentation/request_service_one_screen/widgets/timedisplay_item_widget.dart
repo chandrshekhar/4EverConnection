@@ -3,7 +3,9 @@ import 'package:forever_connection/core/app_export.dart';
 
 // ignore: must_be_immutable
 class TimedisplayItemWidget extends StatelessWidget {
-  const TimedisplayItemWidget({Key? key})
+  final String time;
+  final Color? buttonColor;
+  const TimedisplayItemWidget({Key? key, required this.time, this.buttonColor})
       : super(
           key: key,
         );
@@ -16,21 +18,24 @@ class TimedisplayItemWidget extends StatelessWidget {
         vertical: 6.v,
       ),
       decoration: AppDecoration.fillPrimary.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder4,
-      ),
+          borderRadius: BorderRadiusStyle.roundedBorder4,
+          border: Border.all(color: Colors.black.withOpacity(0.5)),
+          color: buttonColor ?? Colors.white),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 1.v),
-          Text(
-            "05.00\nPM",
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium!.copyWith(
-              height: 1.28,
+          Center(
+            child: Text(
+              time,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium!.copyWith(
+                height: 1.28,
+              ),
             ),
           ),
         ],

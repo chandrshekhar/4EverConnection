@@ -5,17 +5,17 @@ import 'package:get/get.dart';
 class DashboardController extends GetxController {
   List<Map<String, dynamic>> dashboardListData = [
     {
-      "title": "Request New Service",
+      "title": "New Service",
       "desc":
-          "Explore Our Suite of Essential Services &Get ready for an Amazing 5 Star Experience!",
-      "buttonName": "Request Service",
+          "Explore Our Suite of Essential Services\nGet ready for an Amazing 5 Star Experience!",
+      "buttonName": "Request",
       "buttonTap": () {
         Navigator.pushNamed(Get.context!, AppRoutes.requestServiceOneScreen);
       }
     },
     {
       "title": "My Services",
-      "desc": "Review Your Servicesin Progress and Completed",
+      "desc": "View Your Services in Progress and Completed",
       "buttonName": "Review and Collaborate",
       "buttonTap": () {}
     },
@@ -26,12 +26,12 @@ class DashboardController extends GetxController {
       "buttonName": "Manage",
       "buttonTap": () {}
     },
-    {
-      "title": "Support",
-      "desc":
-          "If you need help we are here for you and 4ever. Feel free to reach out if you have a question.",
-      "buttonName": "Get Support",
-      "buttonTap": () {}
-    }
+    // {
+    //   "title": "Support",
+    //   "desc":
+    //       "If you need help we are here for you and 4ever. Feel free to reach out if you have a question.",
+    //   "buttonName": "Get Support",
+    //   "buttonTap": () {}
+    // }
   ];
 }

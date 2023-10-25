@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:forever_connection/presentation/My%20Notes/View/add_note_screen.dart';
+import 'package:forever_connection/presentation/My%20Notes/View/my_notes_list.dart';
 import 'package:forever_connection/presentation/document_vault/document_vault.dart';
 import 'package:forever_connection/presentation/splash_screen/splash_screen.dart';
 import 'package:forever_connection/presentation/login_screen/login_screen.dart';
@@ -69,6 +70,10 @@ class AppRoutes {
 
   static const String documentVaultScreen = '/document_vault_screen';
 
+  static const String myNotesListScreen = '/my_note_screen';
+
+  static const String addNotesScreen = "add_note_screen";
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => LoginScreen(),
@@ -77,7 +82,7 @@ class AppRoutes {
     resetPasswordScreen: (context) => ResetPasswordScreen(),
     dashboardScreen: (context) => DashboardScreen(),
     requestServiceOneScreen: (context) => const RequestServiceOneScreen(),
-    myProfileScreen: (context) =>  MyProfileScreen(),
+    myProfileScreen: (context) => MyProfileScreen(),
     snapshotScreen: (context) => SnapshotScreen(),
     personalDetailsScreen: (context) => const PersonalDetailsScreen(),
     professionalProfileScreen: (context) => ProfessionalProfileScreen(),
@@ -88,6 +93,8 @@ class AppRoutes {
     passwordSecurityScreen: (context) => PasswordSecurityScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
     notificationsScreen: (context) => const NotificationsScreen(),
-    documentVaultScreen: (context) =>  DocumentVaultScreen()
+    documentVaultScreen: (context) => DocumentVaultScreen(),
+    myNotesListScreen: (context) => const MyNotesListScreen(),
+    addNotesScreen: (context) => AddNoteScreen(),
   };
 }

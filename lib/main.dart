@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         child: GetMaterialApp(
-          theme: theme,
+          theme: ThemeData.light(),
           title: 'forever_connection',
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splashScreen,

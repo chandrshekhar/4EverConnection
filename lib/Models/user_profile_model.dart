@@ -83,27 +83,27 @@ class UserProfileModel {
 
 class PersonalData {
   int? id;
-  String? firstName;
+  dynamic firstName;
   dynamic middleName;
-  String? lastName;
-  String? mobilePhone;
-  int? mobileOnlyNumbers;
+  dynamic lastName;
+  dynamic mobilePhone;
+  dynamic mobileOnlyNumbers;
   dynamic homePhone;
-  String? homeAddress;
-  String? homeApt;
-  String? homeZip;
-  String? homeAddressCountry;
+  dynamic homeAddress;
+  dynamic homeApt;
+  dynamic homeZip;
+  dynamic homeAddressCountry;
   dynamic dateOfBirth;
   dynamic dateOfAnniversary;
-  String? gender;
+  dynamic gender;
   dynamic socialSecurityNumber;
   dynamic countryOfBirth;
   dynamic countryOfCitizenship;
   dynamic photo;
-  String? preferredLanguage;
+  dynamic preferredLanguage;
   bool? welcomeDialogueShown;
   bool? welcomeDialogueMpShown;
-  int? sentSms;
+  dynamic sentSms;
   bool? termsAccepted;
   bool? privacyAccepted;
   bool? electronicAuthorDiscAccepted;
@@ -305,11 +305,11 @@ class ProfessionalData {
 
 class RelationshipData {
   int? id;
-  String? relationshipType;
+  dynamic relationshipType;
   bool? taxDependent;
-  int? user;
-  int? personalData;
-  int? professionalData;
+  dynamic user;
+  dynamic personalData;
+  dynamic professionalData;
 
   RelationshipData(
       {id,
@@ -345,7 +345,7 @@ class HealthData {
   dynamic heightFt;
   dynamic heightInches;
   dynamic weight;
-  String? smoker;
+  dynamic smoker;
   dynamic doctorName;
   dynamic doctorPhoneNumber;
   dynamic dateOfLastVisit;
@@ -364,7 +364,7 @@ class HealthData {
   dynamic otherHealthNotes;
   bool? isBlind;
   bool? spouseIsBlind;
-  int? user;
+  dynamic user;
 
   HealthData(
       {id,
@@ -450,7 +450,7 @@ class HealthData {
 }
 
 class FinancialData {
-  int? id;
+  dynamic id;
   dynamic taxProfessionalName;
   dynamic phone;
   dynamic address;
@@ -461,7 +461,7 @@ class FinancialData {
   dynamic expenses;
   dynamic cashflow;
   dynamic financialHealthNotes;
-  int? user;
+  dynamic user;
 
   FinancialData(
       {id,
@@ -511,7 +511,7 @@ class FinancialData {
 }
 
 class HealthInsuranceData {
-  int? id;
+  dynamic id;
   dynamic policyNumber;
   dynamic monthlyPremium;
   dynamic issueDate;
@@ -524,7 +524,7 @@ class HealthInsuranceData {
   dynamic primaryCarePhysician;
   dynamic doctorPhoneNumber;
   dynamic lastDoctorVisit;
-  int? user;
+  dynamic user;
 
   HealthInsuranceData(
       {id,
@@ -580,12 +580,12 @@ class HealthInsuranceData {
 }
 
 class VaultDocumentData {
-  int? id;
-  String? publicationDate;
-  String? description;
-  String? file;
-  int? user;
-  int? name;
+  dynamic id;
+  dynamic publicationDate;
+  dynamic description;
+  dynamic file;
+  dynamic user;
+  dynamic name;
 
   VaultDocumentData({id, publicationDate, description, file, user, name});
 

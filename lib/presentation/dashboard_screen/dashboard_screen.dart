@@ -1,4 +1,5 @@
 import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
+import 'package:forever_connection/presentation/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:get/get.dart';
 import '../../Controllers/User Profile Controller/user_profile_controller.dart';
 import '../dashboard_screen/widgets/userexperience_item_widget.dart';
@@ -23,9 +24,11 @@ class DashboardScreen extends StatelessWidget {
 
   final dashboardController = Get.put(DashboardController());
   final myProfileController = Get.put(UserProfileController());
+  final serviceController = Get.put(RequestServiceController());
 
   @override
   Widget build(BuildContext context) {
+    serviceController.getServiceProfssional();
     return SafeArea(
       child: Scaffold(
         key: _key,
@@ -108,41 +111,42 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ),
 
-                    Padding(
-                      padding: EdgeInsets.all(15.v),
-                      child: CustomSearchView(
-                        controller: searchController,
-                        hintText: "Search",
-                        prefix: Container(
-                          margin: EdgeInsets.fromLTRB(16.h, 16.v, 16.h, 16.v),
-                          child: CustomImageView(
-                            svgPath: ImageConstant.imgSearch,
-                          ),
-                        ),
-                        prefixConstraints: BoxConstraints(
-                          maxHeight: 46.v,
-                        ),
-                        suffix: Padding(
-                          padding: EdgeInsets.only(
-                            right: 15.h,
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              searchController.clear();
-                            },
-                            icon: Icon(
-                              Icons.clear,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.all(15.v),
+                    //   child: CustomSearchView(
+                    //     controller: searchController,
+                    //     hintText: "Search",
+                    //     prefix: Container(
+                    //       margin: EdgeInsets.fromLTRB(16.h, 16.v, 16.h, 16.v),
+                    //       child: CustomImageView(
+                    //         svgPath: ImageConstant.imgSearch,
+                    //       ),
+                    //     ),
+                    //     prefixConstraints: BoxConstraints(
+                    //       maxHeight: 46.v,
+                    //     ),
+                    //     suffix: Padding(
+                    //       padding: EdgeInsets.only(
+                    //         right: 15.h,
+                    //       ),
+                    //       child: IconButton(
+                    //         onPressed: () {
+                    //           searchController.clear();
+                    //         },
+                    //         icon: Icon(
+                    //           Icons.clear,
+                    //           color: Colors.grey.shade600,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     // SizedBox(height: 17.v),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.h),
                         child: ListView.builder(
+                         
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
                           itemCount:

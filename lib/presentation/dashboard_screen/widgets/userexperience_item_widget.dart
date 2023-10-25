@@ -17,9 +17,8 @@ class UserexperienceItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 152.h,
-      width: 342.h,
-      margin: EdgeInsets.symmetric(vertical: 8.h),
+      height: MediaQuery.of(context).size.height * 0.2,
+      margin: EdgeInsets.symmetric(vertical: 20.h),
       decoration: AppDecoration.outlineBlack900.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder9,
       ),
@@ -40,10 +39,11 @@ class UserexperienceItemWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 9.v.v, left: 15.v, right: 15.v),
+            padding: EdgeInsets.only(
+                top: 15.h, left: 15.adaptSize, right: 15.adaptSize),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   desc!,

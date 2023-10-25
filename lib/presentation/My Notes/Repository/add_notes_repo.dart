@@ -1,15 +1,13 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:forever_connection/Models/user_profile_model.dart';
+import 'package:forever_connection/core/constants/api_path.dart';
+import 'package:forever_connection/core/utils/shared_pref_services.dart';
 
-import '../../core/constants/api_path.dart';
-import '../../core/utils/shared_pref_services.dart';
-
-class UserProfileService {
-  Dio dio = Dio();
-  Future<UserProfileModel> getUserProfile() async {
+class MyNotesRepo {
+  final Dio dio = Dio();
+  Future<Map> addNotes({required Map<String, dynamic> reqModel}) async {
+    log("Add notes service running...");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -19,20 +17,16 @@ class UserProfileService {
         'Authorization': "Bearer $token"
       };
 
-      response = await dio.get(
-        ApiPath.getUserProfile,
-      );
-      if (response.statusCode == 200) {
-        log("User data -- ${response.data}");
-        final userServicesList = UserProfileModel.fromJson(response.data);
+      response = await dio.post(ApiPath.addNotesUrl, data: reqModel);
+      log("Add notes response ${response.data}");
 
+      if (response.statusCode == 201) {
         // print(userServicesList);
-        return userServicesList;
+        return response.data;
       } else {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      print(e.toString());
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -40,6 +34,7 @@ class UserProfileService {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
+          log("data ${e}");
           throw Exception("Faild to load data");
         }
       }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomDropDown extends StatelessWidget {
-  const CustomDropDown({
+  CustomDropDown({
     Key? key,
     this.alignment,
     this.width,
@@ -13,6 +13,7 @@ class CustomDropDown extends StatelessWidget {
     this.textStyle,
     this.items,
     this.hintText,
+    this.whereUse,
     this.hintStyle,
     this.prefix,
     this.prefixConstraints,
@@ -24,15 +25,20 @@ class CustomDropDown extends StatelessWidget {
     this.filled = false,
     this.validator,
     this.onChanged,
+    this.internalTextl,
   }) : super(
           key: key,
         );
 
   final Alignment? alignment;
 
+  final String? whereUse;
+
   final double? width;
 
   final EdgeInsetsGeometry? margin;
+
+  final String? internalTextl;
 
   final FocusNode? focusNode;
 
@@ -42,7 +48,7 @@ class CustomDropDown extends StatelessWidget {
 
   final TextStyle? textStyle;
 
-  final List<String>? items;
+  final List<dynamic>? items;
 
   final String? hintText;
 
@@ -66,7 +72,7 @@ class CustomDropDown extends StatelessWidget {
 
   final FormFieldValidator<String>? validator;
 
-  final Function(String)? onChanged;
+  ValueChanged? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -81,27 +87,27 @@ class CustomDropDown extends StatelessWidget {
   Widget get dropDownWidget => Container(
         width: width ?? double.maxFinite,
         margin: margin,
-        child: DropdownButtonFormField(
-          focusNode: focusNode ?? FocusNode(),
-          icon: icon,
-          autofocus: autofocus!,
-          style: textStyle ?? theme.textTheme.bodyLarge,
-          items: items?.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                overflow: TextOverflow.ellipsis,
-                style: hintStyle ?? theme.textTheme.bodyLarge,
-              ),
-            );
-          }).toList(),
-          decoration: decoration,
-          validator: validator,
-          onChanged: (value) {
-            onChanged!(value.toString());
-          },
-        ),
+        child: DropdownButtonFormField<dynamic>(
+            focusNode: focusNode ?? FocusNode(),
+            icon: icon,
+            autofocus: autofocus!,
+            style: textStyle ?? theme.textTheme.bodyLarge,
+            items: items?.map<DropdownMenuItem<dynamic>>((value) {
+              return DropdownMenuItem<dynamic>(
+                value: value,
+                child: Text(
+                  whereUse == "professional"
+                      ? value.name
+                      : whereUse == "partner"
+                          ? value.fullName
+                          : value,
+                  overflow: TextOverflow.ellipsis,
+                  style: hintStyle ?? theme.textTheme.bodyLarge,
+                ),
+              );
+            }).toList(),
+            decoration: decoration,
+            onChanged: onChanged),
       );
   InputDecoration get decoration => InputDecoration(
         hintText: hintText ?? "",

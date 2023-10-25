@@ -3,8 +3,8 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/base_button.dart';
 
 class CustomElevatedButton extends BaseButton {
-   // ignore: use_key_in_widget_constructors
-   const CustomElevatedButton({
+  // ignore: use_key_in_widget_constructors
+  const CustomElevatedButton({
     Key? key,
     this.decoration,
     this.leftIcon,
@@ -52,7 +52,9 @@ class CustomElevatedButton extends BaseButton {
         margin: margin,
         decoration: decoration,
         child: ElevatedButton(
-          style: buttonStyle,
+          style: buttonStyle ??
+              ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Color(0xffF68F27))),
           onPressed: isDisabled ?? false ? null : onTap ?? () {},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

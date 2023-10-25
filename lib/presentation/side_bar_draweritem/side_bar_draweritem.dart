@@ -87,16 +87,18 @@ class SideBarDraweritem extends StatelessWidget {
                 },
                 title: "My Profile",
               ),
-              makeSideField(
-                onTap: () {},
-                title: "User",
-              ),
+              // makeSideField(
+              //   onTap: () {},
+              //   title: "User",
+              // ),
               makeSideField(
                 onTap: () {},
                 title: "Marketing Partner",
               ),
               makeSideField(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.myNotesListScreen);
+                },
                 title: "My Notes",
               ),
               makeSideField(

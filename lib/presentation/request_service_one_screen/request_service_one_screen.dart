@@ -1,7 +1,6 @@
-import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
-import 'package:forever_connection/Controllers/Services/request_service_controller.dart';
+import 'package:forever_connection/presentation/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:get/get.dart';
-
+import 'package:lottie/lottie.dart';
 import '../request_service_one_screen/widgets/timedisplay_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -31,14 +30,16 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
 
   TextEditingController commentController = TextEditingController();
 
-  String? selectedValue;
-
   final requestServiceController = Get.put(RequestServiceController());
   @override
   void initState() {
+    requestServiceController.partnerList.clear();
+    requestServiceController.setLocalListToEmpty();
+    requestServiceController.activeIndex.value = -1;
+    requestServiceController.selectedDate.value = DateTime.now();
+    requestServiceController.selectDateController.value.clear();
     super.initState();
     // Initialize the selected value
-    selectedValue = 'In person';
   }
 
   @override
@@ -109,12 +110,9 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                   EdgeInsets.only(left: 21.h),
                                               readOnly: true,
                                               hintText: "Select Date",
-                                              suffix: Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      30.h, 10.v, 15.h, 10.v),
-                                                  child: CustomImageView(
-                                                      svgPath: ImageConstant
-                                                          .imgCalendar)),
+                                              contentPadding: EdgeInsets.zero,
+                                              suffix:
+                                                  Icon(Icons.calendar_month),
                                             ))
                                           ]),
                                       SizedBox(height: 29.v),
@@ -143,114 +141,212 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                                 .imgVectorGray6004x7)),
                                                     margin: EdgeInsets.only(
                                                         left: 22.h),
-                                                    hintText:
-                                                        "Select professional",
-                                                    items: dropdownItemList,
+                                                    hintText: "Service Needed",
+                                                    items:
+                                                        requestServiceController
+                                                            .listOfServices,
+                                                    whereUse: "professional",
                                                     borderDecoration:
                                                         DropDownStyleHelper
                                                             .underLineBlack,
-                                                    onChanged: (value) {}))
+                                                    onChanged: (value) async {
+                                                      await requestServiceController
+                                                          .getPartnerByServiceId(
+                                                              value.id);
+                                                    }))
                                           ]),
                                       SizedBox(height: 29.v),
-                                      Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomImageView(
-                                                svgPath: ImageConstant.imgUser,
-                                                height: 19.v,
-                                                width: 17.h,
-                                                margin: EdgeInsets.only(
-                                                    top: 2.v, bottom: 13.v)),
-                                            Expanded(
-                                                child: CustomDropDown(
-                                                    icon: Container(
-                                                        margin:
-                                                            EdgeInsets.fromLTRB(
-                                                                30.h,
-                                                                10.v,
-                                                                15.h,
-                                                                10.v),
-                                                        child: CustomImageView(
-                                                            svgPath: ImageConstant
-                                                                .imgVectorGray6004x7)),
-                                                    margin: EdgeInsets.only(
-                                                        left: 22.h),
-                                                    hintText:
-                                                        "Select professional",
-                                                    items: dropdownItemList,
-                                                    borderDecoration:
-                                                        DropDownStyleHelper
-                                                            .underLineBlack,
-                                                    onChanged: (value) {}))
-                                          ]),
+                                      Obx(
+                                          () =>
+                                              requestServiceController
+                                                      .isPartnerLoading.value
+                                                  ? Center(
+                                                      child:
+                                                          LottieBuilder.asset(
+                                                        "assets/lottie/linear_loader.json",
+                                                        height: 60,
+                                                      ),
+                                                    )
+                                                  : Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                          CustomImageView(
+                                                              svgPath:
+                                                                  ImageConstant
+                                                                      .imgUser,
+                                                              height: 19.v,
+                                                              width: 17.h,
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      top: 2.v,
+                                                                      bottom: 13
+                                                                          .v)),
+                                                          Expanded(
+                                                              child: Obx(() =>
+                                                                  CustomDropDown(
+                                                                      icon:
+                                                                          Container(
+                                                                        margin: EdgeInsets.fromLTRB(
+                                                                            30.h,
+                                                                            10.v,
+                                                                            15.h,
+                                                                            10.v),
+                                                                        child: CustomImageView(
+                                                                            svgPath:
+                                                                                ImageConstant.imgVectorGray6004x7),
+                                                                      ),
+                                                                      margin: EdgeInsets.only(
+                                                                          left: 22
+                                                                              .h),
+                                                                      hintText:
+                                                                          "Select Professional",
+                                                                      items: requestServiceController
+                                                                          .partnerList
+                                                                          .value,
+                                                                      whereUse:
+                                                                          "partner",
+                                                                      borderDecoration:
+                                                                          DropDownStyleHelper
+                                                                              .underLineBlack,
+                                                                      onChanged:
+                                                                          (value) async {
+                                                                        requestServiceController
+                                                                            .setPartnerId(value.id);
+                                                                        await requestServiceController
+                                                                            .getUsedSlotList(value.id);
+                                                                        requestServiceController
+                                                                            .setLocalListToEmpty();
+                                                                      })))
+                                                        ])),
                                       SizedBox(height: 29.v),
                                       Text("Service type",
                                           style: theme.textTheme.bodyLarge),
                                       SizedBox(height: 8.v),
-                                      Row(
-                                        children: <Widget>[
-                                          Radio(
-                                            fillColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.blue),
-                                            value: 'In person',
-                                            groupValue: selectedValue,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedValue = value;
-                                              });
-                                            },
-                                          ),
-                                          const Text('In person'),
-                                          SizedBox(width: 20.v),
-                                          Radio(
-                                            fillColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.blue),
-                                            value: 'Phone',
-                                            groupValue: selectedValue,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedValue = value;
-                                              });
-                                            },
-                                          ),
-                                          const Text('Phone'),
-                                          SizedBox(width: 20.v),
-                                          Radio(
-                                            fillColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.blue),
-                                            value: 'Video',
-                                            groupValue: selectedValue,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedValue = value;
-                                              });
-                                            },
-                                          ),
-                                          const Text('Video'),
-                                        ],
-                                      ),
+                                      Obx(() => Row(
+                                            children: <Widget>[
+                                              Radio(
+                                                fillColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.blue),
+                                                value: 'In person',
+                                                groupValue:
+                                                    requestServiceController
+                                                        .selectedValue.value,
+                                                onChanged: (value) {
+                                                  requestServiceController
+                                                      .toggleBetweenRdioButton(
+                                                          value);
+                                                },
+                                              ),
+                                              const Text('In person'),
+                                              SizedBox(width: 20.v),
+                                              Radio(
+                                                  fillColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.blue),
+                                                  value: 'Phone',
+                                                  groupValue:
+                                                      requestServiceController
+                                                          .selectedValue.value,
+                                                  onChanged: (value) {
+                                                    requestServiceController
+                                                        .toggleBetweenRdioButton(
+                                                            value);
+                                                  }),
+                                              const Text('Phone'),
+                                              SizedBox(width: 20.v),
+                                              Radio(
+                                                fillColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.blue),
+                                                value: 'Video',
+                                                groupValue:
+                                                    requestServiceController
+                                                        .selectedValue.value,
+                                                onChanged: (value) {
+                                                  requestServiceController
+                                                      .toggleBetweenRdioButton(
+                                                          value);
+                                                },
+                                              ),
+                                              const Text('Video'),
+                                            ],
+                                          )),
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 12.h, top: 23.v, right: 12.h),
-                                child: GridView.builder(
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            mainAxisExtent: 52.v,
-                                            crossAxisCount: 4,
-                                            mainAxisSpacing: 5.h,
-                                            crossAxisSpacing: 5.h),
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: 28,
-                                    itemBuilder: (context, index) {
-                                      return const TimedisplayItemWidget();
-                                    })),
+                                child: Obx(() => requestServiceController
+                                        .listOfTimeSlot.isNotEmpty
+                                    ? GridView.builder(
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                mainAxisExtent: 52.v,
+                                                crossAxisCount: 4,
+                                                mainAxisSpacing: 5.h,
+                                                crossAxisSpacing: 5.h),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: requestServiceController
+                                            .listOfTimeSlot.length,
+                                        itemBuilder: (context, index) {
+                                          var rawData = requestServiceController
+                                              .listOfTimeSlot[index]
+                                              .toString();
+
+                                          for (int i = 0;
+                                              i <
+                                                  requestServiceController
+                                                      .usedSlotList.length;
+                                              i++) {
+                                            if (requestServiceController
+                                                    .usedSlotList[i].time
+                                                    .toString() ==
+                                                rawData.toString()) {
+                                              requestServiceController
+                                                  .setColorChange(true);
+
+                                              break;
+                                            } else {
+                                              requestServiceController
+                                                  .setColorChange(false);
+                                            }
+                                          }
+
+                                          var item = rawData
+                                              .toString()
+                                              .padLeft(4, '0');
+                                          return InkWell(
+                                            onTap: requestServiceController
+                                                    .colorNeedToChange.value
+                                                ? null
+                                                : () {
+                                                    requestServiceController
+                                                        .changeIndex(index);
+                                                    requestServiceController
+                                                        .setLocalListToEmpty();
+                                                  },
+                                            child: TimedisplayItemWidget(
+                                              buttonColor:
+                                                  requestServiceController
+                                                          .colorNeedToChange
+                                                          .value
+                                                      ? Colors.grey
+                                                      : requestServiceController
+                                                                  .activeIndex
+                                                                  .value ==
+                                                              index
+                                                          ? Colors.blue
+                                                          : Colors.white,
+                                              time:
+                                                  "${item.substring(0, 2)}:${item.toString().substring(2)}",
+                                            ),
+                                          );
+                                        })
+                                    : SizedBox())),
                             CustomTextFormField(
                                 controller: commentController,
                                 margin: EdgeInsets.only(

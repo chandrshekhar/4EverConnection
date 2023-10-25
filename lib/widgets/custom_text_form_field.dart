@@ -27,7 +27,8 @@ class CustomTextFormField extends StatelessWidget {
       this.filled = false,
       this.validator,
       this.readOnly = false,
-      this.onTap})
+      this.onTap,
+      this.onChange})
       : super(
           key: key,
         );
@@ -78,6 +79,8 @@ class CustomTextFormField extends StatelessWidget {
 
   void Function()? onTap;
 
+  final ValueChanged? onChange;
+
   @override
   Widget build(BuildContext context) {
     return textFormFieldWidget;
@@ -93,6 +96,7 @@ class CustomTextFormField extends StatelessWidget {
               TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           obscureText: obscureText!,
           textInputAction: textInputAction,
+          onChanged: onChange,
           keyboardType: textInputType,
           maxLines: maxLines ?? 1,
           decoration: decoration,

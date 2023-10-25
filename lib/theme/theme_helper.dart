@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 
@@ -172,7 +171,7 @@ class TextThemes {
 
 /// Class containing the supported color schemes.
 class ColorSchemes {
-  static  const primaryColorScheme =  ColorScheme.light(
+  static const primaryColorScheme = ColorScheme.light(
     // Primary colors
     primary: Color(0XFFFFFFFF),
     primaryContainer: Color(0XFF00568D),
