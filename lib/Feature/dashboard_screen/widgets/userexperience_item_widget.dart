@@ -35,6 +35,7 @@ class UserexperienceItemWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(9.h),
                     topRight: Radius.circular(9.h))),
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -63,6 +64,11 @@ class UserexperienceItemWidget extends StatelessWidget {
                   width: 5.adaptSize,
                 ),
               ],
+
+            child: Text(
+              title!,
+              style: CustomTextStyles.titleLargePrimary_1,
+
             ),
           ),
           Row(
