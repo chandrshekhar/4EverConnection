@@ -13,9 +13,15 @@ class ApiPath {
   //reques partner name with service id
   static const pertnerDropDownList = "$baseUrl/api/partners";
   //Add service api call
-  static const addService = "$baseUrl/";
+  static const addService = "$baseUrl/api/user/service";
 
   //add notes end point
   static const addNotesUrl = "$baseUrl/api/notes/";
   static const myNotesList = "$baseUrl/api/notes/";
+  static const editNotes = "$baseUrl/api/notes";
+  static const deleteNotes = "$baseUrl/api/notes";
+
+
+  //connection
+  static const addConnection = "$baseUrl/api/connections/";
 }

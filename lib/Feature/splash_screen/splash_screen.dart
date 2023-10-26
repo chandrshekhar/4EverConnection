@@ -24,15 +24,13 @@ class SplashScreen extends StatelessWidget {
             context, AppRoutes.loginScreen, (route) => false);
       }
     });
-    return SafeArea(
-      child: Scaffold(
-        body: Align(
-          alignment: Alignment.center,
-          child: CustomImageView(
-            height: 190.h,
-            width: 190.h,
-            imagePath: ImageConstant.appLogo,
-          ),
+    return Scaffold(
+      body: Align(
+        alignment: Alignment.center,
+        child: CustomImageView(
+          height: 190.h,
+          width: 190.h,
+          imagePath: ImageConstant.appLogo,
         ),
       ),
     );

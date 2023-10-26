@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -37,7 +39,7 @@ class MyProfileScreen extends StatelessWidget {
                 ],
                 styleType: Style.bgShadow),
             body: Obx(
-              () => myProfileController.isLoadingProfileData == true
+              () => myProfileController.isLoadingProfileData.value == true
                   ? const Center(child: CircularProgressIndicator.adaptive())
                   : SingleChildScrollView(
                       padding: EdgeInsets.only(top: 10.v),
@@ -81,48 +83,38 @@ class MyProfileScreen extends StatelessWidget {
                                                             .center,
                                                     children: [
                                                       SizedBox(height: 3.v),
-                                                      SizedBox(
-                                                          height: 144.v,
-                                                          width: 152.h,
-                                                          child: Stack(
-                                                              alignment: Alignment
-                                                                  .bottomRight,
-                                                              children: [
-                                                                CustomImageView(
-                                                                    imagePath:
-                                                                        ImageConstant
-                                                                            .imgImage8,
-                                                                    height: 144
-                                                                        .adaptSize,
-                                                                    width: 144
-                                                                        .adaptSize,
-                                                                    radius: BorderRadius
-                                                                        .circular(72
-                                                                            .h),
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .centerLeft),
-                                                                Positioned(
-                                                                  left: 120.v,
-                                                                  child: CustomIconButton(
-                                                                      height: 35
-                                                                          .adaptSize,
-                                                                      width: 35
-                                                                          .adaptSize,
-                                                                      margin: EdgeInsets.only(
-                                                                          bottom: 21
-                                                                              .v),
-                                                                      padding: EdgeInsets
-                                                                          .all(8
-                                                                              .h),
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .bottomRight,
-                                                                      child: CustomImageView(
-                                                                          svgPath:
-                                                                              ImageConstant.imgCamera)),
-                                                                )
-                                                              ])),
+                                                      CachedNetworkImage(
+                                                        imageUrl: myProfileController
+                                                                .userProfileModel
+                                                                .value
+                                                                .personalData
+                                                                ?.photo ??
+                                                            "", // Replace with the actual image URL
+                                                        imageBuilder: (context,
+                                                                imageProvider) =>
+                                                            CircleAvatar(
+                                                          radius: 50,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          // Adjust the radius as needed
+                                                          backgroundImage:
+                                                              imageProvider,
+                                                        ),
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            const CircularProgressIndicator
+                                                                .adaptive(
+                                                                backgroundColor:
+                                                                    AppColors
+                                                                        .appBackgroundColor), // Placeholder widget
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            const Icon(
+                                                          Icons.person,
+                                                          color: Colors.white,
+                                                          size: 60,
+                                                        ), // Widget to display when an error occurs
+                                                      ),
                                                       SizedBox(height: 9.v),
                                                       Text(
                                                           "${myProfileController.userProfileModel.value.personalData?.firstName}",

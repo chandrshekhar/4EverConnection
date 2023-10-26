@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/shared_pref_services.dart';
@@ -8,6 +10,7 @@ import 'package:forever_connection/Feature/request_service_one_screen/Model/slot
 class ServiceRepository {
   final Dio dio = Dio();
   Future<List<ServiceListModel>> getSelectedProfession() async {
+    log("Service need list api calling....");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -47,6 +50,7 @@ class ServiceRepository {
   }
 
   Future<List<PartnerModelList>> getPartnerByServiceId({int? serviceId}) async {
+    log("partner list api calling....");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -87,6 +91,7 @@ class ServiceRepository {
 
   Future<List<SlotModelList>> getUsedSlotList(
       {required String date, required int partnerId}) async {
+    log("used slot time list api calling....");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -98,8 +103,6 @@ class ServiceRepository {
       response = await dio.get(
         "${ApiPath.baseUrl}/api/partners/$partnerId/slots/${date}/",
       );
-      print(response.data);
-
       if (response.statusCode == 200) {
         final List<SlotModelList> userServicesList = (response.data as List)
             .map((json) => SlotModelList.fromJson(json))
@@ -125,6 +128,7 @@ class ServiceRepository {
   }
 
   Future<Map> addService({required Map<String, dynamic> reqModel}) async {
+    log("Add service api calling....");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -133,17 +137,16 @@ class ServiceRepository {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-
-      response =
-          await dio.post(ApiPath.professionalServiceList, data: reqModel);
-
-      if (response.statusCode == 200) {
+      response = await dio.post(ApiPath.addService, data: reqModel);
+      log(response.data.toString());
+      if (response.statusCode == 201) {
         // print(userServicesList);
         return response.data;
       } else {
         throw Exception("Faild to load data");
       }
     } catch (e) {
+      log(e.toString());
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||

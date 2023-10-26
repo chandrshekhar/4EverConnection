@@ -128,4 +128,18 @@ class ImageConstant {
   static String imageNotFound = 'assets/images/image_not_found.png';
 
   static String serviceImage = "assets/images/Vector.svg";
+
+  static String connectIcon = "assets/images/connection_icon.svg";
+
+  static String infoIcon="assets/images/info_icon.svg";
+
+  static String newServiceIcon="assets/images/new_service_request.svg";
+
+  static String viewMyServiceIcon="assets/images/view_my_service.svg";
+
+  static String viewUploadDocument = "assets/images/view_upload_document.svg";
+
+  static String videoIcon = "assets/images/video_player_icon.svg";
+
+  static String notificationIcon = "assets/images/NOTIFICATION.svg";
 }

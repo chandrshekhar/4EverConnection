@@ -14,6 +14,10 @@ class MyNotesController extends GetxController {
   var subjectController = TextEditingController().obs;
   var notesController = TextEditingController().obs;
 
+//edit controller
+  var editSubjectController = TextEditingController().obs;
+  var editNotesController = TextEditingController().obs;
+
   //Notes list
   RxList<MyNotesModel> noteList = <MyNotesModel>[].obs;
 
@@ -24,6 +28,7 @@ class MyNotesController extends GetxController {
   //loader
   RxBool isAddNoteLoading = false.obs;
   RxBool isNotesLitsLoading = false.obs;
+  RxBool isEditNotesLoading = false.obs;
   //clear text field
   clearTextField() {
     subjectController.value.clear();
@@ -46,6 +51,7 @@ class MyNotesController extends GetxController {
     }
   }
 
+  //add new note
   addNotes(BuildContext context) async {
     try {
       Map<String, dynamic> reqModel = {
@@ -56,10 +62,12 @@ class MyNotesController extends GetxController {
       var res = await _myNotesRepo.addNotes(reqModel: reqModel);
       if (res.isNotEmpty) {
         TostWidget().successToast(title: "Success", message: "Notes added");
-        clearTextField();
-        getMyNotes();
+        await getMyNotes();
         isAddNoteLoading(false);
-        Navigator.pop(context);
+        clearTextField();
+        await Future.delayed(const Duration(seconds: 2), () {
+          Navigator.pop(context);
+        });
       } else {
         TostWidget().errorToast(title: "Error", message: "All field mandatory");
         isAddNoteLoading(false);
@@ -71,10 +79,46 @@ class MyNotesController extends GetxController {
     }
   }
 
-  getMyNotes() async {
+  //Edit the exsisting notes
+  editNotes(BuildContext context, int id) async {
+    try {
+      Map<String, dynamic> reqModel = {
+        "subject": editSubjectController.value.text,
+        "text": editNotesController.value.text,
+      };
+      isEditNotesLoading(true);
+      var res = await _myNotesRepo.editNotes(reqModel: reqModel, id: id);
+      if (res.isNotEmpty) {
+        TostWidget().successToast(title: "Success", message: "Notes updated");
+        await getMyNotes();
+        isEditNotesLoading(false);
+        Navigator.pop(context);
+      } else {
+        TostWidget().errorToast(title: "Error", message: "All field mandatory");
+        isEditNotesLoading(false);
+      }
+    } catch (e) {
+      log("Add notes error ${e.toString()}");
+      TostWidget().errorToast(title: "Error", message: "$e");
+      isEditNotesLoading(false);
+    }
+  }
+
+  //delete the exsisting note
+  deleteNotes(int id) async {
+    try {
+      await _myNotesRepo.deleteNotes(id: id);
+      ToastWidget.successToast(success: "Note  deleted");
+    } catch (e) {
+      ToastWidget.errorToast(error: e.toString());
+    }
+  }
+
+  //Get all notes list
+  getMyNotes({String? searchText}) async {
     try {
       isNotesLitsLoading(true);
-      var res = await _myNotesRepo.getNotes();
+      var res = await _myNotesRepo.getNotes(searchText: searchText);
       noteList.value = res;
       isNotesLitsLoading(false);
     } catch (e) {

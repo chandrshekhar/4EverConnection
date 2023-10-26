@@ -239,7 +239,7 @@ class PrimaryColors {
   // LightBlue
   Color get lightBlue50 => const Color(0XFFE4F5FF);
   Color get lightBlue900 => const Color(0XFF0F6AA5);
-  Color get lightBlue90001 => const Color(0XFF1B608C);
+  Color get lightBlue90001 => const Color(0XFF004C77);
 
   // Red
   Color get red500 => const Color(0XFFF63327);

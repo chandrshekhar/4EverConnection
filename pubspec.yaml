@@ -45,6 +45,7 @@ dependencies:
   flutter_widget_from_html: ^0.9.1
   get: ^4.6.6
   lottie: ^2.6.0
+  awesome_dialog: 
 
 
 dev_dependencies:
