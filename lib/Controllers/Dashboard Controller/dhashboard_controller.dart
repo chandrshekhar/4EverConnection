@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/core/app_export.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
   List<Map<String, dynamic>> dashboardListData = [
     {
-      "title": "New Service",
-      "desc":
-          "Explore Our Suite of Essential Services\nGet ready for an Amazing 5 Star Experience!",
-      "buttonName": "Request",
+      "imagePath": ImageConstant.connectIcon,
+      "title": "Connect Someone",
+      "buttonName": "Connect",
       "buttonTap": () {
         Navigator.pushNamed(Get.context!, AppRoutes.requestServiceOneScreen);
       }
     },
     {
-      "title": "My Services",
-      "desc": "View Your Services in Progress and Completed",
-      "buttonName": "Review and Collaborate",
+      "imagePath": ImageConstant.newServiceIcon,
+      "title": "New Service Request",
+      "buttonName": "Request Service",
+      "buttonTap": () {
+        Navigator.pushNamed(Get.context!, AppRoutes.requestServiceOneScreen);
+      }
+    },
+    {
+      "title": "View My Services",
+      "imagePath": ImageConstant.viewMyServiceIcon,
+      "buttonName": "View & Collaborate",
       "buttonTap": () {}
     },
     {
-      "title": "Documents Vault",
-      "desc":
-          "Time is Life & Life is Time! Did you ever wasted time searching for documents? Search no more!",
-      "buttonName": "Manage",
+      "title": "View / Upload Documents",
+      "imagePath": ImageConstant.viewUploadDocument,
+      "buttonName": "Access My Vault",
       "buttonTap": () {}
     },
     // {

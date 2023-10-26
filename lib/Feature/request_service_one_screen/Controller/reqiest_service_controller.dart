@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/partner_model_list.dart';
@@ -9,6 +11,7 @@ import 'package:intl/intl.dart';
 
 class RequestServiceController extends GetxController {
   var selectDateController = TextEditingController().obs;
+  var commentController = TextEditingController().obs;
   var selectedDate = DateTime.now().obs;
   final ServiceRepository _serviceRepository = ServiceRepository();
   RxList<ServiceListModel> listOfServices = <ServiceListModel>[].obs;
@@ -23,13 +26,15 @@ class RequestServiceController extends GetxController {
   RxInt serviceNeedId = (-1).obs;
   RxString selectSlot = "".obs;
 
+  //Screen loader for service
+  RxBool isAddServiceLoading = false.obs;
 
-  setServiceId(int id){
-    serviceNeedId.value=id;
+  setServiceId(int id) {
+    serviceNeedId.value = id;
   }
 
-   selectSlots(String id){
-    selectSlot.value=id;
+  selectSlots(String id) {
+    selectSlot.value = id;
   }
 
   setLocalListToEmpty() {
@@ -118,6 +123,30 @@ class RequestServiceController extends GetxController {
     // final parsedDate = originalFormat.parse(inputDate);
     final outputFormat = DateFormat("yyyy-MM-dd");
     return outputFormat.format(inputDate);
+  }
+
+  addServiceRequest() async {
+    try {
+      Map<String, dynamic> reqModel = {
+        "partner_assigned": partnerId.value,
+        "service": serviceNeedId.value,
+        "contact_type": selectedValue.value.toString(),
+        "action_scheduled_on":
+            "${selectDateController.value.text}T${selectSlot.value.toString().substring(0, 2)}:${selectSlot.value.toString().substring(2)}:00.000Z"
+      };
+      isAddServiceLoading(true);
+      var res = await _serviceRepository.addService(reqModel: reqModel);
+      if (res.isNotEmpty) {
+        ToastWidget.successToast(success: "Service successfully added");
+        isAddServiceLoading(false);
+      } else {
+        ToastWidget.errorToast(error: "Faild to added service!");
+        isAddServiceLoading(false);
+      }
+    } catch (e) {
+      isAddServiceLoading(false);
+      ToastWidget.errorToast(error: e.toString());
+    }
   }
 
   @override

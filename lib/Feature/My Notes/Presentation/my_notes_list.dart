@@ -1,6 +1,8 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
+import 'package:forever_connection/Feature/My%20Notes/Presentation/edit_notes.dart';
 import 'package:forever_connection/Feature/My%20Notes/Widget/note_card_widget.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
@@ -10,7 +12,6 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class MyNotesListScreen extends StatelessWidget {
   MyNotesListScreen({super.key});
@@ -84,9 +85,27 @@ class MyNotesListScreen extends StatelessWidget {
                                 child: CustomTextFormField(
                                     // controller: passwordController,
                                     margin: EdgeInsets.only(left: 22.h),
-                                    hintText: "Search",
-                                    textInputType:
-                                        TextInputType.visiblePassword,
+                                    hintText: "Search notes",
+                                    textInputType: TextInputType.name,
+                                    onChange: (value) {
+                                      if (value.toString().isNotEmpty) {
+                                        Future.delayed(
+                                            const Duration(milliseconds: 300),
+                                            () {
+                                          // Call your function here
+                                          myNotesController.getMyNotes(
+                                              searchText: value);
+                                        });
+                                      } else {
+                                        Future.delayed(
+                                            const Duration(milliseconds: 300),
+                                            () {
+                                          // Call your function here
+                                          myNotesController.getMyNotes(
+                                              searchText: null);
+                                        });
+                                      }
+                                    },
                                     obscureText: false),
                               ),
                             ],
@@ -114,7 +133,6 @@ class MyNotesListScreen extends StatelessWidget {
           Expanded(
             child: Obx(() => myNotesController.noteList.isNotEmpty
                 ? ListView.builder(
-                    reverse: true,
                     padding: EdgeInsets.only(
                         left: 23.adaptSize, right: 23.adaptSize),
 
@@ -124,6 +142,40 @@ class MyNotesListScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var item = myNotesController.noteList[index];
                       return MyNotesCardWidget(
+                          onSeleted: (value) {
+                            if (value.toString() == "Edit") {
+                              Get.to(EditNotesScreen(
+                                id: item.id!,
+                                subject: item.subject ?? "",
+                                text: item.text ?? "",
+                              ));
+                            } else {
+                              AwesomeDialog(
+                                      btnOkColor: AppColors.buttonColor,
+                                      context: context,
+                                      dialogType: DialogType.question,
+                                      animType: AnimType.bottomSlide,
+                                      title: 'Remove',
+                                      desc:
+                                          'Are you sure to delete this notes?',
+                                      btnCancelOnPress: () {},
+                                      btnOkOnPress: () async {
+                                        await myNotesController
+                                            .deleteNotes(item.id!);
+                                        myNotesController.noteList
+                                            .removeAt(index);
+                                      },
+                                      barrierColor: Colors.red.withOpacity(0.3),
+                                      descTextStyle: TextStyle(
+                                          color: AppColors.buttonColor,
+                                          fontSize: 15.adaptSize),
+                                      titleTextStyle: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.adaptSize))
+                                  .show();
+                            }
+                          },
                           notesTitle: item.subject ?? "",
                           author: profileController.userProfileModel.value
                                   .personalData?.firstName +

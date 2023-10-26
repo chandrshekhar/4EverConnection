@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
@@ -31,8 +30,6 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
 
   List<String> radioList = ["lbl_in_person", "lbl_phone", "lbl_video"];
 
-  TextEditingController commentController = TextEditingController();
-
   final requestServiceController = Get.put(RequestServiceController());
   @override
   void initState() {
@@ -53,8 +50,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
             leadingWidth: 44.h,
             leading: AppbarImage(
                 svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin:
-                    EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+                margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
                 onTap: () {
                   Navigator.pop(context);
                 }),
@@ -71,8 +67,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
           Expanded(
               child: SingleChildScrollView(
                   child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 12.h, right: 12.h, bottom: 5.v),
+                      padding:
+                          EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
                       child: Column(children: [
                         Container(
                             padding: EdgeInsets.symmetric(
@@ -82,8 +78,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                     BorderRadiusStyle.roundedBorder16),
                             child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(height: 4.v),
@@ -92,8 +87,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgCalendar,
+                                            svgPath: ImageConstant.imgCalendar,
                                             height: 18.adaptSize,
                                             width: 18.adaptSize,
                                             margin: EdgeInsets.only(
@@ -104,17 +98,14 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                             requestServiceController
                                                 .selectDate(context);
                                           },
-                                          controller:
-                                              requestServiceController
-                                                  .selectDateController
-                                                  .value,
-                                          margin:
-                                              EdgeInsets.only(left: 21.h),
+                                          controller: requestServiceController
+                                              .selectDateController.value,
+                                          margin: EdgeInsets.only(left: 21.h),
                                           readOnly: true,
                                           hintText: "Select Date",
                                           contentPadding: EdgeInsets.zero,
                                           suffix:
-                                              Icon(Icons.calendar_month),
+                                              const Icon(Icons.calendar_month),
                                         ))
                                       ]),
                                   SizedBox(height: 29.v),
@@ -123,8 +114,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgSettings,
+                                            svgPath: ImageConstant.imgSettings,
                                             height: 18.adaptSize,
                                             width: 18.adaptSize,
                                             margin: EdgeInsets.only(
@@ -132,29 +122,23 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                         Expanded(
                                             child: CustomDropDown(
                                                 icon: Container(
-                                                    margin:
-                                                        EdgeInsets.fromLTRB(
-                                                            30.h,
-                                                            10.v,
-                                                            15.h,
-                                                            10.v),
+                                                    margin: EdgeInsets.fromLTRB(
+                                                        30.h, 10.v, 15.h, 10.v),
                                                     child: CustomImageView(
                                                         svgPath: ImageConstant
                                                             .imgVectorGray6004x7)),
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 hintText: "Service Needed",
-                                                items:
-                                                    requestServiceController
-                                                        .listOfServices,
+                                                items: requestServiceController
+                                                    .listOfServices,
                                                 whereUse: "professional",
                                                 borderDecoration:
                                                     DropDownStyleHelper
                                                         .underLineBlack,
                                                 onChanged: (value) async {
                                                   requestServiceController
-                                                      .setServiceId(
-                                                          value.id);
+                                                      .setServiceId(value.id);
                                                   await requestServiceController
                                                       .getPartnerByServiceId(
                                                           value.id);
@@ -180,14 +164,13 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                   height: 19.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 2.v,
-                                                      bottom: 13.v)),
+                                                      top: 2.v, bottom: 13.v)),
                                               Expanded(
                                                 child: Obx(
                                                   () => CustomDropDown(
                                                     icon: Container(
-                                                      margin: EdgeInsets
-                                                          .fromLTRB(
+                                                      margin:
+                                                          EdgeInsets.fromLTRB(
                                                               30.h,
                                                               10.v,
                                                               15.h,
@@ -198,18 +181,15 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                     ),
                                                     margin: EdgeInsets.only(
                                                         left: 22.h),
-                                                    hintText:
-                                                        "Select Partner",
+                                                    hintText: "Select Partner",
                                                     items:
                                                         requestServiceController
-                                                            .partnerList
-                                                            .value,
+                                                            .partnerList.value,
                                                     whereUse: "partner",
                                                     borderDecoration:
                                                         DropDownStyleHelper
                                                             .underLineBlack,
-                                                    onChanged:
-                                                        (value) async {
+                                                    onChanged: (value) async {
                                                       requestServiceController
                                                           .setPartnerId(
                                                               value.id);
@@ -236,9 +216,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                 MaterialStateProperty.all(
                                                     Colors.blue),
                                             value: 'In-person',
-                                            groupValue:
-                                                requestServiceController
-                                                    .selectedValue.value,
+                                            groupValue: requestServiceController
+                                                .selectedValue.value,
                                             onChanged: (value) {
                                               requestServiceController
                                                   .toggleBetweenRdioButton(
@@ -267,9 +246,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                 MaterialStateProperty.all(
                                                     Colors.blue),
                                             value: 'Video',
-                                            groupValue:
-                                                requestServiceController
-                                                    .selectedValue.value,
+                                            groupValue: requestServiceController
+                                                .selectedValue.value,
                                             onChanged: (value) {
                                               requestServiceController
                                                   .toggleBetweenRdioButton(
@@ -321,9 +299,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                         }
                                       }
 
-                                      var item = rawData
-                                          .toString()
-                                          .padLeft(4, '0');
+                                      var item =
+                                          rawData.toString().padLeft(4, '0');
                                       return InkWell(
                                         onTap: requestServiceController
                                                 .colorNeedToChange.value
@@ -337,23 +314,19 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                     .selectSlots(item);
                                               },
                                         child: TimedisplayItemWidget(
-                                          buttonColor:
-                                              requestServiceController
-                                                      .colorNeedToChange
-                                                      .value
-                                                  ? Colors.grey
-                                                  : requestServiceController
-                                                              .activeIndex
-                                                              .value ==
-                                                          index
-                                                      ? Colors.blue
-                                                      : Colors.white,
+                                          buttonColor: requestServiceController
+                                                  .colorNeedToChange.value
+                                              ? Colors.grey
+                                              : requestServiceController
+                                                          .activeIndex.value ==
+                                                      index
+                                                  ? Colors.blue
+                                                  : Colors.white,
                                           textColor: requestServiceController
                                                   .colorNeedToChange.value
                                               ? Colors.white
                                               : requestServiceController
-                                                          .activeIndex
-                                                          .value ==
+                                                          .activeIndex.value ==
                                                       index
                                                   ? Colors.white
                                                   : AppColors
@@ -364,8 +337,9 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                       );
                                     })
                                 : const SizedBox())),
-                        CustomTextFormField(
-                            controller: commentController,
+                        Obx(() => CustomTextFormField(
+                            controller: requestServiceController
+                                .commentController.value,
                             margin: EdgeInsets.only(
                                 left: 12.h, top: 34.v, right: 12.h),
                             hintText: "Write your comments (optional)",
@@ -376,16 +350,12 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             borderDecoration:
                                 TextFormFieldStyleHelper.fillPrimary,
                             filled: true,
-                            fillColor: theme.colorScheme.primary)
+                            fillColor: theme.colorScheme.primary))
                       ]))))
         ]),
         bottomNavigationBar: CustomElevatedButton(
             onTap: () {
-              log("Date as a strng ${requestServiceController.selectDateController.value.text}");
-              log("Service need ${requestServiceController.serviceNeedId.value}");
-              log("partner id ${requestServiceController.partnerId.value}");
-              log("seleted slot ${requestServiceController.selectSlot.value}");
-              log("Service type ${requestServiceController.selectedValue.value}");
+              requestServiceController.addServiceRequest();
             },
             text: "Save",
             margin: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 22.v),

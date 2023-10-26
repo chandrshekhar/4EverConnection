@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 
 // ignore: must_be_immutable
 class UserexperienceItemWidget extends StatelessWidget {
   String? title;
-  String? desc;
+  String? leftImagePath;
   String? buttonName;
   void Function()? ontap;
   UserexperienceItemWidget(
-      {Key? key, this.title, this.desc, this.buttonName, this.ontap})
+      {Key? key, this.title, this.buttonName, this.ontap, this.leftImagePath})
       : super(
           key: key,
         );
@@ -33,47 +35,78 @@ class UserexperienceItemWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(9.h),
                     topRight: Radius.circular(9.h))),
+
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 20.adaptSize,
+                ),
+                CustomImageView(
+                  svgPath: leftImagePath,
+                  height: 30,
+                  width: 20,
+                ),
+                Expanded(
+                  child: Text(
+                    title!,
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyles.titleLargePrimary_1,
+                  ),
+                ),
+                CustomImageView(
+                  svgPath: leftImagePath,
+                  height: 30,
+                  width: 20,
+                  color: Colors.transparent,
+                ),
+                SizedBox(
+                  width: 5.adaptSize,
+                ),
+              ],
+
             child: Text(
               title!,
               style: CustomTextStyles.titleLargePrimary_1,
+
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: 10.h, left: 15.adaptSize, right: 15.adaptSize),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  desc!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: CustomTextStyles.bodyMediumGray600Light.copyWith(
-                    height: 1.47,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 10.h,
+                    left: 15.adaptSize,
+                    right: 15.adaptSize,
+                    bottom: 15.adaptSize),
+                child: CustomElevatedButton(
+                  onTap: ontap,
+                  height: 38.v,
+                  width: 198.h,
+                  text: buttonName!,
+                  buttonTextStyle: CustomTextStyles.titleSmallPrimary,
+                ),
+              ),
+              SizedBox(
+                width: 28.adaptSize,
+              ),
+              CircleAvatar(
+                radius: 15.adaptSize,
+                backgroundColor: AppColors.floatingActionButtonColor,
+                child: ClipOval(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset(
+                      ImageConstant.infoIcon,
+                    ),
                   ),
                 ),
-
-                Padding(
-                  padding: EdgeInsets.all(13.h),
-                  child: CustomElevatedButton(
-                    onTap: ontap,
-                    height: 38.v,
-                    width: 198.h,
-                    text: buttonName!,
-                    buttonTextStyle: CustomTextStyles.titleSmallPrimary,
-                  ),
-                ),
-                // SizedBox(height: 4.v),
-                // CustomElevatedButton(
-                //   height: 38.v,
-                //   width: 198.h,
-                //   text: "Go to my Vault",
-                //   buttonTextStyle: CustomTextStyles.titleSmallPrimary,
-                // ),
-              ],
-            ),
+              ),
+              SizedBox(
+                width: 15.adaptSize,
+              )
+            ],
           )
         ],
       ),

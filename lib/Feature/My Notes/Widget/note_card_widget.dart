@@ -11,12 +11,14 @@ class MyNotesCardWidget extends StatelessWidget {
   final String author;
   final String description;
   final String dateTime;
+  final Function(String)? onSeleted;
   MyNotesCardWidget(
       {super.key,
       required this.notesTitle,
       required this.author,
       required this.description,
-      required this.dateTime});
+      required this.dateTime,
+      this.onSeleted});
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +50,26 @@ class MyNotesCardWidget extends StatelessWidget {
                   "User Note | ${notesTitle}",
                   style: CustomTextStyles.titleLargePrimary_1,
                 ),
-                const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
-                )
+                PopupMenuButton<String>(
+                    position: PopupMenuPosition.under,
+                    onSelected: onSeleted,
+                    icon: const Icon(
+                      Icons.more_vert,
+                      color: Colors.white,
+                    ), // Icon for the button
+                    itemBuilder: (BuildContext context) {
+                      return <PopupMenuEntry<String>>[
+                        // Define the menu items
+                        const PopupMenuItem<String>(
+                          value: 'Edit',
+                          child: Text('Edit'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Delete',
+                          child: Text('Delete'),
+                        ),
+                      ];
+                    })
               ],
             ),
           ),
