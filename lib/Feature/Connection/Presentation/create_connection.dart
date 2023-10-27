@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
+import 'package:forever_connection/Feature/Connection/Controller/connection_validation.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +26,19 @@ class CreateConnectionScreen extends StatefulWidget {
 class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
   final requestServiceController = Get.put(RequestServiceController());
   final connectionController = Get.put(ConnectionController());
+  final validationController = Get.put(ConnectionValidationController());
+
+  final firstNameKey = GlobalKey<FormState>();
+  final lastNameKey = GlobalKey<FormState>();
+  final phoneKey = GlobalKey<FormState>();
+  final emailKey = GlobalKey<FormState>();
+  final homeKey = GlobalKey<FormState>();
+  final zipKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
     // Initialize the selected value
+    requestServiceController.getServiceProfssional();
   }
 
   @override
@@ -82,8 +95,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                   borderDecoration:
                                       DropDownStyleHelper.underLineBlack,
                                   onChanged: (value) async {
-                                    requestServiceController
-                                        .setServiceId(value.id);
+                                    connectionController.serviceId(value.id);
                                     await requestServiceController
                                         .getPartnerByServiceId(value.id);
                                   }))
@@ -124,12 +136,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                       borderDecoration:
                                           DropDownStyleHelper.underLineBlack,
                                       onChanged: (value) async {
-                                        requestServiceController
+                                        connectionController
                                             .setPartnerId(value.id);
-                                        await requestServiceController
-                                            .getUsedSlotList(value.id);
-                                        requestServiceController
-                                            .setLocalListToEmpty();
                                       },
                                     ),
                                   ),
@@ -138,27 +146,34 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                             ),
                     ),
                     SizedBox(height: 29.v),
-                    CustomTextFormField(
-                        controller:
-                            connectionController.firstNameController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "First name *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        validator: (value) {
-                          if (value!.length < 10) {
-                            return "Notes have atleast 10 character";
-                          } else {
-                            return null;
-                          }
-                        },
-                        fillColor: theme.colorScheme.primary),
+                    Form(
+                      key: firstNameKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          controller:
+                              connectionController.firstNameController.value,
+                          margin: EdgeInsets.only(
+                              left: 12.h, top: 0.v, right: 12.h),
+                          hintText: "First name *",
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 11.h, vertical: 17.v),
+                          borderDecoration: const OutlineInputBorder(),
+                          filled: false,
+                          onChange: (value) {
+                            validationController.setFirstNameValidation(value);
+                            validationController.checkButtonValidation();
+                          },
+                          validator: (value) {
+                            if (value!.length < 4) {
+                              return "First name must have 4 character";
+                            } else {
+                              return null;
+                            }
+                          },
+                          fillColor: theme.colorScheme.primary),
+                    ),
                     CustomTextFormField(
                         controller:
                             connectionController.middleNameController.value,
@@ -173,47 +188,90 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         filled: false,
                         onChange: (value) {},
                         fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        controller:
-                            connectionController.lastNameController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Last name *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        controller: connectionController.phoneController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Phone number *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        controller:
-                            connectionController.personalEmailController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Personal Email *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    Form(
+                      key: lastNameKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          controller:
+                              connectionController.lastNameController.value,
+                          margin: EdgeInsets.only(
+                              left: 12.h, top: 15.v, right: 12.h),
+                          hintText: "Last name *",
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 11.h, vertical: 17.v),
+                          borderDecoration: OutlineInputBorder(),
+                          filled: false,
+                          onChange: (value) {
+                            validationController.setLastNameValidation(value);
+                            validationController.checkButtonValidation();
+                          },
+                          validator: (value) {
+                            if (value!.length < 2) {
+                              return "Last name must have 2 character";
+                            } else {
+                              return null;
+                            }
+                          },
+                          fillColor: theme.colorScheme.primary),
+                    ),
+                    Form(
+                      key: phoneKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          controller:
+                              connectionController.phoneController.value,
+                          margin: EdgeInsets.only(
+                              left: 12.h, top: 15.v, right: 12.h),
+                          hintText: "Phone number *",
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 11.h, vertical: 17.v),
+                          borderDecoration: const OutlineInputBorder(),
+                          filled: false,
+                          onChange: (value) {
+                            validationController.setPhoneNameValidation(value);
+                            validationController.checkButtonValidation();
+                          },
+                          validator: (value) {
+                            if (value!.length < 4) {
+                              return "Phone number must have atleast 8 character";
+                            } else {
+                              return null;
+                            }
+                          },
+                          fillColor: theme.colorScheme.primary),
+                    ),
+                    Form(
+                      key: emailKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          controller: connectionController
+                              .personalEmailController.value,
+                          margin: EdgeInsets.only(
+                              left: 12.h, top: 15.v, right: 12.h),
+                          hintText: "Personal Email *",
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 11.h, vertical: 17.v),
+                          borderDecoration: OutlineInputBorder(),
+                          filled: false,
+                          onChange: (value) {
+                            validationController.setEmailValidation(value);
+                            validationController.checkButtonValidation();
+                          },
+                          validator: (value) {
+                            if (!GetUtils.isEmail(value!)) {
+                              return "Please enter valid email id";
+                            } else {
+                              return null;
+                            }
+                          },
+                          fillColor: theme.colorScheme.primary),
+                    ),
                     CustomTextFormField(
                         controller:
                             connectionController.businessNameController.value,
@@ -228,20 +286,35 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         filled: false,
                         onChange: (value) {},
                         fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        controller:
-                            connectionController.homeAddressController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Home Address *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    Form(
+                      key: homeKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          controller:
+                              connectionController.homeAddressController.value,
+                          margin: EdgeInsets.only(
+                              left: 12.h, top: 15.v, right: 12.h),
+                          hintText: "Home Address *",
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 11.h, vertical: 17.v),
+                          borderDecoration: OutlineInputBorder(),
+                          filled: false,
+                          onChange: (value) {
+                            validationController
+                                .setHomeAddressValidation(value);
+                            validationController.checkButtonValidation();
+                          },
+                          validator: (value) {
+                            if (value!.length < 8) {
+                              return "Home address must have atlease 8 character";
+                            } else {
+                              return null;
+                            }
+                          },
+                          fillColor: theme.colorScheme.primary),
+                    ),
                     CustomTextFormField(
                         controller: connectionController.aptController.value,
                         margin:
@@ -251,37 +324,64 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        controller: connectionController.zipController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "ZIP *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
                         fillColor: theme.colorScheme.primary),
+                    Form(
+                      key: zipKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          controller: connectionController.zipController.value,
+                          margin: EdgeInsets.only(
+                              left: 12.h, top: 15.v, right: 12.h),
+                          hintText: "ZIP *",
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 11.h, vertical: 17.v),
+                          borderDecoration: const OutlineInputBorder(),
+                          filled: false,
+                          onChange: (value) {
+                            validationController.setZipValidation(value);
+                            validationController.checkButtonValidation();
+                          },
+                          validator: (value) {
+                            if (value!.length < 4) {
+                              return "Enter valid zip code";
+                            } else {
+                              return null;
+                            }
+                          },
+                          fillColor: theme.colorScheme.primary),
+                    ),
                     SizedBox(
                       height: 20.adaptSize,
                     ),
-                    CustomElevatedButton(
-                        onTap: () {
-                          requestServiceController.addServiceRequest();
-                        },
-                        text: "Create Connection",
-                        margin: EdgeInsets.only(
-                            left: 24.h, right: 24.h, bottom: 22.v),
-                        rightIcon: Container(
+                    Obx(() => CustomElevatedButton(
+                          onTap:
+                              validationController.isButtonStateChange.value ==
+                                      false
+                                  ? null
+                                  : () {
+                                   connectionController.addConnection();
+                                    },
+                          text: "Create Connection",
+                          buttonStyle: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  validationController
+                                              .isButtonStateChange.value ==
+                                          false
+                                      ? Colors.grey
+                                      : AppColors.buttonColor)),
+                          margin: EdgeInsets.only(
+                              left: 24.h, right: 24.h, bottom: 22.v),
+                          rightIcon: Container(
                             margin: EdgeInsets.only(left: 16.h),
                             child: CustomImageView(
-                                svgPath: ImageConstant.imgArrowrightPrimary)))
+                                svgPath: ImageConstant.imgArrowrightPrimary),
+                          ),
+                        )),
                   ]),
             ),
           ),

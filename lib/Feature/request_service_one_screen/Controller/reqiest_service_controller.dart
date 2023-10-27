@@ -109,7 +109,7 @@ class RequestServiceController extends GetxController {
       context: context,
       initialDate: selectedDate.value,
       firstDate: DateTime(1700),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(3000),
     );
     if (pickedDate != null && pickedDate != selectedDate) {
       selectedDate.value = pickedDate;
@@ -132,8 +132,9 @@ class RequestServiceController extends GetxController {
         "service": serviceNeedId.value,
         "contact_type": selectedValue.value.toString(),
         "action_scheduled_on":
-            "${selectDateController.value.text}T${selectSlot.value.toString().substring(0, 2)}:${selectSlot.value.toString().substring(2)}:00.000Z"
+            "${selectDateController.value.text} ${selectSlot.value.toString().substring(0, 2)}:${selectSlot.value.toString().substring(2)}"
       };
+      print(reqModel);
       isAddServiceLoading(true);
       var res = await _serviceRepository.addService(reqModel: reqModel);
       if (res.isNotEmpty) {

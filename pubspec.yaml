@@ -46,6 +46,7 @@ dependencies:
   get: ^4.6.6
   lottie: ^2.6.0
   awesome_dialog: 
+  url_launcher:
 
 
 dev_dependencies:

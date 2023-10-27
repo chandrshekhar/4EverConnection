@@ -139,8 +139,8 @@ class ServiceRepository {
       };
       response = await dio.post(ApiPath.addService, data: reqModel);
       log(response.data.toString());
+      log(response.data.toString());
       if (response.statusCode == 201) {
-        // print(userServicesList);
         return response.data;
       } else {
         throw Exception("Faild to load data");

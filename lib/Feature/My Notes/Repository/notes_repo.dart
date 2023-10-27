@@ -53,7 +53,6 @@ class MyNotesRepo {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-      print("search text${searchText}");
       String urlWithSearch =
           "https://4everconnection.com/api/notes/?q=$searchText";
       String url = ApiPath.myNotesList;
@@ -75,7 +74,7 @@ class MyNotesRepo {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          log("data ${e}");
+        
           throw Exception("Faild to load data");
         }
       }

@@ -6,19 +6,21 @@ import 'package:forever_connection/theme/app_decoration.dart';
 import 'package:forever_connection/theme/custom_text_style.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
 
-class MyNotesCardWidget extends StatelessWidget {
+class ConnectionListWidget extends StatelessWidget {
   final String notesTitle;
   final String author;
   final String description;
   final String dateTime;
   final Function(String)? onSeleted;
-  MyNotesCardWidget(
+  final VoidCallback? addButtonTap;
+  ConnectionListWidget(
       {super.key,
       required this.notesTitle,
       required this.author,
       required this.description,
       required this.dateTime,
-      this.onSeleted});
+      this.onSeleted,
+      this.addButtonTap});
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +48,17 @@ class MyNotesCardWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                IconButton(
+                    onPressed: addButtonTap,
+                    icon: Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.white,
+                      size: 25.adaptSize,
+                    )),
                 Expanded(
                   child: Text(
-                    "User Note | ${notesTitle}",
+                    notesTitle,
+                    maxLines: 2,
                     style: CustomTextStyles.titleLargePrimary_1,
                   ),
                 ),
@@ -63,12 +73,16 @@ class MyNotesCardWidget extends StatelessWidget {
                       return <PopupMenuEntry<String>>[
                         // Define the menu items
                         const PopupMenuItem<String>(
-                          value: 'Edit',
-                          child: Text('Edit'),
+                          value: 'Resend',
+                          child: Text('Resend'),
                         ),
                         const PopupMenuItem<String>(
-                          value: 'Delete',
-                          child: Text('Delete'),
+                          value: 'Call',
+                          child: Text('Call'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Email',
+                          child: Text('Email'),
                         ),
                       ];
                     })
@@ -85,50 +99,21 @@ class MyNotesCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildLable(context, "Author", ImageConstant.imgUser),
+                _buildLable(context, "Status", ImageConstant.imgUser),
                 Padding(
                   padding: EdgeInsets.only(left: 38, top: 6.h),
                   child: Text(
                     author,
                     style: TextStyle(
-                        color: Colors.black,
+                        color: author.contains("Pending")
+                            ? AppColors.buttonColor
+                            : Colors.green,
                         fontWeight: FontWeight.w400,
                         fontSize: 18.adaptSize),
                   ),
                 ),
                 SizedBox(
                   height: 12.h,
-                ),
-                // _buildLable(context, "Service", ImageConstant.serviceImage),
-                // Padding(
-                //   padding: EdgeInsets.only(left: 38, top: 6.h),
-                //   child: Text(
-                //     "Allen Chatterjee",
-                //     style: TextStyle(
-                //         color: Colors.black,
-                //         fontWeight: FontWeight.w400,
-                //         fontSize: 18.adaptSize),
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 12.h,
-                // ),
-                _buildLable(context, "Description", ImageConstant.imgEdit),
-                Padding(
-                  padding: EdgeInsets.only(left: 38, top: 6.h),
-                  child: Text(
-                    description,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18.adaptSize,
-                        height: 1.5),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

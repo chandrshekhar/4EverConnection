@@ -1,4 +1,3 @@
-
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:get/get.dart';
@@ -82,32 +81,6 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(height: 4.v),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomImageView(
-                                            svgPath: ImageConstant.imgCalendar,
-                                            height: 18.adaptSize,
-                                            width: 18.adaptSize,
-                                            margin: EdgeInsets.only(
-                                                top: 5.v, bottom: 13.v)),
-                                        Expanded(
-                                            child: CustomTextFormField(
-                                          onTap: () {
-                                            requestServiceController
-                                                .selectDate(context);
-                                          },
-                                          controller: requestServiceController
-                                              .selectDateController.value,
-                                          margin: EdgeInsets.only(left: 21.h),
-                                          readOnly: true,
-                                          hintText: "Select Date",
-                                          contentPadding: EdgeInsets.zero,
-                                          suffix:
-                                              const Icon(Icons.calendar_month),
-                                        ))
-                                      ]),
                                   SizedBox(height: 29.v),
                                   Row(
                                       crossAxisAlignment:
@@ -205,8 +178,46 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                             ],
                                           ),
                                   ),
+                                  SizedBox(
+                                    height: 40.adaptSize,
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant.imgCalendar,
+                                            height: 18.adaptSize,
+                                            width: 18.adaptSize,
+                                            margin: EdgeInsets.only(
+                                                top: 5.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                          onTap: () {
+                                            requestServiceController
+                                                .selectDate(context);
+                                          },
+                                          controller: requestServiceController
+                                              .selectDateController.value,
+                                          margin: EdgeInsets.only(left: 21.h),
+                                          readOnly: true,
+                                          hintText: "Select Date",
+                                          contentPadding: EdgeInsets.zero,
+                                          suffix: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
+                                            child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgCalendarLightBlue90001,
+                                              height: 15,
+                                              width: 15,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ))
+                                      ]),
                                   SizedBox(height: 29.v),
-                                  Text("Service type",
+                                  Text("Service Method",
                                       style: theme.textTheme.bodyLarge),
                                   SizedBox(height: 8.v),
                                   Obx(() => Row(
@@ -215,7 +226,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                             fillColor:
                                                 MaterialStateProperty.all(
                                                     Colors.blue),
-                                            value: 'In-person',
+                                            value: 'In-Person',
                                             groupValue: requestServiceController
                                                 .selectedValue.value,
                                             onChanged: (value) {
@@ -343,8 +354,9 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             margin: EdgeInsets.only(
                                 left: 12.h, top: 34.v, right: 12.h),
                             hintText: "Write your comments (optional)",
-                            textInputAction: TextInputAction.done,
+                            textInputAction: TextInputAction.newline,
                             maxLines: 6,
+                            textInputType: TextInputType.multiline,
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 11.h, vertical: 17.v),
                             borderDecoration:
@@ -353,7 +365,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             fillColor: theme.colorScheme.primary))
                       ]))))
         ]),
-        bottomNavigationBar: CustomElevatedButton(
+        bottomNavigationBar: Obx(() => requestServiceController.isAddServiceLoading.value?const Center(child: CircularProgressIndicator.adaptive(),): CustomElevatedButton(
             onTap: () {
               requestServiceController.addServiceRequest();
             },
@@ -362,6 +374,6 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
             rightIcon: Container(
                 margin: EdgeInsets.only(left: 16.h),
                 child: CustomImageView(
-                    svgPath: ImageConstant.imgArrowrightPrimary))));
+                    svgPath: ImageConstant.imgArrowrightPrimary)))));
   }
 }

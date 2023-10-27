@@ -55,7 +55,7 @@ class CustomElevatedButton extends BaseButton {
           style: buttonStyle ??
               const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(Color(0xffF68F27))),
-          onPressed: isDisabled ?? false ? null : onTap ?? () {},
+          onPressed: isDisabled ?? false ? null : onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

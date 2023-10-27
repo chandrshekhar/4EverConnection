@@ -1,5 +1,7 @@
 import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
+import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
+import 'package:forever_connection/Feature/Connection/Presentation/connection_list.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/create_connection.dart';
 import 'package:forever_connection/Feature/Connection/Widget/card_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
@@ -24,6 +26,7 @@ class ConnectionMainScreen extends StatelessWidget {
   final dashboardController = Get.put(DashboardController());
   final myProfileController = Get.put(UserProfileController());
   final serviceController = Get.put(RequestServiceController());
+  final connectionCotroller = Get.put(ConnectionController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class ConnectionMainScreen extends StatelessWidget {
                           child: CircularProgressIndicator.adaptive(),
                         )
                       : Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 17.v),
@@ -81,12 +84,16 @@ class ConnectionMainScreen extends StatelessWidget {
                                       BorderRadius.circular(15.adaptSize)),
                               child: Column(
                                 children: [
-                                  ConnectionCardWidget(
-                                    onTap: () {},
-                                    buttonName: "Check My wallet",
-                                    title: "Wallet",
-                                    available: "Available: \$0",
-                                    des: "Withdraw Funds",
+                                  // ConnectionCardWidget(
+                                  //   onTap: () {},
+                                  //   buttonName: "Check My wallet",
+                                  //   title: "Wallet",
+                                  //   available: "Available: \$0",
+                                  //   des: "Withdraw Funds",
+                                  // ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
                                   ),
                                   ConnectionCardWidget(
                                     onTap: () {
@@ -97,12 +104,22 @@ class ConnectionMainScreen extends StatelessWidget {
                                     available: "accepted: 0",
                                     des: "Create Connections",
                                   ),
-                                  ConnectionCardWidget(
-                                    onTap: () {},
-                                    buttonName: "My Connections",
-                                    title: "Manage",
-                                    available: "Pending: 0",
-                                    des: "Manage Connections",
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                  ),
+                                  Obx(() => ConnectionCardWidget(
+                                        onTap: () {
+                                          Get.to(ConnectionListScreen());
+                                        },
+                                        buttonName: "My Connections",
+                                        title: "Manage",
+                                        available: "Pending: ${connectionCotroller.connectionList.length}",
+                                        des: "Manage Connections",
+                                      )),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
                                   ),
                                 ],
                               ),

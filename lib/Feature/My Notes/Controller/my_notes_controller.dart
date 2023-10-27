@@ -64,9 +64,10 @@ class MyNotesController extends GetxController {
         TostWidget().successToast(title: "Success", message: "Notes added");
         await getMyNotes();
         isAddNoteLoading(false);
-        clearTextField();
+        
         await Future.delayed(const Duration(seconds: 2), () {
           Navigator.pop(context);
+          clearTextField();
         });
       } else {
         TostWidget().errorToast(title: "Error", message: "All field mandatory");
