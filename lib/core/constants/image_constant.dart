@@ -142,4 +142,20 @@ class ImageConstant {
   static String videoIcon = "assets/images/video_player_icon.svg";
 
   static String notificationIcon = "assets/images/NOTIFICATION.svg";
+
+  static String myConnection = "assets/images/myconnections.svg";
+  static String connect = "assets/images/connect.svg";
+  static String myBusinessProfile = "assets/images/businessprofile.svg";
+  static String myDocumntVaults = "assets/images/documentvaults.svg";
+  static String myWallet = "assets/images/mywallet.svg";
+  static String myNotes = "assets/images/mynotes.svg";
+  static String passwordandSecurity = "assets/images/password&security.svg";
+  static String support = "assets/images/support.svg";
+  static String donateConnection = "assets/images/donateconnection.svg";
+  static String markaWish = "assets/images/myservice.svg";
+  static String myservice = "assets/images/myservice.svg";
+  static String mycontact = "assets/images/mycontact.svg";
+  static String logout = "assets/images/logout.svg";
+  static String myprofile = "assets/images/myprofile.svg";
+
 }

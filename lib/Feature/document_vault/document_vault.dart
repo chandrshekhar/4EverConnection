@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/document_vault/Controller/document_controller.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/search_typeahead.dart';
 import 'package:get/get.dart';
 
 import '../../Controllers/Documents Vault controller/documents_vault_controller.dart';
+import '../../core/constants/colors.dart';
 import '../../routes/app_routes.dart';
 import '../../widgets/app_bar/appbar_image.dart';
 import '../../widgets/app_bar/appbar_image_1.dart';
@@ -17,7 +20,23 @@ import '../../widgets/custom_image_view.dart';
 class DocumentVaultScreen extends StatelessWidget {
   DocumentVaultScreen({Key? key}) : super(key: key);
 
-  List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
+  List<String> dropdownItemList = [
+    "Birth Certificate",
+    "Sociel Security",
+    "State ID",
+    "School ID",
+    "Driver License",
+    "Passport Book",
+    "Passport Card",
+    "Naturalization Certificate",
+    "Greencard",
+    "Employment Authorization",
+    "marriage Certificate",
+    "Divorce Decree",
+    "Military ID",
+    "Auto Insurance Card",
+    "Life Insurance Card"
+  ];
 
   final documentVaultController = Get.put(DocumentsVaultController());
 
@@ -50,64 +69,157 @@ class DocumentVaultScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              AnimatedContainer(
+                duration: const Duration(seconds: 2),
                 margin: EdgeInsets.only(bottom: 8.h),
-                padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 30.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 20.h),
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
                     color: Colors.white),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CustomImageView(
-                          svgPath: ImageConstant.imgFile,
-                          height: 19.v,
-                          width: 17.h,
-                          margin: EdgeInsets.only(top: 2.v, bottom: 13.v)),
-                      Column(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CustomDropDown(
-                              width: 300.h,
-                              icon: Container(
-                                  margin: EdgeInsets.fromLTRB(
-                                      30.h, 10.v, 15.h, 10.v),
-                                  child: CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgVectorGray6004x7)),
-                              margin: EdgeInsets.only(left: 22.h),
-                              hintText: "Select professional",
-                              items: dropdownItemList,
-                              borderDecoration:
-                                  DropDownStyleHelper.underLineBlack,
-                              onChanged: (value) {}),
-                          SizedBox(height: 12.h),
-                          CustomElevatedButton(
-                              width: 167.h,
-                              buttonStyle: ButtonStyle(
-                                  foregroundColor: MaterialStateProperty.all(
-                                      const Color(0xFF6B6B6B)),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xffe1f1fb))),
-                              text: "Cancel",
-                              buttonTextStyle: TextStyle(
+                          CustomImageView(
+                              svgPath: ImageConstant.imgFile,
+                              height: 19.v,
+                              width: 17.h,
+                              margin: EdgeInsets.only(
+                                  top: 25.v, bottom: 0.v, right: 15)),
+                          Obx(
+                            () => Expanded(
+                              child: SearchDropDownWidget(
+                                fromWhere: "service",
+                                lableName: "Select Document Type",
+                                list: documentVaultController.documentTypes,
+                                controller: documentVaultController
+                                    .searchForDocumentController.value,
+                                suggestionsCallback: (pattern) {
+                                  return documentVaultController.documentTypes
+                                      .where((item) => item.name!
+                                          .toLowerCase()
+                                          .contains(pattern.toLowerCase()))
+                                      .toList();
+                                },
+                                onSuggestionSelected: (suggestion) async {
+                                  documentVaultController
+                                      .searchForDocumentController
+                                      .value
+                                      .text = suggestion.name.toString();
+                                  // requestServiceController
+                                  //     .setServiceId(suggestion.id);
+                                  // await requestServiceController
+                                  //     .getPartnerByServiceId(suggestion.id);
+                                },
+                              ),
+                            ),
+                          ),
+                        ]),
+                    SizedBox(height: 15.h),
+                    Container(
+                        height: 32.h,
+                        width: MediaQuery.of(context).size.width - 6,
+                        padding: const EdgeInsets.only(left: 5),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 0.5),
+                        ),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'File description',
+                          ),
+                        )),
+                    SizedBox(height: 15.h),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 6,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.file_copy),
+                          SizedBox(width: 5.h),
+                          Text("Choose file",
+                              style: TextStyle(
                                   fontSize: 18.h,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF6B6B6B)),
-                              leftIcon: const Icon(Icons.file_copy_sharp,
-                                  color: Color(0xFF6B6B6B))),
+                                  color: const Color(0xFF6B6B6B))),
+                          Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              height: 21.h,
+                              width: 2,
+                              color: const Color(0xFF6B6B6B)),
+                          const Text("No file chosen"),
                         ],
-                      )
-                    ]),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    CustomElevatedButton(
+                      width: 150.h,
+                      buttonStyle: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(
+                              const Color(0xFF6B6B6B)),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xffe1f1fb))),
+                      text: "Upload",
+                      buttonTextStyle: TextStyle(
+                          fontSize: 18.h,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF6B6B6B)),
+                    )
+                  ],
+                ),
               ),
               const Text("Documents Vault",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.black,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   )),
+              SizedBox(height: 12.h),
+              Container(
+                color: AppColors.darkBlue,
+                padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 5),
+                child: const Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Text('Document Name',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Text('Description',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('Action',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    ),
+                  ],
+                ),
+              ),
+              // const Divider(),
               Obx(
                 () => documentVaultController.isLoadingDocument == true
                     ? const Center(
@@ -119,91 +231,55 @@ class DocumentVaultScreen extends StatelessWidget {
                           )
                         : Expanded(
                             child: ListView.builder(
-                              itemCount: documentVaultController
-                                  .documentValultDataList.length,
+                              itemCount: 10,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  height: 260.h,
-                                  margin: EdgeInsets.symmetric(vertical: 5.h),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14),
-                                      color: Colors.white),
-                                  child: Column(
-                                    children: [
-                                      ListTile(
-                                        minLeadingWidth: 12.h,
-                                        leading: CustomImageView(
-                                          svgPath: ImageConstant.imgCalendar,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  color: (index % 2 == 0)
+                                      ? Colors.white
+                                      : AppColors.bgColor,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            "G",
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          ),
                                         ),
-                                        title: const Text("Upload Date",
-                                            style: TextStyle(
-                                              color: Color(0xFF6B6B6B),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w400,
+                                        Expanded(
+                                            flex: 3,
+                                            child: Text(
+                                              "sf",
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium,
                                             )),
-                                        subtitle: Text(
-                                            documentVaultController
-                                                .documentValultDataList[index]
-                                                .publicationDate
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              color: Color(0xFF1E1E1E),
-                                              fontWeight: FontWeight.w400,
+                                        const Expanded(
+                                            flex: 2,
+                                            child: Align(
+                                              alignment: Alignment.topCenter,
+                                              child: SizedBox(
+                                                  width: 10,
+                                                  height: 10,
+                                                  child: Icon(Icons.more_vert)),
                                             )),
-                                        trailing: const Icon(Icons.more_vert),
-                                      ),
-                                      ListTile(
-                                        minLeadingWidth: 12.h,
-                                        leading: CustomImageView(
-                                          svgPath: ImageConstant.imgUser,
-                                        ),
-                                        title: const Text("Document Name",
-                                            style: TextStyle(
-                                              color: Color(0xFF6B6B6B),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                        subtitle: Text(
-                                            documentVaultController
-                                                .documentValultDataList[index]
-                                                .name
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              color: Color(0xFF1E1E1E),
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                      ),
-                                      ListTile(
-                                        minLeadingWidth: 12.h,
-                                        leading: CustomImageView(
-                                          svgPath: ImageConstant.imgEdit,
-                                        ),
-                                        title: const Text("Description",
-                                            style: TextStyle(
-                                              color: Color(0xFF6B6B6B),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                        subtitle: Text(
-                                            documentVaultController
-                                                .documentValultDataList[index]
-                                                .description
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              color: Color(0xFF1E1E1E),
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                      )
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
                             ),
                           ),
-              )
+              ),
             ],
           ),
         ));

@@ -25,5 +25,8 @@ class ApiPath {
   //connection
   static const addConnection = "$baseUrl/api/connections/";
   static const listConnection = "$baseUrl/api/connections/";
+  static const documentTypeApi = "$baseUrl/api/vault-document-types/";
+
   static const resendRequest = "$baseUrl/api/connections/resend";
+
 }

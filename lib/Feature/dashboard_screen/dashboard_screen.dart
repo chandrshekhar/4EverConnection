@@ -3,12 +3,13 @@ import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard
 import 'package:forever_connection/Feature/Connection/Presentation/connection_main_screen.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:get/get.dart';
 import '../../Controllers/User Profile Controller/user_profile_controller.dart';
+import '../../widgets/custom_popup_widget.dart';
 import '../dashboard_screen/widgets/userexperience_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
-import '../side_bar_draweritem/side_bar_draweritem.dart';
 
 // ignore: must_be_immutable
 class DashboardScreen extends StatelessWidget {
@@ -31,7 +32,7 @@ class DashboardScreen extends StatelessWidget {
       key: _key,
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFEAF7FE),
-      drawer: SideBarDraweritem(
+      endDrawer: CustomDrawerWidget(
         myProfileController: myProfileController,
       ),
       body: SafeArea(
@@ -127,7 +128,7 @@ class DashboardScreen extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  _key.currentState!.openDrawer();
+                                  _key.currentState!.openEndDrawer();
                                 },
                                 icon: Icon(
                                   Icons.menu,
@@ -170,6 +171,61 @@ class DashboardScreen extends StatelessWidget {
                                 ['title'],
                             leftImagePath: dashboardController
                                 .dashboardListData[index]['imagePath'],
+                            onIconClick: () {
+                              if (index == 0) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            16), // Set the border radius for the dialog
+                                      ),
+                                      child: const CustomPopupContent(title: 'Connect',),
+                                    );
+                                  },
+                                );
+                              } else if (index == 1) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            16), // Set the border radius for the dialog
+                                      ),
+                                      child: const CustomPopupContent(title: 'Request Service',),
+                                    );
+                                  },
+                                );
+                              } else if (index == 2) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            16), // Set the border radius for the dialog
+                                      ),
+                                      child: const CustomPopupContent(title: 'View & Collaborate',),
+                                    );
+                                  },
+                                );
+                              } else if (index == 3) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            16), // Set the border radius for the dialog
+                                      ),
+                                      child: const CustomPopupContent(title: 'Access My Vault',),
+                                    );
+                                  },
+                                );
+                              }
+                            },
                             ontap: () {
                               if (index == 0) {
                                 Get.to(ConnectionMainScreen());
@@ -182,8 +238,7 @@ class DashboardScreen extends StatelessWidget {
                               } else if (index == 3) {
                                 Navigator.pushNamed(
                                     context, AppRoutes.documentVaultScreen);
-                              } else if (index == 4) {
-                              } else if (index == 5) {}
+                              }
                             },
                             buttonName: dashboardController
                                 .dashboardListData[index]['buttonName'],

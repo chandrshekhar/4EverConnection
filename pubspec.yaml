@@ -47,6 +47,8 @@ dependencies:
   lottie: ^2.6.0
   awesome_dialog: 
   url_launcher:
+  flutter_html:
+  flutter_typeahead: ^4.8.0
 
 
 dev_dependencies:
