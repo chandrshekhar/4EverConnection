@@ -100,7 +100,7 @@ class ServiceRepository {
         'Authorization': "Bearer $token"
       };
       response = await dio.get(
-        "${ApiPath.baseUrl}/api/partners/$partnerId/slots/${date}/",
+        "${ApiPath.baseUrl}/api/partners/$partnerId/slots/$date/",
       );
       if (response.statusCode == 200) {
         final List<SlotModelList> userServicesList = (response.data as List)

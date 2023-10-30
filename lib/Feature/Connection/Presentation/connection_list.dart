@@ -136,6 +136,8 @@ class ConnectionListScreen extends StatelessWidget {
                                   .launchEmail(item.email ?? "");
                               break;
                             case "Resend":
+                              await connectionController
+                                  .resedConnection(item.id ?? -1);
                               break;
                             case "Call":
                               await connectionController

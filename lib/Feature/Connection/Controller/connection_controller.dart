@@ -1,8 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
 import 'package:forever_connection/Feature/Connection/Repository/create_connection_repo.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
-import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,6 +23,8 @@ class ConnectionController extends GetxController {
   RxInt serviceId = (-1).obs;
   RxInt partnerId = (-1).obs;
   RxList<ConnectionModel> connectionList = <ConnectionModel>[].obs;
+  var searchServiceController = TextEditingController().obs;
+  var searchPartnerController = TextEditingController().obs;
 
   //connection list loading
   RxBool isLoading = false.obs;
@@ -48,7 +52,7 @@ class ConnectionController extends GetxController {
   //loading button
   RxBool isConnectionLoading = false.obs;
 
-  addConnection() async {
+  addConnection(BuildContext context) async {
     try {
       Map<String, dynamic> reqModel = {
         "service": serviceId.value,
@@ -64,12 +68,12 @@ class ConnectionController extends GetxController {
         "home_zip": zipController.value.text,
         "additional": ""
       };
-
       isConnectionLoading(true);
       var res = await _connectionRepo.addConnection(reqModel: reqModel);
       if (res.isNotEmpty) {
         isConnectionLoading(false);
         ToastWidget.successToast(success: "Connection added successfully");
+        Navigator.pop(context);
       } else {
         isConnectionLoading(false);
         ToastWidget.errorToast(error: "Faild to add connection");
@@ -81,6 +85,12 @@ class ConnectionController extends GetxController {
     }
   }
 
+  resedConnection(int id) async {
+    try {
+      var res = await _connectionRepo.resendConnectionRequest(id: id);
+    } catch (e) {}
+  }
+
   Future<void> launchEmail(String emailAddress) async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
@@ -90,8 +100,31 @@ class ConnectionController extends GetxController {
   }
 
   Future<void> launchPhoneDialer(String phoneNumber) async {
-    final Uri phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
+    try {
+      final Uri phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
 
-    launchUrl(phoneLaunchUri);
+      // String url = Platform.isIOS ? 'tel://$phoneNumber' : 'tel:$phoneNumber';
+
+      launchUrl(phoneLaunchUri);
+      // launchUrl(Uri.parse(url));
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  clearAllField() {
+    serviceId(-1);
+    partnerId(-1);
+    searchPartnerController.value.clear();
+    searchServiceController.value.clear();
+    firstNameController.value.clear();
+    middleNameController.value.clear();
+    lastNameController.value.clear();
+    phoneController.value.clear();
+    personalEmailController.value.clear();
+    businessNameController.value.clear();
+    homeAddressController.value.clear();
+    aptController.value.clear();
+    zipController.value.clear();
   }
 }
