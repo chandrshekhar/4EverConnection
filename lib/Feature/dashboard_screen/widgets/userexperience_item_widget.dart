@@ -4,14 +4,17 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 
+import '../../../widgets/custom_popup_widget.dart';
+
 // ignore: must_be_immutable
 class UserexperienceItemWidget extends StatelessWidget {
   String? title;
   String? leftImagePath;
   String? buttonName;
   void Function()? ontap;
+  void Function()? onIconClick;
   UserexperienceItemWidget(
-      {Key? key, this.title, this.buttonName, this.ontap, this.leftImagePath})
+      {Key? key, this.title, this.buttonName, this.ontap, this.leftImagePath, required this.onIconClick})
       : super(
           key: key,
         );
@@ -85,14 +88,17 @@ class UserexperienceItemWidget extends StatelessWidget {
               SizedBox(
                 width: 28.adaptSize,
               ),
-              CircleAvatar(
-                radius: 15.adaptSize,
-                backgroundColor: AppColors.floatingActionButtonColor,
-                child: ClipOval(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      ImageConstant.infoIcon,
+              InkWell(
+                onTap: onIconClick,
+                child: CircleAvatar(
+                  radius: 15.adaptSize,
+                  backgroundColor: AppColors.floatingActionButtonColor,
+                  child: ClipOval(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(
+                        ImageConstant.infoIcon,
+                      ),
                     ),
                   ),
                 ),

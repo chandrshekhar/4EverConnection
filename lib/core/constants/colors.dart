@@ -6,5 +6,9 @@ class AppColors {
   static const buttonColor = Color(0xffF28E20);
   static const greyTextColor = Color(0xff6B6B6B);
   static const dashBoardColor = Color(0xff004C77);
- 
+  static Color orangeColor = const Color(0xffFF8927);
+  static Color lightBlue = const Color(0xff649EB2);
+  static Color bgColor = const Color(0xffECFAFE);
+  static Color grayColor = const Color(0xffEBEEF0);
+  static Color darkBlue = const Color(0xff0C4777);
 }
