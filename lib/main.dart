@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'routes/app_routes.dart';
 import 'theme/theme_helper.dart';
 import 'widgets/dismissible_widget.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ThemeHelper().changeTheme('primary');
@@ -14,7 +13,6 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

@@ -14,7 +14,12 @@ class UserexperienceItemWidget extends StatelessWidget {
   void Function()? ontap;
   void Function()? onIconClick;
   UserexperienceItemWidget(
-      {Key? key, this.title, this.buttonName, this.ontap, this.leftImagePath, required this.onIconClick})
+      {Key? key,
+      this.title,
+      this.buttonName,
+      this.ontap,
+      this.leftImagePath,
+      required this.onIconClick})
       : super(
           key: key,
         );

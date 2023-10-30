@@ -19,7 +19,6 @@ class ServiceRepository {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-
       response = await dio.get(
         ApiPath.professionalServiceList,
       );
