@@ -1,5 +1,8 @@
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Model/request_service_model.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
+import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../request_service_one_screen/widgets/timedisplay_item_widget.dart';
@@ -91,31 +94,44 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                             height: 18.adaptSize,
                                             width: 18.adaptSize,
                                             margin: EdgeInsets.only(
-                                                top: 5.v, bottom: 13.v)),
+                                                top: 25.v, right: 15)),
                                         Expanded(
-                                            child: CustomDropDown(
-                                                icon: Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        30.h, 10.v, 15.h, 10.v),
-                                                    child: CustomImageView(
-                                                        svgPath: ImageConstant
-                                                            .imgVectorGray6004x7)),
-                                                margin:
-                                                    EdgeInsets.only(left: 22.h),
-                                                hintText: "Service Needed",
-                                                items: requestServiceController
-                                                    .listOfServices,
-                                                whereUse: "professional",
-                                                borderDecoration:
-                                                    DropDownStyleHelper
-                                                        .underLineBlack,
-                                                onChanged: (value) async {
+                                          child: Obx(
+                                            () => SearchDropDownWidget(
+                                              fromWhere: "service",
+                                              lableName: "Service need",
+                                              list: requestServiceController
+                                                  .listOfServices,
+                                              controller:
                                                   requestServiceController
-                                                      .setServiceId(value.id);
-                                                  await requestServiceController
-                                                      .getPartnerByServiceId(
-                                                          value.id);
-                                                }))
+                                                      .serviceSearchController
+                                                      .value,
+                                              suggestionsCallback: (pattern) {
+                                                return requestServiceController
+                                                    .listOfServices
+                                                    .where((item) => item.name!
+                                                        .toLowerCase()
+                                                        .contains(pattern
+                                                            .toLowerCase()))
+                                                    .toList();
+                                              },
+                                              onSuggestionSelected:
+                                                  (suggestion) async {
+                                                requestServiceController
+                                                        .serviceSearchController
+                                                        .value
+                                                        .text =
+                                                    suggestion.name.toString();
+                                                requestServiceController
+                                                    .setServiceId(
+                                                        suggestion.id);
+                                                await requestServiceController
+                                                    .getPartnerByServiceId(
+                                                        suggestion.id);
+                                              },
+                                            ),
+                                          ),
+                                        ),
                                       ]),
                                   SizedBox(height: 29.v),
                                   Obx(
@@ -137,42 +153,76 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                   height: 19.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 2.v, bottom: 13.v)),
+                                                      top: 25.v, right: 15)),
                                               Expanded(
                                                 child: Obx(
-                                                  () => CustomDropDown(
-                                                    icon: Container(
-                                                      margin:
-                                                          EdgeInsets.fromLTRB(
-                                                              30.h,
-                                                              10.v,
-                                                              15.h,
-                                                              10.v),
-                                                      child: CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgVectorGray6004x7),
-                                                    ),
-                                                    margin: EdgeInsets.only(
-                                                        left: 22.h),
-                                                    hintText: "Select Partner",
-                                                    items:
+                                                  () => SearchDropDownWidget(
+                                                    fromWhere: "partner",
+                                                    lableName: "Select Partner",
+                                                    list:
                                                         requestServiceController
-                                                            .partnerList.value,
-                                                    whereUse: "partner",
-                                                    borderDecoration:
-                                                        DropDownStyleHelper
-                                                            .underLineBlack,
-                                                    onChanged: (value) async {
+                                                            .partnerList,
+                                                    controller:
+                                                        requestServiceController
+                                                            .partnerSearchController
+                                                            .value,
+                                                    suggestionsCallback:
+                                                        (pattern) {
+                                                      return requestServiceController
+                                                          .partnerList
+                                                          .where((item) => item
+                                                              .fullName!
+                                                              .toLowerCase()
+                                                              .contains(pattern
+                                                                  .toLowerCase()))
+                                                          .toList();
+                                                    },
+                                                    onSuggestionSelected:
+                                                        (suggestion) async {
+                                                      requestServiceController
+                                                              .partnerSearchController
+                                                              .value
+                                                              .text =
+                                                          suggestion.fullName
+                                                              .toString();
                                                       requestServiceController
                                                           .setPartnerId(
-                                                              value.id);
-                                                      await requestServiceController
-                                                          .getUsedSlotList(
-                                                              value.id);
-                                                      requestServiceController
-                                                          .setLocalListToEmpty();
+                                                              suggestion.id);
                                                     },
                                                   ),
+                                                  // CustomDropDown(
+                                                  //   icon: Container(
+                                                  //     margin:
+                                                  //         EdgeInsets.fromLTRB(
+                                                  //             30.h,
+                                                  //             10.v,
+                                                  //             15.h,
+                                                  //             10.v),
+                                                  //     child: CustomImageView(
+                                                  //         svgPath: ImageConstant
+                                                  //             .imgVectorGray6004x7),
+                                                  //   ),
+                                                  //   margin: EdgeInsets.only(
+                                                  //       left: 22.h),
+                                                  //   hintText: "Select Partner",
+                                                  //   items:
+                                                  //       requestServiceController
+                                                  //           .partnerList.value,
+                                                  //   whereUse: "partner",
+                                                  //   borderDecoration:
+                                                  //       DropDownStyleHelper
+                                                  //           .underLineBlack,
+                                                  //   onChanged: (value) async {
+                                                  //     requestServiceController
+                                                  //         .setPartnerId(
+                                                  //             value.id);
+                                                  //     await requestServiceController
+                                                  //         .getUsedSlotList(
+                                                  //             value.id);
+                                                  //     requestServiceController
+                                                  //         .setLocalListToEmpty();
+                                                  //   },
+                                                  // ),
                                                 ),
                                               ),
                                             ],
@@ -365,15 +415,20 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             fillColor: theme.colorScheme.primary))
                       ]))))
         ]),
-        bottomNavigationBar: Obx(() => requestServiceController.isAddServiceLoading.value?const Center(child: CircularProgressIndicator.adaptive(),): CustomElevatedButton(
-            onTap: () {
-              requestServiceController.addServiceRequest();
-            },
-            text: "Save",
-            margin: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 22.v),
-            rightIcon: Container(
-                margin: EdgeInsets.only(left: 16.h),
-                child: CustomImageView(
-                    svgPath: ImageConstant.imgArrowrightPrimary)))));
+        bottomNavigationBar: Obx(() => requestServiceController
+                .isAddServiceLoading.value
+            ? const Center(
+                child: CircularProgressIndicator.adaptive(),
+              )
+            : CustomElevatedButton(
+                onTap: () {
+                  requestServiceController.addServiceRequest();
+                },
+                text: "Save",
+                margin: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 22.v),
+                rightIcon: Container(
+                    margin: EdgeInsets.only(left: 16.h),
+                    child: CustomImageView(
+                        svgPath: ImageConstant.imgArrowrightPrimary)))));
   }
 }

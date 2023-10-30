@@ -25,4 +25,5 @@ class ApiPath {
   //connection
   static const addConnection = "$baseUrl/api/connections/";
   static const listConnection = "$baseUrl/api/connections/";
+  static const resendRequest = "$baseUrl/api/connections/resend";
 }

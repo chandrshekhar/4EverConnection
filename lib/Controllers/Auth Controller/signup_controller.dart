@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -76,7 +76,6 @@ class SignupController extends GetxController {
           TostWidget()
               .errorToast(title: "Error!", message: "Please check internet");
         } else if (e.type == DioErrorType.badResponse) {
-          print("bad-> ${e.response!.data}");
           TostWidget().errorToast(
               title: "Invalid!", message: "${e.response!.data["message"]}");
         } else {
@@ -113,7 +112,7 @@ class SignupController extends GetxController {
           backgroundColor: const Color(0xFF1B608C),
           child: CalendarDatePicker(
             initialDate: selectedDate,
-            firstDate: DateTime(2000),
+            firstDate: DateTime.now(),
             lastDate: DateTime(2101),
             onDateChanged: (date) {
               dobController.value.text = convertAndFormatDate(date);
@@ -127,8 +126,6 @@ class SignupController extends GetxController {
   }
 
   String convertAndFormatDate(DateTime inputDate) {
-    // final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
-    // final parsedDate = originalFormat.parse(inputDate);
     final outputFormat = DateFormat("yyyy-MM-dd");
     return outputFormat.format(inputDate);
   }

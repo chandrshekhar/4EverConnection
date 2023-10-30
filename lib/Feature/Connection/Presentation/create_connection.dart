@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_validation.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
-import 'package:forever_connection/widgets/custom_drop_down.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
@@ -39,6 +37,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
     super.initState();
     // Initialize the selected value
     requestServiceController.getServiceProfssional();
+    connectionController.clearAllField();
   }
 
   @override
@@ -70,7 +69,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 29.v),
+                    SizedBox(height: 15.v),
                     Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -78,27 +77,30 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               svgPath: ImageConstant.imgSettings,
                               height: 18.adaptSize,
                               width: 18.adaptSize,
-                              margin: EdgeInsets.only(top: 5.v, bottom: 13.v)),
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
                           Expanded(
-                              child: CustomDropDown(
-                                  icon: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          30.h, 10.v, 15.h, 10.v),
-                                      child: CustomImageView(
-                                          svgPath: ImageConstant
-                                              .imgVectorGray6004x7)),
-                                  margin: EdgeInsets.only(left: 22.h),
-                                  hintText: "Service Needed",
-                                  items:
-                                      requestServiceController.listOfServices,
-                                  whereUse: "professional",
-                                  borderDecoration:
-                                      DropDownStyleHelper.underLineBlack,
-                                  onChanged: (value) async {
-                                    connectionController.serviceId(value.id);
-                                    await requestServiceController
-                                        .getPartnerByServiceId(value.id);
-                                  }))
+                            child: SearchDropDownWidget(
+                              fromWhere: "service",
+                              lableName: "Service need",
+                              list: requestServiceController.listOfServices,
+                              controller: connectionController
+                                  .searchServiceController.value,
+                              suggestionsCallback: (pattern) {
+                                return requestServiceController.listOfServices
+                                    .where((item) => item.name!
+                                        .toLowerCase()
+                                        .contains(pattern.toLowerCase()))
+                                    .toList();
+                              },
+                              onSuggestionSelected: (suggestion) async {
+                                connectionController.searchServiceController
+                                    .value.text = suggestion.name.toString();
+                                connectionController.serviceId(suggestion.id);
+                                await requestServiceController
+                                    .getPartnerByServiceId(suggestion.id);
+                              },
+                            ),
+                          ),
                         ]),
                     SizedBox(height: 29.v),
                     Obx(
@@ -116,28 +118,34 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     svgPath: ImageConstant.imgUser,
                                     height: 19.v,
                                     width: 17.h,
-                                    margin: EdgeInsets.only(
-                                        top: 2.v, bottom: 13.v)),
+                                    margin:
+                                        EdgeInsets.only(top: 25.v, right: 15)),
                                 Expanded(
                                   child: Obx(
-                                    () => CustomDropDown(
-                                      icon: Container(
-                                        margin: EdgeInsets.fromLTRB(
-                                            30.h, 10.v, 15.h, 10.v),
-                                        child: CustomImageView(
-                                            svgPath: ImageConstant
-                                                .imgVectorGray6004x7),
-                                      ),
-                                      margin: EdgeInsets.only(left: 22.h),
-                                      hintText: "Select Partner",
-                                      items: requestServiceController
-                                          .partnerList.value,
-                                      whereUse: "partner",
-                                      borderDecoration:
-                                          DropDownStyleHelper.underLineBlack,
-                                      onChanged: (value) async {
+                                    () => SearchDropDownWidget(
+                                      fromWhere: "partner",
+                                      lableName: "Select Partner",
+                                      list:
+                                          requestServiceController.partnerList,
+                                      controller: connectionController
+                                          .searchPartnerController.value,
+                                      suggestionsCallback: (pattern) {
+                                        return requestServiceController
+                                            .partnerList
+                                            .where((item) => item.fullName!
+                                                .toLowerCase()
+                                                .contains(
+                                                    pattern.toLowerCase()))
+                                            .toList();
+                                      },
+                                      onSuggestionSelected: (suggestion) async {
                                         connectionController
-                                            .setPartnerId(value.id);
+                                                .searchPartnerController
+                                                .value
+                                                .text =
+                                            suggestion.fullName.toString();
+                                        connectionController
+                                            .setPartnerId(suggestion.id);
                                       },
                                     ),
                                   ),
@@ -257,7 +265,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: OutlineInputBorder(),
+                          borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
                             validationController.setEmailValidation(value);
@@ -282,7 +290,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
+                        borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
                         fillColor: theme.colorScheme.primary),
@@ -299,7 +307,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: OutlineInputBorder(),
+                          borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
                             validationController
@@ -316,6 +324,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           fillColor: theme.colorScheme.primary),
                     ),
                     CustomTextFormField(
+                        maxLength: 10,
                         controller: connectionController.aptController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
@@ -358,30 +367,34 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     SizedBox(
                       height: 20.adaptSize,
                     ),
-                    Obx(() => CustomElevatedButton(
-                          onTap:
-                              validationController.isButtonStateChange.value ==
-                                      false
-                                  ? null
-                                  : () {
-                                   connectionController.addConnection();
-                                    },
-                          text: "Create Connection",
-                          buttonStyle: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  validationController
-                                              .isButtonStateChange.value ==
-                                          false
-                                      ? Colors.grey
-                                      : AppColors.buttonColor)),
-                          margin: EdgeInsets.only(
-                              left: 24.h, right: 24.h, bottom: 22.v),
-                          rightIcon: Container(
-                            margin: EdgeInsets.only(left: 16.h),
-                            child: CustomImageView(
-                                svgPath: ImageConstant.imgArrowrightPrimary),
-                          ),
-                        )),
+                    Obx(() => connectionController.isConnectionLoading.value
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          )
+                        : CustomElevatedButton(
+                            onTap: validationController
+                                        .isButtonStateChange.value ==
+                                    false
+                                ? null
+                                : () {
+                                    connectionController.addConnection(context);
+                                  },
+                            text: "Create Connection",
+                            buttonStyle: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                    validationController
+                                                .isButtonStateChange.value ==
+                                            false
+                                        ? Colors.grey
+                                        : AppColors.buttonColor)),
+                            margin: EdgeInsets.only(
+                                left: 24.h, right: 24.h, bottom: 22.v),
+                            rightIcon: Container(
+                              margin: EdgeInsets.only(left: 16.h),
+                              child: CustomImageView(
+                                  svgPath: ImageConstant.imgArrowrightPrimary),
+                            ),
+                          )),
                   ]),
             ),
           ),

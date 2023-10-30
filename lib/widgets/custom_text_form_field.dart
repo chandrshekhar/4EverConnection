@@ -28,7 +28,7 @@ class CustomTextFormField extends StatelessWidget {
       this.validator,
       this.readOnly = false,
       this.onTap,
-      this.onChange})
+      this.onChange, this.maxLength})
       : super(
           key: key,
         );
@@ -80,6 +80,8 @@ class CustomTextFormField extends StatelessWidget {
   void Function()? onTap;
 
   final ValueChanged? onChange;
+  
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +92,7 @@ class CustomTextFormField extends StatelessWidget {
         width: width ?? double.maxFinite,
         margin: margin,
         child: TextFormField(
+          maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,
           style: textStyle ??
@@ -106,6 +109,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
       );
   InputDecoration get decoration => InputDecoration(
+    
         hintText: hintText ?? "",
         hintStyle: hintStyle ??
             const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),

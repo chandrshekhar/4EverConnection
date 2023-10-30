@@ -7,7 +7,6 @@ class ConnectionValidationController extends GetxController {
   RxBool isEmailValidate = false.obs;
   RxBool homeAddressValidate = false.obs;
   RxBool isZipValidate = false.obs;
-
   RxBool isButtonStateChange = false.obs;
 
   checkButtonValidation() {

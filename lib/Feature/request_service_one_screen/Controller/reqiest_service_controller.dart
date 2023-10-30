@@ -25,6 +25,8 @@ class RequestServiceController extends GetxController {
   RxList<int> listOfTimeSlot = <int>[].obs;
   RxInt serviceNeedId = (-1).obs;
   RxString selectSlot = "".obs;
+  var serviceSearchController = TextEditingController().obs;
+  var partnerSearchController = TextEditingController().obs;
 
   //Screen loader for service
   RxBool isAddServiceLoading = false.obs;
@@ -57,11 +59,11 @@ class RequestServiceController extends GetxController {
     selectedValue.value = value;
   }
 
-  getUsedSlotList(int partnerId) async {
+  getUsedSlotList() async {
     try {
       var res = await _serviceRepository.getUsedSlotList(
           date: selectDateController.value.text.toString(),
-          partnerId: partnerId);
+          partnerId: partnerId.value);
       if (res.isNotEmpty) {
         usedSlotList.value = res;
       } else {
@@ -108,12 +110,14 @@ class RequestServiceController extends GetxController {
     var pickedDate = await showDatePicker(
       context: context,
       initialDate: selectedDate.value,
-      firstDate: DateTime(1700),
+      firstDate:DateTime.now(),
       lastDate: DateTime(3000),
     );
     if (pickedDate != null && pickedDate != selectedDate) {
       selectedDate.value = pickedDate;
       selectDateController.value.text = convertAndFormatDate(pickedDate);
+      await getUsedSlotList();
+      setLocalListToEmpty();
     }
   }
 
