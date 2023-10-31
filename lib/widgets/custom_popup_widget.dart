@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:flutter_html/flutter_html.dart';
 
 class CustomPopupContent extends StatelessWidget {
-  const CustomPopupContent({super.key, required this.title});
+  const CustomPopupContent(
+      {super.key, required this.title, required this.content});
 
   final String title;
-
+  final String content;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,19 +52,16 @@ class CustomPopupContent extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-                margin: EdgeInsets.only(top: 10.h),
-                padding: EdgeInsets.all(15.sp),
-                color: AppColors.grayColor,
-                child: Html(
-                  data: """               
-                <h1>DO WELL BY DOING GOOD</h1>, 
-                and do not follow other guardians apart from Him. Little do 
-                <span class='h'>you remind yourselves</span><a class='f'><sup f=2437>1</sup></a></div>
-                """,
-                )),
-          )
+          Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16.r)),
+              margin: EdgeInsets.only(top: 10.h),
+              padding: EdgeInsets.all(15.sp),
+              child: Image.asset(
+                content,
+                fit: BoxFit.cover,
+              ))
         ],
       ),
     );

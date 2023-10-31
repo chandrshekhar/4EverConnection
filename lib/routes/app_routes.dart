@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/add_note_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_list.dart';
-import 'package:forever_connection/Feature/document_vault/document_vault.dart';
+import 'package:forever_connection/Feature/document_vault/Presentation/document_vault.dart';
 import 'package:forever_connection/Feature/splash_screen/splash_screen.dart';
 import 'package:forever_connection/Feature/login_screen/login_screen.dart';
 import 'package:forever_connection/Feature/sign_up_screen/sign_up_screen.dart';

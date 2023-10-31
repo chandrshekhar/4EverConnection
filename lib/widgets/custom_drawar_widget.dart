@@ -5,12 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
+import 'package:get/get.dart';
 import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   const CustomDrawerWidget({super.key, required this.myProfileController});
-
   final UserProfileController myProfileController;
 
   @override
@@ -24,260 +24,408 @@ class CustomDrawerWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                color: const Color(0xFF1D6F89),
+                color: const Color(0xFF1f718b),
                 padding: EdgeInsets.only(
-                    top: 25.h, left: 25.w, right: 20.w, bottom: 12),
+                    top: 20.h, left: 18.w, right: 18.w, bottom: 12.h),
                 // margin: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl: myProfileController
-                                .userProfileModel.value.personalData?.photo ??
-                            "", // Replace with the actual image URL
-                        imageBuilder: (context, imageProvider) => CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
-                          // Adjust the radius as needed
-                          backgroundImage: imageProvider,
-                        ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator.adaptive(
-                                backgroundColor: AppColors
-                                    .appBackgroundColor), // Placeholder widget
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 60,
-                        ), // Widget to display when an error occurs
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              LoginController().logOut(context);
-                            },
-                            child: const Icon(
-                              Icons.logout_sharp,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            userName,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            myProfileController
-                                .userProfileModel.value.personalData!.id
-                                .toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ]),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 20.w),
                 child: Column(
                   children: [
-                    Container(
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            color: AppColors.darkBlue,
-                            padding: EdgeInsets.all(5.sp),
-                            width: MediaQuery.sizeOf(context).width * 0.7.w,
-                            margin: EdgeInsets.only(top: 10.h),
-                            child: const Center(
-                              child: Text(
-                                "USER",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                ),
+                          CachedNetworkImage(
+                            imageUrl: myProfileController.userProfileModel.value
+                                    .personalData?.photo ??
+                                "", // Replace with the actual image URL
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              radius: 25.r,
+                              backgroundColor: Colors.white,
+                              // Adjust the radius as needed
+                              backgroundImage: imageProvider,
+                            ),
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator.adaptive(
+                                    backgroundColor: AppColors
+                                        .appBackgroundColor), // Placeholder widget
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 60,
+                            ), // Widget to display when an error occurs
+                          ),
+                          SizedBox(width: 18.w),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                userName,
+                                style: const TextStyle(color: Colors.white),
                               ),
-                            ),
+                              SizedBox(height: 2.h),
+                              Text(
+                                "ID No. ${myProfileController.userProfileModel.value.personalData!.id}",
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
                           ),
+                          const Spacer(),
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.requestServiceOneScreen);
+                              Navigator.pop(context);
                             },
-                            child: Items(
-                              icon: ImageConstant.newServiceIcon,
-                              itemText: "Request Service",
+                            child: const Icon(
+                              Icons.arrow_forward_outlined,
+                              color: Colors.white,
                             ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.myServicesScreen);
-                            },
-                            child: Items(
-                              icon: ImageConstant.myservice,
-                              itemText: "My Service",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.myProfileScreen);
-                            },
-                            child: Items(
-                              icon: ImageConstant.myprofile,
-                              itemText: "My Profile",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.myBusinessProfile,
-                              itemText: "My Business Profile",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.documentVaultScreen);
-                            },
-                            child: Items(
-                              icon: ImageConstant.myDocumntVaults,
-                              itemText: "My Document Vault",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                          )
+                        ]),
+                    InkWell(
+                      onTap: () {
+                        LoginController().logOut(context);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            color: AppColors.darkBlue,
-                            padding: EdgeInsets.all(5.sp),
-                            width: MediaQuery.sizeOf(context).width * 0.7.w,
-                            child: const Center(
-                              child: Text(
-                                "MARKETING PARTNER",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
+                          const Text(
+                            "Logout",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.connect,
-                              itemText: "Connect",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.myConnection,
-                              itemText: "My Connection",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.myWallet,
-                              itemText: "My Wallet",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.mycontact,
-                              itemText: "My Contacts",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.myNotes,
-                              itemText: "My Notes",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            color: AppColors.darkBlue,
-                            padding: EdgeInsets.all(5.sp),
-                            width: MediaQuery.sizeOf(context).width * 0.7.w,
-                            child: const Center(
-                              child: Text(
-                                "TOOLS & UTILITIES",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.passwordSecurityScreen);
-                            },
-                            child: Items(
-                              icon: ImageConstant.passwordandSecurity,
-                              itemText: "Password & security",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.support,
-                              itemText: "Support",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.donateConnection,
-                              itemText: "Donate connection",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Items(
-                              icon: ImageConstant.markaWish,
-                              itemText: "Make a wish",
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              LoginController().logOut(context);
-                            },
-                            child: Items(
-                              icon: ImageConstant.logout,
-                              itemText: "Logout",
-                            ),
-                          ),
+                          SizedBox(width: 10.w),
+                          SvgPicture.asset(
+                            ImageConstant.logout,
+                            color: Colors.white,
+                            height: 16.h,
+                            width: 16.h,
+                          )
                         ],
                       ),
                     ),
                   ],
                 ),
+              ),
+              Obx(
+                () => Container(
+                  padding: EdgeInsets.only(left: 20.w),
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              color: AppColors.darkBlue,
+                              padding: EdgeInsets.all(5.sp),
+                              width: MediaQuery.sizeOf(context).width * 0.7.w,
+                              margin: EdgeInsets.only(top: 10.h),
+                              child: const Center(
+                                child: Text(
+                                  "USER",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              color:
+                                  myProfileController.drawerDataList[0] == true
+                                      ? const Color(0xFFFF8927)
+                                      : Colors.white,
+                              child: InkWell(
+                                onTap: () {
+                                  myProfileController.updateSelectedField(0);
+                                  Navigator.pushNamed(context,
+                                      AppRoutes.requestServiceOneScreen);
+                                },
+                                child: Items(
+                                  icon: ImageConstant.newServiceIcon,
+                                  itemText: "Request Service",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(1);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.myServicesScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[1] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myservice,
+                                  itemText: "My Service",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(2);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.myProfileScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[2] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myprofile,
+                                  itemText: "My Profile",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(3);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[3] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myBusinessProfile,
+                                  itemText: "My Business Profile",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(4);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.documentVaultScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[4] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myDocumntVaults,
+                                  itemText: "My Document Vault",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(9);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[9] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myNotes,
+                                  itemText: "My Notes",
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              color: AppColors.darkBlue,
+                              padding: EdgeInsets.all(5.sp),
+                              width: MediaQuery.sizeOf(context).width * 0.7.w,
+                              child: const Center(
+                                child: Text(
+                                  "MARKETING PARTNER",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(5);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[5] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.connect,
+                                  itemText: "Connect",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(6);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[6] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myConnection,
+                                  itemText: "My Connection",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(7);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[7] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myWallet,
+                                  itemText: "My Wallet",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(8);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[8] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.mycontact,
+                                  itemText: "My Contacts",
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              color: AppColors.darkBlue,
+                              padding: EdgeInsets.all(5.sp),
+                              width: MediaQuery.sizeOf(context).width * 0.7.w,
+                              child: const Center(
+                                child: Text(
+                                  "TOOLS & UTILITIES",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(10);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.passwordSecurityScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[10] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.passwordandSecurity,
+                                  itemText: "Password & security",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(11);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[11] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.support,
+                                  itemText: "Support",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(12);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[12] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.donateConnection,
+                                  itemText: "Donate connection",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(13);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[13] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.markaWish,
+                                  itemText: "Make a wish",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(14);
+                                LoginController().logOut(context);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[14] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.logout,
+                                  itemText: "Logout",
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 30.h,
+                color: const Color(0xFF1f718b),
               )
             ],
           ),

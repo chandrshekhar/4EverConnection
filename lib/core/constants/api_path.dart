@@ -8,6 +8,9 @@ class ApiPath {
   static const getUserService = "$baseUrl/api/user-services/";
   static const getUserProfile = "$baseUrl/api/user/profile";
 
+  // get tooltips
+  static const getTooltips = "$baseUrl/api/tooltips/";
+
   //request service one
   static const professionalServiceList = "$baseUrl/api/services/";
   //reques partner name with service id
@@ -21,12 +24,12 @@ class ApiPath {
   static const editNotes = "$baseUrl/api/notes";
   static const deleteNotes = "$baseUrl/api/notes";
 
-
   //connection
   static const addConnection = "$baseUrl/api/connections/";
   static const listConnection = "$baseUrl/api/connections/";
   static const documentTypeApi = "$baseUrl/api/vault-document-types/";
-
   static const resendRequest = "$baseUrl/api/connections/resend";
 
+  //vault
+  static const addDocumentUrl = "$baseUrl/api/vault-document/";
 }

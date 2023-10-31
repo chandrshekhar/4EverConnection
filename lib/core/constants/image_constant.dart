@@ -131,11 +131,11 @@ class ImageConstant {
 
   static String connectIcon = "assets/images/connection_icon.svg";
 
-  static String infoIcon="assets/images/info_icon.svg";
+  static String infoIcon = "assets/images/info_icon.svg";
 
-  static String newServiceIcon="assets/images/new_service_request.svg";
+  static String newServiceIcon = "assets/images/new_service_request.svg";
 
-  static String viewMyServiceIcon="assets/images/view_my_service.svg";
+  static String viewMyServiceIcon = "assets/images/view_my_service.svg";
 
   static String viewUploadDocument = "assets/images/view_upload_document.svg";
 
@@ -152,10 +152,9 @@ class ImageConstant {
   static String passwordandSecurity = "assets/images/password&security.svg";
   static String support = "assets/images/support.svg";
   static String donateConnection = "assets/images/donateconnection.svg";
-  static String markaWish = "assets/images/myservice.svg";
+  static String markaWish = "assets/images/star-shooting-thin.svg";
   static String myservice = "assets/images/myservice.svg";
   static String mycontact = "assets/images/mycontact.svg";
   static String logout = "assets/images/logout.svg";
   static String myprofile = "assets/images/myprofile.svg";
-
 }

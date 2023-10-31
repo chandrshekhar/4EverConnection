@@ -59,7 +59,7 @@ class DashboardScreen extends StatelessWidget {
                             Image.asset(
                               ImageConstant.appLogo,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             CustomImageView(
                               svgPath: ImageConstant.notificationIcon,
                               width: 25.adaptSize,
@@ -181,7 +181,10 @@ class DashboardScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(
                                             16), // Set the border radius for the dialog
                                       ),
-                                      child: const CustomPopupContent(title: 'Connect',),
+                                      child: const CustomPopupContent(
+                                          title: "Connect",
+                                          content:
+                                              "assets/images/connect-tooltips.png"),
                                     );
                                   },
                                 );
@@ -194,7 +197,11 @@ class DashboardScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(
                                             16), // Set the border radius for the dialog
                                       ),
-                                      child: const CustomPopupContent(title: 'Request Service',),
+                                      child: const CustomPopupContent(
+                                        title: "Request Service",
+                                        content:
+                                            "assets/images/request-tooltips.png",
+                                      ),
                                     );
                                   },
                                 );
@@ -207,7 +214,10 @@ class DashboardScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(
                                             16), // Set the border radius for the dialog
                                       ),
-                                      child: const CustomPopupContent(title: 'View & Collaborate',),
+                                      child: const CustomPopupContent(
+                                          title: "View & Collaborate",
+                                          content:
+                                              "assets/images/collaborate-tooltips.png"),
                                     );
                                   },
                                 );
@@ -220,7 +230,10 @@ class DashboardScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(
                                             16), // Set the border radius for the dialog
                                       ),
-                                      child: const CustomPopupContent(title: 'Access My Vault',),
+                                      child: const CustomPopupContent(
+                                          title: "Access My Vault",
+                                          content:
+                                              "assets/images/access-my-vault.png"),
                                     );
                                   },
                                 );

@@ -20,6 +20,33 @@ class UserProfileController extends GetxController {
     }
   }
 
+  void updateSelectedField(int selectedIndex) {
+    for (int i = 0; i < drawerDataList.length; i++) {
+      if (i == selectedIndex) {
+        drawerDataList[i] = true;
+      } else {
+        drawerDataList[i] = false;
+      }
+    }
+  }
+
+  RxList<bool> drawerDataList = <bool>[
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ].obs;
   @override
   void onReady() {
     getUserProfileData();
