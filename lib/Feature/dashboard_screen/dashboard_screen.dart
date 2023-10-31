@@ -59,7 +59,7 @@ class DashboardScreen extends StatelessWidget {
                             Image.asset(
                               ImageConstant.appLogo,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             CustomImageView(
                               svgPath: ImageConstant.notificationIcon,
                               width: 25.adaptSize,

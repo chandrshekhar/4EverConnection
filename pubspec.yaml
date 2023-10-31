@@ -49,6 +49,7 @@ dependencies:
   url_launcher:
   flutter_html:
   flutter_typeahead: ^4.8.0
+  country_code_picker: ^3.0.0
 
 
 dev_dependencies:

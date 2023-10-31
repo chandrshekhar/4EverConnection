@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/partner_model_list.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/request_service_model.dart';
@@ -109,9 +110,11 @@ class RequestServiceController extends GetxController {
   Future<void> selectDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
       context: context,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       initialDate: selectedDate.value,
-      firstDate:DateTime.now(),
+      firstDate: DateTime.now(),
       lastDate: DateTime(3000),
+      fieldHintText: '',
     );
     if (pickedDate != null && pickedDate != selectedDate) {
       selectedDate.value = pickedDate;
