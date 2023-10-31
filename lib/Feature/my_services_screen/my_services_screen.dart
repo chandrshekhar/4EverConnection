@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Services/user_service_controller.dart';
+import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Models/user_services_model.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -37,6 +38,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
   int tapIndex = 0;
 
   final userServiceController = Get.put(UserServicesController());
+  final connectionController = Get.put(ConnectionController());
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +127,15 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                                 itemCount: userServiceController
                                     .userServicesList.length,
                                 itemBuilder: (context, index) {
-                                  return serviceCard(userServiceController
-                                      .userServicesList[index]);
+                                  return serviceCard(
+                                      userServiceController
+                                          .userServicesList[index], (value) {
+                                    switch (value) {
+                                      case "Call us":
+                                        break;
+                                      default:
+                                    }
+                                  });
                                 },
                               ),
                             ),
@@ -135,7 +144,8 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
         ]));
   }
 
-  Widget serviceCard(UserServicesModel userServicesModel) {
+  Widget serviceCard(
+      UserServicesModel userServicesModel, Function(String)? onSelected) {
     return Container(
       margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 6.v),
       padding: EdgeInsets.all(12.v),
@@ -158,8 +168,8 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               Expanded(
                   flex: 2,
                   child: Text(userServicesModel.identifier.toString(),
-                      style:
-                          TextStyle(color: Color(0xFF6B6B6B), fontSize: 15))),
+                      style: const TextStyle(
+                          color: Color(0xFF6B6B6B), fontSize: 15))),
               const Spacer(),
               Container(
                 height: 15.v,
@@ -172,7 +182,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                     size: 18,
                   ),
                   padding: EdgeInsets.zero,
-                  onSelected: (value) {},
+                  onSelected: onSelected,
                   itemBuilder: (BuildContext context) {
                     return <PopupMenuEntry<String>>[
                       const PopupMenuItem<String>(
@@ -182,10 +192,6 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       const PopupMenuItem<String>(
                         value: 'Email us',
                         child: Text('Email us'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Text us',
-                        child: Text('Text us'),
                       ),
                     ];
                   },
@@ -227,9 +233,9 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               ),
               Expanded(
                   flex: 2,
-                  child: Text(userServicesModel.service.toString(),
-                      style:
-                          TextStyle(color: Color(0xFF6B6B6B), fontSize: 15))),
+                  child: Text(userServicesModel.serviceName ?? "",
+                      style: const TextStyle(
+                          color: Color(0xFF6B6B6B), fontSize: 15))),
               const Spacer()
             ],
           ),

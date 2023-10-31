@@ -47,6 +47,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
         backgroundColor: appTheme.lightBlue50,
         appBar: CustomAppBar(
             leadingWidth: 44.h,
@@ -64,10 +65,13 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                   margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
             ],
             styleType: Style.bgShadow),
-        body: Column(children: [
+        body: Column(
+          
+          children: [
           SizedBox(height: 12.v),
           Expanded(
               child: SingleChildScrollView(
+              
                   child: Padding(
                       padding:
                           EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
@@ -99,7 +103,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                           child: Obx(
                                             () => SearchDropDownWidget(
                                               fromWhere: "service",
-                                              lableName: "Service need",
+                                              lableName:
+                                                  "Select Service Needed",
                                               list: requestServiceController
                                                   .listOfServices,
                                               controller:
@@ -158,7 +163,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                                 child: Obx(
                                                   () => SearchDropDownWidget(
                                                     fromWhere: "partner",
-                                                    lableName: "Select Partner",
+                                                    lableName:
+                                                        "Select Professional (Optional)",
                                                     list:
                                                         requestServiceController
                                                             .partnerList,
@@ -267,7 +273,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                         ))
                                       ]),
                                   SizedBox(height: 29.v),
-                                  Text("Service Method",
+                                  Text("Select Service Method",
                                       style: theme.textTheme.bodyLarge),
                                   SizedBox(height: 8.v),
                                   Obx(() => Row(

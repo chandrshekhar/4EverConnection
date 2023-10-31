@@ -30,6 +30,7 @@ class ConnectionMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    connectionCotroller.getConnection();
     serviceController.getServiceProfssional();
     return Scaffold(
       appBar: CustomAppBar(
@@ -114,7 +115,8 @@ class ConnectionMainScreen extends StatelessWidget {
                                         },
                                         buttonName: "My Connections",
                                         title: "Manage",
-                                        available: "Pending: ${connectionCotroller.connectionList.length}",
+                                        available:
+                                            "Pending: ${connectionCotroller.connectionList.length}",
                                         des: "Manage Connections",
                                       )),
                                   SizedBox(

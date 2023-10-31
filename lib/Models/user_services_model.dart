@@ -21,6 +21,9 @@ class UserServicesModel {
   dynamic extraInfo;
   String? statusDescription;
   String? error;
+  String? serviceName;
+  String? preferredPartnerName;
+  String? preferredAssignedName;
 
   UserServicesModel(
       {this.identifier,
@@ -43,7 +46,7 @@ class UserServicesModel {
       this.smsNotificationSend,
       this.balance,
       this.extraInfo,
-      this.statusDescription, this.error});
+      this.statusDescription, this.error, this.serviceName, this.preferredAssignedName, this.preferredPartnerName});
 
       UserServicesModel.withError(String errorMsg){
         error = errorMsg;
@@ -72,5 +75,8 @@ class UserServicesModel {
     balance = json['balance'];
     extraInfo = json['extra_info'];
     statusDescription = json['status_description'];
+    serviceName=json['service_name'];
+    preferredAssignedName= json['partner_assigned_name'];
+    preferredPartnerName = json['preferred_partner_name'];
   }
 }
