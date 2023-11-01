@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Relationship%20Controller/relationship_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -65,7 +66,7 @@ class RelationshipsScreen extends StatelessWidget {
                                         .relationshipsvaController.value,
                                     margin:
                                         EdgeInsets.only(left: 22.h, top: 4.v),
-                                    hintText: "Choose Relationship",
+                                    labelText: "Choose Relationship",
                                     suffix: Container(
                                         margin: EdgeInsets.fromLTRB(
                                             30.h, 10.v, 15.h, 10.v),
@@ -104,7 +105,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .firstNameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "First Name"))
+                                          labelText: "First Name"))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
@@ -121,7 +122,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .middlenameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Middle Name"))
+                                          labelText: "Middle Name"))
                                 ]),
                             SizedBox(height: 39.v),
                             Row(
@@ -138,7 +139,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .lastNameController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Last Name"))
+                                          labelText: "Last Name"))
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
@@ -155,7 +156,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .phoneController.value,
                                           margin: EdgeInsets.only(left: 24.h),
-                                          hintText: "Mobile Phone",
+                                          labelText: "Mobile Phone",
                                           textInputType: TextInputType.phone))
                                 ]),
                             SizedBox(height: 38.v),
@@ -173,7 +174,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .homephoneController.value,
                                           margin: EdgeInsets.only(left: 24.h),
-                                          hintText: "Home Phone",
+                                          labelText: "Home Phone",
                                           textInputType: TextInputType.phone))
                                 ]),
                             SizedBox(height: 38.v),
@@ -191,7 +192,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .emailController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Personal Email",
+                                          labelText: "Personal Email",
                                           textInputType:
                                               TextInputType.emailAddress))
                                 ]),
@@ -207,10 +208,23 @@ class RelationshipsScreen extends StatelessWidget {
                                           top: 4.v, bottom: 12.v)),
                                   Expanded(
                                       child: CustomTextFormField(
+                                          onTap: () async {
+                                            var address = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddressAutoCompleteWidget(),
+                                              ),
+                                            );
+                                            relationshipController
+                                                .homeaddressController
+                                                .value
+                                                .text = address;
+                                          },
                                           controller: relationshipController
                                               .homeaddressController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Home Address"))
+                                          labelText: "Home Address"))
                                 ]),
                             SizedBox(height: 39.v),
                             Row(
@@ -228,7 +242,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           .aptsteContoller.value,
                                       margin:
                                           EdgeInsets.only(left: 22.h, top: 2.v),
-                                      hintText: "Apt, Ste"),
+                                      labelText: "Apt, Ste"),
                                   CustomImageView(
                                       svgPath: ImageConstant.imgLocation,
                                       height: 20.v,
@@ -240,7 +254,7 @@ class RelationshipsScreen extends StatelessWidget {
                                       controller: relationshipController
                                           .zipController.value,
                                       margin: EdgeInsets.only(left: 22.h),
-                                      hintText: "ZIP")
+                                      labelText: "ZIP")
                                 ]),
                             SizedBox(height: 38.v),
                             Row(
@@ -257,7 +271,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .dateOfBirthController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Date of Birth"))
+                                          labelText: "Date of Birth"))
                                 ]),
                             SizedBox(height: 27.v),
                             Row(children: [
@@ -328,7 +342,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .socielsecurityNumber.value,
                                           margin: EdgeInsets.only(left: 24.h),
-                                          hintText: "Social Security Number",
+                                          labelText: "Social Security Number",
                                           textInputType: TextInputType.number))
                                 ]),
                             SizedBox(height: 40.v),
@@ -346,7 +360,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .birthcountryController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Country of Birth",
+                                          labelText: "Country of Birth",
                                           suffix: Container(
                                               margin: EdgeInsets.fromLTRB(
                                                   30.h, 10.v, 15.h, 10.v),
@@ -372,7 +386,7 @@ class RelationshipsScreen extends StatelessWidget {
                                               .birthcitizencountryController
                                               .value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "Country of Citizenship",
+                                          labelText: "Country of Citizenship",
                                           suffix: Container(
                                               margin: EdgeInsets.fromLTRB(
                                                   30.h, 10.v, 15.h, 10.v),
@@ -418,7 +432,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .businessnameController.value,
                                               margin:
                                                   EdgeInsets.only(left: 23.h),
-                                              hintText: "Business Name"))
+                                              labelText: "Business Name"))
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h, top: 39.v),
@@ -439,7 +453,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .value,
                                               margin:
                                                   EdgeInsets.only(left: 24.h),
-                                              hintText: "Business Phone",
+                                              labelText: "Business Phone",
                                               textInputType:
                                                   TextInputType.phone))
                                     ])),
@@ -461,7 +475,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .businessfaxController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "Business Fax"))
+                                              labelText: "Business Fax"))
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h, top: 39.v),
@@ -482,7 +496,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "Business Email",
+                                              labelText: "Business Email",
                                               textInputType:
                                                   TextInputType.emailAddress))
                                     ])),
@@ -505,7 +519,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .value,
                                               margin:
                                                   EdgeInsets.only(left: 20.h),
-                                              hintText: "Business Website"))
+                                              labelText: "Business Website"))
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h, top: 39.v),
@@ -526,7 +540,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "Position",
+                                              labelText: "Position",
                                               suffix: Container(
                                                   margin: EdgeInsets.fromLTRB(
                                                       30.h, 12.v, 15.h, 12.v),
@@ -554,7 +568,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .myidealController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "My Ideal Occupation"))
+                                              labelText: "My Ideal Occupation"))
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h, top: 39.v),
@@ -576,7 +590,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .value,
                                               margin:
                                                   EdgeInsets.only(left: 17.h),
-                                              hintText: "Education Level",
+                                              labelText: "Education Level",
                                               suffix: Container(
                                                   margin: EdgeInsets.fromLTRB(
                                                       30.h, 12.v, 15.h, 12.v),
@@ -605,7 +619,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .degreeController.value,
                                               margin:
                                                   EdgeInsets.only(left: 17.h),
-                                              hintText: "Degree"))
+                                              labelText: "Degree"))
                                     ])),
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h, top: 39.v),
@@ -625,7 +639,7 @@ class RelationshipsScreen extends StatelessWidget {
                                                   .affiliationsController.value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "Affiliations",
+                                              labelText: "Affiliations",
                                               suffix: Container(
                                                   margin: EdgeInsets.fromLTRB(
                                                       30.h, 12.v, 15.h, 12.v),
@@ -649,12 +663,26 @@ class RelationshipsScreen extends StatelessWidget {
                                               top: 4.v, bottom: 12.v)),
                                       Expanded(
                                           child: CustomTextFormField(
+                                              onTap: () async {
+                                                var address =
+                                                    await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AddressAutoCompleteWidget(),
+                                                  ),
+                                                );
+                                                relationshipController
+                                                    .businessAddressaddressController
+                                                    .value
+                                                    .text = address;
+                                              },
                                               controller: relationshipController
                                                   .businessAddressaddressController
                                                   .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "Business Address",
+                                              labelText: "Business Address",
                                               suffix: Container(
                                                   margin: EdgeInsets.fromLTRB(
                                                       30.h, 12.v, 15.h, 12.v),
@@ -684,7 +712,7 @@ class RelationshipsScreen extends StatelessWidget {
                                               .value,
                                           margin: EdgeInsets.only(
                                               left: 22.h, top: 2.v),
-                                          hintText: "Apt, Ste"),
+                                          labelText: "Apt, Ste"),
                                       CustomImageView(
                                           svgPath: ImageConstant.imgLocation,
                                           height: 20.v,
@@ -698,7 +726,7 @@ class RelationshipsScreen extends StatelessWidget {
                                           controller: relationshipController
                                               .businessziponeController.value,
                                           margin: EdgeInsets.only(left: 22.h),
-                                          hintText: "ZIP",
+                                          labelText: "ZIP",
                                           textInputAction: TextInputAction.done)
                                     ]))
                           ])),

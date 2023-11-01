@@ -110,7 +110,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       heightftoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 24.h),
-                                                  hintText: "Height (FT)"))
+                                                  labelText: "Height (FT)"))
                                         ]),
                                     SizedBox(height: 40.v),
                                     Row(
@@ -131,7 +131,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       heightinchsoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 27.h),
-                                                  hintText: "Height (Inchs)"))
+                                                  labelText: "Height (Inchs)"))
                                         ]),
                                     SizedBox(height: 40.v),
                                     Row(
@@ -152,7 +152,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       weightlbsoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 23.h),
-                                                  hintText: "Weight (LBS)"))
+                                                  labelText: "Weight (LBS)"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -174,7 +174,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       smokervalueoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 16.h),
-                                                  hintText: "Smoker",
+                                                  labelText: "Smoker",
                                                   suffix: Container(
                                                       margin:
                                                           EdgeInsets.fromLTRB(
@@ -207,7 +207,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                   controller: nameController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Doctor Name"))
+                                                  labelText: "Doctor Name"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -227,7 +227,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                   controller: phoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 24.h),
-                                                  hintText: "Doctor Phone",
+                                                  labelText: "Doctor Phone",
                                                   textInputType:
                                                       TextInputType.phone))
                                         ]),
@@ -250,7 +250,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                   controller: dateController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText:
+                                                  labelText:
                                                       "Date of Last Visit"))
                                         ]),
                                     SizedBox(height: 40.v),
@@ -273,7 +273,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       doctorstreetController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Doctor Street"))
+                                                  labelText: "Doctor Street"))
                                         ]),
                                     SizedBox(height: 42.v),
                                     Row(
@@ -295,7 +295,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       degreevalueoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 17.h),
-                                                  hintText: "Degree"))
+                                                  labelText: "Degree"))
                                         ]),
                                     SizedBox(height: 40.v),
                                     Row(
@@ -316,7 +316,7 @@ class HealthProfileScreen extends StatelessWidget {
                                               controller: aptsteController,
                                               margin: EdgeInsets.only(
                                                   left: 22.h, top: 2.v),
-                                              hintText: "Apt, Ste"),
+                                              labelText: "Apt, Ste"),
                                           CustomImageView(
                                               svgPath:
                                                   ImageConstant.imgLocation,
@@ -331,7 +331,7 @@ class HealthProfileScreen extends StatelessWidget {
                                               controller: zipvalueoneController,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "ZIP")
+                                              labelText: "ZIP")
                                         ]),
                                     SizedBox(height: 19.v)
                                   ])),
@@ -390,7 +390,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       fatherageoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Father Age"))
+                                                  labelText: "Father Age"))
                                         ]),
                                     SizedBox(
                                       height: 40.v,
@@ -417,7 +417,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                       fatheragethreeController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Mother Age"))
+                                                  labelText: "Mother Age"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     custominputFieldWithContainer(

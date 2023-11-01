@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -81,7 +82,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 23.h),
-                                                  hintText: "Business Name"))
+                                                  labelText: "Business Name"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -104,7 +105,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 24.h),
-                                                  hintText: "Business Phone",
+                                                  labelText: "Business Phone",
                                                   textInputType:
                                                       TextInputType.phone))
                                         ]),
@@ -130,7 +131,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Business Fax"))
+                                                  labelText: "Business Fax"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -153,7 +154,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Business Email",
+                                                  labelText: "Business Email",
                                                   textInputType: TextInputType
                                                       .emailAddress))
                                         ]),
@@ -178,7 +179,8 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 20.h),
-                                                  hintText: "Business Website"))
+                                                  labelText:
+                                                      "Business Website"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -201,7 +203,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Position",
+                                                  labelText: "Position",
                                                   suffix: Container(
                                                       margin:
                                                           EdgeInsets.fromLTRB(
@@ -238,7 +240,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText:
+                                                  labelText:
                                                       "My Ideal Occupation"))
                                         ]),
                                     SizedBox(height: 39.v),
@@ -263,7 +265,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 19.h),
-                                                  hintText: "Education Level",
+                                                  labelText: "Education Level",
                                                   suffix: Container(
                                                       margin:
                                                           EdgeInsets.fromLTRB(
@@ -300,7 +302,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 17.h),
-                                                  hintText: "Degree"))
+                                                  labelText: "Degree"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -323,7 +325,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Affiliations"))
+                                                  labelText: "Affiliations"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -341,13 +343,28 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   top: 4.v, bottom: 12.v)),
                                           Expanded(
                                               child: CustomTextFormField(
+                                                  onTap: () async {
+                                                    var address =
+                                                        await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            AddressAutoCompleteWidget(),
+                                                      ),
+                                                    );
+                                                    professionalProfileController
+                                                        .addressController
+                                                        .value
+                                                        .text = address;
+                                                  },
                                                   controller:
                                                       professionalProfileController
                                                           .addressController
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Business Address"))
+                                                  labelText:
+                                                      "Business Address"))
                                         ]),
                                     SizedBox(height: 40.v),
                                     Row(
@@ -370,7 +387,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                       .aptsteController.value,
                                               margin: EdgeInsets.only(
                                                   left: 22.h, top: 2.v),
-                                              hintText: "Apt, Ste"),
+                                              labelText: "Apt, Ste"),
                                           CustomImageView(
                                               svgPath:
                                                   ImageConstant.imgLocation,
@@ -388,7 +405,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                       .value,
                                               margin:
                                                   EdgeInsets.only(left: 22.h),
-                                              hintText: "ZIP",
+                                              labelText: "ZIP",
                                               textInputAction:
                                                   TextInputAction.done)
                                         ]),

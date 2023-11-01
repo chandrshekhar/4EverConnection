@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
       this.textInputType = TextInputType.text,
       this.maxLines,
       this.hintText,
+      this.labelText,
       this.hintStyle,
       this.prefix,
       this.prefixConstraints,
@@ -55,7 +56,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final int? maxLines;
 
-  final String? hintText;
+  final String? hintText, labelText;
 
   final TextStyle? hintStyle;
 
@@ -91,10 +92,13 @@ class CustomTextFormField extends StatelessWidget {
   Widget get textFormFieldWidget => Container(
         width: width ?? double.maxFinite,
         margin: margin,
+        
         child: TextFormField(
+          textCapitalization: TextCapitalization.sentences,
           maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,
+          
           style: textStyle ??
               TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           obscureText: obscureText!,
@@ -111,8 +115,11 @@ class CustomTextFormField extends StatelessWidget {
   InputDecoration get decoration => InputDecoration(
     
         hintText: hintText ?? "",
+        labelText: labelText ?? "",
+        
         hintStyle: hintStyle ??
             const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+            labelStyle: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIconConstraints: suffixConstraints,

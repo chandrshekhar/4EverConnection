@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -52,8 +53,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 12.h, right: 12.h, bottom: 5.v),
-                        child: Obx(()=>
-                          Column(children: [
+                        child: Obx(
+                          () => Column(children: [
                             Container(
                                 padding: EdgeInsets.all(11.h),
                                 decoration: AppDecoration.outlineBlack.copyWith(
@@ -61,7 +62,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                         BorderRadiusStyle.roundedBorder16),
                                 child: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                           padding: EdgeInsets.only(left: 1.h),
@@ -75,7 +77,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     height: 19.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
-                                                        top: 4.v, bottom: 13.v)),
+                                                        top: 4.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -84,7 +87,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 22.h),
-                                                        hintText: "First Name"))
+                                                        labelText:
+                                                            "First Name"))
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -99,7 +103,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     height: 19.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
-                                                        top: 4.v, bottom: 13.v)),
+                                                        top: 4.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -108,7 +113,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 22.h),
-                                                        hintText: "Middle Name"))
+                                                        labelText:
+                                                            "Middle Name"))
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -123,7 +129,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     height: 19.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
-                                                        top: 3.v, bottom: 13.v)),
+                                                        top: 3.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -132,7 +139,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 22.h),
-                                                        hintText: "Last Name"))
+                                                        labelText: "Last Name"))
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -147,7 +154,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     height: 15.adaptSize,
                                                     width: 15.adaptSize,
                                                     margin: EdgeInsets.only(
-                                                        top: 8.v, bottom: 13.v)),
+                                                        top: 8.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -156,9 +164,11 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 24.h),
-                                                        hintText: "Mobile Phone",
+                                                        labelText:
+                                                            "Mobile Phone",
                                                         textInputType:
-                                                            TextInputType.phone))
+                                                            TextInputType
+                                                                .phone))
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -173,7 +183,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     height: 15.adaptSize,
                                                     width: 15.adaptSize,
                                                     margin: EdgeInsets.only(
-                                                        top: 8.v, bottom: 13.v)),
+                                                        top: 8.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -182,9 +193,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 24.h),
-                                                        hintText: "Home Phone",
+                                                        labelText: "Home Phone",
                                                         textInputType:
-                                                            TextInputType.phone))
+                                                            TextInputType
+                                                                .phone))
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -199,7 +211,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     height: 17.adaptSize,
                                                     width: 17.adaptSize,
                                                     margin: EdgeInsets.only(
-                                                        top: 6.v, bottom: 13.v)),
+                                                        top: 6.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -208,7 +221,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 22.h),
-                                                        hintText:
+                                                        labelText:
                                                             "Personal Email",
                                                         textInputType:
                                                             TextInputType
@@ -222,21 +235,29 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgLocation,
+                                                    svgPath: ImageConstant
+                                                        .imgLocation,
                                                     height: 20.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
-                                                        top: 4.v, bottom: 12.v)),
+                                                        top: 4.v,
+                                                        bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        onTap: () async{
+                                                         var address = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddressAutoCompleteWidget(),),);
+                                                         personalDetailsController
+                                                                .homeAddressController
+                                                                .value.text = address;
+                                                        },
                                                         controller:
                                                             personalDetailsController
                                                                 .homeAddressController
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 22.h),
-                                                        hintText: "Home Address"))
+                                                        labelText:
+                                                            "Home Address"))
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -246,12 +267,13 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgLocation,
+                                                    svgPath: ImageConstant
+                                                        .imgLocation,
                                                     height: 20.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
-                                                        top: 3.v, bottom: 12.v)),
+                                                        top: 3.v,
+                                                        bottom: 12.v)),
                                                 CustomTextFormField(
                                                     width: 113.h,
                                                     controller:
@@ -260,10 +282,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             .value,
                                                     margin: EdgeInsets.only(
                                                         left: 22.h, top: 2.v),
-                                                    hintText: "Apt, Ste"),
+                                                    labelText: "Apt, Ste"),
                                                 CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgLocation,
+                                                    svgPath: ImageConstant
+                                                        .imgLocation,
                                                     height: 20.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
@@ -274,10 +296,11 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     width: 109.h,
                                                     controller:
                                                         personalDetailsController
-                                                            .zipController.value,
+                                                            .zipController
+                                                            .value,
                                                     margin: EdgeInsets.only(
                                                         left: 22.h),
-                                                    hintText: "ZIP")
+                                                    labelText: "ZIP")
                                               ])),
                                       Padding(
                                           padding: EdgeInsets.only(
@@ -287,12 +310,13 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgCalendar,
+                                                    svgPath: ImageConstant
+                                                        .imgCalendar,
                                                     height: 19.v,
                                                     width: 17.h,
                                                     margin: EdgeInsets.only(
-                                                        top: 4.v, bottom: 13.v)),
+                                                        top: 4.v,
+                                                        bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         controller:
@@ -301,7 +325,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                                 .value,
                                                         margin: EdgeInsets.only(
                                                             left: 22.h),
-                                                        hintText:
+                                                        labelText:
                                                             "Date of Birth"))
                                               ])),
                                       Padding(
@@ -342,8 +366,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   groupValue:
                                                       personalDetailsController
                                                           .radioGroup.value,
-                                                  margin:
-                                                      EdgeInsets.only(left: 12.h),
+                                                  margin: EdgeInsets.only(
+                                                      left: 12.h),
                                                   onChange: (value) {
                                                     personalDetailsController
                                                         .selectGender(value);
@@ -354,8 +378,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   groupValue:
                                                       personalDetailsController
                                                           .radioGroup.value,
-                                                  margin:
-                                                      EdgeInsets.only(left: 22.h),
+                                                  margin: EdgeInsets.only(
+                                                      left: 22.h),
                                                   onChange: (value) {
                                                     personalDetailsController
                                                         .selectGender(value);
@@ -373,7 +397,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                         BorderRadiusStyle.roundedBorder16),
                                 child: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Row(
@@ -394,7 +419,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             .value,
                                                     margin: EdgeInsets.only(
                                                         left: 24.h),
-                                                    hintText:
+                                                    labelText:
                                                         "Social Security Number",
                                                     textInputType:
                                                         TextInputType.number))
@@ -419,7 +444,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             .value,
                                                     margin: EdgeInsets.only(
                                                         left: 22.h),
-                                                    hintText: "Country of Birth",
+                                                    labelText:
+                                                        "Country of Birth",
                                                     suffix: Container(
                                                         margin:
                                                             EdgeInsets.fromLTRB(
@@ -448,13 +474,14 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     top: 2.v, bottom: 12.v)),
                                             Expanded(
                                                 child: CustomTextFormField(
+                                                   
                                                     controller:
                                                         personalDetailsController
                                                             .countryOfCitizenshipControlle
                                                             .value,
                                                     margin: EdgeInsets.only(
                                                         left: 22.h),
-                                                    hintText:
+                                                    labelText:
                                                         "Country of Citizenship",
                                                     textInputAction:
                                                         TextInputAction.done,
@@ -469,7 +496,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             svgPath: ImageConstant
                                                                 .imgVectorGray6004x7)),
                                                     suffixConstraints:
-                                                        BoxConstraints(maxHeight: 34.v)))
+                                                        BoxConstraints(
+                                                            maxHeight: 34.v)))
                                           ]),
                                       SizedBox(height: 30.v),
                                       Row(children: [
@@ -481,13 +509,17 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                             margin: EdgeInsets.only(
                                                 top: 5.v, bottom: 6.v)),
                                         Padding(
-                                            padding: EdgeInsets.only(left: 22.h),
+                                            padding:
+                                                EdgeInsets.only(left: 22.h),
                                             child: Text("Language Preferences",
-                                                style: theme.textTheme.bodyLarge))
+                                                style:
+                                                    theme.textTheme.bodyLarge))
                                       ]),
                                       Padding(
                                           padding: EdgeInsets.only(
-                                              left: 37.h, top: 9.v, bottom: 4.v),
+                                              left: 37.h,
+                                              top: 9.v,
+                                              bottom: 4.v),
                                           child: Obx(
                                             () => Row(children: [
                                               CustomRadioButton(
@@ -515,7 +547,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                             ]),
                                           ))
                                     ])),
-                        
+
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.v),
                               child: Row(
@@ -547,7 +579,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                 ],
                               ),
                             ),
-                        
+
                             // Text("Cancel", style: theme.textTheme.titleMedium)
                           ]),
                         ))))));
