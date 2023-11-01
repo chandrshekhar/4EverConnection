@@ -94,7 +94,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath: ImageConstant.imgSettings,
+                                            svgPath: ImageConstant.myservice,
                                             height: 18.adaptSize,
                                             width: 18.adaptSize,
                                             margin: EdgeInsets.only(
@@ -257,7 +257,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                               .selectDateController.value,
                                           margin: EdgeInsets.only(left: 21.h),
                                           readOnly: true,
-                                          hintText: "Select Date",
+                                          labelText: "Select Date",
                                           contentPadding: EdgeInsets.zero,
                                           suffix: Padding(
                                             padding: const EdgeInsets.only(
@@ -408,10 +408,11 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             controller: requestServiceController
                                 .commentController.value,
                             margin: EdgeInsets.only(
-                                left: 12.h, top: 34.v, right: 12.h),
-                            hintText: "Write your comments (optional)",
+                                left: 12.h, top: 34.v, right: 12.h, bottom: 12.v),
+                            labelText: "Write your comments (optional)",
+                            
                             textInputAction: TextInputAction.newline,
-                            maxLines: 6,
+                            maxLines: 2,
                             textInputType: TextInputType.multiline,
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 11.h, vertical: 17.v),

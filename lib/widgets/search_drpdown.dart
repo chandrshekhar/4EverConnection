@@ -31,10 +31,11 @@ class SearchDropDownWidget extends StatelessWidget {
       ),
       suggestionsCallback: suggestionsCallback,
       itemBuilder: (context, suggestion) {
-        return ListTile(
-          title: Text(fromWhere.toString() == "service"
-              ? suggestion.name ?? ""
-              : suggestion.fullName ?? ""),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(fromWhere.toString() == "service"
+                ? suggestion.name ?? ""
+                : suggestion.fullName ?? ""),
         );
       },
       onSuggestionSelected: onSuggestionSelected ?? (selection) {},

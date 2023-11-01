@@ -109,13 +109,26 @@ class RequestServiceController extends GetxController {
   //pic date and time
   Future<void> selectDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
-      context: context,
-      initialEntryMode: DatePickerEntryMode.calendarOnly,
-      initialDate: selectedDate.value,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(3000),
-      fieldHintText: '',
-    );
+        context: context,
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        initialDate: selectedDate.value,
+        firstDate: DateTime.now(),
+        lastDate: DateTime(3000),
+        fieldHintText: '',
+        builder: ((context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                datePickerTheme: const DatePickerThemeData(
+                  dayStyle: TextStyle(fontSize: 20),
+                  headerHeadlineStyle: TextStyle(fontSize: 20),
+                  headerHelpStyle: TextStyle(fontSize: 20),
+                  weekdayStyle: TextStyle(fontSize: 20),
+                ),
+                
+                
+              ),
+              child: child!);
+        }));
     if (pickedDate != null && pickedDate != selectedDate) {
       selectedDate.value = pickedDate;
       selectDateController.value.text = convertAndFormatDate(pickedDate);

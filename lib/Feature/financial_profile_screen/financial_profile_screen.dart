@@ -94,7 +94,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                   controller: nameController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText:
+                                                  labelText:
                                                       "Tax Professional Name"))
                                         ]),
                                     SizedBox(height: 39.v),
@@ -115,7 +115,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                   controller: phoneController,
                                                   margin: EdgeInsets.only(
                                                       left: 24.h),
-                                                  hintText: "Phone",
+                                                  labelText: "Phone",
                                                   textInputType:
                                                       TextInputType.phone))
                                         ]),
@@ -138,7 +138,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                   controller: addressController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Address"))
+                                                  labelText: "Address"))
                                         ]),
                                     SizedBox(height: 40.v),
                                     Row(
@@ -159,7 +159,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                   controller: assetsController,
                                                   margin: EdgeInsets.only(
                                                       left: 23.h),
-                                                  hintText: "Assets"))
+                                                  labelText: "Assets"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -180,7 +180,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       liabilitiesController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Liabilities"))
+                                                  labelText: "Liabilities"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     SizedBox(
@@ -221,7 +221,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                                       margin: EdgeInsets.only(
                                                                           left: 22
                                                                               .h),
-                                                                      hintText:
+                                                                      labelText:
                                                                           "Net Worth"))
                                                             ]),
                                                         SizedBox(height: 47.v),
@@ -234,7 +234,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                               CustomTextFormField(
                                                   width: 303.h,
                                                   controller: incomeController,
-                                                  hintText: "Income",
+                                                  labelText: "Income",
                                                   alignment:
                                                       Alignment.bottomRight)
                                             ])),
@@ -257,7 +257,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       expensesController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Expenses"))
+                                                  labelText: "Expenses"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     Row(
@@ -279,7 +279,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       cashflowController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Cashflow"))
+                                                  labelText: "Cashflow"))
                                         ]),
                                     SizedBox(height: 22.v)
                                   ])),
@@ -297,7 +297,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                   children: [
                                     CustomTextFormField(
                                         controller: editController,
-                                        hintText: "Financial Health Notes",
+                                        labelText: "Financial Health Notes",
                                         prefix: Container(
                                             margin: EdgeInsets.only(
                                                 top: 5.v,
@@ -349,7 +349,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       fatherageController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Father Age"))
+                                                  labelText: "Father Age"))
                                         ]),
                                     SizedBox(
                                       height: 40.v,
@@ -376,7 +376,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                       motherageController,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  hintText: "Mother Age"))
+                                                  labelText: "Mother Age"))
                                         ]),
                                     SizedBox(height: 39.v),
                                     custominputFieldWithContainer(
