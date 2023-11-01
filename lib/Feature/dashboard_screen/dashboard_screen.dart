@@ -20,7 +20,6 @@ class DashboardScreen extends StatelessWidget {
 
   TextEditingController searchController = TextEditingController();
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-
   final dashboardController = Get.put(DashboardController());
   final myProfileController = Get.put(UserProfileController());
   final serviceController = Get.put(RequestServiceController());
@@ -61,6 +60,10 @@ class DashboardScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             CustomImageView(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.notificationsScreen);
+                              },
                               svgPath: ImageConstant.notificationIcon,
                               width: 25.adaptSize,
                               height: 25.adaptSize,

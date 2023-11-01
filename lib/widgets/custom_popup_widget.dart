@@ -31,7 +31,7 @@ class CustomPopupContent extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 25.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.darkBlue),
                 ),

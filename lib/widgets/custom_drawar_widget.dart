@@ -8,6 +8,8 @@ import 'package:forever_connection/routes/app_routes.dart';
 import 'package:get/get.dart';
 import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
+import '../Feature/Connection/Presentation/connection_list.dart';
+import '../Feature/Connection/Presentation/connection_main_screen.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   const CustomDrawerWidget({super.key, required this.myProfileController});
@@ -220,6 +222,8 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(9);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.myNotesListScreen);
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[9] ==
@@ -258,6 +262,7 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(5);
+                                Get.to(ConnectionMainScreen());
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[5] ==
@@ -273,6 +278,7 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(6);
+                                Get.to(ConnectionListScreen());
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[6] ==
@@ -424,7 +430,7 @@ class CustomDrawerWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 30.h,
+                height: 25.h,
                 color: const Color(0xFF1f718b),
               )
             ],

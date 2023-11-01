@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
@@ -24,13 +23,13 @@ class ForgotPasswordScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 89.v),
+              SizedBox(height: 100.v),
               CustomImageView(
                 svgPath: ImageConstant.imgVectorPrimary,
                 height: 203.v,
                 width: 194.h,
               ),
-              SizedBox(height: 50.v),
+              SizedBox(height: 60.v),
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 24.h,
@@ -43,7 +42,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SizedBox(height: 25.v),
+                    SizedBox(height: 15.v),
                     Text(
                       "Trouble Logging in?",
                       style: theme.textTheme.headlineSmall,
@@ -68,7 +67,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         style: CustomTextStyles.bodyMediumOnErrorContainer_1,
                       ),
                     ),
-                    SizedBox(height: 70.v),
+                    SizedBox(height: 50.v),
                     Form(
                       key: _formKey,
                       child: Row(
@@ -107,7 +106,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 80.v),
+                    SizedBox(height: 70.v),
                     Obx(
                       () => forgetPasswordController.isLoginLoading.value
                           ? const CircularProgressIndicator.adaptive()
@@ -127,24 +126,27 @@ class ForgotPasswordScreen extends StatelessWidget {
                               ),
                             ),
                     ),
-                    SizedBox(height: 40.v),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Back to ",
-                            style: CustomTextStyles.bodyMediumGray600,
-                          ),
-                          TextSpan(
-                            text: "Login",
-                            style: CustomTextStyles.titleSmallPrimaryContainer,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.pushNamed(
-                                  context, AppRoutes.loginScreen),
-                          ),
-                        ],
+                    SizedBox(height: 20.v),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.loginScreen);
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Back to ",
+                              style: CustomTextStyles.bodyMediumGray600,
+                            ),
+                            TextSpan(
+                              text: "Login",
+                              style:
+                                  CustomTextStyles.titleSmallPrimaryContainer,
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
                     ),
                   ],
                 ),

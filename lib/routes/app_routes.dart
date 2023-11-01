@@ -92,7 +92,7 @@ class AppRoutes {
     myServicesScreen: (context) => const MyServicesScreen(),
     passwordSecurityScreen: (context) => PasswordSecurityScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
-    notificationsScreen: (context) => const NotificationsScreen(),
+    notificationsScreen: (context) =>  NotificationsScreen(),
     documentVaultScreen: (context) => DocumentVaultScreen(),
     myNotesListScreen: (context) =>  MyNotesListScreen(),
     addNotesScreen: (context) => AddNoteScreen(),

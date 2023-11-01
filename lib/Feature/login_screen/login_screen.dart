@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF1B608C),
       body: SingleChildScrollView(
         child: SafeArea(
-          bottom: false,
+          // bottom: false,
           child: Form(
             key: _formKey,
             child: Column(
@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
                   height: 190.adaptSize,
                   width: 190.adaptSize,
                 ),
-                SizedBox(height: 80.h),
+                SizedBox(height: 50.h),
                 Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 24.h,
@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                         "Login",
                         style: theme.textTheme.headlineSmall,
                       ),
-                      SizedBox(height: 43.v),
+                      SizedBox(height: 30.v),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,7 +186,7 @@ class LoginScreen extends StatelessWidget {
                               )
                             ],
                           )),
-                      SizedBox(height: 90.v),
+                      SizedBox(height: 50.v),
                       Obx(
                         () => CustomElevatedButton(
                           onTap: () {

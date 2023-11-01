@@ -32,4 +32,8 @@ class ApiPath {
 
   //vault
   static const addDocumentUrl = "$baseUrl/api/vault-document/";
+
+  //notification
+  static const getNotification = "$baseUrl/api/user-announcements/";
+  static const updateLastSeen = "$baseUrl/api/user-announcements/last-seen/";
 }

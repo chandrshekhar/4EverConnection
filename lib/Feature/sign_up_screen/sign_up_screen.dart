@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 20.h),
+                SizedBox(height: 40.h),
                 CustomImageView(
                   imagePath: ImageConstant.appLogo,
                   height: 190.adaptSize,

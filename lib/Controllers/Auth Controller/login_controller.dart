@@ -75,9 +75,12 @@ class LoginController extends GetxController {
 
   logOut(BuildContext context) async {
     await SharedPref().deleteAllData();
-    userNameController.value.clear();
-    passwordController.value.clear();
-    rememberMe(false);
+    if (rememberMeCheckBox.value == false) {
+      userNameController.value.clear();
+      passwordController.value.clear();
+      rememberMe(false);
+    }
+
     Navigator.pushNamedAndRemoveUntil(
         context, AppRoutes.loginScreen, (route) => false);
   }
