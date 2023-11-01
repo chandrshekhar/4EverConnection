@@ -138,7 +138,7 @@ class MyNotesListScreen extends StatelessWidget {
 
                     // itemExtent:
                     //     MediaQuery.of(context).size.height * 0.2 + 20.0,
-                    itemCount: myNotesController.noteList.value.length,
+                    itemCount: myNotesController.noteList.length,
                     itemBuilder: (context, index) {
                       var item = myNotesController.noteList[index];
                       return MyNotesCardWidget(

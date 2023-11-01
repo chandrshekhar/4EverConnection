@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
+import 'package:forever_connection/core/utils/size_utils.dart';
+import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -9,14 +12,23 @@ class AddressAutoCompleteWidget extends StatefulWidget {
 }
 
 class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
-  TextEditingController _addressController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
   List<String> _suggestions = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Address'),
+        backgroundColor: Colors.white,
+        title: const Text('Search Address', style: TextStyle(color: Colors.black),),
+        leading: AppbarImage(
+                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+                
+                margin:
+                    EdgeInsets.only(left: 24.h, top: 18.v, bottom: 18.v),
+                onTap: () {
+                  Navigator.pop(context);
+                }),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

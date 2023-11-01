@@ -40,9 +40,11 @@ class MyNotesCardWidget extends StatelessWidget {
                 right: 10),
             alignment: Alignment.center,
             decoration: AppDecoration.fillLightBlue.copyWith(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(9.h),
-                    topRight: Radius.circular(9.h))),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(9.h),
+                topRight: Radius.circular(9.h),
+              ),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -148,58 +148,70 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
       UserServicesModel userServicesModel, Function(String)? onSelected) {
     return Container(
       margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 6.v),
-      padding: EdgeInsets.all(12.v),
+      
       decoration: BoxDecoration(
-          color: theme.cardColor, borderRadius: BorderRadius.circular(5.v)),
+          color: theme.cardColor, borderRadius: BorderRadius.circular(9.v)),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Service #",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18.v),
-                ),
+          Container(
+            padding: EdgeInsets.all(12.v),
+            decoration: AppDecoration.fillLightBlue.copyWith(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(9.h),
+                topRight: Radius.circular(9.h),
               ),
-              Expanded(
-                  flex: 2,
-                  child: Text(userServicesModel.identifier.toString(),
-                      style: const TextStyle(
-                          color: Color(0xFF6B6B6B), fontSize: 15))),
-              const Spacer(),
-              Container(
-                height: 15.v,
-                width: 10.v,
-                margin: EdgeInsets.only(right: 10.v),
-                child: PopupMenuButton<String>(
-                  splashRadius: null,
-                  icon: const Icon(
-                    Icons.more_vert,
-                    size: 18,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Service #",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 18.v),
                   ),
-                  padding: EdgeInsets.zero,
-                  onSelected: onSelected,
-                  itemBuilder: (BuildContext context) {
-                    return <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'Call us',
-                        child: Text('Call us'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Email us',
-                        child: Text('Email us'),
-                      ),
-                    ];
-                  },
                 ),
-              ),
-            ],
+                Expanded(
+                    flex: 2,
+                    child: Text(userServicesModel.identifier.toString(),
+                        style: const TextStyle(
+                            color: Colors.white54, fontSize: 15))),
+                const Spacer(),
+                Container(
+                  height: 15.v,
+                  width: 10.v,
+                  margin: EdgeInsets.only(right: 10.v),
+                  child: PopupMenuButton<String>(
+                    splashRadius: null,
+                    icon: const Icon(
+                      Icons.more_vert,
+                      size: 18,
+                    ),
+                    padding: EdgeInsets.zero,
+                    onSelected: onSelected,
+                    itemBuilder: (BuildContext context) {
+                      return <PopupMenuEntry<String>>[
+                        const PopupMenuItem<String>(
+                          value: 'Call us',
+                          child: Text('Call us'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Email us',
+                          child: Text('Email us'),
+                        ),
+                      ];
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-          Row(
+          Padding(padding: EdgeInsets.all( 12.v,),
+            child: Column(
+              children: [
+                Row(
             children: [
               Expanded(
                 flex: 1,
@@ -324,7 +336,14 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               const Spacer()
             ],
           ),
-        ],
+
+              ],
+            ),
+          
+          ),
+          
+          
+                  ],
       ),
     );
   }

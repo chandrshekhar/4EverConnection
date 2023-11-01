@@ -109,11 +109,13 @@ class RequestServiceController extends GetxController {
   //pic date and time
   Future<void> selectDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
+        
         context: context,
         initialEntryMode: DatePickerEntryMode.calendarOnly,
         initialDate: selectedDate.value,
         firstDate: DateTime.now(),
         lastDate: DateTime(3000),
+        
         fieldHintText: '',
         builder: ((context, child) {
           return Theme(
