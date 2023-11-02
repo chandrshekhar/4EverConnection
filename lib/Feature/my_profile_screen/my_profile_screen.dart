@@ -159,9 +159,15 @@ class MyProfileScreen extends StatelessWidget {
                                                               .value
                                                               .personalData
                                                               ?.personalEmail ??
-                                                          "",
-                                                      style: CustomTextStyles
-                                                          .bodyLargePrimary)
+                                                          "kkjasdklfjaklsj dfklaj",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        fontSize: 15.adaptSize,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ))
                                                 ]))
                                       ]))),
                           SizedBox(height: 10.h),

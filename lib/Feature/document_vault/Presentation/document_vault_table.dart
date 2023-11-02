@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:forever_connection/theme/theme_helper.dart';
+import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 
-import '../../../Controllers/Documents Vault controller/documents_vault_controller.dart';
+import '../../../widgets/custom_text_form_field.dart';
+import '../Documents Vault controller/documents_vault_controller.dart';
 import '../../../core/constants/colors.dart';
 
 // ignore: must_be_immutable
@@ -12,6 +14,7 @@ class DocumentVaultDataTable extends StatelessWidget {
   DocumentVaultDataTable({Key? key, required this.documentsVaultController})
       : super(key: key);
   DocumentsVaultController documentsVaultController;
+
   @override
   Widget build(BuildContext context) {
     return HorizontalDataTable(
@@ -21,7 +24,7 @@ class DocumentVaultDataTable extends StatelessWidget {
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
       rightSideItemBuilder: _generateRightHandSideColumnRow,
-      itemCount: documentsVaultController.documentValultDataList.length,
+      itemCount: documentsVaultController.documentVaultList.length,
       // rowSeparatorWidget: const Divider(
       //   color: Colors.black38,
       //   height: 1.0,
@@ -79,53 +82,183 @@ class DocumentVaultDataTable extends StatelessWidget {
                 itemBuilder: (BuildContext context) {
                   return <PopupMenuEntry<String>>[
                     // Define the menu items
-                    const PopupMenuItem<String>(
-                      value: 'Resend',
-                      child: Text('Edit'),
+                    PopupMenuItem<String>(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      16), // Set the border radius for the dialog
+                                ),
+                                child: editDocumentVaultWidget(
+                                    context,
+                                    documentsVaultController
+                                        .documentVaultList[index].id!,
+                                    documentsVaultController
+                                        .documentVaultList[index].name!,
+                                    documentsVaultController
+                                        .documentVaultList[index]
+                                        .description!));
+                          },
+                        );
+                      },
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            size: 15.sp,
+                          ),
+                          SizedBox(width: 5.w),
+                          const Text('Edit'),
+                        ],
+                      ),
                     ),
-                    const PopupMenuItem<String>(
-                      value: 'Call',
-                      child: Text('Delete'),
+                    PopupMenuItem<String>(
+                      onTap: () {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.delete,
+                            size: 15.sp,
+                          ),
+                          SizedBox(width: 5.w),
+                          const Text('Delete'),
+                        ],
+                      ),
                     ),
-                    const PopupMenuItem<String>(
-                      value: 'Email',
-                      child: Text('Update'),
+                    PopupMenuItem<String>(
+                      onTap: () async {
+                      
+                      },
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.download,
+                            size: 15.sp,
+                          ),
+                          SizedBox(width: 5.w),
+                          const Text('Download'),
+                        ],
+                      ),
                     ),
                   ];
                 }),
           ),
-          // Container(
-          //   width: 80.w,
-          //   height: 30.h,
-          //   padding: EdgeInsets.only(left: 25.w),
-          //   alignment: Alignment.centerLeft,
-          //   child: const Icon(Icons.more_vert, color: Colors.blueGrey),
-          // ),
           Container(
             width: 150.w,
             height: 30.h,
             alignment: Alignment.center,
             child: Text(DateFormat("yyyy-MM-dd").format(DateTime.parse(
                 documentsVaultController
-                    .documentValultDataList[index].publicationDate
+                    .documentVaultList[index].publicationDate
                     .toString()))),
           ),
           Container(
             width: 200.w,
             height: 30.h,
             alignment: Alignment.center,
-            child: Text(documentsVaultController
-                .documentValultDataList[index].typeName
-                .toString()),
+            child: Text(
+              documentsVaultController.documentVaultList[index].typeName
+                  .toString(),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+            ),
           ),
           Container(
             width: 200.w,
             height: 30.h,
             alignment: Alignment.center,
-            child: Text(documentsVaultController
-                .documentValultDataList[index].description
-                .toString()),
+            child: Text(
+              documentsVaultController.documentVaultList[index].description
+                  .toString(),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+            ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget editDocumentVaultWidget(
+      BuildContext context, int id, int name, String desc) {
+    TextEditingController descController = TextEditingController(text: desc);
+    return Container(
+      height: 300.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16.r)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.blueGrey[100],
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16.r),
+                    topRight: Radius.circular(16.r))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(height: 10.h, width: 10.w),
+                Text(
+                  "Edit Description",
+                  style: TextStyle(
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.darkBlue),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(1.sp),
+                    margin: EdgeInsets.all(15.sp),
+                    color: AppColors.darkBlue,
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          CustomTextFormField(
+              onTap: () {
+                documentsVaultController.updateDocumentVaultDescription(
+                    id: id, name: name, desc: desc);
+              },
+              controller: descController,
+              maxLines: 6,
+              margin: EdgeInsets.all(8.sp),
+              textInputAction: TextInputAction.newline,
+              textInputType: TextInputType.multiline,
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 11.h, vertical: 17),
+              borderDecoration: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: appTheme.black900,
+                  width: 1,
+                ),
+              ),
+              filled: true,
+              fillColor: theme.colorScheme.primary),
+          const CustomElevatedButton(
+            text: "Update",
+            isDisabled: true,
+            height: 40,
+            width: 100,
+          )
         ],
       ),
     );

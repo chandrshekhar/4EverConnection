@@ -4,9 +4,8 @@ import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
-import 'package:forever_connection/widgets/search_typeahead.dart';
 import 'package:get/get.dart';
-import '../../../Controllers/Documents Vault controller/documents_vault_controller.dart';
+import '../Documents Vault controller/documents_vault_controller.dart';
 import '../../../core/constants/colors.dart';
 import '../../../routes/app_routes.dart';
 import '../../../widgets/app_bar/appbar_image.dart';
@@ -277,19 +276,19 @@ class DocumentVaultScreen extends StatelessWidget {
                   )),
               SizedBox(height: 12.h),
               Expanded(
-                  child: Obx(() => documentVaultController.isLoadingDocument ==
-                          true
-                      ? const Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        )
-                      : documentVaultController
-                              .documentValultDataList.isNotEmpty
-                          ? DocumentVaultDataTable(
-                              documentsVaultController: documentVaultController,
+                  child: Obx(() =>
+                      documentVaultController.isLoadingDocumentList == true
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive(),
                             )
-                          : const Center(
-                              child: Text("No data"),
-                            )))
+                          : documentVaultController.documentVaultList.isNotEmpty
+                              ? DocumentVaultDataTable(
+                                  documentsVaultController:
+                                      documentVaultController,
+                                )
+                              : const Center(
+                                  child: Text("No data"),
+                                )))
             ],
           ),
         ));

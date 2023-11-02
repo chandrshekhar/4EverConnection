@@ -1,26 +1,27 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
 import 'package:forever_connection/Feature/document_vault/Repo/document_repo.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
-import '../../Feature/document_vault/Model/document_model.dart';
-import '../../Models/user_profile_model.dart';
-import '../../core/constants/colors.dart';
-import '../../core/utils/toast_widget.dart';
-import '../User Profile Controller/user_profile_controller.dart';
+import '../Model/document_type_model.dart';
+import '../../../Models/user_profile_model.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/utils/toast_widget.dart';
+import '../../../Controllers/User Profile Controller/user_profile_controller.dart';
 
 class DocumentsVaultController extends GetxController {
-  RxBool isLoadingDocument = false.obs;
-  RxList<VaultDocumentData> documentValultDataList = <VaultDocumentData>[].obs;
+  RxBool isLoadingDocumentList = false.obs;
+  // RxList<VaultDocumentData> documentValultDataList = <VaultDocumentData>[].obs;
   final DocumentRepo _documentRepo = DocumentRepo();
   RxList<DocumentTypeModel> documentTypes = <DocumentTypeModel>[].obs;
+  RxList<DocumentVaultListModel> documentVaultList =
+      <DocumentVaultListModel>[].obs;
   var searchForDocumentController = TextEditingController().obs;
   RxInt documentTypeId = (-1).obs;
   RxString choosenFilename = RxString("");
@@ -58,6 +59,7 @@ class DocumentsVaultController extends GetxController {
     documentTypeId.value = value;
   }
 
+  // get docuement type controller
   getDocumentType() async {
     try {
       var resp = await _documentRepo.getSelectedProfession();
@@ -67,16 +69,31 @@ class DocumentsVaultController extends GetxController {
     }
   }
 
-  final userProfile = Get.find<UserProfileController>()
-      .userProfileModel
-      .value
-      .vaultDocumentData;
-  getVaultDocumentData() {
-    isLoadingDocument(true);
-    for (var element in userProfile!) {
-      documentValultDataList.add(element);
+  // get vault document list
+  getVaultDocumentList() async {
+    isLoadingDocumentList(true);
+    try {
+      var resp = await _documentRepo.getDocumentVaultList();
+      documentVaultList.value = resp;
+      isLoadingDocumentList(false);
+    } catch (e) {
+      ToastWidget.errorToast(error: e.toString());
+      isLoadingDocumentList(false);
     }
-    isLoadingDocument(false);
+  }
+  // update document vault description
+
+  updateDocumentVaultDescription({int? id, int? name, String? desc}) async {
+    isLoadingDocumentList(true);
+    try {
+      var resp = await _documentRepo.updateDocumentDesc(
+          id: id, name: name, desc: desc);
+      ToastWidget.successToast(success: resp["details"]);
+      isLoadingDocumentList(false);
+    } catch (e) {
+      ToastWidget.errorToast(error: e.toString());
+      isLoadingDocumentList(false);
+    }
   }
 
   addFileDocumentVault() async {
@@ -158,7 +175,7 @@ class DocumentsVaultController extends GetxController {
 
   @override
   void onInit() {
-    getVaultDocumentData();
+    getVaultDocumentList();
     getDocumentType();
     super.onInit();
   }
