@@ -73,10 +73,10 @@ class UserProfileModel {
           healthInsuranceData!.map((v) => v.toJson()).toList();
     }
 
-    if (vaultDocumentData != null) {
-      data['vault_document_data'] =
-          vaultDocumentData!.map((v) => v.toJson()).toList();
-    }
+    // if (vaultDocumentData != null) {
+    //   data['vault_document_data'] =
+    //       vaultDocumentData!.map((v) => v.toJson()).toList();
+    // }
     return data;
   }
 }
@@ -493,7 +493,7 @@ class FinancialData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['tax_professional_name'] = taxProfessionalName;
     data['phone'] = phone;
@@ -586,26 +586,18 @@ class VaultDocumentData {
   dynamic file;
   dynamic user;
   dynamic name;
+  dynamic typeName;
 
-  VaultDocumentData({id, publicationDate, description, file, user, name});
+  VaultDocumentData(
+      {id, publicationDate, description, file, user, name, typeName});
 
   VaultDocumentData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     publicationDate = json['publication_date'];
+    typeName = json['type_name'];
     description = json['description'];
     file = json['file'];
     user = json['user'];
     name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['publication_date'] = publicationDate;
-    data['description'] = description;
-    data['file'] = file;
-    data['user'] = user;
-    data['name'] = name;
-    return data;
   }
 }

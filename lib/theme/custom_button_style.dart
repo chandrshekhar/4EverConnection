@@ -1,4 +1,3 @@
-
 import 'package:forever_connection/core/app_export.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +12,7 @@ class CustomButtonStyles {
       );
   static ButtonStyle get fillLightBlueTL20 => ElevatedButton.styleFrom(
         backgroundColor: appTheme.lightBlue90001,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.h),
-        ),
+       
       );
   static ButtonStyle get fillRed => ElevatedButton.styleFrom(
         backgroundColor: appTheme.red500,

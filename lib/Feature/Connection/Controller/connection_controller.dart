@@ -23,6 +23,8 @@ class ConnectionController extends GetxController {
   RxInt serviceId = (-1).obs;
   RxInt partnerId = (-1).obs;
   RxList<ConnectionModel> connectionList = <ConnectionModel>[].obs;
+  RxList<ConnectionModel> acceptedConnectionList = <ConnectionModel>[].obs;
+  RxList<ConnectionModel> pendingConnectionList = <ConnectionModel>[].obs;
   var searchServiceController = TextEditingController().obs;
   var searchPartnerController = TextEditingController().obs;
 
@@ -34,6 +36,16 @@ class ConnectionController extends GetxController {
       isLoading(true);
       var res = await _connectionRepo.getConnection();
       connectionList.value = res;
+      acceptedConnectionList.value = [];
+      pendingConnectionList.value = [];
+      for (int i = 0; i < connectionList.length; i++) {
+        if (connectionList[i].accepted == true) {
+          acceptedConnectionList.add(connectionList[i]);
+        } else {
+          pendingConnectionList.add(connectionList[i]);
+        }
+      }
+
       isLoading(false);
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());

@@ -47,7 +47,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: true,
         backgroundColor: appTheme.lightBlue50,
         appBar: CustomAppBar(
             leadingWidth: 44.h,
@@ -61,17 +61,17 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
             title: AppbarTitle(text: "Request Service"),
             actions: [
               AppbarImage1(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                  },
                   svgPath: ImageConstant.imgCart,
                   margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
             ],
             styleType: Style.bgShadow),
-        body: Column(
-          
-          children: [
+        body: Column(children: [
           SizedBox(height: 12.v),
           Expanded(
               child: SingleChildScrollView(
-              
                   child: Padding(
                       padding:
                           EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
@@ -408,9 +408,11 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             controller: requestServiceController
                                 .commentController.value,
                             margin: EdgeInsets.only(
-                                left: 12.h, top: 34.v, right: 12.h, bottom: 12.v),
+                                left: 12.h,
+                                top: 34.v,
+                                right: 12.h,
+                                bottom: 12.v),
                             labelText: "Write your comments (optional)",
-                            
                             textInputAction: TextInputAction.newline,
                             maxLines: 2,
                             textInputType: TextInputType.multiline,

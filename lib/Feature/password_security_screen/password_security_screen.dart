@@ -1,4 +1,3 @@
-
 import '../password_security_screen/widgets/userpassword_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -48,6 +47,9 @@ class PasswordSecurityScreen extends StatelessWidget {
             title: AppbarTitle(text: "Password & Security"),
             actions: [
               AppbarImage1(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                  },
                   svgPath: ImageConstant.imgCart,
                   margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
             ],

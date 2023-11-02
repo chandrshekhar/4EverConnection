@@ -3,6 +3,7 @@ import 'package:forever_connection/Feature/document_vault/Presentation/document_
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:forever_connection/widgets/search_typeahead.dart';
 import 'package:get/get.dart';
 import '../../../Controllers/Documents Vault controller/documents_vault_controller.dart';
@@ -26,7 +27,7 @@ class DocumentVaultScreen extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(
-            height: 40.v,
+            height: 60.v,
             leadingWidth: 44.h,
             leading: AppbarImage(
                 svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
@@ -46,7 +47,7 @@ class DocumentVaultScreen extends StatelessWidget {
             ]),
         backgroundColor: const Color(0xFFE4F5FF),
         body: Padding(
-          padding: EdgeInsets.all(12.h),
+          padding: EdgeInsets.all(10.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -104,14 +105,17 @@ class DocumentVaultScreen extends StatelessWidget {
                               height: 32.h,
                               width: MediaQuery.of(context).size.width - 6,
                               padding: const EdgeInsets.only(left: 5),
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 0.5),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'File description',
-                                ),
+                              // decoration: BoxDecoration(
+                              //   border: Border.all(width: 0.5),
+                              // ),
+                              child: TextField(
+                                controller: documentVaultController
+                                    .documentDescControler.value,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    label: Text("File description"),
+                                    labelStyle: TextStyle(
+                                        color: AppColors.greyTextColor)),
                               )),
                           SizedBox(height: 15.h),
                           Container(
@@ -228,27 +232,43 @@ class DocumentVaultScreen extends StatelessWidget {
                           SizedBox(
                             height: 15.h,
                           ),
-                          CustomElevatedButton(
-                            onTap: () {
-                              documentVaultController.addFileDocumentVault();
-                            },
-                            width: 150.h,
-                            buttonStyle: ButtonStyle(
-                                foregroundColor: MaterialStateProperty.all(
-                                    const Color(0xFF6B6B6B)),
-                                backgroundColor: MaterialStateProperty.all(
-                                    const Color(0xffe1f1fb))),
-                            text: "Upload",
-                            buttonTextStyle: TextStyle(
-                                fontSize: 18.h,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF6B6B6B)),
+                          Obx(
+                            () => CustomElevatedButton(
+                              onTap: (documentVaultController
+                                              .choosenFilename.value !=
+                                          "" ||
+                                      documentVaultController.files.value !=
+                                          null)
+                                  ? () {
+                                      documentVaultController
+                                          .addFileDocumentVault();
+                                    }
+                                  : () => null,
+                              width: 150.h,
+                              buttonStyle: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  backgroundColor: MaterialStateProperty.all(
+                                    documentVaultController
+                                                    .choosenFilename.value !=
+                                                "" ||
+                                            documentVaultController
+                                                    .files.value !=
+                                                null
+                                        ? AppColors.floatingActionButtonColor
+                                        : AppColors.grayColor,
+                                  )),
+                              text: "Upload",
+                              buttonTextStyle: TextStyle(
+                                  fontSize: 18.h,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white),
+                            ),
                           )
                         ],
                       )
                     ],
                   )),
-
               const Text("Documents Vault",
                   style: TextStyle(
                     fontSize: 18,
@@ -256,104 +276,20 @@ class DocumentVaultScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   )),
               SizedBox(height: 12.h),
-              const Expanded(child: DocumentVaultDataTable())
-              // Container(
-              //   color: AppColors.darkBlue,
-              //   padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 5),
-              //   child: const Row(
-              //     children: [
-              //       Expanded(
-              //         flex: 3,
-              //         child: Text('Document Name',
-              //             textAlign: TextAlign.start,
-              //             style: TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 16,
-              //                 fontWeight: FontWeight.w500)),
-              //       ),
-              //       Expanded(
-              //         flex: 2,
-              //         child: Text('Description',
-              //             textAlign: TextAlign.start,
-              //             style: TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 16,
-              //                 fontWeight: FontWeight.w500)),
-              //       ),
-              //       Expanded(
-              //         flex: 1,
-              //         child: Text('Action',
-              //             textAlign: TextAlign.start,
-              //             style: TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 16,
-              //                 fontWeight: FontWeight.w500)),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-
-              // const Divider(),
-              // Obx(
-              //   () => documentVaultController.isLoadingDocument == true
-              //       ? const Center(
-              //           child: CircularProgressIndicator.adaptive(),
-              //         )
-              //       : documentVaultController.documentValultDataList.isEmpty
-              //           ? const Center(
-              //               child: Text("No Data Found!"),
-              //             )
-              //           : Expanded(
-              //               child: ListView.builder(
-              //                 itemCount: 10,
-              //                 itemBuilder: (context, index) {
-              //                   return Container(
-              //                     padding:
-              //                         const EdgeInsets.symmetric(vertical: 10),
-              //                     color: (index % 2 == 0)
-              //                         ? Colors.white
-              //                         : AppColors.bgColor,
-              //                     child: Padding(
-              //                       padding: const EdgeInsets.symmetric(
-              //                           horizontal: 10),
-              //                       child: Row(
-              //                         children: [
-              //                           Expanded(
-              //                             flex: 3,
-              //                             child: Text(
-              //                               "G",
-              //                               textAlign: TextAlign.center,
-              //                               style: Theme.of(context)
-              //                                   .textTheme
-              //                                   .bodyMedium,
-              //                             ),
-              //                           ),
-              //                           Expanded(
-              //                               flex: 3,
-              //                               child: Text(
-              //                                 "sf",
-              //                                 textAlign: TextAlign.center,
-              //                                 style: Theme.of(context)
-              //                                     .textTheme
-              //                                     .bodyMedium,
-              //                               )),
-              //                           const Expanded(
-              //                               flex: 2,
-              //                               child: Align(
-              //                                 alignment: Alignment.topCenter,
-              //                                 child: SizedBox(
-              //                                     width: 10,
-              //                                     height: 10,
-              //                                     child: Icon(Icons.more_vert)),
-              //                               )),
-              //                         ],
-              //                       ),
-              //                     ),
-              //                   );
-              //                 },
-              //               ),
-              //             ),
-              // ),
+              Expanded(
+                  child: Obx(() => documentVaultController.isLoadingDocument ==
+                          true
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        )
+                      : documentVaultController
+                              .documentValultDataList.isNotEmpty
+                          ? DocumentVaultDataTable(
+                              documentsVaultController: documentVaultController,
+                            )
+                          : const Center(
+                              child: Text("No data"),
+                            )))
             ],
           ),
         ));
