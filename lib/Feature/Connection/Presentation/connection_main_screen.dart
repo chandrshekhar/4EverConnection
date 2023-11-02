@@ -116,7 +116,7 @@ class ConnectionMainScreen extends StatelessWidget {
                                         buttonName: "My Connections",
                                         title: "Manage",
                                         available:
-                                            "Pending: ${connectionCotroller.connectionList.length}",
+                                            "Pending: ${connectionCotroller.pendingConnectionList.length} \nAccepted: ${connectionCotroller.acceptedConnectionList.length} ",
                                         des: "Manage Connections",
                                       )),
                                   SizedBox(

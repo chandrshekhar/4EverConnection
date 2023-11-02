@@ -36,6 +36,9 @@ class RelationshipsScreen extends StatelessWidget {
                 title: AppbarTitle(text: "Relationships"),
                 actions: [
                   AppbarImage1(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                      },
                       svgPath: ImageConstant.imgCart,
                       margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
                 ],

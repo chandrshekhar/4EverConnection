@@ -100,7 +100,7 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           
           style: textStyle ??
-              TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           obscureText: obscureText!,
           textInputAction: textInputAction,
           onChanged: onChange,

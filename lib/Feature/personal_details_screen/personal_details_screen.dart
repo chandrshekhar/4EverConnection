@@ -42,6 +42,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                 title: AppbarTitle(text: "Personal Details"),
                 actions: [
                   AppbarImage1(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                      },
                       svgPath: ImageConstant.imgCart,
                       margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
                 ],
@@ -244,11 +247,20 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
-                                                        onTap: () async{
-                                                         var address = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddressAutoCompleteWidget(),),);
-                                                         personalDetailsController
-                                                                .homeAddressController
-                                                                .value.text = address;
+                                                        onTap: () async {
+                                                          var address =
+                                                              await Navigator
+                                                                  .push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  AddressAutoCompleteWidget(),
+                                                            ),
+                                                          );
+                                                          personalDetailsController
+                                                              .homeAddressController
+                                                              .value
+                                                              .text = address;
                                                         },
                                                         controller:
                                                             personalDetailsController
@@ -474,7 +486,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                     top: 2.v, bottom: 12.v)),
                                             Expanded(
                                                 child: CustomTextFormField(
-                                                   
                                                     controller:
                                                         personalDetailsController
                                                             .countryOfCitizenshipControlle

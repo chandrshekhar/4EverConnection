@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:forever_connection/Feature/document_vault/Model/document_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
@@ -97,7 +98,9 @@ class DocumentRepo {
       ));
 
       response = await dio.post(ApiPath.addDocumentUrl, data: formData);
-      log("Uplaod document response ${response.data.toString()}");
+      if (kDebugMode) {
+        log("Uplaod document response ${response.data.toString()}");
+      }
       if (response.statusCode == 201) {
         ToastWidget.successToast(success: "Successfully added");
         return response.data;

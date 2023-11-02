@@ -13,10 +13,21 @@ import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class ConnectionListScreen extends StatelessWidget {
+import '../../../widgets/custom_outlined_button.dart';
+
+class ConnectionListScreen extends StatefulWidget {
   ConnectionListScreen({super.key});
+
+  @override
+  State<ConnectionListScreen> createState() => _ConnectionListScreenState();
+}
+
+class _ConnectionListScreenState extends State<ConnectionListScreen> {
   final connectionController = Get.put(ConnectionController());
+
   final myNotesController = Get.put(MyNotesController());
+
+  int tapIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -115,50 +126,135 @@ class ConnectionListScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomOutlinedButton(
+                            buttonStyle: tapIndex == 0
+                                ? CustomButtonStyles.fillLightBlueTL20
+                                : null,
+                            buttonTextStyle: tapIndex == 0
+                                ? const TextStyle(color: Colors.white)
+                                : const TextStyle(color: Colors.black),
+                            onTap: () {
+                              setState(() {
+                                tapIndex = 0;
+                              });
+                            },
+                            width: 167.h,
+                            text: "Pending"),
+                        SizedBox(width: 5.v),
+                        CustomOutlinedButton(
+                            buttonTextStyle: tapIndex == 1
+                                ? const TextStyle(color: Colors.white)
+                                : const TextStyle(color: Colors.black),
+                            buttonStyle: tapIndex == 1
+                                ? CustomButtonStyles.fillLightBlueTL20
+                                : null,
+                            onTap: () {
+                              setState(() {
+                                tapIndex = 1;
+                              });
+                            },
+                            width: 167.h,
+                            text: "Accepted"),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ],
           ),
+          SizedBox(
+            height: 10.h,
+          ),
           Expanded(
-            child: Obx(() => connectionController.connectionList.isNotEmpty
-                ? ListView.builder(
-                    padding: EdgeInsets.only(
-                        left: 23.adaptSize, right: 23.adaptSize),
-                    itemCount: connectionController.connectionList.value.length,
-                    itemBuilder: (context, index) {
-                      var item = connectionController.connectionList[index];
-                      return ConnectionListWidget(
-                        onSeleted: (p0) async {
-                          switch (p0) {
-                            case "Email":
-                              await connectionController
-                                  .launchEmail(item.email ?? "");
-                              break;
-                            case "Resend":
-                              await connectionController
-                                  .resedConnection(item.id ?? -1);
-                              break;
-                            case "Call":
-                              await connectionController
-                                  .launchPhoneDialer(item.mobilePhone ?? "");
-                              break;
-                          }
+            child: Obx(() => connectionController
+                    .pendingConnectionList.isNotEmpty
+                ? tapIndex == 0
+                    ? ListView.builder(
+                        padding: EdgeInsets.only(
+                            left: 23.adaptSize, right: 23.adaptSize),
+                        itemCount:
+                            connectionController.pendingConnectionList.length,
+                        itemBuilder: (context, index) {
+                          var item =
+                              connectionController.pendingConnectionList[index];
+                          return ConnectionListWidget(
+                            onSeleted: (p0) async {
+                              switch (p0) {
+                                case "Email":
+                                  await connectionController
+                                      .launchEmail(item.email ?? "");
+                                  break;
+                                case "Resend":
+                                  await connectionController
+                                      .resedConnection(item.id ?? -1);
+                                  break;
+                                case "Call":
+                                  await connectionController.launchPhoneDialer(
+                                      item.mobilePhone ?? "");
+                                  break;
+                              }
+                            },
+                            dateTime: myNotesController
+                                .dateTime(item.dateCreated ?? ""),
+                            description: "",
+                            notesTitle:
+                                "${item.firstName ?? ""} ${item.middleName ?? ""} ${item.lastName ?? ""}",
+                            author: item.userCreated == null
+                                ? "Pending"
+                                : "Accepted",
+                            addButtonTap: () {
+                              _showBottomSheet(
+                                  context: context, connectionModel: item);
+                            },
+                          );
                         },
-                        dateTime:
-                            myNotesController.dateTime(item.dateCreated ?? ""),
-                        description: "",
-                        notesTitle:
-                            "${item.firstName ?? ""} ${item.middleName ?? ""} ${item.lastName ?? ""}",
-                        author:
-                            item.userCreated == null ? "Pending" : "Accepted",
-                        addButtonTap: () {
-                          _showBottomSheet(
-                              context: context, connectionModel: item);
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.only(
+                            left: 23.adaptSize, right: 23.adaptSize),
+                        itemCount:
+                            connectionController.acceptedConnectionList.length,
+                        itemBuilder: (context, index) {
+                          var item = connectionController
+                              .acceptedConnectionList[index];
+                          return ConnectionListWidget(
+                            onSeleted: (p0) async {
+                              switch (p0) {
+                                case "Email":
+                                  await connectionController
+                                      .launchEmail(item.email ?? "");
+                                  break;
+                                case "Resend":
+                                  await connectionController
+                                      .resedConnection(item.id ?? -1);
+                                  break;
+                                case "Call":
+                                  await connectionController.launchPhoneDialer(
+                                      item.mobilePhone ?? "");
+                                  break;
+                              }
+                            },
+                            dateTime: myNotesController
+                                .dateTime(item.dateCreated ?? ""),
+                            description: "",
+                            notesTitle:
+                                "${item.firstName ?? ""} ${item.middleName ?? ""} ${item.lastName ?? ""}",
+                            author: item.userCreated == null
+                                ? "Pending"
+                                : "Accepted",
+                            addButtonTap: () {
+                              _showBottomSheet(
+                                  context: context, connectionModel: item);
+                            },
+                          );
                         },
-                      );
-                    },
-                  )
+                      )
                 : connectionController.isLoading.value
                     ? const Center(child: CircularProgressIndicator.adaptive())
                     : const Center(child: Text("No notes found"))),

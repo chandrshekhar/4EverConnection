@@ -24,6 +24,7 @@ class DocumentsVaultController extends GetxController {
   var searchForDocumentController = TextEditingController().obs;
   RxInt documentTypeId = (-1).obs;
   RxString choosenFilename = RxString("");
+  final documentDescControler = TextEditingController().obs;
   // RxString files = ''.obs;
   Rx<File?> files = Rx<File?>(null);
   Dio dio = Dio();
@@ -81,7 +82,13 @@ class DocumentsVaultController extends GetxController {
   addFileDocumentVault() async {
     try {
       await _documentRepo.uploadDocument(
-          id: documentTypeId.value, desc: "", file: files.value!);
+          id: documentTypeId.value,
+          desc: documentDescControler.value.text.trim(),
+          file: files.value!);
+      documentTypeId.value = -1;
+      documentDescControler.value.clear();
+      files.value = null;
+      choosenFilename.value = "";
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
     }
