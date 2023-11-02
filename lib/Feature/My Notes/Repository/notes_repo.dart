@@ -56,7 +56,7 @@ class MyNotesRepo {
       String urlWithSearch =
           "https://4everconnection.com/api/notes/?q=$searchText";
       String url = ApiPath.myNotesList;
-      response = await dio.get(searchText!=null ? urlWithSearch : url);
+      response = await dio.get(searchText != null ? urlWithSearch : url);
       log("List notes response ${response.data}");
       if (response.statusCode == 200) {
         final List<MyNotesModel> userNotesLits = (response.data as List)
@@ -74,7 +74,39 @@ class MyNotesRepo {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-        
+          throw Exception("Faild to load data");
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+  Future<MyNotesModel> getNotesDetails({required int id}) async {
+    log("Details of notes service running...");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      String url = "${ApiPath.baseUrl}/api/notes/$id/";
+      response = await dio.get(url);
+      log("Details notes response ${response.data}");
+      if (response.statusCode == 200) {
+        return MyNotesModel.fromJson(response.data);
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
           throw Exception("Faild to load data");
         }
       }

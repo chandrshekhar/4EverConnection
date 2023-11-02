@@ -113,10 +113,8 @@ class CustomTextFormField extends StatelessWidget {
         ),
       );
   InputDecoration get decoration => InputDecoration(
-    
         hintText: hintText ?? "",
         labelText: labelText ?? "",
-        
         hintStyle: hintStyle ??
             const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
             labelStyle: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),

@@ -53,53 +53,50 @@ class AddNoteScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(children: [
-                    CustomImageView(
-                        svgPath: ImageConstant.imgSearch,
-                        height: 17.adaptSize,
-                        width: 17.adaptSize,
-                        margin: EdgeInsets.only(top: 3.v, bottom: 13.v)),
-                    Obx(() => Expanded(
-                          flex: 1,
-                          child: Form(
-                              key: subjectKey,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              child: CustomTextFormField(
-                                  controller:
-                                      myNoteController.subjectController.value,
-                                  margin: EdgeInsets.only(left: 22.h),
-                                  hintText: "Subject",
-                                  textInputType: TextInputType.visiblePassword,
-                                  onChange: (value) {
-                                    myNoteController.setSubjectVlidate(value);
-                                  },
-                                  validator: (value) {
-                                    if (value!.length < 4) {
-                                      return "Subject must have 4 character";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  obscureText: false)),
-                        ))
-                  ]),
+                  const Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        "Subject",
+                      )),
+                  Obx(() => Form(
+                      key: subjectKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: CustomTextFormField(
+                          contentPadding:
+                              EdgeInsets.only(left: 10.adaptSize, bottom: 10),
+                          controller: myNoteController.subjectController.value,
+                          textInputType: TextInputType.visiblePassword,
+                          onChange: (value) {
+                            myNoteController.setSubjectVlidate(value);
+                          },
+                          validator: (value) {
+                            if (value!.length < 4) {
+                              return "Subject must have 4 character";
+                            } else {
+                              return null;
+                            }
+                          },
+                          obscureText: false))),
                   SizedBox(
                     height: 15.h,
+                  ),
+                  const Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        "Write your notes",
+                      )),
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Obx(() => Form(
                       key: notesKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
                           controller: myNoteController.notesController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 34.v, right: 12.h),
-                          hintText: "Write your notes",
                           textInputAction: TextInputAction.done,
                           maxLines: 6,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: OutlineInputBorder(),
+                          contentPadding: const EdgeInsets.all(10),
+                          borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
                             myNoteController.setNotesValidate(value);

@@ -21,6 +21,10 @@ class MyNotesController extends GetxController {
   //Notes list
   RxList<MyNotesModel> noteList = <MyNotesModel>[].obs;
 
+  //My notes model for details screen show
+
+  var myNotesModel = MyNotesModel().obs;
+
   //valiadte flag
   RxBool isSubjectValidate = false.obs;
   RxBool isNotesValidate = false.obs;
@@ -29,6 +33,7 @@ class MyNotesController extends GetxController {
   RxBool isAddNoteLoading = false.obs;
   RxBool isNotesLitsLoading = false.obs;
   RxBool isEditNotesLoading = false.obs;
+  RxBool isNotesDetailsLoading = false.obs;
   //clear text field
   clearTextField() {
     subjectController.value.clear();
@@ -64,7 +69,7 @@ class MyNotesController extends GetxController {
         TostWidget().successToast(title: "Success", message: "Notes added");
         await getMyNotes();
         isAddNoteLoading(false);
-        
+
         await Future.delayed(const Duration(seconds: 2), () {
           Navigator.pop(context);
           clearTextField();
@@ -136,5 +141,19 @@ class MyNotesController extends GetxController {
     final customFormat = DateFormat("MMM d'\'yyyy, h:m a");
     String formattedDateTime = customFormat.format(dateTime);
     return formattedDateTime;
+  }
+
+  getNotesDetails({required int id}) async {
+    try {
+      isNotesDetailsLoading(true);
+      var res = await _myNotesRepo.getNotesDetails(id: id);
+      myNotesModel.value = res;
+      isNotesDetailsLoading(false);
+    } catch (e) {
+       isNotesDetailsLoading(false);
+      ToastWidget.errorToast(error: e.toString());
+    }finally{
+      isNotesDetailsLoading(false);
+    }
   }
 }

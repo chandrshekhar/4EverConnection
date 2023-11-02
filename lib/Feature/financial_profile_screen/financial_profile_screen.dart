@@ -39,368 +39,370 @@ class FinancialProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: appTheme.lightBlue50,
-            appBar: CustomAppBar(
-                leadingWidth: 44.h,
-                leading: AppbarImage(
-                    svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                    margin:
-                        EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
-                    onTap: () {
-                      Navigator.pop(context);
-                    }),
-                centerTitle: true,
-                title: AppbarTitle(text: "Financial Profile"),
-                actions: [
-                  AppbarImage1(
-                      svgPath: ImageConstant.imgCart,
-                      margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
-                ],
-                styleType: Style.bgShadow),
-            body: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                    padding: EdgeInsets.only(top: 11.v),
-                    child: Container(
-                        margin: EdgeInsets.only(
-                            left: 12.h, right: 12.h, bottom: 5.v),
-                        decoration: AppDecoration.fillLightblue50,
-                        child: Column(children: [
-                          Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.h, vertical: 11.v),
-                              decoration: AppDecoration.outlineBlack.copyWith(
-                                  borderRadius:
-                                      BorderRadiusStyle.roundedBorder16),
-                              child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgUser,
-                                              height: 19.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 4.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller: nameController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText:
-                                                      "Tax Professional Name"))
-                                        ]),
-                                    SizedBox(height: 39.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgCall,
-                                              height: 15.adaptSize,
-                                              width: 15.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  top: 8.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller: phoneController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 24.h),
-                                                  labelText: "Phone",
-                                                  textInputType:
-                                                      TextInputType.phone))
-                                        ]),
-                                    SizedBox(height: 39.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath:
-                                                  ImageConstant.imgLocation,
-                                              height: 20.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 4.v, bottom: 12.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller: addressController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText: "Address"))
-                                        ]),
-                                    SizedBox(height: 40.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant
-                                                  .imgVectorGray600,
-                                              height: 16.adaptSize,
-                                              width: 16.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  top: 6.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller: assetsController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 23.h),
-                                                  labelText: "Assets"))
-                                        ]),
-                                    SizedBox(height: 39.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgUser,
-                                              height: 19.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 4.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller:
-                                                      liabilitiesController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText: "Liabilities"))
-                                        ]),
-                                    SizedBox(height: 39.v),
-                                    SizedBox(
-                                        height: 112.v,
-                                        width: 342.h,
-                                        child: Stack(
-                                            alignment: Alignment.bottomRight,
-                                            children: [
-                                              Align(
-                                                  alignment:
-                                                      Alignment.topCenter,
-                                                  child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              CustomImageView(
-                                                                  svgPath:
-                                                                      ImageConstant
-                                                                          .imgUser,
-                                                                  height: 19.v,
-                                                                  width: 17.h,
-                                                                  margin: EdgeInsets.only(
-                                                                      top: 4.v,
-                                                                      bottom: 13
-                                                                          .v)),
-                                                              Expanded(
-                                                                  child: CustomTextFormField(
-                                                                      controller:
-                                                                          networthController,
-                                                                      margin: EdgeInsets.only(
-                                                                          left: 22
-                                                                              .h),
-                                                                      labelText:
-                                                                          "Net Worth"))
-                                                            ]),
-                                                        SizedBox(height: 47.v),
-                                                        CustomImageView(
-                                                            svgPath: ImageConstant
-                                                                .imgComputerGray600,
-                                                            height: 12.v,
-                                                            width: 17.h)
-                                                      ])),
-                                              CustomTextFormField(
-                                                  width: 303.h,
-                                                  controller: incomeController,
-                                                  labelText: "Income",
-                                                  alignment:
-                                                      Alignment.bottomRight)
-                                            ])),
-                                    SizedBox(height: 42.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgUser,
-                                              height: 19.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 1.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller:
-                                                      expensesController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText: "Expenses"))
-                                        ]),
-                                    SizedBox(height: 39.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant
-                                                  .imgComputerGray600,
-                                              height: 12.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 8.v, bottom: 16.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller:
-                                                      cashflowController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText: "Cashflow"))
-                                        ]),
-                                    SizedBox(height: 22.v)
-                                  ])),
-                          SizedBox(height: 10.v),
-                          Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.h, vertical: 17.v),
-                              decoration: AppDecoration.outlineBlack.copyWith(
-                                  borderRadius:
-                                      BorderRadiusStyle.roundedBorder16),
-                              child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CustomTextFormField(
-                                        controller: editController,
-                                        labelText: "Financial Health Notes",
-                                        prefix: Container(
+    return Scaffold(
+        backgroundColor: appTheme.lightBlue50,
+        appBar: CustomAppBar(
+            leadingWidth: 44.h,
+            leading: AppbarImage(
+                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+                margin:
+                    EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
+                onTap: () {
+                  Navigator.pop(context);
+                }),
+            centerTitle: true,
+            title: AppbarTitle(text: "Financial Profile"),
+            actions: [
+              AppbarImage1(
+                  svgPath: ImageConstant.imgCart,
+                  margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
+            ],
+            styleType: Style.bgShadow),
+        body: SafeArea(
+          bottom: false,
+          child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                  padding: EdgeInsets.only(top: 11.v),
+                  child: Container(
+                      margin: EdgeInsets.only(
+                          left: 12.h, right: 12.h, bottom: 5.v),
+                      decoration: AppDecoration.fillLightblue50,
+                      child: Column(children: [
+                        Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.h, vertical: 11.v),
+                            decoration: AppDecoration.outlineBlack.copyWith(
+                                borderRadius:
+                                    BorderRadiusStyle.roundedBorder16),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant.imgUser,
+                                            height: 19.v,
+                                            width: 17.h,
                                             margin: EdgeInsets.only(
-                                                top: 5.v,
-                                                right: 21.h,
-                                                bottom: 5.v),
-                                            child: CustomImageView(
-                                                svgPath:
-                                                    ImageConstant.imgEdit)),
-                                        prefixConstraints:
-                                            BoxConstraints(maxHeight: 156.v),
-                                        contentPadding:
-                                            EdgeInsets.only(right: 30.h)),
-                                    SizedBox(height: 40.v),
-                                    custominputFieldWithContainer(
-                                      title: "Outcome",
-                                      imagePath: ImageConstant.imgUser,
-                                    ),
-                                    SizedBox(height: 39.v),
-                                    custominputFieldWithContainer(
-                                      title: "Health Issues",
-                                      imagePath: ImageConstant.imgMap,
-                                    ),
-                                    SizedBox(height: 39.v),
-                                    custominputFieldWithContainer(
-                                      title: "Medications",
-                                      imagePath: ImageConstant.imgUser,
-                                    ),
-                                    SizedBox(height: 42.v),
-                                    SizedBox(height: 39.v),
-                                    custominputFieldWithContainer(
-                                      title: "Age of Siblings",
-                                      imagePath: ImageConstant.imgCalendar,
-                                    ),
-                                    SizedBox(height: 42.v),
-                                    Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
+                                                top: 4.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller: nameController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText:
+                                                    "Tax Professional Name"))
+                                      ]),
+                                  SizedBox(height: 39.v),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant.imgCall,
+                                            height: 15.adaptSize,
+                                            width: 15.adaptSize,
+                                            margin: EdgeInsets.only(
+                                                top: 8.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller: phoneController,
+                                                margin: EdgeInsets.only(
+                                                    left: 24.h),
+                                                labelText: "Phone",
+                                                textInputType:
+                                                    TextInputType.phone))
+                                      ]),
+                                  SizedBox(height: 39.v),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath:
+                                                ImageConstant.imgLocation,
+                                            height: 20.v,
+                                            width: 17.h,
+                                            margin: EdgeInsets.only(
+                                                top: 4.v, bottom: 12.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller: addressController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText: "Address"))
+                                      ]),
+                                  SizedBox(height: 40.v),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant
+                                                .imgVectorGray600,
+                                            height: 16.adaptSize,
+                                            width: 16.adaptSize,
+                                            margin: EdgeInsets.only(
+                                                top: 6.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller: assetsController,
+                                                margin: EdgeInsets.only(
+                                                    left: 23.h),
+                                                labelText: "Assets"))
+                                      ]),
+                                  SizedBox(height: 39.v),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant.imgUser,
+                                            height: 19.v,
+                                            width: 17.h,
+                                            margin: EdgeInsets.only(
+                                                top: 4.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller:
+                                                    liabilitiesController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText: "Liabilities"))
+                                      ]),
+                                  SizedBox(height: 39.v),
+                                  SizedBox(
+                                      height: 112.v,
+                                      width: 342.h,
+                                      child: Stack(
+                                          alignment: Alignment.bottomRight,
+                                          children: [
+                                            Align(
+                                                alignment:
+                                                    Alignment.topCenter,
+                                                child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            CustomImageView(
+                                                                svgPath:
+                                                                    ImageConstant
+                                                                        .imgUser,
+                                                                height: 19.v,
+                                                                width: 17.h,
+                                                                margin: EdgeInsets.only(
+                                                                    top: 4.v,
+                                                                    bottom: 13
+                                                                        .v)),
+                                                            Expanded(
+                                                                child: CustomTextFormField(
+                                                                    controller:
+                                                                        networthController,
+                                                                    margin: EdgeInsets.only(
+                                                                        left: 22
+                                                                            .h),
+                                                                    labelText:
+                                                                        "Net Worth"))
+                                                          ]),
+                                                      SizedBox(height: 47.v),
+                                                      CustomImageView(
+                                                          svgPath: ImageConstant
+                                                              .imgComputerGray600,
+                                                          height: 12.v,
+                                                          width: 17.h)
+                                                    ])),
+                                            CustomTextFormField(
+                                                width: 303.h,
+                                                controller: incomeController,
+                                                labelText: "Income",
+                                                alignment:
+                                                    Alignment.bottomRight)
+                                          ])),
+                                  SizedBox(height: 42.v),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant.imgUser,
+                                            height: 19.v,
+                                            width: 17.h,
+                                            margin: EdgeInsets.only(
+                                                top: 1.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller:
+                                                    expensesController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText: "Expenses"))
+                                      ]),
+                                  SizedBox(height: 39.v),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath: ImageConstant
+                                                .imgComputerGray600,
+                                            height: 12.v,
+                                            width: 17.h,
+                                            margin: EdgeInsets.only(
+                                                top: 8.v, bottom: 16.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller:
+                                                    cashflowController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText: "Cashflow"))
+                                      ]),
+                                  SizedBox(height: 22.v)
+                                ])),
+                        SizedBox(height: 10.v),
+                        Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.h, vertical: 17.v),
+                            decoration: AppDecoration.outlineBlack.copyWith(
+                                borderRadius:
+                                    BorderRadiusStyle.roundedBorder16),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomTextFormField(
+                                      controller: editController,
+                                      labelText: "Financial Health Notes",
+                                      prefix: Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5.v,
+                                              right: 21.h,
+                                              bottom: 5.v),
+                                          child: CustomImageView(
                                               svgPath:
-                                                  ImageConstant.imgCalendar,
-                                              height: 19.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 1.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller:
-                                                      fatherageController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText: "Father Age"))
-                                        ]),
-                                    SizedBox(
-                                      height: 40.v,
-                                    ),
-                                    custominputFieldWithContainer(
-                                        title: "(If death) Age and Cause",
-                                        imagePath: ImageConstant.imgEdit,
-                                        controller: editController),
-                                    SizedBox(height: 42.v),
-                                    Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath:
-                                                  ImageConstant.imgCalendar,
-                                              height: 19.v,
-                                              width: 17.h,
-                                              margin: EdgeInsets.only(
-                                                  top: 1.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller:
-                                                      motherageController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 22.h),
-                                                  labelText: "Mother Age"))
-                                        ]),
-                                    SizedBox(height: 39.v),
-                                    custominputFieldWithContainer(
-                                        title: "(If death) Age and Cause",
-                                        imagePath: ImageConstant.imgEdit,
-                                        controller: editController),
-                                    SizedBox(height: 39.v),
-                                    custominputFieldWithContainer(
-                                        title: "Other Health Notes",
-                                        imagePath: ImageConstant.imgEdit,
-                                        controller: editController),
-                                  ])),
-                          CustomElevatedButton(
-                              text: "Save",
-                              margin: EdgeInsets.only(
-                                  left: 12.h, top: 32.v, right: 12.h),
-                              rightIcon: Container(
-                                  margin: EdgeInsets.only(left: 16.h),
-                                  child: CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgArrowrightPrimary))),
-                          SizedBox(height: 9.v),
-                          Text("Cancel", style: theme.textTheme.titleMedium)
-                        ]))))));
+                                                  ImageConstant.imgEdit)),
+                                      prefixConstraints:
+                                          BoxConstraints(maxHeight: 156.v),
+                                      contentPadding:
+                                          EdgeInsets.only(right: 30.h)),
+                                  SizedBox(height: 40.v),
+                                  custominputFieldWithContainer(
+                                    title: "Outcome",
+                                    imagePath: ImageConstant.imgUser,
+                                  ),
+                                  SizedBox(height: 39.v),
+                                  custominputFieldWithContainer(
+                                    title: "Health Issues",
+                                    imagePath: ImageConstant.imgMap,
+                                  ),
+                                  SizedBox(height: 39.v),
+                                  custominputFieldWithContainer(
+                                    title: "Medications",
+                                    imagePath: ImageConstant.imgUser,
+                                  ),
+                                  SizedBox(height: 42.v),
+                                  SizedBox(height: 39.v),
+                                  custominputFieldWithContainer(
+                                    title: "Age of Siblings",
+                                    imagePath: ImageConstant.imgCalendar,
+                                  ),
+                                  SizedBox(height: 42.v),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath:
+                                                ImageConstant.imgCalendar,
+                                            height: 19.v,
+                                            width: 17.h,
+                                            margin: EdgeInsets.only(
+                                                top: 1.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller:
+                                                    fatherageController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText: "Father Age"))
+                                      ]),
+                                  SizedBox(
+                                    height: 40.v,
+                                  ),
+                                  custominputFieldWithContainer(
+                                      title: "(If death) Age and Cause",
+                                      imagePath: ImageConstant.imgEdit,
+                                      controller: editController),
+                                  SizedBox(height: 42.v),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                            svgPath:
+                                                ImageConstant.imgCalendar,
+                                            height: 19.v,
+                                            width: 17.h,
+                                            margin: EdgeInsets.only(
+                                                top: 1.v, bottom: 13.v)),
+                                        Expanded(
+                                            child: CustomTextFormField(
+                                                controller:
+                                                    motherageController,
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
+                                                labelText: "Mother Age"))
+                                      ]),
+                                  SizedBox(height: 39.v),
+                                  custominputFieldWithContainer(
+                                      title: "(If death) Age and Cause",
+                                      imagePath: ImageConstant.imgEdit,
+                                      controller: editController),
+                                  SizedBox(height: 39.v),
+                                  custominputFieldWithContainer(
+                                      title: "Other Health Notes",
+                                      imagePath: ImageConstant.imgEdit,
+                                      controller: editController),
+                                ])),
+                        CustomElevatedButton(
+                            text: "Save",
+                            margin: EdgeInsets.only(
+                                left: 12.h, top: 32.v, right: 12.h),
+                            rightIcon: Container(
+                                margin: EdgeInsets.only(left: 16.h),
+                                child: CustomImageView(
+                                    svgPath:
+                                        ImageConstant.imgArrowrightPrimary))),
+                        SizedBox(height: 9.v),
+                        Text("Cancel", style: theme.textTheme.titleMedium)
+                      ])))),
+        ));
   }
 
   Widget custominputFieldWithContainer(

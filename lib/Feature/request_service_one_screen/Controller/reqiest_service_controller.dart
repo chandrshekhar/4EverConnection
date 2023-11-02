@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/partner_model_list.dart';
@@ -109,13 +110,11 @@ class RequestServiceController extends GetxController {
   //pic date and time
   Future<void> selectDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
-        
         context: context,
         initialEntryMode: DatePickerEntryMode.calendarOnly,
         initialDate: selectedDate.value,
         firstDate: DateTime.now(),
         lastDate: DateTime(3000),
-        
         fieldHintText: '',
         builder: ((context, child) {
           return Theme(
@@ -126,8 +125,6 @@ class RequestServiceController extends GetxController {
                   headerHelpStyle: TextStyle(fontSize: 20),
                   weekdayStyle: TextStyle(fontSize: 20),
                 ),
-                
-                
               ),
               child: child!);
         }));
@@ -147,7 +144,7 @@ class RequestServiceController extends GetxController {
     return outputFormat.format(inputDate);
   }
 
-  addServiceRequest() async {
+  addServiceRequest(BuildContext context) async {
     try {
       Map<String, dynamic> reqModel = {
         "partner_assigned": partnerId.value,
@@ -156,12 +153,13 @@ class RequestServiceController extends GetxController {
         "action_scheduled_on":
             "${selectDateController.value.text} ${selectSlot.value.toString().substring(0, 2)}:${selectSlot.value.toString().substring(2)}"
       };
-      print(reqModel);
+
       isAddServiceLoading(true);
       var res = await _serviceRepository.addService(reqModel: reqModel);
       if (res.isNotEmpty) {
         ToastWidget.successToast(success: "Service successfully added");
         isAddServiceLoading(false);
+        Navigator.pushReplacementNamed(context, AppRoutes.dashboardScreen);
       } else {
         ToastWidget.errorToast(error: "Faild to added service!");
         isAddServiceLoading(false);

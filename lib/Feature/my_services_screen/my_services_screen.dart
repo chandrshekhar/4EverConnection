@@ -110,13 +110,18 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               ])),
           Padding(
               padding: EdgeInsets.symmetric(vertical: 13.v, horizontal: 15.v),
-              child: Text("Completed Services",
+              child: Text(
+                  tapIndex == 0 ? "In Progress Service" : "Completed Services",
                   style: theme.textTheme.titleLarge)),
           tapIndex == 0
               ? Obx(
                   () => userServiceController.isLoading == true
-                      ? const Center(
-                          child: CircularProgressIndicator.adaptive())
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.3),
+                          child: const Center(
+                              child: CircularProgressIndicator.adaptive()),
+                        )
                       : userServiceController.userServicesList.isEmpty
                           ? const Center(
                               child: Text("No Service"),
@@ -128,14 +133,16 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                                     .userServicesList.length,
                                 itemBuilder: (context, index) {
                                   return serviceCard(
-                                      userServiceController
-                                          .userServicesList[index], (value) {
-                                    switch (value) {
-                                      case "Call us":
-                                        break;
-                                      default:
-                                    }
-                                  });
+                                    userServiceController
+                                        .userServicesList[index],
+                                    (value) {
+                                      switch (value) {
+                                        case "Call us":
+                                          break;
+                                        default:
+                                      }
+                                    },
+                                  );
                                 },
                               ),
                             ),
@@ -147,8 +154,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
   Widget serviceCard(
       UserServicesModel userServicesModel, Function(String)? onSelected) {
     return Container(
-      margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 6.v),
-      
+      margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 15.v),
       decoration: BoxDecoration(
           color: theme.cardColor, borderRadius: BorderRadius.circular(9.v)),
       child: Column(
@@ -177,7 +183,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                     flex: 2,
                     child: Text(userServicesModel.identifier.toString(),
                         style: const TextStyle(
-                            color: Colors.white54, fontSize: 15))),
+                            color: Colors.white, fontSize: 15))),
                 const Spacer(),
                 Container(
                   height: 15.v,
@@ -188,6 +194,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                     icon: const Icon(
                       Icons.more_vert,
                       size: 18,
+                      color: Colors.white,
                     ),
                     padding: EdgeInsets.zero,
                     onSelected: onSelected,
@@ -208,142 +215,169 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               ],
             ),
           ),
-          Padding(padding: EdgeInsets.all( 12.v,),
+          Padding(
+            padding: EdgeInsets.all(
+              12.v,
+            ),
             child: Column(
               children: [
                 Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Start Date",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18.v),
-                ),
-              ),
-              Expanded(
-                  flex: 3,
-                  child: Text(
-                      convertAndFormatDate(userServicesModel.dateCreated!),
-                      style: const TextStyle(
-                          color: Color(0xFF6B6B6B), fontSize: 15))),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Service ",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18.v),
-                ),
-              ),
-              Expanded(
-                  flex: 2,
-                  child: Text(userServicesModel.serviceName ?? "",
-                      style: const TextStyle(
-                          color: Color(0xFF6B6B6B), fontSize: 15))),
-              const Spacer()
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Collaborate",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18.v),
-                ),
-              ),
-              const Expanded(
-                  flex: 2,
-                  child: Text('Collaboration Page',
-                      style:
-                          TextStyle(color: Color(0xFF6B6B6B), fontSize: 15))),
-              const Spacer(),
-            ],
-          ),
-          SizedBox(height: 5.v),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Fee",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18.v),
-                ),
-              ),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 2),
-                    decoration: BoxDecoration(border: Border.all(width: 0.1)),
-                    child: CustomTextFormField(
-                      hintText: "\$ ${userServicesModel.balance}",
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Start Date",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18.v),
+                      ),
                     ),
-                  )),
-              const Spacer(),
-            ],
-          ),
-          SizedBox(
-            height: 10.v,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Status",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18.v),
+                    Expanded(
+                        flex: 3,
+                        child: Text(
+                            convertAndFormatDate(
+                                userServicesModel.dateCreated!),
+                            style: const TextStyle(
+                                color: Color(0xFF6B6B6B), fontSize: 15))),
+                  ],
                 ),
-              ),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 2),
-                    decoration: BoxDecoration(border: Border.all(width: 0.1)),
-                    child: DropdownButton<String>(
-                      value: selectedItem,
-                      isDense: true,
-                      isExpanded: true,
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedItem = newValue!;
-                        });
-                      },
-                      items: dropdownItemList.map((String item) {
-                        return DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(item),
-                        );
-                      }).toList(),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Service ",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18.v),
+                      ),
                     ),
-                  )),
-              const Spacer()
-            ],
-          ),
-
+                    Expanded(
+                        flex: 2,
+                        child: Text(userServicesModel.serviceName ?? "",
+                            style: const TextStyle(
+                                color: Color(0xFF6B6B6B), fontSize: 15))),
+                    const Spacer()
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Collaborate",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18.v),
+                      ),
+                    ),
+                    const Expanded(
+                        flex: 2,
+                        child: Text('Collaboration Page',
+                            style: TextStyle(
+                                color: Color(0xFF6B6B6B), fontSize: 15))),
+                    const Spacer(),
+                  ],
+                ),
+                SizedBox(height: 5.v),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Fee",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18.v),
+                      ),
+                    ),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                            padding: EdgeInsets.only(
+                                left: 10.adaptSize,
+                                top: 5.adaptSize,
+                                bottom: 5.adaptSize,
+                                right: 10.adaptSize),
+                            decoration: BoxDecoration(
+                                border: Border.all(width: 0.1),
+                                borderRadius:
+                                    BorderRadius.circular(5.adaptSize),
+                                color: Colors.grey.shade100),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  "\$",
+                                  style: TextStyle(
+                                      color: Color(0xFF6B6B6B), fontSize: 15),
+                                ),
+                                SizedBox(
+                                  width: 10.adaptSize,
+                                ),
+                                Container(
+                                  color: Colors.grey,
+                                  height: 15,
+                                  width: 1,
+                                ),
+                                SizedBox(
+                                  width: 10.adaptSize,
+                                ),
+                                Text(
+                                  userServicesModel.balance.toString(),
+                                  style: const TextStyle(
+                                      color: Color(0xFF6B6B6B), fontSize: 15),
+                                )
+                              ],
+                            ))),
+                    const Spacer(),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.v,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Status",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18.v),
+                      ),
+                    ),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                            padding: EdgeInsets.only(
+                                left: 10.adaptSize,
+                                top: 5.adaptSize,
+                                bottom: 5.adaptSize,
+                                right: 10.adaptSize),
+                            decoration: BoxDecoration(
+                                border: Border.all(width: 0.1),
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(5),
+                                color: Colors.grey.shade100),
+                            child: Row(
+                              children: [
+                                Text(userServicesModel.status.toString()),
+                                const Spacer(),
+                                const Icon(Icons.expand_more)
+                              ],
+                            ))),
+                    const Spacer()
+                  ],
+                ),
               ],
             ),
-          
           ),
-          
-          
-                  ],
+        ],
       ),
     );
   }
