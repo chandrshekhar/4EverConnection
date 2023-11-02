@@ -21,27 +21,28 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: appTheme.lightBlue50,
-        resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar(
-            leadingWidth: 44.h,
-            leading: AppbarImage(
-                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin: EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
-                onTap: () {
-                  onTapArrowleftone(context);
-                }),
-            centerTitle: true,
-            title: AppbarTitle(text: "Change Password "),
-            actions: [
-              AppbarImage1(
-                  svgPath: ImageConstant.imgCart,
-                  margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
-            ],
-            styleType: Style.bgShadow),
-        body: Form(
+    return Scaffold(
+      backgroundColor: appTheme.lightBlue50,
+      resizeToAvoidBottomInset: false,
+      appBar: CustomAppBar(
+          leadingWidth: 44.h,
+          leading: AppbarImage(
+              svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+              margin: EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
+              onTap: () {
+                onTapArrowleftone(context);
+              }),
+          centerTitle: true,
+          title: AppbarTitle(text: "Change Password "),
+          actions: [
+            AppbarImage1(
+                svgPath: ImageConstant.imgCart,
+                margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
+          ],
+          styleType: Style.bgShadow),
+      body: SafeArea(
+        bottom: false,
+        child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             padding: EdgeInsets.only(top: 12.v),
@@ -74,6 +75,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                           controller: passwordController,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Old password",
+                                          labelText: "Old password",
                                           textInputType:
                                               TextInputType.visiblePassword,
                                           suffix: Container(
@@ -104,6 +106,8 @@ class ChangePasswordScreen extends StatelessWidget {
                                           controller: newpasswordController,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "New password",
+                                          labelText: "Confirm password",
+
                                           textInputType:
                                               TextInputType.visiblePassword,
                                           suffix: Container(
@@ -134,6 +138,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                           controller: confirmpasswordController,
                                           margin: EdgeInsets.only(left: 22.h),
                                           hintText: "Confirm password",
+                                          labelText: "Confirm password",
                                           textInputAction: TextInputAction.done,
                                           textInputType:
                                               TextInputType.visiblePassword,

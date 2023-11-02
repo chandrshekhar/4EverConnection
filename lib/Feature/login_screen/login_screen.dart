@@ -73,6 +73,7 @@ class LoginScreen extends StatelessWidget {
                                   loginController.userNameController.value,
                               margin: EdgeInsets.only(left: 22.h),
                               hintText: "Username",
+                              labelText: "Username",
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'This field is required';
@@ -118,6 +119,7 @@ class LoginScreen extends StatelessWidget {
                                     loginController.passwordController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Password",
+                                labelText: "Password",
                                 textInputAction: TextInputAction.done,
                                 textInputType: TextInputType.visiblePassword,
                                 suffix: InkWell(

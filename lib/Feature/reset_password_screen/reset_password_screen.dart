@@ -16,11 +16,12 @@ class ResetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: appTheme.lightBlue90001,
-        body: Stack(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: appTheme.lightBlue90001,
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             Align(

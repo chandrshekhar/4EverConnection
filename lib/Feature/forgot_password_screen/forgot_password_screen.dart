@@ -17,10 +17,11 @@ class ForgotPasswordScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: appTheme.lightBlue90001,
-        body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: appTheme.lightBlue90001,
+      body: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 100.v),
@@ -89,6 +90,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                   .emailController.value,
                               margin: EdgeInsets.only(left: 21.h),
                               hintText: "Email ID",
+                              labelText: "Email ID",
                               hintStyle: CustomTextStyles.bodyMediumGray600_1,
                               textInputAction: TextInputAction.done,
                               textInputType: TextInputType.emailAddress,

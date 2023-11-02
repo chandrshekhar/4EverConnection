@@ -33,11 +33,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xFF1B608C),
-        body: Form(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xFF1B608C),
+      body: SafeArea(
+        bottom: false,
+        child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(
@@ -146,6 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.firstNameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "First Name",
+                                labelText: "First Name",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -175,6 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.lastnameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Last Name",
+                                labelText: "Last Name",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -227,6 +230,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     .mobileNumberController.value,
                                 margin: EdgeInsets.only(left: 24.h),
                                 hintText: "Mobile Number",
+                                labelText: "Mobile Number",
                                 textInputType: TextInputType.phone,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -258,6 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.emailController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Mail Address",
+                                labelText: "Mail Address",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -375,6 +380,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.dobController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Date of Birth ",
+                                labelText: "Date of Birth ",
                               ),
                             ),
                           ],
@@ -405,6 +411,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.occupationController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Occupation ",
+                                labelText: "Occupation ",
                               ),
                             ),
                           ],
@@ -428,6 +435,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.addressController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Address",
+                                labelText: "Address",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -457,6 +465,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.aptController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Apt",
+                                labelText: "Apt",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -487,6 +496,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.zipController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "ZIP",
+                                labelText: "ZIP",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -525,6 +535,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     .businessNameController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Your Business Name (If any)",
+                                labelText: "Your Business Name (If any)",
                               ),
                             ),
                           ],
@@ -552,6 +563,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     signUpController.passwordController.value,
                                 margin: EdgeInsets.only(left: 22.h),
                                 hintText: "Password",
+                                labelText: "Password",
                                 textInputType: TextInputType.visiblePassword,
                                 suffix: InkWell(
                                   onTap: () {

@@ -163,6 +163,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           margin: EdgeInsets.only(
                               left: 12.h, top: 0.v, right: 12.h),
                           hintText: "First name *",
+                          labelText: "First name *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
@@ -188,6 +189,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
                         hintText: "Middle name (if Any)",
+                        labelText: "Middle name (if Any)",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
@@ -205,6 +207,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
                           hintText: "Last name *",
+                          labelText: "Last name *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
@@ -233,6 +236,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
                           hintText: "Phone number *",
+                          labelText: "Phone number *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
@@ -261,6 +265,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
                           hintText: "Personal Email *",
+                          labelText: "Personal Email *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
@@ -286,6 +291,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
                         hintText: "Business Name (If Any)",
+                        labelText: "Business Name (If Any)",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
@@ -303,6 +309,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
                           hintText: "Home Address *",
+                          labelText: "Home Address *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
@@ -329,6 +336,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
                         hintText: "Apt, Ste",
+                        labelText: "Apt, Ste",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
@@ -345,6 +353,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
                           hintText: "ZIP *",
+                          labelText: "ZIP *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(

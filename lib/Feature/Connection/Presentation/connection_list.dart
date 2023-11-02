@@ -87,6 +87,7 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                                     // controller: passwordController,
                                     margin: EdgeInsets.only(left: 22.h),
                                     hintText: "Search connection",
+                                    labelText: "Search connection",
                                     textInputType: TextInputType.name,
                                     onChange: (value) {
                                       if (value.toString().isNotEmpty) {
