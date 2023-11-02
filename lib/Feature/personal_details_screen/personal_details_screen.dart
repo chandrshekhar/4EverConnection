@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
-import 'package:flutter_multi_formatter/widgets/country_dropdown.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -35,7 +33,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
             leadingWidth: 44.h,
             leading: AppbarImage(
                 svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin: EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
+                margin:
+                    EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
                 onTap: () {
                   Navigator.pop(context);
                 }),
@@ -44,21 +43,22 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
             actions: [
               AppbarImage1(
                   onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                    Navigator.pushNamed(
+                        context, AppRoutes.notificationsScreen);
                   },
                   svgPath: ImageConstant.imgCart,
                   margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
             ],
             styleType: Style.bgShadow),
         body: SafeArea(
-          bottom: false,
+          bottom: true,
           child: Form(
               key: _formKey,
               child: SingleChildScrollView(
                   padding: EdgeInsets.only(top: 11.v),
                   child: Padding(
-                      padding:
-                          EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
+                      padding: EdgeInsets.only(
+                          left: 12.h, right: 12.h, bottom: 5.v),
                       child: Obx(
                         () => Column(children: [
                           Container(
@@ -68,7 +68,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                       BorderRadiusStyle.roundedBorder16),
                               child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
                                     Padding(
                                         padding: EdgeInsets.only(left: 1.h),
@@ -82,233 +83,18 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   height: 19.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 4.v, bottom: 13.v)),
+                                                      top: 4.v,
+                                                      bottom: 13.v)),
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: appTheme.lightBlue50,
-            resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(
-                leadingWidth: 44.h,
-                leading: AppbarImage(
-                    svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                    margin:
-                        EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
-                    onTap: () {
-                      Navigator.pop(context);
-                    }),
-                centerTitle: true,
-                title: AppbarTitle(text: "Personal Details"),
-                actions: [
-                  AppbarImage1(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, AppRoutes.notificationsScreen);
-                      },
-                      svgPath: ImageConstant.imgCart,
-                      margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
-                ],
-                styleType: Style.bgShadow),
-            body: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                    padding: EdgeInsets.only(top: 11.v),
-                    child: Padding(
-                        padding: EdgeInsets.only(
-                            left: 12.h, right: 12.h, bottom: 5.v),
-                        child: Obx(
-                          () => Column(children: [
-                            Container(
-                                padding: EdgeInsets.all(11.h),
-                                decoration: AppDecoration.outlineBlack.copyWith(
-                                    borderRadius:
-                                        BorderRadiusStyle.roundedBorder16),
-                                child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                          padding: EdgeInsets.only(left: 1.h),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgUser,
-                                                    height: 19.v,
-                                                    width: 17.h,
-                                                    margin: EdgeInsets.only(
-                                                        top: 4.v,
-                                                        bottom: 13.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .firstNameController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText:
-                                                            "First Name"))
-                                              ])),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 1.h, top: 39.v),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgUser,
-                                                    height: 19.v,
-                                                    width: 17.h,
-                                                    margin: EdgeInsets.only(
-                                                        top: 4.v,
-                                                        bottom: 13.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .middleNameController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText:
-                                                            "Middle Name"))
-                                              ])),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 1.h, top: 40.v),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgUser,
-                                                    height: 19.v,
-                                                    width: 17.h,
-                                                    margin: EdgeInsets.only(
-                                                        top: 3.v,
-                                                        bottom: 13.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .lastNameController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText: "Last Name"))
-                                              ])),
-
-                                      SizedBox(height: 18.adaptSize),
-                                      const PhoneNumberTextFieldWidget(
-                                        lable: "Mobile Phone",
-                                      ),
-                                      // Padding(
-                                      //     padding: EdgeInsets.only(
-                                      //         left: 1.h, top: 39.v),
-                                      //     child: Row(
-                                      //         crossAxisAlignment:
-                                      //             CrossAxisAlignment.start,
-                                      //         children: [
-                                      //           CustomImageView(
-                                      //               svgPath:
-                                      //                   ImageConstant.imgCall,
-                                      //               height: 15.adaptSize,
-                                      //               width: 15.adaptSize,
-                                      //               margin: EdgeInsets.only(
-                                      //                   top: 8.v,
-                                      //                   bottom: 13.v)),
-                                      //           Expanded(
-                                      //               child: CustomTextFormField(
-                                      //                   controller:
-                                      //                       personalDetailsController
-                                      //                           .mobilePhoneController
-                                      //                           .value,
-                                      //                   margin: EdgeInsets.only(
-                                      //                       left: 24.h),
-                                      //                   labelText:
-                                      //                       "Mobile Phone",
-                                      //                   textInputType:
-                                      //                       TextInputType
-                                      //                           .phone))
-                                      //         ])),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 1.h, top: 39.v),
-                                        child: const PhoneNumberTextFieldWidget(
-                                          lable: "Home Phone",
-                                        ),
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 1.h, top: 39.v),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgVector,
-                                                    height: 17.adaptSize,
-                                                    width: 17.adaptSize,
-                                                    margin: EdgeInsets.only(
-                                                        top: 6.v,
-                                                        bottom: 13.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .personalEmailController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText:
-                                                            "Personal Email",
-                                                        textInputType:
-                                                            TextInputType
-                                                                .emailAddress))
-                                              ])),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 1.h, top: 39.v),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath: ImageConstant
-                                                        .imgLocation,
-                                                    height: 20.v,
-                                                    width: 17.h,
-                                                    margin: EdgeInsets.only(
-                                                        top: 4.v,
-                                                        bottom: 12.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        onTap: () async {
-                                                          var address =
-                                                              await Navigator
-                                                                  .push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  AddressAutoCompleteWidget(),
-                                                            ),
-                                                          );
                                                           personalDetailsController
                                                               .firstNameController
                                                               .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
-                                                      labelText: "First Name"))
+                                                      labelText:
+                                                          "First Name"))
                                             ])),
                                     Padding(
                                         padding: EdgeInsets.only(
@@ -323,7 +109,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   height: 19.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 4.v, bottom: 13.v)),
+                                                      top: 4.v,
+                                                      bottom: 13.v)),
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
@@ -332,7 +119,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                               .value,
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
-                                                      labelText: "Middle Name"))
+                                                      labelText:
+                                                          "Middle Name"))
                                             ])),
                                     Padding(
                                         padding: EdgeInsets.only(
@@ -347,7 +135,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   height: 19.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 3.v, bottom: 13.v)),
+                                                      top: 3.v,
+                                                      bottom: 13.v)),
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
@@ -358,58 +147,47 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                           left: 22.h),
                                                       labelText: "Last Name"))
                                             ])),
+        
+                                    SizedBox(height: 18.adaptSize),
+                                    const PhoneNumberTextFieldWidget(
+                                      lable: "Mobile Phone",
+                                    ),
+                                    // Padding(
+                                    //     padding: EdgeInsets.only(
+                                    //         left: 1.h, top: 39.v),
+                                    //     child: Row(
+                                    //         crossAxisAlignment:
+                                    //             CrossAxisAlignment.start,
+                                    //         children: [
+                                    //           CustomImageView(
+                                    //               svgPath:
+                                    //                   ImageConstant.imgCall,
+                                    //               height: 15.adaptSize,
+                                    //               width: 15.adaptSize,
+                                    //               margin: EdgeInsets.only(
+                                    //                   top: 8.v,
+                                    //                   bottom: 13.v)),
+                                    //           Expanded(
+                                    //               child: CustomTextFormField(
+                                    //                   controller:
+                                    //                       personalDetailsController
+                                    //                           .mobilePhoneController
+                                    //                           .value,
+                                    //                   margin: EdgeInsets.only(
+                                    //                       left: 24.h),
+                                    //                   labelText:
+                                    //                       "Mobile Phone",
+                                    //                   textInputType:
+                                    //                       TextInputType
+                                    //                           .phone))
+                                    //         ])),
                                     Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 1.h, top: 39.v),
-                                        child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgCall,
-                                                  height: 15.adaptSize,
-                                                  width: 15.adaptSize,
-                                                  margin: EdgeInsets.only(
-                                                      top: 8.v, bottom: 13.v)),
-                                              Expanded(
-                                                  child: CustomTextFormField(
-                                                      controller:
-                                                          personalDetailsController
-                                                              .mobilePhoneController
-                                                              .value,
-                                                      margin: EdgeInsets.only(
-                                                          left: 24.h),
-                                                      labelText: "Mobile Phone",
-                                                      textInputType:
-                                                          TextInputType.phone))
-                                            ])),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 1.h, top: 39.v),
-                                        child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgCall,
-                                                  height: 15.adaptSize,
-                                                  width: 15.adaptSize,
-                                                  margin: EdgeInsets.only(
-                                                      top: 8.v, bottom: 13.v)),
-                                              Expanded(
-                                                  child: CustomTextFormField(
-                                                      controller:
-                                                          personalDetailsController
-                                                              .homePhoneController
-                                                              .value,
-                                                      margin: EdgeInsets.only(
-                                                          left: 24.h),
-                                                      labelText: "Home Phone",
-                                                      textInputType:
-                                                          TextInputType.phone))
-                                            ])),
+                                      padding: EdgeInsets.only(
+                                          left: 1.h, top: 39.v),
+                                      child: const PhoneNumberTextFieldWidget(
+                                        lable: "Home Phone",
+                                      ),
+                                    ),
                                     Padding(
                                         padding: EdgeInsets.only(
                                             left: 1.h, top: 39.v),
@@ -423,7 +201,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   height: 17.adaptSize,
                                                   width: 17.adaptSize,
                                                   margin: EdgeInsets.only(
-                                                      top: 6.v, bottom: 13.v)),
+                                                      top: 6.v,
+                                                      bottom: 13.v)),
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
@@ -446,12 +225,13 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgLocation,
+                                                  svgPath: ImageConstant
+                                                      .imgLocation,
                                                   height: 20.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 4.v, bottom: 12.v)),
+                                                      top: 4.v,
+                                                      bottom: 12.v)),
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       onTap: () async {
@@ -486,12 +266,13 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgLocation,
+                                                  svgPath: ImageConstant
+                                                      .imgLocation,
                                                   height: 20.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 3.v, bottom: 12.v)),
+                                                      top: 3.v,
+                                                      bottom: 12.v)),
                                               CustomTextFormField(
                                                   width: 113.h,
                                                   controller:
@@ -502,8 +283,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                       left: 22.h, top: 2.v),
                                                   labelText: "Apt, Ste"),
                                               CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgLocation,
+                                                  svgPath: ImageConstant
+                                                      .imgLocation,
                                                   height: 20.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
@@ -514,7 +295,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                   width: 109.h,
                                                   controller:
                                                       personalDetailsController
-                                                          .zipController.value,
+                                                          .zipController
+                                                          .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
                                                   labelText: "ZIP")
@@ -527,12 +309,13 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgCalendar,
+                                                  svgPath: ImageConstant
+                                                      .imgCalendar,
                                                   height: 19.v,
                                                   width: 17.h,
                                                   margin: EdgeInsets.only(
-                                                      top: 4.v, bottom: 13.v)),
+                                                      top: 4.v,
+                                                      bottom: 13.v)),
                                               Expanded(
                                                   child: CustomTextFormField(
                                                       controller:
@@ -582,8 +365,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                 groupValue:
                                                     personalDetailsController
                                                         .radioGroup.value,
-                                                margin:
-                                                    EdgeInsets.only(left: 12.h),
+                                                margin: EdgeInsets.only(
+                                                    left: 12.h),
                                                 onChange: (value) {
                                                   personalDetailsController
                                                       .selectGender(value);
@@ -594,8 +377,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                 groupValue:
                                                     personalDetailsController
                                                         .radioGroup.value,
-                                                margin:
-                                                    EdgeInsets.only(left: 22.h),
+                                                margin: EdgeInsets.only(
+                                                    left: 22.h),
                                                 onChange: (value) {
                                                   personalDetailsController
                                                       .selectGender(value);
@@ -613,7 +396,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                       BorderRadiusStyle.roundedBorder16),
                               child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
@@ -659,7 +443,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                           .value,
                                                   margin: EdgeInsets.only(
                                                       left: 22.h),
-                                                  labelText: "Country of Birth",
+                                                  labelText:
+                                                      "Country of Birth",
                                                   suffix: Container(
                                                       margin:
                                                           EdgeInsets.fromLTRB(
@@ -709,7 +494,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                           svgPath: ImageConstant
                                                               .imgVectorGray6004x7)),
                                                   suffixConstraints:
-                                                      BoxConstraints(maxHeight: 34.v)))
+                                                      BoxConstraints(
+                                                          maxHeight: 34.v)))
                                         ]),
                                     SizedBox(height: 30.v),
                                     Row(children: [
@@ -721,13 +507,17 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                           margin: EdgeInsets.only(
                                               top: 5.v, bottom: 6.v)),
                                       Padding(
-                                          padding: EdgeInsets.only(left: 22.h),
+                                          padding:
+                                              EdgeInsets.only(left: 22.h),
                                           child: Text("Language Preferences",
-                                              style: theme.textTheme.bodyLarge))
+                                              style:
+                                                  theme.textTheme.bodyLarge))
                                     ]),
                                     Padding(
                                         padding: EdgeInsets.only(
-                                            left: 37.h, top: 9.v, bottom: 4.v),
+                                            left: 37.h,
+                                            top: 9.v,
+                                            bottom: 4.v),
                                         child: Obx(
                                           () => Row(children: [
                                             CustomRadioButton(
@@ -755,7 +545,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                           ]),
                                         ))
                                   ])),
-
+        
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10.v),
                             child: Row(
@@ -787,7 +577,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                               ],
                             ),
                           ),
-
+        
                           // Text("Cancel", style: theme.textTheme.titleMedium)
                         ]),
                       )))),
