@@ -7,6 +7,7 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 
 import '../../Controllers/Professional Details/professional_details_controller.dart';
@@ -85,30 +86,9 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                   labelText: "Business Name"))
                                         ]),
                                     SizedBox(height: 39.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgCall,
-                                              height: 15.adaptSize,
-                                              width: 15.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  top: 8.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller:
-                                                      professionalProfileController
-                                                          .businessphoneController
-                                                          .value,
-                                                  margin: EdgeInsets.only(
-                                                      left: 24.h),
-                                                  labelText: "Business Phone",
-                                                  textInputType:
-                                                      TextInputType.phone))
-                                        ]),
+                                    const PhoneNumberTextFieldWidget(
+                                      lable: "Business Phone",
+                                    ),
                                     SizedBox(height: 39.v),
                                     Row(
                                         mainAxisAlignment:

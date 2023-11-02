@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
+import 'package:flutter_multi_formatter/widgets/country_dropdown.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -8,6 +10,7 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 import '../../Controllers/Personal Details Controller/personal_details-controller.dart';
 
@@ -43,7 +46,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                 actions: [
                   AppbarImage1(
                       onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                        Navigator.pushNamed(
+                            context, AppRoutes.notificationsScreen);
                       },
                       svgPath: ImageConstant.imgCart,
                       margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
@@ -144,63 +148,47 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             left: 22.h),
                                                         labelText: "Last Name"))
                                               ])),
+
+                                      SizedBox(height: 18.adaptSize),
+                                      const PhoneNumberTextFieldWidget(
+                                        lable: "Mobile Phone",
+                                      ),
+                                      // Padding(
+                                      //     padding: EdgeInsets.only(
+                                      //         left: 1.h, top: 39.v),
+                                      //     child: Row(
+                                      //         crossAxisAlignment:
+                                      //             CrossAxisAlignment.start,
+                                      //         children: [
+                                      //           CustomImageView(
+                                      //               svgPath:
+                                      //                   ImageConstant.imgCall,
+                                      //               height: 15.adaptSize,
+                                      //               width: 15.adaptSize,
+                                      //               margin: EdgeInsets.only(
+                                      //                   top: 8.v,
+                                      //                   bottom: 13.v)),
+                                      //           Expanded(
+                                      //               child: CustomTextFormField(
+                                      //                   controller:
+                                      //                       personalDetailsController
+                                      //                           .mobilePhoneController
+                                      //                           .value,
+                                      //                   margin: EdgeInsets.only(
+                                      //                       left: 24.h),
+                                      //                   labelText:
+                                      //                       "Mobile Phone",
+                                      //                   textInputType:
+                                      //                       TextInputType
+                                      //                           .phone))
+                                      //         ])),
                                       Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 1.h, top: 39.v),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgCall,
-                                                    height: 15.adaptSize,
-                                                    width: 15.adaptSize,
-                                                    margin: EdgeInsets.only(
-                                                        top: 8.v,
-                                                        bottom: 13.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .mobilePhoneController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 24.h),
-                                                        labelText:
-                                                            "Mobile Phone",
-                                                        textInputType:
-                                                            TextInputType
-                                                                .phone))
-                                              ])),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 1.h, top: 39.v),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgCall,
-                                                    height: 15.adaptSize,
-                                                    width: 15.adaptSize,
-                                                    margin: EdgeInsets.only(
-                                                        top: 8.v,
-                                                        bottom: 13.v)),
-                                                Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .homePhoneController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 24.h),
-                                                        labelText: "Home Phone",
-                                                        textInputType:
-                                                            TextInputType
-                                                                .phone))
-                                              ])),
+                                        padding: EdgeInsets.only(
+                                            left: 1.h, top: 39.v),
+                                        child: const PhoneNumberTextFieldWidget(
+                                          lable: "Home Phone",
+                                        ),
+                                      ),
                                       Padding(
                                           padding: EdgeInsets.only(
                                               left: 1.h, top: 39.v),

@@ -9,6 +9,7 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 
 // ignore_for_file: must_be_immutable
@@ -37,7 +38,8 @@ class RelationshipsScreen extends StatelessWidget {
                 actions: [
                   AppbarImage1(
                       onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                        Navigator.pushNamed(
+                            context, AppRoutes.notificationsScreen);
                       },
                       svgPath: ImageConstant.imgCart,
                       margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
@@ -145,41 +147,13 @@ class RelationshipsScreen extends StatelessWidget {
                                           labelText: "Last Name"))
                                 ]),
                             SizedBox(height: 38.v),
-                            Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgCall,
-                                      height: 15.adaptSize,
-                                      width: 15.adaptSize,
-                                      margin: EdgeInsets.only(
-                                          top: 8.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          controller: relationshipController
-                                              .phoneController.value,
-                                          margin: EdgeInsets.only(left: 24.h),
-                                          labelText: "Mobile Phone",
-                                          textInputType: TextInputType.phone))
-                                ]),
+                            const PhoneNumberTextFieldWidget(
+                              lable: "Mobile Phone",
+                            ),
                             SizedBox(height: 38.v),
-                            Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgCall,
-                                      height: 15.adaptSize,
-                                      width: 15.adaptSize,
-                                      margin: EdgeInsets.only(
-                                          top: 8.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          controller: relationshipController
-                                              .homephoneController.value,
-                                          margin: EdgeInsets.only(left: 24.h),
-                                          labelText: "Home Phone",
-                                          textInputType: TextInputType.phone))
-                                ]),
+                            const PhoneNumberTextFieldWidget(
+                              lable: "Home Phone",
+                            ),
                             SizedBox(height: 38.v),
                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -438,28 +412,11 @@ class RelationshipsScreen extends StatelessWidget {
                                               labelText: "Business Name"))
                                     ])),
                             Padding(
-                                padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomImageView(
-                                          svgPath: ImageConstant.imgCall,
-                                          height: 15.adaptSize,
-                                          width: 15.adaptSize,
-                                          margin: EdgeInsets.only(
-                                              top: 8.v, bottom: 13.v)),
-                                      Expanded(
-                                          child: CustomTextFormField(
-                                              controller: relationshipController
-                                                  .businessphoneController
-                                                  .value,
-                                              margin:
-                                                  EdgeInsets.only(left: 24.h),
-                                              labelText: "Business Phone",
-                                              textInputType:
-                                                  TextInputType.phone))
-                                    ])),
+                              padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                              child: const PhoneNumberTextFieldWidget(
+                                lable: "Business Phone",
+                              ),
+                            ),
                             Padding(
                                 padding: EdgeInsets.only(left: 1.h, top: 39.v),
                                 child: Row(

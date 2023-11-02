@@ -27,11 +27,14 @@ class ApiPath {
   //connection
   static const addConnection = "$baseUrl/api/connections/";
   static const listConnection = "$baseUrl/api/connections/";
-  static const documentTypeApi = "$baseUrl/api/vault-document-types/";
+
   static const resendRequest = "$baseUrl/api/connections/resend";
 
   //vault
   static const addDocumentUrl = "$baseUrl/api/vault-document/";
+  static const documentTypeApi = "$baseUrl/api/vault-document-types/";
+  static const documentVaultList = "$baseUrl/api/vault-document/";
+  static const updateDocuemntDesc = "$baseUrl/api/vault-document/update/";
 
   //notification
   static const getNotification = "$baseUrl/api/user-announcements/";

@@ -5,6 +5,7 @@ import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class HealthProfileScreen extends StatelessWidget {
@@ -210,27 +211,9 @@ class HealthProfileScreen extends StatelessWidget {
                                                   labelText: "Doctor Name"))
                                         ]),
                                     SizedBox(height: 39.v),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomImageView(
-                                              svgPath: ImageConstant.imgCall,
-                                              height: 15.adaptSize,
-                                              width: 15.adaptSize,
-                                              margin: EdgeInsets.only(
-                                                  top: 8.v, bottom: 13.v)),
-                                          Expanded(
-                                              child: CustomTextFormField(
-                                                  controller: phoneController,
-                                                  margin: EdgeInsets.only(
-                                                      left: 24.h),
-                                                  labelText: "Doctor Phone",
-                                                  textInputType:
-                                                      TextInputType.phone))
-                                        ]),
+                                    const PhoneNumberTextFieldWidget(
+                                      lable: "Mobile Phone",
+                                    ),
                                     SizedBox(height: 39.v),
                                     Row(
                                         mainAxisAlignment:

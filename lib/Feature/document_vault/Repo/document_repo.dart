@@ -3,7 +3,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:forever_connection/Feature/document_vault/Model/document_model.dart';
+import 'package:forever_connection/Feature/document_vault/Model/document_type_model.dart';
+import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 
@@ -116,6 +117,84 @@ class DocumentRepo {
             e.type == DioExceptionType.receiveTimeout ||
             e.type == DioExceptionType.unknown) {
           ToastWidget.errorToast(error: e.toString());
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          throw Exception("Faild to load data");
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+  // get documentvault list
+  Future<List<DocumentVaultListModel>> getDocumentVaultList() async {
+    log("Document type list api calling....");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      response = await dio.get(
+        ApiPath.documentVaultList,
+      );
+
+      if (response.statusCode == 200) {
+        final List<DocumentVaultListModel> documentVaultList =
+            (response.data as List)
+                .map((json) => DocumentVaultListModel.fromJson(json))
+                .toList();
+
+        // print(userServicesList);
+        return documentVaultList;
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          throw Exception("Faild to load data");
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+// update document desc
+  Future<Map> updateDocumentDesc({int? id, int? name, String? desc}) async {
+    log("Document type list api calling....");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    final reqModel = {"name": name, "description": desc};
+
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      response =
+          await dio.patch("${ApiPath.updateDocuemntDesc}$id/", data: reqModel);
+
+      if (response.statusCode == 200) {
+        // print(userServicesList);
+        return response.data;
+      } else {
+        throw Exception("Faild to update description");
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
           throw Exception("Faild to load data");
