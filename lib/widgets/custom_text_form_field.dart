@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -28,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
       this.filled = false,
       this.validator,
       this.readOnly = false,
-      this.onTap,
+      this.onTap, this.inputFormatters,
       this.onChange, this.maxLength})
       : super(
           key: key,
@@ -84,6 +85,8 @@ class CustomTextFormField extends StatelessWidget {
   
   final int? maxLength;
 
+  final List<TextInputFormatter>? inputFormatters;
+
   @override
   Widget build(BuildContext context) {
     return textFormFieldWidget;
@@ -98,7 +101,7 @@ class CustomTextFormField extends StatelessWidget {
           maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,
-          
+          inputFormatters: [],
           style: textStyle ??
               const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           obscureText: obscureText!,
@@ -122,7 +125,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIconConstraints: prefixConstraints,
         suffixIconConstraints: suffixConstraints,
         isDense: true,
-       
+        
         suffix: suffix,
         contentPadding: contentPadding ?? EdgeInsets.all(2.h),
         fillColor: fillColor,

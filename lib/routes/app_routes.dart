@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/Contact/Presentation/contact_list_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/add_note_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_list.dart';
 import 'package:forever_connection/Feature/document_vault/Presentation/document_vault.dart';
@@ -19,6 +20,8 @@ import 'package:forever_connection/Feature/financial_profile_screen/financial_pr
 import 'package:forever_connection/Feature/my_services_screen/my_services_screen.dart';
 import 'package:forever_connection/Feature/password_security_screen/password_security_screen.dart';
 import 'package:forever_connection/Feature/change_password_screen/change_password_screen.dart';
+import 'package:path/path.dart';
+import '../Feature/Contact/Presentation/add_contact.dart';
 import '../Feature/notification/notification-screen.dart';
 
 class AppRoutes {
@@ -74,6 +77,10 @@ class AppRoutes {
 
   static const String addNotesScreen = "add_note_screen";
 
+  static const String contactList="/myContactList";
+
+  static const String addContactScreen = "/addContactScreen";
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => LoginScreen(),
@@ -96,5 +103,7 @@ class AppRoutes {
     documentVaultScreen: (context) => DocumentVaultScreen(),
     myNotesListScreen: (context) =>  MyNotesListScreen(),
     addNotesScreen: (context) => AddNoteScreen(),
+    contactList:(context) => ContactListScreen(),
+    addContactScreen:(context) => AddContactScreen(),
   };
 }

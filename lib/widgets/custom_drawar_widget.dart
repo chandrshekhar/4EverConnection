@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:get/get.dart';
 import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
@@ -309,6 +310,8 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(8);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.contactList);
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[8] ==
@@ -321,6 +324,7 @@ class CustomDrawerWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
+                           
                           ],
                         ),
                       ),
