@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget.dart';
+import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -39,6 +40,9 @@ class ContactListScreen extends StatelessWidget {
         title: AppbarTitle(text: "Contact Lits"),
         actions: [
           AppbarImage1(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+              },
               svgPath: ImageConstant.imgCart,
               margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
         ],
@@ -73,7 +77,6 @@ class ContactListScreen extends StatelessWidget {
                     SizedBox(
                       height: 10.adaptSize,
                     ),
-                   
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -88,7 +91,7 @@ class ContactListScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(3)),
                             height: 48.h,
                             padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 10, bottom: 10),
+                                left: 20, right: 10, top: 10, bottom: 10),
                             child: const Row(
                               children: [
                                 Icon(
@@ -110,13 +113,20 @@ class ContactListScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomIconButton(
-                            onTap: () {},
+                            onTap: () {
+                              contactController.getContactFromPhone();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MyContactsScreen()));
+                            },
                             decoration: BoxDecoration(
                                 color: AppColors.floatingActionButtonColor,
                                 borderRadius: BorderRadius.circular(3)),
                             height: 48.h,
                             padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 10, bottom: 10),
+                                left: 10, right: 10, top: 10, bottom: 10),
                             child: Row(
                               children: [
                                 const Icon(

@@ -263,6 +263,8 @@ class DocumentVaultDataTable extends StatelessWidget {
             onTap: () async {
               await documentsVaultController.updateDocumentVaultDescription(
                   id: id, name: name, desc: descController.text);
+              // ignore: use_build_context_synchronously
+              Navigator.pop(context);
             },
             child: CustomElevatedButton(
               onTap: () async {
