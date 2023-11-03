@@ -82,7 +82,7 @@ class CustomTextFormField extends StatelessWidget {
   void Function()? onTap;
 
   final ValueChanged? onChange;
-  
+
   final int? maxLength;
 
   final List<TextInputFormatter>? inputFormatters;
@@ -95,13 +95,11 @@ class CustomTextFormField extends StatelessWidget {
   Widget get textFormFieldWidget => Container(
         width: width ?? double.maxFinite,
         margin: margin,
-        
         child: TextFormField(
           textCapitalization: TextCapitalization.sentences,
           maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,
-          inputFormatters: [],
           style: textStyle ??
               const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           obscureText: obscureText!,
@@ -120,12 +118,12 @@ class CustomTextFormField extends StatelessWidget {
         labelText: labelText ?? "",
         hintStyle: hintStyle ??
             const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-            labelStyle: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+        labelStyle:
+            const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIconConstraints: suffixConstraints,
         isDense: true,
-        
         suffix: suffix,
         contentPadding: contentPadding ?? EdgeInsets.all(2.h),
         fillColor: fillColor,

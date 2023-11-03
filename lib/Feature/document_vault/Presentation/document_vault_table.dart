@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/theme/theme_helper.dart';
@@ -97,7 +98,8 @@ class DocumentVaultDataTable extends StatelessWidget {
                                     documentsVaultController
                                         .documentVaultList[index].id!,
                                     documentsVaultController
-                                        .documentVaultList[index].name!,
+                                        .documentVaultList[index].name
+                                        .toString(),
                                     documentsVaultController
                                         .documentVaultList[index]
                                         .description!));
@@ -118,7 +120,32 @@ class DocumentVaultDataTable extends StatelessWidget {
                       ),
                     ),
                     PopupMenuItem<String>(
-                      onTap: () {},
+                      onTap: () {
+                        AwesomeDialog(
+                                btnOkColor: AppColors.buttonColor,
+                                context: context,
+                                dialogType: DialogType.question,
+                                animType: AnimType.bottomSlide,
+                                title: 'Remove',
+                                desc: 'Are you sure to delete this vault?',
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () async {
+                                  await documentsVaultController
+                                      .deleteDocumentVault(
+                                          id: documentsVaultController
+                                              .documentVaultList[index].id!);
+                                },
+                                barrierColor:
+                                    AppColors.lightBlue.withOpacity(0.3),
+                                descTextStyle: TextStyle(
+                                    color: AppColors.buttonColor,
+                                    fontSize: 15.sp),
+                                titleTextStyle: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.sp))
+                            .show();
+                      },
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,
                       child: Row(
@@ -129,23 +156,6 @@ class DocumentVaultDataTable extends StatelessWidget {
                           ),
                           SizedBox(width: 5.w),
                           const Text('Delete'),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                      
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.download,
-                            size: 15.sp,
-                          ),
-                          SizedBox(width: 5.w),
-                          const Text('Download'),
                         ],
                       ),
                     ),
@@ -189,7 +199,7 @@ class DocumentVaultDataTable extends StatelessWidget {
   }
 
   Widget editDocumentVaultWidget(
-      BuildContext context, int id, int name, String desc) {
+      BuildContext context, int id, String name, String desc) {
     TextEditingController descController = TextEditingController(text: desc);
     return Container(
       height: 300.h,
@@ -234,10 +244,6 @@ class DocumentVaultDataTable extends StatelessWidget {
             ),
           ),
           CustomTextFormField(
-              onTap: () {
-                documentsVaultController.updateDocumentVaultDescription(
-                    id: id, name: name, desc: desc);
-              },
               controller: descController,
               maxLines: 6,
               margin: EdgeInsets.all(8.sp),
@@ -253,11 +259,22 @@ class DocumentVaultDataTable extends StatelessWidget {
               ),
               filled: true,
               fillColor: theme.colorScheme.primary),
-          const CustomElevatedButton(
-            text: "Update",
-            isDisabled: true,
-            height: 40,
-            width: 100,
+          InkWell(
+            onTap: () async {
+              await documentsVaultController.updateDocumentVaultDescription(
+                  id: id, name: name, desc: descController.text);
+            },
+            child: CustomElevatedButton(
+              onTap: () async {
+                // await documentsVaultController.updateDocumentVaultDescription(
+                //     id: id, name: name, desc: desc);
+                // Navigator.pop(context);
+              },
+              text: "Update",
+              isDisabled: true,
+              height: 40,
+              width: 100,
+            ),
           )
         ],
       ),

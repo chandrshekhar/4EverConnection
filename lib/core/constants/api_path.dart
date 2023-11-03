@@ -35,6 +35,7 @@ class ApiPath {
   static const documentTypeApi = "$baseUrl/api/vault-document-types/";
   static const documentVaultList = "$baseUrl/api/vault-document/";
   static const updateDocuemntDesc = "$baseUrl/api/vault-document/update/";
+  static const deleteDocument = "$baseUrl/api/vault-document/delete/";
 
   //notification
   static const getNotification = "$baseUrl/api/user-announcements/";

@@ -83,16 +83,32 @@ class DocumentsVaultController extends GetxController {
   }
   // update document vault description
 
-  updateDocumentVaultDescription({int? id, int? name, String? desc}) async {
+  updateDocumentVaultDescription({int? id, String? name, String? desc}) async {
     isLoadingDocumentList(true);
     try {
       var resp = await _documentRepo.updateDocumentDesc(
           id: id, name: name, desc: desc);
-      ToastWidget.successToast(success: resp["details"]);
-      isLoadingDocumentList(false);
+      await getVaultDocumentList();
+      ToastWidget.successToast(success: "Update Successfully");
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
-      isLoadingDocumentList(false);
+    }
+  }
+
+  // delete document vault
+
+  deleteDocumentVault({
+    int? id,
+  }) async {
+    isLoadingDocumentList(true);
+    try {
+      var resp = await _documentRepo.deleteDocument(
+        id: id,
+      );
+      await getVaultDocumentList();
+      ToastWidget.successToast(success: resp['message']);
+    } catch (e) {
+      ToastWidget.errorToast(error: e.toString());
     }
   }
 
@@ -184,6 +200,5 @@ class DocumentsVaultController extends GetxController {
 class ImagePickerList {
   final String? title;
   final Widget? icon;
-
   ImagePickerList(this.title, this.icon);
 }

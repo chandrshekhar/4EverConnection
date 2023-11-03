@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:forever_connection/Feature/document_vault/Documents%20Vault%20controller/documents_vault_controller.dart';
 import 'package:forever_connection/Feature/document_vault/Model/document_type_model.dart';
 import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
@@ -168,28 +169,33 @@ class DocumentRepo {
   }
 
 // update document desc
-  Future<Map> updateDocumentDesc({int? id, int? name, String? desc}) async {
-    log("Document type list api calling....");
+  Future<Map> updateDocumentDesc({int? id, String? name, String? desc}) async {
     Response response;
     var token = await SharedPref().getUserToken();
-    final reqModel = {"name": name, "description": desc};
-
     try {
       dio.options.headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        //'Accept': 'application/json',
+        'Content-Type':
+            'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
         'Authorization': "Bearer $token"
       };
-      response =
-          await dio.patch("${ApiPath.updateDocuemntDesc}$id/", data: reqModel);
 
+      FormData formData = FormData();
+      formData.fields.addAll([
+        MapEntry("name", name.toString()),
+        MapEntry('description', desc!),
+      ]);
+      final String url = "${ApiPath.updateDocuemntDesc}$id/";
+      log("url-> $url");
+      response = await dio.patch(url, data: formData);
       if (response.statusCode == 200) {
-        // print(userServicesList);
+        log("url-> ${response.data.toString()}");
         return response.data;
       } else {
         throw Exception("Faild to update description");
       }
     } catch (e) {
+      log(e.toString());
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -197,7 +203,46 @@ class DocumentRepo {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          throw Exception("Faild to load data");
+          log(e.response.toString());
+          throw Exception("Faild to update data");
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+  // update document desc
+  Future<Map> deleteDocument({int? id}) async {
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      final String url = "${ApiPath.deleteDocument}$id/";
+      log("url-> $url");
+      response = await dio.delete(
+        url,
+      );
+      if (response.statusCode == 200) {
+        log("url-> ${response.data.toString()}");
+        return response.data;
+      } else {
+        throw Exception("Faild to delete document");
+      }
+    } catch (e) {
+      log(e.toString());
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          log(e.response.toString());
+          throw Exception("Faild to update data");
         }
       }
       throw Exception("Faild to make api the request : $e");
