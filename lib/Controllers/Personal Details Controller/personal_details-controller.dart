@@ -17,8 +17,7 @@ class PersonalDetailsController extends GetxController {
   var countruyofbirthControlle = TextEditingController().obs;
   var countryOfCitizenshipControlle = TextEditingController().obs;
 
-  final userPersonal =
-      Get.find<UserProfileController>().userProfileModel.value.personalData;
+  final userPersonal = Get.put(UserProfileController());
 
   RxString radioGroup = "Male".obs;
   RxString radioGroupLanguage = "Yes".obs;
@@ -32,21 +31,21 @@ class PersonalDetailsController extends GetxController {
   }
 
   void initialPersonalDetailsData() {
-    firstNameController.value.text = userPersonal!.firstName ?? "";
-    lastNameController.value.text = userPersonal!.lastName ?? "";
-    middleNameController.value.text = userPersonal!.middleName ?? "";
-    mobilePhoneController.value.text = userPersonal!.mobilePhone ?? "";
-    homePhoneController.value.text = userPersonal!.homePhone ?? "";
-    personalEmailController.value.text = userPersonal!.personalEmail ?? "";
-    homeAddressController.value.text = userPersonal!.homeAddress ?? "";
-    aptSteController.value.text = userPersonal!.homeApt ?? "";
-    zipController.value.text = userPersonal!.homeZip ?? "";
-    dobControlle.value.text = userPersonal!.dateOfBirth ?? "";
-    sociealsecurityController.value.text =
-        userPersonal!.socialSecurityNumber ?? "";
-    countruyofbirthControlle.value.text = userPersonal!.countryOfBirth ?? "";
+    var userData = userPersonal.userProfileModel.value.personalData;
+    firstNameController.value.text = userData?.firstName ?? "";
+    lastNameController.value.text = userData?.lastName ?? "";
+    middleNameController.value.text = userData?.middleName ?? "";
+    mobilePhoneController.value.text = userData?.mobilePhone ?? "";
+    homePhoneController.value.text = userData?.homePhone ?? "";
+    personalEmailController.value.text = userData?.personalEmail ?? "";
+    homeAddressController.value.text = userData?.homeAddress ?? "";
+    aptSteController.value.text = userData?.homeApt ?? "";
+    zipController.value.text = userData?.homeZip ?? "";
+    dobControlle.value.text = userData?.dateOfBirth ?? "";
+    sociealsecurityController.value.text = userData?.socialSecurityNumber ?? "";
+    countruyofbirthControlle.value.text = userData?.countryOfBirth ?? "";
     countryOfCitizenshipControlle.value.text =
-        userPersonal!.countryOfCitizenship ?? "";
+        userData?.countryOfCitizenship ?? "";
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -34,9 +36,11 @@ class SharedPref {
   }
 
   deleteAllData() async {
+    log("Deleting all data");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove("userId");
-    prefs.remove("userToken");
-    prefs.remove("isSeen");
+    await prefs.remove("userId");
+    await prefs.remove("userToken");
+    await prefs.remove("isSeen");
+    log("Deleted all data");
   }
 }

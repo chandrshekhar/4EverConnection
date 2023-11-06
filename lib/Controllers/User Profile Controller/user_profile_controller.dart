@@ -8,10 +8,8 @@ import '../../Services/Profile/user_profile_service.dart';
 import '../../core/utils/toast_widget.dart';
 
 class UserProfileController extends GetxController {
-  
   RxBool isLoadingProfileData = false.obs;
   Rx<UserProfileModel> userProfileModel = UserProfileModel().obs;
-
   UserProfileService userProfileService = UserProfileService();
   getUserProfileData() async {
     try {
@@ -52,14 +50,9 @@ class UserProfileController extends GetxController {
     false
   ].obs;
 
-
-  
-
-  
   @override
-  void onReady() {
-    getUserProfileData();
-    
-    super.onReady();
+  void onInit() {
+    super.onInit();
+     getUserProfileData();
   }
 }

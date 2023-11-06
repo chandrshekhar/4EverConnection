@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Auth%20Controller/login_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
-import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:get/get.dart';
 
 import '../../Controllers/User Profile Controller/user_profile_controller.dart';
@@ -14,7 +14,8 @@ import '../../Controllers/User Profile Controller/user_profile_controller.dart';
 class MyProfileScreen extends StatelessWidget {
   MyProfileScreen({Key? key}) : super(key: key);
 
-  final myProfileController = Get.find<UserProfileController>();
+  final myProfileController = Get.put(UserProfileController());
+  final authController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -305,8 +306,7 @@ class MyProfileScreen extends StatelessWidget {
                                       ),
                                       ListTile(
                                         onTap: () {
-                                          Navigator.pushNamed(
-                                              context, AppRoutes.loginScreen);
+                                          authController.logOut(context);
                                         },
                                         contentPadding: EdgeInsets.zero,
                                         dense: true,

@@ -11,7 +11,6 @@ import '../dashboard_screen/widgets/userexperience_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 
-
 // ignore: must_be_immutable
 class DashboardScreen extends StatelessWidget {
   DashboardScreen({Key? key})
@@ -22,15 +21,12 @@ class DashboardScreen extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   final dashboardController = Get.put(DashboardController());
-  final myProfileController = Get.put(UserProfileController());
   final serviceController = Get.put(RequestServiceController());
-
-
-  
-
+  final myProfileController = Get.put(UserProfileController());
   @override
   Widget build(BuildContext context) {
     serviceController.getServiceProfssional();
+    myProfileController.getUserProfileData();
     return Scaffold(
       key: _key,
       resizeToAvoidBottomInset: false,

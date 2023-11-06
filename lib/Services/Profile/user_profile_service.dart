@@ -12,6 +12,7 @@ class UserProfileService {
   Future<UserProfileModel> getUserProfile() async {
     Response response;
     var token = await SharedPref().getUserToken();
+    print(token);
     try {
       dio.options.headers = {
         'Accept': 'application/json',

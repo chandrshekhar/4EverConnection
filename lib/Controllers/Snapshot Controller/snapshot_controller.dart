@@ -34,52 +34,52 @@ class UserSnapshotController extends GetxController {
   }
 
   // user personal data is the snapshot of the user
-  final userPersonal = Get.find<UserProfileController>().userProfileModel;
+  final userPersonal = Get.put(UserProfileController());
 
   getSnapshotData() {
     firstNameController.value.text =
-        userPersonal.value.personalData!.firstName ?? "";
+        userPersonal.userProfileModel.value.personalData!.firstName ?? "";
     middleNameController.value.text =
-        userPersonal.value.personalData!.middleName ?? "";
+        userPersonal.userProfileModel.value.personalData!.middleName ?? "";
     lastNameController.value.text =
-        userPersonal.value.personalData!.lastName ?? "";
+        userPersonal.userProfileModel.value.personalData!.lastName ?? "";
     occupationController.value.text =
-        userPersonal.value.professionalData!.currentOccupation ?? "";
+        userPersonal.userProfileModel.value.professionalData!.currentOccupation ?? "";
     companyNameController.value.text =
-        userPersonal.value.professionalData!.businessName ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessName ?? "";
     positionController.value.text =
-        userPersonal.value.professionalData!.position ?? "";
+        userPersonal.userProfileModel.value.professionalData!.position ?? "";
     idealOccupationController.value.text =
-        userPersonal.value.professionalData!.idealOccupation ?? "";
+        userPersonal.userProfileModel.value.professionalData!.idealOccupation ?? "";
     phoneNumberController.value.text =
-        userPersonal.value.personalData!.mobilePhone ?? "";
+        userPersonal.userProfileModel.value.personalData!.mobilePhone ?? "";
     homePhoneController.value.text =
-        userPersonal.value.personalData!.homePhone ?? "";
+        userPersonal.userProfileModel.value.personalData!.homePhone ?? "";
     spouseController.value.text = "";
     homeAddressController.value.text =
-        userPersonal.value.personalData!.homeAddress ?? "";
+        userPersonal.userProfileModel.value.personalData!.homeAddress ?? "";
     homeZipController.value.text =
-        userPersonal.value.personalData!.homeZip ?? "";
+        userPersonal.userProfileModel.value.personalData!.homeZip ?? "";
     businessPhoneController.value.text =
-        userPersonal.value.professionalData!.businessPhone ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessName ?? "";
     businessFaxController.value.text =
-        userPersonal.value.professionalData!.businessFax ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessFax ?? "";
     businessAptStecontroller.value.text =
-        userPersonal.value.professionalData!.businessApt ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessApt ?? "";
     businessAddressController.value.text =
-        userPersonal.value.professionalData!.businessAddress ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessAddress ?? "";
     businessZipController.value.text =
-        userPersonal.value.professionalData!.businessZip ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessZip ?? "";
     personalEmailController.value.text =
-        userPersonal.value.personalData!.personalEmail ?? "";
+        userPersonal.userProfileModel.value.personalData!.personalEmail ?? "";
     // spouseController.value.text = userPersonal.value.relationshipData.
     businessEmailController.value.text =
-        userPersonal.value.professionalData!.businessEmail ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessEmail ?? "";
     websiteUrlController.value.text =
-        userPersonal.value.professionalData!.businessWebsite ?? "";
+        userPersonal.userProfileModel.value.professionalData!.businessWebsite ?? "";
 
     languagePreference(
-        userPersonal.value.personalData!.preferredLanguage ?? "");
+        userPersonal.userProfileModel.value.personalData!.preferredLanguage ?? "");
   }
 
   @override
