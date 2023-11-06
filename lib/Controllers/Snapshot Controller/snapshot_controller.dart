@@ -61,7 +61,7 @@ class UserSnapshotController extends GetxController {
     homeZipController.value.text =
         userPersonal.value.personalData!.homeZip ?? "";
     businessPhoneController.value.text =
-        userPersonal.value.professionalData!.businessName ?? "";
+        userPersonal.value.professionalData!.businessPhone ?? "";
     businessFaxController.value.text =
         userPersonal.value.professionalData!.businessFax ?? "";
     businessAptStecontroller.value.text =

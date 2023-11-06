@@ -159,7 +159,7 @@ class MyProfileScreen extends StatelessWidget {
                                                               .value
                                                               .personalData
                                                               ?.personalEmail ??
-                                                          "kkjasdklfjaklsj dfklaj",
+                                                          "",
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(

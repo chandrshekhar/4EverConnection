@@ -54,5 +54,6 @@ class PersonalDetailsController extends GetxController {
     // TODO: implement onInit
     initialPersonalDetailsData();
     super.onInit();
-  }
+  }    
+  
 }
