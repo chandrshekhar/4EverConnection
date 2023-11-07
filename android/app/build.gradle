@@ -12,7 +12,7 @@ if (localPropertiesFile.exists()) {
     }
 }
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('./app/foreverconnection_key.properties')
+def keystorePropertiesFile = rootProject.file('./app/forever_key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
@@ -28,9 +28,9 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.forever_connection"
+    namespace "com.app.foreverconnection"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -47,7 +47,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.forever_connection"
+        applicationId "com.app.foreverconnection"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion

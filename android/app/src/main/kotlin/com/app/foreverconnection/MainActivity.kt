@@ -1,4 +1,4 @@
-package com.example.forever_connection
+package com.app.foreverconnection
 
 import io.flutter.embedding.android.FlutterActivity
 
