@@ -2,6 +2,7 @@ import 'package:forever_connection/Feature/Connection/Controller/connection_cont
 import 'package:forever_connection/Feature/Connection/Controller/connection_validation.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -12,6 +13,8 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+
+import '../../../core/utils/address_autocomplete_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class CreateConnectionScreen extends StatefulWidget {
@@ -227,6 +230,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           },
                           fillColor: theme.colorScheme.primary),
                     ),
+                    // PhoneNumberTextFieldWidget(lable: "Phone Number"),
                     Form(
                       key: phoneKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -304,6 +308,18 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                       key: homeKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
+                          readOnly: true,
+                          onTap: () async {
+                            var address = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddressAutoCompleteWidget(),
+                              ),
+                            );
+                            connectionController
+                                .homeAddressController.value.text = address;
+                          },
                           controller:
                               connectionController.homeAddressController.value,
                           margin: EdgeInsets.only(

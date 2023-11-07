@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:forever_connection/core/constants/image_constant.dart';
-import 'package:forever_connection/core/utils/size_utils.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class AddressAutoCompleteWidget extends StatefulWidget {
   @override
-  _AddressAutoCompleteWidgetState createState() => _AddressAutoCompleteWidgetState();
+  _AddressAutoCompleteWidgetState createState() =>
+      _AddressAutoCompleteWidgetState();
 }
 
 class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
@@ -19,24 +16,29 @@ class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Search Address', style: TextStyle(color: Colors.black),),
-        leading: AppbarImage(
-                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                
-                margin:
-                    EdgeInsets.only(left: 24.h, top: 18.v, bottom: 18.v),
-                onTap: () {
-                  Navigator.pop(context);
-                }),
-      ),
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Search Address',
+            style: TextStyle(color: Colors.grey),
+          ),
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.grey,
+            ),
+          )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             TextField(
               controller: _addressController,
-              decoration: InputDecoration(labelText: 'Enter Address', hintText: "Start typing"),
+              decoration: const InputDecoration(
+                  labelText: 'Enter Address', hintText: "Start typing"),
               onChanged: _onAddressChanged,
             ),
             _suggestions.isNotEmpty
@@ -67,8 +69,10 @@ class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
       return;
     }
 
-    const apiKey = 'AIzaSyDzrs8ZFG7ov2TRmmnNdsNnTzSaAtmIrN8'; // Replace with your Google Places API key
-    const endpoint = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+    const apiKey =
+        'AIzaSyDzrs8ZFG7ov2TRmmnNdsNnTzSaAtmIrN8'; // Replace with your Google Places API key
+    const endpoint =
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     final inputText = Uri.encodeQueryComponent(input);
 
     final url = '$endpoint?input=$inputText&key=$apiKey';
@@ -78,11 +82,12 @@ class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
         final data = json.decode(response.body);
         final predictions = data['predictions'] as List<dynamic>;
         setState(() {
-          _suggestions = predictions.map((prediction) => prediction['description']).cast<String>().toList();
+          _suggestions = predictions
+              .map((prediction) => prediction['description'])
+              .cast<String>()
+              .toList();
         });
       }
     });
   }
 }
-
-

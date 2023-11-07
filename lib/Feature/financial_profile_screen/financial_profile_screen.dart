@@ -8,6 +8,8 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 
+import '../../core/utils/address_autocomplete_widget.dart';
+
 // ignore_for_file: must_be_immutable
 class FinancialProfileScreen extends StatelessWidget {
   FinancialProfileScreen({Key? key}) : super(key: key);
@@ -46,8 +48,7 @@ class FinancialProfileScreen extends StatelessWidget {
             leadingWidth: 44.h,
             leading: AppbarImage(
                 svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin:
-                    EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
+                margin: EdgeInsets.only(left: 24.h, top: 20.v, bottom: 30.v),
                 onTap: () {
                   Navigator.pop(context);
                 }),
@@ -66,8 +67,8 @@ class FinancialProfileScreen extends StatelessWidget {
               child: SingleChildScrollView(
                   padding: EdgeInsets.only(top: 11.v),
                   child: Container(
-                      margin: EdgeInsets.only(
-                          left: 12.h, right: 12.h, bottom: 5.v),
+                      margin:
+                          EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
                       decoration: AppDecoration.fillLightblue50,
                       child: Column(children: [
                         Container(
@@ -94,13 +95,14 @@ class FinancialProfileScreen extends StatelessWidget {
                                         Expanded(
                                             child: CustomTextFormField(
                                                 controller: nameController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText:
                                                     "Tax Professional Name"))
                                       ]),
                                   SizedBox(height: 39.v),
-                                  const PhoneNumberTextFieldWidget(
+                                   PhoneNumberTextFieldWidget(
+                                    phoneController:phoneController ,
                                     lable: "Mobile Phone",
                                   ),
                                   SizedBox(height: 39.v),
@@ -111,17 +113,29 @@ class FinancialProfileScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgLocation,
+                                            svgPath: ImageConstant.imgLocation,
                                             height: 20.v,
                                             width: 17.h,
                                             margin: EdgeInsets.only(
                                                 top: 4.v, bottom: 12.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
+                                                onTap: () async {
+                                                  var address =
+                                                      await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          AddressAutoCompleteWidget(),
+                                                    ),
+                                                  );
+                                                  addressController.text =
+                                                      address;
+                                                },
                                                 controller: addressController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText: "Address"))
                                       ]),
                                   SizedBox(height: 40.v),
@@ -132,8 +146,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath: ImageConstant
-                                                .imgVectorGray600,
+                                            svgPath:
+                                                ImageConstant.imgVectorGray600,
                                             height: 16.adaptSize,
                                             width: 16.adaptSize,
                                             margin: EdgeInsets.only(
@@ -141,8 +155,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                         Expanded(
                                             child: CustomTextFormField(
                                                 controller: assetsController,
-                                                margin: EdgeInsets.only(
-                                                    left: 23.h),
+                                                margin:
+                                                    EdgeInsets.only(left: 23.h),
                                                 labelText: "Assets"))
                                       ]),
                                   SizedBox(height: 39.v),
@@ -162,8 +176,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                             child: CustomTextFormField(
                                                 controller:
                                                     liabilitiesController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText: "Liabilities"))
                                       ]),
                                   SizedBox(height: 39.v),
@@ -174,8 +188,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                           alignment: Alignment.bottomRight,
                                           children: [
                                             Align(
-                                                alignment:
-                                                    Alignment.topCenter,
+                                                alignment: Alignment.topCenter,
                                                 child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.min,
@@ -194,10 +207,12 @@ class FinancialProfileScreen extends StatelessWidget {
                                                                         .imgUser,
                                                                 height: 19.v,
                                                                 width: 17.h,
-                                                                margin: EdgeInsets.only(
-                                                                    top: 4.v,
-                                                                    bottom: 13
-                                                                        .v)),
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            4.v,
+                                                                        bottom:
+                                                                            13.v)),
                                                             Expanded(
                                                                 child: CustomTextFormField(
                                                                     controller:
@@ -237,10 +252,9 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller:
-                                                    expensesController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                controller: expensesController,
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText: "Expenses"))
                                       ]),
                                   SizedBox(height: 39.v),
@@ -259,10 +273,9 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 8.v, bottom: 16.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller:
-                                                    cashflowController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                controller: cashflowController,
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText: "Cashflow"))
                                       ]),
                                   SizedBox(height: 22.v)
@@ -288,8 +301,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                               right: 21.h,
                                               bottom: 5.v),
                                           child: CustomImageView(
-                                              svgPath:
-                                                  ImageConstant.imgEdit)),
+                                              svgPath: ImageConstant.imgEdit)),
                                       prefixConstraints:
                                           BoxConstraints(maxHeight: 156.v),
                                       contentPadding:
@@ -321,18 +333,16 @@ class FinancialProfileScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgCalendar,
+                                            svgPath: ImageConstant.imgCalendar,
                                             height: 19.v,
                                             width: 17.h,
                                             margin: EdgeInsets.only(
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller:
-                                                    fatherageController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                controller: fatherageController,
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText: "Father Age"))
                                       ]),
                                   SizedBox(
@@ -348,18 +358,16 @@ class FinancialProfileScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgCalendar,
+                                            svgPath: ImageConstant.imgCalendar,
                                             height: 19.v,
                                             width: 17.h,
                                             margin: EdgeInsets.only(
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller:
-                                                    motherageController,
-                                                margin: EdgeInsets.only(
-                                                    left: 22.h),
+                                                controller: motherageController,
+                                                margin:
+                                                    EdgeInsets.only(left: 22.h),
                                                 labelText: "Mother Age"))
                                       ]),
                                   SizedBox(height: 39.v),

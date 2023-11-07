@@ -4,7 +4,8 @@ import 'package:forever_connection/core/app_export.dart';
 
 class PhoneNumberTextFieldWidget extends StatefulWidget {
   final String lable;
-  const PhoneNumberTextFieldWidget({super.key, required this.lable});
+  TextEditingController? phoneController;
+   PhoneNumberTextFieldWidget({super.key, required this.lable, this.phoneController});
 
   @override
   State<PhoneNumberTextFieldWidget> createState() =>
@@ -49,6 +50,7 @@ class _PhoneNumberTextFieldWidgetState
               flex: 7,
               child: TextFormField(
                 key: ValueKey(_initialCountryData),
+                controller: widget.phoneController,
                 decoration: InputDecoration(
                     labelText: widget.lable, contentPadding: EdgeInsets.zero),
                 keyboardType: TextInputType.phone,

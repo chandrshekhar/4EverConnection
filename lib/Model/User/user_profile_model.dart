@@ -1,155 +1,252 @@
 class AutoGenerate {
-  AutoGenerate({
-    required this.personalData,
-    required this.professionalData,
-    required this.relationshipData,
-    required this.healthData,
-    required this.financialData,
-    required this.lifeInsuranceData,
-    required this.healthInsuranceData,
-    required this.disabilityInsuranceData,
-    required this.longTermCareInsuranceData,
-    required this.homeInsuranceData,
-    required this.carInsuranceData,
-    required this.vaultDocumentData,
-  });
-  late final PersonalData personalData;
-  late final ProfessionalData professionalData;
-  late final List<dynamic> relationshipData;
-  late final HealthData healthData;
-  late final FinancialData financialData;
-  late final List<dynamic> lifeInsuranceData;
-  late final List<dynamic> healthInsuranceData;
-  late final List<dynamic> disabilityInsuranceData;
-  late final List<dynamic> longTermCareInsuranceData;
-  late final List<dynamic> homeInsuranceData;
-  late final List<dynamic> carInsuranceData;
-  late final List<dynamic> vaultDocumentData;
-  
-  AutoGenerate.fromJson(Map<String, dynamic> json){
-    personalData = PersonalData.fromJson(json['personal_data']);
-    professionalData = ProfessionalData.fromJson(json['professional_data']);
-    relationshipData = List.castFrom<dynamic, dynamic>(json['relationship_data']);
-    healthData = HealthData.fromJson(json['health_data']);
-    financialData = FinancialData.fromJson(json['financial_data']);
-    lifeInsuranceData = List.castFrom<dynamic, dynamic>(json['life_insurance_data']);
-    healthInsuranceData = List.castFrom<dynamic, dynamic>(json['health_insurance_data']);
-    disabilityInsuranceData = List.castFrom<dynamic, dynamic>(json['disability_insurance_data']);
-    longTermCareInsuranceData = List.castFrom<dynamic, dynamic>(json['long_term_care_insurance_data']);
-    homeInsuranceData = List.castFrom<dynamic, dynamic>(json['home_insurance_data']);
-    carInsuranceData = List.castFrom<dynamic, dynamic>(json['car_insurance_data']);
-    vaultDocumentData = List.castFrom<dynamic, dynamic>(json['vault_document_data']);
+  PersonalData? personalData;
+  ProfessionalData? professionalData;
+  List<RelationshipData>? relationshipData;
+  HealthData? healthData;
+  FinancialData? financialData;
+  List<LifeInsuranceData>? lifeInsuranceData;
+  List<dynamic>? healthInsuranceData;
+  List<dynamic>? disabilityInsuranceData;
+  List<dynamic>? longTermCareInsuranceData;
+  List<dynamic>? homeInsuranceData;
+  List<dynamic>? carInsuranceData;
+  List<VaultDocumentData>? vaultDocumentData;
+
+  AutoGenerate(
+      {this.personalData,
+      this.professionalData,
+      this.relationshipData,
+      this.healthData,
+      this.financialData,
+      this.lifeInsuranceData,
+      this.healthInsuranceData,
+      this.disabilityInsuranceData,
+      this.longTermCareInsuranceData,
+      this.homeInsuranceData,
+      this.carInsuranceData,
+      this.vaultDocumentData});
+
+  AutoGenerate.fromJson(Map<String, dynamic> json) {
+    personalData = json['personal_data'] != null
+        ? new PersonalData.fromJson(json['personal_data'])
+        : null;
+    professionalData = json['professional_data'] != null
+        ? new ProfessionalData.fromJson(json['professional_data'])
+        : null;
+    if (json['relationship_data'] != null) {
+      relationshipData = <RelationshipData>[];
+      json['relationship_data'].forEach((v) {
+        relationshipData!.add(new RelationshipData.fromJson(v));
+      });
+    }
+    healthData = json['health_data'] != null
+        ? new HealthData.fromJson(json['health_data'])
+        : null;
+    financialData = json['financial_data'] != null
+        ? new FinancialData.fromJson(json['financial_data'])
+        : null;
+    if (json['life_insurance_data'] != null) {
+      lifeInsuranceData = <LifeInsuranceData>[];
+      json['life_insurance_data'].forEach((v) {
+        lifeInsuranceData!.add(new LifeInsuranceData.fromJson(v));
+      });
+    }
+    if (json['health_insurance_data'] != null) {
+      healthInsuranceData = <Null>[];
+      // json['health_insurance_data'].forEach((v) {
+      //   healthInsuranceData!.add(new Null.fromJson(v));
+      // });
+    }
+    // if (json['disability_insurance_data'] != null) {
+    //   disabilityInsuranceData = <Null>[];
+    //   json['disability_insurance_data'].forEach((v) {
+    //     disabilityInsuranceData!.add(new Null.fromJson(v));
+    //   });
+    // }
+    // if (json['long_term_care_insurance_data'] != null) {
+    //   longTermCareInsuranceData = <Null>[];
+    //   json['long_term_care_insurance_data'].forEach((v) {
+    //     longTermCareInsuranceData!.add(new Null.fromJson(v));
+    //   });
+    // }
+    // if (json['home_insurance_data'] != null) {
+    //   homeInsuranceData = <Null>[];
+    //   json['home_insurance_data'].forEach((v) {
+    //     homeInsuranceData!.add(new Null.fromJson(v));
+    //   });
+    // }
+    // if (json['car_insurance_data'] != null) {
+    //   carInsuranceData = <Null>[];
+    //   json['car_insurance_data'].forEach((v) {
+    //     carInsuranceData!.add(new Null.fromJson(v));
+    //   });
+    // }
+    if (json['vault_document_data'] != null) {
+      vaultDocumentData = <VaultDocumentData>[];
+      json['vault_document_data'].forEach((v) {
+        vaultDocumentData!.add(VaultDocumentData.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['personal_data'] = personalData.toJson();
-    _data['professional_data'] = professionalData.toJson();
-    _data['relationship_data'] = relationshipData;
-    _data['health_data'] = healthData.toJson();
-    _data['financial_data'] = financialData.toJson();
-    _data['life_insurance_data'] = lifeInsuranceData;
-    _data['health_insurance_data'] = healthInsuranceData;
-    _data['disability_insurance_data'] = disabilityInsuranceData;
-    _data['long_term_care_insurance_data'] = longTermCareInsuranceData;
-    _data['home_insurance_data'] = homeInsuranceData;
-    _data['car_insurance_data'] = carInsuranceData;
-    _data['vault_document_data'] = vaultDocumentData;
-    return _data;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (this.personalData != null) {
+      data['personal_data'] = this.personalData!.toJson();
+    }
+    if (this.professionalData != null) {
+      data['professional_data'] = this.professionalData!.toJson();
+    }
+    if (this.relationshipData != null) {
+      data['relationship_data'] =
+          this.relationshipData!.map((v) => v.toJson()).toList();
+    }
+    if (this.healthData != null) {
+      data['health_data'] = this.healthData!.toJson();
+    }
+    if (this.financialData != null) {
+      data['financial_data'] = this.financialData!.toJson();
+    }
+    if (this.lifeInsuranceData != null) {
+      data['life_insurance_data'] =
+          this.lifeInsuranceData!.map((v) => v.toJson()).toList();
+    }
+    if (this.healthInsuranceData != null) {
+      data['health_insurance_data'] =
+          this.healthInsuranceData!.map((v) => v.toJson()).toList();
+    }
+    if (this.disabilityInsuranceData != null) {
+      data['disability_insurance_data'] =
+          this.disabilityInsuranceData!.map((v) => v.toJson()).toList();
+    }
+    if (this.longTermCareInsuranceData != null) {
+      data['long_term_care_insurance_data'] =
+          this.longTermCareInsuranceData!.map((v) => v.toJson()).toList();
+    }
+    if (this.homeInsuranceData != null) {
+      data['home_insurance_data'] =
+          this.homeInsuranceData!.map((v) => v.toJson()).toList();
+    }
+    if (this.carInsuranceData != null) {
+      data['car_insurance_data'] =
+          this.carInsuranceData!.map((v) => v.toJson()).toList();
+    }
+    if (this.vaultDocumentData != null) {
+      data['vault_document_data'] =
+          this.vaultDocumentData!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
 class PersonalData {
-  PersonalData({
-    required this.id,
-    required this.firstName,
-    required this.middleName,
-    required this.lastName,
-    required this.mobilePhone,
-    required this.mobileOnlyNumbers,
-     this.homePhone,
-    required this.homeAddress,
-    required this.homeApt,
-    required this.homeZip,
-    required this.homeAddressCountry,
-     this.dateOfBirth,
-     this.dateOfAnniversary,
-    required this.gender,
-     this.socialSecurityNumber,
-     this.countryOfBirth,
-     this.countryOfCitizenship,
-     this.photo,
-    required this.preferredLanguage,
-    required this.welcomeDialogueShown,
-    required this.welcomeDialogueMpShown,
-    required this.sentSms,
-    required this.termsAccepted,
-    required this.privacyAccepted,
-    required this.electronicAuthorDiscAccepted,
-     this.securityAnswer_1,
-     this.securityAnswer_2,
-     this.personalEmail,
-     this.importInfo,
-     this.profilePin,
-    required this.mobileVerified,
-     this.securityQuestion_1,
-     this.securityQuestion_2,
-     this.lastAnnouncementSeen,
-  });
-  late final int id;
-  late final String firstName;
-  late final String middleName;
-  late final String lastName;
-  late final String mobilePhone;
-  late final int mobileOnlyNumbers;
-  late final Null homePhone;
-  late final String homeAddress;
-  late final String homeApt;
-  late final String homeZip;
-  late final String homeAddressCountry;
-  late final Null dateOfBirth;
-  late final Null dateOfAnniversary;
-  late final String gender;
-  late final Null socialSecurityNumber;
-  late final Null countryOfBirth;
-  late final Null countryOfCitizenship;
-  late final Null photo;
-  late final String preferredLanguage;
-  late final bool welcomeDialogueShown;
-  late final bool welcomeDialogueMpShown;
-  late final int sentSms;
-  late final bool termsAccepted;
-  late final bool privacyAccepted;
-  late final bool electronicAuthorDiscAccepted;
-  late final Null securityAnswer_1;
-  late final Null securityAnswer_2;
-  late final Null personalEmail;
-  late final Null importInfo;
-  late final Null profilePin;
-  late final bool mobileVerified;
-  late final Null securityQuestion_1;
-  late final Null securityQuestion_2;
-  late final Null lastAnnouncementSeen;
-  
-  PersonalData.fromJson(Map<String, dynamic> json){
+  int? id;
+  int? userId;
+  String? lifePartnerName;
+  String? lifePartnerPhone;
+  bool? lifePartnerIsNotMarried;
+  String? userEmail;
+  String? firstName;
+  Null? middleName;
+  String? lastName;
+  String? mobilePhone;
+  int? mobileOnlyNumbers;
+  String? homePhone;
+  String? homeAddress;
+  String? homeApt;
+  String? homeZip;
+  String? homeAddressCountry;
+  String? dateOfBirth;
+  Null? dateOfAnniversary;
+  String? gender;
+  String? socialSecurityNumber;
+  String? countryOfBirth;
+  String? countryOfCitizenship;
+  String? photo;
+  String? preferredLanguage;
+  bool? welcomeDialogueShown;
+  bool? welcomeDialogueMpShown;
+  int? sentSms;
+  bool? termsAccepted;
+  bool? privacyAccepted;
+  bool? electronicAuthorDiscAccepted;
+  Null? securityAnswer1;
+  Null? securityAnswer2;
+  Null? personalEmail;
+  Null? importInfo;
+  Null? profilePin;
+  bool? mobileVerified;
+  Null? profileNote;
+  Null? securityQuestion1;
+  Null? securityQuestion2;
+  int? lastAnnouncementSeen;
+
+  PersonalData(
+      {this.id,
+      this.userId,
+      this.lifePartnerName,
+      this.lifePartnerPhone,
+      this.lifePartnerIsNotMarried,
+      this.userEmail,
+      this.firstName,
+      this.middleName,
+      this.lastName,
+      this.mobilePhone,
+      this.mobileOnlyNumbers,
+      this.homePhone,
+      this.homeAddress,
+      this.homeApt,
+      this.homeZip,
+      this.homeAddressCountry,
+      this.dateOfBirth,
+      this.dateOfAnniversary,
+      this.gender,
+      this.socialSecurityNumber,
+      this.countryOfBirth,
+      this.countryOfCitizenship,
+      this.photo,
+      this.preferredLanguage,
+      this.welcomeDialogueShown,
+      this.welcomeDialogueMpShown,
+      this.sentSms,
+      this.termsAccepted,
+      this.privacyAccepted,
+      this.electronicAuthorDiscAccepted,
+      this.securityAnswer1,
+      this.securityAnswer2,
+      this.personalEmail,
+      this.importInfo,
+      this.profilePin,
+      this.mobileVerified,
+      this.profileNote,
+      this.securityQuestion1,
+      this.securityQuestion2,
+      this.lastAnnouncementSeen});
+
+  PersonalData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    userId = json['user_id'];
+    lifePartnerName = json['life_partner_name'];
+    lifePartnerPhone = json['life_partner_phone'];
+    lifePartnerIsNotMarried = json['life_partner_is_not_married'];
+    userEmail = json['user_email'];
     firstName = json['first_name'];
     middleName = json['middle_name'];
     lastName = json['last_name'];
     mobilePhone = json['mobile_phone'];
     mobileOnlyNumbers = json['mobile_only_numbers'];
-    homePhone = null;
+    homePhone = json['home_phone'];
     homeAddress = json['home_address'];
     homeApt = json['home_apt'];
     homeZip = json['home_zip'];
     homeAddressCountry = json['home_address_country'];
-    dateOfBirth = null;
-    dateOfAnniversary = null;
+    dateOfBirth = json['date_of_birth'];
+    dateOfAnniversary = json['date_of_anniversary'];
     gender = json['gender'];
-    socialSecurityNumber = null;
-    countryOfBirth = null;
-    countryOfCitizenship = null;
-    photo = null;
+    socialSecurityNumber = json['social_security_number'];
+    countryOfBirth = json['country_of_birth'];
+    countryOfCitizenship = json['country_of_citizenship'];
+    photo = json['photo'];
     preferredLanguage = json['preferred_language'];
     welcomeDialogueShown = json['welcome_dialogue_shown'];
     welcomeDialogueMpShown = json['welcome_dialogue_mp_shown'];
@@ -157,296 +254,430 @@ class PersonalData {
     termsAccepted = json['terms_accepted'];
     privacyAccepted = json['privacy_accepted'];
     electronicAuthorDiscAccepted = json['electronic_author_disc_accepted'];
-    securityAnswer_1 = null;
-    securityAnswer_2 = null;
-    personalEmail = null;
-    importInfo = null;
-    profilePin = null;
+    securityAnswer1 = json['security_answer_1'];
+    securityAnswer2 = json['security_answer_2'];
+    personalEmail = json['personal_email'];
+    importInfo = json['import_info'];
+    profilePin = json['profile_pin'];
     mobileVerified = json['mobile_verified'];
-    securityQuestion_1 = null;
-    securityQuestion_2 = null;
-    lastAnnouncementSeen = null;
+    profileNote = json['profile_note'];
+    securityQuestion1 = json['security_question_1'];
+    securityQuestion2 = json['security_question_2'];
+    lastAnnouncementSeen = json['last_announcement_seen'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['first_name'] = firstName;
-    _data['middle_name'] = middleName;
-    _data['last_name'] = lastName;
-    _data['mobile_phone'] = mobilePhone;
-    _data['mobile_only_numbers'] = mobileOnlyNumbers;
-    _data['home_phone'] = homePhone;
-    _data['home_address'] = homeAddress;
-    _data['home_apt'] = homeApt;
-    _data['home_zip'] = homeZip;
-    _data['home_address_country'] = homeAddressCountry;
-    _data['date_of_birth'] = dateOfBirth;
-    _data['date_of_anniversary'] = dateOfAnniversary;
-    _data['gender'] = gender;
-    _data['social_security_number'] = socialSecurityNumber;
-    _data['country_of_birth'] = countryOfBirth;
-    _data['country_of_citizenship'] = countryOfCitizenship;
-    _data['photo'] = photo;
-    _data['preferred_language'] = preferredLanguage;
-    _data['welcome_dialogue_shown'] = welcomeDialogueShown;
-    _data['welcome_dialogue_mp_shown'] = welcomeDialogueMpShown;
-    _data['sent_sms'] = sentSms;
-    _data['terms_accepted'] = termsAccepted;
-    _data['privacy_accepted'] = privacyAccepted;
-    _data['electronic_author_disc_accepted'] = electronicAuthorDiscAccepted;
-    _data['security_answer_1'] = securityAnswer_1;
-    _data['security_answer_2'] = securityAnswer_2;
-    _data['personal_email'] = personalEmail;
-    _data['import_info'] = importInfo;
-    _data['profile_pin'] = profilePin;
-    _data['mobile_verified'] = mobileVerified;
-    _data['security_question_1'] = securityQuestion_1;
-    _data['security_question_2'] = securityQuestion_2;
-    _data['last_announcement_seen'] = lastAnnouncementSeen;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['life_partner_name'] = this.lifePartnerName;
+    data['life_partner_phone'] = this.lifePartnerPhone;
+    data['life_partner_is_not_married'] = this.lifePartnerIsNotMarried;
+    data['user_email'] = this.userEmail;
+    data['first_name'] = this.firstName;
+    data['middle_name'] = this.middleName;
+    data['last_name'] = this.lastName;
+    data['mobile_phone'] = this.mobilePhone;
+    data['mobile_only_numbers'] = this.mobileOnlyNumbers;
+    data['home_phone'] = this.homePhone;
+    data['home_address'] = this.homeAddress;
+    data['home_apt'] = this.homeApt;
+    data['home_zip'] = this.homeZip;
+    data['home_address_country'] = this.homeAddressCountry;
+    data['date_of_birth'] = this.dateOfBirth;
+    data['date_of_anniversary'] = this.dateOfAnniversary;
+    data['gender'] = this.gender;
+    data['social_security_number'] = this.socialSecurityNumber;
+    data['country_of_birth'] = this.countryOfBirth;
+    data['country_of_citizenship'] = this.countryOfCitizenship;
+    data['photo'] = this.photo;
+    data['preferred_language'] = this.preferredLanguage;
+    data['welcome_dialogue_shown'] = this.welcomeDialogueShown;
+    data['welcome_dialogue_mp_shown'] = this.welcomeDialogueMpShown;
+    data['sent_sms'] = this.sentSms;
+    data['terms_accepted'] = this.termsAccepted;
+    data['privacy_accepted'] = this.privacyAccepted;
+    data['electronic_author_disc_accepted'] = this.electronicAuthorDiscAccepted;
+    data['security_answer_1'] = this.securityAnswer1;
+    data['security_answer_2'] = this.securityAnswer2;
+    data['personal_email'] = this.personalEmail;
+    data['import_info'] = this.importInfo;
+    data['profile_pin'] = this.profilePin;
+    data['mobile_verified'] = this.mobileVerified;
+    data['profile_note'] = this.profileNote;
+    data['security_question_1'] = this.securityQuestion1;
+    data['security_question_2'] = this.securityQuestion2;
+    data['last_announcement_seen'] = this.lastAnnouncementSeen;
+    return data;
   }
 }
 
 class ProfessionalData {
-  ProfessionalData({
-    required this.id,
-     this.businessName,
-     this.businessPhone,
-     this.businessFax,
-     this.businessEmail,
-     this.businessWebsite,
-     this.position,
-     this.currentOccupation,
-     this.idealOccupation,
-     this.educationLevel,
-     this.degree,
-     this.affiliations,
-     this.businessAddress,
-     this.businessApt,
-     this.businessZip,
-  });
-  late final int id;
-  late final Null businessName;
-  late final Null businessPhone;
-  late final Null businessFax;
-  late final Null businessEmail;
-  late final Null businessWebsite;
-  late final Null position;
-  late final Null currentOccupation;
-  late final Null idealOccupation;
-  late final Null educationLevel;
-  late final Null degree;
-  late final Null affiliations;
-  late final Null businessAddress;
-  late final Null businessApt;
-  late final Null businessZip;
-  
-  ProfessionalData.fromJson(Map<String, dynamic> json){
+  int? id;
+  String? businessName;
+  String? businessPhone;
+  String? businessFax;
+  String? businessEmail;
+  String? businessWebsite;
+  String? position;
+  String? currentOccupation;
+  String? idealOccupation;
+  String? educationLevel;
+  String? degree;
+  String? affiliations;
+  String? businessAddress;
+  String? businessApt;
+  String? businessZip;
+
+  ProfessionalData(
+      {this.id,
+      this.businessName,
+      this.businessPhone,
+      this.businessFax,
+      this.businessEmail,
+      this.businessWebsite,
+      this.position,
+      this.currentOccupation,
+      this.idealOccupation,
+      this.educationLevel,
+      this.degree,
+      this.affiliations,
+      this.businessAddress,
+      this.businessApt,
+      this.businessZip});
+
+  ProfessionalData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    businessName = null;
-    businessPhone = null;
-    businessFax = null;
-    businessEmail = null;
-    businessWebsite = null;
-    position = null;
-    currentOccupation = null;
-    idealOccupation = null;
-    educationLevel = null;
-    degree = null;
-    affiliations = null;
-    businessAddress = null;
-    businessApt = null;
-    businessZip = null;
+    businessName = json['business_name'];
+    businessPhone = json['business_phone'];
+    businessFax = json['business_fax'];
+    businessEmail = json['business_email'];
+    businessWebsite = json['business_website'];
+    position = json['position'];
+    currentOccupation = json['current_occupation'];
+    idealOccupation = json['ideal_occupation'];
+    educationLevel = json['education_level'];
+    degree = json['degree'];
+    affiliations = json['affiliations'];
+    businessAddress = json['business_address'];
+    businessApt = json['business_apt'];
+    businessZip = json['business_zip'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['business_name'] = businessName;
-    _data['business_phone'] = businessPhone;
-    _data['business_fax'] = businessFax;
-    _data['business_email'] = businessEmail;
-    _data['business_website'] = businessWebsite;
-    _data['position'] = position;
-    _data['current_occupation'] = currentOccupation;
-    _data['ideal_occupation'] = idealOccupation;
-    _data['education_level'] = educationLevel;
-    _data['degree'] = degree;
-    _data['affiliations'] = affiliations;
-    _data['business_address'] = businessAddress;
-    _data['business_apt'] = businessApt;
-    _data['business_zip'] = businessZip;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['business_name'] = this.businessName;
+    data['business_phone'] = this.businessPhone;
+    data['business_fax'] = this.businessFax;
+    data['business_email'] = this.businessEmail;
+    data['business_website'] = this.businessWebsite;
+    data['position'] = this.position;
+    data['current_occupation'] = this.currentOccupation;
+    data['ideal_occupation'] = this.idealOccupation;
+    data['education_level'] = this.educationLevel;
+    data['degree'] = this.degree;
+    data['affiliations'] = this.affiliations;
+    data['business_address'] = this.businessAddress;
+    data['business_apt'] = this.businessApt;
+    data['business_zip'] = this.businessZip;
+    return data;
+  }
+}
+
+class RelationshipData {
+  int? id;
+  String? relationshipType;
+  bool? taxDependent;
+  int? user;
+  int? personalData;
+  int? professionalData;
+
+  RelationshipData(
+      {this.id,
+      this.relationshipType,
+      this.taxDependent,
+      this.user,
+      this.personalData,
+      this.professionalData});
+
+  RelationshipData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    relationshipType = json['relationship_type'];
+    taxDependent = json['tax_dependent'];
+    user = json['user'];
+    personalData = json['personal_data'];
+    professionalData = json['professional_data'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['relationship_type'] = this.relationshipType;
+    data['tax_dependent'] = this.taxDependent;
+    data['user'] = this.user;
+    data['personal_data'] = this.personalData;
+    data['professional_data'] = this.professionalData;
+    return data;
   }
 }
 
 class HealthData {
-  HealthData({
-    required this.id,
-     this.heightFt,
-     this.heightInches,
-     this.weight,
-    required this.smoker,
-     this.doctorName,
-     this.doctorPhoneNumber,
-     this.dateOfLastVisit,
-     this.doctorStreet,
-     this.doctorApt,
-     this.doctorZip,
-     this.reason,
-     this.outcome,
-     this.healthIssues,
-     this.medications,
-     this.ageOfSiblings,
-     this.fatherAge,
-     this.fatherDeathCause,
-     this.motherAge,
-     this.motherDeathCause,
-     this.otherHealthNotes,
-    required this.isBlind,
-    required this.spouseIsBlind,
-    required this.user,
-  });
-  late final int id;
-  late final Null heightFt;
-  late final Null heightInches;
-  late final Null weight;
-  late final String smoker;
-  late final Null doctorName;
-  late final Null doctorPhoneNumber;
-  late final Null dateOfLastVisit;
-  late final Null doctorStreet;
-  late final Null doctorApt;
-  late final Null doctorZip;
-  late final Null reason;
-  late final Null outcome;
-  late final Null healthIssues;
-  late final Null medications;
-  late final Null ageOfSiblings;
-  late final Null fatherAge;
-  late final Null fatherDeathCause;
-  late final Null motherAge;
-  late final Null motherDeathCause;
-  late final Null otherHealthNotes;
-  late final bool isBlind;
-  late final bool spouseIsBlind;
-  late final int user;
-  
-  HealthData.fromJson(Map<String, dynamic> json){
+  int? id;
+  String? heightFt;
+  String? heightInches;
+  String? weight;
+  String? smoker;
+  String? doctorName;
+  String? doctorPhoneNumber;
+  String? dateOfLastVisit;
+  String? doctorStreet;
+  String? doctorApt;
+  String? doctorZip;
+  String? reason;
+  String? outcome;
+  String? healthIssues;
+  String? medications;
+  String? ageOfSiblings;
+  String? fatherAge;
+  String? fatherDeathCause;
+  String? motherAge;
+  String? motherDeathCause;
+  String? otherHealthNotes;
+  bool? isBlind;
+  bool? spouseIsBlind;
+  int? user;
+
+  HealthData(
+      {this.id,
+      this.heightFt,
+      this.heightInches,
+      this.weight,
+      this.smoker,
+      this.doctorName,
+      this.doctorPhoneNumber,
+      this.dateOfLastVisit,
+      this.doctorStreet,
+      this.doctorApt,
+      this.doctorZip,
+      this.reason,
+      this.outcome,
+      this.healthIssues,
+      this.medications,
+      this.ageOfSiblings,
+      this.fatherAge,
+      this.fatherDeathCause,
+      this.motherAge,
+      this.motherDeathCause,
+      this.otherHealthNotes,
+      this.isBlind,
+      this.spouseIsBlind,
+      this.user});
+
+  HealthData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    heightFt = null;
-    heightInches = null;
-    weight = null;
+    heightFt = json['height_ft'];
+    heightInches = json['height_inches'];
+    weight = json['weight'];
     smoker = json['smoker'];
-    doctorName = null;
-    doctorPhoneNumber = null;
-    dateOfLastVisit = null;
-    doctorStreet = null;
-    doctorApt = null;
-    doctorZip = null;
-    reason = null;
-    outcome = null;
-    healthIssues = null;
-    medications = null;
-    ageOfSiblings = null;
-    fatherAge = null;
-    fatherDeathCause = null;
-    motherAge = null;
-    motherDeathCause = null;
-    otherHealthNotes = null;
+    doctorName = json['doctor_name'];
+    doctorPhoneNumber = json['doctor_phone_number'];
+    dateOfLastVisit = json['date_of_last_visit'];
+    doctorStreet = json['doctor_street'];
+    doctorApt = json['doctor_apt'];
+    doctorZip = json['doctor_zip'];
+    reason = json['reason'];
+    outcome = json['outcome'];
+    healthIssues = json['health_issues'];
+    medications = json['medications'];
+    ageOfSiblings = json['age_of_siblings'];
+    fatherAge = json['father_age'];
+    fatherDeathCause = json['father_death_cause'];
+    motherAge = json['mother_age'];
+    motherDeathCause = json['mother_death_cause'];
+    otherHealthNotes = json['other_health_notes'];
     isBlind = json['is_blind'];
     spouseIsBlind = json['spouse_is_blind'];
     user = json['user'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['height_ft'] = heightFt;
-    _data['height_inches'] = heightInches;
-    _data['weight'] = weight;
-    _data['smoker'] = smoker;
-    _data['doctor_name'] = doctorName;
-    _data['doctor_phone_number'] = doctorPhoneNumber;
-    _data['date_of_last_visit'] = dateOfLastVisit;
-    _data['doctor_street'] = doctorStreet;
-    _data['doctor_apt'] = doctorApt;
-    _data['doctor_zip'] = doctorZip;
-    _data['reason'] = reason;
-    _data['outcome'] = outcome;
-    _data['health_issues'] = healthIssues;
-    _data['medications'] = medications;
-    _data['age_of_siblings'] = ageOfSiblings;
-    _data['father_age'] = fatherAge;
-    _data['father_death_cause'] = fatherDeathCause;
-    _data['mother_age'] = motherAge;
-    _data['mother_death_cause'] = motherDeathCause;
-    _data['other_health_notes'] = otherHealthNotes;
-    _data['is_blind'] = isBlind;
-    _data['spouse_is_blind'] = spouseIsBlind;
-    _data['user'] = user;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['height_ft'] = this.heightFt;
+    data['height_inches'] = this.heightInches;
+    data['weight'] = this.weight;
+    data['smoker'] = this.smoker;
+    data['doctor_name'] = this.doctorName;
+    data['doctor_phone_number'] = this.doctorPhoneNumber;
+    data['date_of_last_visit'] = this.dateOfLastVisit;
+    data['doctor_street'] = this.doctorStreet;
+    data['doctor_apt'] = this.doctorApt;
+    data['doctor_zip'] = this.doctorZip;
+    data['reason'] = this.reason;
+    data['outcome'] = this.outcome;
+    data['health_issues'] = this.healthIssues;
+    data['medications'] = this.medications;
+    data['age_of_siblings'] = this.ageOfSiblings;
+    data['father_age'] = this.fatherAge;
+    data['father_death_cause'] = this.fatherDeathCause;
+    data['mother_age'] = this.motherAge;
+    data['mother_death_cause'] = this.motherDeathCause;
+    data['other_health_notes'] = this.otherHealthNotes;
+    data['is_blind'] = this.isBlind;
+    data['spouse_is_blind'] = this.spouseIsBlind;
+    data['user'] = this.user;
+    return data;
   }
 }
 
 class FinancialData {
-  FinancialData({
-    required this.id,
-     this.taxProfessionalName,
-     this.phone,
-     this.address,
-     this.assets,
-     this.liabilities,
-     this.netWorth,
-     this.income,
-     this.expenses,
-     this.cashflow,
-     this.financialHealthNotes,
-    required this.user,
-  });
-  late final int id;
-  late final Null taxProfessionalName;
-  late final Null phone;
-  late final Null address;
-  late final Null assets;
-  late final Null liabilities;
-  late final Null netWorth;
-  late final Null income;
-  late final Null expenses;
-  late final Null cashflow;
-  late final Null financialHealthNotes;
-  late final int user;
-  
-  FinancialData.fromJson(Map<String, dynamic> json){
+  int? id;
+  String? taxProfessionalName;
+  String? phone;
+  String? address;
+  String? assets;
+  String? liabilities;
+  String? netWorth;
+  String? income;
+  String? expenses;
+  String? cashflow;
+  String? financialHealthNotes;
+  int? user;
+
+  FinancialData(
+      {this.id,
+      this.taxProfessionalName,
+      this.phone,
+      this.address,
+      this.assets,
+      this.liabilities,
+      this.netWorth,
+      this.income,
+      this.expenses,
+      this.cashflow,
+      this.financialHealthNotes,
+      this.user});
+
+  FinancialData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    taxProfessionalName = null;
-    phone = null;
-    address = null;
-    assets = null;
-    liabilities = null;
-    netWorth = null;
-    income = null;
-    expenses = null;
-    cashflow = null;
-    financialHealthNotes = null;
+    taxProfessionalName = json['tax_professional_name'];
+    phone = json['phone'];
+    address = json['address'];
+    assets = json['assets'];
+    liabilities = json['liabilities'];
+    netWorth = json['net_worth'];
+    income = json['income'];
+    expenses = json['expenses'];
+    cashflow = json['cashflow'];
+    financialHealthNotes = json['financial_health_notes'];
     user = json['user'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['tax_professional_name'] = taxProfessionalName;
-    _data['phone'] = phone;
-    _data['address'] = address;
-    _data['assets'] = assets;
-    _data['liabilities'] = liabilities;
-    _data['net_worth'] = netWorth;
-    _data['income'] = income;
-    _data['expenses'] = expenses;
-    _data['cashflow'] = cashflow;
-    _data['financial_health_notes'] = financialHealthNotes;
-    _data['user'] = user;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['tax_professional_name'] = this.taxProfessionalName;
+    data['phone'] = this.phone;
+    data['address'] = this.address;
+    data['assets'] = this.assets;
+    data['liabilities'] = this.liabilities;
+    data['net_worth'] = this.netWorth;
+    data['income'] = this.income;
+    data['expenses'] = this.expenses;
+    data['cashflow'] = this.cashflow;
+    data['financial_health_notes'] = this.financialHealthNotes;
+    data['user'] = this.user;
+    return data;
+  }
+}
+
+class LifeInsuranceData {
+  int? id;
+  String? policyNumber;
+  String? policyType;
+  String? issueDate;
+  String? companyName;
+  String? companyPhone;
+  String? currentDeathBenefit;
+  String? currentPremiums;
+  int? user;
+
+  LifeInsuranceData(
+      {this.id,
+      this.policyNumber,
+      this.policyType,
+      this.issueDate,
+      this.companyName,
+      this.companyPhone,
+      this.currentDeathBenefit,
+      this.currentPremiums,
+      this.user});
+
+  LifeInsuranceData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    policyNumber = json['policy_number'];
+    policyType = json['policy_type'];
+    issueDate = json['issue_date'];
+    companyName = json['company_name'];
+    companyPhone = json['company_phone'];
+    currentDeathBenefit = json['current_death_benefit'];
+    currentPremiums = json['current_premiums'];
+    user = json['user'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['policy_number'] = this.policyNumber;
+    data['policy_type'] = this.policyType;
+    data['issue_date'] = this.issueDate;
+    data['company_name'] = this.companyName;
+    data['company_phone'] = this.companyPhone;
+    data['current_death_benefit'] = this.currentDeathBenefit;
+    data['current_premiums'] = this.currentPremiums;
+    data['user'] = this.user;
+    return data;
+  }
+}
+
+class VaultDocumentData {
+  int? id;
+  int? user;
+  String? publicationDate;
+  int? name;
+  String? typeName;
+  String? description;
+  String? file;
+
+  VaultDocumentData(
+      {this.id,
+      this.user,
+      this.publicationDate,
+      this.name,
+      this.typeName,
+      this.description,
+      this.file});
+
+  VaultDocumentData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'];
+    publicationDate = json['publication_date'];
+    name = json['name'];
+    typeName = json['type_name'];
+    description = json['description'];
+    file = json['file'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user'] = this.user;
+    data['publication_date'] = this.publicationDate;
+    data['name'] = this.name;
+    data['type_name'] = this.typeName;
+    data['description'] = this.description;
+    data['file'] = this.file;
+    return data;
   }
 }

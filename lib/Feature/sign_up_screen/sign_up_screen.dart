@@ -5,7 +5,10 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+
+import '../../core/utils/address_autocomplete_widget.dart';
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatefulWidget {
@@ -213,36 +216,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // ),
 
                         SizedBox(height: 38.v),
-                        Row(
-                          children: [
-                            CustomImageView(
-                              svgPath: ImageConstant.imgCall,
-                              height: 15.adaptSize,
-                              width: 15.adaptSize,
-                              margin: EdgeInsets.only(
-                                top: 9.v,
-                                bottom: 7.v,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextFormField(
-                                controller: signUpController
-                                    .mobileNumberController.value,
-                                margin: EdgeInsets.only(left: 24.h),
-                                hintText: "Mobile Number",
-                                labelText: "Mobile Number",
-                                textInputType: TextInputType.phone,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'This field is required';
-                                  }
+                        PhoneNumberTextFieldWidget(
+                            phoneController:
+                                signUpController.mobileNumberController.value,
+                            lable: "Mobile number"),
+                        // Row(
+                        //   children: [
+                        //     CustomImageView(
+                        //       svgPath: ImageConstant.imgCall,
+                        //       height: 15.adaptSize,
+                        //       width: 15.adaptSize,
+                        //       margin: EdgeInsets.only(
+                        //         top: 9.v,
+                        //         bottom: 7.v,
+                        //       ),
+                        //     ),
+                        //     Expanded(
+                        //       child: CustomTextFormField(
+                        //         controller: signUpController
+                        //             .mobileNumberController.value,
+                        //         margin: EdgeInsets.only(left: 24.h),
+                        //         hintText: "Mobile Number",
+                        //         labelText: "Mobile Number",
+                        //         textInputType: TextInputType.phone,
+                        //         validator: (value) {
+                        //           if (value == null || value.isEmpty) {
+                        //             return 'This field is required';
+                        //           }
 
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                        //           return null;
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+
                         SizedBox(height: 38.v),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,6 +439,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
+                                readOnly: true,
+                                onTap: () async {
+                                  var address = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddressAutoCompleteWidget(),
+                                    ),
+                                  );
+                                  signUpController
+                                      .addressController.value.text = address;
+                                },
                                 controller:
                                     signUpController.addressController.value,
                                 margin: EdgeInsets.only(left: 22.h),

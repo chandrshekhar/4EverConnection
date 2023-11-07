@@ -149,7 +149,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                             ])),
         
                                     SizedBox(height: 18.adaptSize),
-                                    const PhoneNumberTextFieldWidget(
+                                     PhoneNumberTextFieldWidget(
                                       lable: "Mobile Phone",
                                     ),
                                     // Padding(
@@ -184,7 +184,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                     Padding(
                                       padding: EdgeInsets.only(
                                           left: 1.h, top: 39.v),
-                                      child: const PhoneNumberTextFieldWidget(
+                                      child:  PhoneNumberTextFieldWidget(
                                         lable: "Home Phone",
                                       ),
                                     ),
