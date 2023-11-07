@@ -46,6 +46,7 @@ class PersonalDetailsController extends GetxController {
     countruyofbirthControlle.value.text = userData?.countryOfBirth ?? "";
     countryOfCitizenshipControlle.value.text =
         userData?.countryOfCitizenship ?? "";
+    
   }
 
   @override
