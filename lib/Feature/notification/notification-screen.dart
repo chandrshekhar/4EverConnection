@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -14,10 +17,12 @@ class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({Key? key}) : super(key: key);
 
   final notificationController = Get.put(NotificationController());
+  final myProfileController = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
     notificationController.getNotification();
+    // final profileImage = userProfileController.userProfileModel.value.personalData.
     return Scaffold(
       backgroundColor: appTheme.lightBlue50,
       appBar: CustomAppBar(
@@ -37,6 +42,7 @@ class NotificationsScreen extends StatelessWidget {
           () => notificationController.isLoading == true
               ? const Center(child: CircularProgressIndicator.adaptive())
               : ListView.builder(
+                  shrinkWrap: true,
                   itemCount: notificationController.notificationList.length,
                   itemBuilder: (context, index) {
                     if (index == 0) {
@@ -46,23 +52,62 @@ class NotificationsScreen extends StatelessWidget {
                     return Column(
                       children: [
                         Container(
+                            height: 80.h,
                             alignment: Alignment.topLeft,
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10.h, vertical: 10.h),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color: Colors.grey.shade300),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                                color: Colors.white),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(notificationController
-                                    .notificationList[index].subject
-                                    .toString()),
-                                Html(
-                                    data:
-                                        "  ${notificationController.notificationList[index].text}"),
+                                CachedNetworkImage(
+                                  imageUrl: myProfileController.userProfileModel
+                                          .value.personalData?.photo ??
+                                      "", // Replace with the actual image URL
+                                  imageBuilder: (context, imageProvider) =>
+                                      CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: imageProvider,
+                                  ),
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator.adaptive(
+                                          backgroundColor: AppColors
+                                              .appBackgroundColor), // Placeholder widget
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                    size: 60,
+                                  ), // Widget to display when an error occurs
+                                ),
+                                SizedBox(width: 10.h),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(notificationController
+                                        .notificationList[index].subject
+                                        .toString()),
+                                    Html(
+                                      data:
+                                          "  ${notificationController.notificationList[index].text}",
+                                      shrinkWrap: true,
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Text(DateFormat('EEEE')
+                                    .format(DateTime.parse(
+                                        notificationController
+                                                .notificationList[index]
+                                                .dateCreated ??
+                                            ""))
+                                    .substring(0, 3))
                               ],
                             )),
                         SizedBox(
@@ -109,7 +154,7 @@ class NotificationsScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 10.v,
+                          height: 20.v,
                         ),
                       ],
                     );

@@ -83,6 +83,7 @@ class UserProfileModel {
 
 class PersonalData {
   int? id;
+  int? userId;
   dynamic firstName;
   dynamic middleName;
   dynamic lastName;
@@ -119,6 +120,7 @@ class PersonalData {
 
   PersonalData(
       {id,
+      userId,
       firstName,
       middleName,
       lastName,
@@ -154,6 +156,7 @@ class PersonalData {
       lastAnnouncementSeen});
 
   PersonalData.fromJson(Map<String, dynamic> json) {
+    userId = json['user_id'];
     id = json['id'];
     firstName = json['first_name'];
     middleName = json['middle_name'];
@@ -192,6 +195,7 @@ class PersonalData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['user_id'] = userId;
     data['id'] = id;
     data['first_name'] = firstName;
     data['middle_name'] = middleName;
