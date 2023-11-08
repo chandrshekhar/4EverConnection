@@ -333,9 +333,9 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
-                            validationController
-                                .setHomeAddressValidation(value);
-                            validationController.checkButtonValidation();
+                            // validationController
+                            //     .setHomeAddressValidation(value);
+                            // validationController.checkButtonValidation();
                           },
                           validator: (value) {
                             if (value!.length < 8) {

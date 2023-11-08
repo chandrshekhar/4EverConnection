@@ -241,6 +241,7 @@ class DocumentVaultScreen extends StatelessWidget {
                                   ? () {
                                       documentVaultController
                                           .addFileDocumentVault();
+                                          
                                     }
                                   : () => null,
                               width: 150.h,

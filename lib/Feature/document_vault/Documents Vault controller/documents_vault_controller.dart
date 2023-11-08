@@ -112,6 +112,22 @@ class DocumentsVaultController extends GetxController {
     }
   }
 
+  // download file
+
+//   Future<void> initPlatformState() async {
+//     _setPath();
+// }
+// void _setPath() async {
+//     Directory path = await getApplicationDocumentsDirectory(); 
+//     String localPath = path.path + Platform.pathSeparator + 'Download';
+//     final savedDir = Directory(localPath);
+//     bool hasExisted = await savedDir.exists();
+//     if (!hasExisted) {
+//         savedDir.create();
+//     }
+//     path = localPath;
+// }
+
   addFileDocumentVault() async {
     try {
       await _documentRepo.uploadDocument(
@@ -119,6 +135,7 @@ class DocumentsVaultController extends GetxController {
           desc: documentDescControler.value.text.trim(),
           file: files.value!);
       documentTypeId.value = -1;
+      searchForDocumentController.value.text = "";
       documentDescControler.value.clear();
       files.value = null;
       choosenFilename.value = "";

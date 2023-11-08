@@ -14,7 +14,6 @@ class ConnectionValidationController extends GetxController {
         isLastNameValidate.value == false ||
         isPhoneNumberValidate.value == false ||
         isEmailValidate.value == false ||
-        homeAddressValidate.value == false ||
         isZipValidate.value == false) {
       isButtonStateChange(false);
     } else {

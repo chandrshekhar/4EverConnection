@@ -1,12 +1,25 @@
 class ApiPath {
   static const baseUrl = "https://4everconnection.com";
 
+  static const profile = "$baseUrl/api/user/profile/";
+
   //Authentication
   static const registerUrl = "$baseUrl/api/user/";
   static const loginUrl = "$baseUrl/api-token-auth/";
   static const forgotPasswordSendEmail = "$baseUrl/api/user/reset-password";
   static const getUserService = "$baseUrl/api/user-services/";
   static const getUserProfile = "$baseUrl/api/user/profile";
+
+  // profile
+  static const personaUserData = "$baseUrl$profile/personal";
+  static const carInsurance = "$baseUrl$profile/car-insurance";
+  static const disabilityInsurance = "$baseUrl$profile/disability-insurance";
+  static const healthInsurance = "$baseUrl$profile/health-insurance";
+  static const longtermCarInsurance = "$baseUrl$profile/long-term-care-insurance";
+  static const lifeInsurance = "$baseUrl$profile/life-insurance";
+  static const homeInsurance = "$baseUrl$profile/home-insurance";
+  static const profesional = "$baseUrl$profile/professional";
+  static const relationship = "$baseUrl$profile/relationship";
 
   // get tooltips
   static const getTooltips = "$baseUrl/api/tooltips/";
