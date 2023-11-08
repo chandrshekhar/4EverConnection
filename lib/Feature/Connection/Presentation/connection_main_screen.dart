@@ -102,12 +102,11 @@ class ConnectionMainScreen extends StatelessWidget {
                                     },
                                     buttonName: "Connect",
                                     title: "Connections",
-                                    available: "accepted: 0",
                                     des: "Create Connections",
                                   ),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height *
-                                        0.05,
+                                        0.06,
                                   ),
                                   Obx(() => ConnectionCardWidget(
                                         onTap: () {
@@ -134,14 +133,14 @@ class ConnectionMainScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: CustomElevatedButton(
-          onTap: () {},
-          text: "Access My Link",
-          margin: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 22.v),
-          rightIcon: Container(
-              margin: EdgeInsets.only(left: 16.h),
-              child: CustomImageView(
-                  svgPath: ImageConstant.imgArrowrightPrimary))),
+      // bottomNavigationBar: CustomElevatedButton(
+      //     onTap: () {},
+      //     text: "Access My Link",
+      //     margin: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 22.v),
+      //     rightIcon: Container(
+      //         margin: EdgeInsets.only(left: 16.h),
+      //         child: CustomImageView(
+      //             svgPath: ImageConstant.imgArrowrightPrimary))),
     );
   }
 }

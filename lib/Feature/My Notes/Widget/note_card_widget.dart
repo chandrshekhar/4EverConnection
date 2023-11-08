@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
@@ -167,13 +168,17 @@ class MyNotesCardWidget extends StatelessWidget {
         SizedBox(
           width: 21.adaptSize,
         ),
-        Text(
-          lableName,
-          style: TextStyle(
-              color: AppColors.greyTextColor,
-              fontSize: 18.adaptSize,
-              fontWeight: FontWeight.w400),
+        Html(
+          data: lableName,
+          shrinkWrap: true,
         ),
+        // Text(
+        //   lableName,
+        //   style: TextStyle(
+        //       color: AppColors.greyTextColor,
+        //       fontSize: 18.adaptSize,
+        //       fontWeight: FontWeight.w400),
+        // ),
       ],
     );
   }

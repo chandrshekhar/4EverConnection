@@ -4,8 +4,10 @@ import 'package:forever_connection/core/app_export.dart';
 
 class PhoneNumberTextFieldWidget extends StatefulWidget {
   final String lable;
+  int? c;
   TextEditingController? phoneController;
-   PhoneNumberTextFieldWidget({super.key, required this.lable, this.phoneController});
+  PhoneNumberTextFieldWidget(
+      {super.key, required this.lable, this.phoneController, this.c});
 
   @override
   State<PhoneNumberTextFieldWidget> createState() =>
@@ -21,11 +23,13 @@ class _PhoneNumberTextFieldWidgetState
         height: 60,
         child: Row(
           children: [
-            Expanded(
-              child: CustomImageView(
-                svgPath: ImageConstant.imgCall,
-              ),
-            ),
+            widget.c == null
+                ? Expanded(
+                    child: CustomImageView(
+                      svgPath: ImageConstant.imgCall,
+                    ),
+                  )
+                : Container(),
             SizedBox(
               width: 20.adaptSize,
             ),

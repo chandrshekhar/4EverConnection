@@ -9,12 +9,14 @@ class ConnectionCardWidget extends StatelessWidget {
   final String? available;
   final String? des;
   final VoidCallback? onTap;
-  const ConnectionCardWidget(
-      {super.key,
-      required this.title,
-      required this.buttonName,
-      this.available,
-      this.des, this.onTap, });
+  const ConnectionCardWidget({
+    super.key,
+    required this.title,
+    required this.buttonName,
+    this.available,
+    this.des,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class ConnectionCardWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 15.adaptSize,
+            height: 10.adaptSize,
           ),
           Text(
             available ?? "",

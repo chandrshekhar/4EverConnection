@@ -230,36 +230,16 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           },
                           fillColor: theme.colorScheme.primary),
                     ),
-                    // PhoneNumberTextFieldWidget(lable: "Phone Number"),
-                    Form(
-                      key: phoneKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          controller:
-                              connectionController.phoneController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "Phone number *",
-                          labelText: "Phone number *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            validationController.setPhoneNameValidation(value);
-                            validationController.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 4) {
-                              return "Phone number must have atleast 8 character";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
-                    ),
+                    Container(
+                        decoration: BoxDecoration(border: Border.all()),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 13.h, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: PhoneNumberTextFieldWidget(
+                            c: 1,
+                            phoneController:
+                                connectionController.phoneController.value,
+                            lable: "Phone Number")),
                     Form(
                       key: emailKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -8,12 +8,15 @@ import 'package:flutter/services.dart';
 import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
 import 'package:forever_connection/Feature/document_vault/Repo/document_repo.dart';
 import 'package:get/get.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:printing/printing.dart';
 import '../Model/document_type_model.dart';
-import '../../../Models/user_profile_model.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/utils/toast_widget.dart';
-import '../../../Controllers/User Profile Controller/user_profile_controller.dart';
 
 class DocumentsVaultController extends GetxController {
   RxBool isLoadingDocumentList = false.obs;
@@ -112,21 +115,133 @@ class DocumentsVaultController extends GetxController {
     }
   }
 
-  // download file
+  // print document
 
-//   Future<void> initPlatformState() async {
-//     _setPath();
-// }
-// void _setPath() async {
-//     Directory path = await getApplicationDocumentsDirectory(); 
-//     String localPath = path.path + Platform.pathSeparator + 'Download';
-//     final savedDir = Directory(localPath);
-//     bool hasExisted = await savedDir.exists();
-//     if (!hasExisted) {
-//         savedDir.create();
-//     }
-//     path = localPath;
-// }
+  void printDocument(String documentUrl) async {
+    final pdf = Printing.convertHtml(html: documentUrl);
+    Printing.layoutPdf(
+      onLayout: (PdfPageFormat format) async => pdf,
+    );
+  }
+
+  // download file fsavePath
+  Future download2(String url) async {
+    final appDocumentsDirectory = await getApplicationDocumentsDirectory();
+    final savePath = '${appDocumentsDirectory.path}/downloaded_file.extension';
+
+    try {
+      var response = await dio.get(
+        url,
+        onReceiveProgress: showDownloadProgress,
+        //Received data with List<int>
+        options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 500;
+            }),
+      );
+      print(response.headers);
+      File file = File(savePath);
+      var raf = file.openSync(mode: FileMode.write);
+      // response.data is List<int> type
+      raf.writeFromSync(response.data);
+      await raf.close();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void showDownloadProgress(received, total) {
+    if (total != -1) {
+      // ToastWidget.successToast(success: "Downloading");
+      print((received / total * 100).toStringAsFixed(0) + "%");
+      ToastWidget.successToast(success: "downloaded");
+    }
+  }
+
+  // download file azhar
+
+  bool loading = false;
+  double progress = 0;
+
+  Future<bool> saveFile(String url, String fileName) async {
+    Directory directory;
+    try {
+      if (Platform.isAndroid) {
+        if (await _requestPermission(Permission.storage) &&
+            await _requestPermission(Permission.accessMediaLocation) &&
+            await _requestPermission(Permission.manageExternalStorage)) {
+          directory = (await getExternalStorageDirectory())!;
+          print(directory.path);
+          String newPath = "";
+          List<String> folders = directory.path.split("/");
+          for (int x = 1; x < folders.length; x++) {
+            String folder = folders[x];
+            if (folder != "Android") {
+              newPath += "/" + folder;
+            } else {
+              break;
+            }
+          }
+          newPath = newPath + "/4everConnection";
+          directory = Directory(newPath);
+          print(directory.path);
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (await _requestPermission(Permission.photos)) {
+          directory = await getTemporaryDirectory();
+        } else {
+          return false;
+        }
+      }
+      if (!await directory.exists()) {
+        directory.create(recursive: true);
+      }
+      if (await directory.exists()) {
+        File saveFile = File(directory.path + "/$fileName");
+        await dio.download(
+          url,
+          saveFile.path,
+        );
+        if (Platform.isIOS) {
+          await ImageGallerySaver.saveFile(saveFile.path,
+              isReturnPathOfIOS: true);
+        }
+        return true;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return false;
+  }
+
+  Future<bool> _requestPermission(Permission permission) async {
+    if (await permission.isGranted) {
+      return true;
+    } else {
+      var result = await permission.request();
+      if (result == PermissionStatus.granted) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  downloadFile(String fileUrl) async {
+    List<String> parts = fileUrl.split('/');
+    String filename = parts.last;
+    bool downloaded = await saveFile(fileUrl, filename);
+    if (downloaded) {
+      print("File downloaded");
+    } else {
+      print("Problem downloading file");
+    }
+  }
 
   addFileDocumentVault() async {
     try {

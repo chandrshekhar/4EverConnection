@@ -133,10 +133,11 @@ class MyProfileScreen extends StatelessWidget {
                                                           .bodyMediumPrimary_1)
                                                 ])),
                                         Container(
+                                            width: 383.h,
                                             margin: EdgeInsets.only(
                                                 left: 1.h, top: 10.v),
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 47.h,
+                                                horizontal: 30.h,
                                                 vertical: 10.v),
                                             decoration: AppDecoration
                                                 .fillLightBlue

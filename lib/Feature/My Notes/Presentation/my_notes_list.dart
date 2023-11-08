@@ -46,6 +46,9 @@ class MyNotesListScreen extends StatelessWidget {
         title: AppbarTitle(text: "My Notes"),
         actions: [
           AppbarImage1(
+              onTap: () {
+                AppRoutes.notificationsScreen;
+              },
               svgPath: ImageConstant.imgCart,
               margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
         ],
