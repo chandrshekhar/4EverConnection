@@ -109,6 +109,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           value: "Yes",
                                           groupValue: radioGroup,
                                           onChange: (value) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (_) => AlertDialog(
+                                                  contentPadding: EdgeInsets.zero,
+                                                  titlePadding: EdgeInsets.zero,
+                                                  scrollable: false,
+                                                  elevation: 4,
+
+                                                  title: Container(
+                                                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                                    width: double.infinity,
+                                                      color:  const Color(0xFF1B608C),
+                                                      child: const Text('You may already have an account',style: const TextStyle(color: Colors.white),)),
+                                                  content: Padding(
+                                                    padding: const EdgeInsets.all(16.0),
+                                                    child: Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                      Text("Let's Check!", style: const TextStyle(fontSize: 20, color: Color(0xFF1B608C), fontWeight: FontWeight.bold),),
+                                                      TextField(
+                                                        decoration: InputDecoration(
+                                                          labelText: "First Name",
+
+                                                        ),
+                                                      ),
+                                                      TextField(decoration: InputDecoration(
+                                                        labelText: "Last Name",
+                                                      ),),
+                                                      TextField(
+                                                        keyboardType: TextInputType.emailAddress,
+                                                        decoration: InputDecoration(
+                                                        labelText: "Email",
+                                                      ),),
+
+                                                      const SizedBox(height: 16,),
+                                                      Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                                                        child: ElevatedButton(
+                                                            style: ButtonStyle(backgroundColor:MaterialStatePropertyAll<Color>(Color(0xFF1B608C)) ),
+                                                            onPressed: (){}, child: Center(child: Text("Check", style: TextStyle(color: Colors.white),),),),
+                                                      ),
+
+                                                    ],),
+                                                  ),
+                                                )
+                                            );
                                             setState(() {
                                               radioGroup = value;
                                             });
