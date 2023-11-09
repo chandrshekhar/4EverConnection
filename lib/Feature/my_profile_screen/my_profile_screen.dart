@@ -116,7 +116,7 @@ class MyProfileScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(height: 9.v),
                                                   Text(
-                                                      "${myProfileController.userProfileModel.value.personalData?.firstName}",
+                                                      "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""}",
                                                       style: CustomTextStyles
                                                           .titleLargePrimary),
                                                   SizedBox(height: 1.v),
@@ -124,8 +124,8 @@ class MyProfileScreen extends StatelessWidget {
                                                       myProfileController
                                                               .userProfileModel
                                                               .value
-                                                              .personalData!
-                                                              .homeAddress ??
+                                                              .personalData
+                                                              ?.homeAddress ??
                                                           "",
                                                       textAlign:
                                                           TextAlign.center,
@@ -151,7 +151,7 @@ class MyProfileScreen extends StatelessWidget {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                      "${myProfileController.userProfileModel.value.personalData?.mobilePhone}",
+                                                      "${myProfileController.userProfileModel.value.personalData?.mobilePhone ?? ""}",
                                                       style: CustomTextStyles
                                                           .titleMediumPrimary),
                                                   SizedBox(height: 3.v),

@@ -45,6 +45,10 @@ class ConnectionController extends GetxController {
           pendingConnectionList.add(connectionList[i]);
         }
       }
+      acceptedConnectionList
+          .sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
+      pendingConnectionList
+          .sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
 
       isLoading(false);
     } catch (e) {
@@ -80,11 +84,14 @@ class ConnectionController extends GetxController {
         "home_zip": zipController.value.text,
         "additional": ""
       };
+
+      print("req mod-->$reqModel");
       isConnectionLoading(true);
       var res = await _connectionRepo.addConnection(reqModel: reqModel);
       if (res.isNotEmpty) {
         isConnectionLoading(false);
         ToastWidget.successToast(success: "Connection added successfully");
+        // ignore: use_build_context_synchronously
         Navigator.pop(context);
       } else {
         isConnectionLoading(false);

@@ -34,6 +34,9 @@ class MyNotesDetailsScreen extends StatelessWidget {
         title: AppbarTitle(text: "Note Description"),
         actions: [
           AppbarImage1(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+              },
               svgPath: ImageConstant.imgCart,
               margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
         ],

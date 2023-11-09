@@ -27,10 +27,18 @@ class SignupController extends GetxController {
   RxString selectedGender = 'Male'.obs;
   RxString selectedlanguage = 'English'.obs;
 
+  var selectedDate = DateTime.now().obs;
+
   RxBool passwordVigiable = false.obs;
+
+  RxBool aggrement = false.obs;
 
   visiablePassword(bool value) {
     passwordVigiable.value = value;
+  }
+
+  acceptAggrement(bool value) {
+    aggrement.value = value;
   }
 
   genderSelected(value) {
@@ -103,30 +111,37 @@ class SignupController extends GetxController {
     businessNameController.value.clear();
   }
 
-  DateTime selectedDate = DateTime.now();
+  //pic date and time
   Future<void> selectDate(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: const Color(0xFF1B608C),
-          child: CalendarDatePicker(
-            initialDate: selectedDate,
-            firstDate: DateTime.now(),
-            lastDate: DateTime(2101),
-            onDateChanged: (date) {
-              dobController.value.text = convertAndFormatDate(date);
-              Navigator.pop(
-                  context); // Close the dialog when a date is selected
-            },
-          ),
-        );
-      },
-    );
+    var pickedDate = await showDatePicker(
+        context: context,
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        initialDate: selectedDate.value,
+        firstDate: DateTime(1900, 8),
+        lastDate: DateTime.now(),
+        fieldHintText: '',
+        useRootNavigator: false,
+        builder: ((context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                datePickerTheme: const DatePickerThemeData(
+                  dayStyle: TextStyle(fontSize: 20),
+                  headerHeadlineStyle: TextStyle(fontSize: 20),
+                  headerHelpStyle: TextStyle(fontSize: 20),
+                  weekdayStyle: TextStyle(fontSize: 20),
+                ),
+              ),
+              child: child!);
+        }));
+    if (pickedDate != null && pickedDate != selectedDate) {
+      selectedDate.value = pickedDate;
+      dobController.value.text = convertAndFormatDate(pickedDate);
+    }
   }
 
+  //format date time as per requirement
   String convertAndFormatDate(DateTime inputDate) {
-    final outputFormat = DateFormat("yyyy-MM-dd");
+    final outputFormat = DateFormat("MM-dd-yyyy");
     return outputFormat.format(inputDate);
   }
 }

@@ -28,15 +28,15 @@ class AutoGenerate {
 
   AutoGenerate.fromJson(Map<String, dynamic> json) {
     personalData = json['personal_data'] != null
-        ? new PersonalData.fromJson(json['personal_data'])
+        ?  PersonalData.fromJson(json['personal_data'])
         : null;
     professionalData = json['professional_data'] != null
-        ? new ProfessionalData.fromJson(json['professional_data'])
+        ?  ProfessionalData.fromJson(json['professional_data'])
         : null;
     if (json['relationship_data'] != null) {
       relationshipData = <RelationshipData>[];
       json['relationship_data'].forEach((v) {
-        relationshipData!.add(new RelationshipData.fromJson(v));
+        relationshipData!.add( RelationshipData.fromJson(v));
       });
     }
     healthData = json['health_data'] != null

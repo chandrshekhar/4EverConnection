@@ -5,6 +5,7 @@ import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_contro
 import 'package:forever_connection/Feature/My%20Notes/Presentation/edit_notes.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_details_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Widget/note_card_widget.dart';
+import 'package:forever_connection/Feature/notification/notification-screen.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -47,7 +48,10 @@ class MyNotesListScreen extends StatelessWidget {
         actions: [
           AppbarImage1(
               onTap: () {
-                AppRoutes.notificationsScreen;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationsScreen()));
               },
               svgPath: ImageConstant.imgCart,
               margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
@@ -107,7 +111,7 @@ class MyNotesListScreen extends StatelessWidget {
                                             () {
                                           // Call your function here
                                           myNotesController.getMyNotes(
-                                              searchText: null);
+                                              searchText: "");
                                         });
                                       }
                                     },

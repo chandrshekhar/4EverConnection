@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -17,7 +16,6 @@ class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({Key? key}) : super(key: key);
 
   final notificationController = Get.put(NotificationController());
-  final myProfileController = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class NotificationsScreen extends StatelessWidget {
                     return Column(
                       children: [
                         Container(
-                            height: 80.h,
+                            // height: 80.h,
                             alignment: Alignment.topLeft,
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(
@@ -65,8 +63,9 @@ class NotificationsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CachedNetworkImage(
-                                  imageUrl: myProfileController.userProfileModel
-                                          .value.personalData?.photo ??
+                                  imageUrl: notificationController
+                                          .notificationList[index]
+                                          .announcedFromPhoto ??
                                       "", // Replace with the actual image URL
                                   imageBuilder: (context, imageProvider) =>
                                       CircleAvatar(
@@ -90,9 +89,24 @@ class NotificationsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(notificationController
-                                        .notificationList[index].subject
-                                        .toString()),
+                                    Text(
+                                      notificationController
+                                              .notificationList[index]
+                                              .announcedFromName ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      notificationController
+                                              .notificationList[index]
+                                              .subject ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                    ),
                                     Html(
                                       data:
                                           "  ${notificationController.notificationList[index].text}",

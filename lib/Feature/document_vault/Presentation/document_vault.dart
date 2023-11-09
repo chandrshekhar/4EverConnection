@@ -232,38 +232,44 @@ class DocumentVaultScreen extends StatelessWidget {
                             height: 15.h,
                           ),
                           Obx(
-                            () => CustomElevatedButton(
-                              onTap: (documentVaultController
-                                              .choosenFilename.value !=
-                                          "" ||
-                                      documentVaultController.files.value !=
-                                          null)
-                                  ? () {
-                                      documentVaultController
-                                          .addFileDocumentVault();
-                                          
-                                    }
-                                  : () => null,
-                              width: 150.h,
-                              buttonStyle: ButtonStyle(
-                                  foregroundColor:
-                                      MaterialStateProperty.all(Colors.white),
-                                  backgroundColor: MaterialStateProperty.all(
-                                    documentVaultController
+                            () => documentVaultController.uplodDocument == true
+                                ? const CircularProgressIndicator.adaptive()
+                                : CustomElevatedButton(
+                                    onTap: (documentVaultController
                                                     .choosenFilename.value !=
                                                 "" ||
                                             documentVaultController
                                                     .files.value !=
-                                                null
-                                        ? AppColors.floatingActionButtonColor
-                                        : AppColors.grayColor,
-                                  )),
-                              text: "Upload",
-                              buttonTextStyle: TextStyle(
-                                  fontSize: 18.h,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white),
-                            ),
+                                                null)
+                                        ? () {
+                                            documentVaultController
+                                                .addFileDocumentVault();
+                                          }
+                                        : () => null,
+                                    width: 150.h,
+                                    buttonStyle: ButtonStyle(
+                                        foregroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          documentVaultController
+                                                          .choosenFilename
+                                                          .value !=
+                                                      "" ||
+                                                  documentVaultController
+                                                          .files.value !=
+                                                      null
+                                              ? AppColors
+                                                  .floatingActionButtonColor
+                                              : AppColors.grayColor,
+                                        )),
+                                    text: "Upload",
+                                    buttonTextStyle: TextStyle(
+                                        fontSize: 18.h,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  ),
                           )
                         ],
                       )

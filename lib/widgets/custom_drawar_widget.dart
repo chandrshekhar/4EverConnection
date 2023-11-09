@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +20,9 @@ class CustomDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String userName =
-        "${myProfileController.userProfileModel.value.personalData!.firstName ?? ""}  ${myProfileController.userProfileModel.value.personalData!.lastName ?? ""}";
+        "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""}  ${myProfileController.userProfileModel.value.personalData?.lastName ?? ""}";
+
+    log("UserName--> $userName");
     return SafeArea(
       child: Drawer(
         backgroundColor: AppColors.lightBlue,
@@ -67,7 +71,7 @@ class CustomDrawerWidget extends StatelessWidget {
                               ),
                               SizedBox(height: 2.h),
                               Text(
-                                "ID No. ${myProfileController.userProfileModel.value.personalData!.userId}",
+                                "ID No. ${myProfileController.userProfileModel.value.personalData?.userId ?? ""}",
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ],
@@ -323,7 +327,6 @@ class CustomDrawerWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
-                           
                           ],
                         ),
                       ),

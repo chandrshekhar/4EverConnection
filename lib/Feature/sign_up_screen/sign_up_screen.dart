@@ -2,11 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/address_autocomplete_widget.dart';
 
@@ -571,36 +573,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               margin: EdgeInsets.symmetric(vertical: 7.v),
                             ),
                             Expanded(
-                              child: CustomTextFormField(
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'This field is required';
-                                  }
+                              child: Obx(
+                                () => CustomTextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'This field is required';
+                                    }
 
-                                  return null;
-                                },
-                                controller:
-                                    signUpController.passwordController.value,
-                                margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Password",
-                                labelText: "Password",
-                                textInputType: TextInputType.visiblePassword,
-                                suffix: InkWell(
-                                  onTap: () {
-                                    signUpController.visiablePassword(
-                                        !signUpController
-                                            .passwordVigiable.value);
+                                    return null;
                                   },
-                                  child: Icon(
-                                      !signUpController.passwordVigiable.value
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                      size: 18.h),
+                                  controller:
+                                      signUpController.passwordController.value,
+                                  margin: EdgeInsets.only(left: 22.h),
+                                  hintText: "Password",
+                                  labelText: "Password",
+                                  textInputType: TextInputType.visiblePassword,
+                                  suffix: InkWell(
+                                    onTap: () {
+                                      signUpController.visiablePassword(
+                                          !signUpController
+                                              .passwordVigiable.value);
+                                    },
+                                    child: Icon(
+                                        !signUpController.passwordVigiable.value
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        size: 18.h),
+                                  ),
+                                  suffixConstraints: BoxConstraints(
+                                    maxHeight: 30.v,
+                                  ),
+                                  obscureText:
+                                      signUpController.passwordVigiable.value,
                                 ),
-                                suffixConstraints: BoxConstraints(
-                                  maxHeight: 30.v,
-                                ),
-                                obscureText: true,
                               ),
                             ),
                           ],
@@ -647,8 +652,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     SizedBox(width: 20.h),
                                     CustomRadioButton(
-                                      text: "Spenish",
-                                      value: "Spenish",
+                                      text: "Spanish",
+                                      value: "Spanish",
                                       groupValue: signUpController
                                           .selectedlanguage.value,
                                       onChange: (value) {
@@ -665,11 +670,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 20.v),
                         Row(
                           children: [
-                            Checkbox(value: true, onChanged: (value) {}),
-                            const Expanded(
-                              child: Text(
-                                "By clicking Register Now, you agree to our Terms of Service and Privacy Policy. You may receive SMS Notifications from us and can opt out any time.",
-                              ),
+                            Obx(
+                              () => Checkbox(
+                                  value: signUpController.aggrement.value,
+                                  onChanged: (value) {
+                                    signUpController.acceptAggrement(value!);
+                                  }),
+                            ),
+                            Expanded(
+                              child: RichText(
+                                  text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        'By clicking Register Now, you agree to our  ',
+                                    style:
+                                        CustomTextStyles.bodySmallGray600Light,
+                                  ),
+                                  TextSpan(
+                                    text: 'Terms of Service ',
+                                    style: TextStyle(
+                                        color: AppColors.darkBlue,
+                                        fontSize: 13),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        launch(
+                                            'https://4everconnection.com/terms/');
+                                      },
+                                  ),
+                                  TextSpan(
+                                    text: 'and ',
+                                    style:
+                                        CustomTextStyles.bodySmallGray600Light,
+                                  ),
+                                  TextSpan(
+                                    text: 'Privacy Policy ',
+                                    style: TextStyle(
+                                        color: AppColors.darkBlue,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        launch(
+                                            'https://4everconnection.com/privacy/');
+                                      },
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        'You may receive SMS Notifications from us and can opt out any time.',
+                                    style:
+                                        CustomTextStyles.bodySmallGray600Light,
+                                  ),
+                                ],
+                              )),
                             )
                           ],
                         ),

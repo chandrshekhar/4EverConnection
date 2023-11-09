@@ -53,6 +53,6 @@ class UserProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-     getUserProfileData();
+    getUserProfileData();
   }
 }

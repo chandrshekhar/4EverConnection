@@ -116,6 +116,7 @@ class RequestServiceController extends GetxController {
         firstDate: DateTime.now(),
         lastDate: DateTime(3000),
         fieldHintText: '',
+        useRootNavigator: false,
         builder: ((context, child) {
           return Theme(
               data: ThemeData.light().copyWith(

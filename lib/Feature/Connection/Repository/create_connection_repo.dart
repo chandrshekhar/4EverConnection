@@ -35,9 +35,11 @@ class ConnectionRepo {
             e.type == DioExceptionType.sendTimeout ||
             e.type == DioExceptionType.receiveTimeout ||
             e.type == DioExceptionType.unknown) {
+          print("error-> ${e.response}");
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          throw Exception("Faild to load data");
+          print("error2-> ${e.response!.data['error']}");
+          throw Exception(e.response!.data['error']);
         }
       }
       throw Exception("Faild to make api the request : $e");

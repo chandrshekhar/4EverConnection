@@ -133,13 +133,22 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                                     .userServicesList.length,
                                 itemBuilder: (context, index) {
                                   return serviceCard(
-                                    userServiceController
+                                    userServicesModel: userServiceController
                                         .userServicesList[index],
-                                    (value) {
-                                      switch (value) {
-                                        case "Call us":
+                                    onSeleted: (p0) async {
+                                      switch (p0) {
+                                        case "Email":
+                                          await connectionController
+                                              .launchEmail("");
                                           break;
-                                        default:
+                                        case "Resend":
+                                          await connectionController
+                                              .resedConnection(-1);
+                                          break;
+                                        case "Call":
+                                          await connectionController
+                                              .launchPhoneDialer("");
+                                          break;
                                       }
                                     },
                                   );
@@ -152,7 +161,8 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
   }
 
   Widget serviceCard(
-      UserServicesModel userServicesModel, Function(String)? onSelected) {
+      {required UserServicesModel userServicesModel,
+      Function(String)? onSeleted}) {
     return Container(
       margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 15.v),
       decoration: BoxDecoration(
@@ -160,7 +170,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(12.v),
+            padding: EdgeInsets.only(left: 12.v),
             decoration: AppDecoration.fillLightBlue.copyWith(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(9.h),
@@ -181,37 +191,36 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                 ),
                 Expanded(
                     flex: 2,
-                    child: Text(userServicesModel.identifier.toString(),
+                    child: Text(userServicesModel.identifier ?? "",
                         style: const TextStyle(
                             color: Colors.white, fontSize: 15))),
                 const Spacer(),
-                Container(
-                  height: 15.v,
-                  width: 10.v,
-                  margin: EdgeInsets.only(right: 10.v),
-                  child: PopupMenuButton<String>(
-                    splashRadius: null,
+                PopupMenuButton<String>(
+                    padding: EdgeInsets.zero,
+                    position: PopupMenuPosition.under,
+                    onSelected: onSeleted,
                     icon: const Icon(
                       Icons.more_vert,
-                      size: 18,
                       color: Colors.white,
-                    ),
-                    padding: EdgeInsets.zero,
-                    onSelected: onSelected,
+                    ), // Icon for the button
                     itemBuilder: (BuildContext context) {
                       return <PopupMenuEntry<String>>[
+                        // Define the menu items
+
                         const PopupMenuItem<String>(
-                          value: 'Call us',
-                          child: Text('Call us'),
+                          value: 'Call',
+                          child: Text('Call'),
                         ),
                         const PopupMenuItem<String>(
-                          value: 'Email us',
-                          child: Text('Email us'),
+                          value: 'Email',
+                          child: Text('Email'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Message',
+                          child: Text('Message'),
                         ),
                       ];
-                    },
-                  ),
-                ),
+                    }),
               ],
             ),
           ),
@@ -237,11 +246,12 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                         flex: 3,
                         child: Text(
                             convertAndFormatDate(
-                                userServicesModel.dateCreated!),
+                                userServicesModel.dateCreated ?? ""),
                             style: const TextStyle(
                                 color: Color(0xFF6B6B6B), fontSize: 15))),
                   ],
                 ),
+                SizedBox(height: 5.h),
                 Row(
                   children: [
                     Expanded(
@@ -262,27 +272,27 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                     const Spacer()
                   ],
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        "Collaborate",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 18.v),
-                      ),
-                    ),
-                    const Expanded(
-                        flex: 2,
-                        child: Text('Collaboration Page',
-                            style: TextStyle(
-                                color: Color(0xFF6B6B6B), fontSize: 15))),
-                    const Spacer(),
-                  ],
-                ),
-                SizedBox(height: 5.v),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       flex: 2,
+                //       child: Text(
+                //         "Collaborate",
+                //         style: TextStyle(
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.normal,
+                //             fontSize: 18.v),
+                //       ),
+                //     ),
+                //     const Expanded(
+                //         flex: 2,
+                //         child: Text('Collaboration Page',
+                //             style: TextStyle(
+                //                 color: Color(0xFF6B6B6B), fontSize: 15))),
+                //     const Spacer(),
+                //   ],
+                // ),
+                SizedBox(height: 6.v),
                 Row(
                   children: [
                     Expanded(

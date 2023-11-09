@@ -312,11 +312,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               horizontal: 11.h, vertical: 17.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
-                          onChange: (value) {
+                          // onChange: (value) {
                             // validationController
                             //     .setHomeAddressValidation(value);
                             // validationController.checkButtonValidation();
-                          },
+                          // },
                           validator: (value) {
                             if (value!.length < 8) {
                               return "Home address must have atlease 8 character";

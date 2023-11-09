@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -116,9 +118,16 @@ class DocumentVaultDataTable extends StatelessWidget {
                     ),
                     PopupMenuItem<String>(
                       onTap: () async {
-                        documentsVaultController.download2(
-                            documentsVaultController
-                                .documentVaultList[index].file!);
+                        if (Platform.isAndroid) {
+                          documentsVaultController.downloadFile(
+                              documentsVaultController
+                                  .documentVaultList[index].file!,
+                              context);
+                        } else {
+                          documentsVaultController.download2(
+                              documentsVaultController
+                                  .documentVaultList[index].file!);
+                        }
                       },
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,

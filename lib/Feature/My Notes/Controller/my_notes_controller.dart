@@ -126,6 +126,7 @@ class MyNotesController extends GetxController {
       isNotesLitsLoading(true);
       var res = await _myNotesRepo.getNotes(searchText: searchText);
       noteList.value = res;
+      noteList.sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
       isNotesLitsLoading(false);
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
@@ -150,9 +151,9 @@ class MyNotesController extends GetxController {
       myNotesModel.value = res;
       isNotesDetailsLoading(false);
     } catch (e) {
-       isNotesDetailsLoading(false);
+      isNotesDetailsLoading(false);
       ToastWidget.errorToast(error: e.toString());
-    }finally{
+    } finally {
       isNotesDetailsLoading(false);
     }
   }

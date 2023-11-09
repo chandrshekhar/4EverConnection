@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/notification/notification-screen.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
@@ -39,6 +40,12 @@ class EditNotesScreen extends StatelessWidget {
         title: AppbarTitle(text: "Edit Notes"),
         actions: [
           AppbarImage1(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationsScreen()));
+              },
               svgPath: ImageConstant.imgCart,
               margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
         ],
@@ -59,9 +66,9 @@ class EditNotesScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(children: [
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     CustomImageView(
-                        svgPath: ImageConstant.imgSearch,
+                        svgPath: ImageConstant.imgEdit,
                         height: 17.adaptSize,
                         width: 17.adaptSize,
                         margin: EdgeInsets.only(top: 3.v, bottom: 13.v)),

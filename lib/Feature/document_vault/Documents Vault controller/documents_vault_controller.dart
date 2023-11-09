@@ -10,6 +10,7 @@ import 'package:forever_connection/Feature/document_vault/Repo/document_repo.dar
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -29,6 +30,8 @@ class DocumentsVaultController extends GetxController {
   RxInt documentTypeId = (-1).obs;
   RxString choosenFilename = RxString("");
   final documentDescControler = TextEditingController().obs;
+
+  RxBool uplodDocument = false.obs;
   // RxString files = ''.obs;
   Rx<File?> files = Rx<File?>(null);
   Dio dio = Dio();
@@ -126,8 +129,11 @@ class DocumentsVaultController extends GetxController {
 
   // download file fsavePath
   Future download2(String url) async {
+    String fileName = url.split("/").last.toString();
     final appDocumentsDirectory = await getApplicationDocumentsDirectory();
-    final savePath = '${appDocumentsDirectory.path}/downloaded_file.extension';
+    final savePath = '${appDocumentsDirectory.path}/$fileName';
+
+    print("save path--. $savePath");
 
     try {
       var response = await dio.get(
@@ -144,11 +150,116 @@ class DocumentsVaultController extends GetxController {
       print(response.headers);
       File file = File(savePath);
       var raf = file.openSync(mode: FileMode.write);
-      // response.data is List<int> type
       raf.writeFromSync(response.data);
       await raf.close();
     } catch (e) {
       print(e);
+    }
+  }
+
+  downloadforAndroid() async {}
+  void showPermissionRationale(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Permission Required"),
+          content:
+              Text("Storage permission is required to perform this action."),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: Text("Open Settings"),
+              onPressed: () {
+                openAppSettings();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool> _requestPermission(Permission permission) async {
+    if (await permission.isGranted) {
+      return true;
+    } else {
+      var result = await permission.request();
+      if (result == PermissionStatus.granted) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<bool> saveVideo(
+      String url, String fileName, BuildContext context) async {
+    Directory directory;
+    try {
+      if (Platform.isAndroid) {
+        if (await _requestPermission(Permission.manageExternalStorage)) {
+          directory = (await getExternalStorageDirectory())!;
+          String newPath = "";
+          print(directory);
+          List<String> paths = directory.path.split("/");
+          for (int x = 1; x < paths.length; x++) {
+            String folder = paths[x];
+            if (folder != "Android") {
+              newPath += "/" + folder;
+            } else {
+              break;
+            }
+          }
+          newPath = newPath + "/forEver";
+          directory = Directory(newPath);
+        } else {
+          showPermissionRationale(context);
+          return false;
+        }
+      } else {
+        if (await _requestPermission(Permission.photos)) {
+          directory = await getTemporaryDirectory();
+        } else {
+          return false;
+        }
+      }
+      File saveFile = File(directory.path + "/$fileName");
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+      if (await directory.exists()) {
+        await dio.download(url, saveFile.path,
+            onReceiveProgress: (value1, value2) {
+          progress = value1 / value2;
+        });
+        if (Platform.isIOS) {
+          await ImageGallerySaver.saveFile(saveFile.path,
+              isReturnPathOfIOS: true);
+        }
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  downloadFile(String url, BuildContext context) async {
+    // var res = await CsvFileDownload().getDownloadUrl();
+
+    String fileName = url.toString().split("/").last;
+    bool downloaded = await saveVideo(url, fileName, context);
+    if (downloaded) {
+      ToastWidget.successToast(success: "File Downloaded");
+    } else {
+      ToastWidget.errorToast(error: "Failed to download file");
     }
   }
 
@@ -219,32 +330,9 @@ class DocumentsVaultController extends GetxController {
     return false;
   }
 
-  Future<bool> _requestPermission(Permission permission) async {
-    if (await permission.isGranted) {
-      return true;
-    } else {
-      var result = await permission.request();
-      if (result == PermissionStatus.granted) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-
-  downloadFile(String fileUrl) async {
-    List<String> parts = fileUrl.split('/');
-    String filename = parts.last;
-    bool downloaded = await saveFile(fileUrl, filename);
-    if (downloaded) {
-      print("File downloaded");
-    } else {
-      print("Problem downloading file");
-    }
-  }
-
   addFileDocumentVault() async {
     try {
+      uplodDocument(true);
       await _documentRepo.uploadDocument(
           id: documentTypeId.value,
           desc: documentDescControler.value.text.trim(),
@@ -254,8 +342,10 @@ class DocumentsVaultController extends GetxController {
       documentDescControler.value.clear();
       files.value = null;
       choosenFilename.value = "";
+      uplodDocument(false);
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
+      uplodDocument(false);
     }
   }
 
