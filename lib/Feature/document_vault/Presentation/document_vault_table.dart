@@ -1,16 +1,12 @@
 import 'dart:io';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../widgets/custom_text_form_field.dart';
 import '../Documents Vault controller/documents_vault_controller.dart';
 import '../../../core/constants/colors.dart';

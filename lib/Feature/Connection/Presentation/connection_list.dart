@@ -176,9 +176,8 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
             height: 10.h,
           ),
           Expanded(
-            child: Obx(() => connectionController
-                    .pendingConnectionList.isNotEmpty
-                ? tapIndex == 0
+            child: Obx(() => tapIndex == 0
+                ? connectionController.pendingConnectionList.isNotEmpty
                     ? ListView.builder(
                         padding: EdgeInsets.only(
                             left: 23.adaptSize, right: 23.adaptSize),
@@ -219,7 +218,9 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                           );
                         },
                       )
-                    : ListView.builder(
+                    : const Center(child: Text("No notes found"))
+                : connectionController.acceptedConnectionList.isNotEmpty
+                    ? ListView.builder(
                         padding: EdgeInsets.only(
                             left: 23.adaptSize, right: 23.adaptSize),
                         itemCount:
@@ -227,6 +228,7 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                         itemBuilder: (context, index) {
                           var item = connectionController
                               .acceptedConnectionList[index];
+                          print("check$item");
                           return ConnectionListWidget(
                             onSeleted: (p0) async {
                               switch (p0) {
@@ -259,9 +261,10 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                           );
                         },
                       )
-                : connectionController.isLoading.value
-                    ? const Center(child: CircularProgressIndicator.adaptive())
-                    : const Center(child: Text("No notes found"))),
+                    : connectionController.isLoading.value
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive())
+                        : const Center(child: Text("No notes found"))),
           )
         ],
       ),
