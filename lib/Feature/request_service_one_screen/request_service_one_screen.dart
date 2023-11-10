@@ -394,12 +394,13 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                   })
                               : const SizedBox())),
 
+
                       Obx(
                         () => CustomTextFormField(
                             controller: requestServiceController
                                 .commentController.value,
                             margin: EdgeInsets.only(
-                                left: 12.h, top: 15.v, right: 12.h, bottom: 20),
+                                left: 12.h, top: 40.v, right: 12.h, bottom: 20),
                             labelText: "Write your comments (optional)*",
                             textInputAction: TextInputAction.done,
                             maxLines: 1,

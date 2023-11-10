@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Models/user_services_model.dart';
-import 'package:forever_connection/theme/theme_helper.dart';
-import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../widgets/custom_text_form_field.dart';
 import '../../../core/constants/colors.dart';
-import '../Controllers/Services/user_service_controller.dart';
 
 // ignore: must_be_immutable
 class UserServiceDataTable extends StatelessWidget {
@@ -105,13 +101,13 @@ class UserServiceDataTable extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.remove_red_eye,
+                            Icons.call,
                             color: AppColors.lightBlue,
                             size: 15.sp,
                           ),
                           SizedBox(width: 5.w),
                           Text(
-                            'View',
+                            'Call',
                             style: TextStyle(color: AppColors.lightBlue),
                           ),
                         ],
@@ -145,6 +141,38 @@ class UserServiceDataTable extends StatelessWidget {
                           SizedBox(width: 5.w),
                           Text(
                             'Email',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      onTap: () async {
+                        // final Uri params = Uri(
+                        //   scheme: 'mailto',
+                        //   path: 'support@4ever.net',
+                        //   //add subject and body here
+                        // );
+
+                        // var url = Uri.parse(params.toString());
+                        // if (await canLaunchUrl(url)) {
+                        //   await launchUrl(url);
+                        // } else {
+                        //   throw 'Could not launch $url';
+                        // }
+                      },
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.message,
+                            size: 15.sp,
+                            color: AppColors.lightBlue,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'Message',
                             style: TextStyle(color: AppColors.lightBlue),
                           ),
                         ],

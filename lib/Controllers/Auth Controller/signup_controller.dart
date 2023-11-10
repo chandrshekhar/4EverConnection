@@ -26,7 +26,7 @@ class SignupController extends GetxController {
   RxBool isRegisterLoadng = false.obs;
   RxBool isClientChecking = false.obs;
   RxString selectedGender = 'Male'.obs;
-  RxString selectedlanguage = 'English'.obs;
+  RxString selectedlanguage = ''.obs;
 
   RxInt selectedSourceType = 0.obs;
 
@@ -36,9 +36,10 @@ class SignupController extends GetxController {
 
   void sourceOption(int value) {
     selectedSourceType.value = value;
+    print(selectedSourceType);
   }
 
-  RxString isAlreadyAccount = "No".obs;
+  RxString isAlreadyAccount = "".obs;
 
   checkAccount(String value) {
     isAlreadyAccount.value = value;
@@ -113,12 +114,12 @@ class SignupController extends GetxController {
         "business_name": businessNameController.value.text.trim(),
         "password": passwordController.value.text.trim(),
         "language": selectedlanguage.value.toString(),
-        "how_do_you_know_us": selectedSourceType.value
+        "how_do_you_know_us": selectedSourceType.value.toString()
       };
       debugPrint(reqModel.toString());
       isRegisterLoadng(true);
       var res = await authServices.registerApi(reqModel: reqModel);
-      if (res["satus"] == 200 && res["message"] != "") {
+      if (res["satus"] == 200) {
         isRegisterLoadng(false);
         ToastWidget.successToast(success: res['message']);
         clearValue();
@@ -133,6 +134,7 @@ class SignupController extends GetxController {
           TostWidget()
               .errorToast(title: "Error!", message: "Please check internet");
         } else if (e.type == DioErrorType.badResponse) {
+          print(e.response!.data);
           TostWidget().errorToast(
               title: "Invalid!", message: "${e.response!.data["message"]}");
         } else {
@@ -159,6 +161,10 @@ class SignupController extends GetxController {
     aptController.value.clear();
     businessNameController.value.clear();
     selectedSourceType.value = 0;
+    aggrement(false);
+    selectedlanguage.value="";
+    
+    
   }
 
   //pic date and time
@@ -191,7 +197,7 @@ class SignupController extends GetxController {
 
   //format date time as per requirement
   String convertAndFormatDate(DateTime inputDate) {
-    final outputFormat = DateFormat("MM-dd-yyyy");
+    final outputFormat = DateFormat("yyyy-dd-MM");
     return outputFormat.format(inputDate);
   }
 }

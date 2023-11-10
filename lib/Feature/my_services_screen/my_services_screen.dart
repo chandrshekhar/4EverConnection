@@ -26,13 +26,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
 
   TextEditingController languageController = TextEditingController();
 
-  List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
-
   TextEditingController edittextoneController = TextEditingController();
-
-  List<String> dropdownItemList1 = ["Item One", "Item Two", "Item Three"];
-
-  String selectedItem = 'Item One';
 
   TextEditingController edittexttwoController = TextEditingController();
 
@@ -80,14 +74,16 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
                 height: MediaQuery.of(context).size.height * 0.36,
                 child: Obx(
-                  () => userServiceController.userServicesPendingList.isEmpty
-                      ? const Center(
-                          child: Text("No data"),
-                        )
-                      : UserServiceDataTable(
-                          userServiceModel:
-                              userServiceController.userServicesPendingList,
-                        ),
+                  () => userServiceController.isServiceLoading == true
+                      ?const Center(child:  CircularProgressIndicator.adaptive())
+                      : userServiceController.userServicesPendingList.isEmpty
+                          ? const Center(
+                              child: Text("No data"),
+                            )
+                          : UserServiceDataTable(
+                              userServiceModel:
+                                  userServiceController.userServicesPendingList,
+                            ),
                 ),
               ),
               CustomOutlinedButton(
@@ -100,13 +96,15 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                 height: MediaQuery.of(context).size.height * 0.35,
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
                 child: Obx(
-                  () => userServiceController.userServicesCompletedList.isEmpty
-                      ? const Center(
-                          child: Text("No Data"),
-                        )
-                      : UserServiceDataTable(
-                          userServiceModel:
-                              userServiceController.userServicesCompletedList),
+                  () => userServiceController.isServiceLoading == true
+                      ? const Center(child:  CircularProgressIndicator.adaptive())
+                      : userServiceController.userServicesCompletedList.isEmpty
+                          ? const Center(
+                              child: Text("No Data"),
+                            )
+                          : UserServiceDataTable(
+                              userServiceModel: userServiceController
+                                  .userServicesCompletedList),
                 ),
               )
             ]));

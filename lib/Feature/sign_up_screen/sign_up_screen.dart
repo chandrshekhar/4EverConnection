@@ -131,13 +131,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             groupValue: signUpController
                                                 .isAlreadyAccount.value,
                                             onChange: (value) {
-                                                signUpController
+                                              signUpController
                                                   .checkAccount(value);
                                               CustomAlretDialogs()
                                                   .openDialogForNoClient(
                                                       context,
                                                       signUpController);
-                                            
                                             },
                                           ),
                                         ),
@@ -442,8 +441,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           AddressAutoCompleteWidget(),
                                     ),
                                   );
-                                  signUpController
-                                      .addressController.value.text = address;
+                                  signUpController.addressController.value
+                                      .text = address ?? "";
                                 },
                                 controller:
                                     signUpController.addressController.value,
@@ -587,7 +586,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               .passwordVigiable.value);
                                     },
                                     child: Icon(
-                                        !signUpController.passwordVigiable.value
+                                        signUpController.passwordVigiable.value
                                             ? Icons.visibility
                                             : Icons.visibility_off,
                                         size: 18.h),
@@ -596,7 +595,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     maxHeight: 30.v,
                                   ),
                                   obscureText:
-                                      signUpController.passwordVigiable.value,
+                                      !signUpController.passwordVigiable.value,
                                 ),
                               ),
                             ),
@@ -683,6 +682,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     text: 'Terms of Service ',
                                     style: TextStyle(
                                         color: AppColors.darkBlue,
+                                        fontWeight: FontWeight.w600,
                                         fontSize: 13),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
@@ -718,16 +718,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             )
                           ],
                         ),
-                        // CustomCheckboxButton(
-                        //   text:
-                        //       "By clicking Register Now, you agree to our Terms of Service and Privacy Policy. You may receive SMS Notifications from us and can opt out any time.",
-                        //   isExpandedText: true,
-                        //   value: byclickingregis,
-                        //   textStyle: CustomTextStyles.bodySmallGray600Light,
-                        //   onChange: (value) {
-                        //     byclickingregis = value;
-                        //   },
-                        // ),
+
                         Obx(
                           () => signUpController.isRegisterLoadng == true
                               ? const Center(
