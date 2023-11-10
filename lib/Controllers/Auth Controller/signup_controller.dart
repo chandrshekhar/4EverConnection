@@ -74,6 +74,7 @@ class SignupController extends GetxController {
       if (res["satus"] == 200 && res["message"] != "") {
         isClientChecking(false);
         ToastWidget.successToast(success: res['message']);
+        clearValue();
       }
     } catch (e) {
       if (e is DioError) {

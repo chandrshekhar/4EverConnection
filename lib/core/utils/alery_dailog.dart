@@ -98,7 +98,9 @@ class CustomAlretDialogs {
                 ],
               ),
             ),
-            btnCancelOnPress: () {},
+            btnCancelOnPress: () {
+              signupController.clearValue();
+            },
             btnOkText: "Check",
             btnCancelColor: AppColors.buttonColor,
             btnOkOnPress: () async {

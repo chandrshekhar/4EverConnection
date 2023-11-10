@@ -40,6 +40,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
     requestServiceController.activeIndex.value = -1;
     requestServiceController.selectedDate.value = DateTime.now();
     requestServiceController.selectDateController.value.clear();
+    requestServiceController.serviceSearchController.value.clear();
+    requestServiceController.partnerSearchController.value.clear();
     super.initState();
     // Initialize the selected value
   }
