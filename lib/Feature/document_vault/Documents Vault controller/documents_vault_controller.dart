@@ -80,6 +80,9 @@ class DocumentsVaultController extends GetxController {
     isLoadingDocumentList(true);
     try {
       var resp = await _documentRepo.getDocumentVaultList();
+      if (kDebugMode) {
+        log(resp.toString());
+      }
       documentVaultList.value = resp;
       isLoadingDocumentList(false);
     } catch (e) {

@@ -5,6 +5,7 @@ class ApiPath {
 
   //Authentication
   static const registerUrl = "$baseUrl/api/user/";
+  static const checkClient = "$baseUrl/api/user/check";
   static const loginUrl = "$baseUrl/api-token-auth/";
   static const forgotPasswordSendEmail = "$baseUrl/api/user/reset-password";
   static const getUserService = "$baseUrl/api/user-services/";
@@ -15,7 +16,8 @@ class ApiPath {
   static const carInsurance = "$baseUrl$profile/car-insurance";
   static const disabilityInsurance = "$baseUrl$profile/disability-insurance";
   static const healthInsurance = "$baseUrl$profile/health-insurance";
-  static const longtermCarInsurance = "$baseUrl$profile/long-term-care-insurance";
+  static const longtermCarInsurance =
+      "$baseUrl$profile/long-term-care-insurance";
   static const lifeInsurance = "$baseUrl$profile/life-insurance";
   static const homeInsurance = "$baseUrl$profile/home-insurance";
   static const profesional = "$baseUrl$profile/professional";

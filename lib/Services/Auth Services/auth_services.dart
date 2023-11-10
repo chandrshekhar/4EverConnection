@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -25,6 +24,27 @@ class AuthServices {
 
     return response.data;
   }
+Future<Map> checkApi({required Map<String, dynamic> reqModel}) async {
+    dio.options.headers = {
+      'Accept': 'application/json',
+      'Conent-Type': 'application/json',
+    };
+    var response = await dio.get(ApiPath.checkClient, queryParameters: reqModel);
+    if (kDebugMode) {
+      print("reg--. $response");
+    }
+
+    if (response.statusCode == 200) {
+      return {
+        "satus": response.statusCode,
+        "message": response.data['message']
+      };
+    }
+
+    return response.data;
+  }
+
+
 
   Future<Map> loginApi({required Map<String, dynamic> reqModel}) async {
     // Response response;

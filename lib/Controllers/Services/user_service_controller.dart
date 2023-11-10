@@ -18,7 +18,13 @@ class UserServicesController extends GetxController {
       isLoading(true);
       userServicesList.value = await userServices.getUserServices();
 
-      // for (int i = 0; i < userServicesList.length; i++) {}
+      for (int i = 0; i < userServicesList.length; i++) {
+        if (userServicesList[i].statusDescription == "Completed") {
+          userServicesCompletedList.add(userServicesList[i]);
+        } else {
+          userServicesPendingList.add(userServicesList[i]);
+        }
+      }
       isLoading(false);
     } catch (e) {
       isLoading(false);

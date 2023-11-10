@@ -9,6 +9,7 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_outlined_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/service_table_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -45,119 +46,70 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     userServiceController.getUserServices();
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xFFE4F5FF),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-              padding: EdgeInsets.symmetric(vertical: 13.v),
-              decoration: AppDecoration.outlineBlack,
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                CustomAppBar(
-                    height: 31.v,
-                    leadingWidth: 44.h,
-                    leading: AppbarImage(
-                        svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                        margin:
-                            EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
-                        onTap: () {
-                          onTapArrowleftone(context);
-                        }),
-                    centerTitle: true,
-                    title: AppbarTitle(text: "My Services"),
-                    actions: [
-                      AppbarImage1(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.notificationsScreen);
-                          },
-                          svgPath: ImageConstant.imgCart,
-                          margin: EdgeInsets.fromLTRB(24.h, 1.v, 24.h, 6.v))
-                    ]),
-                Padding(
-                    padding: EdgeInsets.fromLTRB(24.h, 29.v, 24.h, 13.v),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomOutlinedButton(
-                              buttonStyle: tapIndex == 0
-                                  ? CustomButtonStyles.fillLightBlueTL20
-                                  : null,
-                              buttonTextStyle: tapIndex == 0
-                                  ? const TextStyle(color: Colors.white)
-                                  : const TextStyle(color: Colors.black),
-                              onTap: () {
-                                setState(() {
-                                  tapIndex = 0;
-                                });
-                              },
-                              width: 167.h,
-                              text: "Services in Progress"),
-                          SizedBox(width: 5.v),
-                          CustomOutlinedButton(
-                              buttonTextStyle: tapIndex == 1
-                                  ? const TextStyle(color: Colors.white)
-                                  : const TextStyle(color: Colors.black),
-                              buttonStyle: tapIndex == 1
-                                  ? CustomButtonStyles.fillLightBlueTL20
-                                  : null,
-                              onTap: () {
-                                setState(() {
-                                  tapIndex = 1;
-                                });
-                              },
-                              width: 167.h,
-                              text: "Completed Services"),
-                        ]))
-              ])),
-          Padding(
-              padding: EdgeInsets.symmetric(vertical: 13.v, horizontal: 15.v),
-              child: Text(
-                  tapIndex == 0 ? "In Progress Service" : "Completed Services",
-                  style: theme.textTheme.titleLarge)),
-          tapIndex == 0
-              ? Obx(
-                  () => userServiceController.isLoading == true
-                      ? Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.3),
-                          child: const Center(
-                              child: CircularProgressIndicator.adaptive()),
+        //backgroundColor: const Color(0xFFE4F5FF),
+        backgroundColor: Colors.white,
+        appBar: CustomAppBar(
+            leadingWidth: 44.h,
+            leading: AppbarImage(
+                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+                margin: EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
+                onTap: () {
+                  Navigator.pop(context);
+                }),
+            centerTitle: true,
+            title: AppbarTitle(text: "My Services"),
+            actions: [
+              AppbarImage1(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                  },
+                  svgPath: ImageConstant.imgCart,
+                  margin: EdgeInsets.fromLTRB(24.h, 1.v, 24.h, 6.v))
+            ]),
+        body: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10.h),
+              CustomOutlinedButton(
+                  buttonStyle: CustomButtonStyles.fillLightBlueTL20,
+                  buttonTextStyle: const TextStyle(color: Colors.white),
+                  width: 167.h,
+                  text: "Services in Progress"),
+              Container(
+                margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
+                height: MediaQuery.of(context).size.height * 0.36,
+                child: Obx(
+                  () => userServiceController.userServicesPendingList.isEmpty
+                      ? const Center(
+                          child: Text("No data"),
                         )
-                      : userServiceController.userServicesList.isEmpty
-                          ? const Center(
-                              child: Text("No Service"),
-                            )
-                          : Expanded(
-                              child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                itemCount: userServiceController
-                                    .userServicesList.length,
-                                itemBuilder: (context, index) {
-                                  return serviceCard(
-                                    userServicesModel: userServiceController
-                                        .userServicesList[index],
-                                    onSeleted: (p0) async {
-                                      switch (p0) {
-                                        case "Email":
-                                          await connectionController
-                                              .launchEmail("");
-                                          break;
-                                        case "Resend":
-                                          await connectionController
-                                              .resedConnection(-1);
-                                          break;
-                                        case "Call":
-                                          await connectionController
-                                              .launchPhoneDialer("");
-                                          break;
-                                      }
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                )
-              : Container()
-        ]));
+                      : UserServiceDataTable(
+                          userServiceModel:
+                              userServiceController.userServicesPendingList,
+                        ),
+                ),
+              ),
+              CustomOutlinedButton(
+                  buttonStyle: CustomButtonStyles.fillLightBlueTL20,
+                  buttonTextStyle: const TextStyle(color: Colors.white),
+                  width: 167.h,
+                  text: "Completed Services"),
+              SizedBox(height: 1.h),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.35,
+                margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
+                child: Obx(
+                  () => userServiceController.userServicesCompletedList.isEmpty
+                      ? const Center(
+                          child: Text("No Data"),
+                        )
+                      : UserServiceDataTable(
+                          userServiceModel:
+                              userServiceController.userServicesCompletedList),
+                ),
+              )
+            ]));
   }
 
   Widget serviceCard(
@@ -242,13 +194,13 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                             fontSize: 18.v),
                       ),
                     ),
-                    Expanded(
-                        flex: 3,
-                        child: Text(
-                            convertAndFormatDate(
-                                userServicesModel.dateCreated ?? ""),
-                            style: const TextStyle(
-                                color: Color(0xFF6B6B6B), fontSize: 15))),
+                    // Expanded(
+                    //     flex: 3,
+                    //     child: Text(
+                    //         convertAndFormatDate(
+                    //             userServicesModel.dateCreated ?? ""),
+                    //         style: const TextStyle(
+                    //             color: Color(0xFF6B6B6B), fontSize: 15))),
                   ],
                 ),
                 SizedBox(height: 5.h),
@@ -392,15 +344,15 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     );
   }
 
-  String convertAndFormatDate(String inputDate) {
-    final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
-    final parsedDate = originalFormat.parse(inputDate);
+  // String convertAndFormatDate(String inputDate) {
+  //   final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
+  //   final parsedDate = originalFormat.parse(inputDate);
 
-    final outputFormat = DateFormat("dd/MM/yyyy");
-    return outputFormat.format(parsedDate);
-  }
+  //   final outputFormat = DateFormat("dd/MM/yyyy");
+  //   return outputFormat.format(parsedDate);
+  // }
 
-  onTapArrowleftone(BuildContext context) {
-    Navigator.pop(context);
-  }
+  // onTapArrowleftone(BuildContext context) {
+  //   Navigator.pop(context);
+  // }
 }

@@ -12,7 +12,6 @@ class CustomButtonStyles {
       );
   static ButtonStyle get fillLightBlueTL20 => ElevatedButton.styleFrom(
         backgroundColor: appTheme.lightBlue90001,
-       
       );
   static ButtonStyle get fillRed => ElevatedButton.styleFrom(
         backgroundColor: appTheme.red500,

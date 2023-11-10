@@ -86,11 +86,13 @@ class DocumentVaultDataTable extends StatelessWidget {
                     // Define the menu items
                     PopupMenuItem<String>(
                       onTap: () async {
-                        var url = documentsVaultController
-                            .documentVaultList[index].file!;
-                        if (await canLaunch(url)) {
-                          await launch(url,
-                              forceSafariVC: false, forceWebView: false);
+                        var url = Uri.parse(documentsVaultController
+                                .documentVaultList[index].file ??
+                            "");
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(
+                            url,
+                          );
                         } else {
                           throw 'Could not launch $url';
                         }
@@ -144,9 +146,18 @@ class DocumentVaultDataTable extends StatelessWidget {
                     ),
                     PopupMenuItem<String>(
                       onTap: () async {
-                        var emailUrl = "pandey211998@gmail.com";
+                        final Uri params = Uri(
+                          scheme: 'mailto',
+                          path: 'support@4ever.net',
+                          //add subject and body here
+                        );
 
-                        await launch(emailUrl);
+                        var url = Uri.parse(params.toString());
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,

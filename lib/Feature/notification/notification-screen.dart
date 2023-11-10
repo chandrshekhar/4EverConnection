@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:get/get.dart';
@@ -27,7 +27,7 @@ class NotificationsScreen extends StatelessWidget {
         leadingWidth: 44.h,
         leading: AppbarImage(
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+            margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 28.h),
             onTap: () {
               Navigator.pop(context);
             }),
@@ -89,23 +89,32 @@ class NotificationsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      notificationController
-                                              .notificationList[index]
-                                              .announcedFromName ??
-                                          "",
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          const TextSpan(
+                                            text: 'From ',
+                                            style: TextStyle(),
+                                          ),
+                                          TextSpan(
+                                              style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600),
+                                              text: notificationController
+                                                      .notificationList[index]
+                                                      .announcedFromName ??
+                                                  ""),
+                                        ],
+                                      ),
                                     ),
                                     Text(
                                       notificationController
                                               .notificationList[index]
                                               .subject ??
                                           "",
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w400),
                                     ),
                                     Html(
                                       data:
@@ -125,7 +134,7 @@ class NotificationsScreen extends StatelessWidget {
                               ],
                             )),
                         SizedBox(
-                          height: 3.v,
+                          height: 3.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -168,7 +177,7 @@ class NotificationsScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 20.v,
+                          height: 20.h,
                         ),
                       ],
                     );

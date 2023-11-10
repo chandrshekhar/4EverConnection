@@ -24,14 +24,26 @@ class SignupController extends GetxController {
   final languageController = TextEditingController().obs;
   AuthServices authServices = AuthServices();
   RxBool isRegisterLoadng = false.obs;
+  RxBool isClientChecking = false.obs;
   RxString selectedGender = 'Male'.obs;
   RxString selectedlanguage = 'English'.obs;
 
+  RxInt selectedSourceType = 0.obs;
+
   var selectedDate = DateTime.now().obs;
-
   RxBool passwordVigiable = false.obs;
-
   RxBool aggrement = false.obs;
+
+  void sourceOption(int value) {
+    selectedSourceType.value = value;
+  }
+
+  RxString isAlreadyAccount = "No".obs;
+
+  checkAccount(String value) {
+    isAlreadyAccount.value = value;
+    clearValue();
+  }
 
   visiablePassword(bool value) {
     passwordVigiable.value = value;
@@ -49,6 +61,41 @@ class SignupController extends GetxController {
     selectedlanguage.value = value;
   }
 
+  checkClient(BuildContext context) async {
+    try {
+      Map<String, dynamic> reqModel = {
+        "first_name": firstNameController.value.text.trim(),
+        "last_name": lastnameController.value.text.trim(),
+        "email": emailController.value.text,
+      };
+      debugPrint(reqModel.toString());
+      isClientChecking(true);
+      var res = await authServices.checkApi(reqModel: reqModel);
+      if (res["satus"] == 200 && res["message"] != "") {
+        isClientChecking(false);
+        ToastWidget.successToast(success: res['message']);
+      }
+    } catch (e) {
+      if (e is DioError) {
+        if (e.type == DioErrorType.connectionTimeout ||
+            e.type == DioErrorType.receiveTimeout ||
+            e.type == DioErrorType.sendTimeout) {
+          TostWidget()
+              .errorToast(title: "Error!", message: "Please check internet");
+        } else if (e.type == DioErrorType.badResponse) {
+          TostWidget().errorToast(
+              title: "Invalid!", message: "${e.response!.data["message"]}");
+        } else {
+          TostWidget().errorToast(
+              title: "Error!",
+              message: "Someting went wrong please try after sometime!");
+        }
+      }
+
+      isRegisterLoadng(false);
+    }
+  }
+
   register(BuildContext context) async {
     try {
       Map<String, dynamic> reqModel = {
@@ -64,7 +111,8 @@ class SignupController extends GetxController {
         "zip": zipController.value.text.trim(),
         "business_name": businessNameController.value.text.trim(),
         "password": passwordController.value.text.trim(),
-        "language": selectedlanguage.value.toString()
+        "language": selectedlanguage.value.toString(),
+        "how_do_you_know_us": selectedSourceType.value
       };
       debugPrint(reqModel.toString());
       isRegisterLoadng(true);
@@ -109,6 +157,7 @@ class SignupController extends GetxController {
     dobController.value.clear();
     aptController.value.clear();
     businessNameController.value.clear();
+    selectedSourceType.value = 0;
   }
 
   //pic date and time

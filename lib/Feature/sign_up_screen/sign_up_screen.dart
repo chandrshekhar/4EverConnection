@@ -1,8 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
@@ -106,25 +108,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        CustomRadioButton(
-                                          text: "Yes",
-                                          value: "Yes",
-                                          groupValue: radioGroup,
-                                          onChange: (value) {
-                                            setState(() {
-                                              radioGroup = value;
-                                            });
-                                          },
+                                        Obx(
+                                          () => CustomRadioButton(
+                                            text: "Yes",
+                                            value: "YES",
+                                            groupValue: signUpController
+                                                .isAlreadyAccount.value,
+                                            onChange: (value) {
+                                              CustomAlretDialogs()
+                                                  .openDialogforCheckClient(
+                                                      context,
+                                                      signUpController);
+                                              signUpController
+                                                  .checkAccount(value);
+                                            },
+                                          ),
                                         ),
-                                        CustomRadioButton(
-                                          text: "No",
-                                          value: "No",
-                                          groupValue: radioGroup,
-                                          onChange: (value) {
-                                            setState(() {
-                                              radioGroup = value;
-                                            });
-                                          },
+                                        Obx(
+                                          () => CustomRadioButton(
+                                            text: "No",
+                                            value: "No",
+                                            groupValue: signUpController
+                                                .isAlreadyAccount.value,
+                                            onChange: (value) {
+                                                signUpController
+                                                  .checkAccount(value);
+                                              CustomAlretDialogs()
+                                                  .openDialogForNoClient(
+                                                      context,
+                                                      signUpController);
+                                            
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -194,29 +209,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-                        // Align(
-                        //   alignment: Alignment.centerRight,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.end,
-                        //     children: [
-                        //       Text(
-                        //         "Scan ID",
-                        //         style: CustomTextStyles.bodyLarge16,
-                        //       ),
-                        //       CustomImageView(
-                        //         svgPath: ImageConstant.imgInfo,
-                        //         height: 13.adaptSize,
-                        //         width: 13.adaptSize,
-                        //         margin: EdgeInsets.only(
-                        //           left: 8.h,
-                        //           top: 5.v,
-                        //           bottom: 5.v,
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-
                         SizedBox(height: 38.v),
                         PhoneNumberTextFieldWidget(
                             phoneController:
