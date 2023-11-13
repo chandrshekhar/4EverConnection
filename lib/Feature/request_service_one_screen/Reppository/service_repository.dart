@@ -136,10 +136,13 @@ class ServiceRepository {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
+      log("req--$reqModel");
       response = await dio.post(ApiPath.addService, data: reqModel);
       log(response.data.toString());
       log(response.data.toString());
       if (response.statusCode == 201) {
+        return response.data;
+      } else if (response.statusCode == 200) {
         return response.data;
       } else {
         throw Exception("Faild to load data");
@@ -153,6 +156,7 @@ class ServiceRepository {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
+          log(e.response!.data.toString());
           throw Exception("Faild to load data");
         }
       }

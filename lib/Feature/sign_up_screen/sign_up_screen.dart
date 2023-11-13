@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
+import 'package:forever_connection/Services/Auth%20Services/auth_services.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
@@ -26,16 +30,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String radioGroup = "";
-
-  String radioGroup1 = "";
-
-  String radioGroup2 = "";
-
-  bool byclickingregis = false;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  AuthServices authServices = AuthServices();
   final signUpController = Get.put(SignupController());
 
   @override
@@ -426,38 +422,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 20.v,
                               width: 17.h,
                               margin: EdgeInsets.only(
-                                top: 7.v,
-                                bottom: 4.v,
-                              ),
+                                  top: 7.v, bottom: 4.v, right: 22.v),
                             ),
                             Expanded(
-                              child: CustomTextFormField(
-                                readOnly: true,
-                                onTap: () async {
-                                  var address = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddressAutoCompleteWidget(),
-                                    ),
-                                  );
-                                  signUpController.addressController.value
-                                      .text = address ?? "";
+                              child: TypeAheadField(
+                                textFieldConfiguration: TextFieldConfiguration(
+                                  controller:
+                                      signUpController.addressController.value,
+                                  decoration: const InputDecoration(
+                                      labelText: 'Search Location'),
+                                ),
+                                suggestionsCallback: (pattern) async {
+                                  return await authServices
+                                      .searchLocations(pattern);
                                 },
-                                controller:
-                                    signUpController.addressController.value,
-                                margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Address",
-                                labelText: "Address",
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'This field is required';
-                                  }
-
-                                  return null;
+                                itemBuilder: (context, suggestion) {
+                                  log(suggestion.toString());
+                                  return ListTile(
+                                    title: Text(suggestion.toString()),
+                                  );
+                                },
+                                onSuggestionSelected: (suggestion) {
+                                  // Extract the ZIP code or handle the selected location
+                                  signUpController.addressController.value
+                                      .text = suggestion;
+                                  print('Selected: $suggestion');
                                 },
                               ),
                             ),
+                            // Expanded(
+                            //   child: CustomTextFormField(
+                            //     readOnly: true,
+                            //     onTap: () async {
+                            //       var address = await Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) =>
+                            //               AddressAutoCompleteWidget(),
+                            //         ),
+                            //       );
+                            //       signUpController.addressController.value
+                            //           .text = address ?? "";
+                            //     },
+                            //     controller:
+                            //         signUpController.addressController.value,
+                            //     margin: EdgeInsets.only(left: 22.h),
+                            //     hintText: "Address",
+                            //     labelText: "Address",
+                            //     validator: (value) {
+                            //       if (value == null || value.isEmpty) {
+                            //         return 'This field is required';
+                            //       }
+
+                            //       return null;
+                            //     },
+                            //   ),
+                            // ),
                           ],
                         ),
                         SizedBox(height: 38.v),

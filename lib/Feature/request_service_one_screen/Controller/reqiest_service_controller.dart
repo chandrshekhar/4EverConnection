@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/widgets/book-successfully_msg_screen.dart';
+import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/partner_model_list.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/request_service_model.dart';
@@ -12,13 +12,15 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class RequestServiceController extends GetxController {
+  // RequestServiceController requestServiceController =
+  //     RequestServiceController();
   var selectDateController = TextEditingController().obs;
   var commentController = TextEditingController().obs;
   var selectedDate = DateTime.now().obs;
   final ServiceRepository _serviceRepository = ServiceRepository();
   RxList<ServiceListModel> listOfServices = <ServiceListModel>[].obs;
   RxList<PartnerModelList> partnerList = <PartnerModelList>[].obs;
-  RxString selectedValue = "In person".obs;
+  RxString selectedValue = "".obs;
   RxBool isPartnerLoading = false.obs;
   RxInt partnerId = (-1).obs;
   RxList<SlotModelList> usedSlotList = <SlotModelList>[].obs;
@@ -27,6 +29,9 @@ class RequestServiceController extends GetxController {
   RxList<int> listOfTimeSlot = <int>[].obs;
   RxInt serviceNeedId = (-1).obs;
   RxString selectSlot = "".obs;
+  RxBool forceIdDuplicate = false.obs;
+
+  RxBool requistServiceEnable = false.obs;
   var serviceSearchController = TextEditingController().obs;
   var partnerSearchController = TextEditingController().obs;
 
@@ -59,6 +64,41 @@ class RequestServiceController extends GetxController {
 
   toggleBetweenRdioButton(value) {
     selectedValue.value = value;
+  }
+
+  forceIsDuplicatedMethod(bool value) {
+    forceIdDuplicate.value = value;
+  }
+
+  requiestServiceClearData() {
+    serviceSearchController.value.clear();
+    partnerSearchController.value.clear();
+    activeIndex.value = -1;
+    partnerId.value = -1;
+    selectedValue.value = "";
+    serviceNeedId.value = -1;
+    selectDateController.value.clear();
+    selectSlot.value = "";
+    forceIdDuplicate.value = false;
+  }
+
+  // requistServiceEnableMethod() {
+  //   if (selectDateController.value.text.isNotEmpty &&
+  //       selectedValue.value.isNotEmpty &&
+  //       serviceSearchController.value.text.isNotEmpty &&
+  //       partnerSearchController.value.text.isNotEmpty &&
+  //       selectSlot.value.isNotEmpty) {
+  //     requistServiceEnable.value = true;
+  //   } else {
+  //     requistServiceEnable.value = true;
+  //   }
+  // }
+
+  String? findServiceById(String id) {
+    var result = listOfServices.firstWhere(
+      (element) => element.id.toString() == id,
+    );
+    return result.name;
   }
 
   getUsedSlotList() async {
@@ -132,6 +172,7 @@ class RequestServiceController extends GetxController {
     if (pickedDate != null && pickedDate != selectedDate) {
       selectedDate.value = pickedDate;
       selectDateController.value.text = convertAndFormatDate(pickedDate);
+      requistServiceEnable();
       await getUsedSlotList();
       setLocalListToEmpty();
     }
@@ -152,15 +193,29 @@ class RequestServiceController extends GetxController {
         "service": serviceNeedId.value,
         "contact_type": selectedValue.value.toString(),
         "action_scheduled_on":
-            "${selectDateController.value.text} ${selectSlot.value.toString().substring(0, 2)}:${selectSlot.value.toString().substring(2)}"
+            "${selectDateController.value.text} ${selectSlot.value.toString().substring(0, 2)}:${selectSlot.value.toString().substring(2)}",
+        "force_if_duplicate": forceIdDuplicate.value
       };
 
       isAddServiceLoading(true);
       var res = await _serviceRepository.addService(reqModel: reqModel);
-      if (res.isNotEmpty) {
-        ToastWidget.successToast(success: "Service successfully added");
+      if (res["success"] == false) {
+        // ignore: use_build_context_synchronously
+        CustomAlretDialogs()
+            .forceIdDuplicate(context, res["error"], res["message"]);
         isAddServiceLoading(false);
-        Navigator.pushReplacementNamed(context, AppRoutes.dashboardScreen);
+      } else if (res.isNotEmpty) {
+        isAddServiceLoading(false);
+        ToastWidget.successToast(success: "Service successfully added");
+        requiestServiceClearData();
+
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookingServiceSuccessFullyScreen(
+                      successRes: reqModel,
+                    )));
       } else {
         ToastWidget.errorToast(error: "Faild to added service!");
         isAddServiceLoading(false);

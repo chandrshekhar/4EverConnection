@@ -62,6 +62,31 @@ class SignupController extends GetxController {
     selectedlanguage.value = value;
   }
 
+  // get zip code
+  List<String> suggestions = [];
+  Future<List<String>> getLocation(String query) async {
+    try {
+      suggestions = await authServices.searchLocations(query);
+      return suggestions;
+    } catch (e) {
+      if (e is DioError) {
+        if (e.type == DioErrorType.connectionTimeout ||
+            e.type == DioErrorType.receiveTimeout ||
+            e.type == DioErrorType.sendTimeout) {
+          TostWidget()
+              .errorToast(title: "Error!", message: "Please check internet");
+        } else if (e.type == DioErrorType.badResponse) {
+          TostWidget().errorToast(title: "Invalid!", message: "${e.response!}");
+        } else {
+          TostWidget().errorToast(
+              title: "Error!",
+              message: "Someting went wrong please try after sometime!");
+        }
+      }
+      return suggestions;
+    }
+  }
+
   checkClient(BuildContext context) async {
     try {
       Map<String, dynamic> reqModel = {
@@ -162,9 +187,7 @@ class SignupController extends GetxController {
     businessNameController.value.clear();
     selectedSourceType.value = 0;
     aggrement(false);
-    selectedlanguage.value="";
-    
-    
+    selectedlanguage.value = "";
   }
 
   //pic date and time

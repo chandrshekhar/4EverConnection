@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
@@ -193,7 +194,12 @@ class CustomAlretDialogs {
     ).show();
   }
 
-  void successfullServiceDialog(BuildContext context) {
+  void forceIdDuplicate(
+    BuildContext context,
+    String error,
+    String message,
+  ) {
+    final serviceController = Get.put(RequestServiceController());
     AwesomeDialog(
             btnOkColor: AppColors.floatingActionButtonColor,
             context: context,
@@ -203,127 +209,32 @@ class CustomAlretDialogs {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: const TextSpan(
-                    text: 'Your appointment with ',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.floatingActionButtonColor),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: '4ever Corporation ',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(
-                        text: 'has been confirmed!',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.floatingActionButtonColor),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 15.h),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Appointment details:",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black),
-                  ),
-                ),
-                SizedBox(height: 5.h),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text("Allen Chatterjee",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.floatingActionButtonColor)),
+                Text(
+                  error,
+                  style:
+                      TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 50.w),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 5.h),
-                      const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.timer_outlined,
-                              size: 15,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Wednesday, 11/22/2023-07;30",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            )
-                          ]),
-                      SizedBox(height: 5.h),
-                      const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.account_balance,
-                              size: 15,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Accounting",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            )
-                          ]),
-                      SizedBox(height: 5.h),
-                      Row(children: [
-                        const Icon(
-                          Icons.timer_outlined,
-                          size: 14,
-                        ),
-                        SizedBox(width: 10.w),
-                        const Text(
-                          "In person",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(left: 50.w),
-                            padding: const EdgeInsets.all(7),
-                            decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.circular(2)),
-                            child: const Text("Get Direction"))
-                      ]),
-                    ],
+                  padding: EdgeInsets.all(12.sp),
+                  child: Text(
+                    message,
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
                   ),
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey.withOpacity(0.5),
                 )
               ],
             ),
-            btnCancelOnPress: () {},
-            btnOkText: "Upload",
+            btnCancelOnPress: () {
+              serviceController.forceIsDuplicatedMethod(false);
+              serviceController.requiestServiceClearData();
+            },
+            btnOkText: "Yes",
+            btnCancelText: "No",
             btnCancelColor: AppColors.buttonColor,
-            btnOkOnPress: () async {},
+            btnOkOnPress: () {
+              serviceController.forceIsDuplicatedMethod(true);
+              serviceController.addServiceRequest(context);
+            },
             barrierColor: AppColors.lightBlue.withOpacity(0.3),
             descTextStyle:
                 const TextStyle(color: AppColors.buttonColor, fontSize: 15),

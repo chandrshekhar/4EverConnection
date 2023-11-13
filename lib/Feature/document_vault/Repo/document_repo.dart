@@ -66,24 +66,6 @@ class DocumentRepo {
         'Content-Type': 'multipart/form-data',
         'Authorization': "Bearer $token"
       };
-      // Map<String, dynamic> formData = {
-      //   'email': email,
-      //   'fullname': name,
-      //   'phone': phone,
-      //   'verified': verify,
-      //   "password": password,
-      //   "account_number": accNumber,
-      //   "bank_name": bankName,
-      //   "account_holder_name": accHolderName,
-      //   "idprof": idProffType,
-      //   //"prof": await MultipartFile.fromFile(prof!.path.toString()),
-      //   "seller_status": 0,
-      //   "business_name": businessName,
-      //   "gstNumber": gstNumber,
-      //   "account_type": accType,
-      //   "pancard": panCard,
-      //   "ifsccode": ifscCode,
-      // };
 
       FormData formData = FormData();
       formData.fields.addAll([

@@ -84,6 +84,9 @@ class DocumentsVaultController extends GetxController {
         log(resp.toString());
       }
       documentVaultList.value = resp;
+      documentVaultList
+          .sort((a, b) => b.publicationDate!.compareTo(a.publicationDate!));
+
       isLoadingDocumentList(false);
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
@@ -346,6 +349,8 @@ class DocumentsVaultController extends GetxController {
       files.value = null;
       choosenFilename.value = "";
       uplodDocument(false);
+      getVaultDocumentList();
+      getDocumentType();
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
       uplodDocument(false);

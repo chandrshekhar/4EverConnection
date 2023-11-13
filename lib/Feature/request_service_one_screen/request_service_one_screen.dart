@@ -369,31 +369,32 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                               requestServiceController
                                                   .selectSlots(item);
                                             },
-                                      child: TimedisplayItemWidget(
-                                        buttonColor: requestServiceController
-                                                .colorNeedToChange.value
-                                            ? Colors.grey
-                                            : requestServiceController
-                                                        .activeIndex.value ==
-                                                    index
-                                                ? Colors.blue
-                                                : Colors.white,
-                                        textColor: requestServiceController
-                                                .colorNeedToChange.value
-                                            ? Colors.white
-                                            : requestServiceController
-                                                        .activeIndex.value ==
-                                                    index
-                                                ? Colors.white
-                                                : AppColors
-                                                    .floatingActionButtonColor,
-                                        time:
-                                            "${item.substring(0, 2)}:${item.toString().substring(2)}",
+                                      child: Obx(
+                                        () => TimedisplayItemWidget(
+                                          buttonColor: requestServiceController
+                                                  .colorNeedToChange.value
+                                              ? Colors.grey
+                                              : requestServiceController
+                                                          .activeIndex.value ==
+                                                      index
+                                                  ? Colors.blue
+                                                  : Colors.white,
+                                          textColor: requestServiceController
+                                                  .colorNeedToChange.value
+                                              ? Colors.white
+                                              : requestServiceController
+                                                          .activeIndex.value ==
+                                                      index
+                                                  ? Colors.white
+                                                  : AppColors
+                                                      .floatingActionButtonColor,
+                                          time:
+                                              "${item.substring(0, 2)}:${item.toString().substring(2)}",
+                                        ),
                                       ),
                                     );
                                   })
                               : const SizedBox())),
-
 
                       Obx(
                         () => CustomTextFormField(
@@ -411,43 +412,49 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             fillColor: theme.colorScheme.primary),
                       ),
                       // SizedBox(height: 10.h),
-                      Obx(() => requestServiceController
-                              .isAddServiceLoading.value
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            )
-                          : CustomElevatedButton(
-                              onTap: () {
-                                requestServiceController
-                                    .addServiceRequest(context);
-                              },
-                              text: "Save",
-                              margin: EdgeInsets.only(
-                                  left: 15.h, right: 15.h, bottom: 22.v),
-                              rightIcon: Container(
-                                  margin: EdgeInsets.only(left: 16.h),
-                                  child: CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgArrowrightPrimary))))
-                      // SizedBox(he)
-                      // Obx(() => CustomTextFormField(
-                      //     controller: requestServiceController
-                      //         .commentController.value,
-                      //     margin: EdgeInsets.only(
-                      //         left: 12.h,
-                      //         top: 34.v,
-                      //         right: 12.h,
-                      //         bottom: 12.v),
-                      //     labelText: "Write your comments (optional)",
-                      //     textInputAction: TextInputAction.newline,
-                      //     maxLines: 2,
-                      //     textInputType: TextInputType.multiline,
-                      //     contentPadding: EdgeInsets.symmetric(
-                      //         horizontal: 11.h, vertical: 17.v),
-                      //     borderDecoration:
-                      //         TextFormFieldStyleHelper.fillPrimary,
-                      //     filled: true,
-                      //     fillColor: theme.colorScheme.primary))
+                      Obx(() =>
+                          requestServiceController.isAddServiceLoading.value
+                              ? const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              : Obx(
+                                  () => CustomElevatedButton(
+                                      onTap: (requestServiceController
+                                                  .selectDateController
+                                                  .value
+                                                  .text
+                                                  .isNotEmpty &&
+                                              requestServiceController
+                                                  .selectedValue
+                                                  .value
+                                                  .isNotEmpty &&
+                                              requestServiceController
+                                                  .serviceSearchController
+                                                  .value
+                                                  .text
+                                                  .isNotEmpty &&
+                                              requestServiceController
+                                                  .partnerSearchController
+                                                  .value
+                                                  .text
+                                                  .isNotEmpty &&
+                                              requestServiceController
+                                                  .selectSlot.value.isNotEmpty)
+                                          ? () {
+                                              requestServiceController
+                                                  .addServiceRequest(context);
+                                            }
+                                          : null,
+                                      text: "Save",
+                                      margin: EdgeInsets.only(
+                                          left: 15.h,
+                                          right: 15.h,
+                                          bottom: 22.v),
+                                      rightIcon: Container(
+                                          margin: EdgeInsets.only(left: 16.h),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant.imgArrowrightPrimary))),
+                                ))
                     ]))))
       ]),
     );
