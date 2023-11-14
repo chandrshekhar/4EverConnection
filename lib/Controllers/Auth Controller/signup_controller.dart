@@ -67,6 +67,7 @@ class SignupController extends GetxController {
   Future<List<String>> getLocation(String query) async {
     try {
       suggestions = await authServices.searchLocations(query);
+       print(suggestions[0]);
       return suggestions;
     } catch (e) {
       if (e is DioError) {

@@ -23,6 +23,7 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
       backgroundColor: AppColors.floatingActionButtonColor,
       appBar: AppBar(
         backgroundColor: AppColors.floatingActionButtonColor,
+        automaticallyImplyLeading: false,
         // leading: IconButton(
         //     icon: const Icon(
         //       Icons.arrow_back_ios,
@@ -46,7 +47,7 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
           SizedBox(height: 18.h),
           Container(
             color: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: 21.h, horizontal: 35.w),
+            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 35.w),
             child: Column(
               children: [
                 RichText(
@@ -181,7 +182,20 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
                           margin: EdgeInsets.symmetric(vertical: 12.h)),
                     ],
                   ),
-                )
+                ),
+                InkWell(
+                onTap: () {
+                Navigator.pop(context);
+                },
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal:15.w, vertical: 5.h),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(6)),
+                    child:const Icon(Icons.edit)),
+              ),
               ],
             ),
           ),
@@ -202,9 +216,9 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
           Row(
             children: [
               Container(
-                  margin: EdgeInsets.only(left: 57.w, top: 14.h),
+                  margin: EdgeInsets.only(left: 57.w, top: 10.h),
                   padding:
-                      EdgeInsets.symmetric(horizontal: 42.w, vertical: 18.h),
+                      EdgeInsets.symmetric(horizontal: 42.w, vertical: 10.h),
                   decoration: BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(6)),
@@ -226,7 +240,7 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
                 child: Container(
                     margin: EdgeInsets.only(left: 6.w, top: 14.h),
                     padding:
-                        EdgeInsets.symmetric(horizontal: 42.w, vertical: 18.h),
+                        EdgeInsets.symmetric(horizontal: 42.w, vertical: 10.h),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(6)),

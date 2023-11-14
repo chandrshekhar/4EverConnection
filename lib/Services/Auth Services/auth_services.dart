@@ -28,7 +28,7 @@ class AuthServices {
 
   Future<List<String>> searchLocations(String query) async {
     final response = await dio.get(
-      '${ApiPath.locationApi}?input=$query&key=${ApiPath.locationApiKey}',
+      '${ApiPath.locationApi}?q=$query&key=${ApiPath.locationApiKey}',
     );
     log(response.toString());
     log(response.statusCode.toString());

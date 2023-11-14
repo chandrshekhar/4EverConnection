@@ -15,6 +15,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:printing/printing.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Model/document_type_model.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/utils/toast_widget.dart';
@@ -123,14 +124,36 @@ class DocumentsVaultController extends GetxController {
       ToastWidget.errorToast(error: e.toString());
     }
   }
+// send email with document
+
+  Future<void> sendEmail(String attachmentUrl, String path) async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: path,
+      queryParameters: {
+        'subject': "Document vault Attachment",
+        'body': "I send the document vault attachemnt.",
+        'attachment': attachmentUrl,
+      },
+    );
+
+    if (await launchUrl(Uri.parse(emailLaunchUri.toString()))) {
+      await launchUrl(Uri.parse(emailLaunchUri.toString()));
+    } else {
+      throw 'Could not launch email';
+    }
+  }
 
   // print document
-
   void printDocument(String documentUrl) async {
-    final pdf = Printing.convertHtml(html: documentUrl);
-    Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdf,
-    );
+    var url = Uri.parse(documentUrl);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   // download file fsavePath

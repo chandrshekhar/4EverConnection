@@ -1,5 +1,3 @@
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/Model/request_service_model.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
@@ -12,7 +10,6 @@ import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
-import 'package:forever_connection/widgets/custom_drop_down.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 
@@ -412,49 +409,45 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             fillColor: theme.colorScheme.primary),
                       ),
                       // SizedBox(height: 10.h),
-                      Obx(() =>
-                          requestServiceController.isAddServiceLoading.value
-                              ? const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                )
-                              : Obx(
-                                  () => CustomElevatedButton(
-                                      onTap: (requestServiceController
-                                                  .selectDateController
-                                                  .value
-                                                  .text
-                                                  .isNotEmpty &&
-                                              requestServiceController
-                                                  .selectedValue
-                                                  .value
-                                                  .isNotEmpty &&
-                                              requestServiceController
-                                                  .serviceSearchController
-                                                  .value
-                                                  .text
-                                                  .isNotEmpty &&
-                                              requestServiceController
-                                                  .partnerSearchController
-                                                  .value
-                                                  .text
-                                                  .isNotEmpty &&
-                                              requestServiceController
-                                                  .selectSlot.value.isNotEmpty)
-                                          ? () {
-                                              requestServiceController
-                                                  .addServiceRequest(context);
-                                            }
-                                          : null,
-                                      text: "Save",
-                                      margin: EdgeInsets.only(
-                                          left: 15.h,
-                                          right: 15.h,
-                                          bottom: 22.v),
-                                      rightIcon: Container(
-                                          margin: EdgeInsets.only(left: 16.h),
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant.imgArrowrightPrimary))),
-                                ))
+                      Obx(
+                        () => requestServiceController.isAddServiceLoading.value
+                            ? const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              )
+                            : CustomElevatedButton(
+                                onTap: (requestServiceController
+                                            .selectDateController
+                                            .value
+                                            .text
+                                            .isNotEmpty &&
+                                        requestServiceController
+                                            .selectedValue.value.isNotEmpty &&
+                                        requestServiceController
+                                            .serviceSearchController
+                                            .value
+                                            .text
+                                            .isNotEmpty &&
+                                        requestServiceController
+                                            .partnerSearchController
+                                            .value
+                                            .text
+                                            .isNotEmpty &&
+                                        requestServiceController
+                                            .selectSlot.value.isNotEmpty)
+                                    ? () {
+                                        requestServiceController
+                                            .addServiceRequest(context);
+                                      }
+                                    : null,
+                                text: "Save",
+                                margin: EdgeInsets.only(
+                                    left: 15.h, right: 15.h, bottom: 22.v),
+                                rightIcon: Container(
+                                    margin: EdgeInsets.only(left: 16.h),
+                                    child: CustomImageView(
+                                        svgPath: ImageConstant
+                                            .imgArrowrightPrimary))),
+                      )
                     ]))))
       ]),
     );

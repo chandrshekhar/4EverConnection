@@ -2,14 +2,16 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/document_vault/Presentation/Widgets/document_viewer.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../widgets/custom_text_form_field.dart';
-import '../Documents Vault controller/documents_vault_controller.dart';
-import '../../../core/constants/colors.dart';
+import '../../../../widgets/custom_text_form_field.dart';
+import '../../Documents Vault controller/documents_vault_controller.dart';
+import '../../../../core/constants/colors.dart';
 
 // ignore: must_be_immutable
 class DocumentVaultDataTable extends StatelessWidget {
@@ -86,16 +88,19 @@ class DocumentVaultDataTable extends StatelessWidget {
                     // Define the menu items
                     PopupMenuItem<String>(
                       onTap: () async {
-                        var url = Uri.parse(documentsVaultController
-                                .documentVaultList[index].file ??
-                            "");
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(
-                            url,
-                          );
-                        } else {
-                          throw 'Could not launch $url';
-                        }
+                        String extension = documentsVaultController
+                            .documentVaultList[index].file!
+                            .split(".")
+                            .last;
+                        print(extension);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => ShowImage(
+                                      imageUrl: documentsVaultController
+                                              .documentVaultList[index].file ??
+                                          "",
+                                    )));
                       },
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,
@@ -146,18 +151,24 @@ class DocumentVaultDataTable extends StatelessWidget {
                     ),
                     PopupMenuItem<String>(
                       onTap: () async {
-                        final Uri params = Uri(
-                          scheme: 'mailto',
-                          path: 'support@4ever.net',
-                          //add subject and body here
-                        );
+                        documentsVaultController.sendEmail(
+                            documentsVaultController
+                                    .documentVaultList[index].file ??
+                                "",
+                            "pandey211998@gmail.com");
+                        //   final Uri params = Uri(
+                        //     scheme: 'mailto',
+                        //     path: 'support@4ever.net',
 
-                        var url = Uri.parse(params.toString());
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
+                        //     //add subject and body here
+                        //   );
+
+                        //   var url = Uri.parse(params.toString());
+                        //   if (await canLaunchUrl(url)) {
+                        //     await launchUrl(url);
+                        //   } else {
+                        //     throw 'Could not launch $url';
+                        //   }
                       },
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,
