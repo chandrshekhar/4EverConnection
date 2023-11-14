@@ -1,5 +1,6 @@
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -23,12 +24,6 @@ class RequestServiceOneScreen extends StatefulWidget {
 }
 
 class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
-  List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
-
-  String servicetype = "";
-
-  List<String> radioList = ["lbl_in_person", "lbl_phone", "lbl_video"];
-
   final requestServiceController = Get.put(RequestServiceController());
   @override
   void initState() {
@@ -415,30 +410,24 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                 child: CircularProgressIndicator.adaptive(),
                               )
                             : CustomElevatedButton(
-                                onTap: (requestServiceController
-                                            .selectDateController
-                                            .value
-                                            .text
-                                            .isNotEmpty &&
-                                        requestServiceController
-                                            .selectedValue.value.isNotEmpty &&
-                                        requestServiceController
-                                            .serviceSearchController
-                                            .value
-                                            .text
-                                            .isNotEmpty &&
-                                        requestServiceController
-                                            .partnerSearchController
-                                            .value
-                                            .text
-                                            .isNotEmpty &&
-                                        requestServiceController
-                                            .selectSlot.value.isNotEmpty)
-                                    ? () {
-                                        requestServiceController
-                                            .addServiceRequest(context);
-                                      }
-                                    : null,
+                                onTap: () {
+                                  if (requestServiceController.serviceSearchController.value.text.isNotEmpty &&
+                                      requestServiceController
+                                          .partnerSearchController
+                                          .value
+                                          .text
+                                          .isNotEmpty &&
+                                      requestServiceController
+                                          .selectSlot.value.isNotEmpty &&
+                                      requestServiceController
+                                          .selectedValue.value.isNotEmpty) {
+                                    requestServiceController
+                                        .addServiceRequest(context);
+                                  } else {
+                                    ToastWidget.errorToast(
+                                        error: "please select required field!");
+                                  }
+                                },
                                 text: "Save",
                                 margin: EdgeInsets.only(
                                     left: 15.h, right: 15.h, bottom: 22.v),

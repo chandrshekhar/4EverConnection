@@ -28,7 +28,7 @@ class ShowImage extends StatelessWidget {
       return customImageViewWidget(
           child: PhotoView(imageProvider: NetworkImage(imageUrl)));
     } else if (extension == 'doc' || extension == 'docx') {
-          return customImageViewWidget(child: Text(""));
+          return customImageViewWidget(child: const Text(""));
     } else {
       ToastWidget.errorToast(error: "Document is not valid");
       return const Center(child: Text("Invalid document"));

@@ -210,7 +210,7 @@ class CustomAlretDialogs {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  error,
+                  error.replaceFirst(error[0], error[0].toUpperCase()),
                   style:
                       TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
                 ),
@@ -219,7 +219,7 @@ class CustomAlretDialogs {
                   child: Text(
                     message,
                     style:
-                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
                   ),
                 )
               ],

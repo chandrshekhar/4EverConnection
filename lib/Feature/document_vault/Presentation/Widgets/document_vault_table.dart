@@ -192,6 +192,9 @@ class DocumentVaultDataTable extends StatelessWidget {
                         documentsVaultController.printDocument(
                             documentsVaultController
                                 .documentVaultList[index].file!);
+                        // documentsVaultController.printImage(
+                        //     documentsVaultController
+                        //         .documentVaultList[index].file!);
                       },
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,

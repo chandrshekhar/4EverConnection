@@ -66,6 +66,8 @@ dependencies:
   pdf: ^3.10.6
   photo_view:
   flutter_cached_pdfview:
+  image:
+
  
 
 

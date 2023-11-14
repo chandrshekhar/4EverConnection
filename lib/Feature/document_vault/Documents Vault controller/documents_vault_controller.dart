@@ -1,8 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:image/image.dart' as img;
+import 'dart:typed_data';
+import 'package:printing/printing.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
@@ -14,7 +18,6 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:printing/printing.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Model/document_type_model.dart';
 import '../../../core/constants/colors.dart';
@@ -156,14 +159,51 @@ class DocumentsVaultController extends GetxController {
     }
   }
 
+  // print document with ---
+
+  Future<String> saveNetworkImageToLocalTempFileWithDio(String imageUrl) async {
+    try {
+      final tempDir = await getApplicationDocumentsDirectory();
+
+      // Generate a unique file name
+      final String fileName =
+          'temp_image_${DateTime.now().millisecondsSinceEpoch}.png';
+
+      // Create a File instance with the temporary directory and file name
+      final File file = File('${tempDir.path}/$fileName');
+
+      // Download the image using Dio and save it to the local file
+      await dio.download(imageUrl, file.path);
+
+      // Return the path of the saved file
+      return file.path;
+    } catch (error) {
+      // Handle errors, for example, print the error message
+      print('Error: $error');
+      throw error; // Propagate the error to the calling code
+    }
+  }
+
+  Future<void> printImage(String imageUrl) async {
+    try {
+      final String imagePath =
+          await saveNetworkImageToLocalTempFileWithDio(imageUrl);
+
+      // Do something with the image path, for example, print it
+      print('Image saved at: $imagePath');
+      final pdf = await rootBundle.load(imagePath);
+      await Printing.layoutPdf(onLayout: (_) => pdf.buffer.asUint8List());
+    } catch (error) {
+      // Handle errors, for example, print the error message
+      print('Error: $error');
+    }
+  }
+
   // download file fsavePath
   Future download2(String url) async {
     String fileName = url.split("/").last.toString();
     final appDocumentsDirectory = await getApplicationDocumentsDirectory();
     final savePath = '${appDocumentsDirectory.path}/$fileName';
-
-    print("save path--. $savePath");
-
     try {
       var response = await dio.get(
         url,
@@ -286,7 +326,7 @@ class DocumentsVaultController extends GetxController {
     String fileName = url.toString().split("/").last;
     bool downloaded = await saveVideo(url, fileName, context);
     if (downloaded) {
-      ToastWidget.successToast(success: "File Downloaded");
+      ToastWidget.successToast(success: "File Downloaded-->");
     } else {
       ToastWidget.errorToast(error: "Failed to download file");
     }

@@ -51,6 +51,7 @@ class UserProfileService {
   Future<Map<String, dynamic>> getUserProfileDetails(String url) async {
     Response response;
     var token = await SharedPref().getUserToken();
+    print(url);
     print(token);
     try {
       dio.options.headers = {
@@ -75,6 +76,7 @@ class UserProfileService {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
+          print(e.response!.data);
           throw Exception("Faild to load data");
         }
       }

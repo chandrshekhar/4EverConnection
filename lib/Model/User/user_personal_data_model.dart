@@ -31,14 +31,14 @@ class UserPersonalModel {
   bool? privacyAccepted;
   bool? electronicAuthorDiscAccepted;
   dynamic securityAnswer1;
-dynamic securityAnswer2;
-dynamic personalEmail;
-dynamic importInfo;
- dynamic profilePin;
+  dynamic securityAnswer2;
+  dynamic personalEmail;
+  dynamic importInfo;
+  dynamic profilePin;
   bool? mobileVerified;
-dynamic profileNote;
- dynamic securityQuestion1;
-dynamic securityQuestion2;
+  dynamic profileNote;
+  dynamic securityQuestion1;
+  dynamic securityQuestion2;
   int? lastAnnouncementSeen;
 
   UserPersonalModel(
@@ -118,7 +118,7 @@ dynamic securityQuestion2;
     electronicAuthorDiscAccepted = json['electronic_author_disc_accepted'];
     securityAnswer1 = json['security_answer_1'];
     securityAnswer2 = json['security_answer_2'];
-    personalEmail = json['personal_email'];
+    personalEmail = json['user_email'];
     importInfo = json['import_info'];
     profilePin = json['profile_pin'];
     mobileVerified = json['mobile_verified'];

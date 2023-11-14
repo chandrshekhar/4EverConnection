@@ -9,12 +9,28 @@ class PersonalDetailsController extends GetxController {
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
   var lastNameController = TextEditingController().obs;
+  var companyNameController = TextEditingController().obs;
+  var positionController = TextEditingController().obs;
+  var occupationController = TextEditingController().obs;
+  var idealoccupationController = TextEditingController().obs;
   var mobilePhoneController = TextEditingController().obs;
   var homePhoneController = TextEditingController().obs;
-  var personalEmailController = TextEditingController().obs;
+  var businessFaxController = TextEditingController().obs;
+
   var homeAddressController = TextEditingController().obs;
   var aptSteController = TextEditingController().obs;
+  var homeZipcodeController = TextEditingController().obs;
+  var homeAptSteController = TextEditingController().obs;
   var zipController = TextEditingController().obs;
+  var businessAddress = TextEditingController().obs;
+  var businessZipController = TextEditingController().obs;
+  var businessAptSteController = TextEditingController().obs;
+  var spouseController = TextEditingController().obs;
+  var spousePhoneController = TextEditingController().obs;
+  var personalEmailController = TextEditingController().obs;
+  var businessEmailController = TextEditingController().obs;
+  var websiteController = TextEditingController().obs;
+  //-------snapshot
   var dobControlle = TextEditingController().obs;
   var sociealsecurityController = TextEditingController().obs;
   var countruyofbirthControlle = TextEditingController().obs;
@@ -26,7 +42,7 @@ class PersonalDetailsController extends GetxController {
 
   RxString radioGroup = "Male".obs;
   RxString radioGroupLanguage = "Yes".obs;
-  RxBool isLoadingProfileData = false.obs;
+  RxBool isLoadingPersonalData = false.obs;
   Rx<UserPersonalModel> userProfilePersonalModel = UserPersonalModel().obs;
 
   void selectGender(String selectedvalue) {
@@ -39,15 +55,15 @@ class PersonalDetailsController extends GetxController {
 
   getUserPersonalData() async {
     try {
-      isLoadingProfileData(true);
+      isLoadingPersonalData(true);
       var jsonValue = await userProfileService
           .getUserProfileDetails(ApiPath.personaUserData);
 
       userProfilePersonalModel.value = UserPersonalModel.fromJson(jsonValue);
       initialPersonalDetailsData();
-      isLoadingProfileData(false);
+      isLoadingPersonalData(false);
     } catch (e) {
-      isLoadingProfileData(false);
+      isLoadingPersonalData(false);
       ToastWidget.errorToast(error: e.toString());
     }
   }
@@ -57,6 +73,7 @@ class PersonalDetailsController extends GetxController {
     firstNameController.value.text = userData.firstName ?? "";
     lastNameController.value.text = userData.lastName ?? "";
     middleNameController.value.text = userData.middleName ?? "";
+    companyNameController.value.text = "";
     homePhoneController.value.text = userData.homePhone ?? "";
     personalEmailController.value.text = userData.personalEmail ?? "";
     mobilePhoneController.value.text = userData.mobilePhone ?? "";
@@ -68,11 +85,7 @@ class PersonalDetailsController extends GetxController {
     countruyofbirthControlle.value.text = userData.countryOfBirth ?? "";
     countryOfCitizenshipControlle.value.text =
         userData.countryOfCitizenship ?? "";
-  }
-
-  @override
-  void onInit() {
-    getUserPersonalData();
-    super.onInit();
+    spouseController.value.text = userData.lifePartnerName ?? "";
+    spousePhoneController.value.text = userData.lifePartnerPhone ?? "";
   }
 }

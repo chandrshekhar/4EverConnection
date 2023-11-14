@@ -80,10 +80,17 @@ class UserSnapshotController extends GetxController {
         userPersonal.userProfileModel.value.professionalData!.businessZip ?? "";
     personalEmailController.value.text =
         userPersonal.userProfileModel.value.personalData!.personalEmail ?? "";
-    spouseController.value.text = "";
-    // spouseLifePartnerPhoneController.value.text = userPersonal.userProfileModel.value.relationshipData!.first.relationshipType   ?? "";
+    spouseController.value.text =
+        userPersonal.userProfileModel.value.personalData!.lifePartnerName ?? "";
+    spouseLifePartnerPhoneController.value.text =
+        userPersonal.userProfileModel.value.personalData!.lifePartnerPhone ??
+            "";
     websiteUrlController.value.text =
         userPersonal.userProfileModel.value.professionalData!.businessWebsite ??
+            "";
+
+    businessEmailController.value.text =
+        userPersonal.userProfileModel.value.professionalData?.businessEmail ??
             "";
 
     languagePreference(

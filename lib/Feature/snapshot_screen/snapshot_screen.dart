@@ -489,42 +489,6 @@ class SnapshotScreen extends StatelessWidget {
                                       textInputAction: TextInputAction.done))
                             ]),
                         SizedBox(height: 30.v),
-                        Row(children: [
-                          CustomImageView(
-                              svgPath: ImageConstant.imgVectorGray60015x17,
-                              height: 15.v,
-                              width: 17.h,
-                              margin: EdgeInsets.only(top: 5.v, bottom: 6.v)),
-                          Padding(
-                              padding: EdgeInsets.only(left: 22.h),
-                              child: Text("Language Preferences",
-                                  style: theme.textTheme.bodyLarge))
-                        ]),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                left: 37.h, top: 9.v, bottom: 2.v),
-                            child: Obx(
-                              () => Row(children: [
-                                CustomRadioButton(
-                                    text: "Yes",
-                                    value: "Yes",
-                                    groupValue:
-                                        snapshotController.radioGroup.value,
-                                    onChange: (value) {
-                                      snapshotController
-                                          .languagePreference(value);
-                                    }),
-                                CustomRadioButton(
-                                    text: "No",
-                                    value: "No",
-                                    groupValue:
-                                        snapshotController.radioGroup.value,
-                                    onChange: (value) {
-                                      snapshotController
-                                          .languagePreference(value);
-                                    }),
-                              ]),
-                            ))
                       ]))
             ])));
   }

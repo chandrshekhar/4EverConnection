@@ -82,17 +82,17 @@ class RequestServiceController extends GetxController {
     forceIdDuplicate.value = false;
   }
 
-  // requistServiceEnableMethod() {
-  //   if (selectDateController.value.text.isNotEmpty &&
-  //       selectedValue.value.isNotEmpty &&
-  //       serviceSearchController.value.text.isNotEmpty &&
-  //       partnerSearchController.value.text.isNotEmpty &&
-  //       selectSlot.value.isNotEmpty) {
-  //     requistServiceEnable.value = true;
-  //   } else {
-  //     requistServiceEnable.value = true;
-  //   }
-  // }
+  requistServiceEnableMethod() {
+    if (selectDateController.value.text.isNotEmpty &&
+        selectedValue.value.isNotEmpty &&
+        serviceSearchController.value.text.isNotEmpty &&
+        partnerSearchController.value.text.isNotEmpty &&
+        selectSlot.value.isNotEmpty) {
+      requistServiceEnable.value = true;
+    } else {
+      requistServiceEnable.value = false;
+    }
+  }
 
   String? findServiceById(String id) {
     var result = listOfServices.firstWhere(
@@ -207,7 +207,6 @@ class RequestServiceController extends GetxController {
       } else if (res.isNotEmpty) {
         isAddServiceLoading(false);
         ToastWidget.successToast(success: "Service successfully added");
-        requiestServiceClearData();
 
         // ignore: use_build_context_synchronously
         Navigator.push(

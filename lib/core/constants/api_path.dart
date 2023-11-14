@@ -1,9 +1,10 @@
 class ApiPath {
   static const locationApiKey = "AIzaSyDzrs8ZFG7ov2TRmmnNdsNnTzSaAtmIrN8";
-  static const locationApi = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+  static const locationApi =
+      'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   static const baseUrl = "https://4everconnection.com";
 
-  static const profile = "$baseUrl/api/user/profile/";
+  static const profile = "/api/user/profile";
 
   //Authentication
   static const registerUrl = "$baseUrl/api/user/";

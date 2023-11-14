@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Financial%20profile/financial_profile_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
@@ -7,38 +8,16 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
+import 'package:get/get.dart';
 
 import '../../core/utils/address_autocomplete_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class FinancialProfileScreen extends StatelessWidget {
   FinancialProfileScreen({Key? key}) : super(key: key);
-
-  TextEditingController nameController = TextEditingController();
-
-  TextEditingController phoneController = TextEditingController();
-
-  TextEditingController addressController = TextEditingController();
-
-  TextEditingController assetsController = TextEditingController();
-
-  TextEditingController liabilitiesController = TextEditingController();
-
-  TextEditingController networthController = TextEditingController();
-
-  TextEditingController incomeController = TextEditingController();
-
-  TextEditingController expensesController = TextEditingController();
-
-  TextEditingController cashflowController = TextEditingController();
-
-  TextEditingController editController = TextEditingController();
-
-  TextEditingController fatherageController = TextEditingController();
-
-  TextEditingController motherageController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final financialController = Get.put(FinancialProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +73,18 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller: nameController,
+                                                controller: financialController
+                                                    .taxProfessionalNameController
+                                                    .value,
                                                 margin:
                                                     EdgeInsets.only(left: 22.h),
                                                 labelText:
                                                     "Tax Professional Name"))
                                       ]),
                                   SizedBox(height: 39.v),
-                                   PhoneNumberTextFieldWidget(
-                                    phoneController:phoneController ,
+                                  PhoneNumberTextFieldWidget(
+                                    phoneController: financialController
+                                        .phoneNumberController.value,
                                     lable: "Mobile Phone",
                                   ),
                                   SizedBox(height: 39.v),
@@ -130,10 +112,13 @@ class FinancialProfileScreen extends StatelessWidget {
                                                           AddressAutoCompleteWidget(),
                                                     ),
                                                   );
-                                                  addressController.text =
-                                                      address;
+                                                  financialController
+                                                      .addressController
+                                                      .value
+                                                      .text = address;
                                                 },
-                                                controller: addressController,
+                                                controller: financialController
+                                                    .addressController.value,
                                                 margin:
                                                     EdgeInsets.only(left: 22.h),
                                                 labelText: "Address"))
@@ -154,7 +139,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 6.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller: assetsController,
+                                                controller: financialController
+                                                    .assetController.value,
                                                 margin:
                                                     EdgeInsets.only(left: 23.h),
                                                 labelText: "Assets"))
@@ -174,8 +160,9 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller:
-                                                    liabilitiesController,
+                                                controller: financialController
+                                                    .liabilitiesController
+                                                    .value,
                                                 margin:
                                                     EdgeInsets.only(left: 22.h),
                                                 labelText: "Liabilities"))
@@ -216,7 +203,9 @@ class FinancialProfileScreen extends StatelessWidget {
                                                             Expanded(
                                                                 child: CustomTextFormField(
                                                                     controller:
-                                                                        networthController,
+                                                                        financialController
+                                                                            .netWorthController
+                                                                            .value,
                                                                     margin: EdgeInsets.only(
                                                                         left: 22
                                                                             .h),
@@ -232,7 +221,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                                     ])),
                                             CustomTextFormField(
                                                 width: 303.h,
-                                                controller: incomeController,
+                                                controller: financialController
+                                                    .incomeController.value,
                                                 labelText: "Income",
                                                 alignment:
                                                     Alignment.bottomRight)
@@ -252,7 +242,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller: expensesController,
+                                                controller: financialController
+                                                    .expansesController.value,
                                                 margin:
                                                     EdgeInsets.only(left: 22.h),
                                                 labelText: "Expenses"))
@@ -273,7 +264,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 8.v, bottom: 16.v)),
                                         Expanded(
                                             child: CustomTextFormField(
-                                                controller: cashflowController,
+                                                controller: financialController
+                                                    .cashflowController.value,
                                                 margin:
                                                     EdgeInsets.only(left: 22.h),
                                                 labelText: "Cashflow"))
@@ -282,105 +274,24 @@ class FinancialProfileScreen extends StatelessWidget {
                                 ])),
                         SizedBox(height: 10.v),
                         Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.h, vertical: 17.v),
-                            decoration: AppDecoration.outlineBlack.copyWith(
-                                borderRadius:
-                                    BorderRadiusStyle.roundedBorder16),
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomTextFormField(
-                                      controller: editController,
-                                      labelText: "Financial Health Notes",
-                                      prefix: Container(
-                                          margin: EdgeInsets.only(
-                                              top: 5.v,
-                                              right: 21.h,
-                                              bottom: 5.v),
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant.imgEdit)),
-                                      prefixConstraints:
-                                          BoxConstraints(maxHeight: 156.v),
-                                      contentPadding:
-                                          EdgeInsets.only(right: 30.h)),
-                                  SizedBox(height: 40.v),
-                                  custominputFieldWithContainer(
-                                    title: "Outcome",
-                                    imagePath: ImageConstant.imgUser,
-                                  ),
-                                  SizedBox(height: 39.v),
-                                  custominputFieldWithContainer(
-                                    title: "Health Issues",
-                                    imagePath: ImageConstant.imgMap,
-                                  ),
-                                  SizedBox(height: 39.v),
-                                  custominputFieldWithContainer(
-                                    title: "Medications",
-                                    imagePath: ImageConstant.imgUser,
-                                  ),
-                                  SizedBox(height: 42.v),
-                                  SizedBox(height: 39.v),
-                                  custominputFieldWithContainer(
-                                    title: "Age of Siblings",
-                                    imagePath: ImageConstant.imgCalendar,
-                                  ),
-                                  SizedBox(height: 42.v),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomImageView(
-                                            svgPath: ImageConstant.imgCalendar,
-                                            height: 19.v,
-                                            width: 17.h,
-                                            margin: EdgeInsets.only(
-                                                top: 1.v, bottom: 13.v)),
-                                        Expanded(
-                                            child: CustomTextFormField(
-                                                controller: fatherageController,
-                                                margin:
-                                                    EdgeInsets.only(left: 22.h),
-                                                labelText: "Father Age"))
-                                      ]),
-                                  SizedBox(
-                                    height: 40.v,
-                                  ),
-                                  custominputFieldWithContainer(
-                                      title: "(If death) Age and Cause",
-                                      imagePath: ImageConstant.imgEdit,
-                                      controller: editController),
-                                  SizedBox(height: 42.v),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomImageView(
-                                            svgPath: ImageConstant.imgCalendar,
-                                            height: 19.v,
-                                            width: 17.h,
-                                            margin: EdgeInsets.only(
-                                                top: 1.v, bottom: 13.v)),
-                                        Expanded(
-                                            child: CustomTextFormField(
-                                                controller: motherageController,
-                                                margin:
-                                                    EdgeInsets.only(left: 22.h),
-                                                labelText: "Mother Age"))
-                                      ]),
-                                  SizedBox(height: 39.v),
-                                  custominputFieldWithContainer(
-                                      title: "(If death) Age and Cause",
-                                      imagePath: ImageConstant.imgEdit,
-                                      controller: editController),
-                                  SizedBox(height: 39.v),
-                                  custominputFieldWithContainer(
-                                      title: "Other Health Notes",
-                                      imagePath: ImageConstant.imgEdit,
-                                      controller: editController),
-                                ])),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.h, vertical: 17.v),
+                          decoration: AppDecoration.outlineBlack.copyWith(
+                              borderRadius: BorderRadiusStyle.roundedBorder16),
+                          child: CustomTextFormField(
+                              controller: financialController
+                                  .financialheathNotesController.value,
+                              labelText: "Financial Health Notes",
+                              prefix: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  margin: EdgeInsets.only(
+                                      top: 5.v, right: 21.h, bottom: 5.v),
+                                  child: CustomImageView(
+                                      svgPath: ImageConstant.imgEdit)),
+                              prefixConstraints:
+                                  BoxConstraints(maxHeight: 156.v),
+                              contentPadding: EdgeInsets.only(right: 30.h)),
+                        ),
                         CustomElevatedButton(
                             text: "Save",
                             margin: EdgeInsets.only(

@@ -194,10 +194,8 @@ class MyNotesListScreen extends StatelessWidget {
                               }
                             },
                             notesTitle: item.subject ?? "",
-                            author: profileController.userProfileModel.value
-                                    .personalData?.firstName +
-                                profileController.userProfileModel.value
-                                    .personalData?.lastName,
+                            author:
+                                "${profileController.userProfileModel.value.personalData?.firstName ?? ''} ${profileController.userProfileModel.value.personalData?.lastName ?? ""}",
                             description: item.text ?? "",
                             dateTime: myNotesController
                                 .dateTime(item.dateUpdated ?? "")),

@@ -75,12 +75,14 @@ class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
         'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     final inputText = Uri.encodeQueryComponent(input);
 
-    final url = '$endpoint?input=$inputText&key=$apiKey';
+    final url =
+        '$endpoint?input=$inputText&key=$apiKey&fields=address_component';
 
     http.get(Uri.parse(url)).then((response) {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final predictions = data['predictions'] as List<dynamic>;
+        print(data);
         setState(() {
           _suggestions = predictions
               .map((prediction) => prediction['description'])
