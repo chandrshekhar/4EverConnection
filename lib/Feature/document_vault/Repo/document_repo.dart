@@ -110,7 +110,8 @@ class DocumentRepo {
   }
 
   // get documentvault list
-  Future<List<DocumentVaultListModel>> getDocumentVaultList() async {
+  Future<List<DocumentVaultListModel>> getDocumentVaultList(
+      String? searchText) async {
     log("Document type list api calling....");
     Response response;
     var token = await SharedPref().getUserToken();
@@ -120,8 +121,9 @@ class DocumentRepo {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
+      String url = "${ApiPath.documentVaultList}?search=$searchText";
       response = await dio.get(
-        ApiPath.documentVaultList,
+        url,
       );
 
       if (response.statusCode == 200) {

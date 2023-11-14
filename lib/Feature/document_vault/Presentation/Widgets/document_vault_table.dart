@@ -6,6 +6,7 @@ import 'package:forever_connection/Feature/document_vault/Presentation/Widgets/d
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
+import 'package:get/get.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,6 +35,7 @@ class DocumentVaultDataTable extends StatelessWidget {
       //   height: 1.0,
       //   thickness: 0.0,
       // ),
+
       leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
       rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
       itemExtent: 40.h,
@@ -67,272 +69,287 @@ class DocumentVaultDataTable extends StatelessWidget {
   }
 
   Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
-    return Container(
-      color: (index % 2 == 0) ? Colors.white : AppColors.bgColor,
-      padding: EdgeInsets.symmetric(vertical: (index % 2 != 0) ? 4.h : 0),
-      child: Row(
-        children: <Widget>[
-          Container(
-            height: 30.h,
-            width: 80.w,
-            child: PopupMenuButton<String>(
-                padding: EdgeInsets.zero,
-                // position: PopupMenuPosition.under,
-                onSelected: null,
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.blueGrey,
-                ), // Icon for the button
-                itemBuilder: (BuildContext context) {
-                  return <PopupMenuEntry<String>>[
-                    // Define the menu items
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        String extension = documentsVaultController
-                            .documentVaultList[index].file!
-                            .split(".")
-                            .last;
-                        print(extension);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => ShowImage(
-                                      imageUrl: documentsVaultController
-                                              .documentVaultList[index].file ??
-                                          "",
-                                    )));
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.remove_red_eye,
-                            color: AppColors.lightBlue,
-                            size: 15.sp,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            'View',
-                            style: TextStyle(color: AppColors.lightBlue),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        if (Platform.isAndroid) {
-                          documentsVaultController.downloadFile(
-                              documentsVaultController
-                                  .documentVaultList[index].file!,
-                              context);
-                        } else {
-                          documentsVaultController.download2(
-                              documentsVaultController
-                                  .documentVaultList[index].file!);
-                        }
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.download,
-                            size: 15.sp,
-                            color: AppColors.lightBlue,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            'Download',
-                            style: TextStyle(color: AppColors.lightBlue),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        documentsVaultController.sendEmail(
-                            documentsVaultController
-                                    .documentVaultList[index].file ??
-                                "",
-                            "pandey211998@gmail.com");
-                        //   final Uri params = Uri(
-                        //     scheme: 'mailto',
-                        //     path: 'support@4ever.net',
-
-                        //     //add subject and body here
-                        //   );
-
-                        //   var url = Uri.parse(params.toString());
-                        //   if (await canLaunchUrl(url)) {
-                        //     await launchUrl(url);
-                        //   } else {
-                        //     throw 'Could not launch $url';
-                        //   }
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.email,
-                            size: 15.sp,
-                            color: AppColors.lightBlue,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            'Email',
-                            style: TextStyle(color: AppColors.lightBlue),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () {
-                        documentsVaultController.printDocument(
-                            documentsVaultController
-                                .documentVaultList[index].file!);
-                        // documentsVaultController.printImage(
-                        //     documentsVaultController
-                        //         .documentVaultList[index].file!);
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.print,
-                            size: 15.sp,
-                            color: AppColors.lightBlue,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            'Print',
-                            style: TextStyle(color: AppColors.lightBlue),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      16), // Set the border radius for the dialog
-                                ),
-                                child: editDocumentVaultWidget(
+    return Obx(
+      () => documentsVaultController.isLoadingDocumentList == true
+          ? const SizedBox.shrink()
+          : Container(
+              color: (index % 2 == 0) ? Colors.white : AppColors.bgColor,
+              padding:
+                  EdgeInsets.symmetric(vertical: (index % 2 != 0) ? 4.h : 0),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 30.h,
+                    width: 80.w,
+                    child: PopupMenuButton<String>(
+                        padding: EdgeInsets.zero,
+                        // position: PopupMenuPosition.under,
+                        onSelected: null,
+                        icon: const Icon(
+                          Icons.more_vert,
+                          color: Colors.blueGrey,
+                        ), // Icon for the button
+                        itemBuilder: (BuildContext context) {
+                          return <PopupMenuEntry<String>>[
+                            // Define the menu items
+                            PopupMenuItem<String>(
+                              onTap: () async {
+                                String extension = documentsVaultController
+                                    .documentVaultList[index].file!
+                                    .split(".")
+                                    .last;
+                                print(extension);
+                                Navigator.push(
                                     context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ShowImage(
+                                              imageUrl: documentsVaultController
+                                                      .documentVaultList[index]
+                                                      .file ??
+                                                  "",
+                                            )));
+                              },
+                              padding: const EdgeInsets.only(left: 5, right: 0),
+                              height: 40.h,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.remove_red_eye,
+                                    color: AppColors.lightBlue,
+                                    size: 15.sp,
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    'View',
+                                    style:
+                                        TextStyle(color: AppColors.lightBlue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              onTap: () async {
+                                if (Platform.isAndroid) {
+                                  documentsVaultController.downloadFile(
+                                      documentsVaultController
+                                          .documentVaultList[index].file!,
+                                      context);
+                                } else {
+                                  documentsVaultController.download2(
+                                      documentsVaultController
+                                          .documentVaultList[index].file!);
+                                }
+                              },
+                              padding: const EdgeInsets.only(left: 5, right: 0),
+                              height: 40.h,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.download,
+                                    size: 15.sp,
+                                    color: AppColors.lightBlue,
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    'Download',
+                                    style:
+                                        TextStyle(color: AppColors.lightBlue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              onTap: () async {
+                                documentsVaultController.sendEmail(
                                     documentsVaultController
-                                        .documentVaultList[index].id!,
+                                            .documentVaultList[index].file ??
+                                        "",
+                                    "pandey211998@gmail.com");
+                                //   final Uri params = Uri(
+                                //     scheme: 'mailto',
+                                //     path: 'support@4ever.net',
+
+                                //     //add subject and body here
+                                //   );
+
+                                //   var url = Uri.parse(params.toString());
+                                //   if (await canLaunchUrl(url)) {
+                                //     await launchUrl(url);
+                                //   } else {
+                                //     throw 'Could not launch $url';
+                                //   }
+                              },
+                              padding: const EdgeInsets.only(left: 5, right: 0),
+                              height: 40.h,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.email,
+                                    size: 15.sp,
+                                    color: AppColors.lightBlue,
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    'Email',
+                                    style:
+                                        TextStyle(color: AppColors.lightBlue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              onTap: () {
+                                documentsVaultController.printDocument(
                                     documentsVaultController
-                                        .documentVaultList[index].name
-                                        .toString(),
-                                    documentsVaultController
-                                        .documentVaultList[index]
-                                        .description!));
-                          },
-                        );
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.edit,
-                            size: 15.sp,
-                            color: AppColors.lightBlue,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            'Edit',
-                            style: TextStyle(color: AppColors.lightBlue),
-                          ),
-                        ],
-                      ),
+                                        .documentVaultList[index].file!);
+                                // documentsVaultController.printImage(
+                                //     documentsVaultController
+                                //         .documentVaultList[index].file!);
+                              },
+                              padding: const EdgeInsets.only(left: 5, right: 0),
+                              height: 40.h,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.print,
+                                    size: 15.sp,
+                                    color: AppColors.lightBlue,
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    'Print',
+                                    style:
+                                        TextStyle(color: AppColors.lightBlue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              16), // Set the border radius for the dialog
+                                        ),
+                                        child: editDocumentVaultWidget(
+                                            context,
+                                            documentsVaultController
+                                                .documentVaultList[index].id!,
+                                            documentsVaultController
+                                                .documentVaultList[index].name
+                                                .toString(),
+                                            documentsVaultController
+                                                .documentVaultList[index]
+                                                .description!));
+                                  },
+                                );
+                              },
+                              padding: const EdgeInsets.only(left: 5, right: 0),
+                              height: 40.h,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.edit,
+                                    size: 15.sp,
+                                    color: AppColors.lightBlue,
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    'Edit',
+                                    style:
+                                        TextStyle(color: AppColors.lightBlue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              onTap: () {
+                                AwesomeDialog(
+                                        btnOkColor: AppColors.buttonColor,
+                                        context: context,
+                                        dialogType: DialogType.question,
+                                        animType: AnimType.bottomSlide,
+                                        title: 'Remove',
+                                        desc:
+                                            'Are you sure to delete this vault?',
+                                        btnCancelOnPress: () {},
+                                        btnOkOnPress: () async {
+                                          await documentsVaultController
+                                              .deleteDocumentVault(
+                                                  id: documentsVaultController
+                                                      .documentVaultList[index]
+                                                      .id!);
+                                        },
+                                        barrierColor: AppColors.lightBlue
+                                            .withOpacity(0.3),
+                                        descTextStyle: TextStyle(
+                                            color: AppColors.buttonColor,
+                                            fontSize: 15.sp),
+                                        titleTextStyle: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16.sp))
+                                    .show();
+                              },
+                              padding: const EdgeInsets.only(left: 5, right: 0),
+                              height: 40.h,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.delete,
+                                    size: 15.sp,
+                                    color: AppColors.lightBlue,
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    'Delete',
+                                    style:
+                                        TextStyle(color: AppColors.lightBlue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ];
+                        }),
+                  ),
+                  Container(
+                    width: 150.w,
+                    height: 30.h,
+                    alignment: Alignment.center,
+                    child: Text(DateFormat("yyyy-MM-dd").format(DateTime.parse(
+                        documentsVaultController
+                            .documentVaultList[index].publicationDate
+                            .toString()))),
+                  ),
+                  Container(
+                    width: 200.w,
+                    height: 30.h,
+                    alignment: Alignment.center,
+                    child: Text(
+                      documentsVaultController.documentVaultList[index].typeName
+                          .toString(),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
                     ),
-                    PopupMenuItem<String>(
-                      onTap: () {
-                        AwesomeDialog(
-                                btnOkColor: AppColors.buttonColor,
-                                context: context,
-                                dialogType: DialogType.question,
-                                animType: AnimType.bottomSlide,
-                                title: 'Remove',
-                                desc: 'Are you sure to delete this vault?',
-                                btnCancelOnPress: () {},
-                                btnOkOnPress: () async {
-                                  await documentsVaultController
-                                      .deleteDocumentVault(
-                                          id: documentsVaultController
-                                              .documentVaultList[index].id!);
-                                },
-                                barrierColor:
-                                    AppColors.lightBlue.withOpacity(0.3),
-                                descTextStyle: TextStyle(
-                                    color: AppColors.buttonColor,
-                                    fontSize: 15.sp),
-                                titleTextStyle: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16.sp))
-                            .show();
-                      },
-                      padding: const EdgeInsets.only(left: 5, right: 0),
-                      height: 40.h,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.delete,
-                            size: 15.sp,
-                            color: AppColors.lightBlue,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            'Delete',
-                            style: TextStyle(color: AppColors.lightBlue),
-                          ),
-                        ],
-                      ),
+                  ),
+                  Container(
+                    width: 200.w,
+                    height: 30.h,
+                    alignment: Alignment.center,
+                    child: Text(
+                      documentsVaultController
+                          .documentVaultList[index].description
+                          .toString(),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
                     ),
-                  ];
-                }),
-          ),
-          Container(
-            width: 150.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            child: Text(DateFormat("yyyy-MM-dd").format(DateTime.parse(
-                documentsVaultController
-                    .documentVaultList[index].publicationDate
-                    .toString()))),
-          ),
-          Container(
-            width: 200.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            child: Text(
-              documentsVaultController.documentVaultList[index].typeName
-                  .toString(),
-              textAlign: TextAlign.center,
-              maxLines: 2,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: 200.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            child: Text(
-              documentsVaultController.documentVaultList[index].description
-                  .toString(),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-            ),
-          ),
-        ],
-      ),
     );
   }
 

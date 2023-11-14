@@ -23,6 +23,7 @@ class DocumentVaultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     documentVaultController.choosenFilename.value = "";
     documentVaultController.files.value = null;
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(
@@ -275,27 +276,52 @@ class DocumentVaultScreen extends StatelessWidget {
                       )
                     ],
                   )),
-              const Text("Documents Vault",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                  )),
+              Row(
+                children: [
+                  const Text("Documents Vault",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                      )),
+                  const SizedBox(width: 10),
+                  Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        height: 35,
+                        child: TextField(
+                            onChanged: (value) {
+                              if (value.toString().isNotEmpty) {
+                                Future.delayed(
+                                    const Duration(milliseconds: 300), () {
+                                  documentVaultController.getVaultDocumentList(
+                                      query: value);
+                                });
+                              } else {
+                                Future.delayed(
+                                    const Duration(milliseconds: 300), () {
+                                  documentVaultController.getVaultDocumentList(
+                                      query: "");
+                                });
+                              }
+                            },
+                            decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.only(left: 10),
+                                hintText: "Search document",
+                                border: OutlineInputBorder())),
+                      ))
+                ],
+              ),
               SizedBox(height: 12.h),
               Expanded(
-                  child: Obx(() =>
-                      documentVaultController.isLoadingDocumentList == true
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive(),
+                  child: Obx(
+                      () => documentVaultController.documentVaultList.isNotEmpty
+                          ? DocumentVaultDataTable(
+                              documentsVaultController: documentVaultController,
                             )
-                          : documentVaultController.documentVaultList.isNotEmpty
-                              ? DocumentVaultDataTable(
-                                  documentsVaultController:
-                                      documentVaultController,
-                                )
-                              : const Center(
-                                  child: Text("No data"),
-                                )))
+                          : const Center(
+                              child: Text("No data"),
+                            )))
             ],
           ),
         ));

@@ -35,6 +35,11 @@ class DocumentsVaultController extends GetxController {
   RxString choosenFilename = RxString("");
   final documentDescControler = TextEditingController().obs;
 
+  final TextEditingController documentSearchController = TextEditingController();
+
+
+
+
   RxBool uplodDocument = false.obs;
   // RxString files = ''.obs;
   Rx<File?> files = Rx<File?>(null);
@@ -80,10 +85,10 @@ class DocumentsVaultController extends GetxController {
   }
 
   // get vault document list
-  getVaultDocumentList() async {
+  getVaultDocumentList({String? query}) async {
     isLoadingDocumentList(true);
     try {
-      var resp = await _documentRepo.getDocumentVaultList();
+      var resp = await _documentRepo.getDocumentVaultList(query??"");
       if (kDebugMode) {
         log(resp.toString());
       }
