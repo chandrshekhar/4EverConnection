@@ -229,6 +229,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                    
                                                             controller:
                                                                 personalDetailsController
                                                                     .personalEmailController

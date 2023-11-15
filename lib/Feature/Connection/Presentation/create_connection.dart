@@ -244,6 +244,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                       key: emailKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
+                        textInputType: TextInputType.emailAddress,
                           controller: connectionController
                               .personalEmailController.value,
                           margin: EdgeInsets.only(

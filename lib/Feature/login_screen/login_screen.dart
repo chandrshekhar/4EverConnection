@@ -69,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: CustomTextFormField(
+                              textInputType: TextInputType.emailAddress,
                               controller:
                                   loginController.userNameController.value,
                               margin: EdgeInsets.only(left: 22.h),

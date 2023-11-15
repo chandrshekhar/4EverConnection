@@ -8,7 +8,6 @@ import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:get/get.dart';
-
 import '../../Controllers/User Profile Controller/user_profile_controller.dart';
 
 class MyProfileScreen extends StatelessWidget {
@@ -151,7 +150,12 @@ class MyProfileScreen extends StatelessWidget {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                      "${myProfileController.userProfileModel.value.personalData?.mobilePhone ?? ""}",
+                                                      myProfileController
+                                                              .userProfileModel
+                                                              .value
+                                                              .personalData
+                                                              ?.mobilePhone ??
+                                                          "",
                                                       style: CustomTextStyles
                                                           .titleMediumPrimary),
                                                   SizedBox(height: 3.v),
@@ -228,7 +232,7 @@ class MyProfileScreen extends StatelessWidget {
                                         },
                                         contentPadding: EdgeInsets.zero,
                                         dense: true,
-                                        title: Text("professional Details ",
+                                        title: Text("Professional Details ",
                                             style: theme.textTheme.titleMedium),
                                         subtitle: Text("User snapshot details",
                                             style: CustomTextStyles
@@ -281,7 +285,10 @@ class MyProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       ListTile(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pushNamed(context,
+                                              AppRoutes.protectionprofile);
+                                        },
                                         contentPadding: EdgeInsets.zero,
                                         dense: true,
                                         title: Text("Protection",

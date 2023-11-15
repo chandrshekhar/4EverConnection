@@ -255,6 +255,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
+                                textInputType: TextInputType.emailAddress,
                                 controller:
                                     signUpController.emailController.value,
                                 margin: EdgeInsets.only(left: 22.h),

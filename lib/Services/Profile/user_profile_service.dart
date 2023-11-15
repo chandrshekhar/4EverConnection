@@ -51,8 +51,6 @@ class UserProfileService {
   Future<Map<String, dynamic>> getUserProfileDetails(String url) async {
     Response response;
     var token = await SharedPref().getUserToken();
-    print(url);
-    print(token);
     try {
       dio.options.headers = {
         'Accept': 'application/json',
@@ -68,7 +66,6 @@ class UserProfileService {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      print(e.toString());
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||

@@ -72,10 +72,13 @@ class ConnectionListWidget extends StatelessWidget {
                     itemBuilder: (BuildContext context) {
                       return <PopupMenuEntry<String>>[
                         // Define the menu items
-                        const PopupMenuItem<String>(
-                          value: 'Resend',
-                          child: Text('Resend'),
-                        ),
+                        author.contains("Pending")
+                            ? const PopupMenuItem<String>(
+                                value: 'Resend',
+                                child: Text('Resend'),
+                              )
+                            : const PopupMenuItem(
+                                height: 0, child: SizedBox.shrink()),
                         const PopupMenuItem<String>(
                           value: 'Call',
                           child: Text('Call'),

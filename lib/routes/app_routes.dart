@@ -3,6 +3,7 @@ import 'package:forever_connection/Feature/Contact/Presentation/contact_list_scr
 import 'package:forever_connection/Feature/My%20Notes/Presentation/add_note_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_list.dart';
 import 'package:forever_connection/Feature/document_vault/Presentation/document_vault.dart';
+import 'package:forever_connection/Feature/protection-profile/protection_profile_screen.dart';
 import 'package:forever_connection/Feature/splash_screen/splash_screen.dart';
 import 'package:forever_connection/Feature/login_screen/login_screen.dart';
 import 'package:forever_connection/Feature/sign_up_screen/sign_up_screen.dart';
@@ -56,6 +57,8 @@ class AppRoutes {
 
   static const String financialProfileScreen = '/financial_profile_screen';
 
+  static const String protectionprofile = '/protection_profile_screen';
+
   static const String myServicesOnePage = '/my_services_one_page';
 
   static const String myServicesOneTabContainerScreen =
@@ -77,7 +80,7 @@ class AppRoutes {
 
   static const String addNotesScreen = "add_note_screen";
 
-  static const String contactList="/myContactList";
+  static const String contactList = "/myContactList";
 
   static const String addContactScreen = "/addContactScreen";
 
@@ -93,17 +96,18 @@ class AppRoutes {
     snapshotScreen: (context) => SnapshotScreen(),
     personalDetailsScreen: (context) => const PersonalDetailsScreen(),
     professionalProfileScreen: (context) => ProfessionalProfileScreen(),
+    protectionprofile :(context) => ProtectionProfileScreen(),
     relationshipsScreen: (context) => RelationshipsScreen(),
     healthProfileScreen: (context) => HealthProfileScreen(),
     financialProfileScreen: (context) => FinancialProfileScreen(),
     myServicesScreen: (context) => const MyServicesScreen(),
     passwordSecurityScreen: (context) => PasswordSecurityScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
-    notificationsScreen: (context) =>  NotificationsScreen(),
+    notificationsScreen: (context) => NotificationsScreen(),
     documentVaultScreen: (context) => DocumentVaultScreen(),
-    myNotesListScreen: (context) =>  MyNotesListScreen(),
+    myNotesListScreen: (context) => MyNotesListScreen(),
     addNotesScreen: (context) => AddNoteScreen(),
-    contactList:(context) => ContactListScreen(),
-    addContactScreen:(context) => AddContactScreen(),
+    contactList: (context) => ContactListScreen(),
+    addContactScreen: (context) => AddContactScreen(),
   };
 }
