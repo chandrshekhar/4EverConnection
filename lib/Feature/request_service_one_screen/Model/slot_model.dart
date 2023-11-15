@@ -14,11 +14,11 @@ class SlotModelList {
     enabled = json['enabled'];
     date = json['date'];
     service =
-        json['service'] != null ? new Service.fromJson(json['service']) : null;
+        json['service'] != null ? Service.fromJson(json['service']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['time'] = time;
     data['has_service'] = hasService;
     data['enabled'] = enabled;
@@ -49,7 +49,7 @@ class Service {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['contact_type'] = contactType;
     data['requested_by'] = requestedBy;
     data['id'] = id;

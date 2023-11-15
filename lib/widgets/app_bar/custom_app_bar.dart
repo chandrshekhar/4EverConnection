@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/core/constants/colors.dart';
 
 // ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -53,31 +52,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mediaQueryData.size.width,
         height ?? 62.v,
       );
-  _getStyle() {
-    switch (styleType) {
-      case Style.bgShadow:
-        return Container(
-          height: 62.v,
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: AppColors.floatingActionButtonColor,
-            boxShadow: [
-              BoxShadow(
-                color: appTheme.black900.withOpacity(0.06),
-                spreadRadius: 2.h,
-                blurRadius: 2.h,
-                offset: const Offset(
-                  0,
-                  10,
-                ),
-              ),
-            ],
-          ),
-        );
-      default:
-        return null;
-    }
-  }
 }
 
 enum Style {

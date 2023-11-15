@@ -14,7 +14,7 @@ import '../../Controllers/Protection controller/protection_controller.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 
 class ProtectionProfileScreen extends StatefulWidget {
-  ProtectionProfileScreen({Key? key}) : super(key: key);
+  const ProtectionProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProtectionProfileScreen> createState() =>
@@ -26,6 +26,7 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
 
   @override
   void initState() {
+    protectionController.getUserRelationshipData();
     super.initState();
   }
 
@@ -55,37 +56,65 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
             styleType: Style.bgShadow),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: ListView.builder(
-            itemCount: protectionController.protectionList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(bottom: 7.h),
-                decoration: const BoxDecoration(
-                    color: AppColors.floatingActionButtonColor),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  title: Text(
-                    protectionController.protectionList[index],
-                    style: const TextStyle(color: Colors.white),
+          child: Obx(
+            () => protectionController.isprotectionDataLoading == true
+                ? const Center(child: CircularProgressIndicator.adaptive())
+                : ListView.builder(
+                    itemCount: protectionController.protectionLocalModel.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 7.h),
+                        decoration: const BoxDecoration(
+                            color: AppColors.floatingActionButtonColor),
+                        child: ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10),
+                          title: Text(
+                            protectionController.protectionLocalModel[index]
+                                    .protectionType ??
+                                "",
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          trailing: Container(
+                            height: 12.h,
+                            width: 12.h,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 2.h, color: Colors.white)),
+                          ),
+                          onTap: () {
+                            protectionController.updateProtectController(
+                                companyName: protectionController
+                                    .protectionLocalModel[index].protectionType,
+                                companyPhone: protectionController
+                                    .protectionLocalModel[index].companyPhone,
+                                policyType: protectionController
+                                    .protectionLocalModel[index].policyType,
+                                currentDeathBenefit: protectionController
+                                    .protectionLocalModel[index]
+                                    .currentDeathBenefit,
+                                currentPremiums: protectionController
+                                    .protectionLocalModel[index]
+                                    .currentPremiums,
+                                policyNumber: protectionController
+                                    .protectionLocalModel[index].policyNumber,
+                                issueDate: protectionController
+                                    .protectionLocalModel[index].issueDate);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProtectionDetailsScreen(
+                                          protectionType: protectionController
+                                                  .protectionLocalModel[index]
+                                                  .protectionType ??
+                                              "",
+                                        )));
+                          },
+                        ),
+                      );
+                    },
                   ),
-                  trailing: Container(
-                    height: 12.h,
-                    width: 12.h,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2.h, color: Colors.white)),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProtectionDetailsScreen(
-                                  protectionType: protectionController
-                                      .protectionList[index],
-                                )));
-                  },
-                ),
-              );
-            },
           ),
         ));
   }

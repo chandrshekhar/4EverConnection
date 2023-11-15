@@ -35,7 +35,7 @@ class MyNotesRepo {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          log("data ${e}");
+          log("data $e");
           throw Exception("Faild to load data");
         }
       }

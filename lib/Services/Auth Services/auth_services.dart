@@ -48,10 +48,6 @@ class AuthServices {
     }
   }
 
-  String _getPostalCodeFromResult(Map<String, dynamic> result) {
-  
-    return result['components']['postcode'] ?? 'N/A';
-  }
 
   Future<Map> checkApi({required Map<String, dynamic> reqModel}) async {
     dio.options.headers = {
@@ -100,7 +96,7 @@ class AuthServices {
       debugPrint(reqModel.toString());
       response =
           await dio.post(ApiPath.forgotPasswordSendEmail, data: reqModel);
-      print("pandey->${response.data}");
+      log("pandey->${response.data}");
       if (response.statusCode == 200) {
         return {
           'status': response.statusCode,

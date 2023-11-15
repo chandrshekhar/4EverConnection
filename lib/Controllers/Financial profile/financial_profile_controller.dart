@@ -35,7 +35,6 @@ class FinancialProfileController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getHealthData();
     super.onInit();
   }

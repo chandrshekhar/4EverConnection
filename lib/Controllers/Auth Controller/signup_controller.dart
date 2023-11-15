@@ -1,4 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -36,7 +38,7 @@ class SignupController extends GetxController {
 
   void sourceOption(int value) {
     selectedSourceType.value = value;
-    print(selectedSourceType);
+    log(selectedSourceType.toString());
   }
 
   RxString isAlreadyAccount = "".obs;
@@ -67,7 +69,7 @@ class SignupController extends GetxController {
   Future<List<String>> getLocation(String query) async {
     try {
       suggestions = await authServices.searchLocations(query);
-       print(suggestions[0]);
+       log(suggestions[0]);
       return suggestions;
     } catch (e) {
       if (e is DioError) {
@@ -160,7 +162,7 @@ class SignupController extends GetxController {
           TostWidget()
               .errorToast(title: "Error!", message: "Please check internet");
         } else if (e.type == DioErrorType.badResponse) {
-          print(e.response!.data);
+          log(e.response!.data);
           TostWidget().errorToast(
               title: "Invalid!", message: "${e.response!.data["message"]}");
         } else {
@@ -213,7 +215,7 @@ class SignupController extends GetxController {
               ),
               child: child!);
         }));
-    if (pickedDate != null && pickedDate != selectedDate) {
+    if (pickedDate != null && pickedDate != selectedDate.value) {
       selectedDate.value = pickedDate;
       dobController.value.text = convertAndFormatDate(pickedDate);
     }

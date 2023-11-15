@@ -12,7 +12,7 @@ class ContactListCard extends StatelessWidget {
   final String description;
   final String dateTime;
   final Function(String)? onSeleted;
-  ContactListCard(
+  const ContactListCard(
       {super.key,
       required this.notesTitle,
       required this.author,

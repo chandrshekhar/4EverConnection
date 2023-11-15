@@ -115,7 +115,7 @@ class MyProfileScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(height: 9.v),
                                                   Text(
-                                                      "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""}",
+                                                      myProfileController.userProfileModel.value.personalData?.firstName ?? "",
                                                       style: CustomTextStyles
                                                           .titleLargePrimary),
                                                   SizedBox(height: 1.v),

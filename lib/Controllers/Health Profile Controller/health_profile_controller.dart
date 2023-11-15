@@ -52,7 +52,6 @@ class HealthProfileController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getHealthData();
     super.onInit();
   }

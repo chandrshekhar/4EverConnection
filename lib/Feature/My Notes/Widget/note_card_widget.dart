@@ -13,7 +13,7 @@ class MyNotesCardWidget extends StatelessWidget {
   final String description;
   final String dateTime;
   final Function(String)? onSeleted;
-  MyNotesCardWidget(
+  const MyNotesCardWidget(
       {super.key,
       required this.notesTitle,
       required this.author,
@@ -51,7 +51,7 @@ class MyNotesCardWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "User Note | ${notesTitle}",
+                    "User Note | $notesTitle",
                     style: CustomTextStyles.titleLargePrimary_1,
                   ),
                 ),
@@ -102,20 +102,6 @@ class MyNotesCardWidget extends StatelessWidget {
                 SizedBox(
                   height: 12.h,
                 ),
-                // _buildLable(context, "Service", ImageConstant.serviceImage),
-                // Padding(
-                //   padding: EdgeInsets.only(left: 38, top: 6.h),
-                //   child: Text(
-                //     "Allen Chatterjee",
-                //     style: TextStyle(
-                //         color: Colors.black,
-                //         fontWeight: FontWeight.w400,
-                //         fontSize: 18.adaptSize),
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 12.h,
-                // ),
                 _buildLable(context, "Description", ImageConstant.imgEdit),
                 Padding(
                   padding: EdgeInsets.only(left: 38, top: 6.h),

@@ -1,4 +1,4 @@
-class LifeInsuranceModel {
+class LocalModel {
   int? id;
   String? policyNumber;
   String? policyType;
@@ -7,9 +7,9 @@ class LifeInsuranceModel {
   String? companyPhone;
   String? currentDeathBenefit;
   String? currentPremiums;
-  int? user;
+  String? protectionType;
 
-  LifeInsuranceModel(
+  LocalModel(
       {this.id,
       this.policyNumber,
       this.policyType,
@@ -18,9 +18,9 @@ class LifeInsuranceModel {
       this.companyPhone,
       this.currentDeathBenefit,
       this.currentPremiums,
-      this.user});
+      this.protectionType});
 
-  LifeInsuranceModel.fromJson(Map<String, dynamic> json) {
+  LocalModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     policyNumber = json['policy_number'];
     policyType = json['policy_type'];
@@ -29,20 +29,6 @@ class LifeInsuranceModel {
     companyPhone = json['company_phone'];
     currentDeathBenefit = json['current_death_benefit'];
     currentPremiums = json['current_premiums'];
-    user = json['user'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['policy_number'] = policyNumber;
-    data['policy_type'] = policyType;
-    data['issue_date'] = issueDate;
-    data['company_name'] = companyName;
-    data['company_phone'] = companyPhone;
-    data['current_death_benefit'] = currentDeathBenefit;
-    data['current_premiums'] = currentPremiums;
-    data['user'] = user;
-    return data;
+    protectionType = json['protection_type'];
   }
 }

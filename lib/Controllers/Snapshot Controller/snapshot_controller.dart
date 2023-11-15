@@ -100,7 +100,6 @@ class UserSnapshotController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getSnapshotData();
     super.onInit();
   }

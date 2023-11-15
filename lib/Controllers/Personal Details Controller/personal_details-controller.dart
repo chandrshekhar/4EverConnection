@@ -16,7 +16,6 @@ class PersonalDetailsController extends GetxController {
   var mobilePhoneController = TextEditingController().obs;
   var homePhoneController = TextEditingController().obs;
   var businessFaxController = TextEditingController().obs;
-
   var homeAddressController = TextEditingController().obs;
   var aptSteController = TextEditingController().obs;
   var homeZipcodeController = TextEditingController().obs;
@@ -35,11 +34,8 @@ class PersonalDetailsController extends GetxController {
   var sociealsecurityController = TextEditingController().obs;
   var countruyofbirthControlle = TextEditingController().obs;
   var countryOfCitizenshipControlle = TextEditingController().obs;
-
   // final userPersonal = Get.put(UserProfileController());
-
   UserProfileService userProfileService = UserProfileService();
-
   RxString radioGroup = "Male".obs;
   RxString radioGroupLanguage = "Yes".obs;
   RxBool isLoadingPersonalData = false.obs;
@@ -58,7 +54,6 @@ class PersonalDetailsController extends GetxController {
       isLoadingPersonalData(true);
       var jsonValue = await userProfileService
           .getUserProfileDetails(ApiPath.personaUserData);
-
       userProfilePersonalModel.value = UserPersonalModel.fromJson(jsonValue);
       initialPersonalDetailsData();
       isLoadingPersonalData(false);

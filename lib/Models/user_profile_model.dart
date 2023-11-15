@@ -29,27 +29,27 @@ class UserProfileModel {
 
   UserProfileModel.fromJson(Map<String, dynamic> json) {
     personalData = json['personal_data'] != null
-        ? new PersonalData.fromJson(json['personal_data'])
+        ? PersonalData.fromJson(json['personal_data'])
         : null;
     professionalData = json['professional_data'] != null
-        ? new ProfessionalData.fromJson(json['professional_data'])
+        ? ProfessionalData.fromJson(json['professional_data'])
         : null;
     if (json['relationship_data'] != null) {
       relationshipData = <RelationshipData>[];
       json['relationship_data'].forEach((v) {
-        relationshipData!.add(new RelationshipData.fromJson(v));
+        relationshipData!.add(RelationshipData.fromJson(v));
       });
     }
     healthData = json['health_data'] != null
-        ? new HealthData.fromJson(json['health_data'])
+        ? HealthData.fromJson(json['health_data'])
         : null;
     financialData = json['financial_data'] != null
-        ? new FinancialData.fromJson(json['financial_data'])
+        ? FinancialData.fromJson(json['financial_data'])
         : null;
     if (json['life_insurance_data'] != null) {
       lifeInsuranceData = <LifeInsuranceData>[];
       json['life_insurance_data'].forEach((v) {
-        lifeInsuranceData!.add(new LifeInsuranceData.fromJson(v));
+        lifeInsuranceData!.add(LifeInsuranceData.fromJson(v));
       });
     }
     // if (json['health_insurance_data'] != null) {
@@ -368,23 +368,23 @@ class ProfessionalData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['modified'] = this.modified;
-    data['business_name'] = this.businessName;
-    data['business_phone'] = this.businessPhone;
-    data['business_fax'] = this.businessFax;
-    data['business_email'] = this.businessEmail;
-    data['business_website'] = this.businessWebsite;
-    data['position'] = this.position;
-    data['current_occupation'] = this.currentOccupation;
-    data['ideal_occupation'] = this.idealOccupation;
-    data['education_level'] = this.educationLevel;
-    data['degree'] = this.degree;
-    data['affiliations'] = this.affiliations;
-    data['business_address'] = this.businessAddress;
-    data['business_apt'] = this.businessApt;
-    data['business_zip'] = this.businessZip;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['modified'] = modified;
+    data['business_name'] = businessName;
+    data['business_phone'] = businessPhone;
+    data['business_fax'] = businessFax;
+    data['business_email'] = businessEmail;
+    data['business_website'] = businessWebsite;
+    data['position'] = position;
+    data['current_occupation'] = currentOccupation;
+    data['ideal_occupation'] = idealOccupation;
+    data['education_level'] = educationLevel;
+    data['degree'] = degree;
+    data['affiliations'] = affiliations;
+    data['business_address'] = businessAddress;
+    data['business_apt'] = businessApt;
+    data['business_zip'] = businessZip;
     return data;
   }
 }
@@ -415,13 +415,13 @@ class RelationshipData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['relationship_type'] = this.relationshipType;
-    data['tax_dependent'] = this.taxDependent;
-    data['user'] = this.user;
-    data['personal_data'] = this.personalData;
-    data['professional_data'] = this.professionalData;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['relationship_type'] = relationshipType;
+    data['tax_dependent'] = taxDependent;
+    data['user'] = user;
+    data['personal_data'] = personalData;
+    data['professional_data'] = professionalData;
     return data;
   }
 }
@@ -506,31 +506,31 @@ class HealthData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['height_ft'] = this.heightFt;
-    data['height_inches'] = this.heightInches;
-    data['weight'] = this.weight;
-    data['smoker'] = this.smoker;
-    data['doctor_name'] = this.doctorName;
-    data['doctor_phone_number'] = this.doctorPhoneNumber;
-    data['date_of_last_visit'] = this.dateOfLastVisit;
-    data['doctor_street'] = this.doctorStreet;
-    data['doctor_apt'] = this.doctorApt;
-    data['doctor_zip'] = this.doctorZip;
-    data['reason'] = this.reason;
-    data['outcome'] = this.outcome;
-    data['health_issues'] = this.healthIssues;
-    data['medications'] = this.medications;
-    data['age_of_siblings'] = this.ageOfSiblings;
-    data['father_age'] = this.fatherAge;
-    data['father_death_cause'] = this.fatherDeathCause;
-    data['mother_age'] = this.motherAge;
-    data['mother_death_cause'] = this.motherDeathCause;
-    data['other_health_notes'] = this.otherHealthNotes;
-    data['is_blind'] = this.isBlind;
-    data['spouse_is_blind'] = this.spouseIsBlind;
-    data['user'] = this.user;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['height_ft'] = heightFt;
+    data['height_inches'] = heightInches;
+    data['weight'] = weight;
+    data['smoker'] = smoker;
+    data['doctor_name'] = doctorName;
+    data['doctor_phone_number'] = doctorPhoneNumber;
+    data['date_of_last_visit'] = dateOfLastVisit;
+    data['doctor_street'] = doctorStreet;
+    data['doctor_apt'] = doctorApt;
+    data['doctor_zip'] = doctorZip;
+    data['reason'] = reason;
+    data['outcome'] = outcome;
+    data['health_issues'] = healthIssues;
+    data['medications'] = medications;
+    data['age_of_siblings'] = ageOfSiblings;
+    data['father_age'] = fatherAge;
+    data['father_death_cause'] = fatherDeathCause;
+    data['mother_age'] = motherAge;
+    data['mother_death_cause'] = motherDeathCause;
+    data['other_health_notes'] = otherHealthNotes;
+    data['is_blind'] = isBlind;
+    data['spouse_is_blind'] = spouseIsBlind;
+    data['user'] = user;
     return data;
   }
 }
@@ -579,19 +579,19 @@ class FinancialData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['tax_professional_name'] = this.taxProfessionalName;
-    data['phone'] = this.phone;
-    data['address'] = this.address;
-    data['assets'] = this.assets;
-    data['liabilities'] = this.liabilities;
-    data['net_worth'] = this.netWorth;
-    data['income'] = this.income;
-    data['expenses'] = this.expenses;
-    data['cashflow'] = this.cashflow;
-    data['financial_health_notes'] = this.financialHealthNotes;
-    data['user'] = this.user;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['tax_professional_name'] = taxProfessionalName;
+    data['phone'] = phone;
+    data['address'] = address;
+    data['assets'] = assets;
+    data['liabilities'] = liabilities;
+    data['net_worth'] = netWorth;
+    data['income'] = income;
+    data['expenses'] = expenses;
+    data['cashflow'] = cashflow;
+    data['financial_health_notes'] = financialHealthNotes;
+    data['user'] = user;
     return data;
   }
 }
@@ -631,16 +631,16 @@ class LifeInsuranceData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['policy_number'] = this.policyNumber;
-    data['policy_type'] = this.policyType;
-    data['issue_date'] = this.issueDate;
-    data['company_name'] = this.companyName;
-    data['company_phone'] = this.companyPhone;
-    data['current_death_benefit'] = this.currentDeathBenefit;
-    data['current_premiums'] = this.currentPremiums;
-    data['user'] = this.user;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['policy_number'] = policyNumber;
+    data['policy_type'] = policyType;
+    data['issue_date'] = issueDate;
+    data['company_name'] = companyName;
+    data['company_phone'] = companyPhone;
+    data['current_death_benefit'] = currentDeathBenefit;
+    data['current_premiums'] = currentPremiums;
+    data['user'] = user;
     return data;
   }
 }

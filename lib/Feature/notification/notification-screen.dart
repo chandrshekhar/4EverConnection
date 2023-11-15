@@ -123,7 +123,7 @@ class NotificationsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(DateFormat('EEEE')
                                     .format(DateTime.parse(
                                         notificationController

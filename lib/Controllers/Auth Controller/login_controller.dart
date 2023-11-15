@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/toast_widget.dart';

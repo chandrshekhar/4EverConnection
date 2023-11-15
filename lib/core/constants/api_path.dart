@@ -25,6 +25,7 @@ class ApiPath {
   static const homeInsurance = "$baseUrl$profile/home-insurance";
   static const profesional = "$baseUrl$profile/professional";
   static const relationship = "$baseUrl$profile/relationship";
+  static const protection = "$baseUrl$profile/protection";
 
   // get tooltips
   static const getTooltips = "$baseUrl/api/tooltips/";

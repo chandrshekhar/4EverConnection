@@ -37,40 +37,42 @@ class ProtectionDetailsScreen extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(24.w, 15.h, 24.w, 24.h))
           ],
           styleType: Style.bgShadow),
-      body: Container(
-        margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 5.h),
-        padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 12.h),
-        // decoration: AppDecoration.outlineBlack
-        //     .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
-        child: Column(
-          children: [
-            rowWidget(
-                controller: protectionController.policeNumberController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Plicy Number"),
-            rowWidget(
-                controller: protectionController.policyTypeController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Policy Type"),
-            rowWidget(
-                controller: protectionController.issueDateController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Issue Date"),
-            rowWidget(
-                svgpath: ImageConstant.imgUser, labelText: "Company Name"),
-            rowWidget(
-                controller: protectionController.companyPhoneController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Company Phone"),
-            rowWidget(
-                controller: protectionController.deathBenefitController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Current Death Benefit"),
-            rowWidget(
-                controller: protectionController.premimusController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Current Premiums"),
-          ],
+      body: Obx(
+        () => Container(
+          margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 5.h),
+          padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 12.h),
+          // decoration: AppDecoration.outlineBlack
+          //     .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
+          child: Column(
+            children: [
+              rowWidget(
+                  controller: protectionController.policeNumberController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Plicy Number"),
+              rowWidget(
+                  controller: protectionController.policyTypeController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Policy Type"),
+              rowWidget(
+                  controller: protectionController.issueDateController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Issue Date"),
+              rowWidget(
+                  svgpath: ImageConstant.imgUser, labelText: "Company Name"),
+              rowWidget(
+                  controller: protectionController.companyPhoneController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Company Phone"),
+              rowWidget(
+                  controller: protectionController.deathBenefitController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Current Death Benefit"),
+              rowWidget(
+                  controller: protectionController.premimusController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Current Premiums"),
+            ],
+          ),
         ),
       ),
     );

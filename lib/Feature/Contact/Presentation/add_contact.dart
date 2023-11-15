@@ -29,7 +29,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
   final emailKey = GlobalKey<FormState>();
   final homeKey = GlobalKey<FormState>();
   final zipKey = GlobalKey<FormState>();
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -47,11 +47,11 @@ class _AddContactScreenState extends State<AddContactScreen> {
   void _formatDate() {
     final text = _controller.text;
     if (text.length == 2 && !_controller.text.endsWith('/')) {
-      _controller.text = text + '/';
+      _controller.text = '$text/';
       _controller.selection = TextSelection.fromPosition(
           TextPosition(offset: _controller.text.length));
     } else if (text.length == 5 && !_controller.text.endsWith('/')) {
-      _controller.text = text.substring(0, 5) + '/';
+      _controller.text = '${text.substring(0, 5)}/';
       _controller.selection = TextSelection.fromPosition(
           TextPosition(offset: _controller.text.length));
     }
