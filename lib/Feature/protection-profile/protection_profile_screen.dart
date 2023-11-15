@@ -60,7 +60,7 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
             () => protectionController.isprotectionDataLoading == true
                 ? const Center(child: CircularProgressIndicator.adaptive())
                 : ListView.builder(
-                    itemCount: protectionController.protectionLocalModel.length,
+                    itemCount: protectionController.protectionDataList.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.only(bottom: 7.h),
@@ -70,8 +70,8 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10),
                           title: Text(
-                            protectionController.protectionLocalModel[index]
-                                    .protectionType ??
+                            protectionController.protectionDataList[index].type
+                                     ??
                                 "",
                             style: const TextStyle(color: Colors.white),
                           ),
@@ -83,31 +83,16 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                                     width: 2.h, color: Colors.white)),
                           ),
                           onTap: () {
-                            protectionController.updateProtectController(
-                                companyName: protectionController
-                                    .protectionLocalModel[index].protectionType,
-                                companyPhone: protectionController
-                                    .protectionLocalModel[index].companyPhone,
-                                policyType: protectionController
-                                    .protectionLocalModel[index].policyType,
-                                currentDeathBenefit: protectionController
-                                    .protectionLocalModel[index]
-                                    .currentDeathBenefit,
-                                currentPremiums: protectionController
-                                    .protectionLocalModel[index]
-                                    .currentPremiums,
-                                policyNumber: protectionController
-                                    .protectionLocalModel[index].policyNumber,
-                                issueDate: protectionController
-                                    .protectionLocalModel[index].issueDate);
+                            protectionController.updateControllerData(protectionController.protectionDataList[index]);
+                           
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         ProtectionDetailsScreen(
                                           protectionType: protectionController
-                                                  .protectionLocalModel[index]
-                                                  .protectionType ??
+                                                  .protectionDataList[index].type
+                                            ??
                                               "",
                                         )));
                           },

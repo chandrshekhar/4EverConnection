@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Protection%20controller/protection_controller.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/theme/app_decoration.dart';
+import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -18,6 +20,7 @@ class ProtectionDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: appTheme.lightBlue50,
       appBar: CustomAppBar(
           leadingWidth: 50.h,
           leading: AppbarImage(
@@ -39,16 +42,16 @@ class ProtectionDetailsScreen extends StatelessWidget {
           styleType: Style.bgShadow),
       body: Obx(
         () => Container(
-          margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 5.h),
+          margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 25.h,top: 15.h),
           padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 12.h),
-          // decoration: AppDecoration.outlineBlack
-          //     .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
+          decoration: AppDecoration.outlineBlack
+              .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
           child: Column(
             children: [
               rowWidget(
                   controller: protectionController.policeNumberController.value,
                   svgpath: ImageConstant.imgUser,
-                  labelText: "Plicy Number"),
+                  labelText: "Policy Number"),
               rowWidget(
                   controller: protectionController.policyTypeController.value,
                   svgpath: ImageConstant.imgUser,
@@ -58,6 +61,7 @@ class ProtectionDetailsScreen extends StatelessWidget {
                   svgpath: ImageConstant.imgUser,
                   labelText: "Issue Date"),
               rowWidget(
+                controller: protectionController.companynameController.value,
                   svgpath: ImageConstant.imgUser, labelText: "Company Name"),
               rowWidget(
                   controller: protectionController.companyPhoneController.value,
