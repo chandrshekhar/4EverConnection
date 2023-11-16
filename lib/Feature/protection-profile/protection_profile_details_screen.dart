@@ -24,7 +24,7 @@ class ProtectionDetailsScreen extends StatelessWidget {
           leadingWidth: 50.h,
           leading: AppbarImage(
               svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-              margin: EdgeInsets.only(left: 24.w, top: 20.h, bottom: 30.h),
+              margin: EdgeInsets.only(left: 15.w, top: 18.h, bottom: 25.h),
               onTap: () {
                 Navigator.pop(context);
               }),
@@ -41,7 +41,8 @@ class ProtectionDetailsScreen extends StatelessWidget {
           styleType: Style.bgShadow),
       body: Obx(
         () => Container(
-          margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 25.h,top: 15.h),
+          margin:
+              EdgeInsets.only(left: 12.w, right: 12.w, bottom: 25.h, top: 15.h),
           padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 12.h),
           decoration: AppDecoration.outlineBlack
               .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
@@ -60,8 +61,9 @@ class ProtectionDetailsScreen extends StatelessWidget {
                   svgpath: ImageConstant.imgUser,
                   labelText: "Issue Date"),
               rowWidget(
-                controller: protectionController.companynameController.value,
-                  svgpath: ImageConstant.imgUser, labelText: "Company Name"),
+                  controller: protectionController.companynameController.value,
+                  svgpath: ImageConstant.imgUser,
+                  labelText: "Company Name"),
               rowWidget(
                   controller: protectionController.companyPhoneController.value,
                   svgpath: ImageConstant.imgUser,

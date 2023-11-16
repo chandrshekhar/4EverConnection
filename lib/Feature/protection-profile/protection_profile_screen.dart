@@ -9,7 +9,6 @@ import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:get/get.dart';
-
 import '../../Controllers/Protection controller/protection_controller.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 
@@ -39,7 +38,7 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
             leadingWidth: 44.h,
             leading: AppbarImage(
                 svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin: EdgeInsets.only(left: 24.h, top: 20.h, bottom: 30.h),
+                margin: EdgeInsets.only(left: 15.w, top: 18.h, bottom: 25.h),
                 onTap: () {
                   Navigator.pop(context);
                 }),
@@ -91,11 +90,10 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         ProtectionDetailsScreen(
-                                          protectionType: protectionController
-                                                  .protectionDataList[index]
-                                                  .type ??
-                                              "",
-                                        )));
+                                            protectionType: capitalizeWords(
+                                                protectionController
+                                                    .protectionDataList[index]
+                                                    .type!))));
                           },
                         ),
                       );

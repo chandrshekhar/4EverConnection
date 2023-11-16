@@ -35,7 +35,6 @@ class AddNoteScreen extends StatelessWidget {
         actions: [
           AppbarImage1(
               onTap: () {
-            
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -101,8 +100,9 @@ class AddNoteScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
                           controller: myNoteController.notesController.value,
-                          textInputAction: TextInputAction.done,
-                          maxLines: 6,
+                          textInputAction: TextInputAction.newline,
+                          textInputType: TextInputType.multiline,
+                          maxLines: 5,
                           contentPadding: const EdgeInsets.all(10),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,

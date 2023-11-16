@@ -395,10 +395,11 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                             margin: EdgeInsets.only(
                                 left: 12.h, top: 40.v, right: 12.h, bottom: 20),
                             labelText: "Write your comments (optional)*",
-                            textInputAction: TextInputAction.done,
-                            maxLines: 1,
+                            textInputAction: TextInputAction.newline,
+                            textInputType: TextInputType.multiline,
+                            maxLines: 2,
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 11.h, vertical: 17.v),
+                                horizontal: 11.h, vertical: 10.v),
                             borderDecoration: const OutlineInputBorder(),
                             filled: false,
                             fillColor: theme.colorScheme.primary),

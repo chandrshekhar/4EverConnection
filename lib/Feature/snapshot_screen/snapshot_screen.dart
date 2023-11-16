@@ -312,6 +312,7 @@ class SnapshotScreen extends StatelessWidget {
                                 margin: EdgeInsets.only(
                                     left: 43.h, top: 3.v, bottom: 12.v)),
                             CustomTextFormField(
+                                      textInputType: TextInputType.number,
                                 readOnly: true,
                                 controller:
                                     snapshotController.homeZipController.value,
@@ -371,6 +372,7 @@ class SnapshotScreen extends StatelessWidget {
                                 labelText: "Apt, Ste"),
                             const Spacer(),
                             CustomTextFormField(
+                                      textInputType: TextInputType.number,
                                 readOnly: true,
                                 controller: snapshotController
                                     .businessZipController.value,

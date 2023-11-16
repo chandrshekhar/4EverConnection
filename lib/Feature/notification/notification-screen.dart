@@ -27,7 +27,7 @@ class NotificationsScreen extends StatelessWidget {
         leadingWidth: 44.h,
         leading: AppbarImage(
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 28.h),
+            margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 25.h),
             onTap: () {
               Navigator.pop(context);
             }),

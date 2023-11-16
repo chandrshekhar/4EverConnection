@@ -77,9 +77,10 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomImageView(
-                              svgPath: ImageConstant.imgSettings,
+                              svgPath: ImageConstant.myservice,
                               height: 18.adaptSize,
                               width: 18.adaptSize,
+                              color: Colors.black,
                               margin: EdgeInsets.only(top: 25.v, right: 15)),
                           Expanded(
                             child: SearchDropDownWidget(
@@ -244,7 +245,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                       key: emailKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
-                        textInputType: TextInputType.emailAddress,
+                          textInputType: TextInputType.emailAddress,
                           controller: connectionController
                               .personalEmailController.value,
                           margin: EdgeInsets.only(
@@ -314,9 +315,9 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           // onChange: (value) {
-                            // validationController
-                            //     .setHomeAddressValidation(value);
-                            // validationController.checkButtonValidation();
+                          // validationController
+                          //     .setHomeAddressValidation(value);
+                          // validationController.checkButtonValidation();
                           // },
                           validator: (value) {
                             if (value!.length < 8) {
@@ -353,6 +354,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           labelText: "ZIP *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
+                          textInputType: TextInputType.number,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 11.h, vertical: 17.v),
                           borderDecoration: const OutlineInputBorder(),
