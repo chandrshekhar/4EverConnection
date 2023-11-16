@@ -70,8 +70,8 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10),
                           title: Text(
-                            protectionController.protectionDataList[index].type
-                                     ??
+                            capitalizeWords(protectionController
+                                    .protectionDataList[index].type!) ??
                                 "",
                             style: const TextStyle(color: Colors.white),
                           ),
@@ -83,16 +83,17 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                                     width: 2.h, color: Colors.white)),
                           ),
                           onTap: () {
-                            protectionController.updateControllerData(protectionController.protectionDataList[index]);
-                           
+                            protectionController.updateControllerData(
+                                protectionController.protectionDataList[index]);
+
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         ProtectionDetailsScreen(
                                           protectionType: protectionController
-                                                  .protectionDataList[index].type
-                                            ??
+                                                  .protectionDataList[index]
+                                                  .type ??
                                               "",
                                         )));
                           },
@@ -102,5 +103,18 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                   ),
           ),
         ));
+  }
+
+  String capitalizeWords(String input) {
+    List<String> words = input.split('_');
+    List<String> capitalizedWords = words.map((word) {
+      if (word.isNotEmpty) {
+        return word[0].toUpperCase() + word.substring(1);
+      } else {
+        return '';
+      }
+    }).toList();
+
+    return capitalizedWords.join(' ');
   }
 }

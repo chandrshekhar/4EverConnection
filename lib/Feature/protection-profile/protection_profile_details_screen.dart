@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Protection%20controller/protection_controller.dart';
-import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/theme/app_decoration.dart';
