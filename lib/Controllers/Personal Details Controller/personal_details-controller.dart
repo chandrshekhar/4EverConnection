@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Model/User/user_personal_data_model.dart';
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
+
+import '../../Feature/Webview/web_view.dart';
 
 class PersonalDetailsController extends GetxController {
   var firstNameController = TextEditingController().obs;
@@ -82,5 +86,29 @@ class PersonalDetailsController extends GetxController {
         userData.countryOfCitizenship ?? "";
     spouseController.value.text = userData.lifePartnerName ?? "";
     spousePhoneController.value.text = userData.lifePartnerPhone ?? "";
+  }
+
+  RxBool isLoadingEdit = false.obs;
+  getMagicLink(BuildContext context) async {
+    try {
+      isLoadingEdit(true);
+      var res = await userProfileService.getMagicLink(
+          navigateTo: "https://4everconnection.com/profile/");
+      if (res.isNotEmpty) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => WebViewScreen(
+                      webViewUrl: res['magic_link'],
+                    )));
+        isLoadingEdit(false);
+      } else {
+        ToastWidget.errorToast(error: "Someting went wrong");
+        isLoadingEdit(false);
+      }
+    } catch (e) {
+      ToastWidget.errorToast(error: "$e");
+      isLoadingEdit(false);
+    }
   }
 }

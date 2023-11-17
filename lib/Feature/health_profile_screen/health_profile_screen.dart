@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Health%20Profile%20Controller/health_profile_controller.dart';
+import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
@@ -8,12 +9,15 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/custom_elevated_button.dart';
+
 // ignore_for_file: must_be_immutable
 class HealthProfileScreen extends StatelessWidget {
   HealthProfileScreen({Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final healthProfileController = Get.put(HealthProfileController());
+  final personalDetailsController = Get.put(PersonalDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -391,30 +395,39 @@ class HealthProfileScreen extends StatelessWidget {
                                       controller: healthProfileController
                                           .otherHealthNotes.value),
                                 ])),
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: 12.h, top: 24.v, right: 12.h),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 139.h, vertical: 14.v),
-                            decoration: AppDecoration.fillYellow.copyWith(
-                                borderRadius: BorderRadiusStyle.roundedBorder4),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Save",
-                                      style:
-                                          CustomTextStyles.bodyLargePrimary16),
-                                  CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgArrowrightPrimary,
-                                      height: 11.v,
-                                      width: 6.h,
-                                      margin: EdgeInsets.only(
-                                          top: 7.v, bottom: 6.v))
-                                ])),
-                        SizedBox(height: 9.v),
-                        Text("Cancel", style: theme.textTheme.titleMedium)
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.v),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(width: 5.v),
+                              Obx(
+                                () => personalDetailsController
+                                        .isLoadingEdit.value
+                                    ? const Center(
+                                        child: CircularProgressIndicator
+                                            .adaptive(),
+                                      )
+                                    : Expanded(
+                                        child: CustomElevatedButton(
+                                            onTap: () async {
+                                              await personalDetailsController
+                                                  .getMagicLink(context);
+                                            },
+                                            text: "Edit",
+                                            buttonTextStyle: TextStyle(
+                                                fontSize: 22.adaptSize),
+                                            rightIcon: Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 16.h),
+                                                child: CustomImageView(
+                                                    svgPath: ImageConstant
+                                                        .imgArrowrightPrimary))),
+                                      ),
+                              )
+                            ],
+                          ),
+                        ),
                       ])))),
         ));
   }

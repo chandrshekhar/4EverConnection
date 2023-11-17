@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -19,6 +20,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
 
   final professionalProfileController =
       Get.put(ProfessionalDetailsController());
+  final personalDetailsController = Get.put(PersonalDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -431,33 +433,33 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                 Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10.v),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Expanded(
-                                        child: CustomElevatedButton(
-                                            buttonStyle: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        Colors.red)),
-                                            text: "Cancel",
-                                            rightIcon: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 16.h),
-                                                child: const Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                ))),
-                                      ),
-                                      SizedBox(width: 5.v),
-                                      Expanded(
-                                        child: CustomElevatedButton(
-                                            text: "Save",
-                                            rightIcon: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 16.h),
-                                                child: CustomImageView(
-                                                    svgPath: ImageConstant
-                                                        .imgArrowrightPrimary))),
-                                      ),
+                                      Obx(
+                                        () => personalDetailsController
+                                                .isLoadingEdit.value
+                                            ? const Center(
+                                                child: CircularProgressIndicator
+                                                    .adaptive(),
+                                              )
+                                            : Expanded(
+                                                child: CustomElevatedButton(
+                                                    onTap: () async {
+                                                      await personalDetailsController
+                                                          .getMagicLink(
+                                                              context);
+                                                    },
+                                                    text: "Edit",
+                                                    buttonTextStyle: TextStyle(
+                                                        fontSize: 22.adaptSize),
+                                                    rightIcon: Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 16.h),
+                                                        child: CustomImageView(
+                                                            svgPath: ImageConstant
+                                                                .imgArrowrightPrimary))),
+                                              ),
+                                      )
                                     ],
                                   ),
                                 ),

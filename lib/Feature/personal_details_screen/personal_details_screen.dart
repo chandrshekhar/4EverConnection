@@ -11,6 +11,7 @@ import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 import '../../Controllers/Personal Details Controller/personal_details-controller.dart';
+import '../Webview/web_view.dart';
 
 // ignore_for_file: must_be_immutable
 class PersonalDetailsScreen extends StatefulWidget {
@@ -229,7 +230,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
-                                                    
                                                             controller:
                                                                 personalDetailsController
                                                                     .personalEmailController
@@ -574,42 +574,40 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                           //       ]),
                                           //     ))
                                         ])),
-
                                 Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10.v),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Expanded(
-                                        child: CustomElevatedButton(
-                                            buttonStyle: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        Colors.red)),
-                                            text: "Cancel",
-                                            rightIcon: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 16.h),
-                                                child: const Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                ))),
-                                      ),
                                       SizedBox(width: 5.v),
-                                      Expanded(
-                                        child: CustomElevatedButton(
-                                            text: "Save",
-                                            rightIcon: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 16.h),
-                                                child: CustomImageView(
-                                                    svgPath: ImageConstant
-                                                        .imgArrowrightPrimary))),
-                                      ),
+                                      Obx(
+                                        () => personalDetailsController
+                                                .isLoadingEdit.value
+                                            ? const Center(
+                                                child: CircularProgressIndicator
+                                                    .adaptive(),
+                                              )
+                                            : Expanded(
+                                                child: CustomElevatedButton(
+                                                    onTap: () async {
+                                                      await personalDetailsController
+                                                          .getMagicLink(
+                                                              context);
+                                                    },
+                                                    text: "Edit",
+                                                    buttonTextStyle: TextStyle(
+                                                        fontSize: 22.adaptSize),
+                                                    rightIcon: Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 16.h),
+                                                        child: CustomImageView(
+                                                            svgPath: ImageConstant
+                                                                .imgArrowrightPrimary))),
+                                              ),
+                                      )
                                     ],
                                   ),
                                 ),
-
-                                // Text("Cancel", style: theme.textTheme.titleMedium)
                               ]),
                       )))),
         ));

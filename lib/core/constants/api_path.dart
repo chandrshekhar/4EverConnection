@@ -59,4 +59,7 @@ class ApiPath {
   //notification
   static const getNotification = "$baseUrl/api/user-announcements/";
   static const updateLastSeen = "$baseUrl/api/user-announcements/last-seen/";
+
+  //magic link url
+  static const magicLink = "$baseUrl/api/user/section-magic-link/";
 }

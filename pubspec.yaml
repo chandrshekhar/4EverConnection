@@ -65,6 +65,7 @@ dependencies:
   printing: ^5.11.1
   pdf: ^3.10.6
   photo_view:
+  webview_flutter:
   flutter_cached_pdfview:
   image:
 

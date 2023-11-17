@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Financial%20profile/financial_profile_controller.dart';
+import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
@@ -18,7 +19,7 @@ class FinancialProfileScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final financialController = Get.put(FinancialProfileController());
-
+  final personalDetailsController = Get.put(PersonalDetailsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -273,36 +274,40 @@ class FinancialProfileScreen extends StatelessWidget {
                                   SizedBox(height: 22.v)
                                 ])),
                         SizedBox(height: 10.v),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.h, vertical: 17.v),
-                          decoration: AppDecoration.outlineBlack.copyWith(
-                              borderRadius: BorderRadiusStyle.roundedBorder16),
-                          child: CustomTextFormField(
-                              controller: financialController
-                                  .financialheathNotesController.value,
-                              labelText: "Financial Health Notes",
-                              prefix: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  margin: EdgeInsets.only(
-                                      top: 5.v, right: 21.h, bottom: 5.v),
-                                  child: CustomImageView(
-                                      svgPath: ImageConstant.imgEdit)),
-                              prefixConstraints:
-                                  BoxConstraints(maxHeight: 156.v),
-                              contentPadding: EdgeInsets.only(right: 30.h)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.v),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(width: 5.v),
+                              Obx(
+                                () => personalDetailsController
+                                        .isLoadingEdit.value
+                                    ? const Center(
+                                        child: CircularProgressIndicator
+                                            .adaptive(),
+                                      )
+                                    : Expanded(
+                                        child: CustomElevatedButton(
+                                            onTap: () async {
+                                              await personalDetailsController
+                                                  .getMagicLink(context);
+                                            },
+                                            text: "Edit",
+                                            buttonTextStyle: TextStyle(
+                                                fontSize: 22.adaptSize),
+                                            rightIcon: Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 16.h),
+                                                child: CustomImageView(
+                                                    svgPath: ImageConstant
+                                                        .imgArrowrightPrimary))),
+                                      ),
+                              )
+                            ],
+                          ),
                         ),
-                        CustomElevatedButton(
-                            text: "Save",
-                            margin: EdgeInsets.only(
-                                left: 12.h, top: 32.v, right: 12.h),
-                            rightIcon: Container(
-                                margin: EdgeInsets.only(left: 16.h),
-                                child: CustomImageView(
-                                    svgPath:
-                                        ImageConstant.imgArrowrightPrimary))),
-                        SizedBox(height: 9.v),
-                        Text("Cancel", style: theme.textTheme.titleMedium)
+                        SizedBox(height: 10.v),
                       ])))),
         ));
   }

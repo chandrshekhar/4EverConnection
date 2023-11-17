@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/Controllers/Protection%20controller/protection_controller.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
@@ -11,11 +12,14 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_image_view.dart';
 
 class ProtectionDetailsScreen extends StatelessWidget {
   ProtectionDetailsScreen({super.key, required this.protectionType});
   final String protectionType;
   final protectionController = Get.put(ProtectionController());
+  final personalDetailsController = Get.put(PersonalDetailsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +80,36 @@ class ProtectionDetailsScreen extends StatelessWidget {
                   controller: protectionController.premimusController.value,
                   svgpath: ImageConstant.imgUser,
                   labelText: "Current Premiums"),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 5),
+                    Obx(
+                      () => personalDetailsController.isLoadingEdit.value
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            )
+                          : Expanded(
+                              child: CustomElevatedButton(
+                                  onTap: () async {
+                                    await personalDetailsController
+                                        .getMagicLink(context);
+                                  },
+                                  text: "Edit",
+                                  buttonTextStyle: TextStyle(fontSize: 22.sp),
+                                  rightIcon: Container(
+                                      margin: EdgeInsets.only(left: 16.h),
+                                      child: CustomImageView(
+                                          svgPath: ImageConstant
+                                              .imgArrowrightPrimary))),
+                            ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
             ],
           ),
         ),

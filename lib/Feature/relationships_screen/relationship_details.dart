@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/Controllers/Relationship%20Controller/relationship_controller.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
@@ -15,6 +16,8 @@ import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/custom_elevated_button.dart';
+
 class RelationshipDetailsScreen extends StatelessWidget {
   RelationshipDetailsScreen({
     required this.relationshipType,
@@ -24,6 +27,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
   final String relationshipType;
 
   final resControlle = Get.put(RelationShipController());
+  final personalDetailsController = Get.put(PersonalDetailsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +50,6 @@ class RelationshipDetailsScreen extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(24.h, 15.v, 24.h, 24.v))
           ],
           styleType: Style.bgShadow),
-     
-     
       body: SafeArea(
         bottom: true,
         child: SingleChildScrollView(
@@ -194,278 +196,306 @@ class RelationshipDetailsScreen extends StatelessWidget {
                       ])),
               SizedBox(height: 13.v),
               Container(
-                  margin: EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 11.h, vertical: 25.v),
-                  decoration: AppDecoration.outlineBlack.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder16),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h),
-                            child: Text("Professional Profile",
-                                style: theme.textTheme.titleMedium)),
-                        rowWidget(
-                            controller:
-                                resControlle.businessnameController.value,
-                            svgpath: ImageConstant.imgFile,
-                            labelText: "Business Name"),
-                        Padding(
-                          padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                          child: PhoneNumberTextFieldWidget(
-                            phoneController:
-                                resControlle.businessphoneController.value,
-                            lable: "Business Phone",
-                          ),
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgVideocamera,
-                                      height: 17.adaptSize,
-                                      width: 17.adaptSize,
-                                      margin: EdgeInsets.only(
-                                          top: 6.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          controller: resControlle
-                                              .businessfaxController.value,
-                                          margin: EdgeInsets.only(left: 22.h),
-                                          labelText: "Business Fax"))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgVector,
-                                      height: 17.adaptSize,
-                                      width: 17.adaptSize,
-                                      margin: EdgeInsets.only(
-                                          top: 6.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          controller: resControlle
-                                              .businessemailController.value,
-                                          margin: EdgeInsets.only(left: 22.h),
-                                          labelText: "Business Email",
-                                          textInputType:
-                                              TextInputType.emailAddress))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgGlobe,
-                                      height: 17.v,
-                                      width: 19.h,
-                                      margin: EdgeInsets.only(
-                                          top: 6.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          controller: resControlle
-                                              .businesswebsitecontroller.value,
-                                          margin: EdgeInsets.only(left: 20.h),
-                                          labelText: "Business Website"))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgUser,
-                                      height: 19.v,
-                                      width: 17.h,
-                                      margin: EdgeInsets.only(
-                                          top: 4.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          margin: EdgeInsets.only(left: 22.h),
-                                          controller: resControlle
-                                              .businessPositionController.value,
-                                          labelText: "Position",
-                                          suffix: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  30.h, 12.v, 15.h, 12.v),
-                                              child: CustomImageView(
-                                                  svgPath: ImageConstant
-                                                      .imgVectorGray6004x7)),
-                                          suffixConstraints:
-                                              BoxConstraints(maxHeight: 36.v)))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 41.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgCarGray600,
-                                      height: 17.adaptSize,
-                                      width: 17.adaptSize,
-                                      margin: EdgeInsets.only(
-                                          top: 3.v, bottom: 14.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          margin: EdgeInsets.only(left: 22.h),
-                                          controller: resControlle
-                                              .myidealController.value,
-                                          labelText: "My Ideal Occupation"))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgVectorGray60018x22,
-                                      height: 18.v,
-                                      width: 22.h,
-                                      margin: EdgeInsets.only(
-                                          top: 6.v, bottom: 12.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          margin: EdgeInsets.only(left: 17.h),
-                                          controller: resControlle
-                                              .educationlevelcontroller.value,
-                                          labelText: "Education Level",
-                                          suffix: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  30.h, 12.v, 15.h, 12.v),
-                                              child: CustomImageView(
-                                                  svgPath: ImageConstant
-                                                      .imgVectorGray6004x7)),
-                                          suffixConstraints:
-                                              BoxConstraints(maxHeight: 36.v)))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 42.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgVectorGray60018x22,
-                                      height: 18.v,
-                                      width: 22.h,
-                                      margin: EdgeInsets.only(
-                                          top: 3.v, bottom: 12.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          controller: resControlle
-                                              .degreeController.value,
-                                          margin: EdgeInsets.only(left: 17.h),
-                                          labelText: "Degree"))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgUser,
-                                      height: 19.v,
-                                      width: 17.h,
-                                      margin: EdgeInsets.only(
-                                          top: 4.v, bottom: 13.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          margin: EdgeInsets.only(left: 22.h),
-                                          controller: resControlle
-                                              .affiliationsController.value,
-                                          labelText: "Affiliations",
-                                          suffix: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  30.h, 12.v, 15.h, 12.v),
-                                              child: CustomImageView(
-                                                  svgPath: ImageConstant
-                                                      .imgVectorGray6004x7)),
-                                          suffixConstraints:
-                                              BoxConstraints(maxHeight: 36.v)))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(left: 1.h, top: 39.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgLocation,
-                                      height: 20.v,
-                                      width: 17.h,
-                                      margin: EdgeInsets.only(
-                                          top: 4.v, bottom: 12.v)),
-                                  Expanded(
-                                      child: CustomTextFormField(
-                                          onTap: () async {
-                                            // var address = await Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //     builder: (context) =>
-                                            //         AddressAutoCompleteWidget(),
-                                            //   ),
-                                            // );
-                                            // relationship
-                                            //     .businessAddressaddress
-                                            //     .value
-                                            //     .text = address;
-                                          },
-                                          margin: EdgeInsets.only(left: 22.h),
-                                          labelText: "Business Address",
-                                          controller: resControlle
-                                              .businessAddressaddressController
-                                              .value,
-                                          suffix: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  30.h, 12.v, 15.h, 12.v),
-                                              child: CustomImageView(
-                                                  svgPath: ImageConstant
-                                                      .imgVectorGray6004x7)),
-                                          suffixConstraints:
-                                              BoxConstraints(maxHeight: 36.v)))
-                                ])),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                left: 1.h, top: 40.v, bottom: 13.v),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgLocation,
-                                      height: 20.v,
-                                      width: 17.h,
-                                      margin: EdgeInsets.only(
-                                          top: 3.v, bottom: 12.v)),
-                                  CustomTextFormField(
+                margin: EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
+                padding: EdgeInsets.symmetric(horizontal: 11.h, vertical: 25.v),
+                decoration: AppDecoration.outlineBlack
+                    .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h),
+                        child: Text("Professional Profile",
+                            style: theme.textTheme.titleMedium)),
+                    rowWidget(
+                        controller: resControlle.businessnameController.value,
+                        svgpath: ImageConstant.imgFile,
+                        labelText: "Business Name"),
+                    Padding(
+                      padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                      child: PhoneNumberTextFieldWidget(
+                        phoneController:
+                            resControlle.businessphoneController.value,
+                        lable: "Business Phone",
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgVideocamera,
+                                  height: 17.adaptSize,
+                                  width: 17.adaptSize,
+                                  margin:
+                                      EdgeInsets.only(top: 6.v, bottom: 13.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
                                       controller: resControlle
-                                          .businessaptsteoneController.value,
-                                      width: 113.h,
-                                      margin:
-                                          EdgeInsets.only(left: 22.h, top: 2.v),
-                                      labelText: "Apt, Ste"),
-                                  CustomImageView(
-                                      svgPath: ImageConstant.imgLocation,
-                                      height: 20.v,
-                                      width: 17.h,
-                                      margin: EdgeInsets.only(
-                                          left: 43.h, top: 3.v, bottom: 12.v)),
-                                  CustomTextFormField(
-                                      width: 109.h,
-                                      controller: resControlle
-                                          .businessziponeController.value,
+                                          .businessfaxController.value,
                                       margin: EdgeInsets.only(left: 22.h),
-                                      labelText: "ZIP",
-                                      textInputAction: TextInputAction.done)
-                                ]))
-                      ])),
+                                      labelText: "Business Fax"))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgVector,
+                                  height: 17.adaptSize,
+                                  width: 17.adaptSize,
+                                  margin:
+                                      EdgeInsets.only(top: 6.v, bottom: 13.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      controller: resControlle
+                                          .businessemailController.value,
+                                      margin: EdgeInsets.only(left: 22.h),
+                                      labelText: "Business Email",
+                                      textInputType:
+                                          TextInputType.emailAddress))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgGlobe,
+                                  height: 17.v,
+                                  width: 19.h,
+                                  margin:
+                                      EdgeInsets.only(top: 6.v, bottom: 13.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      controller: resControlle
+                                          .businesswebsitecontroller.value,
+                                      margin: EdgeInsets.only(left: 20.h),
+                                      labelText: "Business Website"))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgUser,
+                                  height: 19.v,
+                                  width: 17.h,
+                                  margin:
+                                      EdgeInsets.only(top: 4.v, bottom: 13.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      margin: EdgeInsets.only(left: 22.h),
+                                      controller: resControlle
+                                          .businessPositionController.value,
+                                      labelText: "Position",
+                                      suffix: Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              30.h, 12.v, 15.h, 12.v),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgVectorGray6004x7)),
+                                      suffixConstraints:
+                                          BoxConstraints(maxHeight: 36.v)))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 41.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgCarGray600,
+                                  height: 17.adaptSize,
+                                  width: 17.adaptSize,
+                                  margin:
+                                      EdgeInsets.only(top: 3.v, bottom: 14.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      margin: EdgeInsets.only(left: 22.h),
+                                      controller:
+                                          resControlle.myidealController.value,
+                                      labelText: "My Ideal Occupation"))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgVectorGray60018x22,
+                                  height: 18.v,
+                                  width: 22.h,
+                                  margin:
+                                      EdgeInsets.only(top: 6.v, bottom: 12.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      margin: EdgeInsets.only(left: 17.h),
+                                      controller: resControlle
+                                          .educationlevelcontroller.value,
+                                      labelText: "Education Level",
+                                      suffix: Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              30.h, 12.v, 15.h, 12.v),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgVectorGray6004x7)),
+                                      suffixConstraints:
+                                          BoxConstraints(maxHeight: 36.v)))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 42.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgVectorGray60018x22,
+                                  height: 18.v,
+                                  width: 22.h,
+                                  margin:
+                                      EdgeInsets.only(top: 3.v, bottom: 12.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      controller:
+                                          resControlle.degreeController.value,
+                                      margin: EdgeInsets.only(left: 17.h),
+                                      labelText: "Degree"))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgUser,
+                                  height: 19.v,
+                                  width: 17.h,
+                                  margin:
+                                      EdgeInsets.only(top: 4.v, bottom: 13.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      margin: EdgeInsets.only(left: 22.h),
+                                      controller: resControlle
+                                          .affiliationsController.value,
+                                      labelText: "Affiliations",
+                                      suffix: Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              30.h, 12.v, 15.h, 12.v),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgVectorGray6004x7)),
+                                      suffixConstraints:
+                                          BoxConstraints(maxHeight: 36.v)))
+                            ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 1.h, top: 39.v),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgLocation,
+                                  height: 20.v,
+                                  width: 17.h,
+                                  margin:
+                                      EdgeInsets.only(top: 4.v, bottom: 12.v)),
+                              Expanded(
+                                  child: CustomTextFormField(
+                                      onTap: () async {
+                                        // var address = await Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) =>
+                                        //         AddressAutoCompleteWidget(),
+                                        //   ),
+                                        // );
+                                        // relationship
+                                        //     .businessAddressaddress
+                                        //     .value
+                                        //     .text = address;
+                                      },
+                                      margin: EdgeInsets.only(left: 22.h),
+                                      labelText: "Business Address",
+                                      controller: resControlle
+                                          .businessAddressaddressController
+                                          .value,
+                                      suffix: Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              30.h, 12.v, 15.h, 12.v),
+                                          child: CustomImageView(
+                                              svgPath: ImageConstant
+                                                  .imgVectorGray6004x7)),
+                                      suffixConstraints:
+                                          BoxConstraints(maxHeight: 36.v)))
+                            ])),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(left: 1.h, top: 40.v, bottom: 13.v),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgLocation,
+                              height: 20.v,
+                              width: 17.h,
+                              margin: EdgeInsets.only(top: 3.v, bottom: 12.v)),
+                          CustomTextFormField(
+                              controller: resControlle
+                                  .businessaptsteoneController.value,
+                              width: 113.h,
+                              margin: EdgeInsets.only(left: 22.h, top: 2.v),
+                              labelText: "Apt, Ste"),
+                          CustomImageView(
+                              svgPath: ImageConstant.imgLocation,
+                              height: 20.v,
+                              width: 17.h,
+                              margin: EdgeInsets.only(
+                                  left: 43.h, top: 3.v, bottom: 12.v)),
+                          CustomTextFormField(
+                              width: 109.h,
+                              controller:
+                                  resControlle.businessziponeController.value,
+                              margin: EdgeInsets.only(left: 22.h),
+                              labelText: "ZIP",
+                              textInputAction: TextInputAction.done)
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.v),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 5.v),
+                    Obx(
+                      () => personalDetailsController.isLoadingEdit.value
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            )
+                          : Expanded(
+                              child: CustomElevatedButton(
+                                  onTap: () async {
+                                    await personalDetailsController
+                                        .getMagicLink(context);
+                                  },
+                                  text: "Edit",
+                                  buttonTextStyle:
+                                      TextStyle(fontSize: 22.adaptSize),
+                                  rightIcon: Container(
+                                      margin: EdgeInsets.only(left: 16.h),
+                                      child: CustomImageView(
+                                          svgPath: ImageConstant
+                                              .imgArrowrightPrimary))),
+                            ),
+                    )
+                  ],
+                ),
+              ),
             ])),
       ),
     );
