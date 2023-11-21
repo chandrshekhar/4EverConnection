@@ -16,14 +16,26 @@ import '../../../widgets/custom_elevated_button.dart';
 import '../../../widgets/custom_image_view.dart';
 
 // ignore_for_file: must_be_immutable
-class DocumentVaultScreen extends StatelessWidget {
+class DocumentVaultScreen extends StatefulWidget {
   DocumentVaultScreen({Key? key}) : super(key: key);
-  final documentVaultController = Get.put(DocumentsVaultController());
+
   @override
-  Widget build(BuildContext context) {
+  State<DocumentVaultScreen> createState() => _DocumentVaultScreenState();
+}
+
+class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
+  final documentVaultController = Get.put(DocumentsVaultController());
+
+  @override
+  void initState() {
+    documentVaultController.getVaultDocumentList(query: "");
     documentVaultController.choosenFilename.value = "";
     documentVaultController.files.value = null;
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(
@@ -263,10 +275,12 @@ class DocumentVaultScreen extends StatelessWidget {
                                                       null
                                               ? AppColors
                                                   .floatingActionButtonColor
-                                              : AppColors.grayColor,
+                                              : AppColors.greyTextColor
+                                                  .withOpacity(0.5),
                                         )),
                                     text: "Upload",
                                     buttonTextStyle: TextStyle(
+                                        letterSpacing: 1,
                                         fontSize: 18.h,
                                         fontWeight: FontWeight.w400,
                                         color: Colors.white),

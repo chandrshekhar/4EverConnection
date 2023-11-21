@@ -98,7 +98,7 @@ class DocumentVaultDataTable extends StatelessWidget {
                                     .documentVaultList[index].file!
                                     .split(".")
                                     .last;
-                                print(extension);
+
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -161,10 +161,10 @@ class DocumentVaultDataTable extends StatelessWidget {
                             PopupMenuItem<String>(
                               onTap: () async {
                                 documentsVaultController.sendEmail(
-                                    documentsVaultController
-                                            .documentVaultList[index].file ??
-                                        "",
-                                    "pandey211998@gmail.com");
+                                  documentsVaultController
+                                          .documentVaultList[index].file ??
+                                      "",
+                                );
                                 //   final Uri params = Uri(
                                 //     scheme: 'mailto',
                                 //     path: 'support@4ever.net',
@@ -274,7 +274,7 @@ class DocumentVaultDataTable extends StatelessWidget {
                                         animType: AnimType.bottomSlide,
                                         title: 'Remove',
                                         desc:
-                                            'Are you sure to delete this vault?',
+                                            'Do you want to delete this document?',
                                         btnCancelOnPress: () {},
                                         btnOkOnPress: () async {
                                           await documentsVaultController
@@ -283,6 +283,8 @@ class DocumentVaultDataTable extends StatelessWidget {
                                                       .documentVaultList[index]
                                                       .id!);
                                         },
+                                        btnOkText: "Yes",
+                                        btnCancelText: "No",
                                         barrierColor: AppColors.lightBlue
                                             .withOpacity(0.3),
                                         descTextStyle: TextStyle(

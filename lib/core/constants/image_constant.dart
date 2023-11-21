@@ -3,15 +3,15 @@ class ImageConstant {
   static String imagePath = 'assets/images';
 
   // Login images
-  static String imgGroup2008 = '$imagePath/img_group2008.png';
+  // static String imgGroup2008 = '$imagePath/img_group2008.png';
 
   // Sign up images
-  static String imgInfo = '$imagePath/img_info.svg';
+  // static String imgInfo = '$imagePath/img_info.svg';
 
   static String imgQrcode = '$imagePath/img_qrcode.svg';
 
-  static String imgVectorErrorcontainer =
-      '$imagePath/img_vector_errorcontainer.svg';
+  // static String imgVectorErrorcontainer =
+      // '$imagePath/img_vector_errorcontainer.svg';
 
   static String imgImage24 = '$imagePath/img_image24.png';
 

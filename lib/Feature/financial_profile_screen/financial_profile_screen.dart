@@ -10,7 +10,6 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
-
 import '../../core/utils/address_autocomplete_widget.dart';
 
 // ignore_for_file: must_be_immutable
@@ -74,6 +73,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .taxProfessionalNameController
                                                     .value,
@@ -84,6 +84,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                       ]),
                                   SizedBox(height: 39.v),
                                   PhoneNumberTextFieldWidget(
+                                    readOnly: true,
                                     phoneController: financialController
                                         .phoneNumberController.value,
                                     lable: "Mobile Phone",
@@ -140,6 +141,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 6.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .assetController.value,
                                                 margin:
@@ -161,6 +163,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .liabilitiesController
                                                     .value,
@@ -203,6 +206,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                                                             13.v)),
                                                             Expanded(
                                                                 child: CustomTextFormField(
+                                                                    readOnly:
+                                                                        true,
                                                                     controller:
                                                                         financialController
                                                                             .netWorthController
@@ -221,6 +226,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                           width: 17.h)
                                                     ])),
                                             CustomTextFormField(
+                                                readOnly: true,
                                                 width: 303.h,
                                                 controller: financialController
                                                     .incomeController.value,
@@ -243,6 +249,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .expansesController.value,
                                                 margin:
@@ -265,6 +272,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 8.v, bottom: 16.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .cashflowController.value,
                                                 margin:
@@ -275,7 +283,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                 ])),
                         SizedBox(height: 10.v),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.v),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.v, horizontal: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

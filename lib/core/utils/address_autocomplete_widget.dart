@@ -82,7 +82,7 @@ class _AddressAutoCompleteWidgetState extends State<AddressAutoCompleteWidget> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final predictions = data['predictions'] as List<dynamic>;
-        print(data);
+        
         setState(() {
           _suggestions = predictions
               .map((prediction) => prediction['description'])

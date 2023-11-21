@@ -53,6 +53,7 @@ class ProtectionDetailsScreen extends StatelessWidget {
           child: Column(
             children: [
               rowWidget(
+                
                   controller: protectionController.policeNumberController.value,
                   svgpath: ImageConstant.imgUser,
                   labelText: "Policy Number"),
@@ -81,11 +82,11 @@ class ProtectionDetailsScreen extends StatelessWidget {
                   svgpath: ImageConstant.imgUser,
                   labelText: "Current Premiums"),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     Obx(
                       () => personalDetailsController.isLoadingEdit.value
                           ? const Center(

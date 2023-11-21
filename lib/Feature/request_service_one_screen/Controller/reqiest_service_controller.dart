@@ -112,7 +112,7 @@ class RequestServiceController extends GetxController {
         usedSlotList.value = [];
       }
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 

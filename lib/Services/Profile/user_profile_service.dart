@@ -12,7 +12,7 @@ class UserProfileService {
   Future<UserProfileModel> getUserProfile() async {
     Response response;
     var token = await SharedPref().getUserToken();
-    print(token);
+    
     try {
       dio.options.headers = {
         'Accept': 'application/json',
@@ -33,7 +33,7 @@ class UserProfileService {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -73,7 +73,7 @@ class UserProfileService {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          print(e.response!.data);
+          log(e.response!.data);
           throw Exception("Faild to load data");
         }
       }
@@ -107,7 +107,7 @@ class UserProfileService {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          print(e.response!.data);
+          log(e.response!.data);
           throw Exception("Faild to load data");
         }
       }

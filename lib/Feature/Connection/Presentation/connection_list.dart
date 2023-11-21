@@ -228,7 +228,7 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                         itemBuilder: (context, index) {
                           var item = connectionController
                               .acceptedConnectionList[index];
-                          print("check$item");
+                        
                           return ConnectionListWidget(
                             onSeleted: (p0) async {
                               switch (p0) {

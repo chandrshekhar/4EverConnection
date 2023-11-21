@@ -161,216 +161,319 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     Form(
                       key: firstNameKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          controller:
-                              connectionController.firstNameController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 0.v, right: 12.h),
-                          hintText: "First name *",
-                          labelText: "First name *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            validationController.setFirstNameValidation(value);
-                            validationController.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 4) {
-                              return "First name must have 4 character";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
+                      child: Row(
+                        children: [
+                           CustomImageView(
+                              svgPath: ImageConstant.imgUser,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                          Expanded(
+                            child: CustomTextFormField(
+                                controller:
+                                    connectionController.firstNameController.value,
+                                // margin: EdgeInsets.only(
+                                //     left: 12.h, top: 0.v, right: 12.h),
+                                // hintText: "First name *",
+                                labelText: "First name *",
+                                textInputAction: TextInputAction.done,
+                                maxLines: 1,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 11.h, vertical: 17.v),
+                                borderDecoration: const OutlineInputBorder(),
+                                filled: false,
+                                onChange: (value) {
+                                  validationController.setFirstNameValidation(value);
+                                  validationController.checkButtonValidation();
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "First name will not Empty";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                fillColor: theme.colorScheme.primary),
+                          ),
+                        ],
+                      ),
                     ),
-                    CustomTextFormField(
-                        controller:
-                            connectionController.middleNameController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Middle name (if Any)",
-                        labelText: "Middle name (if Any)",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    Row(
+                      children: [
+                        CustomImageView(
+                              svgPath: ImageConstant.imgUser,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                        Expanded(
+                          child: CustomTextFormField(
+                              controller:
+                                  connectionController.middleNameController.value,
+                              margin:
+                                  EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                              // hintText: "Middle name (if Any)",
+                              labelText: "Middle name (if Any)",
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 17.v),
+                              borderDecoration: OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {},
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                      ],
+                    ),
                     Form(
                       key: lastNameKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          controller:
-                              connectionController.lastNameController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "Last name *",
-                          labelText: "Last name *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            validationController.setLastNameValidation(value);
-                            validationController.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 2) {
-                              return "Last name must have 2 character";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
+                      child: Row(
+                        children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgUser,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                          Expanded(
+                            child: CustomTextFormField(
+                                controller:
+                                    connectionController.lastNameController.value,
+                                margin: EdgeInsets.only(
+                                    left: 12.h, top: 15.v, right: 12.h),
+                                // hintText: "Last name *",
+                                labelText: "Last name *",
+                                textInputAction: TextInputAction.done,
+                                maxLines: 1,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 11.h, vertical: 17.v),
+                                        
+                                filled: false,
+                                onChange: (value) {
+                                  validationController.setLastNameValidation(value);
+                                  validationController.checkButtonValidation();
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Last name must have 2 character";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                fillColor: theme.colorScheme.primary),
+                          ),
+                        ],
+                      ),
                     ),
-                    Container(
-                        decoration: BoxDecoration(border: Border.all()),
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 13.h, vertical: 10),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: PhoneNumberTextFieldWidget(
-                            c: 1,
-                            phoneController:
-                                connectionController.phoneController.value,
-                            lable: "Phone Number")),
+                    SizedBox(height: 20.h),
+                    Row(
+                      children: [
+                        CustomImageView(
+                              svgPath: ImageConstant.imgCall,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                        Expanded(
+                          child: PhoneNumberTextFieldWidget(
+                              c: 1,
+                              phoneController:
+                                  connectionController.phoneController.value,
+                              lable: "Phone Number"),
+                        ),
+                      ],
+                    ),
                     Form(
                       key: emailKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          textInputType: TextInputType.emailAddress,
-                          controller: connectionController
-                              .personalEmailController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "Personal Email *",
-                          labelText: "Personal Email *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            validationController.setEmailValidation(value);
-                            validationController.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (!GetUtils.isEmail(value!)) {
-                              return "Please enter valid email id";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
+                      child: Row(
+                        children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgVector,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                          Expanded(
+                            child: CustomTextFormField(
+                                textInputType: TextInputType.emailAddress,
+                                controller: connectionController
+                                    .personalEmailController.value,
+                               
+                                // hintText: "Personal Email *",
+                                labelText: "Personal Email *",
+                                textInputAction: TextInputAction.done,
+                                maxLines: 1,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 11.h, vertical: 17.v),
+                                borderDecoration: const OutlineInputBorder(),
+                                filled: false,
+                                onChange: (value) {
+                                  validationController.setEmailValidation(value);
+                                  validationController.checkButtonValidation();
+                                },
+                                validator: (value) {
+                                  if (!GetUtils.isEmail(value!)) {
+                                    return "Please enter valid email id";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                fillColor: theme.colorScheme.primary),
+                          ),
+                        ],
+                      ),
                     ),
-                    CustomTextFormField(
-                        controller:
-                            connectionController.businessNameController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Business Name (If Any)",
-                        labelText: "Business Name (If Any)",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    Row(
+                      children: [
+                        CustomImageView(
+                              svgPath: ImageConstant.myBusinessProfile,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                        Expanded(
+                          child: CustomTextFormField(
+                              controller:
+                                  connectionController.businessNameController.value,
+                              margin:
+                                  EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                              // hintText: "Business Name (If Any)",
+                              labelText: "Business Name (If Any)",
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 17.v),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {},
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                      ],
+                    ),
                     Form(
                       key: homeKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          readOnly: true,
-                          onTap: () async {
-                            var address = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AddressAutoCompleteWidget(),
-                              ),
-                            );
-                            connectionController
-                                .homeAddressController.value.text = address;
-                          },
-                          controller:
-                              connectionController.homeAddressController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "Home Address *",
-                          labelText: "Home Address *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          // onChange: (value) {
-                          // validationController
-                          //     .setHomeAddressValidation(value);
-                          // validationController.checkButtonValidation();
-                          // },
-                          validator: (value) {
-                            if (value!.length < 8) {
-                              return "Home address must have atlease 8 character";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
+                      child: Row(
+                        children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgLocation,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                          Expanded(
+                            child: CustomTextFormField(
+                                readOnly: true,
+                                onTap: () async {
+                                  var address = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddressAutoCompleteWidget(),
+                                    ),
+                                  );
+                                  connectionController
+                                      .homeAddressController.value.text = address;
+                                },
+                                controller:
+                                    connectionController.homeAddressController.value,
+                                margin: EdgeInsets.only(
+                                    left: 12.h, top: 15.v, right: 12.h),
+                                // hintText: "Home Address *",
+                                labelText: "Home Address *",
+                                textInputAction: TextInputAction.done,
+                                maxLines: 1,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 11.h, vertical: 17.v),
+                                borderDecoration: const OutlineInputBorder(),
+                                filled: false,
+                                // onChange: (value) {
+                                // validationController
+                                //     .setHomeAddressValidation(value);
+                                // validationController.checkButtonValidation();
+                                // },
+                                validator: (value) {
+                                  if (connectionController.homeAddressController.value.text.isEmpty) {
+                                    return "Home address must have atlease 8 character";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                fillColor: theme.colorScheme.primary),
+                          ),
+                        ],
+                      ),
                     ),
-                    CustomTextFormField(
-                        maxLength: 10,
-                        controller: connectionController.aptController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Apt, Ste",
-                        labelText: "Apt, Ste",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    Row(
+                      children: [
+                        CustomImageView(
+                              svgPath: ImageConstant.imgLocation,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                        Expanded(
+                          child: CustomTextFormField(
+                              maxLength: 10,
+                              controller: connectionController.aptController.value,
+                              margin:
+                                  EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                              // hintText: "Apt, Ste",
+                              labelText: "Apt, Ste",
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 17.v),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {},
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                      ],
+                    ),
                     Form(
                       key: zipKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          controller: connectionController.zipController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "ZIP *",
-                          labelText: "ZIP *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          textInputType: TextInputType.number,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            validationController.setZipValidation(value);
-                            validationController.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 4) {
-                              return "Enter valid zip code";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
+                      child: Row(
+                        children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgLocation,
+                              height: 18.adaptSize,
+                              width: 18.adaptSize,
+                              color: Colors.black,
+                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                          Expanded(
+                            child: CustomTextFormField(
+                                controller: connectionController.zipController.value,
+                                margin: EdgeInsets.only(
+                                    left: 12.h, top: 15.v, right: 12.h),
+                                // hintText: "ZIP *",
+                                labelText: "ZIP *",
+                                textInputAction: TextInputAction.done,
+                                maxLines: 1,
+                                textInputType: TextInputType.number,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 11.h, vertical: 17.v),
+                                borderDecoration: const OutlineInputBorder(),
+                                filled: false,
+                                onChange: (value) {
+                                  validationController.setZipValidation(value);
+                                  validationController.checkButtonValidation();
+                                },
+                                validator: (value) {
+                                  if (value!.length < 4) {
+                                    return "Enter valid zip code";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                fillColor: theme.colorScheme.primary),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20.adaptSize,

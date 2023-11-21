@@ -29,8 +29,10 @@ class CustomTextFormField extends StatelessWidget {
       this.filled = false,
       this.validator,
       this.readOnly = false,
-      this.onTap, this.inputFormatters,
-      this.onChange, this.maxLength})
+      this.onTap,
+      this.inputFormatters,
+      this.onChange,
+      this.maxLength})
       : super(
           key: key,
         );
@@ -128,30 +130,23 @@ class CustomTextFormField extends StatelessWidget {
         contentPadding: contentPadding ?? EdgeInsets.all(2.h),
         fillColor: fillColor,
         filled: filled,
-        border: borderDecoration ??
-            UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(3.h),
-              borderSide: BorderSide(
-                color: appTheme.black900,
-                width: 1,
-              ),
-            ),
-        enabledBorder: borderDecoration ??
-            UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(3.h),
-              borderSide: BorderSide(
-                color: appTheme.black900,
-                width: 1,
-              ),
-            ),
-        focusedBorder: borderDecoration ??
-            UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(3.h),
-              borderSide: BorderSide(
-                color: appTheme.black900,
-                width: 1,
-              ),
-            ),
+        border: const UnderlineInputBorder(),
+        // enabledBorder: borderDecoration ??
+        //     UnderlineInputBorder(
+        //       borderRadius: BorderRadius.circular(3.h),
+        //       borderSide: BorderSide(
+        //         color: appTheme.black900,
+        //         width: 1,
+        //       ),
+        //     ),
+        // focusedBorder:
+        //     UnderlineInputBorder(
+        //       borderRadius: BorderRadius.circular(3.h),
+        //       borderSide: BorderSide(
+        //         color: appTheme.black900,
+        //         width: 1,
+        //       ),
+        //     ),
       );
 }
 

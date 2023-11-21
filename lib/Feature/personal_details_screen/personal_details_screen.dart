@@ -100,6 +100,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                          readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .firstNameController
@@ -127,6 +128,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .middleNameController
@@ -154,6 +156,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .lastNameController
@@ -167,45 +170,18 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
 
                                           SizedBox(height: 18.adaptSize),
                                           PhoneNumberTextFieldWidget(
+                                              readOnly: true,
                                             phoneController:
                                                 personalDetailsController
                                                     .mobilePhoneController
                                                     .value,
                                             lable: "Mobile Phone",
                                           ),
-                                          // Padding(
-                                          //     padding: EdgeInsets.only(
-                                          //         left: 1.h, top: 39.v),
-                                          //     child: Row(
-                                          //         crossAxisAlignment:
-                                          //             CrossAxisAlignment.start,
-                                          //         children: [
-                                          //           CustomImageView(
-                                          //               svgPath:
-                                          //                   ImageConstant.imgCall,
-                                          //               height: 15.adaptSize,
-                                          //               width: 15.adaptSize,
-                                          //               margin: EdgeInsets.only(
-                                          //                   top: 8.v,
-                                          //                   bottom: 13.v)),
-                                          //           Expanded(
-                                          //               child: CustomTextFormField(
-                                          //                   controller:
-                                          //                       personalDetailsController
-                                          //                           .mobilePhoneController
-                                          //                           .value,
-                                          //                   margin: EdgeInsets.only(
-                                          //                       left: 24.h),
-                                          //                   labelText:
-                                          //                       "Mobile Phone",
-                                          //                   textInputType:
-                                          //                       TextInputType
-                                          //                           .phone))
-                                          //         ])),
                                           Padding(
                                             padding: EdgeInsets.only(
                                                 left: 1.h, top: 39.v),
                                             child: PhoneNumberTextFieldWidget(
+                                              readOnly: true,
                                               phoneController:
                                                   personalDetailsController
                                                       .homePhoneController
@@ -230,6 +206,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                          readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .personalEmailController
@@ -306,6 +283,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             top: 3.v,
                                                             bottom: 12.v)),
                                                     CustomTextFormField(
+                                                       readOnly: true,
                                                         width: 113.h,
                                                         controller:
                                                             personalDetailsController
@@ -325,6 +303,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             top: 3.v,
                                                             bottom: 12.v)),
                                                     CustomTextFormField(
+                                                       readOnly: true,
                                                         width: 109.h,
                                                         controller:
                                                             personalDetailsController
@@ -351,6 +330,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                           readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .dobControlle
@@ -454,6 +434,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                       readOnly: true,
                                                         controller:
                                                             personalDetailsController
                                                                 .sociealsecurityController
@@ -481,6 +462,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                       readOnly: true,
                                                         controller:
                                                             personalDetailsController
                                                                 .countruyofbirthControlle
@@ -520,6 +502,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                       readOnly: true,
                                                         controller: personalDetailsController
                                                             .countryOfCitizenshipControlle
                                                             .value,

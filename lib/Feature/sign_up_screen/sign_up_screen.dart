@@ -447,7 +447,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   // Extract the ZIP code or handle the selected location
                                   signUpController.addressController.value
                                       .text = suggestion;
-                                  print('Selected: $suggestion');
+                                  log('Selected: $suggestion');
                                 },
                               ),
                             ),

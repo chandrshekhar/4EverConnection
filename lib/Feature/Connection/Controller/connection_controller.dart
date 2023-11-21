@@ -1,6 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
 import 'package:forever_connection/Feature/Connection/Repository/create_connection_repo.dart';
@@ -9,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ConnectionController extends GetxController {
-  ConnectionRepo _connectionRepo = ConnectionRepo();
+  final ConnectionRepo _connectionRepo = ConnectionRepo();
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
   var lastNameController = TextEditingController().obs;
@@ -85,7 +83,6 @@ class ConnectionController extends GetxController {
         "additional": ""
       };
 
-      print("req mod-->$reqModel");
       isConnectionLoading(true);
       var res = await _connectionRepo.addConnection(reqModel: reqModel);
       if (res.isNotEmpty) {
@@ -107,7 +104,10 @@ class ConnectionController extends GetxController {
   resedConnection(int id) async {
     try {
       var res = await _connectionRepo.resendConnectionRequest(id: id);
-    } catch (e) {}
+      ToastWidget.successToast(success: res["message"]);
+    } catch (e) {
+       ToastWidget.errorToast(error: e.toString());
+    }
   }
 
   Future<void> launchEmail(String emailAddress) async {

@@ -134,13 +134,12 @@ class DocumentsVaultController extends GetxController {
   }
 // send email with document
 
-  Future<void> sendEmail(String attachmentUrl, String path) async {
+  Future<void> sendEmail(String attachmentUrl) async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: path,
       queryParameters: {
         'subject': "Document vault Attachment",
-        'body': "I send the document vault attachemnt.",
+        'body': attachmentUrl,
         'attachment': attachmentUrl,
       },
     );
@@ -184,7 +183,7 @@ class DocumentsVaultController extends GetxController {
       return file.path;
     } catch (error) {
       // Handle errors, for example, print the error message
-      print('Error: $error');
+     
       throw error; // Propagate the error to the calling code
     }
   }
@@ -195,12 +194,12 @@ class DocumentsVaultController extends GetxController {
           await saveNetworkImageToLocalTempFileWithDio(imageUrl);
 
       // Do something with the image path, for example, print it
-      print('Image saved at: $imagePath');
+     
       final pdf = await rootBundle.load(imagePath);
       await Printing.layoutPdf(onLayout: (_) => pdf.buffer.asUint8List());
     } catch (error) {
       // Handle errors, for example, print the error message
-      print('Error: $error');
+     
     }
   }
 
@@ -221,13 +220,13 @@ class DocumentsVaultController extends GetxController {
               return status! < 500;
             }),
       );
-      print(response.headers);
+     
       File file = File(savePath);
       var raf = file.openSync(mode: FileMode.write);
       raf.writeFromSync(response.data);
       await raf.close();
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -280,7 +279,7 @@ class DocumentsVaultController extends GetxController {
         if (await _requestPermission(Permission.manageExternalStorage)) {
           directory = (await getExternalStorageDirectory())!;
           String newPath = "";
-          print(directory);
+          log(directory.toString());
           List<String> paths = directory.path.split("/");
           for (int x = 1; x < paths.length; x++) {
             String folder = paths[x];
@@ -320,7 +319,7 @@ class DocumentsVaultController extends GetxController {
       }
       return false;
     } catch (e) {
-      print(e);
+      log(e.toString());
       return false;
     }
   }
@@ -340,7 +339,7 @@ class DocumentsVaultController extends GetxController {
   void showDownloadProgress(received, total) {
     if (total != -1) {
       // ToastWidget.successToast(success: "Downloading");
-      print((received / total * 100).toStringAsFixed(0) + "%");
+    
       ToastWidget.successToast(success: "downloaded");
     }
   }
@@ -358,7 +357,7 @@ class DocumentsVaultController extends GetxController {
             await _requestPermission(Permission.accessMediaLocation) &&
             await _requestPermission(Permission.manageExternalStorage)) {
           directory = (await getExternalStorageDirectory())!;
-          print(directory.path);
+         
           String newPath = "";
           List<String> folders = directory.path.split("/");
           for (int x = 1; x < folders.length; x++) {
@@ -371,7 +370,7 @@ class DocumentsVaultController extends GetxController {
           }
           newPath = newPath + "/4everConnection";
           directory = Directory(newPath);
-          print(directory.path);
+         
           return true;
         } else {
           return false;
@@ -399,7 +398,7 @@ class DocumentsVaultController extends GetxController {
         return true;
       }
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
     return false;
   }
@@ -439,8 +438,8 @@ class DocumentsVaultController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
       final fileName = file.path!.split("/").last;
-      print(fileName);
-      print("FileName--> $fileName");
+     
+      
       choosenFilename.value = fileName;
       files.value = File(file.path!);
     } else {
@@ -453,11 +452,11 @@ class DocumentsVaultController extends GetxController {
       final images = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (images != null) {
         final fileName = images.path.split("/").last;
-        print("fileName-> $fileName");
+        
         choosenFilename.value = fileName;
         files.value = File(images.path);
       } else {
-        print("data is null");
+       
         // User canceled the picker
       }
     } on PlatformException catch (e) {
@@ -477,7 +476,7 @@ class DocumentsVaultController extends GetxController {
       if (image == null) return;
       final imageTemp = File(image.path);
       final fileName = imageTemp.path.split("/").last;
-      print("fileName-> $fileName");
+      log("fileName-> $fileName");
       choosenFilename.value = fileName;
       files.value = File(image.path);
     } on PlatformException catch (e) {

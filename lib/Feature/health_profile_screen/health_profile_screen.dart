@@ -76,6 +76,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 10.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                              readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .heightInFtController
@@ -99,6 +100,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 10.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .heightInChController
@@ -122,6 +124,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 6.v, bottom: 14.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .weightLbsController
@@ -145,21 +148,15 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 7.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .smakerController.value,
                                                 margin:
                                                     EdgeInsets.only(left: 16.h),
                                                 labelText: "Smoker",
-                                                suffix: Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        30.h, 12.v, 15.h, 12.v),
-                                                    child: CustomImageView(
-                                                        svgPath: ImageConstant
-                                                            .imgVectorGray6004x7)),
-                                                suffixConstraints:
-                                                    BoxConstraints(
-                                                        maxHeight: 36.v)))
+                                                
+                                                ))
                                       ]),
                                   SizedBox(height: 40.v),
                                   Row(
@@ -176,6 +173,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 3.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .doctorname.value,
@@ -198,6 +196,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 8.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .doctorPhoneController
@@ -223,6 +222,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .dateOflastVisit.value,
@@ -246,6 +246,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 3.v, bottom: 12.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .doctorStreetController
@@ -268,6 +269,7 @@ class HealthProfileScreen extends StatelessWidget {
                                             margin: EdgeInsets.only(
                                                 top: 3.v, bottom: 12.v)),
                                         CustomTextFormField(
+                                           readOnly: true,
                                             width: 113.h,
                                             controller: healthProfileController
                                                 .doctorAptController.value,
@@ -283,6 +285,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 3.v,
                                                 bottom: 12.v)),
                                         CustomTextFormField(
+                                           readOnly: true,
                                             width: 109.h,
                                             controller: healthProfileController
                                                 .doctorZipController.value,
@@ -304,6 +307,7 @@ class HealthProfileScreen extends StatelessWidget {
                                 children: [
                                   SizedBox(height: 2.v),
                                   custominputFieldWithContainer(
+                                  
                                       title: "Reason",
                                       imagePath: ImageConstant.imgEdit,
                                       controller: healthProfileController
@@ -346,6 +350,7 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .fatherAgeController
@@ -375,6 +380,8 @@ class HealthProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+
+                                               readOnly: true,
                                                 controller:
                                                     healthProfileController
                                                         .motherAge.value,
@@ -456,6 +463,7 @@ class HealthProfileScreen extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: appTheme.black900, width: 1.h)),
           child: TextFormField(
+            readOnly: true,
             decoration: const InputDecoration.collapsed(hintText: ""),
             controller: controller,
           ),

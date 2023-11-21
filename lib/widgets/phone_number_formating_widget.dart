@@ -6,8 +6,9 @@ class PhoneNumberTextFieldWidget extends StatefulWidget {
   final String lable;
   int? c;
   TextEditingController? phoneController;
+  bool? readOnly;
   PhoneNumberTextFieldWidget(
-      {super.key, required this.lable, this.phoneController, this.c});
+      {super.key, required this.lable, this.phoneController, this.c, this.readOnly});
 
   @override
   State<PhoneNumberTextFieldWidget> createState() =>
@@ -62,6 +63,7 @@ class _PhoneNumberTextFieldWidgetState
             Expanded(
               flex: 7,
               child: TextFormField(
+                readOnly: widget.readOnly??false,
                 key: ValueKey(_initialCountryData),
                 controller: widget.phoneController,
                 decoration: InputDecoration(

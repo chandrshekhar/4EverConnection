@@ -1,4 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/routes/app_routes.dart';
@@ -56,9 +58,9 @@ class LoginController extends GetxController {
           TostWidget()
               .errorToast(title: "Error!", message: "Please check internet");
         } else if (e.type == DioErrorType.badResponse) {
-          print("bad-> ${e.response!.data}");
+          log("bad-> ${e.response!.data}");
           TostWidget().errorToast(
-              title: "Invalid!",
+             title: "Invalid!",
               message: "${e.response!.data["non_field_errors"][0]}");
         } else {
           TostWidget().errorToast(
