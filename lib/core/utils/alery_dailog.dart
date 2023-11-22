@@ -243,7 +243,7 @@ class CustomAlretDialogs {
         .show();
   }
 
-  void commingSoonPopUp(
+  void comingSoonPopUp(
     BuildContext context,
     String error,
     String message,
@@ -253,6 +253,7 @@ class CustomAlretDialogs {
       dialogType: DialogType.info,
       animType: AnimType.scale,
       dismissOnTouchOutside: false,
+      // btnCancel: (){},
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -270,7 +271,7 @@ class CustomAlretDialogs {
         ],
       ),
       btnCancelOnPress: () {
-        Navigator.pop(context);
+        //  Navigator.pop(context);
       },
     ).show();
   }

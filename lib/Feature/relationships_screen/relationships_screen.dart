@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Relationship%20Controller/relationship_controller.dart';
 import 'package:forever_connection/Feature/relationships_screen/relationship_details.dart';
@@ -12,7 +11,7 @@ import 'package:get/get.dart';
 
 // ignore_for_file: must_be_immutable
 class RelationshipsScreen extends StatefulWidget {
-  RelationshipsScreen({Key? key}) : super(key: key);
+  const RelationshipsScreen({Key? key}) : super(key: key);
 
   @override
   State<RelationshipsScreen> createState() => _RelationshipsScreenState();
@@ -68,21 +67,16 @@ class _RelationshipsScreenState extends State<RelationshipsScreen> {
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10),
                           title: Text(
-                            relationData![index].relationshipType ?? "",
+                            relationData[index].relationshipType ?? "",
                             style: const TextStyle(color: Colors.white),
                           ),
-                          trailing: Container(
-                            height: 12.h,
-                            width: 12.h,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 2.h, color: Colors.white)),
+                          trailing: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white,
                           ),
                           onTap: () {
                             relationshipController.updateControllerValue(
                               relationshipModel: relationData[index],
-                             
-                              
                             );
                             Navigator.push(
                                 context,

@@ -38,6 +38,7 @@ class PersonalDetailsController extends GetxController {
   var sociealsecurityController = TextEditingController().obs;
   var countruyofbirthControlle = TextEditingController().obs;
   var countryOfCitizenshipControlle = TextEditingController().obs;
+
   // final userPersonal = Get.put(UserProfileController());
   UserProfileService userProfileService = UserProfileService();
   RxString radioGroup = "Male".obs;
@@ -45,9 +46,9 @@ class PersonalDetailsController extends GetxController {
   RxBool isLoadingPersonalData = false.obs;
   Rx<UserPersonalModel> userProfilePersonalModel = UserPersonalModel().obs;
 
-  void selectGender(String selectedvalue) {
-    radioGroup.value = selectedvalue;
-  }
+  // void selectGender(String selectedvalue) {
+  //   radioGroup.value = selectedvalue;
+  // }
 
   void selectLanguage(String selectedValue) {
     radioGroupLanguage.value = selectedValue;
@@ -86,7 +87,7 @@ class PersonalDetailsController extends GetxController {
         userData.countryOfCitizenship ?? "";
     spouseController.value.text = userData.lifePartnerName ?? "";
     spousePhoneController.value.text = userData.lifePartnerPhone ?? "";
-    
+    radioGroup.value = userData.gender ?? "";
   }
 
   RxBool isLoadingEdit = false.obs;

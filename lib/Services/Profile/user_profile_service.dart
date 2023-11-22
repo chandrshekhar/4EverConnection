@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:forever_connection/Model/User/user_personal_data_model.dart';
 import 'package:forever_connection/Models/user_profile_model.dart';
 
 import '../../core/constants/api_path.dart';
@@ -116,10 +115,12 @@ class UserProfileService {
     }
   }
 
-  Future<Map> uploadContacts(Map<String, dynamic> requestModel, Contact contact) async {
+  Future<Map> uploadContacts(
+      Map<String, dynamic> requestModel, Contact contact) async {
     Response response;
     var token = await SharedPref().getUserToken();
     //log("token is $token");
+    log(requestModel.toString());
     try {
       dio.options.headers = {
         'Accept': 'application/json',
@@ -127,25 +128,21 @@ class UserProfileService {
         'Authorization': "Bearer $token"
       };
       FormData formData = FormData.fromMap(requestModel);
-      if(contact.photo != null){
-        formData.files.add(MapEntry(
-        "file",
-        await MultipartFile.fromBytes(
-          contact.photoOrThumbnail!
-          
-          //contentType: MediaType("images", "jpeg")),
-        ),
-      ));
-      }
-      
-      response = await dio.post(
-        ApiPath.uploadContacts,
-        data: formData
-      );
+      log("form data--> ${formData.fields}");
+      // if (contact.photo != null) {
+      //   formData.files.add(MapEntry(
+      //     "file",
+      //     MultipartFile.fromBytes(contact.photoOrThumbnail!
+
+      //         //contentType: MediaType("images", "jpeg")),
+      //         ),
+      //   ));
+      // }
+
+      response = await dio.post(ApiPath.uploadContacts, data: formData);
       if (response.statusCode == 200 || response.statusCode == 201) {
         log("response after contact upload -- ${response.data}");
-        
-        
+
         return response.data;
       } else {
         throw Exception("Faild to load data");

@@ -4,12 +4,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:forever_connection/Feature/Webview/web_view.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:get/get.dart';
+
 import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
 import '../Feature/Connection/Presentation/connection_list.dart';
@@ -197,10 +197,10 @@ class CustomDrawerWidget extends StatelessWidget {
                               onTap: () {
                                 myProfileController.updateSelectedField(3);
 
-                                CustomAlretDialogs().commingSoonPopUp(
+                                CustomAlretDialogs().comingSoonPopUp(
                                     context,
-                                    "COMMING...",
-                                    "My Business Profile will Comming soon");
+                                    "COMING...",
+                                    "My Business Profile will Coming soon");
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[3] ==
@@ -413,10 +413,10 @@ class CustomDrawerWidget extends StatelessWidget {
                               onTap: () {
                                 myProfileController.updateSelectedField(12);
 
-                                CustomAlretDialogs().commingSoonPopUp(
+                                CustomAlretDialogs().comingSoonPopUp(
                                     context,
-                                    "COMMING...",
-                                    "Donate connection will Comming soon");
+                                    "COMING...",
+                                    "Donate connection will Coming soon");
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[12] ==
@@ -432,10 +432,10 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(13);
-                                CustomAlretDialogs().commingSoonPopUp(
+                                CustomAlretDialogs().comingSoonPopUp(
                                     context,
-                                    "COMMING...",
-                                    "Make a wish will Comming soon");
+                                    "COMING...",
+                                    "Make a wish will Coming soon");
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[13] ==

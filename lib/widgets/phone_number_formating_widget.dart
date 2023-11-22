@@ -23,7 +23,7 @@ class PhoneNumberTextFieldWidget extends StatefulWidget {
 
 class _PhoneNumberTextFieldWidgetState
     extends State<PhoneNumberTextFieldWidget> {
-  PhoneCountryData _initialCountryData = PhoneCountryData.fromMap(
+  final PhoneCountryData _initialCountryData = PhoneCountryData.fromMap(
     {
       'country': 'United States',
       'countryRU': 'США',
@@ -50,19 +50,13 @@ class _PhoneNumberTextFieldWidgetState
             ),
             Expanded(
               flex: 5,
-              child: CountryDropdown(
-                // decoration: InputDecoration(
-                //     border:
-                //         OutlineInputBorder()),
-
-                printCountryName: true,
-                triggerOnCountrySelectedInitially: false,
-                initialCountryData: _initialCountryData,
-                onCountrySelected: (PhoneCountryData? countryData) {
-                  setState(() {
-                    _initialCountryData = countryData!;
-                  });
-                },
+              child: IgnorePointer(
+                ignoring: true,
+                child: CountryDropdown(
+                    printCountryName: true,
+                    triggerOnCountrySelectedInitially: true,
+                    initialCountryData: _initialCountryData,
+                    onCountrySelected: (v) {}),
               ),
             ),
             SizedBox(width: 10.0.adaptSize),

@@ -1,10 +1,8 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
@@ -26,69 +24,64 @@ class ContactController extends GetxController {
   RxBool isUploadingContacts = false.obs;
   UserProfileService userProfileService = UserProfileService();
 
-  uploadContacts() async{
-    Get.defaultDialog(title: "Upload in progress.", middleText: "Please wait..",barrierDismissible: false);
-    isUploadingContacts(true);
-    if(markAll.value){
-      bool response = false;
-      for(int i =0; i< contacts.length; i++){
-        response = await uploadContactsHelper(contacts[i]);
-        if(!response){
-          isUploadingContacts(false);
-          return;
+  uploadContacts() async {
+    try {
+      // Get.defaultDialog(
+      //     title: "Upload in progress.",
+      //     middleText: "Please wait..",
+      //     barrierDismissible: false);
+      isUploadingContacts(true);
+      if (markAll.value) {
+        bool response = false;
+        for (int i = 0; i < contacts.length; i++) {
+          response = await uploadContactsHelper(contacts[i]);
+          if (!response) {
+            isUploadingContacts(false);
+            return;
+          } else {
+            log("uploaded contact number $i successfully.");
+          }
         }
-        else{
-          log("uploaded contact number $i successfully.");
+        ToastWidget.successToast(success: "Contacts uploaded successfully");
+      } else {
+        bool response;
+        for (int i = 0; i < selectedContactList.length; i++) {
+          response = await uploadContactsHelper(selectedContactList[i]);
+          if (!response) {
+            isUploadingContacts(false);
+            return;
+          } else {
+            log("uploaded contact number $i successfully.");
+          }
         }
+        ToastWidget.successToast(success: "Contacts uploaded successfully");
       }
-      ToastWidget.successToast(success: "Contacts uploaded successfully");
-    }
-    else{
-      bool response;
-      for(int i =0; i< selectedContactList.length; i++){
-        response = await uploadContactsHelper(selectedContactList[i]);
-        if(!response){
-          isUploadingContacts(false);
-          return;
-        }
-        else{
-          log("uploaded contact number $i successfully.");
-        }
-      }
-      ToastWidget.successToast(success: "Contacts uploaded successfully");
-    }
 
-
-    isUploadingContacts(false);
-    Get.back();
+      isUploadingContacts(false);
+     ;
+    } catch (e) {
+     
+      ToastWidget.errorToast(error: "Something went wrong!");
+    }
   }
-
-
-
 
   Future<bool> uploadContactsHelper(Contact contact) async {
     try {
-      
-      
       Map<String, dynamic> requestModel = {
-        "first_name": contact.name.first,
-        "last_name": contact.name.last,
-        "mobile_phone":contact.phones[0].number.toString(),
-        "additional_json" : jsonEncode(contact),
-
+        "first_name": contact.name.first.isNotEmpty ? contact.name.first : "NA",
+        "last_name": contact.name.last.isNotEmpty ? contact.name.last : "NA",
+        "mobile_phone": contact.phones[0].number.toString(),
+        "additional_json": jsonEncode(contact),
       };
       // log("request model is $requestModel");
-       await userProfileService.uploadContacts(requestModel, contact);
-      
+      await userProfileService.uploadContacts(requestModel, contact);
+
       return true;
-      
     } catch (e) {
-      
       ToastWidget.errorToast(error: e.toString());
       return false;
     }
   }
-
 
   void getContactFromPhone() async {
     final stopwatch = Stopwatch()..start();

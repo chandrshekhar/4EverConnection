@@ -83,7 +83,7 @@ class CustomRadioButton extends StatelessWidget {
   Widget get leftSideRadioButton => Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 0),
             child: radioButtonWidget,
           ),
           textWidget,

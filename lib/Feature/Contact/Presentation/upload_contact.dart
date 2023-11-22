@@ -23,6 +23,13 @@ class _MyContactsScreenState extends State<MyContactsScreen>
     with SingleTickerProviderStateMixin {
   List<dynamic> selectedContect = [];
   final contactController = Get.put(ContactController());
+
+  @override
+  void initState() {
+    contactController.search("");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     print("build inside upload");
@@ -105,10 +112,13 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                       (BuildContext context, int index) {
                                     return Obx(
                                       () => SelectedContactItemWidget(
-                                        checkBoxVal: 
-
-                                         (contactController.markAll.value || contactController.selectedContactList.contains(contactController
-                                            .seachedContactList[index])),
+                                        checkBoxVal:
+                                            (contactController.markAll.value ||
+                                                contactController
+                                                    .selectedContactList
+                                                    .contains(contactController
+                                                            .seachedContactList[
+                                                        index])),
                                         initials: contactController
                                             .seachedContactList[index]
                                             .name
@@ -128,13 +138,16 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                         ),
 
                         Obx(
-                          ()=>
-                          contactController.isUploadingContacts.value ? const Center(child: CircularProgressIndicator.adaptive(),) : CustomElevatedButton(
-                            text: "Upload",
-                            onTap: () {
-                              contactController.uploadContacts();
-                            },
-                          ),
+                          () => contactController.isUploadingContacts.value
+                              ? const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              : CustomElevatedButton(
+                                  text: "Upload",
+                                  onTap: () {
+                                    contactController.uploadContacts();
+                                  },
+                                ),
                         ),
 
                         // SizedBox(height: 50.h,),

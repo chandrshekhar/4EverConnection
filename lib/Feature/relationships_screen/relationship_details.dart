@@ -211,7 +211,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  left: 30.h, top: 5.v, right: 33.h),
+                                  left: 30.h, top: 5.v, right: 30.h),
                               child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [

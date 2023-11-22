@@ -423,9 +423,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                           personalDetailsController
                                                               .radioGroup.value,
                                                       onChange: (value) {
-                                                        personalDetailsController
-                                                            .selectGender(
-                                                                value);
+                                                        // personalDetailsController
+                                                        //     .selectGender(
+                                                        //         value);
                                                       }),
                                                   CustomRadioButton(
                                                       text: "Female",
@@ -436,9 +436,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                       margin: EdgeInsets.only(
                                                           left: 12.h),
                                                       onChange: (value) {
-                                                        personalDetailsController
-                                                            .selectGender(
-                                                                value);
+                                                        // personalDetailsController
+                                                        //     .selectGender(
+                                                        //         value);
                                                       }),
                                                   CustomRadioButton(
                                                       text: "Other",
@@ -449,9 +449,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                       margin: EdgeInsets.only(
                                                           left: 22.h),
                                                       onChange: (value) {
-                                                        personalDetailsController
-                                                            .selectGender(
-                                                                value);
+                                                        // personalDetailsController
+                                                        //     .selectGender(
+                                                        //         value);
                                                       })
                                                 ]),
                                               )),

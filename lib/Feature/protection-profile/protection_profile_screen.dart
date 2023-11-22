@@ -9,6 +9,7 @@ import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:get/get.dart';
+
 import '../../Controllers/Protection controller/protection_controller.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 
@@ -74,16 +75,12 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                                 "",
                             style: const TextStyle(color: Colors.white),
                           ),
-                          trailing: Container(
-                            height: 12.h,
-                            width: 12.h,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 2.h, color: Colors.white)),
-                          ),
+                          trailing: const Icon(Icons.arrow_drop_down,
+                              color: Colors.white),
                           onTap: () {
                             protectionController.updateControllerData(
-                                protectionController.protectionDataList[index],context);
+                                protectionController.protectionDataList[index],
+                                context);
 
                             Navigator.push(
                                 context,
