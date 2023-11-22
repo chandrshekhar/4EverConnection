@@ -19,10 +19,23 @@ import '../../../widgets/app_bar/appbar_title.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_icon_button.dart';
 
-class ContactListScreen extends StatelessWidget {
+class ContactListScreen extends StatefulWidget {
   ContactListScreen({super.key});
+
+  @override
+  State<ContactListScreen> createState() => _ContactListScreenState();
+}
+
+class _ContactListScreenState extends State<ContactListScreen> {
   final contactController = Get.put(ContactController());
+
   final noteController = Get.put(MyNotesController());
+
+  @override
+  void initState() {
+    // contactController.getContactFromPhone();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +127,7 @@ class ContactListScreen extends StatelessWidget {
                         Expanded(
                           child: CustomIconButton(
                             onTap: () {
-                              contactController.getContactFromPhone();
+                              // contactController.getContactFromPhone();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

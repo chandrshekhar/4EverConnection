@@ -9,6 +9,7 @@ import '../../core/utils/toast_widget.dart';
 
 class UserProfileController extends GetxController {
   RxBool isLoadingProfileData = false.obs;
+  RxBool isUploadingContacts = false.obs;
   Rx<UserProfileModel> userProfileModel = UserProfileModel().obs;
   UserProfileService userProfileService = UserProfileService();
   getUserProfileData() async {
@@ -29,6 +30,18 @@ class UserProfileController extends GetxController {
       } else {
         drawerDataList[i] = false;
       }
+    }
+  }
+
+  void uploadContacts() async {
+    try {
+      isUploadingContacts(true);
+      Map requestModel = {};
+      var response = await userProfileService.uploadContacts(requestModel);
+      isUploadingContacts(false);
+    } catch (e) {
+      isUploadingContacts(false);
+      ToastWidget.errorToast(error: e.toString());
     }
   }
 

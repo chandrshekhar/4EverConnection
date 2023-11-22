@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:get/get.dart';
 import 'routes/app_routes.dart';
 import 'theme/theme_helper.dart';
@@ -12,11 +14,13 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final contactController = Get.put(ContactController());
+  
 
   @override
   Widget build(BuildContext context) {
