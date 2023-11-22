@@ -1,9 +1,12 @@
-import 'dart:async';
+
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
+import 'package:forever_connection/Services/Profile/user_profile_service.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 
 class ContactController extends GetxController {
@@ -18,6 +21,57 @@ class ContactController extends GetxController {
   setDropdownText(String value) {
     selectedString.value = value;
   }
+
+  RxBool isUploadingContacts = false.obs;
+  UserProfileService userProfileService = UserProfileService();
+
+  uploadContacts() async{
+    isUploadingContacts(true);
+    if(markAll.value){
+      bool response = false;
+      for(int i =0; i< contacts.length; i++){
+        response = await uploadContactsHelper(contacts[i]);
+        if(!response){
+          isUploadingContacts(false);
+          return;
+        }
+        else{
+          log("uploaded contact number $i successfully.");
+        }
+      }
+      ToastWidget.successToast(success: "Contacts uploaded successfully");
+    }
+
+
+    isUploadingContacts(false);
+  }
+
+
+
+
+  Future<bool> uploadContactsHelper(Contact contact) async {
+    try {
+      
+      
+      Map<String, dynamic> requestModel = {
+        "first_name": contact.name.first,
+        "last_name": contact.name.last,
+        "mobile_phone":contact.phones[0].number.toString(),
+        "additional_json" : jsonEncode(contact),
+
+      };
+      //log("request model is $requestModel");
+       await userProfileService.uploadContacts(requestModel);
+      
+      return true;
+      
+    } catch (e) {
+      
+      ToastWidget.errorToast(error: e.toString());
+      return false;
+    }
+  }
+
 
   void getContactFromPhone() async {
     final stopwatch = Stopwatch()..start();

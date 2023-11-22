@@ -12,7 +12,7 @@ class UserProfileService {
   Future<UserProfileModel> getUserProfile() async {
     Response response;
     var token = await SharedPref().getUserToken();
-    print(token);
+    log(token.toString());
     try {
       dio.options.headers = {
         'Accept': 'application/json',
@@ -115,25 +115,25 @@ class UserProfileService {
     }
   }
 
-  Future<Map> uploadContacts(Map requestModel) async {
+  Future<Map> uploadContacts(Map<String, dynamic> requestModel) async {
     Response response;
     var token = await SharedPref().getUserToken();
-    log("token is $token");
+    //log("token is $token");
     try {
       dio.options.headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-
+      FormData formData = FormData.fromMap(requestModel);
       response = await dio.post(
         ApiPath.uploadContacts,
-        data: requestModel
+        data: formData
       );
-      if (response.statusCode == 200) {
-        log("response after contact upload -- ${response.data}");
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        //log("response after contact upload -- ${response.data}");
         
-        // print(userServicesList);
+        
         return response.data;
       } else {
         throw Exception("Faild to load data");

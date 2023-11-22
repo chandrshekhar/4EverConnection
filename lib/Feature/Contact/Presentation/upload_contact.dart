@@ -124,9 +124,14 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                 ),
                         ),
 
-                        CustomElevatedButton(
-                          text: "Upload",
-                          onTap: () {},
+                        Obx(
+                          ()=>
+                          contactController.isUploadingContacts.value ? const Center(child: CircularProgressIndicator.adaptive(),) : CustomElevatedButton(
+                            text: "Upload",
+                            onTap: () {
+                              contactController.uploadContacts();
+                            },
+                          ),
                         ),
 
                         // SizedBox(height: 50.h,),
