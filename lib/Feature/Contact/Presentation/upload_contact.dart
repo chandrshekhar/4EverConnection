@@ -76,7 +76,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(
+                              const Text(
                                 "Select All",
                                 style: TextStyle(fontSize: 14),
                               ),
@@ -85,7 +85,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                     value: contactController.markAll.value,
                                     onChanged: (val) {
                                       contactController.markAll(val);
-                                      contactController.singleSelected(val);
+                                      //contactController.singleSelected(val);
                                     }),
                               )
                             ],

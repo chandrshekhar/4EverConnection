@@ -43,18 +43,13 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
   @override
   Widget build(BuildContext context) {
     //print("contactName" + widget.phoneNumber);
-    isSelect.value = controller.markAll.value ? true : false;
+    // /  print(controller.markAll.value);
+    isSelect.value = false;
+    RxBool isSel = false.obs;
     return InkWell(
       child: ListTile(
         onTap: () {
-          // Navigator.pushNamed(
-          //   context,
-          //   ContactDetailsScreen.routeName,
-          //   arguments: {
-          //     'name': widget.name,
-          //     'phoneNumber': widget.phoneNumber,
-          //   },
-          // ),
+       
         },
         leading: CircleAvatar(
           // backgroundColor: widget.color,
@@ -69,9 +64,11 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
         trailing: Obx(() => Checkbox(
               activeColor: AppColors.buttonColor,
               onChanged: (value) {
-                isSelect.value = value!;
+                isSel.value = value!;
               },
-              value: isSelect.value,
+              value: controller.markAll.value
+                  ? controller.markAll.value
+                  : isSel.value,
             )),
       ),
     );
