@@ -86,6 +86,7 @@ class PersonalDetailsController extends GetxController {
         userData.countryOfCitizenship ?? "";
     spouseController.value.text = userData.lifePartnerName ?? "";
     spousePhoneController.value.text = userData.lifePartnerPhone ?? "";
+    
   }
 
   RxBool isLoadingEdit = false.obs;

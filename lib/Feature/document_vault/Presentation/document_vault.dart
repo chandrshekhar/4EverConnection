@@ -31,6 +31,8 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
     documentVaultController.getVaultDocumentList(query: "");
     documentVaultController.choosenFilename.value = "";
     documentVaultController.files.value = null;
+    documentVaultController.searchForDocumentController.value.text = "";
+    documentVaultController.documentDescControler.value.text = "";
     super.initState();
   }
 

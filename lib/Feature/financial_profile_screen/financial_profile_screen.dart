@@ -105,20 +105,20 @@ class FinancialProfileScreen extends StatelessWidget {
                                         Expanded(
                                             child: CustomTextFormField(
                                                 readOnly: true,
-                                                onTap: () async {
-                                                  var address =
-                                                      await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          AddressAutoCompleteWidget(),
-                                                    ),
-                                                  );
-                                                  financialController
-                                                      .addressController
-                                                      .value
-                                                      .text = address;
-                                                },
+                                                // onTap: () async {
+                                                //   var address =
+                                                //       await Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           AddressAutoCompleteWidget(),
+                                                //     ),
+                                                //   );
+                                                //   financialController
+                                                //       .addressController
+                                                //       .value
+                                                //       .text = address;
+                                                // },
                                                 controller: financialController
                                                     .addressController.value,
                                                 margin:

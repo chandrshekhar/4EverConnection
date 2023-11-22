@@ -360,16 +360,18 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(10);
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
                                 // Navigator.pushNamed(
                                 //     context, AppRoutes.passwordSecurityScreen);
-                               Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => WebViewScreen(
-                                              webViewUrl:
-                                                  "https://4everconnection.com/security/",
-                                            )));
+                                myProfileController
+                                    .getMagicLinkForPassSecurity(context);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (_) => WebViewScreen(
+                                //               webViewUrl:
+                                //                   "https://4everconnection.com/security/",
+                                //             )));
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[10] ==
@@ -385,15 +387,16 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(11);
-                                Navigator.pop(context);
-                             
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => WebViewScreen(
-                                              webViewUrl:
-                                                  "https://4everconnection.com/help/",
-                                            )));
+                                // Navigator.pop(context);
+                                myProfileController
+                                    .getMagicLinkSupport(context);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (_) => WebViewScreen(
+                                //               webViewUrl:
+                                //                   "https://4everconnection.com/help/",
+                                //             )));
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[11] ==

@@ -85,11 +85,13 @@ class RelationshipDetailsScreen extends StatelessWidget {
                             labelText: "Last Name"),
                         SizedBox(height: 38.v),
                         PhoneNumberTextFieldWidget(
+                          readOnly: true,
                           phoneController: resControlle.phoneController.value,
                           lable: "Mobile Phone",
                         ),
                         SizedBox(height: 38.v),
                         PhoneNumberTextFieldWidget(
+                          readOnly: true,
                           lable: "Home Phone",
                         ),
                         SizedBox(height: 38.v),
@@ -114,6 +116,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                   margin:
                                       EdgeInsets.only(top: 3.v, bottom: 12.v)),
                               CustomTextFormField(
+                                  readOnly: true,
                                   width: 113.h,
                                   controller:
                                       resControlle.aptsteContoller.value,
@@ -126,6 +129,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                   margin: EdgeInsets.only(
                                       left: 43.h, top: 3.v, bottom: 12.v)),
                               CustomTextFormField(
+                                  readOnly: true,
                                   width: 109.h,
                                   controller: resControlle.zipController.value,
                                   margin: EdgeInsets.only(left: 22.h),
@@ -215,6 +219,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 1.h, top: 39.v),
                       child: PhoneNumberTextFieldWidget(
+                        readOnly: true,
                         phoneController:
                             resControlle.businessphoneController.value,
                         lable: "Business Phone",
@@ -233,6 +238,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 6.v, bottom: 13.v)),
                               Expanded(
                                   child: CustomTextFormField(
+                                      readOnly: true,
                                       controller: resControlle
                                           .businessfaxController.value,
                                       margin: EdgeInsets.only(left: 22.h),
@@ -251,6 +257,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 6.v, bottom: 13.v)),
                               Expanded(
                                   child: CustomTextFormField(
+                                      readOnly: true,
                                       controller: resControlle
                                           .businessemailController.value,
                                       margin: EdgeInsets.only(left: 22.h),
@@ -271,6 +278,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 6.v, bottom: 13.v)),
                               Expanded(
                                   child: CustomTextFormField(
+                                      readOnly: true,
                                       controller: resControlle
                                           .businesswebsitecontroller.value,
                                       margin: EdgeInsets.only(left: 20.h),
@@ -289,18 +297,12 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 4.v, bottom: 13.v)),
                               Expanded(
                                   child: CustomTextFormField(
-                                      margin: EdgeInsets.only(left: 22.h),
-                                      controller: resControlle
-                                          .businessPositionController.value,
-                                      labelText: "Position",
-                                      suffix: Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              30.h, 12.v, 15.h, 12.v),
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant
-                                                  .imgVectorGray6004x7)),
-                                      suffixConstraints:
-                                          BoxConstraints(maxHeight: 36.v)))
+                                readOnly: true,
+                                margin: EdgeInsets.only(left: 22.h),
+                                controller: resControlle
+                                    .businessPositionController.value,
+                                labelText: "Position",
+                              ))
                             ])),
                     Padding(
                         padding: EdgeInsets.only(left: 1.h, top: 41.v),
@@ -315,6 +317,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 3.v, bottom: 14.v)),
                               Expanded(
                                   child: CustomTextFormField(
+                                      readOnly: true,
                                       margin: EdgeInsets.only(left: 22.h),
                                       controller:
                                           resControlle.myidealController.value,
@@ -333,18 +336,12 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 6.v, bottom: 12.v)),
                               Expanded(
                                   child: CustomTextFormField(
-                                      margin: EdgeInsets.only(left: 17.h),
-                                      controller: resControlle
-                                          .educationlevelcontroller.value,
-                                      labelText: "Education Level",
-                                      suffix: Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              30.h, 12.v, 15.h, 12.v),
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant
-                                                  .imgVectorGray6004x7)),
-                                      suffixConstraints:
-                                          BoxConstraints(maxHeight: 36.v)))
+                                readOnly: true,
+                                margin: EdgeInsets.only(left: 17.h),
+                                controller:
+                                    resControlle.educationlevelcontroller.value,
+                                labelText: "Education Level",
+                              ))
                             ])),
                     Padding(
                         padding: EdgeInsets.only(left: 1.h, top: 42.v),
@@ -359,6 +356,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 3.v, bottom: 12.v)),
                               Expanded(
                                   child: CustomTextFormField(
+                                      readOnly: true,
                                       controller:
                                           resControlle.degreeController.value,
                                       margin: EdgeInsets.only(left: 17.h),
@@ -377,18 +375,12 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 4.v, bottom: 13.v)),
                               Expanded(
                                   child: CustomTextFormField(
-                                      margin: EdgeInsets.only(left: 22.h),
-                                      controller: resControlle
-                                          .affiliationsController.value,
-                                      labelText: "Affiliations",
-                                      suffix: Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              30.h, 12.v, 15.h, 12.v),
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant
-                                                  .imgVectorGray6004x7)),
-                                      suffixConstraints:
-                                          BoxConstraints(maxHeight: 36.v)))
+                                readOnly: true,
+                                margin: EdgeInsets.only(left: 22.h),
+                                controller:
+                                    resControlle.affiliationsController.value,
+                                labelText: "Affiliations",
+                              ))
                             ])),
                     Padding(
                         padding: EdgeInsets.only(left: 1.h, top: 39.v),
@@ -403,32 +395,25 @@ class RelationshipDetailsScreen extends StatelessWidget {
                                       EdgeInsets.only(top: 4.v, bottom: 12.v)),
                               Expanded(
                                   child: CustomTextFormField(
-                                      onTap: () async {
-                                        // var address = await Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) =>
-                                        //         AddressAutoCompleteWidget(),
-                                        //   ),
-                                        // );
-                                        // relationship
-                                        //     .businessAddressaddress
-                                        //     .value
-                                        //     .text = address;
-                                      },
-                                      margin: EdgeInsets.only(left: 22.h),
-                                      labelText: "Business Address",
-                                      controller: resControlle
-                                          .businessAddressaddressController
-                                          .value,
-                                      suffix: Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              30.h, 12.v, 15.h, 12.v),
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant
-                                                  .imgVectorGray6004x7)),
-                                      suffixConstraints:
-                                          BoxConstraints(maxHeight: 36.v)))
+                                readOnly: true,
+                                onTap: () async {
+                                  // var address = await Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         AddressAutoCompleteWidget(),
+                                  //   ),
+                                  // );
+                                  // relationship
+                                  //     .businessAddressaddress
+                                  //     .value
+                                  //     .text = address;
+                                },
+                                margin: EdgeInsets.only(left: 22.h),
+                                labelText: "Business Address",
+                                controller: resControlle
+                                    .businessAddressaddressController.value,
+                              ))
                             ])),
                     Padding(
                       padding:
@@ -442,6 +427,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                               width: 17.h,
                               margin: EdgeInsets.only(top: 3.v, bottom: 12.v)),
                           CustomTextFormField(
+                              readOnly: true,
                               controller: resControlle
                                   .businessaptsteoneController.value,
                               width: 113.h,
@@ -454,6 +440,7 @@ class RelationshipDetailsScreen extends StatelessWidget {
                               margin: EdgeInsets.only(
                                   left: 43.h, top: 3.v, bottom: 12.v)),
                           CustomTextFormField(
+                              readOnly: true,
                               width: 109.h,
                               controller:
                                   resControlle.businessziponeController.value,
