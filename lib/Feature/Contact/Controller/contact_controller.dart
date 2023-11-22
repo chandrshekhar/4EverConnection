@@ -27,6 +27,7 @@ class ContactController extends GetxController {
   UserProfileService userProfileService = UserProfileService();
 
   uploadContacts() async{
+    Get.defaultDialog(title: "Upload in progress.", middleText: "Please wait..",barrierDismissible: false);
     isUploadingContacts(true);
     if(markAll.value){
       bool response = false;
@@ -45,7 +46,7 @@ class ContactController extends GetxController {
     else{
       bool response;
       for(int i =0; i< selectedContactList.length; i++){
-        response = await uploadContactsHelper(contacts[i]);
+        response = await uploadContactsHelper(selectedContactList[i]);
         if(!response){
           isUploadingContacts(false);
           return;
@@ -59,6 +60,7 @@ class ContactController extends GetxController {
 
 
     isUploadingContacts(false);
+    Get.back();
   }
 
 
@@ -75,8 +77,8 @@ class ContactController extends GetxController {
         "additional_json" : jsonEncode(contact),
 
       };
-      //log("request model is $requestModel");
-       await userProfileService.uploadContacts(requestModel);
+      // log("request model is $requestModel");
+       await userProfileService.uploadContacts(requestModel, contact);
       
       return true;
       
