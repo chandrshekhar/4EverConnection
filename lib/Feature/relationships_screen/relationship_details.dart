@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/Controllers/Relationship%20Controller/relationship_controller.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/routes/app_routes.dart';
@@ -15,6 +18,7 @@ import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../widgets/custom_elevated_button.dart';
 
@@ -88,11 +92,61 @@ class RelationshipDetailsScreen extends StatelessWidget {
                           readOnly: true,
                           phoneController: resControlle.phoneController.value,
                           lable: "Mobile Phone",
+                          suffix: InkWell(
+                            onTap: () async {
+                              try {
+                                final Uri phoneLaunchUri = Uri(
+                                    scheme: 'tel',
+                                    path: resControlle
+                                        .phoneController.value.text);
+
+                                launchUrl(phoneLaunchUri);
+                                // launchUrl(Uri.parse(url));
+                              } catch (e) {
+                                log(e.toString());
+                              }
+                            },
+                            child: Container(
+                                color: AppColors.floatingActionButtonColor,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 4.h, horizontal: 10.v),
+                                child: const Icon(
+                                  Icons.call,
+                                  color: Colors.white,
+                                  size: 15,
+                                )),
+                          ),
                         ),
                         SizedBox(height: 38.v),
                         PhoneNumberTextFieldWidget(
+                          phoneController:
+                              resControlle.homephoneController.value,
                           readOnly: true,
                           lable: "Home Phone",
+                          suffix: InkWell(
+                            onTap: () async {
+                              try {
+                                final Uri phoneLaunchUri = Uri(
+                                    scheme: 'tel',
+                                    path: resControlle
+                                        .homephoneController.value.text);
+
+                                launchUrl(phoneLaunchUri);
+                                // launchUrl(Uri.parse(url));
+                              } catch (e) {
+                                log(e.toString());
+                              }
+                            },
+                            child: Container(
+                                color: AppColors.floatingActionButtonColor,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 4.h, horizontal: 10.v),
+                                child: const Icon(
+                                  Icons.call,
+                                  color: Colors.white,
+                                  size: 15,
+                                )),
+                          ),
                         ),
                         SizedBox(height: 38.v),
                         rowWidget(
@@ -223,6 +277,30 @@ class RelationshipDetailsScreen extends StatelessWidget {
                         phoneController:
                             resControlle.businessphoneController.value,
                         lable: "Business Phone",
+                        suffix: InkWell(
+                          onTap: () async {
+                            try {
+                              final Uri phoneLaunchUri = Uri(
+                                  scheme: 'tel',
+                                  path: resControlle
+                                      .businessphoneController.value.text);
+
+                              launchUrl(phoneLaunchUri);
+                              // launchUrl(Uri.parse(url));
+                            } catch (e) {
+                              log(e.toString());
+                            }
+                          },
+                          child: Container(
+                              color: AppColors.floatingActionButtonColor,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 4.h, horizontal: 10.v),
+                              child: const Icon(
+                                Icons.call,
+                                color: Colors.white,
+                                size: 15,
+                              )),
+                        ),
                       ),
                     ),
                     Padding(

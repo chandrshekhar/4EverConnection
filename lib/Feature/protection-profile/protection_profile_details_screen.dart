@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/Controllers/Protection%20controller/protection_controller.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/theme/app_decoration.dart';
@@ -12,6 +15,9 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_image_view.dart';
 
@@ -20,8 +26,12 @@ class ProtectionDetailsScreen extends StatelessWidget {
   final String protectionType;
   final protectionController = Get.put(ProtectionController());
   final personalDetailsController = Get.put(PersonalDetailsController());
+
+
   @override
   Widget build(BuildContext context) {
+   
+
     return Scaffold(
       backgroundColor: appTheme.lightBlue50,
       appBar: CustomAppBar(
@@ -53,10 +63,10 @@ class ProtectionDetailsScreen extends StatelessWidget {
           child: Column(
             children: [
               rowWidget(
-                
-                  controller: protectionController.policeNumberController.value,
-                  svgpath: ImageConstant.imgUser,
-                  labelText: "Policy Number"),
+                controller: protectionController.policeNumberController.value,
+                svgpath: ImageConstant.imgUser,
+                labelText: "Policy Number",
+              ),
               rowWidget(
                   controller: protectionController.policyTypeController.value,
                   svgpath: ImageConstant.imgUser,
@@ -70,9 +80,34 @@ class ProtectionDetailsScreen extends StatelessWidget {
                   svgpath: ImageConstant.imgUser,
                   labelText: "Company Name"),
               rowWidget(
-                  controller: protectionController.companyPhoneController.value,
-                  svgpath: ImageConstant.imgUser,
-                  labelText: "Company Phone"),
+                controller: protectionController.companyPhoneController.value,
+                svgpath: ImageConstant.imgUser,
+                labelText: "Company Phone",
+                suffix: InkWell(
+                  onTap: () async {
+                    try {
+                      final Uri phoneLaunchUri = Uri(
+                          scheme: 'tel',
+                          path: protectionController
+                              .policeNumberController.value.text);
+
+                      launchUrl(phoneLaunchUri);
+                      // launchUrl(Uri.parse(url));
+                    } catch (e) {
+                      log(e.toString());
+                    }
+                  },
+                  child: Container(
+                      color: AppColors.floatingActionButtonColor,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.h),
+                      child: const Icon(
+                        Icons.call,
+                        color: Colors.white,
+                        size: 15,
+                      )),
+                ),
+              ),
               rowWidget(
                   controller: protectionController.deathBenefitController.value,
                   svgpath: ImageConstant.imgUser,
@@ -110,7 +145,7 @@ class ProtectionDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -119,10 +154,14 @@ class ProtectionDetailsScreen extends StatelessWidget {
   }
 
   Widget rowWidget(
-      {String? svgpath, String? labelText, TextEditingController? controller}) {
+      {String? svgpath,
+      String? labelText,
+      TextEditingController? controller,
+      Widget? suffix}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h),
       child: CustomTextFormField(
+          suffix: suffix ?? const SizedBox.shrink(),
           controller: controller,
           readOnly: true,
           margin: EdgeInsets.only(left: 22.h),

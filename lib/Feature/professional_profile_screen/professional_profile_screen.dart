@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -10,6 +12,7 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Controllers/Professional Details/professional_details_controller.dart';
 
@@ -107,6 +110,34 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                     .businessphoneController
                                                     .value,
                                             lable: "Business Phone",
+                                            suffix: InkWell(
+                                              onTap: () async {
+                                                try {
+                                                  final Uri phoneLaunchUri = Uri(
+                                                      scheme: 'tel',
+                                                      path: professionalProfileController
+                                                          .businessphoneController
+                                                          .value
+                                                          .text);
+
+                                                  launchUrl(phoneLaunchUri);
+                                                  // launchUrl(Uri.parse(url));
+                                                } catch (e) {
+                                                  log(e.toString());
+                                                }
+                                              },
+                                              child: Container(
+                                                  color: AppColors
+                                                      .floatingActionButtonColor,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 4.h,
+                                                      horizontal: 10.v),
+                                                  child: const Icon(
+                                                    Icons.call,
+                                                    color: Colors.white,
+                                                    size: 15,
+                                                  )),
+                                            ),
                                           ),
                                           SizedBox(height: 39.v),
                                           Row(
