@@ -20,7 +20,7 @@ class ConnectionValidationController extends GetxController {
   }
 
   setFirstNameValidation(String value) {
-    if (value.length < 4) {
+    if (value.length<1) {
       isFirstNameValidate(false);
     } else {
       isFirstNameValidate(true);
@@ -28,7 +28,7 @@ class ConnectionValidationController extends GetxController {
   }
 
   setLastNameValidation(String value) {
-    if (value.length < 2) {
+    if (value.isEmpty) {
       isLastNameValidate(false);
     } else {
       isLastNameValidate(true);

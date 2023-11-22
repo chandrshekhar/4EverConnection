@@ -61,7 +61,7 @@ class DashboardController extends GetxController {
             .map((json) => TooltipsModel.fromJson(json))
             .toList();
 
-        print("toolTips--> $toolTipsDataList");
+       
       } else {
         throw Exception("Faild to load data");
       }

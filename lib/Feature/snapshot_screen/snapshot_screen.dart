@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../Controllers/Snapshot Controller/snapshot_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
 
@@ -133,19 +137,12 @@ class SnapshotScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 4.v, bottom: 13.v)),
                           Expanded(
                               child: CustomTextFormField(
-                                  readOnly: true,
-                                  margin: EdgeInsets.only(left: 22.h),
-                                  labelText: "Position",
-                                  controller: snapshotController
-                                      .positionController.value,
-                                  suffix: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          30.h, 12.v, 15.h, 12.v),
-                                      child: CustomImageView(
-                                          svgPath: ImageConstant
-                                              .imgVectorGray6004x7)),
-                                  suffixConstraints:
-                                      BoxConstraints(maxHeight: 36.v)))
+                            readOnly: true,
+                            margin: EdgeInsets.only(left: 22.h),
+                            labelText: "Position",
+                            controller:
+                                snapshotController.positionController.value,
+                          ))
                         ]),
                     SizedBox(height: 41.v),
                     Row(
@@ -195,12 +192,37 @@ class SnapshotScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
                           Expanded(
                               child: CustomTextFormField(
-                                  readOnly: true,
-                                  controller: snapshotController
-                                      .phoneNumberController.value,
-                                  margin: EdgeInsets.only(left: 24.h),
-                                  labelText: "Mobile Phone",
-                                  textInputType: TextInputType.phone))
+                            readOnly: true,
+                            controller:
+                                snapshotController.phoneNumberController.value,
+                            margin: EdgeInsets.only(left: 24.h),
+                            labelText: "Mobile Phone",
+                            textInputType: TextInputType.phone,
+                            suffix: InkWell(
+                              onTap: () async {
+                                try {
+                                  final Uri phoneLaunchUri = Uri(
+                                      scheme: 'tel',
+                                      path: snapshotController
+                                          .phoneNumberController.value.text);
+
+                                  launchUrl(phoneLaunchUri);
+                                  // launchUrl(Uri.parse(url));
+                                } catch (e) {
+                                  log(e.toString());
+                                }
+                              },
+                              child: Container(
+                                  color: AppColors.floatingActionButtonColor,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 10.v),
+                                  child: const Icon(
+                                    Icons.call,
+                                    color: Colors.white,
+                                    size: 15,
+                                  )),
+                            ),
+                          ))
                         ]),
                     SizedBox(height: 39.v),
                     Row(
@@ -214,12 +236,37 @@ class SnapshotScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
                           Expanded(
                               child: CustomTextFormField(
-                                  readOnly: true,
-                                  controller: snapshotController
-                                      .homePhoneController.value,
-                                  margin: EdgeInsets.only(left: 24.h),
-                                  labelText: "Home Phone",
-                                  textInputType: TextInputType.phone))
+                            readOnly: true,
+                            controller:
+                                snapshotController.homePhoneController.value,
+                            margin: EdgeInsets.only(left: 24.h),
+                            labelText: "Home Phone",
+                            textInputType: TextInputType.phone,
+                            suffix: InkWell(
+                              onTap: () async {
+                                try {
+                                  final Uri phoneLaunchUri = Uri(
+                                      scheme: 'tel',
+                                      path: snapshotController
+                                          .homePhoneController.value.text);
+
+                                  launchUrl(phoneLaunchUri);
+                                  // launchUrl(Uri.parse(url));
+                                } catch (e) {
+                                  log(e.toString());
+                                }
+                              },
+                              child: Container(
+                                  color: AppColors.floatingActionButtonColor,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 10.v),
+                                  child: const Icon(
+                                    Icons.call,
+                                    color: Colors.white,
+                                    size: 15,
+                                  )),
+                            ),
+                          ))
                         ]),
                     SizedBox(height: 39.v),
                     Row(
@@ -233,12 +280,37 @@ class SnapshotScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
                           Expanded(
                               child: CustomTextFormField(
-                                  readOnly: true,
-                                  controller: snapshotController
-                                      .businessPhoneController.value,
-                                  margin: EdgeInsets.only(left: 24.h),
-                                  labelText: "Business Phone",
-                                  textInputType: TextInputType.phone))
+                            readOnly: true,
+                            controller: snapshotController
+                                .businessPhoneController.value,
+                            margin: EdgeInsets.only(left: 24.h),
+                            labelText: "Business Phone",
+                            textInputType: TextInputType.phone,
+                            suffix: InkWell(
+                              onTap: () async {
+                                try {
+                                  final Uri phoneLaunchUri = Uri(
+                                      scheme: 'tel',
+                                      path: snapshotController
+                                          .businessPhoneController.value.text);
+
+                                  launchUrl(phoneLaunchUri);
+                                  // launchUrl(Uri.parse(url));
+                                } catch (e) {
+                                  log(e.toString());
+                                }
+                              },
+                              child: Container(
+                                  color: AppColors.floatingActionButtonColor,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 10.v),
+                                  child: const Icon(
+                                    Icons.call,
+                                    color: Colors.white,
+                                    size: 15,
+                                  )),
+                            ),
+                          ))
                         ]),
                     SizedBox(height: 39.v),
                     Row(
@@ -320,17 +392,17 @@ class SnapshotScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 4.v, bottom: 12.v)),
                           Expanded(
                               child: CustomTextFormField(
-                                  onTap: () async {
-                                    var address = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddressAutoCompleteWidget(),
-                                      ),
-                                    );
-                                    snapshotController.businessAddressController
-                                        .value.text = address;
-                                  },
+                                  // onTap: () async {
+                                  //   var address = await Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           AddressAutoCompleteWidget(),
+                                  //     ),
+                                  //   );
+                                  //   snapshotController.businessAddressController
+                                  //       .value.text = address;
+                                  // },
                                   readOnly: true,
                                   controller: snapshotController
                                       .businessAddressController.value,
@@ -400,12 +472,39 @@ class SnapshotScreen extends StatelessWidget {
                         margin: EdgeInsets.only(top: 7.v, bottom: 13.v)),
                     Expanded(
                         child: CustomTextFormField(
-                            readOnly: true,
-                            controller: snapshotController
-                                .spouseLifePartnerPhoneController.value,
-                            margin: EdgeInsets.only(left: 24.h),
-                            labelText: "Spouse / Life Partner Phone",
-                            textInputType: TextInputType.phone))
+                      readOnly: true,
+                      controller: snapshotController
+                          .spouseLifePartnerPhoneController.value,
+                      margin: EdgeInsets.only(left: 24.h),
+                      labelText: "Spouse / Life Partner Phone",
+                      textInputType: TextInputType.phone,
+                      suffix: InkWell(
+                        onTap: () async {
+                          try {
+                            final Uri phoneLaunchUri = Uri(
+                                scheme: 'tel',
+                                path: snapshotController
+                                    .spouseLifePartnerPhoneController
+                                    .value
+                                    .text);
+
+                            launchUrl(phoneLaunchUri);
+                            // launchUrl(Uri.parse(url));
+                          } catch (e) {
+                            log(e.toString());
+                          }
+                        },
+                        child: Container(
+                            color: AppColors.floatingActionButtonColor,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 4.h, horizontal: 10.v),
+                            child: const Icon(
+                              Icons.call,
+                              color: Colors.white,
+                              size: 15,
+                            )),
+                      ),
+                    ))
                   ]),
                   SizedBox(height: 39.v),
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -460,11 +559,11 @@ class SnapshotScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Obx(
                     () => personalDetailsController.isLoadingEdit.value
                         ? const Center(
@@ -477,7 +576,7 @@ class SnapshotScreen extends StatelessWidget {
                                       .getMagicLink(context);
                                 },
                                 text: "Edit",
-                                buttonTextStyle: TextStyle(fontSize: 22),
+                                buttonTextStyle: const TextStyle(fontSize: 22),
                                 rightIcon: Container(
                                     margin: EdgeInsets.only(left: 16.h),
                                     child: CustomImageView(
@@ -488,7 +587,7 @@ class SnapshotScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             )
           ],

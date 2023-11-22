@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -10,6 +12,7 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Controllers/Professional Details/professional_details_controller.dart';
 
@@ -89,6 +92,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .businessnameController
@@ -100,11 +104,40 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                               ]),
                                           SizedBox(height: 39.v),
                                           PhoneNumberTextFieldWidget(
+                                            readOnly: true,
                                             phoneController:
                                                 professionalProfileController
                                                     .businessphoneController
                                                     .value,
                                             lable: "Business Phone",
+                                            suffix: InkWell(
+                                              onTap: () async {
+                                                try {
+                                                  final Uri phoneLaunchUri = Uri(
+                                                      scheme: 'tel',
+                                                      path: professionalProfileController
+                                                          .businessphoneController
+                                                          .value
+                                                          .text);
+
+                                                  launchUrl(phoneLaunchUri);
+                                                  // launchUrl(Uri.parse(url));
+                                                } catch (e) {
+                                                  log(e.toString());
+                                                }
+                                              },
+                                              child: Container(
+                                                  color: AppColors
+                                                      .floatingActionButtonColor,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 4.h,
+                                                      horizontal: 10.v),
+                                                  child: const Icon(
+                                                    Icons.call,
+                                                    color: Colors.white,
+                                                    size: 15,
+                                                  )),
+                                            ),
                                           ),
                                           SizedBox(height: 39.v),
                                           Row(
@@ -123,6 +156,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .businessfaxoneController
@@ -149,6 +183,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .businessEmailController
@@ -178,6 +213,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .businesswebsiteController
@@ -204,26 +240,15 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
-                                                        controller:
-                                                            professionalProfileController
-                                                                .positionvalueController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText: "Position",
-                                                        suffix: Container(
-                                                            margin: EdgeInsets
-                                                                .fromLTRB(
-                                                                    30.h,
-                                                                    12.v,
-                                                                    15.h,
-                                                                    12.v),
-                                                            child: CustomImageView(
-                                                                svgPath: ImageConstant
-                                                                    .imgVectorGray6004x7)),
-                                                        suffixConstraints:
-                                                            BoxConstraints(
-                                                                maxHeight: 36.v)))
+                                                  readOnly: true,
+                                                  controller:
+                                                      professionalProfileController
+                                                          .positionvalueController
+                                                          .value,
+                                                  margin: EdgeInsets.only(
+                                                      left: 22.h),
+                                                  labelText: "Position",
+                                                ))
                                               ]),
                                           SizedBox(height: 41.v),
                                           Row(
@@ -242,6 +267,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 14.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .idealoccupationController
@@ -268,27 +294,15 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
-                                                        controller:
-                                                            professionalProfileController
-                                                                .educationlevelController
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 19.h),
-                                                        labelText:
-                                                            "Education Level",
-                                                        suffix: Container(
-                                                            margin: EdgeInsets
-                                                                .fromLTRB(
-                                                                    30.h,
-                                                                    12.v,
-                                                                    15.h,
-                                                                    12.v),
-                                                            child: CustomImageView(
-                                                                svgPath: ImageConstant
-                                                                    .imgVectorGray6004x7)),
-                                                        suffixConstraints:
-                                                            BoxConstraints(
-                                                                maxHeight: 36.v)))
+                                                  readOnly: true,
+                                                  controller:
+                                                      professionalProfileController
+                                                          .educationlevelController
+                                                          .value,
+                                                  margin: EdgeInsets.only(
+                                                      left: 19.h),
+                                                  labelText: "Education Level",
+                                                ))
                                               ]),
                                           SizedBox(height: 42.v),
                                           Row(
@@ -307,6 +321,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .degreevalueoneController
@@ -332,6 +347,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             professionalProfileController
                                                                 .affiliationsvalController
@@ -359,21 +375,21 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         readOnly: true,
-                                                        onTap: () async {
-                                                          var address =
-                                                              await Navigator
-                                                                  .push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  AddressAutoCompleteWidget(),
-                                                            ),
-                                                          );
-                                                          professionalProfileController
-                                                              .addressController
-                                                              .value
-                                                              .text = address;
-                                                        },
+                                                        // onTap: () async {
+                                                        //   var address =
+                                                        //       await Navigator
+                                                        //           .push(
+                                                        //     context,
+                                                        //     MaterialPageRoute(
+                                                        //       builder: (context) =>
+                                                        //           AddressAutoCompleteWidget(),
+                                                        //     ),
+                                                        //   );
+                                                        //   professionalProfileController
+                                                        //       .addressController
+                                                        //       .value
+                                                        //       .text = address;
+                                                        // },
                                                         controller:
                                                             professionalProfileController
                                                                 .addressController
@@ -399,6 +415,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         top: 3.v,
                                                         bottom: 12.v)),
                                                 CustomTextFormField(
+                                                    readOnly: true,
                                                     width: 113.h,
                                                     controller:
                                                         professionalProfileController
@@ -417,6 +434,7 @@ class ProfessionalProfileScreen extends StatelessWidget {
                                                         top: 3.v,
                                                         bottom: 12.v)),
                                                 CustomTextFormField(
+                                                    readOnly: true,
                                                     width: 109.h,
                                                     controller:
                                                         professionalProfileController

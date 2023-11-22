@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/core/utils/address_autocomplete_widget.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -10,8 +12,9 @@ import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../Controllers/Personal Details Controller/personal_details-controller.dart';
-import '../Webview/web_view.dart';
 
 // ignore_for_file: must_be_immutable
 class PersonalDetailsScreen extends StatefulWidget {
@@ -100,6 +103,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .firstNameController
@@ -127,6 +131,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .middleNameController
@@ -154,6 +159,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .lastNameController
@@ -164,53 +170,82 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             labelText:
                                                                 "Last Name"))
                                                   ])),
-
                                           SizedBox(height: 18.adaptSize),
                                           PhoneNumberTextFieldWidget(
+                                            readOnly: true,
                                             phoneController:
                                                 personalDetailsController
                                                     .mobilePhoneController
                                                     .value,
                                             lable: "Mobile Phone",
+                                            suffix: InkWell(
+                                              onTap: () async {
+                                                try {
+                                                  final Uri phoneLaunchUri = Uri(
+                                                      scheme: 'tel',
+                                                      path: personalDetailsController
+                                                          .mobilePhoneController
+                                                          .value
+                                                          .text);
+
+                                                  launchUrl(phoneLaunchUri);
+                                                  // launchUrl(Uri.parse(url));
+                                                } catch (e) {
+                                                  log(e.toString());
+                                                }
+                                              },
+                                              child: Container(
+                                                  color: AppColors
+                                                      .floatingActionButtonColor,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 4.h,
+                                                      horizontal: 10.v),
+                                                  child: const Icon(
+                                                    Icons.call,
+                                                    color: Colors.white,
+                                                    size: 15,
+                                                  )),
+                                            ),
                                           ),
-                                          // Padding(
-                                          //     padding: EdgeInsets.only(
-                                          //         left: 1.h, top: 39.v),
-                                          //     child: Row(
-                                          //         crossAxisAlignment:
-                                          //             CrossAxisAlignment.start,
-                                          //         children: [
-                                          //           CustomImageView(
-                                          //               svgPath:
-                                          //                   ImageConstant.imgCall,
-                                          //               height: 15.adaptSize,
-                                          //               width: 15.adaptSize,
-                                          //               margin: EdgeInsets.only(
-                                          //                   top: 8.v,
-                                          //                   bottom: 13.v)),
-                                          //           Expanded(
-                                          //               child: CustomTextFormField(
-                                          //                   controller:
-                                          //                       personalDetailsController
-                                          //                           .mobilePhoneController
-                                          //                           .value,
-                                          //                   margin: EdgeInsets.only(
-                                          //                       left: 24.h),
-                                          //                   labelText:
-                                          //                       "Mobile Phone",
-                                          //                   textInputType:
-                                          //                       TextInputType
-                                          //                           .phone))
-                                          //         ])),
                                           Padding(
                                             padding: EdgeInsets.only(
                                                 left: 1.h, top: 39.v),
                                             child: PhoneNumberTextFieldWidget(
+                                              readOnly: true,
                                               phoneController:
                                                   personalDetailsController
                                                       .homePhoneController
                                                       .value,
                                               lable: "Home Phone",
+                                              suffix: InkWell(
+                                                onTap: () async {
+                                                  try {
+                                                    final Uri phoneLaunchUri = Uri(
+                                                        scheme: 'tel',
+                                                        path: personalDetailsController
+                                                            .homePhoneController
+                                                            .value
+                                                            .text);
+
+                                                    launchUrl(phoneLaunchUri);
+                                                    // launchUrl(Uri.parse(url));
+                                                  } catch (e) {
+                                                    log(e.toString());
+                                                  }
+                                                },
+                                                child: Container(
+                                                    color: AppColors
+                                                        .floatingActionButtonColor,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 4.h,
+                                                            horizontal: 10.v),
+                                                    child: const Icon(
+                                                      Icons.call,
+                                                      color: Colors.white,
+                                                      size: 15,
+                                                    )),
+                                              ),
                                             ),
                                           ),
                                           Padding(
@@ -230,6 +265,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .personalEmailController
@@ -259,36 +295,29 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             top: 4.v,
                                                             bottom: 12.v)),
                                                     Expanded(
-                                                        child:
-                                                            CustomTextFormField(
-                                                                onTap:
-                                                                    () async {
-                                                                  var address =
-                                                                      await Navigator
-                                                                          .push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              AddressAutoCompleteWidget(),
-                                                                    ),
-                                                                  );
-                                                                  personalDetailsController
-                                                                          .homeAddressController
-                                                                          .value
-                                                                          .text =
-                                                                      address;
-                                                                },
-                                                                controller:
-                                                                    personalDetailsController
-                                                                        .homeAddressController
-                                                                        .value,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        left: 22
-                                                                            .h),
-                                                                labelText:
-                                                                    "Home Address"))
+                                                        child: CustomTextFormField(
+                                                            readOnly: true,
+                                                            // onTap:
+                                                            //     () async {
+                                                            //   var address =
+                                                            //       await Navigator
+                                                            //           .push(
+                                                            //     context,
+                                                            //     MaterialPageRoute(
+                                                            //       builder:
+                                                            //           (context) =>
+                                                            //               AddressAutoCompleteWidget(),
+                                                            //     ),
+                                                            //   );
+                                                            //   personalDetailsController
+                                                            //           .homeAddressController
+                                                            //           .value
+                                                            //           .text =
+                                                            //       address;
+                                                            // },
+                                                            controller: personalDetailsController.homeAddressController.value,
+                                                            margin: EdgeInsets.only(left: 22.h),
+                                                            labelText: "Home Address"))
                                                   ])),
                                           Padding(
                                               padding: EdgeInsets.only(
@@ -306,6 +335,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             top: 3.v,
                                                             bottom: 12.v)),
                                                     CustomTextFormField(
+                                                        readOnly: true,
                                                         width: 113.h,
                                                         controller:
                                                             personalDetailsController
@@ -325,6 +355,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             top: 3.v,
                                                             bottom: 12.v)),
                                                     CustomTextFormField(
+                                                        readOnly: true,
                                                         width: 109.h,
                                                         controller:
                                                             personalDetailsController
@@ -351,6 +382,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                             bottom: 13.v)),
                                                     Expanded(
                                                         child: CustomTextFormField(
+                                                            readOnly: true,
                                                             controller:
                                                                 personalDetailsController
                                                                     .dobControlle
@@ -454,6 +486,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
+                                                        readOnly: true,
                                                         controller:
                                                             personalDetailsController
                                                                 .sociealsecurityController
@@ -481,29 +514,15 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         bottom: 12.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
-                                                        controller:
-                                                            personalDetailsController
-                                                                .countruyofbirthControlle
-                                                                .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText:
-                                                            "Country of Birth",
-                                                        suffix: Container(
-                                                            margin:
-                                                                EdgeInsets.fromLTRB(
-                                                                    30.h,
-                                                                    10.v,
-                                                                    15.h,
-                                                                    10.v),
-                                                            child: CustomImageView(
-                                                                svgPath:
-                                                                    ImageConstant
-                                                                        .imgVectorGray6004x7)),
-                                                        suffixConstraints:
-                                                            BoxConstraints(
-                                                                maxHeight:
-                                                                    34.v)))
+                                                  readOnly: true,
+                                                  controller:
+                                                      personalDetailsController
+                                                          .countruyofbirthControlle
+                                                          .value,
+                                                  margin: EdgeInsets.only(
+                                                      left: 22.h),
+                                                  labelText: "Country of Birth",
+                                                ))
                                               ]),
                                           SizedBox(height: 41.v),
                                           Row(
@@ -519,29 +538,20 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                                         top: 2.v,
                                                         bottom: 12.v)),
                                                 Expanded(
-                                                    child: CustomTextFormField(
-                                                        controller: personalDetailsController
+                                                  child: CustomTextFormField(
+                                                    readOnly: true,
+                                                    controller:
+                                                        personalDetailsController
                                                             .countryOfCitizenshipControlle
                                                             .value,
-                                                        margin: EdgeInsets.only(
-                                                            left: 22.h),
-                                                        labelText:
-                                                            "Country of Citizenship",
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
-                                                        suffix: Container(
-                                                            margin: EdgeInsets.fromLTRB(
-                                                                30.h,
-                                                                10.v,
-                                                                15.h,
-                                                                10.v),
-                                                            child: CustomImageView(
-                                                                svgPath: ImageConstant
-                                                                    .imgVectorGray6004x7)),
-                                                        suffixConstraints:
-                                                            BoxConstraints(
-                                                                maxHeight: 34.v)))
+                                                    margin: EdgeInsets.only(
+                                                        left: 22.h),
+                                                    labelText:
+                                                        "Country of Citizenship",
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                  ),
+                                                )
                                               ]),
                                           SizedBox(height: 30.v),
                                           // Padding(

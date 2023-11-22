@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
 import '../User Profile Controller/user_profile_controller.dart';
 
 class FinancialProfileController extends GetxController {
@@ -26,11 +27,23 @@ class FinancialProfileController extends GetxController {
     assetController.value.text = financialData?.assets ?? "";
     liabilitiesController.value.text = financialData?.liabilities ?? "";
     netWorthController.value.text = financialData?.netWorth ?? "";
-    incomeController.value.text = financialData?.income ?? "";
-    expansesController.value.text = financialData?.expenses ?? "";
-    cashflowController.value.text = financialData?.cashflow ?? "";
+    incomeController.value.text =
+        currency(amount: financialData?.income ?? "") ?? "";
+    expansesController.value.text =
+        currency(amount: financialData?.expenses ?? "") ?? "";
+    cashflowController.value.text =
+        currency(amount: financialData?.cashflow ?? "") ?? "";
     financialheathNotesController.value.text =
         financialData?.financialHealthNotes ?? "";
+  }
+
+  String? currency({required String amount}) {
+    // Locale locale = Localizations.localeOf(context!);
+    var format = NumberFormat.simpleCurrency(locale: Platform.localeName);
+    String? formattedAmount = NumberFormat.currency(
+            locale: Platform.localeName, symbol: format.currencySymbol)
+        .format(double.parse(amount));
+    return formattedAmount;
   }
 
   @override

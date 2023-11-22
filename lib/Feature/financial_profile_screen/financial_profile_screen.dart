@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Financial%20profile/financial_profile_controller.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -10,8 +13,7 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
-
-import '../../core/utils/address_autocomplete_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore_for_file: must_be_immutable
 class FinancialProfileScreen extends StatelessWidget {
@@ -74,6 +76,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .taxProfessionalNameController
                                                     .value,
@@ -84,9 +87,37 @@ class FinancialProfileScreen extends StatelessWidget {
                                       ]),
                                   SizedBox(height: 39.v),
                                   PhoneNumberTextFieldWidget(
+                                    readOnly: true,
                                     phoneController: financialController
                                         .phoneNumberController.value,
                                     lable: "Mobile Phone",
+                                    suffix: InkWell(
+                                      onTap: () async {
+                                        try {
+                                          final Uri phoneLaunchUri = Uri(
+                                              scheme: 'tel',
+                                              path: financialController
+                                                  .taxProfessionalNameController
+                                                  .value
+                                                  .text);
+
+                                          launchUrl(phoneLaunchUri);
+                                          // launchUrl(Uri.parse(url));
+                                        } catch (e) {
+                                          log(e.toString());
+                                        }
+                                      },
+                                      child: Container(
+                                          color: AppColors
+                                              .floatingActionButtonColor,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 4.h, horizontal: 10.v),
+                                          child: const Icon(
+                                            Icons.call,
+                                            color: Colors.white,
+                                            size: 15,
+                                          )),
+                                    ),
                                   ),
                                   SizedBox(height: 39.v),
                                   Row(
@@ -104,20 +135,20 @@ class FinancialProfileScreen extends StatelessWidget {
                                         Expanded(
                                             child: CustomTextFormField(
                                                 readOnly: true,
-                                                onTap: () async {
-                                                  var address =
-                                                      await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          AddressAutoCompleteWidget(),
-                                                    ),
-                                                  );
-                                                  financialController
-                                                      .addressController
-                                                      .value
-                                                      .text = address;
-                                                },
+                                                // onTap: () async {
+                                                //   var address =
+                                                //       await Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           AddressAutoCompleteWidget(),
+                                                //     ),
+                                                //   );
+                                                //   financialController
+                                                //       .addressController
+                                                //       .value
+                                                //       .text = address;
+                                                // },
                                                 controller: financialController
                                                     .addressController.value,
                                                 margin:
@@ -140,6 +171,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 6.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .assetController.value,
                                                 margin:
@@ -161,6 +193,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 4.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .liabilitiesController
                                                     .value,
@@ -203,6 +236,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                                                             13.v)),
                                                             Expanded(
                                                                 child: CustomTextFormField(
+                                                                    readOnly:
+                                                                        true,
                                                                     controller:
                                                                         financialController
                                                                             .netWorthController
@@ -221,6 +256,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                           width: 17.h)
                                                     ])),
                                             CustomTextFormField(
+                                                readOnly: true,
                                                 width: 303.h,
                                                 controller: financialController
                                                     .incomeController.value,
@@ -243,6 +279,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 1.v, bottom: 13.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .expansesController.value,
                                                 margin:
@@ -265,6 +302,7 @@ class FinancialProfileScreen extends StatelessWidget {
                                                 top: 8.v, bottom: 16.v)),
                                         Expanded(
                                             child: CustomTextFormField(
+                                                readOnly: true,
                                                 controller: financialController
                                                     .cashflowController.value,
                                                 margin:
@@ -275,7 +313,8 @@ class FinancialProfileScreen extends StatelessWidget {
                                 ])),
                         SizedBox(height: 10.v),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.v),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.v, horizontal: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

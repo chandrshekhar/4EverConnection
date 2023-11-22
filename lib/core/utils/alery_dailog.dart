@@ -242,4 +242,36 @@ class CustomAlretDialogs {
                 color: Colors.red, fontWeight: FontWeight.w600, fontSize: 16))
         .show();
   }
+
+  void commingSoonPopUp(
+    BuildContext context,
+    String error,
+    String message,
+  ) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.info,
+      animType: AnimType.scale,
+      dismissOnTouchOutside: false,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            error.toUpperCase(),
+            style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.sp),
+            child: Text(
+              message,
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+            ),
+          )
+        ],
+      ),
+      btnCancelOnPress: () {
+        Navigator.pop(context);
+      },
+    ).show();
+  }
 }

@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/shared_pref_services.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ProtectionController extends GetxController {
   var policeNumberController = TextEditingController().obs;
@@ -29,14 +31,27 @@ class ProtectionController extends GetxController {
 
   RxBool isprotectionDataLoading = false.obs;
   RxList<ProtectionDataModel> protectionDataList = <ProtectionDataModel>[].obs;
-  updateControllerData(ProtectionDataModel dataModel) {
+  updateControllerData(ProtectionDataModel dataModel, BuildContext context) {
     policeNumberController.value.text = dataModel.policyNumber ?? "";
     policyTypeController.value.text = dataModel.policyType ?? "";
     issueDateController.value.text = dataModel.issueDate ?? "";
     companyPhoneController.value.text = dataModel.companyPhone ?? "";
     companynameController.value.text = dataModel.companyName ?? "";
-    deathBenefitController.value.text = dataModel.currentDeathBenefit ?? "";
-    premimusController.value.text = dataModel.currentPremiums ?? "";
+    deathBenefitController.value.text = currency(
+            context: context, amount: dataModel.currentDeathBenefit ?? "00") ??
+        "";
+    premimusController.value.text =
+        currency(context: context, amount: dataModel.currentPremiums ?? "00") ??
+            "";
+  }
+
+  String? currency({BuildContext? context, required String amount}) {
+    // Locale locale = Localizations.localeOf(context!);
+    var format = NumberFormat.simpleCurrency(locale: Platform.localeName);
+    String? formattedAmount = NumberFormat.currency(
+            locale: Platform.localeName, symbol: format.currencySymbol)
+        .format(double.parse(amount));
+    return formattedAmount;
   }
 
   Future<void> getUserRelationshipData() async {

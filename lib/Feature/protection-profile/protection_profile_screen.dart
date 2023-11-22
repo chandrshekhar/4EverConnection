@@ -83,7 +83,7 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                           ),
                           onTap: () {
                             protectionController.updateControllerData(
-                                protectionController.protectionDataList[index]);
+                                protectionController.protectionDataList[index],context);
 
                             Navigator.push(
                                 context,
