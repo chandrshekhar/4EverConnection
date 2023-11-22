@@ -62,4 +62,7 @@ class ApiPath {
 
   //magic link url
   static const magicLink = "$baseUrl/api/user/section-magic-link/";
+
+    //user contacts
+  static const uploadContacts = "$baseUrl/api/user-contacts/";
 }

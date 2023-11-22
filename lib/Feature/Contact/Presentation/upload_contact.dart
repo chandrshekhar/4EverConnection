@@ -8,6 +8,7 @@ import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/selected_contact_item.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
   final contactController = Get.put(ContactController());
   @override
   Widget build(BuildContext context) {
+    print("build inside upload");
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
       appBar: CustomAppBar(
@@ -32,6 +34,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
             margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
             onTap: () {
+              contactController.selectedContactList.clear();
               Navigator.pop(context);
             }),
         centerTitle: true,
@@ -54,21 +57,82 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                   ? const Center(child: CircularProgressIndicator.adaptive())
                   : Column(
                       children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: contactController.contacts.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return SelectedContactItemWidget(
-                                initials: contactController
-                                    .contacts[index].name.first[0],
-                                selectedContacts: false,
-                                name:
-                                    "${contactController.contacts[index].name.first} ${contactController.contacts[index].name.last}",
-                                phoneNumber: '', color: Colors.red,
-                                contact: contactController.contacts[index],
+                        TextField(
+                          decoration: InputDecoration(
+                            hintText: "Search here",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(45),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            contactController.search(value);
+                          },
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
 
-                                //color: '',
-                              );
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.adaptSize),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "Select All",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              Obx(
+                                () => Checkbox(
+                                    value: contactController.markAll.value,
+                                    onChanged: (val) {
+                                      contactController.markAll(val);
+                                      //contactController.singleSelected(val);
+                                    }),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: contactController.seachedContactList.isEmpty
+                              ? const Center(
+                                  child: Text(
+                                      "No matching contacts. Please check spelling"),
+                                )
+                              : ListView.builder(
+                                  itemCount: contactController
+                                      .seachedContactList.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Obx(
+                                      () => SelectedContactItemWidget(
+                                        checkBoxVal: 
+
+                                         (contactController.markAll.value || contactController.selectedContactList.contains(contactController
+                                            .seachedContactList[index])),
+                                        initials: contactController
+                                            .seachedContactList[index]
+                                            .name
+                                            .first[0],
+                                        selectedContacts: false,
+                                        name:
+                                            "${contactController.seachedContactList[index].name.first} ${contactController.seachedContactList[index].name.middle} ${contactController.seachedContactList[index].name.last}",
+                                        phoneNumber: '', color: Colors.red,
+                                        contact: contactController
+                                            .seachedContactList[index],
+
+                                        //color: '',
+                                      ),
+                                    );
+                                  },
+                                ),
+                        ),
+
+                        Obx(
+                          ()=>
+                          contactController.isUploadingContacts.value ? const Center(child: CircularProgressIndicator.adaptive(),) : CustomElevatedButton(
+                            text: "Upload",
+                            onTap: () {
+                              contactController.uploadContacts();
                             },
                           ),
                         ),
