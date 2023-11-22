@@ -18,6 +18,7 @@ class ContactController extends GetxController {
   RxBool isLoading = false.obs;
   RxList<Contact> contacts = <Contact>[].obs;
   RxList<Contact> seachedContactList = <Contact>[].obs;
+  RxList<Contact> selectedContactList = <Contact>[].obs;
   setDropdownText(String value) {
     selectedString.value = value;
   }
@@ -30,6 +31,20 @@ class ContactController extends GetxController {
     if(markAll.value){
       bool response = false;
       for(int i =0; i< contacts.length; i++){
+        response = await uploadContactsHelper(contacts[i]);
+        if(!response){
+          isUploadingContacts(false);
+          return;
+        }
+        else{
+          log("uploaded contact number $i successfully.");
+        }
+      }
+      ToastWidget.successToast(success: "Contacts uploaded successfully");
+    }
+    else{
+      bool response;
+      for(int i =0; i< selectedContactList.length; i++){
         response = await uploadContactsHelper(contacts[i]);
         if(!response){
           isUploadingContacts(false);

@@ -34,6 +34,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
             margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
             onTap: () {
+              contactController.selectedContactList.clear();
               Navigator.pop(context);
             }),
         centerTitle: true,
@@ -104,8 +105,9 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                       (BuildContext context, int index) {
                                     return Obx(
                                       () => SelectedContactItemWidget(
-                                        checkBoxVal:
-                                            contactController.markAll.value,
+                                        checkBoxVal: 
+
+                                         contactController.markAll.value ,
                                         initials: contactController
                                             .seachedContactList[index]
                                             .name

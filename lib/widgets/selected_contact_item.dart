@@ -1,3 +1,7 @@
+
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
@@ -9,6 +13,7 @@ class SelectedContactItemWidget extends StatefulWidget {
   final String initials;
   final Contact contact;
   final bool selectedContacts;
+  
 
   final String phoneNumber;
   final Color color;
@@ -65,6 +70,15 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
               activeColor: AppColors.buttonColor,
               onChanged: (value) {
                 isSel.value = value!;
+                if(value){
+                  controller.selectedContactList.add(widget.contact);
+                }
+                else{
+                  if(controller.selectedContactList.contains(widget.contact)){
+                    controller.selectedContactList.remove(widget.contact);
+                  }
+                }
+                log("length is "+controller.selectedContactList.length.toString());
               },
               value: controller.markAll.value
                   ? controller.markAll.value
