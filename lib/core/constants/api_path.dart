@@ -27,6 +27,8 @@ class ApiPath {
   static const relationship = "$baseUrl$profile/relationship";
   static const protection = "$baseUrl$profile/protection";
 
+  static const getContact = "https://4everconnection.com/api/user-contacts/";
+
   // get tooltips
   static const getTooltips = "$baseUrl/api/tooltips/";
 
@@ -63,6 +65,6 @@ class ApiPath {
   //magic link url
   static const magicLink = "$baseUrl/api/user/section-magic-link/";
 
-    //user contacts
+  //user contacts
   static const uploadContacts = "$baseUrl/api/user-contacts/";
 }

@@ -55,6 +55,9 @@ class ProtectionController extends GetxController {
   }
 
   Future<void> getUserRelationshipData() async {
+
+
+    
     var token = await SharedPref().getUserToken();
     try {
       isprotectionDataLoading(true);

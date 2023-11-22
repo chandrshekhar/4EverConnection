@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class ContactController extends GetxController {
   RxList<Contact> contacts = <Contact>[].obs;
   RxList<Contact> seachedContactList = <Contact>[].obs;
   RxList<Contact> selectedContactList = <Contact>[].obs;
+  final addContactController = Get.put(AddContactController());
   setDropdownText(String value) {
     selectedString.value = value;
   }
@@ -43,6 +45,7 @@ class ContactController extends GetxController {
           }
         }
         ToastWidget.successToast(success: "Contacts uploaded successfully");
+        addContactController.getContactList();
       } else {
         bool response;
         for (int i = 0; i < selectedContactList.length; i++) {
@@ -54,13 +57,12 @@ class ContactController extends GetxController {
             log("uploaded contact number $i successfully.");
           }
         }
+        addContactController.getContactList();
         ToastWidget.successToast(success: "Contacts uploaded successfully");
       }
 
       isUploadingContacts(false);
-     ;
     } catch (e) {
-     
       ToastWidget.errorToast(error: "Something went wrong!");
     }
   }

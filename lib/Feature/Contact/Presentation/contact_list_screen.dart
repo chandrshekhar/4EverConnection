@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/core/utils/size_utils.dart';
-import 'package:forever_connection/widgets/custom_drop_down.dart';
-import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 
-import '../../../core/constants/image_constant.dart';
 import '../../../widgets/app_bar/appbar_image.dart';
 import '../../../widgets/app_bar/appbar_image_1.dart';
 import '../../../widgets/app_bar/appbar_title.dart';
@@ -20,7 +16,7 @@ import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_icon_button.dart';
 
 class ContactListScreen extends StatefulWidget {
-  ContactListScreen({super.key});
+  const ContactListScreen({super.key});
 
   @override
   State<ContactListScreen> createState() => _ContactListScreenState();
@@ -31,9 +27,11 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   final noteController = Get.put(MyNotesController());
 
+  final addContactController = Get.put(AddContactController());
+
   @override
   void initState() {
-    // contactController.getContactFromPhone();
+    addContactController.getContactList();
     super.initState();
   }
 
@@ -166,20 +164,35 @@ class _ContactListScreenState extends State<ContactListScreen> {
                 ),
               ),
               Expanded(
-                  child: ListView.builder(
-                padding: EdgeInsets.only(top: 20.h),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ContactListCard(
-                    author: "Test",
-                    dateTime: noteController
-                        .dateTime("2023-10-19T06:04:27.405012-04:00"),
-                    description: "Connect",
-                    notesTitle: "",
-                    onSeleted: (p0) {},
-                  );
-                },
-              ))
+                  child: Obx(() =>
+                      addContactController.isprotectionDataLoading.value == true
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive())
+                          : ListView.builder(
+                              padding: EdgeInsets.only(top: 20.h),
+                              itemCount: addContactController
+                                  .contactModelList.value.length,
+                              itemBuilder: (context, index) {
+                                return ContactListCard(
+                                  author:
+                                      "${addContactController.contactModelList[index].firstName}",
+                                  dateTime: noteController.dateTime(
+                                      addContactController
+                                              .contactModelList[index]
+                                              .dateCreated ??
+                                          ""),
+                                  description: addContactController
+                                          .contactModelList[index]
+                                          .currentOccupation ??
+                                      "NA",
+                                  notesTitle: addContactController
+                                          .contactModelList[index]
+                                          .mobilePhone ??
+                                      "NA",
+                                  onSeleted: (p0) {},
+                                );
+                              },
+                            )))
             ],
           ),
         ),

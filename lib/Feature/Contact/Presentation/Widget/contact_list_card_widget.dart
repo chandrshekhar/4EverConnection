@@ -12,13 +12,15 @@ class ContactListCard extends StatelessWidget {
   final String description;
   final String dateTime;
   final Function(String)? onSeleted;
+  final String? whereFrom;
   const ContactListCard(
       {super.key,
       required this.notesTitle,
       required this.author,
       required this.description,
       required this.dateTime,
-      this.onSeleted});
+      this.onSeleted,
+      this.whereFrom});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class ContactListCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "User Contact",
+                    notesTitle,
                     style: CustomTextStyles.titleLargePrimary_1,
                   ),
                 ),

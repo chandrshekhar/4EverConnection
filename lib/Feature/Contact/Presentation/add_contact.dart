@@ -1,14 +1,14 @@
-import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
-import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/widgets/custom_drop_down.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/custom_drop_down.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:get/get.dart';
 
 import '../Controller/contact_text_validation.dart';
 
@@ -195,7 +195,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 11.h, vertical: 17.v),
-                          borderDecoration: OutlineInputBorder(),
+                          borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
                             formValidation.setLastNameValidation(value);
@@ -605,28 +605,20 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 20.adaptSize,
                     ),
-                    Obx(() => CustomElevatedButton(
-                          onTap:
-                              formValidation.isButtonStateChange.value == false
-                                  ? null
-                                  : () {
-                                      // formValidation.addConnection(context);
-                                    },
-                          text: "Create Connection",
-                          buttonStyle: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  formValidation.isButtonStateChange.value ==
-                                          false
-                                      ? Colors.grey
-                                      : AppColors.buttonColor)),
-                          margin: EdgeInsets.only(
-                              left: 24.h, right: 24.h, bottom: 22.v),
-                          rightIcon: Container(
-                            margin: EdgeInsets.only(left: 16.h),
-                            child: CustomImageView(
-                                svgPath: ImageConstant.imgArrowrightPrimary),
-                          ),
-                        )),
+                    CustomElevatedButton(
+                      onTap: () {},
+                      text: "Create Connection",
+                      buttonStyle: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(AppColors.buttonColor)),
+                      margin: EdgeInsets.only(
+                          left: 24.h, right: 24.h, bottom: 22.v),
+                      rightIcon: Container(
+                        margin: EdgeInsets.only(left: 16.h),
+                        child: CustomImageView(
+                            svgPath: ImageConstant.imgArrowrightPrimary),
+                      ),
+                    )
                   ]),
             ),
           ),
