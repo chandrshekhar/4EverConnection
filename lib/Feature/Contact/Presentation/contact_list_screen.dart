@@ -48,7 +48,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
               Navigator.pop(context);
             }),
         centerTitle: true,
-        title: AppbarTitle(text: "Contact Lits"),
+        title: AppbarTitle(text: "Contact List"),
         actions: [
           AppbarImage1(
               onTap: () {
