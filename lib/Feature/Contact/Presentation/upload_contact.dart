@@ -107,7 +107,8 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                       () => SelectedContactItemWidget(
                                         checkBoxVal: 
 
-                                         contactController.markAll.value ,
+                                         (contactController.markAll.value || contactController.selectedContactList.contains(contactController
+                                            .seachedContactList[index])),
                                         initials: contactController
                                             .seachedContactList[index]
                                             .name

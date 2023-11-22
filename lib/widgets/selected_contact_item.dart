@@ -50,7 +50,7 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
     //print("contactName" + widget.phoneNumber);
     // /  print(controller.markAll.value);
     isSelect.value = false;
-    RxBool isSel = false.obs;
+    RxBool isSel = (false || widget.checkBoxVal).obs;
     return InkWell(
       child: ListTile(
         onTap: () {
