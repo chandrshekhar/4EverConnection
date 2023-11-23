@@ -28,11 +28,11 @@ class FinancialProfileController extends GetxController {
     liabilitiesController.value.text = financialData?.liabilities ?? "";
     netWorthController.value.text = financialData?.netWorth ?? "";
     incomeController.value.text =
-        currency(amount: financialData?.income ?? "") ?? "";
+        currency(amount: financialData?.income ?? "00") ?? "";
     expansesController.value.text =
-        currency(amount: financialData?.expenses ?? "") ?? "";
+        currency(amount: financialData?.expenses ?? "00") ?? "";
     cashflowController.value.text =
-        currency(amount: financialData?.cashflow ?? "") ?? "";
+        currency(amount: financialData?.cashflow ?? "00") ?? "";
     financialheathNotesController.value.text =
         financialData?.financialHealthNotes ?? "";
   }
