@@ -93,6 +93,14 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                     value: contactController.markAll.value,
                                     onChanged: (val) {
                                       contactController.markAll(val);
+                                      if(val!){
+                                         contactController.anySelected.value =
+                                            true;
+                                      }
+                                       else {
+                                        contactController.anySelected.value =
+                                            false;
+                                      }
                                       //contactController.singleSelected(val);
                                     }),
                               )
@@ -143,6 +151,8 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                   child: CircularProgressIndicator.adaptive(),
                                 )
                               : CustomElevatedButton(
+                                  isDisabled:
+                                      !contactController.anySelected.value,
                                   text: "Upload",
                                   onTap: () {
                                     contactController.uploadContacts();

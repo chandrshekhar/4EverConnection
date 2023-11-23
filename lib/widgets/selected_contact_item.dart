@@ -72,10 +72,21 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
                 isSel.value = value!;
                 if(value){
                   controller.selectedContactList.add(widget.contact);
+                  if(controller.selectedContactList.length > 0){
+                    controller.anySelected.value = true;
+                  }
+                  else{
+                    controller.anySelected.value = false;
+                  }
                 }
                 else{
                   if(controller.selectedContactList.contains(widget.contact)){
                     controller.selectedContactList.remove(widget.contact);
+                    if (controller.selectedContactList.length > 0) {
+                      controller.anySelected.value = true;
+                    } else {
+                      controller.anySelected.value = false;
+                    }
                   }
                 }
                 log("length is "+controller.selectedContactList.length.toString());

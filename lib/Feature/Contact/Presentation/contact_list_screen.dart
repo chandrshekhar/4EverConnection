@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
-import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget.dart';
+import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget2.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -173,7 +173,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                               itemCount: addContactController
                                   .contactModelList.value.length,
                               itemBuilder: (context, index) {
-                                return ContactListCard(
+                                return ContactListCard2(
                                   author:
                                       "${addContactController.contactModelList[index].firstName}",
                                   dateTime: noteController.dateTime(

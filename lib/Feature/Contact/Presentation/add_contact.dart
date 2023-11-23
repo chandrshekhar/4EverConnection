@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
@@ -87,56 +90,68 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: 15.v),
-                    Container(
-                      decoration: BoxDecoration(
+                    Obx(
+                      () =>
+                       Container(
+                        decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(3),
                           border: Border.all(color: Colors.grey),
-                          image: const DecorationImage(
-                              image:
-                                  AssetImage("assets/images/user_female.jpg"))),
-                      height: 200,
-                      width: 200,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          PopupMenuButton<String>(
-                            icon: Container(
-                              padding: EdgeInsets.all(5.adaptSize),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  color: AppColors.floatingActionButtonColor),
-                              child: const Icon(
-                                Icons.menu, // Replace with your custom icon
-                                color: Colors.white, // Icon color
+                          image: addController.choosenFilename.value.isNotEmpty
+                              ? DecorationImage(
+                                  image: FileImage(addController.files.value!),
+                                  fit: BoxFit.cover)
+                              : const DecorationImage(
+                                  image:  AssetImage(
+                                      "assets/images/user_female.jpg"),
+                                  fit: BoxFit.cover),
+                        ),
+                        //AssetImage("assets/images/user_female.jpg"),),),
+                        height: 200,
+                        width: 200,
+                      
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PopupMenuButton<String>(
+                              icon: Container(
+                                padding: EdgeInsets.all(5.adaptSize),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    color: AppColors.floatingActionButtonColor),
+                                child: const Icon(
+                                  Icons.menu, // Replace with your custom icon
+                                  color: Colors.white, // Icon color
+                                ),
                               ),
-                            ),
-                            onSelected: (value) {
-                              // Handle the selected menu item
-                              switch (value) {
-                                case 'Add':
-                                  // Handle Item 1 selection
-                                  break;
-                                case 'Delete':
-                                  // Handle Item 2 selection
-                                  break;
-                              }
-                            },
-                            itemBuilder: (BuildContext context) {
-                              return <PopupMenuEntry<String>>[
-                                const PopupMenuItem<String>(
-                                  value: 'Add',
-                                  child: Text('Add'),
-                                ),
-                                const PopupMenuItem<String>(
-                                  value: 'Delete',
-                                  child: Text('Delete'),
-                                ),
-                              ];
-                            },
-                          )
-                        ],
+                              onSelected: (value) async {
+                                // Handle the selected menu item
+                                switch (value) {
+                                  case 'Add':
+                                    addController.pickImageFromGallery();
+                                    break;
+                                  case 'Delete':
+                                    addController.choosenFilename.value = "";
+                                    addController.files = Rx<File?>(null);
+                                    break;
+                                }
+                              },
+                              itemBuilder: (BuildContext context) {
+                                return <PopupMenuEntry<String>>[
+                                  const PopupMenuItem<String>(
+                                    value: 'Add',
+                                    child: Text('Add'),
+                                  ),
+                                  const PopupMenuItem<String>(
+                                    value: 'Delete',
+                                    child: Text('Delete'),
+                                  ),
+                                ];
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 29.v),
@@ -160,7 +175,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             formValidation.checkButtonValidation();
                           },
                           validator: (value) {
-                            if (value!.length < 4) {
+                            if (value!.isEmpty) {
+                              return "First name can't be empty.";
+                            } else if (value.length < 4) {
                               return "First name must have 4 character";
                             } else {
                               return null;
@@ -214,11 +231,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       height: 16.adaptSize,
                     ),
                     CustomDropDown(
+                      borderDecoration: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
                       margin: const EdgeInsets.only(left: 14, right: 14),
                       contentPadding:
                           const EdgeInsets.only(top: 10, bottom: 10, left: 10),
                       items: const ["Male", "Female", "Other"],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        addController.gender.value = value;
+                      },
                       hintText: "Select gender",
                     ),
                     SizedBox(
@@ -313,21 +333,37 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: CustomTextFormField(
-                              controller:
-                                  addController.mobilePhoneController.value,
-                              margin: EdgeInsets.only(
-                                  left: 12.h, top: 0.v, right: 12),
-                              hintText: "Mobile Phone",
-                              labelText: "Mobile Phone",
-                              textInputAction: TextInputAction.done,
-                              maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20.h, vertical: 17.v),
-                              borderDecoration: const OutlineInputBorder(),
-                              filled: false,
-                              onChange: (value) {},
-                              fillColor: theme.colorScheme.primary),
+                          child: Form(
+                            key: phoneKey,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            child: CustomTextFormField(
+                                controller:
+                                    addController.mobilePhoneController.value,
+                                margin: EdgeInsets.only(
+                                    left: 12.h, top: 0.v, right: 12),
+                                hintText: "Mobile Phone",
+                                labelText: "Mobile Phone",
+                                textInputType: TextInputType.phone,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                textInputAction: TextInputAction.done,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Phone can't be empty";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                maxLines: 1,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20.h, vertical: 17.v),
+                                borderDecoration: const OutlineInputBorder(),
+                                filled: false,
+                                onChange: (value) {},
+                                fillColor: theme.colorScheme.primary),
+                          ),
                         ),
                       ],
                     ),
@@ -359,6 +395,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Life Partner Phone",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
+                        textInputType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 11.h, vertical: 17.v),
                         borderDecoration: const OutlineInputBorder(),
@@ -375,6 +415,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         hintText: "Home Phone",
                         labelText: "Home Phone",
                         textInputAction: TextInputAction.done,
+                        textInputType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 11.h, vertical: 17.v),
@@ -584,6 +628,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
                         hintText: "ZIP *",
                         labelText: "ZIP *",
+                        textInputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
@@ -605,19 +653,32 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 20.adaptSize,
                     ),
-                    CustomElevatedButton(
-                      onTap: () {},
-                      text: "Create Connection",
-                      buttonStyle: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.buttonColor)),
-                      margin: EdgeInsets.only(
-                          left: 24.h, right: 24.h, bottom: 22.v),
-                      rightIcon: Container(
-                        margin: EdgeInsets.only(left: 16.h),
-                        child: CustomImageView(
-                            svgPath: ImageConstant.imgArrowrightPrimary),
-                      ),
+                    Obx(
+                      () => addController.isUploadingContact.value
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            )
+                          : CustomElevatedButton(
+                              onTap: () {
+                                if (firstNameKey.currentState!.validate() &&
+                                    lastNameKey.currentState!.validate() &&
+                                    phoneKey.currentState!.validate()) {
+                                  addController.addContact();
+                                }
+                              },
+                              text: "Create Connection",
+                              buttonStyle: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      AppColors.buttonColor)),
+                              margin: EdgeInsets.only(
+                                  left: 24.h, right: 24.h, bottom: 22.v),
+                              rightIcon: Container(
+                                margin: EdgeInsets.only(left: 16.h),
+                                child: CustomImageView(
+                                    svgPath:
+                                        ImageConstant.imgArrowrightPrimary),
+                              ),
+                            ),
                     )
                   ]),
             ),

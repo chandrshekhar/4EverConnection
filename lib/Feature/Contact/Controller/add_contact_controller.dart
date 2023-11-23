@@ -1,12 +1,18 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Model/contact_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/shared_pref_services.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddContactController extends GetxController {
   var firstNameController = TextEditingController().obs;
@@ -33,10 +39,20 @@ class AddContactController extends GetxController {
   var businessAptController = TextEditingController().obs;
   var businessZipController = TextEditingController().obs;
 
+
+  
+
+  RxString gender = "Select Gender".obs;
+  RxBool isUploadingContact = false.obs;
+
   RxBool isprotectionDataLoading = false.obs;
   RxList<ContactListModel> contactModelList = <ContactListModel>[].obs;
 
   Dio dio = Dio();
+
+  RxString choosenFilename = RxString("");
+  Rx<File?> files = Rx<File?>(null);
+
   Future<void> getContactList() async {
     var token = await SharedPref().getUserToken();
     try {
@@ -79,5 +95,178 @@ class AddContactController extends GetxController {
       ToastWidget.errorToast(error: e.toString());
       throw Exception("Faild to make api the request : $e");
     }
+  }
+
+  Future pickImageFromGallery() async {
+    try {
+      final images = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (images != null) {
+        final fileName = images.path.split("/").last;
+
+        choosenFilename.value = fileName;
+        files.value = File(images.path);
+      } else {
+        // User canceled the picker
+      }
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        log('Failed to pick image: $e');
+      }
+    }
+  }
+
+  void addContact() async {
+    final newContact = Contact();
+    isUploadingContact(true);
+
+    if (firstNameController.value.text.isNotEmpty) {
+      newContact.name.first = firstNameController.value.text;
+    }
+    if (middleNameController.value.text.isNotEmpty) {
+      newContact.name.middle = middleNameController.value.text;
+    }
+    if (lastNameController.value.text.isNotEmpty) {
+      newContact.name.last = lastNameController.value.text;
+    }
+    if (gender.value != "Select Gender") {
+      // no gender property for contact found in flutter contacts
+    }
+    if (dateOfBirth.value.text.isNotEmpty) {
+      // no dob property for contact found in flutter contacts
+    }
+
+    if (companyController.value.text.isNotEmpty) {
+      Organization organization = Organization();
+      organization.company = companyController.value.text;
+
+      if (postionController.value.text.isNotEmpty) {
+        organization.jobDescription = postionController.value.text;
+      }
+      if (occupationController.value.text.isNotEmpty) {
+        organization.department = occupationController.value.text;
+      }
+      newContact.organizations = [organization];
+    }
+
+    if (idealOccupationController.value.text.isNotEmpty) {
+      // no ideal occupation property for contact found in flutter contacts
+    }
+
+    if (mobilePhoneController.value.text.isNotEmpty) {
+      newContact.phones = [Phone(mobilePhoneController.value.text)];
+    }
+
+    if (lifePartnerName.value.text.isNotEmpty) {
+      // no life parntner name property for contact found in flutter contacts
+    }
+    if (lifePartnerPhone.value.text.isNotEmpty) {
+      newContact.phones.add(Phone(lifePartnerPhone.value.text));
+    }
+    if (homePhone.value.text.isNotEmpty) {
+      newContact.phones.add(Phone(homePhone.value.text));
+    }
+    if (personalEmail.value.text.isNotEmpty) {
+      newContact.emails = [Email(personalEmail.value.text)];
+    }
+
+    if (businessEmail.value.text.isNotEmpty) {
+      newContact.emails.add(Email(businessEmail.value.text));
+    }
+    if (businessFax.value.text.isNotEmpty) {
+      // no business fax property for contact found in flutter contacts
+    }
+    if (webSiteController.value.text.isNotEmpty) {
+      newContact.websites = [Website(webSiteController.value.text)];
+    }
+
+    Address? address;
+    if (homeAddressController.value.text.isNotEmpty) {
+      address = Address(
+        homeAddressController.value.text,
+      );
+      if (aptController.value.text.isNotEmpty) {
+        address.subLocality = aptController.value.text;
+      }
+      if (zipController.value.text.isNotEmpty) {
+        address.postalCode = zipController.value.text;
+      }
+
+      address.label = AddressLabel.home;
+
+      newContact.addresses = [address];
+    }
+
+    if (businessNameController.value.text.isNotEmpty) {
+      if (newContact.organizations.isNotEmpty) {
+        newContact.organizations.add(
+          Organization(
+            company: businessNameController.value.text,
+          ),
+        );
+      } else {
+        newContact.organizations = [
+          Organization(
+            company: businessNameController.value.text,
+          ),
+        ];
+      }
+    }
+
+    if (businessAddressController.value.text.isNotEmpty) {
+      address = Address(
+        businessAddressController.value.text,
+      );
+      if (businessAptController.value.text.isNotEmpty) {
+        address.subLocality = businessAptController.value.text;
+      }
+      if (businessZipController.value.text.isNotEmpty) {
+        address.postalCode = businessZipController.value.text;
+      }
+
+      address.label = AddressLabel.work;
+
+      newContact.addresses.add(address);
+    }
+
+    if(choosenFilename.value.isNotEmpty){
+      newContact.photo = files.value?.readAsBytesSync();
+    }
+    final contactController = Get.put(ContactController());
+    var response = await contactController.uploadContactsHelper(newContact, files.value);
+    if (response) {
+      ToastWidget.successToast(success: "Contact added successfully!");
+      clearAllControllers();
+      Get.back();
+    }
+
+    isUploadingContact(false);
+  }
+
+  void clearAllControllers() {
+    firstNameController.value.clear();
+    middleNameController.value.clear();
+    lastNameController.value.clear();
+    dateOfBirth.value.clear();
+    companyController.value.clear();
+    postionController.value.clear();
+    occupationController.value.clear();
+    idealOccupationController.value.clear();
+    mobilePhoneController.value.clear();
+    lifePartnerName.value.clear();
+    lifePartnerPhone.value.clear();
+    homePhone.value.clear();
+    personalEmail.value.clear();
+    businessNameController.value.clear();
+    businessEmail.value.clear();
+    businessFax.value.clear();
+    webSiteController.value.clear();
+    homeAddressController.value.clear();
+    aptController.value.clear();
+    zipController.value.clear();
+    businessAddressController.value.clear();
+    businessAptController.value.clear();
+    businessZipController.value.clear();
+    choosenFilename.value = "";
+    files =   Rx<File?>(null);
   }
 }

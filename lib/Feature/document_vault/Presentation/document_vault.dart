@@ -116,21 +116,23 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                              height: 32.h,
-                              width: MediaQuery.of(context).size.width - 6,
-                              padding: const EdgeInsets.only(left: 5),
-                              // decoration: BoxDecoration(
-                              //   border: Border.all(width: 0.5),
-                              // ),
-                              child: TextField(
-                                controller: documentVaultController
-                                    .documentDescControler.value,
-                                decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    label: Text("File description"),
-                                    labelStyle: TextStyle(
-                                        color: AppColors.greyTextColor)),
-                              )),
+                            height: 32.h,
+                            width: MediaQuery.of(context).size.width - 6,
+                            padding: const EdgeInsets.only(left: 5),
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(width: 0.5),
+                            // ),
+                            child: TextField(
+                              controller: documentVaultController
+                                  .documentDescControler.value,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                label: Text("File description"),
+                                labelStyle:
+                                    TextStyle(color: AppColors.greyTextColor),
+                              ),
+                            ),
+                          ),
                           SizedBox(height: 15.h),
                           Container(
                             width: MediaQuery.of(context).size.width - 6,
