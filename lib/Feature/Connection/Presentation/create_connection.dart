@@ -503,7 +503,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               labelText: "Additonal Information (optional)",
                               textInputAction: TextInputAction.done,
                               maxLines: 4,
-                              textInputType: TextInputType.number,
+                              textInputType: TextInputType.text,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 11.h, vertical: 17.v),
                               borderDecoration: const OutlineInputBorder(),
