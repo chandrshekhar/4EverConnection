@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/widgets/book-successfully_msg_screen.dart';
-import 'package:forever_connection/core/utils/alery_dailog.dart';
-import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/partner_model_list.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/request_service_model.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Model/slot_model.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Reppository/service_repository.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/widgets/book-successfully_msg_screen.dart';
+import 'package:forever_connection/core/utils/alery_dailog.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -186,6 +186,11 @@ class RequestServiceController extends GetxController {
     return outputFormat.format(inputDate);
   }
 
+  void clearControllers() {
+    commentController.value.clear();
+    selectDateController.value.clear();
+  }
+
   addServiceRequest(BuildContext context) async {
     try {
       Map<String, dynamic> reqModel = {
@@ -208,12 +213,14 @@ class RequestServiceController extends GetxController {
         isAddServiceLoading(false);
         ToastWidget.successToast(success: "Service successfully added");
 
+        clearControllers();
+
         // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => BookingServiceSuccessFullyScreen(
-                      successRes: reqModel,
+                      successRes: res,
                     )));
       } else {
         ToastWidget.errorToast(error: "Faild to added service!");

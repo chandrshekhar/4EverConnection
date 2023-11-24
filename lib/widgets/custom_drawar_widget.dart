@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
@@ -16,8 +17,9 @@ import '../Feature/Connection/Presentation/connection_list.dart';
 import '../Feature/Connection/Presentation/connection_main_screen.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
-  const CustomDrawerWidget({super.key, required this.myProfileController});
+   CustomDrawerWidget({super.key, required this.myProfileController});
   final UserProfileController myProfileController;
+  final personalDetailsController = Get.put(PersonalDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -194,13 +196,15 @@ class CustomDrawerWidget extends StatelessWidget {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
+                              onTap: () async {
                                 myProfileController.updateSelectedField(3);
+                                await personalDetailsController
+                                    .getMagicLink(context);
 
-                                CustomAlretDialogs().comingSoonPopUp(
-                                    context,
-                                    "COMING...",
-                                    "My Business Profile will Coming soon");
+                                // CustomAlretDialogs().comingSoonPopUp(
+                                //     context,
+                                //     "COMING...",
+                                //     "My Business Profile will Coming soon");
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[3] ==

@@ -149,8 +149,8 @@ class PersonalData {
     dateOfAnniversary = json['date_of_anniversary'];
     gender = json['gender'];
     socialSecurityNumber = json['social_security_number'];
-    countryOfBirth = json['country_of_birth'];
-    countryOfCitizenship = json['country_of_citizenship'];
+    countryOfBirth = json['full_country_of_birth'];
+    countryOfCitizenship = json['full_country_of_citizenship'];
     photo = json['photo'];
     preferredLanguage = json['preferred_language'];
     welcomeDialogueShown = json['welcome_dialogue_shown'];

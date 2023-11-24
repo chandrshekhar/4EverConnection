@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
@@ -19,6 +21,7 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("response is $successRes");
     return Scaffold(
       backgroundColor: AppColors.floatingActionButtonColor,
       appBar: AppBar(
@@ -184,18 +187,18 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                onTap: () {
-                Navigator.pop(context);
-                },
-                child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal:15.w, vertical: 5.h),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(6)),
-                    child:const Icon(Icons.edit)),
-              ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(6)),
+                      child: const Icon(Icons.edit)),
+                ),
               ],
             ),
           ),
@@ -215,20 +218,26 @@ class BookingServiceSuccessFullyScreen extends StatelessWidget {
               )),
           Row(
             children: [
-              Container(
-                  margin: EdgeInsets.only(left: 57.w, top: 10.h),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 42.w, vertical: 10.h),
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(6)),
-                  child: Text(
-                    "Upload Now",
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  )),
+              InkWell(
+                onTap: () {
+                  profileController.getMagicLinkToUploadNow(
+                      context, successRes["id"].toString());
+                },
+                child: Container(
+                    margin: EdgeInsets.only(left: 57.w, top: 10.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 42.w, vertical: 10.h),
+                    decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Text(
+                      "Upload Now",
+                      style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    )),
+              ),
               InkWell(
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
