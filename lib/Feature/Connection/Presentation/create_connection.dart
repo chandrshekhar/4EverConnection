@@ -501,9 +501,9 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                   left: 12.h, top: 15.v, right: 12.h),
                               // hintText: "ZIP *",
                               labelText: "Additonal Information (optional)",
-                              textInputAction: TextInputAction.done,
-                              maxLines: 4,
-                              textInputType: TextInputType.text,
+                              textInputAction: TextInputAction.newline,
+                              maxLines: 3,
+                              textInputType: TextInputType.multiline,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 11.h, vertical: 17.v),
                               borderDecoration: const OutlineInputBorder(),
