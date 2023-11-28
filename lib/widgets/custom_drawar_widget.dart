@@ -482,10 +482,12 @@ class CustomDrawerWidget extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(13);
-                                CustomAlretDialogs().comingSoonPopUp(
-                                    context,
-                                    "COMING...",
-                                    "Make a wish will Coming soon");
+                                // CustomAlretDialogs().comingSoonPopUp(
+                                //     context,
+                                //     "COMING...",
+                                //     "Make a wish will Coming soon");
+                                 myProfileController
+                                    .getMagicLinkMakeAWish(context);
                               },
                               child: Container(
                                 color: myProfileController.drawerDataList[13] ==

@@ -110,6 +110,30 @@ class UserProfileController extends GetxController {
     }
   }
 
+  getMagicLinkMakeAWish(BuildContext context) async {
+    try {
+      isLoadingSupport(true);
+      var res = await userProfileService.getMagicLink(
+          navigateTo: "https://4everconnection.com/user-dashboard/?make-a-wish=True");
+
+      if (res.isNotEmpty) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => WebViewScreen(
+                      webViewUrl: res['magic_link'],
+                    )));
+        isLoadingSupport(false);
+      } else {
+        ToastWidget.errorToast(error: "Someting went wrong");
+        isLoadingSupport(false);
+      }
+    } catch (e) {
+      ToastWidget.errorToast(error: "$e");
+      isLoadingSupport(false);
+    }
+  }
+
   RxList<bool> drawerDataList = <bool>[
     false,
     false,
