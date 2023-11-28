@@ -61,6 +61,31 @@ class UserProfileController extends GetxController {
     }
   }
 
+  getMagicLinkToUploadNow(BuildContext context, String id) async {
+    try {
+      isLoadingpasswordandSecurity(true);
+      var res = await userProfileService.getMagicLink(
+          navigateTo: "https://4everconnection.com/collaboration/$id/");
+      if (res.isNotEmpty) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => WebViewScreen(
+                      webViewUrl: res['magic_link'],
+                    )));
+        isLoadingpasswordandSecurity(false);
+      } else {
+        ToastWidget.errorToast(error: "Someting went wrong");
+        isLoadingpasswordandSecurity(false);
+      }
+    } catch (e) {
+      ToastWidget.errorToast(error: "$e");
+      isLoadingpasswordandSecurity(false);
+    }
+  }
+
+  
+
   getMagicLinkSupport(BuildContext context) async {
     try {
       isLoadingSupport(true);

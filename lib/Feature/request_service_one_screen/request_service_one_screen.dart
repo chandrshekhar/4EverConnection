@@ -1,18 +1,19 @@
-import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
-import 'package:forever_connection/core/utils/toast_widget.dart';
-import 'package:forever_connection/widgets/search_drpdown.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import '../request_service_one_screen/widgets/timedisplay_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/search_drpdown.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+
+import '../request_service_one_screen/widgets/timedisplay_item_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class RequestServiceOneScreen extends StatefulWidget {
@@ -394,10 +395,10 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                 .commentController.value,
                             margin: EdgeInsets.only(
                                 left: 12.h, top: 40.v, right: 12.h, bottom: 20),
-                            labelText: "Write your comments (optional)*",
+                            labelText: "Write your comments (optional)",
                             textInputAction: TextInputAction.newline,
                             textInputType: TextInputType.multiline,
-                            maxLines: 2,
+                            maxLines: 4,
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 11.h, vertical: 10.v),
                             borderDecoration: const OutlineInputBorder(),

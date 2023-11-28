@@ -1,18 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_validation.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
-import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
-import 'package:forever_connection/widgets/search_drpdown.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
+import 'package:forever_connection/widgets/search_drpdown.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../core/utils/address_autocomplete_widget.dart';
 
@@ -35,6 +35,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
   final emailKey = GlobalKey<FormState>();
   final homeKey = GlobalKey<FormState>();
   final zipKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -163,7 +164,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: Row(
                         children: [
-                           CustomImageView(
+                          CustomImageView(
                               svgPath: ImageConstant.imgUser,
                               height: 18.adaptSize,
                               width: 18.adaptSize,
@@ -171,8 +172,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               margin: EdgeInsets.only(top: 25.v, right: 15)),
                           Expanded(
                             child: CustomTextFormField(
-                                controller:
-                                    connectionController.firstNameController.value,
+                                controller: connectionController
+                                    .firstNameController.value,
                                 // margin: EdgeInsets.only(
                                 //     left: 12.h, top: 0.v, right: 12.h),
                                 // hintText: "First name *",
@@ -184,7 +185,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 borderDecoration: const OutlineInputBorder(),
                                 filled: false,
                                 onChange: (value) {
-                                  validationController.setFirstNameValidation(value);
+                                  validationController
+                                      .setFirstNameValidation(value);
                                   validationController.checkButtonValidation();
                                 },
                                 validator: (value) {
@@ -202,24 +204,24 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     Row(
                       children: [
                         CustomImageView(
-                              svgPath: ImageConstant.imgUser,
-                              height: 18.adaptSize,
-                              width: 18.adaptSize,
-                              color: Colors.black,
-                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                            svgPath: ImageConstant.imgUser,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 25.v, right: 15)),
                         Expanded(
                           child: CustomTextFormField(
-                              controller:
-                                  connectionController.middleNameController.value,
-                              margin:
-                                  EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                              controller: connectionController
+                                  .middleNameController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 15.v, right: 12.h),
                               // hintText: "Middle name (if Any)",
                               labelText: "Middle name (if Any)",
                               textInputAction: TextInputAction.done,
                               maxLines: 1,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 11.h, vertical: 17.v),
-                              borderDecoration: OutlineInputBorder(),
+                              borderDecoration: const OutlineInputBorder(),
                               filled: false,
                               onChange: (value) {},
                               fillColor: theme.colorScheme.primary),
@@ -239,8 +241,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               margin: EdgeInsets.only(top: 25.v, right: 15)),
                           Expanded(
                             child: CustomTextFormField(
-                                controller:
-                                    connectionController.lastNameController.value,
+                                controller: connectionController
+                                    .lastNameController.value,
                                 margin: EdgeInsets.only(
                                     left: 12.h, top: 15.v, right: 12.h),
                                 // hintText: "Last name *",
@@ -249,10 +251,10 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 maxLines: 1,
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 11.h, vertical: 17.v),
-                                        
                                 filled: false,
                                 onChange: (value) {
-                                  validationController.setLastNameValidation(value);
+                                  validationController
+                                      .setLastNameValidation(value);
                                   validationController.checkButtonValidation();
                                 },
                                 validator: (value) {
@@ -271,14 +273,15 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     Row(
                       children: [
                         CustomImageView(
-                              svgPath: ImageConstant.imgCall,
-                              height: 18.adaptSize,
-                              width: 18.adaptSize,
-                              color: Colors.black,
-                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                            svgPath: ImageConstant.imgCall,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 25.v, right: 15)),
                         Expanded(
                           child: PhoneNumberTextFieldWidget(
                               c: 1,
+                              ignore: false,
                               phoneController:
                                   connectionController.phoneController.value,
                               lable: "Phone Number"),
@@ -301,7 +304,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 textInputType: TextInputType.emailAddress,
                                 controller: connectionController
                                     .personalEmailController.value,
-                               
+
                                 // hintText: "Personal Email *",
                                 labelText: "Personal Email *",
                                 textInputAction: TextInputAction.done,
@@ -311,7 +314,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 borderDecoration: const OutlineInputBorder(),
                                 filled: false,
                                 onChange: (value) {
-                                  validationController.setEmailValidation(value);
+                                  validationController
+                                      .setEmailValidation(value);
                                   validationController.checkButtonValidation();
                                 },
                                 validator: (value) {
@@ -329,17 +333,17 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     Row(
                       children: [
                         CustomImageView(
-                              svgPath: ImageConstant.myBusinessProfile,
-                              height: 18.adaptSize,
-                              width: 18.adaptSize,
-                              color: Colors.black,
-                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                            svgPath: ImageConstant.myBusinessProfile,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 25.v, right: 15)),
                         Expanded(
                           child: CustomTextFormField(
-                              controller:
-                                  connectionController.businessNameController.value,
-                              margin:
-                                  EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                              controller: connectionController
+                                  .businessNameController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 15.v, right: 12.h),
                               // hintText: "Business Name (If Any)",
                               labelText: "Business Name (If Any)",
                               textInputAction: TextInputAction.done,
@@ -375,11 +379,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                           AddressAutoCompleteWidget(),
                                     ),
                                   );
-                                  connectionController
-                                      .homeAddressController.value.text = address;
+                                  connectionController.homeAddressController
+                                      .value.text = address;
                                 },
-                                controller:
-                                    connectionController.homeAddressController.value,
+                                controller: connectionController
+                                    .homeAddressController.value,
                                 margin: EdgeInsets.only(
                                     left: 12.h, top: 15.v, right: 12.h),
                                 // hintText: "Home Address *",
@@ -396,7 +400,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 // validationController.checkButtonValidation();
                                 // },
                                 validator: (value) {
-                                  if (connectionController.homeAddressController.value.text.isEmpty) {
+                                  if (connectionController.homeAddressController
+                                      .value.text.isEmpty) {
                                     return "Home address must have atlease 8 character";
                                   } else {
                                     return null;
@@ -410,17 +415,18 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     Row(
                       children: [
                         CustomImageView(
-                              svgPath: ImageConstant.imgLocation,
-                              height: 18.adaptSize,
-                              width: 18.adaptSize,
-                              color: Colors.black,
-                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                            svgPath: ImageConstant.imgLocation,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 25.v, right: 15)),
                         Expanded(
                           child: CustomTextFormField(
                               maxLength: 10,
-                              controller: connectionController.aptController.value,
-                              margin:
-                                  EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                              controller:
+                                  connectionController.aptController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 15.v, right: 12.h),
                               // hintText: "Apt, Ste",
                               labelText: "Apt, Ste",
                               textInputAction: TextInputAction.done,
@@ -447,7 +453,8 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               margin: EdgeInsets.only(top: 25.v, right: 15)),
                           Expanded(
                             child: CustomTextFormField(
-                                controller: connectionController.zipController.value,
+                                controller:
+                                    connectionController.zipController.value,
                                 margin: EdgeInsets.only(
                                     left: 12.h, top: 15.v, right: 12.h),
                                 // hintText: "ZIP *",
@@ -474,6 +481,47 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           ),
                         ],
                       ),
+                    ),
+                    SizedBox(
+                      height: 20.adaptSize,
+                    ),
+                    Row(
+                      children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgEdit,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 25.v, right: 15)),
+                        Expanded(
+                          child: CustomTextFormField(
+                              controller: connectionController
+                                  .additionalController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 15.v, right: 12.h),
+                              // hintText: "ZIP *",
+                              labelText: "Additonal Information (optional)",
+                              textInputAction: TextInputAction.done,
+                              maxLines: 4,
+                              textInputType: TextInputType.text,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 17.v),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {
+                                validationController.setZipValidation(value);
+                                validationController.checkButtonValidation();
+                              },
+                              validator: (value) {
+                                if (value!.length < 4) {
+                                  return "Enter valid zip code";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 20.adaptSize,

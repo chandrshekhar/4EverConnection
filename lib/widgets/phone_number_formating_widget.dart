@@ -4,6 +4,7 @@ import 'package:forever_connection/core/app_export.dart';
 
 class PhoneNumberTextFieldWidget extends StatefulWidget {
   final String lable;
+  final bool ignore;
   int? c;
   Widget? suffix;
   TextEditingController? phoneController;
@@ -13,6 +14,7 @@ class PhoneNumberTextFieldWidget extends StatefulWidget {
       required this.lable,
       this.phoneController,
       this.c,
+      this.ignore = true,
       this.readOnly,
       this.suffix});
 
@@ -51,7 +53,7 @@ class _PhoneNumberTextFieldWidgetState
             Expanded(
               flex: 5,
               child: IgnorePointer(
-                ignoring: true,
+                ignoring: widget.ignore,
                 child: CountryDropdown(
                     printCountryName: true,
                     triggerOnCountrySelectedInitially: true,

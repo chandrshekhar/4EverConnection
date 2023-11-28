@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
 import 'package:forever_connection/Feature/Connection/Repository/create_connection_repo.dart';
@@ -80,7 +81,7 @@ class ConnectionController extends GetxController {
         "home_address": homeAddressController.value.text,
         "home_apt": aptController.value.text,
         "home_zip": zipController.value.text,
-        "additional": ""
+        "additional": additionalController.value.text
       };
 
       isConnectionLoading(true);
@@ -106,7 +107,7 @@ class ConnectionController extends GetxController {
       var res = await _connectionRepo.resendConnectionRequest(id: id);
       ToastWidget.successToast(success: res["message"]);
     } catch (e) {
-       ToastWidget.errorToast(error: e.toString());
+      ToastWidget.errorToast(error: e.toString());
     }
   }
 
