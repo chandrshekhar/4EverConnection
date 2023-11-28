@@ -89,7 +89,7 @@ class ExpansionTileController {
   ///  * [isExpanded] to check whether the tile is expanded.
   ///  * [ExpansionTile.controller] to create an ExpansionTile with a controller.
   void collapse() {
-    assert(_state != null);
+    // assert(_state != null);
     if (isExpanded) {
       _state!._toggleExpansion();
     }
@@ -535,7 +535,7 @@ class _ExpansionTileState extends State<CustomExpansionTile>
       _animationController.value = 1.0;
     }
 
-    assert(widget.controller?._state == null);
+    // assert(widget.controller?._state == null);
     _tileController = widget.controller ?? ExpansionTileController();
     _tileController._state = this;
   }

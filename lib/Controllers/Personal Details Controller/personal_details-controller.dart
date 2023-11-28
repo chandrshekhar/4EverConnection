@@ -1,15 +1,23 @@
 // ignore_for_file: use_build_context_synchronously
 
+
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Model/User/user_personal_data_model.dart';
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
+import 'package:forever_connection/widgets/custom_expansion_tile.dart' as customExpansionTile;
 import 'package:get/get.dart';
 
 import '../../Feature/Webview/web_view.dart';
 
 class PersonalDetailsController extends GetxController {
+  Rx<customExpansionTile.ExpansionTileController?> userExpansionTile = customExpansionTile.ExpansionTileController().obs;
+  Rx<customExpansionTile.ExpansionTileController?> markettingExpansionTile = customExpansionTile.ExpansionTileController().obs;
+  Rx<customExpansionTile.ExpansionTileController?> toolsExpansionTile = customExpansionTile.ExpansionTileController().obs;
+  
+
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
   var lastNameController = TextEditingController().obs;
@@ -112,5 +120,11 @@ class PersonalDetailsController extends GetxController {
       ToastWidget.errorToast(error: "$e");
       isLoadingEdit(false);
     }
+  }
+
+  @override
+  void onInit() {
+    
+    super.onInit();
   }
 }

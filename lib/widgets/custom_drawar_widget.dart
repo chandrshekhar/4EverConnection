@@ -18,7 +18,7 @@ import '../Feature/Connection/Presentation/connection_list.dart';
 import '../Feature/Connection/Presentation/connection_main_screen.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
-   CustomDrawerWidget({super.key, required this.myProfileController});
+  CustomDrawerWidget({super.key, required this.myProfileController});
   final UserProfileController myProfileController;
   final personalDetailsController = Get.put(PersonalDetailsController());
 
@@ -125,17 +125,24 @@ class CustomDrawerWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        
                         color: Colors.white,
                         child: CustomExpansionTile(
+                          controller:
+                              personalDetailsController.userExpansionTile.value,
+                          onExpansionChanged: (val) {
+                            if(val){
+                              personalDetailsController
+                                  .markettingExpansionTile.value!
+                                  .collapse();
+
+                              personalDetailsController
+                                  .toolsExpansionTile.value!
+                                  .collapse();
+                            }
+                          },
                           childrenPadding: EdgeInsets.zero,
                           tilePadding: EdgeInsets.zero,
                           initiallyExpanded: true,
-                          
-                          
-                          
-
-
                           title: Container(
                             color: AppColors.darkBlue,
                             padding: EdgeInsets.all(5.sp),
@@ -152,142 +159,152 @@ class CustomDrawerWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                        
-                        children:[
-                           Container(
-                          color:
-                              myProfileController.drawerDataList[0] == true
-                                  ? const Color(0xFFFF8927)
-                                  : Colors.white,
-                          child: InkWell(
-                            onTap: () {
-                              myProfileController.updateSelectedField(0);
-                              Navigator.pushNamed(context,
-                                  AppRoutes.requestServiceOneScreen);
-                            },
-                            child: Items(
-                              icon: ImageConstant.newServiceIcon,
-                              itemText: "Request Service",
+                          children: [
+                            Container(
+                              color:
+                                  myProfileController.drawerDataList[0] == true
+                                      ? const Color(0xFFFF8927)
+                                      : Colors.white,
+                              child: InkWell(
+                                onTap: () {
+                                  myProfileController.updateSelectedField(0);
+                                  Navigator.pushNamed(context,
+                                      AppRoutes.requestServiceOneScreen);
+                                },
+                                child: Items(
+                                  icon: ImageConstant.newServiceIcon,
+                                  itemText: "Request Service",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(1);
-                            Navigator.pushNamed(
-                                context, AppRoutes.myServicesScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[1] ==
-                                    true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myservice,
-                              itemText: "My Service",
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(1);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.myServicesScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[1] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myservice,
+                                  itemText: "My Service",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(2);
-                            Navigator.pushNamed(
-                                context, AppRoutes.myProfileScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[2] ==
-                                    true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myprofile,
-                              itemText: "My Profile",
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(2);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.myProfileScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[2] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myprofile,
+                                  itemText: "My Profile",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            myProfileController.updateSelectedField(3);
-                            await personalDetailsController
-                                .getMagicLink(context);
-                        
-                            // CustomAlretDialogs().comingSoonPopUp(
-                            //     context,
-                            //     "COMING...",
-                            //     "My Business Profile will Coming soon");
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[3] ==
-                                    true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myBusinessProfile,
-                              itemText: "My Business Profile",
+                            InkWell(
+                              onTap: () async {
+                                myProfileController.updateSelectedField(3);
+                                await personalDetailsController
+                                    .getMagicLink(context);
+
+                                // CustomAlretDialogs().comingSoonPopUp(
+                                //     context,
+                                //     "COMING...",
+                                //     "My Business Profile will Coming soon");
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[3] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myBusinessProfile,
+                                  itemText: "My Business Profile",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(4);
-                            Navigator.pushNamed(
-                                context, AppRoutes.documentVaultScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[4] ==
-                                    true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myDocumntVaults,
-                              itemText: "My Document Vault",
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(4);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.documentVaultScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[4] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myDocumntVaults,
+                                  itemText: "My Document Vault",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(9);
-                            Navigator.pushNamed(
-                                context, AppRoutes.myNotesListScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[9] ==
-                                    true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myNotes,
-                              itemText: "My Notes",
+                            InkWell(
+                              onTap: () {
+                                myProfileController.updateSelectedField(9);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.myNotesListScreen);
+                              },
+                              child: Container(
+                                color: myProfileController.drawerDataList[9] ==
+                                        true
+                                    ? const Color(0xFFFF8927)
+                                    : Colors.white,
+                                child: Items(
+                                  icon: ImageConstant.myNotes,
+                                  itemText: "My Notes",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        ],
+                          ],
                         ),
                       ),
                       Container(
                         color: Colors.white,
-                        child: 
+                        child: CustomExpansionTile(
+                          onExpansionChanged: (val) {
+                            if (val) {
+                              personalDetailsController
+                                  .userExpansionTile.value!
+                                  .collapse();
 
-                        CustomExpansionTile(
+                              personalDetailsController
+                                  .toolsExpansionTile.value!
+                                  .collapse();
+                            }
+                          },
+                          controller: personalDetailsController
+                              .markettingExpansionTile.value,
                           childrenPadding: EdgeInsets.zero,
                           tilePadding: EdgeInsets.zero,
                           initiallyExpanded: false,
                           title: Container(
-                              color: AppColors.darkBlue,
-                              padding: EdgeInsets.all(5.sp),
-                              width: MediaQuery.sizeOf(context).width * 0.7.w,
-                              child: const Center(
-                                child: Text(
-                                  "MARKETING PARTNER",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
+                            color: AppColors.darkBlue,
+                            padding: EdgeInsets.all(5.sp),
+                            width: MediaQuery.sizeOf(context).width * 0.7.w,
+                            child: const Center(
+                              child: Text(
+                                "MARKETING PARTNER",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                            children: [
+                          ),
+                          children: [
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(5);
@@ -354,35 +371,42 @@ class CustomDrawerWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        
-                        
-                        
                       ),
                       Container(
                         color: Colors.white,
-                        child: 
-                        CustomExpansionTile(childrenPadding: EdgeInsets.zero,
+                        child: CustomExpansionTile(
+                          onExpansionChanged: (val) {
+                            if (val) {
+                              personalDetailsController
+                                  .markettingExpansionTile.value!
+                                  .collapse();
+
+                              personalDetailsController
+                                  .userExpansionTile.value!
+                                  .collapse();
+                            }
+                          },
+                          controller: personalDetailsController
+                              .toolsExpansionTile.value,
+                          childrenPadding: EdgeInsets.zero,
                           tilePadding: EdgeInsets.zero,
                           initiallyExpanded: false,
-                          
-                          
                           title: Container(
-                              color: AppColors.darkBlue,
-                              padding: EdgeInsets.all(5.sp),
-                              width: MediaQuery.sizeOf(context).width * 0.7.w,
-                              child: const Center(
-                                child: Text(
-                                  "TOOLS & UTILITIES",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
+                            color: AppColors.darkBlue,
+                            padding: EdgeInsets.all(5.sp),
+                            width: MediaQuery.sizeOf(context).width * 0.7.w,
+                            child: const Center(
+                              child: Text(
+                                "TOOLS & UTILITIES",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                            
-                            children: [
+                          ),
+                          children: [
                             InkWell(
                               onTap: () {
                                 myProfileController.updateSelectedField(10);
@@ -490,9 +514,8 @@ class CustomDrawerWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ],),
-                        
-                      
+                          ],
+                        ),
                       ),
                     ],
                   ),
