@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
@@ -32,7 +33,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
 
   @override
   Widget build(BuildContext context) {
-    print("build inside upload");
+    log("build inside upload");
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
       appBar: CustomAppBar(
@@ -45,7 +46,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
               Navigator.pop(context);
             }),
         centerTitle: true,
-        title: AppbarTitle(text: "Contact Lits"),
+        title: AppbarTitle(text: "Contact Lists"),
         actions: [
           AppbarImage1(
               onTap: () {
@@ -93,11 +94,10 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                     value: contactController.markAll.value,
                                     onChanged: (val) {
                                       contactController.markAll(val);
-                                      if(val!){
-                                         contactController.anySelected.value =
+                                      if (val ?? false) {
+                                        contactController.anySelected.value =
                                             true;
-                                      }
-                                       else {
+                                      } else {
                                         contactController.anySelected.value =
                                             false;
                                       }
@@ -111,7 +111,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                           child: contactController.seachedContactList.isEmpty
                               ? const Center(
                                   child: Text(
-                                      "No matching contacts. Please check spelling"),
+                                      "No matching contacts Please check spelling"),
                                 )
                               : ListView.builder(
                                   itemCount: contactController
