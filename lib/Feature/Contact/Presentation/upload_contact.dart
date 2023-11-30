@@ -128,9 +128,18 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                                             .seachedContactList[
                                                         index])),
                                         initials: contactController
-                                            .seachedContactList[index]
-                                            .name
-                                            .first[0],
+                                                .seachedContactList[index]
+                                                .name
+                                                .first
+                                                .isNotEmpty
+                                            ? contactController
+                                                .seachedContactList[index]
+                                                .name
+                                                .first[0]
+                                            : contactController
+                                                .seachedContactList[index]
+                                                .name
+                                                .first,
                                         selectedContacts: false,
                                         name:
                                             "${contactController.seachedContactList[index].name.first} ${contactController.seachedContactList[index].name.middle} ${contactController.seachedContactList[index].name.last}",
