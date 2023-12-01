@@ -9,6 +9,7 @@ import 'package:forever_connection/widgets/custom_image_view.dart';
 class ConnectionListWidget extends StatelessWidget {
   final String notesTitle;
   final String author;
+  final Color color;
   final String description;
   final String dateTime;
   final Function(String)? onSeleted;
@@ -20,7 +21,7 @@ class ConnectionListWidget extends StatelessWidget {
       required this.description,
       required this.dateTime,
       this.onSeleted,
-      this.addButtonTap});
+      this.addButtonTap,required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +109,7 @@ class ConnectionListWidget extends StatelessWidget {
                   child: Text(
                     author,
                     style: TextStyle(
-                        color: author.contains("Pending")
-                            ? AppColors.buttonColor
-                            : Colors.green,
+                        color:color,
                         fontWeight: FontWeight.w400,
                         fontSize: 18.adaptSize),
                   ),

@@ -47,9 +47,7 @@ class _PhoneNumberTextFieldWidgetState
                     ),
                   )
                 : Container(),
-            SizedBox(
-              width: 20.adaptSize,
-            ),
+           
             Expanded(
               flex: 5,
               child: IgnorePointer(

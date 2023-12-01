@@ -8,13 +8,16 @@ import 'package:forever_connection/Controllers/Auth%20Controller/signup_controll
 import 'package:forever_connection/Services/Auth%20Services/auth_services.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/address_search.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
+import 'package:forever_connection/core/utils/place_service.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../core/utils/address_autocomplete_widget.dart';
 
@@ -426,31 +429,66 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   top: 7.v, bottom: 4.v, right: 22.v),
                             ),
                             Expanded(
-                              child: TypeAheadField(
-                                textFieldConfiguration: TextFieldConfiguration(
-                                  controller:
-                                      signUpController.addressController.value,
-                                  decoration: const InputDecoration(
-                                      labelText: 'Search Location'),
-                                ),
-                                suggestionsCallback: (pattern) async {
-                                  return await authServices
-                                      .searchLocations(pattern);
-                                },
-                                itemBuilder: (context, suggestion) {
-                                  log(suggestion.toString());
-                                  return ListTile(
-                                    title: Text(suggestion.toString()),
+                              child: Expanded(
+                              child: CustomTextFormField(
+                                onTap: ()async {
+                                   // generate a new token here
+                                  final sessionToken = const Uuid().v4();
+                                  final Suggestion? result = await showSearch(
+                                    context: context,
+                                    delegate: AddressSearch(sessionToken),
                                   );
+                                  // This will change the text displayed in the TextField
+                                  if (result != null){
+                                    final placeDetails = await PlaceApiProvider(
+                                            sessionToken)
+                                        .getPlaceDetailFromId(result.placeId);
+                                    setState(() {
+                                      signUpController.addressController.value
+                                          .text = result.description;
+                                      // _streetNumber = placeDetails.streetNumber??"";
+                                      // _street = placeDetails.street??"";
+                                      // _city = placeDetails.city??"";
+                                      signUpController.zipController.value
+                                          .text = placeDetails.zipCode ?? "";
+                                    });
+                                  }
                                 },
-                                onSuggestionSelected: (suggestion) {
-                                  // Extract the ZIP code or handle the selected location
-                                  signUpController.addressController.value
-                                      .text = suggestion;
-                                  log('Selected: $suggestion');
-                                },
+                                controller:  signUpController.addressController.value,
+                                readOnly: true,
+                              //  margin: EdgeInsets.only(left: 0.h),
+                                labelText: "Address",
+                                
                               ),
                             ),
+                            ),
+                            // Expanded(
+                            //   child: TypeAheadField(
+                            //     textFieldConfiguration: TextFieldConfiguration(
+                            //       controller:
+                            //           signUpController.addressController.value,
+                            //       decoration: const InputDecoration(
+                            //           labelText: 'Search Location'),
+                            //     ),
+                            //     suggestionsCallback: (pattern) async {
+                            //       return await authServices
+                            //           .searchLocations(pattern);
+                            //     },
+                            //     itemBuilder: (context, suggestion) {
+                            //       log(suggestion.toString());
+                            //       return ListTile(
+                            //         title: Text(suggestion.toString()),
+                            //       );
+                            //     },
+                            //     onSuggestionSelected: (suggestion) {
+                            //       // Extract the ZIP code or handle the selected location
+                            //       signUpController.addressController.value
+                            //           .text = suggestion;
+                            //       log('Selected: $suggestion');
+                            //     },
+                            //   ),
+                            // ),
+
                             // Expanded(
                             //   child: CustomTextFormField(
                             //     readOnly: true,
@@ -498,8 +536,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 controller:
                                     signUpController.aptController.value,
                                 margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Apt",
-                                labelText: "Apt",
+                                labelText: "Apt Ste",
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
@@ -507,21 +544,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                   return null;
                                 },
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 38.v),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomImageView(
-                              svgPath: ImageConstant.imgLocation,
-                              height: 20.v,
-                              width: 17.h,
-                              margin: EdgeInsets.only(
-                                top: 6.v,
-                                bottom: 4.v,
                               ),
                             ),
                             Expanded(
@@ -542,6 +564,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
+
                         SizedBox(height: 38.v),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

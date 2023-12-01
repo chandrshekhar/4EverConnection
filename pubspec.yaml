@@ -68,6 +68,7 @@ dependencies:
   webview_flutter:
   flutter_cached_pdfview:
   image:
+  uuid: ^4.2.1
 
  
 

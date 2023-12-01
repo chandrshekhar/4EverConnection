@@ -8,10 +8,10 @@ import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_outlined_button.dart';
-import 'package:forever_connection/widgets/custom_text_form_field.dart';
+
 import 'package:forever_connection/widgets/service_table_widget.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+
 
 // ignore_for_file: must_be_immutable
 class MyServicesScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               CustomOutlinedButton(
                   buttonStyle: CustomButtonStyles.fillLightBlueTL20,
                   buttonTextStyle: const TextStyle(color: Colors.white),
-                  width: 167.h,
+                  width: 160.h,
                   text: "Services in Progress"),
               Container(
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),

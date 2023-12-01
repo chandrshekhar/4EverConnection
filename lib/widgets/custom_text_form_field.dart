@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -32,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
       this.onTap,
       this.inputFormatters,
       this.onChange,
-      this.maxLength})
+      this.maxLength,  this.context,this.onEditingComplete})
       : super(
           key: key,
         );
@@ -89,6 +90,10 @@ class CustomTextFormField extends StatelessWidget {
 
   final List<TextInputFormatter>? inputFormatters;
 
+  final BuildContext? context;
+
+  void Function()? onEditingComplete;
+
   @override
   Widget build(BuildContext context) {
     return textFormFieldWidget;
@@ -98,14 +103,20 @@ class CustomTextFormField extends StatelessWidget {
         width: width ?? double.maxFinite,
         margin: margin,
         child: TextFormField(
+        
           textCapitalization: TextCapitalization.sentences,
           maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,
           style: textStyle ??
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+              TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15.sp),
           obscureText: obscureText!,
           textInputAction: textInputAction,
+          onEditingComplete: onEditingComplete, 
+       
           onChanged: onChange,
           keyboardType: textInputType,
           maxLines: maxLines ?? 1,
@@ -127,7 +138,7 @@ class CustomTextFormField extends StatelessWidget {
         suffixIconConstraints: suffixConstraints,
         isDense: true,
         suffix: suffix,
-        contentPadding: contentPadding ?? EdgeInsets.all(2.h),
+        contentPadding: contentPadding ?? EdgeInsets.all(2.v),
         fillColor: fillColor,
         filled: filled,
         border: const UnderlineInputBorder(),
@@ -152,7 +163,7 @@ class CustomTextFormField extends StatelessWidget {
 
 extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get fillPrimary => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(3.h),
+        borderRadius: BorderRadius.circular(3.r),
         borderSide: BorderSide.none,
       );
   static OutlineInputBorder get outlineBlack => OutlineInputBorder(

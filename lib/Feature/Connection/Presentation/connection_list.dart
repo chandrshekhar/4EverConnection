@@ -208,9 +208,8 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                             description: "",
                             notesTitle:
                                 "${item.firstName ?? ""} ${item.middleName ?? ""} ${item.lastName ?? ""}",
-                            author: item.userCreated == null
-                                ? "Pending"
-                                : "Accepted",
+                            author: "Pending",
+                            color: AppColors.buttonColor,
                             addButtonTap: () {
                               _showBottomSheet(
                                   context: context, connectionModel: item);
@@ -228,17 +227,13 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                         itemBuilder: (context, index) {
                           var item = connectionController
                               .acceptedConnectionList[index];
-                        
+
                           return ConnectionListWidget(
                             onSeleted: (p0) async {
                               switch (p0) {
                                 case "Email":
                                   await connectionController
                                       .launchEmail(item.email ?? "");
-                                  break;
-                                case "Resend":
-                                  await connectionController
-                                      .resedConnection(item.id ?? -1);
                                   break;
                                 case "Call":
                                   await connectionController.launchPhoneDialer(
@@ -251,9 +246,8 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
                             description: "",
                             notesTitle:
                                 "${item.firstName ?? ""} ${item.middleName ?? ""} ${item.lastName ?? ""}",
-                            author: item.userCreated == null
-                                ? "Pending"
-                                : "Accepted",
+                            author: "Accepted",
+                            color: Colors.green,
                             addButtonTap: () {
                               _showBottomSheet(
                                   context: context, connectionModel: item);
