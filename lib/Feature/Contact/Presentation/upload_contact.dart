@@ -81,29 +81,44 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(right: 16.adaptSize),
+                          padding: EdgeInsets.only(right: 16.adaptSize, left: 16.adaptSize),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "Select All",
-                                style: TextStyle(fontSize: 14),
-                              ),
-                              Obx(
-                                () => Checkbox(
-                                    value: contactController.markAll.value,
-                                    onChanged: (val) {
-                                      contactController.markAll(val);
-                                      if (val ?? false) {
-                                        contactController.anySelected.value =
-                                            true;
-                                      } else {
-                                        contactController.anySelected.value =
-                                            false;
-                                      }
-                                      //contactController.singleSelected(val);
-                                    }),
-                              )
+                                Row(
+                                  children: [
+                                    Text(
+                                    "Total:",
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                  ),
+                                    Text(
+                                    " ${contactController
+                                          .seachedContactList.length}",
+                                    style: TextStyle(fontSize: 14),
+                                                                  ),
+                                  ],
+                                ),
+                              Row(children: [
+                                  const Text(
+                                    "Select All",
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  Obx(
+                                    () => Checkbox(
+                                        value: contactController.markAll.value,
+                                        onChanged: (val) {
+                                          contactController.markAll(val);
+                                          if (val ?? false) {
+                                            contactController
+                                                .anySelected.value = true;
+                                          } else {
+                                            contactController
+                                                .anySelected.value = false;
+                                          }
+                                          //contactController.singleSelected(val);
+                                        }),
+                                  )
+                                ],),
                             ],
                           ),
                         ),

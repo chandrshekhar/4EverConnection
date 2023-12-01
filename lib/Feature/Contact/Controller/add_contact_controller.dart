@@ -39,9 +39,6 @@ class AddContactController extends GetxController {
   var businessAptController = TextEditingController().obs;
   var businessZipController = TextEditingController().obs;
 
-
-  
-
   RxString gender = "Select Gender".obs;
   RxBool isUploadingContact = false.obs;
 
@@ -69,10 +66,9 @@ class AddContactController extends GetxController {
             .map((json) => ContactListModel.fromJson(json))
             .toList();
 
+        contactModelList.value = data;
         contactModelList
             .sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
-
-        contactModelList.value = data;
 
         isprotectionDataLoading(false);
       } else {
@@ -228,11 +224,12 @@ class AddContactController extends GetxController {
       newContact.addresses.add(address);
     }
 
-    if(choosenFilename.value.isNotEmpty){
+    if (choosenFilename.value.isNotEmpty) {
       newContact.photo = files.value?.readAsBytesSync();
     }
     final contactController = Get.put(ContactController());
-    var response = await contactController.uploadContactsHelper(newContact, files.value);
+    var response =
+        await contactController.uploadContactsHelper(newContact, files.value);
     if (response) {
       ToastWidget.successToast(success: "Contact added successfully!");
       clearAllControllers();
@@ -267,6 +264,6 @@ class AddContactController extends GetxController {
     businessAptController.value.clear();
     businessZipController.value.clear();
     choosenFilename.value = "";
-    files =   Rx<File?>(null);
+    files = Rx<File?>(null);
   }
 }

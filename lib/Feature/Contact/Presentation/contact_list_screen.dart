@@ -170,6 +170,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
                               child: CircularProgressIndicator.adaptive())
                           : ListView.builder(
                               padding: EdgeInsets.only(top: 20.h),
+                              
+                              
+                              
                               itemCount: addContactController
                                   .contactModelList.value.length,
                               itemBuilder: (context, index) {
