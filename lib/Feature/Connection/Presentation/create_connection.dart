@@ -369,9 +369,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           Expanded(
                             child: CustomTextFormField(
                                 readOnly: true,
-                                onEditingComplete: () {
-                                  FocusScope.of(context).requestFocus(focus);
-                                },
+                               
                                 onTap: () async {
                                   // generate a new token here
                                   final sessionToken = const Uuid().v4();
@@ -388,7 +386,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                         .value.text = result.description;
                                     connectionController.zipController.value
                                         .text = placeDetails.zipCode ?? "";
+                                        
                                   }
+                                   // ignore: use_build_context_synchronously
+                                   FocusScope.of(context).requestFocus(focus);
+                                  
                                 },
                                 controller: connectionController
                                     .homeAddressController.value,
