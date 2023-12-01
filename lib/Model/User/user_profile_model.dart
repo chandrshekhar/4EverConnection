@@ -28,114 +28,39 @@ class AutoGenerate {
 
   AutoGenerate.fromJson(Map<String, dynamic> json) {
     personalData = json['personal_data'] != null
-        ?  PersonalData.fromJson(json['personal_data'])
+        ? PersonalData.fromJson(json['personal_data'])
         : null;
     professionalData = json['professional_data'] != null
-        ?  ProfessionalData.fromJson(json['professional_data'])
+        ? ProfessionalData.fromJson(json['professional_data'])
         : null;
     if (json['relationship_data'] != null) {
       relationshipData = <RelationshipData>[];
       json['relationship_data'].forEach((v) {
-        relationshipData!.add( RelationshipData.fromJson(v));
+        relationshipData!.add(RelationshipData.fromJson(v));
       });
     }
     healthData = json['health_data'] != null
-        ? new HealthData.fromJson(json['health_data'])
+        ? HealthData.fromJson(json['health_data'])
         : null;
     financialData = json['financial_data'] != null
-        ? new FinancialData.fromJson(json['financial_data'])
+        ? FinancialData.fromJson(json['financial_data'])
         : null;
     if (json['life_insurance_data'] != null) {
       lifeInsuranceData = <LifeInsuranceData>[];
       json['life_insurance_data'].forEach((v) {
-        lifeInsuranceData!.add(new LifeInsuranceData.fromJson(v));
+        lifeInsuranceData!.add(LifeInsuranceData.fromJson(v));
       });
     }
     if (json['health_insurance_data'] != null) {
       healthInsuranceData = <Null>[];
-      // json['health_insurance_data'].forEach((v) {
-      //   healthInsuranceData!.add(new Null.fromJson(v));
-      // });
     }
-    // if (json['disability_insurance_data'] != null) {
-    //   disabilityInsuranceData = <Null>[];
-    //   json['disability_insurance_data'].forEach((v) {
-    //     disabilityInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['long_term_care_insurance_data'] != null) {
-    //   longTermCareInsuranceData = <Null>[];
-    //   json['long_term_care_insurance_data'].forEach((v) {
-    //     longTermCareInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['home_insurance_data'] != null) {
-    //   homeInsuranceData = <Null>[];
-    //   json['home_insurance_data'].forEach((v) {
-    //     homeInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['car_insurance_data'] != null) {
-    //   carInsuranceData = <Null>[];
-    //   json['car_insurance_data'].forEach((v) {
-    //     carInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
+
     if (json['vault_document_data'] != null) {
       vaultDocumentData = <VaultDocumentData>[];
       json['vault_document_data'].forEach((v) {
         vaultDocumentData!.add(VaultDocumentData.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (personalData != null) {
-      data['personal_data'] = personalData!.toJson();
-    }
-    if (professionalData != null) {
-      data['professional_data'] = professionalData!.toJson();
-    }
-    if (relationshipData != null) {
-      data['relationship_data'] =
-          relationshipData!.map((v) => v.toJson()).toList();
-    }
-    if (healthData != null) {
-      data['health_data'] = healthData!.toJson();
-    }
-    if (financialData != null) {
-      data['financial_data'] = financialData!.toJson();
-    }
-    if (lifeInsuranceData != null) {
-      data['life_insurance_data'] =
-          lifeInsuranceData!.map((v) => v.toJson()).toList();
-    }
-    if (healthInsuranceData != null) {
-      data['health_insurance_data'] =
-          healthInsuranceData!.map((v) => v.toJson()).toList();
-    }
-    if (disabilityInsuranceData != null) {
-      data['disability_insurance_data'] =
-          disabilityInsuranceData!.map((v) => v.toJson()).toList();
-    }
-    if (longTermCareInsuranceData != null) {
-      data['long_term_care_insurance_data'] =
-          longTermCareInsuranceData!.map((v) => v.toJson()).toList();
-    }
-    if (homeInsuranceData != null) {
-      data['home_insurance_data'] =
-          homeInsuranceData!.map((v) => v.toJson()).toList();
-    }
-    if (carInsuranceData != null) {
-      data['car_insurance_data'] =
-          carInsuranceData!.map((v) => v.toJson()).toList();
-    }
-    if (vaultDocumentData != null) {
-      data['vault_document_data'] =
-          vaultDocumentData!.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 
@@ -147,7 +72,7 @@ class PersonalData {
   bool? lifePartnerIsNotMarried;
   String? userEmail;
   String? firstName;
-  Null? middleName;
+  dynamic middleName;
   String? lastName;
   String? mobilePhone;
   int? mobileOnlyNumbers;
@@ -157,7 +82,7 @@ class PersonalData {
   String? homeZip;
   String? homeAddressCountry;
   String? dateOfBirth;
-  Null? dateOfAnniversary;
+  dynamic dateOfAnniversary;
   String? gender;
   String? socialSecurityNumber;
   String? countryOfBirth;
@@ -170,15 +95,15 @@ class PersonalData {
   bool? termsAccepted;
   bool? privacyAccepted;
   bool? electronicAuthorDiscAccepted;
-  Null? securityAnswer1;
-  Null? securityAnswer2;
-  Null? personalEmail;
-  Null? importInfo;
-  Null? profilePin;
+  dynamic securityAnswer1;
+  dynamic securityAnswer2;
+  dynamic personalEmail;
+  dynamic importInfo;
+  dynamic profilePin;
   bool? mobileVerified;
-  Null? profileNote;
-  Null? securityQuestion1;
-  Null? securityQuestion2;
+  dynamic profileNote;
+  dynamic securityQuestion1;
+  dynamic securityQuestion2;
   int? lastAnnouncementSeen;
 
   PersonalData(
@@ -265,51 +190,6 @@ class PersonalData {
     securityQuestion2 = json['security_question_2'];
     lastAnnouncementSeen = json['last_announcement_seen'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['life_partner_name'] = lifePartnerName;
-    data['life_partner_phone'] = lifePartnerPhone;
-    data['life_partner_is_not_married'] = lifePartnerIsNotMarried;
-    data['user_email'] = userEmail;
-    data['first_name'] = firstName;
-    data['middle_name'] = middleName;
-    data['last_name'] = lastName;
-    data['mobile_phone'] = mobilePhone;
-    data['mobile_only_numbers'] = mobileOnlyNumbers;
-    data['home_phone'] = homePhone;
-    data['home_address'] = homeAddress;
-    data['home_apt'] = homeApt;
-    data['home_zip'] = homeZip;
-    data['home_address_country'] = homeAddressCountry;
-    data['date_of_birth'] = dateOfBirth;
-    data['date_of_anniversary'] = dateOfAnniversary;
-    data['gender'] = gender;
-    data['social_security_number'] = socialSecurityNumber;
-    data['country_of_birth'] = countryOfBirth;
-    data['country_of_citizenship'] = countryOfCitizenship;
-    data['photo'] = photo;
-    data['preferred_language'] = preferredLanguage;
-    data['welcome_dialogue_shown'] = welcomeDialogueShown;
-    data['welcome_dialogue_mp_shown'] = welcomeDialogueMpShown;
-    data['sent_sms'] = sentSms;
-    data['terms_accepted'] = termsAccepted;
-    data['privacy_accepted'] = privacyAccepted;
-    data['electronic_author_disc_accepted'] = electronicAuthorDiscAccepted;
-    data['security_answer_1'] = securityAnswer1;
-    data['security_answer_2'] = securityAnswer2;
-    data['personal_email'] = personalEmail;
-    data['import_info'] = importInfo;
-    data['profile_pin'] = profilePin;
-    data['mobile_verified'] = mobileVerified;
-    data['profile_note'] = profileNote;
-    data['security_question_1'] = securityQuestion1;
-    data['security_question_2'] = securityQuestion2;
-    data['last_announcement_seen'] = lastAnnouncementSeen;
-    return data;
-  }
 }
 
 class ProfessionalData {
@@ -363,26 +243,6 @@ class ProfessionalData {
     businessApt = json['business_apt'];
     businessZip = json['business_zip'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['business_name'] = businessName;
-    data['business_phone'] = businessPhone;
-    data['business_fax'] = businessFax;
-    data['business_email'] = businessEmail;
-    data['business_website'] = businessWebsite;
-    data['position'] = position;
-    data['current_occupation'] = currentOccupation;
-    data['ideal_occupation'] = idealOccupation;
-    data['education_level'] = educationLevel;
-    data['degree'] = degree;
-    data['affiliations'] = affiliations;
-    data['business_address'] = businessAddress;
-    data['business_apt'] = businessApt;
-    data['business_zip'] = businessZip;
-    return data;
-  }
 }
 
 class RelationshipData {
@@ -408,17 +268,6 @@ class RelationshipData {
     user = json['user'];
     personalData = json['personal_data'];
     professionalData = json['professional_data'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['relationship_type'] = relationshipType;
-    data['tax_dependent'] = taxDependent;
-    data['user'] = user;
-    data['personal_data'] = personalData;
-    data['professional_data'] = professionalData;
-    return data;
   }
 }
 
@@ -500,35 +349,6 @@ class HealthData {
     spouseIsBlind = json['spouse_is_blind'];
     user = json['user'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['height_ft'] = heightFt;
-    data['height_inches'] = heightInches;
-    data['weight'] = weight;
-    data['smoker'] = smoker;
-    data['doctor_name'] = doctorName;
-    data['doctor_phone_number'] = doctorPhoneNumber;
-    data['date_of_last_visit'] = dateOfLastVisit;
-    data['doctor_street'] = doctorStreet;
-    data['doctor_apt'] = doctorApt;
-    data['doctor_zip'] = doctorZip;
-    data['reason'] = reason;
-    data['outcome'] = outcome;
-    data['health_issues'] = healthIssues;
-    data['medications'] = medications;
-    data['age_of_siblings'] = ageOfSiblings;
-    data['father_age'] = fatherAge;
-    data['father_death_cause'] = fatherDeathCause;
-    data['mother_age'] = motherAge;
-    data['mother_death_cause'] = motherDeathCause;
-    data['other_health_notes'] = otherHealthNotes;
-    data['is_blind'] = isBlind;
-    data['spouse_is_blind'] = spouseIsBlind;
-    data['user'] = user;
-    return data;
-  }
 }
 
 class FinancialData {
@@ -573,23 +393,6 @@ class FinancialData {
     financialHealthNotes = json['financial_health_notes'];
     user = json['user'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['tax_professional_name'] = taxProfessionalName;
-    data['phone'] = phone;
-    data['address'] = address;
-    data['assets'] = assets;
-    data['liabilities'] = liabilities;
-    data['net_worth'] = netWorth;
-    data['income'] = income;
-    data['expenses'] = expenses;
-    data['cashflow'] = cashflow;
-    data['financial_health_notes'] = financialHealthNotes;
-    data['user'] = user;
-    return data;
-  }
 }
 
 class LifeInsuranceData {
@@ -625,20 +428,6 @@ class LifeInsuranceData {
     currentPremiums = json['current_premiums'];
     user = json['user'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['policy_number'] = policyNumber;
-    data['policy_type'] = policyType;
-    data['issue_date'] = issueDate;
-    data['company_name'] = companyName;
-    data['company_phone'] = companyPhone;
-    data['current_death_benefit'] = currentDeathBenefit;
-    data['current_premiums'] = currentPremiums;
-    data['user'] = user;
-    return data;
-  }
 }
 
 class VaultDocumentData {
@@ -667,17 +456,5 @@ class VaultDocumentData {
     typeName = json['type_name'];
     description = json['description'];
     file = json['file'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user'] = user;
-    data['publication_date'] = publicationDate;
-    data['name'] = name;
-    data['type_name'] = typeName;
-    data['description'] = description;
-    data['file'] = file;
-    return data;
   }
 }

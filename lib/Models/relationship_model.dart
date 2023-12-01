@@ -27,20 +27,7 @@ class RelationshipModel {
     user = json['user'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    if (personalData != null) {
-      data['personal_data'] = personalData!.toJson();
-    }
-    if (professionalData != null) {
-      data['professional_data'] = professionalData!.toJson();
-    }
-    data['relationship_type'] = relationshipType;
-    data['tax_dependent'] = taxDependent;
-    data['user'] = user;
-    return data;
-  }
+ 
 }
 
 class PersonalData {
@@ -170,50 +157,7 @@ class PersonalData {
     lastAnnouncementSeen = json['last_announcement_seen'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['life_partner_name'] = lifePartnerName;
-    data['life_partner_phone'] = lifePartnerPhone;
-    data['life_partner_is_not_married'] = lifePartnerIsNotMarried;
-    data['user_email'] = userEmail;
-    data['modified'] = modified;
-    data['first_name'] = firstName;
-    data['middle_name'] = middleName;
-    data['last_name'] = lastName;
-    data['mobile_phone'] = mobilePhone;
-    data['mobile_only_numbers'] = mobileOnlyNumbers;
-    data['home_phone'] = homePhone;
-    data['home_address'] = homeAddress;
-    data['home_apt'] = homeApt;
-    data['home_zip'] = homeZip;
-    data['home_address_country'] = homeAddressCountry;
-    data['date_of_birth'] = dateOfBirth;
-    data['date_of_anniversary'] = dateOfAnniversary;
-    data['gender'] = gender;
-    data['social_security_number'] = socialSecurityNumber;
-    data['country_of_birth'] = countryOfBirth;
-    data['country_of_citizenship'] = countryOfCitizenship;
-    data['photo'] = photo;
-    data['preferred_language'] = preferredLanguage;
-    data['welcome_dialogue_shown'] = welcomeDialogueShown;
-    data['welcome_dialogue_mp_shown'] = welcomeDialogueMpShown;
-    data['sent_sms'] = sentSms;
-    data['terms_accepted'] = termsAccepted;
-    data['privacy_accepted'] = privacyAccepted;
-    data['electronic_author_disc_accepted'] = electronicAuthorDiscAccepted;
-    data['security_answer_1'] = securityAnswer1;
-    data['security_answer_2'] = securityAnswer2;
-    data['personal_email'] = personalEmail;
-    data['import_info'] = importInfo;
-    data['mobile_verified'] = mobileVerified;
-    data['profile_note'] = profileNote;
-    data['security_question_1'] = securityQuestion1;
-    data['security_question_2'] = securityQuestion2;
-    data['last_announcement_seen'] = lastAnnouncementSeen;
-    return data;
-  }
+
 }
 
 class ProfessionalData {
@@ -271,24 +215,4 @@ class ProfessionalData {
     businessZip = json['business_zip'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['modified'] = modified;
-    data['business_name'] = businessName;
-    data['business_phone'] = businessPhone;
-    data['business_fax'] = businessFax;
-    data['business_email'] = businessEmail;
-    data['business_website'] = businessWebsite;
-    data['position'] = position;
-    data['current_occupation'] = currentOccupation;
-    data['ideal_occupation'] = idealOccupation;
-    data['education_level'] = educationLevel;
-    data['degree'] = degree;
-    data['affiliations'] = affiliations;
-    data['business_address'] = businessAddress;
-    data['business_apt'] = businessApt;
-    data['business_zip'] = businessZip;
-    return data;
-  }
 }

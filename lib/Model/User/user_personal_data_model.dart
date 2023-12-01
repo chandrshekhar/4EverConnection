@@ -128,49 +128,5 @@ class UserPersonalModel {
     lastAnnouncementSeen = json['last_announcement_seen'];
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = <String, dynamic>{};
-  //   data['id'] = id;
-  //   data['user_id'] = this.userId;
-  //   data['life_partner_name'] = this.lifePartnerName;
-  //   data['life_partner_phone'] = this.lifePartnerPhone;
-  //   data['life_partner_is_not_married'] = this.lifePartnerIsNotMarried;
-  //   data['user_email'] = this.userEmail;
-  //   data['modified'] = this.modified;
-  //   data['first_name'] = this.firstName;
-  //   data['middle_name'] = this.middleName;
-  //   data['last_name'] = this.lastName;
-  //   data['mobile_phone'] = this.mobilePhone;
-  //   data['mobile_only_numbers'] = this.mobileOnlyNumbers;
-  //   data['home_phone'] = this.homePhone;
-  //   data['home_address'] = this.homeAddress;
-  //   data['home_apt'] = this.homeApt;
-  //   data['home_zip'] = this.homeZip;
-  //   data['home_address_country'] = this.homeAddressCountry;
-  //   data['date_of_birth'] = this.dateOfBirth;
-  //   data['date_of_anniversary'] = this.dateOfAnniversary;
-  //   data['gender'] = this.gender;
-  //   data['social_security_number'] = this.socialSecurityNumber;
-  //   data['country_of_birth'] = this.countryOfBirth;
-  //   data['country_of_citizenship'] = this.countryOfCitizenship;
-  //   data['photo'] = this.photo;
-  //   data['preferred_language'] = this.preferredLanguage;
-  //   data['welcome_dialogue_shown'] = this.welcomeDialogueShown;
-  //   data['welcome_dialogue_mp_shown'] = this.welcomeDialogueMpShown;
-  //   data['sent_sms'] = this.sentSms;
-  //   data['terms_accepted'] = this.termsAccepted;
-  //   data['privacy_accepted'] = this.privacyAccepted;
-  //   data['electronic_author_disc_accepted'] = this.electronicAuthorDiscAccepted;
-  //   data['security_answer_1'] = this.securityAnswer1;
-  //   data['security_answer_2'] = this.securityAnswer2;
-  //   data['personal_email'] = this.personalEmail;
-  //   data['import_info'] = this.importInfo;
-  //   data['profile_pin'] = this.profilePin;
-  //   data['mobile_verified'] = this.mobileVerified;
-  //   data['profile_note'] = this.profileNote;
-  //   data['security_question_1'] = this.securityQuestion1;
-  //   data['security_question_2'] = this.securityQuestion2;
-  //   data['last_announcement_seen'] = this.lastAnnouncementSeen;
-  //   return data;
-  // }
+
 }

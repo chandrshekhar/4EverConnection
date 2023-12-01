@@ -5,12 +5,7 @@ class UserProfileModel {
   HealthData? healthData;
   FinancialData? financialData;
   List<LifeInsuranceData>? lifeInsuranceData;
-  // List<Null>? healthInsuranceData;
-  // List<Null>? disabilityInsuranceData;
-  // List<Null>? longTermCareInsuranceData;
-  // List<Null>? homeInsuranceData;
-  // List<Null>? carInsuranceData;
-  // List<VaultDocumentData>? vaultDocumentData;
+  
 
   UserProfileModel({
     this.personalData,
@@ -19,12 +14,7 @@ class UserProfileModel {
     this.healthData,
     this.financialData,
     this.lifeInsuranceData,
-    // this.healthInsuranceData,
-    // this.disabilityInsuranceData,
-    // this.longTermCareInsuranceData,
-    // this.homeInsuranceData,
-    // this.carInsuranceData,
-    // this.vaultDocumentData
+   
   });
 
   UserProfileModel.fromJson(Map<String, dynamic> json) {
@@ -52,90 +42,7 @@ class UserProfileModel {
         lifeInsuranceData!.add(LifeInsuranceData.fromJson(v));
       });
     }
-    // if (json['health_insurance_data'] != null) {
-    //   healthInsuranceData = <Null>[];
-    //   json['health_insurance_data'].forEach((v) {
-    //     healthInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['disability_insurance_data'] != null) {
-    //   disabilityInsuranceData = <Null>[];
-    //   json['disability_insurance_data'].forEach((v) {
-    //     disabilityInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['long_term_care_insurance_data'] != null) {
-    //   longTermCareInsuranceData = <Null>[];
-    //   json['long_term_care_insurance_data'].forEach((v) {
-    //     longTermCareInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['home_insurance_data'] != null) {
-    //   homeInsuranceData = <Null>[];
-    //   json['home_insurance_data'].forEach((v) {
-    //     homeInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['car_insurance_data'] != null) {
-    //   carInsuranceData = <Null>[];
-    //   json['car_insurance_data'].forEach((v) {
-    //     carInsuranceData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['vault_document_data'] != null) {
-    //   vaultDocumentData = <VaultDocumentData>[];
-    //   json['vault_document_data'].forEach((v) {
-    //     vaultDocumentData!.add(new VaultDocumentData.fromJson(v));
-    //   });
-    // }
-
-    // Map<String, dynamic> toJson() {
-    //   final Map<String, dynamic> data = new Map<String, dynamic>();
-    //   if (this.personalData != null) {
-    //     data['personal_data'] = this.personalData!.toJson();
-    //   }
-    //   if (this.professionalData != null) {
-    //     data['professional_data'] = this.professionalData!.toJson();
-    //   }
-    //   if (this.relationshipData != null) {
-    //     data['relationship_data'] =
-    //         this.relationshipData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.healthData != null) {
-    //     data['health_data'] = this.healthData!.toJson();
-    //   }
-    //   if (this.financialData != null) {
-    //     data['financial_data'] = this.financialData!.toJson();
-    //   }
-    //   if (this.lifeInsuranceData != null) {
-    //     data['life_insurance_data'] =
-    //         this.lifeInsuranceData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.healthInsuranceData != null) {
-    //     data['health_insurance_data'] =
-    //         this.healthInsuranceData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.disabilityInsuranceData != null) {
-    //     data['disability_insurance_data'] =
-    //         this.disabilityInsuranceData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.longTermCareInsuranceData != null) {
-    //     data['long_term_care_insurance_data'] =
-    //         this.longTermCareInsuranceData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.homeInsuranceData != null) {
-    //     data['home_insurance_data'] =
-    //         this.homeInsuranceData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.carInsuranceData != null) {
-    //     data['car_insurance_data'] =
-    //         this.carInsuranceData!.map((v) => v.toJson()).toList();
-    //   }
-    //   if (this.vaultDocumentData != null) {
-    //     data['vault_document_data'] =
-    //         this.vaultDocumentData!.map((v) => v.toJson()).toList();
-    //   }
-    // return data;
+   
   }
 }
 
@@ -266,50 +173,7 @@ class PersonalData {
     lastAnnouncementSeen = json['last_announcement_seen'];
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['id'] = this.id;
-  //   data['user_id'] = this.userId;
-  //   data['life_partner_name'] = this.lifePartnerName;
-  //   data['life_partner_phone'] = this.lifePartnerPhone;
-  //   data['life_partner_is_not_married'] = this.lifePartnerIsNotMarried;
-  //   data['user_email'] = this.userEmail;
-  //   data['modified'] = this.modified;
-  //   data['first_name'] = this.firstName;
-  //   data['middle_name'] = this.middleName;
-  //   data['last_name'] = this.lastName;
-  //   data['mobile_phone'] = this.mobilePhone;
-  //   data['mobile_only_numbers'] = this.mobileOnlyNumbers;
-  //   data['home_phone'] = this.homePhone;
-  //   data['home_address'] = this.homeAddress;
-  //   data['home_apt'] = this.homeApt;
-  //   data['home_zip'] = this.homeZip;
-  //   data['home_address_country'] = this.homeAddressCountry;
-  //   data['date_of_birth'] = this.dateOfBirth;
-  //   data['date_of_anniversary'] = this.dateOfAnniversary;
-  //   data['gender'] = this.gender;
-  //   data['social_security_number'] = this.socialSecurityNumber;
-  //   data['country_of_birth'] = this.countryOfBirth;
-  //   data['country_of_citizenship'] = this.countryOfCitizenship;
-  //   data['photo'] = this.photo;
-  //   data['preferred_language'] = this.preferredLanguage;
-  //   data['welcome_dialogue_shown'] = this.welcomeDialogueShown;
-  //   data['welcome_dialogue_mp_shown'] = this.welcomeDialogueMpShown;
-  //   data['sent_sms'] = this.sentSms;
-  //   data['terms_accepted'] = this.termsAccepted;
-  //   data['privacy_accepted'] = this.privacyAccepted;
-  //   data['electronic_author_disc_accepted'] = this.electronicAuthorDiscAccepted;
-  //   data['security_answer_1'] = this.securityAnswer1;
-  //   data['security_answer_2'] = this.securityAnswer2;
-  //   data['personal_email'] = this.personalEmail;
-  //   data['import_info'] = this.importInfo;
-  //   data['mobile_verified'] = this.mobileVerified;
-  //   data['profile_note'] = this.profileNote;
-  //   data['security_question_1'] = this.securityQuestion1;
-  //   data['security_question_2'] = this.securityQuestion2;
-  //   data['last_announcement_seen'] = this.lastAnnouncementSeen;
-  //   return data;
-  // }
+ 
 }
 
 class ProfessionalData {
@@ -367,26 +231,7 @@ class ProfessionalData {
     businessZip = json['business_zip'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['modified'] = modified;
-    data['business_name'] = businessName;
-    data['business_phone'] = businessPhone;
-    data['business_fax'] = businessFax;
-    data['business_email'] = businessEmail;
-    data['business_website'] = businessWebsite;
-    data['position'] = position;
-    data['current_occupation'] = currentOccupation;
-    data['ideal_occupation'] = idealOccupation;
-    data['education_level'] = educationLevel;
-    data['degree'] = degree;
-    data['affiliations'] = affiliations;
-    data['business_address'] = businessAddress;
-    data['business_apt'] = businessApt;
-    data['business_zip'] = businessZip;
-    return data;
-  }
+
 }
 
 class RelationshipData {
@@ -414,16 +259,7 @@ class RelationshipData {
     professionalData = json['professional_data'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['relationship_type'] = relationshipType;
-    data['tax_dependent'] = taxDependent;
-    data['user'] = user;
-    data['personal_data'] = personalData;
-    data['professional_data'] = professionalData;
-    return data;
-  }
+  
 }
 
 class HealthData {
@@ -505,34 +341,7 @@ class HealthData {
     user = json['user'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['height_ft'] = heightFt;
-    data['height_inches'] = heightInches;
-    data['weight'] = weight;
-    data['smoker'] = smoker;
-    data['doctor_name'] = doctorName;
-    data['doctor_phone_number'] = doctorPhoneNumber;
-    data['date_of_last_visit'] = dateOfLastVisit;
-    data['doctor_street'] = doctorStreet;
-    data['doctor_apt'] = doctorApt;
-    data['doctor_zip'] = doctorZip;
-    data['reason'] = reason;
-    data['outcome'] = outcome;
-    data['health_issues'] = healthIssues;
-    data['medications'] = medications;
-    data['age_of_siblings'] = ageOfSiblings;
-    data['father_age'] = fatherAge;
-    data['father_death_cause'] = fatherDeathCause;
-    data['mother_age'] = motherAge;
-    data['mother_death_cause'] = motherDeathCause;
-    data['other_health_notes'] = otherHealthNotes;
-    data['is_blind'] = isBlind;
-    data['spouse_is_blind'] = spouseIsBlind;
-    data['user'] = user;
-    return data;
-  }
+  
 }
 
 class FinancialData {
@@ -578,22 +387,7 @@ class FinancialData {
     user = json['user'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['tax_professional_name'] = taxProfessionalName;
-    data['phone'] = phone;
-    data['address'] = address;
-    data['assets'] = assets;
-    data['liabilities'] = liabilities;
-    data['net_worth'] = netWorth;
-    data['income'] = income;
-    data['expenses'] = expenses;
-    data['cashflow'] = cashflow;
-    data['financial_health_notes'] = financialHealthNotes;
-    data['user'] = user;
-    return data;
-  }
+
 }
 
 class LifeInsuranceData {
@@ -630,17 +424,5 @@ class LifeInsuranceData {
     user = json['user'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['policy_number'] = policyNumber;
-    data['policy_type'] = policyType;
-    data['issue_date'] = issueDate;
-    data['company_name'] = companyName;
-    data['company_phone'] = companyPhone;
-    data['current_death_benefit'] = currentDeathBenefit;
-    data['current_premiums'] = currentPremiums;
-    data['user'] = user;
-    return data;
-  }
+ 
 }

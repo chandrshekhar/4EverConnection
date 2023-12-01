@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
-
 import '../../core/utils/shared_pref_services.dart';
 
 class SplashScreen extends StatelessWidget {

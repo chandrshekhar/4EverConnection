@@ -13,12 +13,5 @@ class ServiceListModel {
     order = json['order'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['description'] = description;
-    data['order'] = order;
-    return data;
-  }
+  
 }

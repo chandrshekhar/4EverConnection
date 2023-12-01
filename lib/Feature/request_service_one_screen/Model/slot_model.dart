@@ -4,7 +4,7 @@ class SlotModelList {
   bool? enabled;
   String? date;
   Service? service;
-  
+
   SlotModelList(
       {this.time, this.hasService, this.enabled, this.date, this.service});
 
@@ -15,18 +15,6 @@ class SlotModelList {
     date = json['date'];
     service =
         json['service'] != null ? Service.fromJson(json['service']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['time'] = time;
-    data['has_service'] = hasService;
-    data['enabled'] = enabled;
-    data['date'] = date;
-    if (service != null) {
-      data['service'] = service!.toJson();
-    }
-    return data;
   }
 }
 
@@ -46,15 +34,5 @@ class Service {
     id = json['id'];
     type = json['type'];
     service = json['service'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['contact_type'] = contactType;
-    data['requested_by'] = requestedBy;
-    data['id'] = id;
-    data['type'] = type;
-    data['service'] = service;
-    return data;
   }
 }
