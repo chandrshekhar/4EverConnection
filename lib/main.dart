@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:get/get.dart';
+
 import 'routes/app_routes.dart';
 import 'theme/theme_helper.dart';
 import 'widgets/dismissible_widget.dart';
@@ -20,7 +20,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   final contactController = Get.put(ContactController());
-  
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +30,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         child: GetMaterialApp(
           theme: ThemeData.light(),
+          themeMode: ThemeMode.light,
           title: 'forever_connection',
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splashScreen,

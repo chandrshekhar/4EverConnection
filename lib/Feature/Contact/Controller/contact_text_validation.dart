@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 
 class ContactValidation extends GetxController{
    RxBool isFirstNameValidate = false.obs;
-  RxBool isLastNameValidate = false.obs;
   RxBool isPhoneNumberValidate = false.obs;
   RxBool isEmailValidate = false.obs;
   RxBool homeAddressValidate = false.obs;
@@ -11,7 +10,7 @@ class ContactValidation extends GetxController{
 
   checkButtonValidation() {
     if (isFirstNameValidate.value == false ||
-        isLastNameValidate.value == false ||
+        
         isPhoneNumberValidate.value == false ||
         isEmailValidate.value == false ||
         homeAddressValidate.value == false ||
@@ -30,13 +29,7 @@ class ContactValidation extends GetxController{
     }
   }
 
-  setLastNameValidation(String value) {
-    if (value.length < 2) {
-      isLastNameValidate(false);
-    } else {
-      isLastNameValidate(true);
-    }
-  }
+ 
 
   setPhoneNameValidation(String value) {
     if (value.length < 7) {

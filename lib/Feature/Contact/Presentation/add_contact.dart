@@ -98,8 +98,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   children: [
                     SizedBox(height: 15.v),
                     Obx(
-                      () =>
-                       Container(
+                      () => Container(
                         decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(3),
@@ -108,15 +107,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               ? DecorationImage(
                                   image: FileImage(addController.files.value!),
                                   fit: BoxFit.cover)
-                              :  DecorationImage(
-                                  image:  AssetImage(
-                                      "assets/images/user.png"),
+                              : const DecorationImage(
+                                  image: AssetImage("assets/images/user.png"),
                                   fit: BoxFit.fitHeight),
                         ),
                         //AssetImage("assets/images/user_female.jpg"),),),
                         height: 200,
                         width: 200,
-                      
+
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,15 +220,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
-                            formValidation.setLastNameValidation(value);
                             formValidation.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 2) {
-                              return "Last name must have 2 character";
-                            } else {
-                              return null;
-                            }
                           },
                           fillColor: theme.colorScheme.primary),
                     ),
@@ -238,7 +228,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       height: 16.adaptSize,
                     ),
                     CustomDropDown(
-                      borderDecoration: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                      borderDecoration: const UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)),
                       margin: const EdgeInsets.only(left: 14, right: 14),
                       contentPadding:
                           const EdgeInsets.only(top: 10, bottom: 10, left: 10),
@@ -253,7 +244,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     ),
                     CustomTextFormField(
                         controller: addController.dateOfBirth.value,
-                        onTap: (){
+                        onTap: () {
                           addController.selectDate(context);
                         },
                         margin:
@@ -343,15 +334,12 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
                     Row(
                       children: [
-                        
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: Form(
-                              
                               key: phoneKey,
                               child: PhoneNumberTextFieldWidget(
-                                
                                   c: 1,
                                   ignore: false,
                                   phoneController:
@@ -424,7 +412,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       children: [
                         Expanded(
                           child: Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 12.h),
+                            padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: PhoneNumberTextFieldWidget(
                                 c: 1,
                                 ignore: false,
@@ -457,23 +445,21 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       height: 16.adaptSize,
                     ),
 
-                     Row(
+                    Row(
                       children: [
                         Expanded(
                           child: Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 12.h),
+                            padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: PhoneNumberTextFieldWidget(
                                 c: 1,
                                 ignore: false,
-                                phoneController:
-                                    addController.homePhone.value,
+                                phoneController: addController.homePhone.value,
                                 lable: "Home Phone"),
                           ),
                         ),
                       ],
                     ),
 
-                    
                     // CustomTextFormField(
                     //     controller: addController.homePhone.value,
                     //     margin:
@@ -583,7 +569,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       key: homeKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
-                        onTap: () async {
+                          onTap: () async {
                             // generate a new token here
                             final sessionToken = const Uuid().v4();
                             final Suggestion? result = await showSearch(
@@ -595,8 +581,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               final placeDetails =
                                   await PlaceApiProvider(sessionToken)
                                       .getPlaceDetailFromId(result.placeId);
-                              addController.homeAddressController.value
-                                  .text = result.description;
+                              addController.homeAddressController.value.text =
+                                  result.description;
                               addController.zipController.value.text =
                                   placeDetails.zipCode ?? "";
                             }
@@ -627,58 +613,61 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           },
                           fillColor: theme.colorScheme.primary),
                     ),
-                    Row(children: [Expanded(
-                      child: CustomTextFormField(
-                          
-                          controller: addController.aptController.value,
-                          focusNode: focus,
-                          
-                          margin:
-                              EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                          // hintText: "Apt, Ste",
-                          labelText: "Apt, Ste",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 7.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {},
-                          fillColor: theme.colorScheme.primary),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomTextFormField(
+                              controller: addController.aptController.value,
+                              focusNode: focus,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 15.v, right: 12.h),
+                              // hintText: "Apt, Ste",
+                              labelText: "Apt, Ste",
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 7.v),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {},
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                        Expanded(
+                          child: Form(
+                            key: zipKey,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            child: CustomTextFormField(
+                                controller: addController.zipController.value,
+                                margin: EdgeInsets.only(
+                                    left: 12.h, top: 15.v, right: 12.h),
+                                // hintText: "ZIP *",
+                                labelText: "ZIP *",
+                                textInputAction: TextInputAction.done,
+                                textInputType: TextInputType.number,
+                                maxLines: 1,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 11.h, vertical: 7.v),
+                                borderDecoration: const OutlineInputBorder(),
+                                filled: false,
+                                onChange: (value) {
+                                  formValidation.setZipValidation(value);
+                                  formValidation.checkButtonValidation();
+                                },
+                                validator: (value) {
+                                  if (value!.length < 4) {
+                                    return "Enter valid zip code";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                fillColor: theme.colorScheme.primary),
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Form(
-                        key: zipKey,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        child: CustomTextFormField(
-                            controller: addController.zipController.value,
-                            margin: EdgeInsets.only(
-                                left: 12.h, top: 15.v, right: 12.h),
-                            // hintText: "ZIP *",
-                            labelText: "ZIP *",
-                            textInputAction: TextInputAction.done,
-                            textInputType: TextInputType.number,
-                            maxLines: 1,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 11.h, vertical: 7.v),
-                            borderDecoration: const OutlineInputBorder(),
-                            filled: false,
-                            onChange: (value) {
-                              formValidation.setZipValidation(value);
-                              formValidation.checkButtonValidation();
-                            },
-                            validator: (value) {
-                              if (value!.length < 4) {
-                                return "Enter valid zip code";
-                              } else {
-                                return null;
-                              }
-                            },
-                            fillColor: theme.colorScheme.primary),
-                      ),
-                    ),],),
                     CustomTextFormField(
-                      onTap: () async {
+                        onTap: () async {
                           // generate a new token here
                           final sessionToken = const Uuid().v4();
                           final Suggestion? result = await showSearch(
@@ -722,12 +711,11 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           }
                         },
                         fillColor: theme.colorScheme.primary),
-                     Row(
+                    Row(
                       children: [
                         Expanded(
                           child: CustomTextFormField(
-                            focusNode: focus2,
-                              
+                              focusNode: focus2,
                               controller:
                                   addController.businessAptController.value,
                               margin: EdgeInsets.only(
@@ -774,11 +762,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               },
                               fillColor: theme.colorScheme.primary),
                         ),
-                   
                       ],
-                     ),
-                     
-                     SizedBox(
+                    ),
+
+                    SizedBox(
                       height: 20.adaptSize,
                     ),
                     Obx(

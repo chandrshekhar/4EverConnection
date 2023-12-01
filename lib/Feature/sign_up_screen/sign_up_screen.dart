@@ -17,7 +17,7 @@ import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({Key? key})
+  const SignUpScreen({Key? key})
       : super(
           key: key,
         );
@@ -205,6 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 38.v),
                         PhoneNumberTextFieldWidget(
+                            ignore: false,
                             phoneController:
                                 signUpController.mobileNumberController.value,
                             lable: "Mobile number"),
