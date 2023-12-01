@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
@@ -15,7 +14,6 @@ import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
-
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatefulWidget {
@@ -427,34 +425,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   top: 7.v, bottom: 4.v, right: 22.v),
                             ),
                             Expanded(
-                            child: CustomTextFormField(
-                              onTap: ()async {
-                                 // generate a new token here
-                                final sessionToken = const Uuid().v4();
-                                final Suggestion? result = await showSearch(
-                                  context: context,
-                                  delegate: AddressSearch(sessionToken),
-                                );
-                                // This will change the text displayed in the TextField
-                                if (result != null) {
-                                  final placeDetails = await PlaceApiProvider(
-                                          sessionToken)
-                                      .getPlaceDetailFromId(result.placeId);
-                                  signUpController.addressController
-                                      .value.text = result.description;
-                                  signUpController.zipController.value
-                                      .text = placeDetails.zipCode ?? "";
-                                      
-                                }
-                                 // ignore: use_build_context_synchronously
-                                 FocusScope.of(context).requestFocus(zipCodeFocus);
-                              },
-                              controller:  signUpController.addressController.value,
-                              readOnly: true,
-                            //  margin: EdgeInsets.only(left: 0.h),
-                              labelText: "Address",
-                              
-                            ),
+                              child: CustomTextFormField(
+                                onTap: () async {
+                                  // generate a new token here
+                                  final sessionToken = const Uuid().v4();
+                                  final Suggestion? result = await showSearch(
+                                    context: context,
+                                    delegate: AddressSearch(sessionToken),
+                                  );
+                                  // This will change the text displayed in the TextField
+                                  if (result != null) {
+                                    final placeDetails = await PlaceApiProvider(
+                                            sessionToken)
+                                        .getPlaceDetailFromId(result.placeId);
+                                    signUpController.addressController.value
+                                        .text = result.description;
+                                    signUpController.zipController.value.text =
+                                        placeDetails.zipCode ?? "";
+                                  }
+                                  // ignore: use_build_context_synchronously
+                                  FocusScope.of(context)
+                                      .requestFocus(zipCodeFocus);
+                                },
+                                controller:
+                                    signUpController.addressController.value,
+                                readOnly: true,
+                                //  margin: EdgeInsets.only(left: 0.h),
+                                labelText: "Address",
+                              ),
                             ),
                             // Expanded(
                             //   child: TypeAheadField(
@@ -543,7 +541,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                               
                                 controller:
                                     signUpController.zipController.value,
                                 margin: EdgeInsets.only(left: 22.h),
@@ -553,7 +550,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
                                   }
-
                                   return null;
                                 },
                               ),
