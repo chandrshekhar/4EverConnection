@@ -11,6 +11,7 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_drop_down.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
+import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 
 import '../Controller/contact_text_validation.dart';
@@ -73,7 +74,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 Navigator.pop(context);
               }),
           centerTitle: true,
-          title: AppbarTitle(text: "Create Connection"),
+          title: AppbarTitle(text: "Create Contact"),
           styleType: Style.bgShadow),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -101,10 +102,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               ? DecorationImage(
                                   image: FileImage(addController.files.value!),
                                   fit: BoxFit.cover)
-                              : const DecorationImage(
+                              :  DecorationImage(
                                   image:  AssetImage(
-                                      "assets/images/user_female.jpg"),
-                                  fit: BoxFit.cover),
+                                      "assets/images/user.png"),
+                                  fit: BoxFit.fitHeight),
                         ),
                         //AssetImage("assets/images/user_female.jpg"),),),
                         height: 200,
@@ -162,7 +163,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           controller: addController.firstNameController.value,
                           margin: EdgeInsets.only(
                               left: 12.h, top: 0.v, right: 12.h),
-                          hintText: "First name *",
+                          // hintText: "First name *",
                           labelText: "First name *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
@@ -188,8 +189,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     CustomTextFormField(
                         controller: addController.middleNameController.value,
                         margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Middle name (if Any)",
+                            EdgeInsets.only(left: 12.h, top: 5.v, right: 12.h),
+                        // hintText: "Middle name (if Any)",
                         labelText: "Middle name (if Any)",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -205,8 +206,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       child: CustomTextFormField(
                           controller: addController.lastNameController.value,
                           margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "Last name *",
+                              left: 12.h, top: 5.v, right: 12.h),
+                          // hintText: "Last name *",
                           labelText: "Last name *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
@@ -246,10 +247,13 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     ),
                     CustomTextFormField(
                         controller: addController.dateOfBirth.value,
+                        onTap: (){
+                          addController.selectDate(context);
+                        },
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
                         hintText: "Date of Birth",
-                        labelText: "Date of Birth",
+                        // labelText: "Date of Birth",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
@@ -265,7 +269,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.companyController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Company Name",
+                        // hintText: "Company Name",
                         labelText: "Company Name",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -282,7 +286,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.postionController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Position",
+                        // hintText: "Position",
                         labelText: "Position",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -299,7 +303,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.occupationController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Occupation",
+                        // hintText: "Occupation",
                         labelText: "Occupation",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -317,7 +321,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             addController.idealOccupationController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Ideal Occupation",
+                        // hintText: "Ideal Occupation",
                         labelText: "Ideal Occupation",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -330,43 +334,60 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 16.adaptSize,
                     ),
+
                     Row(
                       children: [
+                        
                         Expanded(
                           child: Form(
                             key: phoneKey,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            child: CustomTextFormField(
-                                controller:
+                            child: PhoneNumberTextFieldWidget(
+                                c: 1,
+                                ignore: false,
+                                phoneController:
                                     addController.mobilePhoneController.value,
-                                margin: EdgeInsets.only(
-                                    left: 12.h, top: 0.v, right: 12),
-                                hintText: "Mobile Phone",
-                                labelText: "Mobile Phone",
-                                textInputType: TextInputType.phone,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                textInputAction: TextInputAction.done,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Phone can't be empty";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                maxLines: 1,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20.h, vertical: 17.v),
-                                borderDecoration: const OutlineInputBorder(),
-                                filled: false,
-                                onChange: (value) {},
-                                fillColor: theme.colorScheme.primary),
+                                lable: "Mobile Number"),
                           ),
                         ),
                       ],
                     ),
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       child: Form(
+                    //         key: phoneKey,
+                    //         autovalidateMode:
+                    //             AutovalidateMode.onUserInteraction,
+                    //         child: CustomTextFormField(
+                    //             controller:
+                    //                 addController.mobilePhoneController.value,
+                    //             margin: EdgeInsets.only(
+                    //                 left: 12.h, top: 0.v, right: 12),
+                    //             hintText: "Mobile Phone",
+                    //             labelText: "Mobile Phone",
+                    //             textInputType: TextInputType.phone,
+                    //             inputFormatters: [
+                    //               FilteringTextInputFormatter.digitsOnly
+                    //             ],
+                    //             textInputAction: TextInputAction.done,
+                    //             validator: (value) {
+                    //               if (value!.isEmpty) {
+                    //                 return "Phone can't be empty";
+                    //               } else {
+                    //                 return null;
+                    //               }
+                    //             },
+                    //             maxLines: 1,
+                    //             contentPadding: EdgeInsets.symmetric(
+                    //                 horizontal: 20.h, vertical: 17.v),
+                    //             borderDecoration: const OutlineInputBorder(),
+                    //             filled: false,
+                    //             onChange: (value) {},
+                    //             fillColor: theme.colorScheme.primary),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
@@ -374,7 +395,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.lifePartnerName.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Life Partner Name",
+                        // hintText: "Life Partner Name",
                         labelText: "Life Partner Name",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -387,53 +408,82 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.lifePartnerPhone.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Life Partner Phone",
-                        labelText: "Life Partner Phone",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        textInputType: TextInputType.phone,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PhoneNumberTextFieldWidget(
+                              c: 1,
+                              ignore: false,
+                              phoneController:
+                                  addController.lifePartnerPhone.value,
+                              lable: "Life Partner Phone"),
+                        ),
+                      ],
+                    ),
+                    // CustomTextFormField(
+                    //     controller: addController.lifePartnerPhone.value,
+                    //     margin:
+                    //         EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
+                    //     hintText: "Life Partner Phone",
+                    //     labelText: "Life Partner Phone",
+                    //     textInputAction: TextInputAction.done,
+                    //     maxLines: 1,
+                    //     textInputType: TextInputType.phone,
+                    //     inputFormatters: [
+                    //       FilteringTextInputFormatter.digitsOnly
+                    //     ],
+                    //     contentPadding: EdgeInsets.symmetric(
+                    //         horizontal: 11.h, vertical: 17.v),
+                    //     borderDecoration: const OutlineInputBorder(),
+                    //     filled: false,
+                    //     onChange: (value) {},
+                    //     fillColor: theme.colorScheme.primary),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.homePhone.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Home Phone",
-                        labelText: "Home Phone",
-                        textInputAction: TextInputAction.done,
-                        textInputType: TextInputType.phone,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+
+                     Row(
+                      children: [
+                        Expanded(
+                          child: PhoneNumberTextFieldWidget(
+                              c: 1,
+                              ignore: false,
+                              phoneController:
+                                  addController.homePhone.value,
+                              lable: "Home Phone"),
+                        ),
+                      ],
+                    ),
+
+                    
+                    // CustomTextFormField(
+                    //     controller: addController.homePhone.value,
+                    //     margin:
+                    //         EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
+                    //     hintText: "Home Phone",
+                    //     labelText: "Home Phone",
+                    //     textInputAction: TextInputAction.done,
+                    //     textInputType: TextInputType.phone,
+                    //     inputFormatters: [
+                    //       FilteringTextInputFormatter.digitsOnly
+                    //     ],
+                    //     maxLines: 1,
+                    //     contentPadding: EdgeInsets.symmetric(
+                    //         horizontal: 11.h, vertical: 17.v),
+                    //     borderDecoration: const OutlineInputBorder(),
+                    //     filled: false,
+                    //     onChange: (value) {},
+                    //     fillColor: theme.colorScheme.primary),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
                     CustomTextFormField(
                         controller: addController.personalEmail.value,
+                        textInputType: TextInputType.emailAddress,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Personal Email",
+                        // hintText: "Personal Email",
                         labelText: "Personal Email",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -450,7 +500,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.businessNameController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Business Name",
+                        // hintText: "Business Name",
                         labelText: "Business Name",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -467,8 +517,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.businessEmail.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Business Email",
+                        // hintText: "Business Email",
                         labelText: "Business Email",
+                        textInputType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
@@ -484,7 +535,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.businessFax.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Business Fax",
+                        // hintText: "Business Fax",
                         labelText: "Business Fax",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -501,7 +552,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.webSiteController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Website",
+                        // hintText: "Website",
                         labelText: "Website",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -518,7 +569,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           controller: addController.homeAddressController.value,
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "Home Address *",
+                          // hintText: "Home Address *",
                           labelText: "Home Address *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
@@ -544,7 +595,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.aptController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Apt, Ste",
+                        // hintText: "Apt, Ste",
                         labelText: "Apt, Ste",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -561,9 +612,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           controller: addController.zipController.value,
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
-                          hintText: "ZIP *",
+                          // hintText: "ZIP *",
                           labelText: "ZIP *",
                           textInputAction: TextInputAction.done,
+                          textInputType: TextInputType.number,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 11.h, vertical: 17.v),
@@ -587,7 +639,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             addController.businessAddressController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Business Address *",
+                        // hintText: "Business Address *",
                         labelText: "Business Address *",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -612,7 +664,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.businessAptController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "Apt, Ste",
+                        // hintText: "Apt, Ste",
                         labelText: "Apt, Ste",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
@@ -626,7 +678,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         controller: addController.businessZipController.value,
                         margin:
                             EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        hintText: "ZIP *",
+                        // hintText: "ZIP *",
                         labelText: "ZIP *",
                         textInputType: TextInputType.number,
                         inputFormatters: [
@@ -666,7 +718,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                   addController.addContact();
                                 }
                               },
-                              text: "Create Connection",
+                              text: "Create Contact",
                               buttonStyle: const ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll(
                                       AppColors.buttonColor)),

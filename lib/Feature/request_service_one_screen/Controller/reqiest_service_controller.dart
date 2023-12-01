@@ -169,7 +169,7 @@ class RequestServiceController extends GetxController {
               ),
               child: child!);
         }));
-    if (pickedDate != null && pickedDate != selectedDate) {
+    if (pickedDate != null && pickedDate != selectedDate.value) {
       selectedDate.value = pickedDate;
       selectDateController.value.text = convertAndFormatDate(pickedDate);
       requistServiceEnable();

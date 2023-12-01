@@ -32,7 +32,7 @@ class ContactController extends GetxController {
 
   RxBool anySelected = false.obs;
 
-  uploadContacts() async {
+  Future uploadContacts() async {
     try {
       Get.defaultDialog(
         titlePadding: EdgeInsets.zero,
@@ -70,7 +70,9 @@ class ContactController extends GetxController {
         Get.back();
         ToastWidget.successToast(success: "Contacts uploaded successfully");
         
+        
         addContactController.getContactList();
+        
         
       } else  {
         bool response;

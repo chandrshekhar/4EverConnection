@@ -178,8 +178,9 @@ class _MyContactsScreenState extends State<MyContactsScreen>
                                   isDisabled:
                                       !contactController.anySelected.value,
                                   text: "Upload",
-                                  onTap: () {
-                                    contactController.uploadContacts();
+                                  onTap: () async {
+                                   await contactController.uploadContacts();
+                                   Get.back();
                                   },
                                 ),
                         ),

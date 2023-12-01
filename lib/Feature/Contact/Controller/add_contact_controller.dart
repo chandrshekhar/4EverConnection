@@ -13,8 +13,11 @@ import 'package:forever_connection/core/utils/shared_pref_services.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class AddContactController extends GetxController {
+
+  var selectedDate = DateTime.now().obs;
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
   var lastNameController = TextEditingController().obs;
@@ -39,6 +42,9 @@ class AddContactController extends GetxController {
   var businessAptController = TextEditingController().obs;
   var businessZipController = TextEditingController().obs;
 
+
+
+
   RxString gender = "Select Gender".obs;
   RxBool isUploadingContact = false.obs;
 
@@ -49,6 +55,42 @@ class AddContactController extends GetxController {
 
   RxString choosenFilename = RxString("");
   Rx<File?> files = Rx<File?>(null);
+
+
+  Future<void> selectDate(BuildContext context) async {
+    var pickedDate = await showDatePicker(
+        context: context,
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        initialDate: selectedDate.value,
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+        fieldHintText: '',
+        useRootNavigator: false,
+        builder: ((context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                datePickerTheme: const DatePickerThemeData(
+                  dayStyle: TextStyle(fontSize: 20),
+                  headerHeadlineStyle: TextStyle(fontSize: 20),
+                  headerHelpStyle: TextStyle(fontSize: 20),
+                  weekdayStyle: TextStyle(fontSize: 20),
+                ),
+              ),
+              child: child!);
+        }));
+    if (pickedDate != null && pickedDate != selectedDate.value) {
+      selectedDate.value = pickedDate;
+      dateOfBirth.value.text = convertAndFormatDate(pickedDate);
+      
+    }
+  }
+
+  String convertAndFormatDate(DateTime inputDate) {
+    // final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
+    // final parsedDate = originalFormat.parse(inputDate);
+    final outputFormat = DateFormat("yyyy-MM-dd");
+    return outputFormat.format(inputDate);
+  }
 
   Future<void> getContactList() async {
     var token = await SharedPref().getUserToken();
