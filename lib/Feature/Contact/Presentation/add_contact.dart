@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/address_search.dart';
+import 'package:forever_connection/core/utils/place_service.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
@@ -13,6 +15,7 @@ import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 import '../Controller/contact_text_validation.dart';
 
@@ -33,6 +36,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
   final emailKey = GlobalKey<FormState>();
   final homeKey = GlobalKey<FormState>();
   final zipKey = GlobalKey<FormState>();
+  final focus = FocusNode();
+  final focus2 = FocusNode();
+
   final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
@@ -168,7 +174,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
+                              horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
@@ -195,7 +201,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -212,7 +218,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
+                              horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
@@ -252,12 +258,12 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         },
                         margin:
                             EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        hintText: "Date of Birth",
-                        // labelText: "Date of Birth",
+                        // hintText: "Date of Birth",
+                        labelText: "Date of Birth",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -274,7 +280,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -291,7 +297,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -308,7 +314,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -326,7 +332,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -339,14 +345,19 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       children: [
                         
                         Expanded(
-                          child: Form(
-                            key: phoneKey,
-                            child: PhoneNumberTextFieldWidget(
-                                c: 1,
-                                ignore: false,
-                                phoneController:
-                                    addController.mobilePhoneController.value,
-                                lable: "Mobile Number"),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.h),
+                            child: Form(
+                              
+                              key: phoneKey,
+                              child: PhoneNumberTextFieldWidget(
+                                
+                                  c: 1,
+                                  ignore: false,
+                                  phoneController:
+                                      addController.mobilePhoneController.value,
+                                  lable: "Mobile Number"),
+                            ),
                           ),
                         ),
                       ],
@@ -400,7 +411,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -412,12 +423,15 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: PhoneNumberTextFieldWidget(
-                              c: 1,
-                              ignore: false,
-                              phoneController:
-                                  addController.lifePartnerPhone.value,
-                              lable: "Life Partner Phone"),
+                          child: Padding(
+                             padding: EdgeInsets.symmetric(horizontal: 12.h),
+                            child: PhoneNumberTextFieldWidget(
+                                c: 1,
+                                ignore: false,
+                                phoneController:
+                                    addController.lifePartnerPhone.value,
+                                lable: "Life Partner Phone"),
+                          ),
                         ),
                       ],
                     ),
@@ -446,12 +460,15 @@ class _AddContactScreenState extends State<AddContactScreen> {
                      Row(
                       children: [
                         Expanded(
-                          child: PhoneNumberTextFieldWidget(
-                              c: 1,
-                              ignore: false,
-                              phoneController:
-                                  addController.homePhone.value,
-                              lable: "Home Phone"),
+                          child: Padding(
+                             padding: EdgeInsets.symmetric(horizontal: 12.h),
+                            child: PhoneNumberTextFieldWidget(
+                                c: 1,
+                                ignore: false,
+                                phoneController:
+                                    addController.homePhone.value,
+                                lable: "Home Phone"),
+                          ),
                         ),
                       ],
                     ),
@@ -488,7 +505,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -505,7 +522,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -523,7 +540,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -540,7 +557,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -557,7 +574,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -566,6 +583,26 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       key: homeKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: CustomTextFormField(
+                        onTap: () async {
+                            // generate a new token here
+                            final sessionToken = const Uuid().v4();
+                            final Suggestion? result = await showSearch(
+                              context: context,
+                              delegate: AddressSearch(sessionToken),
+                            );
+                            // This will change the text displayed in the TextField
+                            if (result != null) {
+                              final placeDetails =
+                                  await PlaceApiProvider(sessionToken)
+                                      .getPlaceDetailFromId(result.placeId);
+                              addController.homeAddressController.value
+                                  .text = result.description;
+                              addController.zipController.value.text =
+                                  placeDetails.zipCode ?? "";
+                            }
+                            // ignore: use_build_context_synchronously
+                            FocusScope.of(context).requestFocus(focus);
+                          },
                           controller: addController.homeAddressController.value,
                           margin: EdgeInsets.only(
                               left: 12.h, top: 15.v, right: 12.h),
@@ -574,7 +611,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
+                              horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
@@ -590,51 +627,77 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           },
                           fillColor: theme.colorScheme.primary),
                     ),
-                    CustomTextFormField(
-                        maxLength: 10,
-                        controller: addController.aptController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        // hintText: "Apt, Ste",
-                        labelText: "Apt, Ste",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
-                    Form(
-                      key: zipKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    Row(children: [Expanded(
                       child: CustomTextFormField(
-                          controller: addController.zipController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          // hintText: "ZIP *",
-                          labelText: "ZIP *",
+                          
+                          controller: addController.aptController.value,
+                          focusNode: focus,
+                          
+                          margin:
+                              EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
+                          // hintText: "Apt, Ste",
+                          labelText: "Apt, Ste",
                           textInputAction: TextInputAction.done,
-                          textInputType: TextInputType.number,
                           maxLines: 1,
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 17.v),
+                              horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
-                          onChange: (value) {
-                            formValidation.setZipValidation(value);
-                            formValidation.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 4) {
-                              return "Enter valid zip code";
-                            } else {
-                              return null;
-                            }
-                          },
+                          onChange: (value) {},
                           fillColor: theme.colorScheme.primary),
                     ),
+                    Expanded(
+                      child: Form(
+                        key: zipKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: CustomTextFormField(
+                            controller: addController.zipController.value,
+                            margin: EdgeInsets.only(
+                                left: 12.h, top: 15.v, right: 12.h),
+                            // hintText: "ZIP *",
+                            labelText: "ZIP *",
+                            textInputAction: TextInputAction.done,
+                            textInputType: TextInputType.number,
+                            maxLines: 1,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 11.h, vertical: 7.v),
+                            borderDecoration: const OutlineInputBorder(),
+                            filled: false,
+                            onChange: (value) {
+                              formValidation.setZipValidation(value);
+                              formValidation.checkButtonValidation();
+                            },
+                            validator: (value) {
+                              if (value!.length < 4) {
+                                return "Enter valid zip code";
+                              } else {
+                                return null;
+                              }
+                            },
+                            fillColor: theme.colorScheme.primary),
+                      ),
+                    ),],),
                     CustomTextFormField(
+                      onTap: () async {
+                          // generate a new token here
+                          final sessionToken = const Uuid().v4();
+                          final Suggestion? result = await showSearch(
+                            context: context,
+                            delegate: AddressSearch(sessionToken),
+                          );
+                          // This will change the text displayed in the TextField
+                          if (result != null) {
+                            final placeDetails =
+                                await PlaceApiProvider(sessionToken)
+                                    .getPlaceDetailFromId(result.placeId);
+                            addController.businessAddressController.value.text =
+                                result.description;
+                            addController.businessZipController.value.text =
+                                placeDetails.zipCode ?? "";
+                          }
+                          // ignore: use_build_context_synchronously
+                          FocusScope.of(context).requestFocus(focus2);
+                        },
                         controller:
                             addController.businessAddressController.value,
                         margin:
@@ -644,7 +707,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
+                            horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {
@@ -659,50 +722,63 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           }
                         },
                         fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        maxLength: 10,
-                        controller: addController.businessAptController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        // hintText: "Apt, Ste",
-                        labelText: "Apt, Ste",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
-                    CustomTextFormField(
-                        controller: addController.businessZipController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        // hintText: "ZIP *",
-                        labelText: "ZIP *",
-                        textInputType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 17.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {
-                          formValidation.setZipValidation(value);
-                          formValidation.checkButtonValidation();
-                        },
-                        validator: (value) {
-                          if (value!.length < 4) {
-                            return "Enter valid zip code";
-                          } else {
-                            return null;
-                          }
-                        },
-                        fillColor: theme.colorScheme.primary),
-                    SizedBox(
+                     Row(
+                      children: [
+                        Expanded(
+                          child: CustomTextFormField(
+                            focusNode: focus2,
+                              
+                              controller:
+                                  addController.businessAptController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 5.v, right: 12.h),
+                              // hintText: "Apt, Ste",
+                              labelText: "Apt, Ste",
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 7.v),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {},
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                        Expanded(
+                          child: CustomTextFormField(
+                              controller:
+                                  addController.businessZipController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, top: 5.v, right: 12.h),
+                              // hintText: "ZIP *",
+                              labelText: "ZIP *",
+                              textInputType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 11.h, vertical: 7.v),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              onChange: (value) {
+                                formValidation.setZipValidation(value);
+                                formValidation.checkButtonValidation();
+                              },
+                              validator: (value) {
+                                if (value!.length < 4) {
+                                  return "Enter valid zip code";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                   
+                      ],
+                     ),
+                     
+                     SizedBox(
                       height: 20.adaptSize,
                     ),
                     Obx(
