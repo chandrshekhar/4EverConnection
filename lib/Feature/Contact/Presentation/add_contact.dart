@@ -399,9 +399,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     //     ),
                     //   ],
                     // ),
-                    SizedBox(
-                      height: 16.adaptSize,
-                    ),
+                    // SizedBox(
+                    //   height: 16.adaptSize,
+                    // ),
                     CustomTextFormField(
                         controller: addController.lifePartnerName.value,
                         margin:
@@ -416,9 +416,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         filled: false,
                         onChange: (value) {},
                         fillColor: theme.colorScheme.primary),
-                    SizedBox(
-                      height: 16.adaptSize,
-                    ),
+                    // SizedBox(
+                    //   height: 16.adaptSize,
+                    // ),
 
                     Row(
                       children: [
