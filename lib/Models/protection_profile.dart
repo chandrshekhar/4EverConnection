@@ -35,18 +35,5 @@ class ProtectionDataModel {
     type = json['type'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user'] = this.user;
-    data['policy_number'] = this.policyNumber;
-    data['policy_type'] = this.policyType;
-    data['issue_date'] = this.issueDate;
-    data['company_name'] = this.companyName;
-    data['company_phone'] = this.companyPhone;
-    data['current_death_benefit'] = this.currentDeathBenefit;
-    data['current_premiums'] = this.currentPremiums;
-    data['type'] = this.type;
-    return data;
-  }
+  
 }

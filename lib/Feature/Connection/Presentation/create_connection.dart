@@ -18,7 +18,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../core/utils/address_autocomplete_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class CreateConnectionScreen extends StatefulWidget {

@@ -32,17 +32,5 @@ class LifeInsuranceModel {
     user = json['user'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['policy_number'] = policyNumber;
-    data['policy_type'] = policyType;
-    data['issue_date'] = issueDate;
-    data['company_name'] = companyName;
-    data['company_phone'] = companyPhone;
-    data['current_death_benefit'] = currentDeathBenefit;
-    data['current_premiums'] = currentPremiums;
-    data['user'] = user;
-    return data;
-  }
+ 
 }

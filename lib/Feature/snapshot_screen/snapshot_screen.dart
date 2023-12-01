@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -11,7 +10,6 @@ import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../Controllers/Snapshot Controller/snapshot_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
 
