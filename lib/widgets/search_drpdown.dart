@@ -27,15 +27,23 @@ class SearchDropDownWidget extends StatelessWidget {
       getImmediateSuggestions: true,
       textFieldConfiguration: TextFieldConfiguration(
         controller: controller,
-        decoration: InputDecoration(labelText: lableName ?? "Select"),
+        decoration: InputDecoration(
+          labelText: lableName ?? "Select",
+          suffix: InkWell(
+            onTap: () {
+              controller?.clear();
+            },
+            child: Icon(Icons.close, size: 16,),
+          ),
+        ),
       ),
       suggestionsCallback: suggestionsCallback,
       itemBuilder: (context, suggestion) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(fromWhere.toString() == "service"
-                ? suggestion.name ?? ""
-                : suggestion.fullName ?? ""),
+              ? suggestion.name ?? ""
+              : suggestion.fullName ?? ""),
         );
       },
       onSuggestionSelected: onSuggestionSelected ?? (selection) {},
