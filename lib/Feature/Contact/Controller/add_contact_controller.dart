@@ -92,7 +92,7 @@ class AddContactController extends GetxController {
     return outputFormat.format(inputDate);
   }
 
-  Future<void> getContactList() async {
+  Future<void> getContactList({String searchString = ''}) async {
     var token = await SharedPref().getUserToken();
     try {
       isprotectionDataLoading(true);
@@ -102,7 +102,7 @@ class AddContactController extends GetxController {
         'Authorization': "Bearer $token"
       };
 
-      var response = await dio.get(ApiPath.getContact);
+      var response = await dio.get("${ApiPath.getContact}$searchString");
       if (response.statusCode == 200) {
         final List<ContactListModel> data = (response.data as List)
             .map((json) => ContactListModel.fromJson(json))

@@ -27,7 +27,7 @@ class ApiPath {
   static const relationship = "$baseUrl$profile/relationship";
   static const protection = "$baseUrl$profile/protection";
 
-  static const getContact = "https://4everconnection.com/api/user-contacts/";
+  static const getContact = "https://4everconnection.com/api/user-contacts?search=";
 
   // get tooltips
   static const getTooltips = "$baseUrl/api/tooltips/";

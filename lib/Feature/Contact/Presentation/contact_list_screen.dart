@@ -36,6 +36,12 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
   @override
+  void dispose() {
+    contactController.searchController.value.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
@@ -82,7 +88,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
                           margin: EdgeInsets.only(left: 22.h),
                           labelText: "Search contact",
                           textInputType: TextInputType.name,
-                          onChange: (value) {},
+                          onChange: (value) {
+                            addContactController.getContactList(searchString: value);
+                          },
                           obscureText: false),
                     ),
                     SizedBox(
