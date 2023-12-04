@@ -170,6 +170,7 @@ class AddContactController extends GetxController {
       // no gender property for contact found in flutter contacts
     }
     if (dateOfBirth.value.text.isNotEmpty) {
+      
       // no dob property for contact found in flutter contacts
     }
 

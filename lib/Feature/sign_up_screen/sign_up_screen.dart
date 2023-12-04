@@ -6,6 +6,7 @@ import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/address_search.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
+import 'package:forever_connection/core/utils/date_formatter.dart';
 import 'package:forever_connection/core/utils/place_service.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
@@ -372,12 +373,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Expanded(
                               child: CustomTextFormField(
-                                onTap: () =>
-                                    signUpController.selectDate(context),
+                                // onTap: () =>
+                                //     signUpController.selectDate(context),
+                                textInputType: TextInputType.number,
+                                counterText: "",
                                 controller:
                                     signUpController.dobController.value,
+                                    inputFormatters: [DateTextFormatter()],
                                 margin: EdgeInsets.only(left: 22.h),
-                                hintText: "Date of Birth ",
+                                hintText: "MM/DD/YYYY",
+                                maxLength: 10,
                                 labelText: "Date of Birth ",
                               ),
                             ),

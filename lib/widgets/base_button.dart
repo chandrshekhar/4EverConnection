@@ -12,6 +12,7 @@ class BaseButton extends StatelessWidget {
     this.height,
     this.width,
     this.margin,
+    this.padding,
     this.alignment,
   }) : super(
           key: key,
@@ -32,6 +33,8 @@ class BaseButton extends StatelessWidget {
   final double? width;
 
   final EdgeInsets? margin;
+
+  final EdgeInsets? padding;
 
   final Alignment? alignment;
 

@@ -66,15 +66,17 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
             children: [
               SizedBox(height: 10.h),
               CustomOutlinedButton(
+                
                   buttonStyle: CustomButtonStyles.fillLightBlueTL20,
                   buttonTextStyle: const TextStyle(color: Colors.white),
-                  width: 160.h,
+                  
+                  width: 200.h,
                   text: "Services in Progress"),
               Container(
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
                 height: MediaQuery.of(context).size.height * 0.36,
                 child: Obx(
-                  () => userServiceController.isServiceLoading == true
+                  () => userServiceController.isServiceLoading.value == true
                       ?const Center(child:  CircularProgressIndicator.adaptive())
                       : userServiceController.userServicesPendingList.isEmpty
                           ? const Center(
@@ -89,14 +91,14 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               CustomOutlinedButton(
                   buttonStyle: CustomButtonStyles.fillLightBlueTL20,
                   buttonTextStyle: const TextStyle(color: Colors.white),
-                  width: 167.h,
+                  width: 197.h,
                   text: "Completed Services"),
               SizedBox(height: 1.h),
               Container(
                 height: MediaQuery.of(context).size.height * 0.35,
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
                 child: Obx(
-                  () => userServiceController.isServiceLoading == true
+                  () => userServiceController.isServiceLoading.value == true
                       ? const Center(child:  CircularProgressIndicator.adaptive())
                       : userServiceController.userServicesCompletedList.isEmpty
                           ? const Center(

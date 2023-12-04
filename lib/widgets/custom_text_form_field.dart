@@ -31,6 +31,8 @@ class CustomTextFormField extends StatelessWidget {
       this.validator,
       this.readOnly = false,
       this.onTap,
+      this.counterText,
+      
       this.inputFormatters,
       this.onChange,
       this.maxLength,  this.context,this.onEditingComplete})
@@ -80,6 +82,8 @@ class CustomTextFormField extends StatelessWidget {
 
   final bool? filled;
 
+  final String? counterText;
+
   final FormFieldValidator<String>? validator;
 
   void Function()? onTap;
@@ -91,6 +95,7 @@ class CustomTextFormField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   final BuildContext? context;
+  
 
   void Function()? onEditingComplete;
 
@@ -103,11 +108,14 @@ class CustomTextFormField extends StatelessWidget {
         width: width ?? double.maxFinite,
         margin: margin,
         child: TextFormField(
+          
+          
         focusNode: focusNode,
           textCapitalization: TextCapitalization.sentences,
           maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,
+          inputFormatters: inputFormatters,
           style: textStyle ??
               TextStyle(
                   color: Colors.black,
@@ -128,6 +136,7 @@ class CustomTextFormField extends StatelessWidget {
       );
   InputDecoration get decoration => InputDecoration(
         hintText: hintText ?? "",
+        counterText: counterText,
         labelText: labelText ?? "",
         hintStyle: hintStyle ??
             const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),

@@ -17,10 +17,11 @@ class CustomOutlinedButton extends BaseButton {
     Alignment? alignment,
     double? height,
     double? width,
-    EdgeInsets? margin,
+    EdgeInsets? margin, padding,
     required String text,
   }) : super(
           text: text,
+          padding: padding,
           onTap: onTap,
           buttonStyle: buttonStyle,
           isDisabled: isDisabled,
@@ -50,8 +51,9 @@ class CustomOutlinedButton extends BaseButton {
   }
 
   Widget get buildOutlinedButtonWidget => Container(
+    padding: padding,
         height: height ?? 40.v,
-        width: width ?? double.maxFinite,
+        width: width ,
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(
