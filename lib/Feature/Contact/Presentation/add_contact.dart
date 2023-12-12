@@ -171,8 +171,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           labelText: "First name *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 7.v),
+                          // contentPadding: EdgeInsets.symmetric(
+                          //     horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
@@ -182,13 +182,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "First name can't be empty.";
-                            } else if (value.length < 4) {
-                              return "First name must have 4 character";
                             } else {
                               return null;
                             }
                           },
                           fillColor: theme.colorScheme.primary),
+                    ),
+                    SizedBox(
+                      height: 16.adaptSize,
                     ),
                     CustomTextFormField(
                         controller: addController.middleNameController.value,
@@ -198,12 +199,16 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Middle name (if Any)",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
                         fillColor: theme.colorScheme.primary),
+
+                    SizedBox(
+                      height: 16.adaptSize,
+                    ),
                     Form(
                       key: lastNameKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -215,8 +220,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           labelText: "Last name *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 7.v),
+                          // contentPadding: EdgeInsets.symmetric(
+                          //     horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
@@ -231,8 +236,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       borderDecoration: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey)),
                       margin: const EdgeInsets.only(left: 14, right: 14),
-                      contentPadding:
-                          const EdgeInsets.only(top: 10, bottom: 10, left: 10),
+                      // contentPadding:
+                      //     const EdgeInsets.only(top: 10, bottom: 10, left: 10),
                       items: const ["Male", "Female", "Other"],
                       onChanged: (value) {
                         addController.gender.value = value;
@@ -253,8 +258,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Date of Birth",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -270,8 +275,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Company Name",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -287,8 +292,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Position",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -304,8 +309,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Occupation",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -322,8 +327,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Ideal Occupation",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -337,15 +342,29 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
-                            child: Form(
-                              key: phoneKey,
-                              child: PhoneNumberTextFieldWidget(
-                                  c: 1,
-                                  ignore: false,
-                                  phoneController:
-                                      addController.mobilePhoneController.value,
-                                  lable: "Mobile Number"),
-                            ),
+                            child: Obx(() => Form(
+                                  key: phoneKey,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  child: PhoneNumberTextFieldWidget(
+                                      onChange: (value) {
+                                        formValidation
+                                            .setPhoneNameValidation(value);
+                                        formValidation.checkButtonValidation();
+                                      },
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Number is required";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      c: 1,
+                                      ignore: false,
+                                      phoneController: addController
+                                          .mobilePhoneController.value,
+                                      lable: "Mobile Number"),
+                                )),
                           ),
                         ),
                       ],
@@ -398,8 +417,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Life Partner Name",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -490,8 +509,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Personal Email",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -507,8 +526,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Business Name",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -525,8 +544,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         textInputType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -542,8 +561,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Business Fax",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -559,8 +578,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Website",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {},
@@ -596,8 +615,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           labelText: "Home Address *",
                           textInputAction: TextInputAction.done,
                           maxLines: 1,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 11.h, vertical: 7.v),
+                          // contentPadding: EdgeInsets.symmetric(
+                          //     horizontal: 11.h, vertical: 7.v),
                           borderDecoration: const OutlineInputBorder(),
                           filled: false,
                           onChange: (value) {
@@ -625,8 +644,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               labelText: "Apt, Ste",
                               textInputAction: TextInputAction.done,
                               maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 11.h, vertical: 7.v),
+                              // contentPadding: EdgeInsets.symmetric(
+                              //     horizontal: 11.h, vertical: 7.v),
                               borderDecoration: const OutlineInputBorder(),
                               filled: false,
                               onChange: (value) {},
@@ -646,8 +665,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                 textInputAction: TextInputAction.done,
                                 textInputType: TextInputType.number,
                                 maxLines: 1,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 11.h, vertical: 7.v),
+                                // contentPadding: EdgeInsets.symmetric(
+                                //     horizontal: 11.h, vertical: 7.v),
                                 borderDecoration: const OutlineInputBorder(),
                                 filled: false,
                                 onChange: (value) {
@@ -695,8 +714,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         labelText: "Business Address *",
                         textInputAction: TextInputAction.done,
                         maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 11.h, vertical: 7.v),
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     horizontal: 11.h, vertical: 7.v),
                         borderDecoration: const OutlineInputBorder(),
                         filled: false,
                         onChange: (value) {
@@ -724,8 +743,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               labelText: "Apt, Ste",
                               textInputAction: TextInputAction.done,
                               maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 11.h, vertical: 7.v),
+                              // contentPadding: EdgeInsets.symmetric(
+                              //     horizontal: 11.h, vertical: 7.v),
                               borderDecoration: const OutlineInputBorder(),
                               filled: false,
                               onChange: (value) {},
@@ -745,8 +764,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               ],
                               textInputAction: TextInputAction.done,
                               maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 11.h, vertical: 7.v),
+                              // contentPadding: EdgeInsets.symmetric(
+                              //     horizontal: 11.h, vertical: 7.v),
                               borderDecoration: const OutlineInputBorder(),
                               filled: false,
                               onChange: (value) {

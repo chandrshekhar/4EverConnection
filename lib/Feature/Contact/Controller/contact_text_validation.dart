@@ -10,11 +10,8 @@ class ContactValidation extends GetxController{
 
   checkButtonValidation() {
     if (isFirstNameValidate.value == false ||
-        
         isPhoneNumberValidate.value == false ||
-        isEmailValidate.value == false ||
-        homeAddressValidate.value == false ||
-        isZipValidate.value == false) {
+        isEmailValidate.value == false) {
       isButtonStateChange(false);
     } else {
       isButtonStateChange(true);
@@ -29,10 +26,16 @@ class ContactValidation extends GetxController{
     }
   }
 
+  phoneNumber(String value){
+    if(value.isNotEmpty){
+
+    }
+  }
+
  
 
   setPhoneNameValidation(String value) {
-    if (value.length < 7) {
+    if (value.isEmpty) {
       isPhoneNumberValidate(false);
     } else {
       isPhoneNumberValidate(true);

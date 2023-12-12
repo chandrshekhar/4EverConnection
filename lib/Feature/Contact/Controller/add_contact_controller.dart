@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +13,9 @@ import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AddContactController extends GetxController {
-
   var selectedDate = DateTime.now().obs;
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
@@ -42,9 +41,6 @@ class AddContactController extends GetxController {
   var businessAptController = TextEditingController().obs;
   var businessZipController = TextEditingController().obs;
 
-
-
-
   RxString gender = "Select Gender".obs;
   RxBool isUploadingContact = false.obs;
 
@@ -55,7 +51,6 @@ class AddContactController extends GetxController {
 
   RxString choosenFilename = RxString("");
   Rx<File?> files = Rx<File?>(null);
-
 
   Future<void> selectDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
@@ -81,14 +76,13 @@ class AddContactController extends GetxController {
     if (pickedDate != null && pickedDate != selectedDate.value) {
       selectedDate.value = pickedDate;
       dateOfBirth.value.text = convertAndFormatDate(pickedDate);
-      
     }
   }
 
   String convertAndFormatDate(DateTime inputDate) {
     // final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
     // final parsedDate = originalFormat.parse(inputDate);
-    final outputFormat = DateFormat("yyyy-MM-dd");
+    final outputFormat = DateFormat("MM/dd/yyyy");
     return outputFormat.format(inputDate);
   }
 
@@ -152,6 +146,20 @@ class AddContactController extends GetxController {
       }
     }
   }
+
+  // Future<void> saveContact() async {
+  //   // Check and request permission if needed
+  //   if (!(await Permission.contacts.request().isGranted)) {
+  //     return;
+  //   }
+  //   final newContact = Contact()
+  //     ..name.first = firstNameController.value.text
+  //     ..name.last = lastNameController.value.text
+  //     ..name.middle = middleNameController.value.text
+  //     ..phones = [Phone(mobilePhoneController.value.text)];
+  //   await newContact.insert();
+  //   print("add contact--> $newContact");
+  // }
 
   void addContact() async {
     final newContact = Contact();
@@ -270,9 +278,12 @@ class AddContactController extends GetxController {
       newContact.photo = files.value?.readAsBytesSync();
     }
     final contactController = Get.put(ContactController());
+    //  await  saveContact();
     var response =
         await contactController.uploadContactsHelper(newContact, files.value);
+
     if (response) {
+    
       ToastWidget.successToast(success: "Contact added successfully!");
       clearAllControllers();
       Get.back();

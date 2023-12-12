@@ -9,6 +9,8 @@ class PhoneNumberTextFieldWidget extends StatefulWidget {
   Widget? suffix;
   TextEditingController? phoneController;
   bool? readOnly;
+  String? Function(String?)? validator;
+  void Function(String)? onChange;
   PhoneNumberTextFieldWidget(
       {super.key,
       required this.lable,
@@ -16,7 +18,7 @@ class PhoneNumberTextFieldWidget extends StatefulWidget {
       this.c,
       this.ignore = true,
       this.readOnly,
-      this.suffix});
+      this.suffix, this.validator, this.onChange});
 
   @override
   State<PhoneNumberTextFieldWidget> createState() =>
@@ -65,6 +67,8 @@ class _PhoneNumberTextFieldWidgetState
                 readOnly: widget.readOnly ?? false,
                 key: ValueKey(_initialCountryData),
                 controller: widget.phoneController,
+                validator:widget.validator,
+                onChanged: widget.onChange,
                 decoration: InputDecoration(
                     labelText: widget.lable,
                     contentPadding: EdgeInsets.zero,

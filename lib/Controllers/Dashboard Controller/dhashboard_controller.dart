@@ -16,30 +16,30 @@ class DashboardController extends GetxController {
   List<Map<String, dynamic>> dashboardListData = [
     {
       "imagePath": ImageConstant.connectIcon,
-      "title": "Connect Someone",
-      "buttonName": "Connect",
+      "title": "Connect\nSomeone",
+      // "buttonName": "Connect",
       "buttonTap": () {
         Navigator.pushNamed(Get.context!, AppRoutes.requestServiceOneScreen);
       }
     },
     {
       "imagePath": ImageConstant.newServiceIcon,
-      "title": "New Service Request",
-      "buttonName": "Request Service",
+      "title": "New Service\nRequest",
+      // "buttonName": "Request Service",
       "buttonTap": () {
         Navigator.pushNamed(Get.context!, AppRoutes.requestServiceOneScreen);
       }
     },
     {
-      "title": "View My Services",
+      "title": "View My\nServices",
       "imagePath": ImageConstant.viewMyServiceIcon,
-      "buttonName": "View & Collaborate",
+      // "buttonName": "View & Collaborate",
       "buttonTap": () {}
     },
     {
-      "title": "View / Upload Documents",
+      "title": "View / Upload\nDocuments",
       "imagePath": ImageConstant.viewUploadDocument,
-      "buttonName": "Access My Vault",
+      // "buttonName": "Access My Vault",
       "buttonTap": () {}
     },
   ];

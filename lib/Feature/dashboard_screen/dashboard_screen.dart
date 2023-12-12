@@ -30,7 +30,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       key: _key,
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFEAF7FE),
+      backgroundColor: Colors.white,
       endDrawer: CustomDrawerWidget(
         myProfileController: myProfileController,
       ),
@@ -41,9 +41,10 @@ class DashboardScreen extends StatelessWidget {
                   child: CircularProgressIndicator.adaptive(),
                 )
               : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      height: 160,
+                      height: 160.h,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
@@ -59,85 +60,120 @@ class DashboardScreen extends StatelessWidget {
                               ImageConstant.appLogo,
                             ),
                             const Spacer(),
-                            CustomImageView(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, AppRoutes.notificationsScreen);
-                              },
-                              svgPath: ImageConstant.notificationIcon,
-                              width: 25.adaptSize,
-                              height: 25.adaptSize,
-                            ),
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                CachedNetworkImage(
-                                  imageUrl: myProfileController.userProfileModel
-                                          .value.personalData?.photo ??
-                                      "", // Replace with the actual image URL
-                                  imageBuilder: (context, imageProvider) =>
-                                      CircleAvatar(
-                                    radius: 30,
-                                    backgroundColor: Colors.white,
-                                    // Adjust the radius as needed
-                                    backgroundImage: imageProvider,
-                                  ),
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator.adaptive(
-                                          backgroundColor: AppColors
-                                              .appBackgroundColor), // Placeholder widget
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 60,
-                                  ), // Widget to display when an error occurs
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CustomImageView(
+                                      onTap: () {
+                                        Navigator.pushNamed(context,
+                                            AppRoutes.notificationsScreen);
+                                      },
+                                      svgPath: ImageConstant.notificationIcon,
+                                      width: 25.adaptSize,
+                                      height: 25.adaptSize,
+                                    ),
+                                    SizedBox(
+                                      width: 20.adaptSize,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _key.currentState!.openEndDrawer();
+                                      },
+                                      child: Icon(
+                                        Icons.menu,
+                                        color: AppColors.appBackgroundColor,
+                                        size: 50.adaptSize,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Obx(() => Text(
-                                      "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""} ${myProfileController.userProfileModel.value.personalData?.lastName ?? ""}",
-                                      style: const TextStyle(
-                                          color: AppColors.appBackgroundColor,
-                                          fontWeight: FontWeight.w600),
-                                    )),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Obx(() => Text(
+                                              "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""} ${myProfileController.userProfileModel.value.personalData?.lastName ?? ""}",
+                                              style: const TextStyle(
+                                                  color: AppColors
+                                                      .appBackgroundColor,
+                                                  fontWeight: FontWeight.w600),
+                                            )),
+                                        SizedBox(height: 5.h),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.pushNamed(context,
+                                                AppRoutes.myProfileScreen);
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 12.h,
+                                                vertical: 8.adaptSize),
+                                            // width: 100,
+                                            // height: 30,
+                                            decoration: BoxDecoration(
+                                                color: AppColors.buttonColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5.adaptSize)),
+                                            child: Center(
+                                              child: Text(
+                                                "MY PROFILE",
+                                                style: TextStyle(
+                                                    fontSize: 11.adaptSize,
+                                                    color: Colors.white,
+                                                    decoration: TextDecoration
+                                                        .underline),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                     
+                                     
+                                      ],
+                                    ),
+                                    SizedBox(width: 8.adaptSize),
+                                    CachedNetworkImage(
+                                      imageUrl: myProfileController
+                                              .userProfileModel
+                                              .value
+                                              .personalData
+                                              ?.photo ??
+                                          "", // Replace with the actual image URL
+                                      imageBuilder: (context, imageProvider) =>
+                                          CircleAvatar(
+                                        radius: 27.adaptSize,
+                                        backgroundColor: Colors.white,
+                                        // Adjust the radius as needed
+                                        backgroundImage: imageProvider,
+                                      ),
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator
+                                                  .adaptive(
+                                              backgroundColor: AppColors
+                                                  .appBackgroundColor), // Placeholder widget
+                                      errorWidget: (context, url, error) =>
+                                          Icon(
+                                        Icons.person,
+                                        color: Colors.white,
+                                        size: 50.adaptSize,
+                                      ), // Widget to display when an error occurs
+                                    ),
+                                  ],
+                                ),
                                 SizedBox(
                                   height: 8.h,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, AppRoutes.myProfileScreen);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(3.adaptSize),
-                                    width: 100,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.appBackgroundColor,
-                                        borderRadius:
-                                            BorderRadius.circular(180)),
-                                    child: Center(
-                                      child: Text(
-                                        "MY PROFILE",
-                                        style: TextStyle(
-                                            fontSize: 11.adaptSize,
-                                            color: AppColors
-                                                .floatingActionButtonColor,
-                                            decoration:
-                                                TextDecoration.underline),
-                                      ),
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
-                            IconButton(
-                                onPressed: () {
-                                  _key.currentState!.openEndDrawer();
-                                },
-                                icon: Icon(
-                                  Icons.menu,
-                                  color: AppColors.appBackgroundColor,
-                                  size: 50.adaptSize,
-                                ))
                           ],
                         ),
                       ),
@@ -161,12 +197,11 @@ class DashboardScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600),
                     ),
                     Expanded(
-                      flex: 1,
+                      // flex: 1,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
-                        padding: EdgeInsets.only(
-                            left: 16.adaptSize, right: 16.adaptSize, top: 20.h),
+                        padding: EdgeInsets.only(top: 20.h),
                         itemCount: dashboardController.dashboardListData.length,
                         itemBuilder: (context, index) {
                           return UserexperienceItemWidget(
@@ -262,30 +297,34 @@ class DashboardScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.video_file,
-                          color: AppColors.floatingActionButtonColor,
-                        ),
-                        SizedBox(
-                          width: 6.adaptSize,
-                        ),
-                        const Text(
-                          "Video Introduction",
-                          style: TextStyle(
-                              color: AppColors.floatingActionButtonColor,
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 0.adaptSize,
-                    )
                   ],
                 ),
+        ),
+      ),
+      bottomSheet: Container(
+        color: const Color(0xFFEAF7FE),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.adaptSize),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.play_circle,
+                color: AppColors.floatingActionButtonColor,
+              ),
+              SizedBox(
+                width: 6.adaptSize,
+              ),
+              Text(
+                "Video Introduction",
+                style: TextStyle(
+                    color: AppColors.floatingActionButtonColor,
+                    // decoration: TextDecoration.underline,
+                    fontSize: 18.adaptSize,
+                    fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
         ),
       ),
     );

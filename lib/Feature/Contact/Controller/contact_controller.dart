@@ -10,6 +10,7 @@ import 'package:forever_connection/Feature/Contact/Controller/add_contact_contro
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ContactController extends GetxController {
@@ -35,17 +36,18 @@ class ContactController extends GetxController {
   Future uploadContacts() async {
     try {
       Get.defaultDialog(
-        titlePadding: EdgeInsets.zero,
-        title: "",
-        contentPadding: EdgeInsets.only(left: 30.w, bottom: 20.h),
-           content: Row(
-          
-             children: [
-               CircularProgressIndicator(),
-               SizedBox(width: 10.w,),
-               Text(" Please wait"),
-             ],
-           ),
+          titlePadding: EdgeInsets.zero,
+          title: "",
+          contentPadding: EdgeInsets.only(left: 30.w, bottom: 20.h),
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                width: 10.w,
+              ),
+              Text(" Please wait"),
+            ],
+          ),
           middleText: "Please wait..",
           barrierDismissible: false);
       isUploadingContacts(true);
@@ -53,8 +55,7 @@ class ContactController extends GetxController {
         bool response = false;
         File? file;
         for (int i = 0; i < contacts.length; i++) {
-          
-          if(contacts[i].photo !=null){
+          if (contacts[i].photo != null) {
             file = await saveUint8ListAsTempFile(
                 contacts[i].photo!, "temp_img$i.jpg");
           }
@@ -69,12 +70,9 @@ class ContactController extends GetxController {
         }
         Get.back();
         ToastWidget.successToast(success: "Contacts uploaded successfully");
-        
-        
+
         addContactController.getContactList();
-        
-        
-      } else  {
+      } else {
         bool response;
         File? file;
         for (int i = 0; i < selectedContactList.length; i++) {
@@ -105,7 +103,6 @@ class ContactController extends GetxController {
 
   Future<bool> uploadContactsHelper(Contact contact, File? file) async {
     try {
-      
       Map<String, dynamic> requestModel = {
         "first_name": contact.name.first.isNotEmpty ? contact.name.first : "NA",
         "last_name": contact.name.last.isNotEmpty ? contact.name.last : "NA",
@@ -113,8 +110,9 @@ class ContactController extends GetxController {
         "additional_json": jsonEncode(contact),
       };
       log("request model is $requestModel");
-      await userProfileService.uploadContacts(requestModel, file);
-
+      await userProfileService
+          .uploadContacts(requestModel, file)
+          .then((value) => contact.insert());
       return true;
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
@@ -132,8 +130,6 @@ class ContactController extends GetxController {
 
     return tempFile;
   }
-
-  
 
   void getContactFromPhone() async {
     final stopwatch = Stopwatch()..start();
