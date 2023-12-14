@@ -1,15 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/connection_main_screen.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
+import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:get/get.dart';
+
 import '../../Controllers/User Profile Controller/user_profile_controller.dart';
 import '../../widgets/custom_popup_widget.dart';
 import '../dashboard_screen/widgets/userexperience_item_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:forever_connection/core/app_export.dart';
 
 // ignore: must_be_immutable
 class DashboardScreen extends StatelessWidget {
@@ -44,7 +45,7 @@ class DashboardScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      height: 160.h,
+                      height: 165.h,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
@@ -77,7 +78,7 @@ class DashboardScreen extends StatelessWidget {
                                       height: 25.adaptSize,
                                     ),
                                     SizedBox(
-                                      width: 20.adaptSize,
+                                      width: 15.adaptSize,
                                     ),
                                     InkWell(
                                       onTap: () {
@@ -92,7 +93,7 @@ class DashboardScreen extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 15.h,
+                                  height: 10.h,
                                 ),
                                 Row(
                                   children: [
@@ -102,10 +103,10 @@ class DashboardScreen extends StatelessWidget {
                                       children: [
                                         Obx(() => Text(
                                               "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""} ${myProfileController.userProfileModel.value.personalData?.lastName ?? ""}",
-                                              style:  TextStyle(
+                                              style: TextStyle(
                                                   color: AppColors
                                                       .appBackgroundColor,
-                                                      fontSize: 18.h,
+                                                  fontSize: 18.h,
                                                   fontWeight: FontWeight.bold),
                                             )),
                                         SizedBox(height: 5.h),
@@ -129,15 +130,13 @@ class DashboardScreen extends StatelessWidget {
                                               child: Text(
                                                 "MY PROFILE",
                                                 style: TextStyle(
-                                                    fontSize: 11.adaptSize,
-                                                    color: Colors.white,
-                                                    ),
+                                                  fontSize: 11.adaptSize,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                     
-                                     
                                       ],
                                     ),
                                     SizedBox(width: 8.adaptSize),
@@ -157,7 +156,7 @@ class DashboardScreen extends StatelessWidget {
                                       ),
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator
-                                                  .adaptive(
+                                              .adaptive(
                                               backgroundColor: AppColors
                                                   .appBackgroundColor), // Placeholder widget
                                       errorWidget: (context, url, error) =>

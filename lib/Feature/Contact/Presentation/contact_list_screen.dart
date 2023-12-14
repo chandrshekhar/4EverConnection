@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget2.dart';
@@ -25,9 +26,10 @@ class ContactListScreen extends StatefulWidget {
 class _ContactListScreenState extends State<ContactListScreen> {
   final contactController = Get.put(ContactController());
 
-  final noteController = Get.put(MyNotesController());
+  // final noteController = Get.put(MyNotesController());
 
   final addContactController = Get.put(AddContactController());
+
 
   @override
   void initState() {
@@ -168,20 +170,31 @@ class _ContactListScreenState extends State<ContactListScreen> {
                       addContactController.isContactListLoading.value == true
                           ? const Center(
                               child: CircularProgressIndicator.adaptive())
-                          :
-                           ListView.builder(
+                          : ListView.builder(
                               padding: EdgeInsets.only(top: 20.h),
-                              itemCount: 2,
+                              itemCount:
+                                  addContactController.contactModelList.length,
                               itemBuilder: (context, index) {
+                                print(addContactController
+                                    .contactModelList[index].firstName);
                                 return ContactListCard2(
-                                  author: "",
-                                  photo:"",
-                                  phoneNumber:"",
-                                  email:"",
-                                  go:"",
-                                  connect:""
-                                 
-                                );
+                                    author: addContactController
+                                            .contactModelList[index]
+                                            .firstName ??
+                                        "",
+                                    photo: addContactController
+                                            .contactModelList[index].photo ??
+                                        "",
+                                    phoneNumber: addContactController
+                                            .contactModelList[index]
+                                            .mobilePhone ??
+                                        "",
+                                    email: addContactController
+                                            .contactModelList[index]
+                                            .personalEmail ??
+                                        "",
+                                    go: "",
+                                    connect: "");
                                 // return ContactListCard2(
                                 //   author:
                                 //       "${addContactController.contactModelList[index].firstName}",
