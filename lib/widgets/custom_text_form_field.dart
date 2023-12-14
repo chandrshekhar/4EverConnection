@@ -33,7 +33,9 @@ class CustomTextFormField extends StatelessWidget {
       this.onTap,
       this.inputFormatters,
       this.onChange,
-      this.maxLength,  this.context,this.onEditingComplete})
+      this.maxLength,
+      this.context,
+      this.onEditingComplete})
       : super(
           key: key,
         );
@@ -103,7 +105,7 @@ class CustomTextFormField extends StatelessWidget {
         width: width ?? double.maxFinite,
         margin: margin,
         child: TextFormField(
-        focusNode: focusNode,
+          focusNode: focusNode,
           textCapitalization: TextCapitalization.sentences,
           maxLength: maxLength,
           readOnly: readOnly,
@@ -115,8 +117,7 @@ class CustomTextFormField extends StatelessWidget {
                   fontSize: 15.sp),
           obscureText: obscureText!,
           textInputAction: textInputAction,
-          onEditingComplete: onEditingComplete, 
-       
+          onEditingComplete: onEditingComplete,
           onChanged: onChange,
           keyboardType: textInputType,
           maxLines: maxLines ?? 1,
@@ -137,7 +138,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIconConstraints: prefixConstraints,
         suffixIconConstraints: suffixConstraints,
         isDense: true,
-        suffix: suffix,
+        suffixIcon: suffix,
         contentPadding: contentPadding ?? EdgeInsets.all(2.v),
         fillColor: fillColor,
         filled: filled,

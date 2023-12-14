@@ -30,6 +30,7 @@ class ContactListCard2 extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.only(bottom: 4.h),
       decoration: AppDecoration.outlineBlack900.copyWith(
+        color: AppColors.appBackgroundColor,
         borderRadius: BorderRadiusStyle.roundedBorder9,
       ),
       child: Column(
@@ -157,7 +158,7 @@ class ContactListCard2 extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 10.h),
         width: 60.w,
         decoration: BoxDecoration(
-            color: AppColors.grayColor,
+            color: Colors.white,
             borderRadius: BorderRadiusDirectional.circular(6.r)),
         child: Column(
           children: [
