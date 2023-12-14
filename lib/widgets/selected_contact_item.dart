@@ -1,9 +1,8 @@
-
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,6 @@ class SelectedContactItemWidget extends StatefulWidget {
   final String initials;
   final Contact contact;
   final bool selectedContacts;
-  
 
   final String phoneNumber;
   final Color color;
@@ -53,34 +51,40 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
     RxBool isSel = (false || widget.checkBoxVal).obs;
     return InkWell(
       child: ListTile(
-        onTap: () {
-       
-        },
+        onTap: () {},
         leading: CircleAvatar(
-          // backgroundColor: widget.color,
+          backgroundColor: AppColors.darkBlue,
           child: Text(
-            widget.initials,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+            widget.initials.toUpperCase(),
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.sp),
           ),
         ),
-        title: Text(widget.name),
+        title: Text(
+          widget.name,
+          style: TextStyle(fontSize: 18.sp, color: AppColors.greyTextColor),
+        ),
         trailing: Obx(() => Checkbox(
-              activeColor: AppColors.buttonColor,
+              side: BorderSide(
+                color: Colors.grey,
+                width: 1.5.sp,
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.r)),
+              activeColor: AppColors.darkBlue,
               onChanged: (value) {
                 isSel.value = value!;
-                if(value){
+                if (value) {
                   controller.selectedContactList.add(widget.contact);
-                  if(controller.selectedContactList.length > 0){
+                  if (controller.selectedContactList.length > 0) {
                     controller.anySelected.value = true;
-                  }
-                  else{
+                  } else {
                     controller.anySelected.value = false;
                   }
-                }
-                else{
-                  if(controller.selectedContactList.contains(widget.contact)){
+                } else {
+                  if (controller.selectedContactList.contains(widget.contact)) {
                     controller.selectedContactList.remove(widget.contact);
                     if (controller.selectedContactList.length > 0) {
                       controller.anySelected.value = true;
@@ -89,7 +93,8 @@ class _SelectedContactItemWidgetState extends State<SelectedContactItemWidget> {
                     }
                   }
                 }
-                log("length is "+controller.selectedContactList.length.toString());
+                log("length is " +
+                    controller.selectedContactList.length.toString());
               },
               value: controller.markAll.value
                   ? controller.markAll.value

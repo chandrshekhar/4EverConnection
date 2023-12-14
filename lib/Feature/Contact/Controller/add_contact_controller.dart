@@ -44,7 +44,7 @@ class AddContactController extends GetxController {
   RxString gender = "Select Gender".obs;
   RxBool isUploadingContact = false.obs;
 
-  RxBool isprotectionDataLoading = false.obs;
+  RxBool isContactListLoading = false.obs;
   RxList<ContactListModel> contactModelList = <ContactListModel>[].obs;
 
   Dio dio = Dio();
@@ -89,7 +89,7 @@ class AddContactController extends GetxController {
   Future<void> getContactList() async {
     var token = await SharedPref().getUserToken();
     try {
-      isprotectionDataLoading(true);
+      isContactListLoading(true);
       dio.options.headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -106,9 +106,9 @@ class AddContactController extends GetxController {
         contactModelList
             .sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
 
-        isprotectionDataLoading(false);
+        isContactListLoading(false);
       } else {
-        isprotectionDataLoading(false);
+        isContactListLoading(false);
         ToastWidget.errorToast(error: "Faild to load data");
         throw Exception("Faild to load data");
       }

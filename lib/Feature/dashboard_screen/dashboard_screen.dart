@@ -102,10 +102,11 @@ class DashboardScreen extends StatelessWidget {
                                       children: [
                                         Obx(() => Text(
                                               "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""} ${myProfileController.userProfileModel.value.personalData?.lastName ?? ""}",
-                                              style: const TextStyle(
+                                              style:  TextStyle(
                                                   color: AppColors
                                                       .appBackgroundColor,
-                                                  fontWeight: FontWeight.w600),
+                                                      fontSize: 18.h,
+                                                  fontWeight: FontWeight.bold),
                                             )),
                                         SizedBox(height: 5.h),
                                         InkWell(
@@ -130,8 +131,7 @@ class DashboardScreen extends StatelessWidget {
                                                 style: TextStyle(
                                                     fontSize: 11.adaptSize,
                                                     color: Colors.white,
-                                                    decoration: TextDecoration
-                                                        .underline),
+                                                    ),
                                               ),
                                             ),
                                           ),

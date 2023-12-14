@@ -165,35 +165,41 @@ class _ContactListScreenState extends State<ContactListScreen> {
               ),
               Expanded(
                   child: Obx(() =>
-                      addContactController.isprotectionDataLoading.value == true
+                      addContactController.isContactListLoading.value == true
                           ? const Center(
                               child: CircularProgressIndicator.adaptive())
-                          : ListView.builder(
+                          :
+                           ListView.builder(
                               padding: EdgeInsets.only(top: 20.h),
-                              
-                              
-                              
-                              itemCount: addContactController
-                                  .contactModelList.value.length,
+                              itemCount: 2,
                               itemBuilder: (context, index) {
                                 return ContactListCard2(
-                                  author:
-                                      "${addContactController.contactModelList[index].firstName}",
-                                  dateTime: noteController.dateTime(
-                                      addContactController
-                                              .contactModelList[index]
-                                              .dateCreated ??
-                                          ""),
-                                  description: addContactController
-                                          .contactModelList[index]
-                                          .currentOccupation ??
-                                      "NA",
-                                  notesTitle: addContactController
-                                          .contactModelList[index]
-                                          .mobilePhone ??
-                                      "NA",
-                                  onSeleted: (p0) {},
+                                  author: "",
+                                  photo:"",
+                                  phoneNumber:"",
+                                  email:"",
+                                  go:"",
+                                  connect:""
+                                 
                                 );
+                                // return ContactListCard2(
+                                //   author:
+                                //       "${addContactController.contactModelList[index].firstName}",
+                                //   dateTime: noteController.dateTime(
+                                //       addContactController
+                                //               .contactModelList[index]
+                                //               .dateCreated ??
+                                //           ""),
+                                //   description: addContactController
+                                //           .contactModelList[index]
+                                //           .currentOccupation ??
+                                //       "NA",
+                                //   notesTitle: addContactController
+                                //           .contactModelList[index]
+                                //           .mobilePhone ??
+                                //       "NA",
+                                //   onSeleted: (p0) {},
+                                // );
                               },
                             )))
             ],

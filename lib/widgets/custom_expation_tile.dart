@@ -21,16 +21,21 @@ class CustomExpansionPanel extends StatelessWidget {
       required this.children,
       this.titleStyle,
       this.backgroundColor,
-      this.collapsedBackgroundColor, this.leading});
+      this.collapsedBackgroundColor,
+      this.leading});
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      leading: leading,
+        collapsedTextColor: Colors.white,
+        leading: leading,
         childrenPadding: EdgeInsets.zero,
         // tilePadding: EdgeInsets.symmetric(horizontal: 0.w),
         collapsedShape: ContinuousRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(0.r))),
+            side: BorderSide.none,
+            borderRadius: BorderRadius.all(Radius.circular(
+              0.r,
+            ))),
         shape: ContinuousRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(0.r))),
         expandedCrossAxisAlignment: CrossAxisAlignment.start,
@@ -38,9 +43,12 @@ class CustomExpansionPanel extends StatelessWidget {
         collapsedBackgroundColor:
             collapsedBackgroundColor ?? AppColors.appBackgroundColor,
         expandedAlignment: Alignment.topLeft,
-        collapsedIconColor: Colors.black,
-        iconColor: Colors.black,
-        title: Text(title, style: titleStyle ?? const TextStyle()),
+        collapsedIconColor: Colors.white,
+        iconColor: AppColors.darkBlue,
+        title: Transform.translate(
+          offset: Offset(-15.w, 0),
+          child: Text(title, style: titleStyle ?? const TextStyle()),
+        ),
         onExpansionChanged: onExpansionChanged,
         initiallyExpanded: initiallyExpanded,
         children: children);

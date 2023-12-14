@@ -9,7 +9,6 @@ import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/routes/app_routes.dart';
-import 'package:forever_connection/widgets/custom_expansion_tile.dart';
 import 'package:forever_connection/widgets/custom_expation_tile.dart';
 import 'package:get/get.dart';
 
@@ -75,8 +74,8 @@ class CustomDrawerWidget extends StatelessWidget {
                                 userName,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 17.sp,
-                                    fontWeight: FontWeight.w600),
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 5.h),
                               InkWell(
@@ -96,8 +95,9 @@ class CustomDrawerWidget extends StatelessWidget {
                                     child: Text(
                                       "MY PROFILE",
                                       style: TextStyle(
-                                        fontSize: 11.sp,
+                                        fontSize: 13.sp,
                                         color: Colors.white,
+                                        fontWeight: FontWeight.bold
                                       ),
                                     ),
                                   ),
@@ -107,9 +107,9 @@ class CustomDrawerWidget extends StatelessWidget {
                               Text(
                                 "ID No. ${myProfileController.userProfileModel.value.personalData?.userId ?? ""}",
                                 style: TextStyle(
-                                    color: AppColors.buttonColor,
+                                    color: Colors.yellow[200],
                                     fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -152,399 +152,240 @@ class CustomDrawerWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Obx(
-                () => Column(
-                  children: [
-                    CustomExpansionPanel(
-                      leading: Icon(Icons.person),
-                      initiallyExpanded: false,
-                      backgroundColor: Colors.blue[50],
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          personalDetailsController
-                              .markettingExpansionTile.value!
-                              .collapse();
-
-                          personalDetailsController.toolsExpansionTile.value!
-                              .collapse();
-                        }
-                      },
-                      title: "USER",
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(0);
-                            Navigator.pushNamed(
-                                context, AppRoutes.requestServiceOneScreen);
-                          },
-                          child: Items(
-                            icon: ImageConstant.newServiceIcon,
-                            itemText: "Request Service",
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(1);
-                            Navigator.pushNamed(
-                                context, AppRoutes.myServicesScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[1] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myservice,
-                              itemText: "My Service",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(2);
-                            Navigator.pushNamed(
-                                context, AppRoutes.myProfileScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[2] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myprofile,
-                              itemText: "My Profile",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            myProfileController.updateSelectedField(3);
-                            await personalDetailsController
-                                .getMagicLink(context);
-
-                            // CustomAlretDialogs().comingSoonPopUp(
-                            //     context,
-                            //     "COMING...",
-                            //     "My Business Profile will Coming soon");
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[3] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myBusinessProfile,
-                              itemText: "My Business Profile",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(4);
-                            Navigator.pushNamed(
-                                context, AppRoutes.documentVaultScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[4] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myDocumntVaults,
-                              itemText: "My Document Vault",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(9);
-                            Navigator.pushNamed(
-                                context, AppRoutes.myNotesListScreen);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[9] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myNotes,
-                              itemText: "My Notes",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // CustomExpansionTile(
-                    //   controller:
-                    //       personalDetailsController.userExpansionTile.value,
-                    //   onExpansionChanged: (val) {},
-                    //   childrenPadding: EdgeInsets.zero,
-                    //   tilePadding: EdgeInsets.zero,
-                    //   initiallyExpanded: true,
-                    //   title: Container(
-                    //     color: AppColors.darkBlue,
-                    //     padding: EdgeInsets.all(5.sp),
-                    //     width: MediaQuery.sizeOf(context).width * 0.7.w,
-                    //     margin: EdgeInsets.only(top: 10.h),
-                    //     child: const Center(
-                    //       child: Text(
-                    //         "USER",
-                    //         style: TextStyle(
-                    //           fontSize: 18,
-                    //           fontWeight: FontWeight.w700,
-                    //           color: Colors.white,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    CustomExpansionPanel(
-                      onExpansionChanged: (val) {
-                        if (val) {
-                          personalDetailsController.userExpansionTile.value!
-                              .collapse();
-
-                          personalDetailsController.toolsExpansionTile.value!
-                              .collapse();
-                        }
-                      },
-                      // controller: personalDetailsController
-                      //     .markettingExpansionTile.value,
-                      // childrenPadding: EdgeInsets.zero,
-                      // tilePadding: EdgeInsets.zero,
-                      initiallyExpanded: false,
-                      title: "MARKETING PARTNER",
-                      //  Container(
-                      //   color: AppColors.darkBlue,
-                      //   padding: EdgeInsets.all(5.sp),
-                      //   width: MediaQuery.sizeOf(context).width * 0.7.w,
-                      //   child: const Center(
-                      //     child: Text(
-                      //       "MARKETING PARTNER",
-                      //       style: TextStyle(
-                      //         fontSize: 18,
-                      //         fontWeight: FontWeight.w700,
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(5);
-                            Get.to(ConnectionMainScreen());
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[5] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.connect,
-                              itemText: "Connect",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(6);
-                            Get.to(ConnectionListScreen());
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[6] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myConnection,
-                              itemText: "My Connection",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(7);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[7] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.myWallet,
-                              itemText: "My Wallet",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(8);
-                            Navigator.pushNamed(context, AppRoutes.contactList);
-                          },
-                          child: Container(
-                            color: myProfileController.drawerDataList[8] == true
-                                ? const Color(0xFFFF8927)
-                                : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.mycontact,
-                              itemText: "My Contacts",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    CustomExpansionPanel(
-                      onExpansionChanged: (val) {
-                        if (val) {
-                          personalDetailsController
-                              .markettingExpansionTile.value!
-                              .collapse();
-
-                          personalDetailsController.userExpansionTile.value!
-                              .collapse();
-                        }
-                      },
-                      // controller:
-                      //     personalDetailsController.toolsExpansionTile.value,
-                      // childrenPadding: EdgeInsets.zero,
-                      // tilePadding: EdgeInsets.zero,
-                      initiallyExpanded: false,
-                      title: "TOOLS & UTILITIES",
-
-                      //  Container(
-                      //   color: AppColors.darkBlue,
-                      //   padding: EdgeInsets.all(5.sp),
-                      //   width: MediaQuery.sizeOf(context).width * 0.7.w,
-                      //   child: const Center(
-                      //     child: Text(
-                      //       "TOOLS & UTILITIES",
-                      //       style: TextStyle(
-                      //         fontSize: 18,
-                      //         fontWeight: FontWeight.w700,
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(10);
-                            // Navigator.pop(context);
-                            // Navigator.pushNamed(
-                            //     context, AppRoutes.passwordSecurityScreen);
-                            myProfileController
-                                .getMagicLinkForPassSecurity(context);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => WebViewScreen(
-                            //               webViewUrl:
-                            //                   "https://4everconnection.com/security/",
-                            //             )));
-                          },
-                          child: Container(
-                            color:
-                                myProfileController.drawerDataList[10] == true
-                                    ? const Color(0xFFFF8927)
-                                    : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.passwordandSecurity,
-                              itemText: "Password & security",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(11);
-                            // Navigator.pop(context);
-                            myProfileController.getMagicLinkSupport(context);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => WebViewScreen(
-                            //               webViewUrl:
-                            //                   "https://4everconnection.com/help/",
-                            //             )));
-                          },
-                          child: Container(
-                            color:
-                                myProfileController.drawerDataList[11] == true
-                                    ? const Color(0xFFFF8927)
-                                    : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.support,
-                              itemText: "Support",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(12);
-
-                            CustomAlretDialogs().comingSoonPopUp(
-                                context,
-                                "COMING...",
-                                "Donate connection will Coming soon");
-                          },
-                          child: Container(
-                            color:
-                                myProfileController.drawerDataList[12] == true
-                                    ? const Color(0xFFFF8927)
-                                    : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.donateConnection,
-                              itemText: "Donate connection",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(13);
-                            // CustomAlretDialogs().comingSoonPopUp(
-                            //     context,
-                            //     "COMING...",
-                            //     "Make a wish will Coming soon");
-                            myProfileController.getMagicLinkMakeAWish(context);
-                          },
-                          child: Container(
-                            color:
-                                myProfileController.drawerDataList[13] == true
-                                    ? const Color(0xFFFF8927)
-                                    : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.markaWish,
-                              itemText: "Make a wish",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            myProfileController.updateSelectedField(14);
-                            LoginController().logOut(context);
-                          },
-                          child: Container(
-                            color:
-                                myProfileController.drawerDataList[14] == true
-                                    ? const Color(0xFFFF8927)
-                                    : Colors.white,
-                            child: Items(
-                              icon: ImageConstant.logout,
-                              itemText: "Logout",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ListTile(
-                      onTap: () {
-                        LoginController().logOut(context);
-                      },
-                      title: const Text(
-                        "Logout",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
+              Column(
+                children: [
+                  CustomExpansionPanel(
+                    leading: const Icon(Icons.person),
+                    collapsedBackgroundColor: AppColors.darkBlue,
+                    
+                    initiallyExpanded: false,
+                    backgroundColor: Colors.blue[50],
+                    onExpansionChanged: (value) {
+                      if (value) {
+                        // personalDetailsController
+                        //     .markettingExpansionTile.value!
+                        //     .collapse();
+                        // personalDetailsController.toolsExpansionTile.value!
+                        //     .collapse();
+                      }
+                    },
+                    title: "USER",
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // myProfileController.updateSelectedField(0);
+                          Navigator.pushNamed(
+                              context, AppRoutes.requestServiceOneScreen);
+                        },
+                        child: Items(
+                          icon: ImageConstant.newServiceIcon,
+                          itemText: "Request Service",
                         ),
                       ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(1);
+                          Navigator.pushNamed(
+                              context, AppRoutes.myServicesScreen);
+                        },
+                        child: Items(
+                          icon: ImageConstant.myservice,
+                          itemText: "My Service",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(2);
+                          Navigator.pushNamed(
+                              context, AppRoutes.myProfileScreen);
+                        },
+                        child: Items(
+                          icon: ImageConstant.myprofile,
+                          itemText: "My Profile",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          myProfileController.updateSelectedField(3);
+                          await personalDetailsController.getMagicLink(context);
+                        },
+                        child: Items(
+                          icon: ImageConstant.myBusinessProfile,
+                          itemText: "My Business Profile",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(4);
+                          Navigator.pushNamed(
+                              context, AppRoutes.documentVaultScreen);
+                        },
+                        child: Items(
+                          icon: ImageConstant.myDocumntVaults,
+                          itemText: "My Document Vault",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(9);
+                          Navigator.pushNamed(
+                              context, AppRoutes.myNotesListScreen);
+                        },
+                        child: Items(
+                          icon: ImageConstant.myNotes,
+                          itemText: "My Notes",
+                        ),
+                      ),
+                    ],
+                  ),
+                  CustomExpansionPanel(
+                    collapsedBackgroundColor: AppColors.darkBlue,
+                    onExpansionChanged: (val) {
+                      if (val) {
+                        // personalDetailsController.userExpansionTile.value!
+                        //     .collapse();
+
+                        // personalDetailsController.toolsExpansionTile.value!
+                        //     .collapse();
+                      }
+                    },
+                    leading: const Icon(Icons.business_center),
+                    initiallyExpanded: false,
+                    title: "MARKETING PARTNER",
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(5);
+                          Get.to(ConnectionMainScreen());
+                        },
+                        child: Items(
+                          icon: ImageConstant.connect,
+                          itemText: "Connect",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(6);
+                          Get.to(ConnectionListScreen());
+                        },
+                        child: Items(
+                          icon: ImageConstant.myConnection,
+                          itemText: "My Connection",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(7);
+                        },
+                        child: Items(
+                          icon: ImageConstant.myWallet,
+                          itemText: "My Wallet",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(8);
+                          Navigator.pushNamed(context, AppRoutes.contactList);
+                        },
+                        child: Items(
+                          icon: ImageConstant.mycontact,
+                          itemText: "My Contacts",
+                        ),
+                      ),
+                    ],
+                  ),
+                  CustomExpansionPanel(
+                    onExpansionChanged: (val) {
+                      if (val) {
+                        // personalDetailsController
+                        //     .markettingExpansionTile.value!
+                        //     .collapse();
+
+                        // personalDetailsController.userExpansionTile.value!
+                        //     .collapse();
+                      }
+                    },
+                    leading: const Icon(Icons.room_service),
+                    collapsedBackgroundColor: AppColors.darkBlue,
+                    initiallyExpanded: false,
+                    title: "TOOLS & UTILITIES",
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          myProfileController
+                              .getMagicLinkForPassSecurity(context);
+                        },
+                        child: Items(
+                          icon: ImageConstant.passwordandSecurity,
+                          itemText: "Password & security",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(11);
+                          // Navigator.pop(context);
+                          myProfileController.getMagicLinkSupport(context);
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (_) => WebViewScreen(
+                          //               webViewUrl:
+                          //                   "https://4everconnection.com/help/",
+                          //             )));
+                        },
+                        child: Items(
+                          icon: ImageConstant.support,
+                          itemText: "Support",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(12);
+
+                          CustomAlretDialogs().comingSoonPopUp(
+                              context,
+                              "COMING...",
+                              "Donate connection will Coming soon");
+                        },
+                        child: Items(
+                          icon: ImageConstant.donateConnection,
+                          itemText: "Donate connection",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          myProfileController.updateSelectedField(13);
+                          // CustomAlretDialogs().comingSoonPopUp(
+                          //     context,
+                          //     "COMING...",
+                          //     "Make a wish will Coming soon");
+                          myProfileController.getMagicLinkMakeAWish(context);
+                        },
+                        child: Items(
+                          icon: ImageConstant.markaWish,
+                          itemText: "Make a wish",
+                        ),
+                      ),
+                    ],
+                  ),
+                  ListTile(
+                    onTap: () {
+                      LoginController().logOut(context);
+                    },
+                    leading: const Icon(
+                      Icons.login_outlined,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
+                    title: const Text(
+                      "Logout",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -569,28 +410,31 @@ class Items extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(height: 1, color: Colors.blue[50]),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-                color: grayColor,
-                width: 32.w,
-                padding:
-                    EdgeInsets.symmetric(horizontal: 7.sp, vertical: 10.sp),
-                child: SvgPicture.asset(
-                  icon,
-                  height: 16.h,
-                  color: Colors.black.withOpacity(0.6),
-                )),
-            SizedBox(
-              width: 10.h,
-            ),
-            Text(
-              itemText,
-              style: TextStyle(letterSpacing: 2.sp, fontSize: 16.sp),
-            )
-          ],
+        Container(height: 1, color: Colors.blueGrey[200]),
+        Container(
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                  color: grayColor,
+                  width: 32.w,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.sp, vertical: 15.sp),
+                  child: SvgPicture.asset(
+                    icon,
+                    height: 16.h,
+                    color: Colors.black.withOpacity(0.6),
+                  )),
+              SizedBox(
+                width: 10.h,
+              ),
+              Text(
+                itemText,
+                style: TextStyle(letterSpacing: 2.sp, fontSize: 16.sp),
+              )
+            ],
+          ),
         ),
       ],
     );

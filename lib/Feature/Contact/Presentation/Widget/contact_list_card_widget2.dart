@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
-import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/theme/app_decoration.dart';
 import 'package:forever_connection/theme/custom_text_style.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
 
 class ContactListCard2 extends StatelessWidget {
-  final String notesTitle;
-  final String author;
-  final String description;
-  final String dateTime;
-  final Function(String)? onSeleted;
-  final String? whereFrom;
-  const ContactListCard2(
+  String author;
+  String photo;
+  String phoneNumber;
+  String email;
+  String? go;
+  String? connect;
+
+  ContactListCard2(
       {super.key,
-      required this.notesTitle,
+      required this.email,
       required this.author,
-      required this.description,
-      required this.dateTime,
-      this.onSeleted,
-      this.whereFrom});
+      required this.photo,
+      required this.phoneNumber,
+      this.go,
+      this.connect});
 
   @override
   Widget build(BuildContext context) {
@@ -37,100 +38,107 @@ class ContactListCard2 extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.only(
-                top: 6.adaptSize,
-                bottom: 6.adaptSize,
-                left: 16.adaptSize,
-                right: 10),
+                top: 10.h, bottom: 10.h, left: 15.w, right: 15.w),
             alignment: Alignment.center,
             decoration: AppDecoration.fillLightBlue.copyWith(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(9.h),
-                topRight: Radius.circular(9.h),
+                topLeft: Radius.circular(9.r),
+                topRight: Radius.circular(9.r),
               ),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                CircleAvatar(
+                  radius: 25.r,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 24.r,
+                  ),
+                ),
+                SizedBox(width: 10.w),
                 Expanded(
-                  child: Text(
-                    notesTitle,
-                    style: CustomTextStyles.titleLargePrimary_1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Chandrshekhar pandey",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        "connected by other",
+                        style: TextStyle(height: 1.2.h, color: Colors.white),
+                      )
+                    ],
                   ),
                 ),
-                ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: 6.h,
-                left: 15.adaptSize,
-                right: 15.adaptSize,
-                bottom: 6.h),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildLable(context, "Contact Name", ImageConstant.imgUser),
-                Padding(
-                  padding: EdgeInsets.only(left: 38, top: 10.h),
-                  child: Text(
-                    author,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18.adaptSize),
-                  ),
-                ),
-                
-                
-                
-               
+                Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  color: Colors.white,
+                  size: 30.sp,
+                )
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: 6.h, left: 15.adaptSize, right: 15.adaptSize, bottom: 6.h),
+            padding: EdgeInsets.all(12.sp),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildLable(context, "Occupation", ImageConstant.imgEdit),
-                Padding(
-                  padding: EdgeInsets.only(left: 38, top: 10.h),
-                  child: Text(
-                    description,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18.adaptSize),
-                  ),
+                _buildLable(
+                  "Call",
+                  Icons.mobile_screen_share_outlined,
+                ),
+                _buildLable(
+                  "Text",
+                  Icons.message_outlined,
+                ),
+                _buildLable(
+                  "Email",
+                  Icons.email_outlined,
+                ),
+                _buildLable(
+                  "Go",
+                  Icons.location_on_outlined,
+                ),
+                _buildLable(
+                  "Connect",
+                  Icons.connected_tv,
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildLable(BuildContext context, String lableName, String lableIcon) {
-    return Row(
-      children: [
-        CustomImageView(svgPath: lableIcon),
-        SizedBox(
-          width: 21.adaptSize,
-        ),
-        Text(
-          lableName,
-          style: TextStyle(
-              color: AppColors.greyTextColor,
-              fontSize: 18.adaptSize,
-              fontWeight: FontWeight.w400),
-        ),
-      ],
+  Widget _buildLable(String lableName, IconData lableIcon) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
+      width: 60.w,
+      decoration: BoxDecoration(
+          color: AppColors.grayColor,
+          borderRadius: BorderRadiusDirectional.circular(6.r)),
+      child: Column(
+        children: [
+          Icon(lableIcon, size: 18.sp, color: AppColors.darkBlue),
+          SizedBox(
+            height: 5.h,
+          ),
+          Text(
+            lableName,
+            style: TextStyle(
+                color: AppColors.darkBlue,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w300),
+          ),
+        ],
+      ),
     );
   }
 }
