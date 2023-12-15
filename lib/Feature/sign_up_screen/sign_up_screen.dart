@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.37,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/background.png"),
@@ -51,8 +51,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Center(
               child: CustomImageView(
                 imagePath: ImageConstant.appLogo,
-                height: 190.adaptSize,
-                width: 190.adaptSize,
+                height: 155.adaptSize,
+                width: 155.adaptSize,
               ),
             ),
           ),
@@ -682,14 +682,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       alignment: Alignment.topCenter,
                                     ),
                             ),
-                            SizedBox(height: 10.v),
+                            SizedBox(height: 20.h),
                             Align(
                               alignment: Alignment.center,
                               child: RichText(
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "Joined us before? ",
+                                      text: "Joined us before?  ",
                                       style: CustomTextStyles.bodyMediumGray600,
                                     ),
                                     TextSpan(
@@ -711,6 +711,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 20.h),
                       playerWidget()
                     ],
                   ),
@@ -727,8 +728,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20.adaptSize),
-      decoration: const BoxDecoration(
-        color: Colors.blueGrey,
+      decoration: BoxDecoration(
+        color: AppColors.darkBlue.withOpacity(0.1),
       ),
       child: Column(
         children: [
@@ -743,30 +744,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
             decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(10.adaptSize)),
-            child:
-                const Center(child: Icon(Icons.youtube_searched_for_outlined)),
+            child: Center(
+                child: Icon(
+              Icons.play_circle_fill,
+              color: Colors.white,
+              size: 60.adaptSize,
+            )),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: "******  ",
-                      style: CustomTextStyles.titleSmallYellow900),
-                  TextSpan(
-                    text: "5.0 ",
-                    style: CustomTextStyles.bodyMediumGray600,
-                  ),
-                  TextSpan(
-                    text: "(457 reviews)",
-                    style: CustomTextStyles.bodySmallGray600,
-                  ),
-                ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.star,
+                color: AppColors.buttonColor2,
+                size: 18.adaptSize,
               ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+              Icon(
+                Icons.star,
+                color: AppColors.buttonColor2,
+                size: 18.adaptSize,
+              ),
+              Icon(
+                Icons.star,
+                color: AppColors.buttonColor2,
+                size: 18.adaptSize,
+              ),
+              Icon(
+                Icons.star,
+                color: AppColors.buttonColor2,
+                size: 18.adaptSize,
+              ),
+              Icon(
+                Icons.star,
+                color: AppColors.buttonColor2,
+                size: 18.adaptSize,
+              ),
+              Text("   5.0",
+                  style: TextStyle(
+                      fontSize: 17.adaptSize,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black)),
+              Text(" (475 reviews)",
+                  style: TextStyle(
+                      fontSize: 17.adaptSize,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black))
+            ],
+          )
         ],
       ),
     );

@@ -45,9 +45,10 @@ class CustomExpansionPanel extends StatelessWidget {
         expandedAlignment: Alignment.topLeft,
         collapsedIconColor: Colors.white,
         iconColor: AppColors.darkBlue,
+        textColor: AppColors.darkBlue,
         title: Transform.translate(
           offset: Offset(-15.w, 0),
-          child: Text(title, style: titleStyle ?? const TextStyle()),
+          child: Text(title, style: const TextStyle()),
         ),
         onExpansionChanged: onExpansionChanged,
         initiallyExpanded: initiallyExpanded,

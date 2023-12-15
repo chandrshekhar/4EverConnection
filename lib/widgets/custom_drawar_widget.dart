@@ -11,7 +11,6 @@ import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/custom_expation_tile.dart';
 import 'package:get/get.dart';
-
 import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
 import '../Feature/Connection/Presentation/connection_list.dart';
@@ -26,8 +25,6 @@ class CustomDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String userName =
         "${myProfileController.userProfileModel.value.personalData?.firstName ?? ""}  ${myProfileController.userProfileModel.value.personalData?.lastName ?? ""}";
-
-    log("UserName--> $userName");
     return SafeArea(
       child: Drawer(
         backgroundColor: AppColors.darkBlue,
@@ -89,16 +86,15 @@ class CustomDrawerWidget extends StatelessWidget {
                                   // width: 100,
                                   // height: 30,
                                   decoration: BoxDecoration(
-                                      color: AppColors.buttonColor,
+                                      color: AppColors.buttonColor2,
                                       borderRadius: BorderRadius.circular(5.r)),
                                   child: Center(
                                     child: Text(
                                       "MY PROFILE",
                                       style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold
-                                      ),
+                                          fontSize: 13.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -155,9 +151,8 @@ class CustomDrawerWidget extends StatelessWidget {
               Column(
                 children: [
                   CustomExpansionPanel(
-                    leading: const Icon(Icons.person),
+                    leading: const Icon(Icons.person_outline),
                     collapsedBackgroundColor: AppColors.darkBlue,
-                    
                     initiallyExpanded: false,
                     backgroundColor: Colors.blue[50],
                     onExpansionChanged: (value) {
@@ -249,7 +244,7 @@ class CustomDrawerWidget extends StatelessWidget {
                         //     .collapse();
                       }
                     },
-                    leading: const Icon(Icons.business_center),
+                    leading: const Icon(Icons.handshake_outlined),
                     initiallyExpanded: false,
                     title: "MARKETING PARTNER",
                     children: [
@@ -305,7 +300,7 @@ class CustomDrawerWidget extends StatelessWidget {
                         //     .collapse();
                       }
                     },
-                    leading: const Icon(Icons.room_service),
+                    leading: const Icon(Icons.construction_outlined),
                     collapsedBackgroundColor: AppColors.darkBlue,
                     initiallyExpanded: false,
                     title: "TOOLS & UTILITIES",
@@ -373,15 +368,18 @@ class CustomDrawerWidget extends StatelessWidget {
                       LoginController().logOut(context);
                     },
                     leading: const Icon(
-                      Icons.login_outlined,
+                      Icons.logout,
                       color: Colors.white,
                     ),
-                    title: const Text(
-                      "Logout",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                    title: Transform.translate(
+                      offset: Offset(-15.w, 0),
+                      child: Text(
+                        "Logout",
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -410,7 +408,7 @@ class Items extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(height: 1, color: Colors.blueGrey[200]),
+        Container(height: 0.5.h, color: AppColors.darkBlue),
         Container(
           color: Colors.white,
           child: Row(
@@ -418,20 +416,22 @@ class Items extends StatelessWidget {
             children: [
               Container(
                   color: grayColor,
-                  width: 32.w,
+                  width: 40.w,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 10.sp, vertical: 15.sp),
+                      EdgeInsets.symmetric(horizontal: 11.sp, vertical: 16.sp),
                   child: SvgPicture.asset(
                     icon,
-                    height: 16.h,
-                    color: Colors.black.withOpacity(0.6),
+                    height: 15.h,
+                    width: 15.h,
+                    fit: BoxFit.fill,
+                    color: AppColors.darkBlue,
                   )),
               SizedBox(
                 width: 10.h,
               ),
               Text(
                 itemText,
-                style: TextStyle(letterSpacing: 2.sp, fontSize: 16.sp),
+                style: TextStyle(fontSize: 16.sp, color: AppColors.darkBlue),
               )
             ],
           ),

@@ -40,6 +40,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
       appBar: AppBar(
         leadingWidth: 44.h,
         backgroundColor: AppColors.appBackgroundColor,
+        elevation: 0.5,
         leading: AppbarImage(
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
             margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),

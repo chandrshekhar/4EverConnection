@@ -22,7 +22,7 @@ class AuthOptionScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.55,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/background.png"),
@@ -41,26 +41,26 @@ class AuthOptionScreen extends StatelessWidget {
             Text(
               '"The Effect of Quality"',
               style: TextStyle(
-                  height: 3.h,
+                  height: 4.h,
                   fontSize: 24.sp,
-                  color: AppColors.buttonColor,
+                  color: AppColors.buttonColor2,
                   fontWeight: FontWeight.bold),
             ),
             Text(
               "Creating Lifetime Connectins!",
               style: TextStyle(
-                  height: 1.2.h,
-                  fontSize: 18.sp,
+                  height: 0.5.h,
+                  fontSize: 20.sp,
                   color: AppColors.darkBlue,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w400),
             ),
             SizedBox(
-              height: 20.h,
+              height: 30.h,
             ),
             Text(
-              "Your Virtual office with a 100% Free Income Opportunity",
+              "Your Virtual office with a\n 100% Free Income Opportunity",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 40.h,
@@ -82,7 +82,7 @@ class AuthOptionScreen extends StatelessWidget {
                       (route) => false);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.orangeColor,
+                  backgroundColor: AppColors.buttonColor2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6.r), // <-- Radius
                   ),

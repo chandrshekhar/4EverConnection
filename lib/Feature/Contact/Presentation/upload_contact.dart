@@ -1,14 +1,12 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
-import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/selected_contact_item.dart';
 import 'package:get/get.dart';
@@ -38,7 +36,8 @@ class _MyContactsScreenState extends State<MyContactsScreen>
       //backgroundColor: AppColors.appBackgroundColor,
       appBar: AppBar(
         leadingWidth: 44.h,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.appBackgroundColor,
+        elevation: 0.5,
         leading: Padding(
             padding: EdgeInsets.only(left: 20.w),
             child: IconButton(
