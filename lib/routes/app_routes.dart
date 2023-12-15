@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/contact_list_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/add_note_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_list.dart';
-import 'package:forever_connection/Feature/document_vault/Presentation/document_vault.dart';
-import 'package:forever_connection/Feature/protection-profile/protection_profile_screen.dart';
-import 'package:forever_connection/Feature/splash_screen/splash_screen.dart';
-import 'package:forever_connection/Feature/login_screen/login_screen.dart';
-import 'package:forever_connection/Feature/sign_up_screen/sign_up_screen.dart';
-import 'package:forever_connection/Feature/forgot_password_screen/forgot_password_screen.dart';
-import 'package:forever_connection/Feature/reset_password_screen/reset_password_screen.dart';
+import 'package:forever_connection/Feature/change_password_screen/change_password_screen.dart';
 import 'package:forever_connection/Feature/dashboard_screen/dashboard_screen.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/request_service_one_screen.dart';
-import 'package:forever_connection/Feature/my_profile_screen/my_profile_screen.dart';
-import 'package:forever_connection/Feature/snapshot_screen/snapshot_screen.dart';
-import 'package:forever_connection/Feature/personal_details_screen/personal_details_screen.dart';
-import 'package:forever_connection/Feature/professional_profile_screen/professional_profile_screen.dart';
-import 'package:forever_connection/Feature/relationships_screen/relationships_screen.dart';
-import 'package:forever_connection/Feature/health_profile_screen/health_profile_screen.dart';
+import 'package:forever_connection/Feature/document_vault/Presentation/document_vault.dart';
 import 'package:forever_connection/Feature/financial_profile_screen/financial_profile_screen.dart';
+import 'package:forever_connection/Feature/forgot_password_screen/forgot_password_screen.dart';
+import 'package:forever_connection/Feature/health_profile_screen/health_profile_screen.dart';
+import 'package:forever_connection/Feature/login_screen/login_screen.dart';
+import 'package:forever_connection/Feature/my_profile_screen/my_profile_screen.dart';
 import 'package:forever_connection/Feature/my_services_screen/my_services_screen.dart';
 import 'package:forever_connection/Feature/password_security_screen/password_security_screen.dart';
-import 'package:forever_connection/Feature/change_password_screen/change_password_screen.dart';
-import 'package:path/path.dart';
+import 'package:forever_connection/Feature/personal_details_screen/personal_details_screen.dart';
+import 'package:forever_connection/Feature/professional_profile_screen/professional_profile_screen.dart';
+import 'package:forever_connection/Feature/protection-profile/protection_profile_screen.dart';
+import 'package:forever_connection/Feature/relationships_screen/relationships_screen.dart';
+import 'package:forever_connection/Feature/request_service_one_screen/request_service_one_screen.dart';
+import 'package:forever_connection/Feature/reset_password_screen/reset_password_screen.dart';
+import 'package:forever_connection/Feature/sign_up_screen/sign_up_screen.dart';
+import 'package:forever_connection/Feature/snapshot_screen/snapshot_screen.dart';
+import 'package:forever_connection/Feature/splash_screen/splash_screen.dart';
+import 'package:forever_connection/widgets/auth_screen.dart';
+
 import '../Feature/Contact/Presentation/add_contact.dart';
 import '../Feature/notification/notification-screen.dart';
 
@@ -84,10 +85,12 @@ class AppRoutes {
 
   static const String addContactScreen = "/addContactScreen";
 
+  static const String authOptionScreen = "/authoptionScreen";
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => LoginScreen(),
-    signUpScreen: (context) => SignUpScreen(),
+    signUpScreen: (context) => const SignUpScreen(),
     forgotPasswordScreen: (context) => ForgotPasswordScreen(),
     resetPasswordScreen: (context) => ResetPasswordScreen(),
     dashboardScreen: (context) => DashboardScreen(),
@@ -96,8 +99,8 @@ class AppRoutes {
     snapshotScreen: (context) => SnapshotScreen(),
     personalDetailsScreen: (context) => const PersonalDetailsScreen(),
     professionalProfileScreen: (context) => ProfessionalProfileScreen(),
-    protectionprofile :(context) => ProtectionProfileScreen(),
-    relationshipsScreen: (context) => RelationshipsScreen(),
+    protectionprofile: (context) => const ProtectionProfileScreen(),
+    relationshipsScreen: (context) => const RelationshipsScreen(),
     healthProfileScreen: (context) => HealthProfileScreen(),
     financialProfileScreen: (context) => FinancialProfileScreen(),
     myServicesScreen: (context) => const MyServicesScreen(),
@@ -107,7 +110,8 @@ class AppRoutes {
     documentVaultScreen: (context) => DocumentVaultScreen(),
     myNotesListScreen: (context) => MyNotesListScreen(),
     addNotesScreen: (context) => AddNoteScreen(),
-    contactList: (context) => ContactListScreen(),
-    addContactScreen: (context) => AddContactScreen(),
+    contactList: (context) => const ContactListScreen(),
+    addContactScreen: (context) => const AddContactScreen(),
+    authOptionScreen: (context) => const AuthOptionScreen()
   };
 }

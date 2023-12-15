@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.light,
           title: 'forever_connection',
           debugShowCheckedModeBanner: false,
-          // home: const AuthScreen(),
           initialRoute: AppRoutes.splashScreen,
           routes: AppRoutes.routes,
         ),

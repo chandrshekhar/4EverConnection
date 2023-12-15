@@ -1,81 +1,131 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/login_screen/login_screen.dart';
+import 'package:forever_connection/Feature/sign_up_screen/sign_up_screen.dart';
 
 import '../core/constants/colors.dart';
 import '../core/constants/image_constant.dart';
 
-class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
+class AuthOptionScreen extends StatelessWidget {
+  const AuthOptionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            height: 300.h,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/background.png"),
-                // fit: BoxFit.cover,
+      body: Container(
+        color: Colors.white,
+        height: double.infinity,
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.5,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/background.png"),
+                    fit: BoxFit.cover
+                    // fit: BoxFit.cover,
+                    ),
+              ),
+              child: Center(
+                child: Image.asset(
+                  ImageConstant.appLogo,
+                  height: 180.h,
+                  width: 180.w,
+                ),
               ),
             ),
-            child: Image.asset(
-              ImageConstant.appLogo,
-              height: 100.h,
-              width: 100.w,
+            Text(
+              '"The Effect of Quality"',
+              style: TextStyle(
+                  height: 3.h,
+                  fontSize: 24.sp,
+                  color: AppColors.buttonColor,
+                  fontWeight: FontWeight.bold),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(color: Colors.white),
-            child: Column(
-              children: [
-                const Text('"The Effect of Quality"'),
-                const Text("Creating Lifetime Connectins!"),
-                SizedBox(
-                  height: 20.h,
-                ),
-                const Text(
-                    "Your Virtual office with a 100% Free Income Opportunity"),
-                SizedBox(
-                  height: 40.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(100.w, 50.h),
-                        backgroundColor: AppColors.orangeColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12), // <-- Radius
-                        ),
-                      ),
-                      child: const Text('Login'),
-                    ),
-                    SizedBox(width: 20.w),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(100.w, 50.h),
-                        backgroundColor: AppColors.dashBoardColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12), // <-- Radius
-                        ),
-                      ),
-                      child: const Text('Register'),
-                    ),
-                  ],
-                )
-              ],
+            Text(
+              "Creating Lifetime Connectins!",
+              style: TextStyle(
+                  height: 1.2.h,
+                  fontSize: 18.sp,
+                  color: AppColors.darkBlue,
+                  fontWeight: FontWeight.w500),
             ),
-          )
-        ],
+            SizedBox(
+              height: 20.h,
+            ),
+            Text(
+              "Your Virtual office with a 100% Free Income Opportunity",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
+            ),
+            SizedBox(
+              height: 40.h,
+            ),
+          ],
+        ),
+      ),
+      bottomSheet: Padding(
+        padding: EdgeInsets.only(bottom: 50.h, right: 40.w, left: 40.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => LoginScreen()),
+                      (route) => false);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.orangeColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6.r), // <-- Radius
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: Text(
+                    'Login',
+                    style:
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 30.w),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => const SignUpScreen()),
+                      (route) => false);
+                },
+                style: ElevatedButton.styleFrom(
+                  // maximumSize: Size(150.w, 100.h),
+                  // minimumSize: Size(150.w, 60.h),
+                  backgroundColor: AppColors.dashBoardColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6.r), // <-- Radius
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: Text(
+                    'Register',
+                    style:
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
