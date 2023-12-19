@@ -11,7 +11,7 @@ class ImageConstant {
   static String imgQrcode = '$imagePath/img_qrcode.svg';
 
   // static String imgVectorErrorcontainer =
-      // '$imagePath/img_vector_errorcontainer.svg';
+  // '$imagePath/img_vector_errorcontainer.svg';
 
   static String imgImage24 = '$imagePath/img_image24.png';
 
@@ -157,4 +157,7 @@ class ImageConstant {
   static String mycontact = "assets/images/mycontact.svg";
   static String logout = "assets/images/logout.svg";
   static String myprofile = "assets/images/myprofile.svg";
+  static String earningHistory = "assets/images/earning_history.svg";
+  static String withdrawHistory = "assets/images/with_history.svg";
+  static String withdraw = "assets/images/withdraw_avai_fund.svg";
 }

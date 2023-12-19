@@ -14,6 +14,7 @@ class ContactListCard2 extends StatelessWidget {
   String email;
   String? go;
   String? connect;
+  VoidCallback? goPress;
 
   ContactListCard2(
       {super.key,
@@ -22,6 +23,7 @@ class ContactListCard2 extends StatelessWidget {
       required this.photo,
       required this.phoneNumber,
       this.go,
+      this.goPress,
       this.connect});
 
   @override
@@ -140,7 +142,7 @@ class ContactListCard2 extends StatelessWidget {
                   );
                   launchUrl(emailLaunchUri);
                 }),
-                _buildLable("Go", Icons.location_on_outlined, () {}),
+                _buildLable("Go", Icons.location_on_outlined, goPress),
                 _buildLable("Connect", Icons.connected_tv, () {}),
               ],
             ),

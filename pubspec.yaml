@@ -70,7 +70,7 @@ dependencies:
   image:
   uuid: ^4.2.1
   contacts_service: ^0.6.3
-
+  easy_debounce: ^2.0.3
  
 
 

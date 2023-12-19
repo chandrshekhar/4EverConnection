@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
@@ -74,7 +75,15 @@ class _ContactListScreenState extends State<ContactListScreen> {
                     labelText: "Search contact",
                     textStyle: TextStyle(fontSize: 20.h),
                     textInputType: TextInputType.name,
-                    onChange: (value) {},
+                    onChange: (value) {
+                      EasyDebounce.debounce(
+                          'contact-debounce', // <-- An ID for this particular debouncer
+                          const Duration(
+                              milliseconds: 500), // <-- The debounce duration
+                          () => addContactController.getContactList(
+                              search: value) // <-- The target method
+                          );
+                    },
                     obscureText: false),
               ),
               Expanded(
@@ -82,51 +91,59 @@ class _ContactListScreenState extends State<ContactListScreen> {
                       addContactController.isContactListLoading.value == true
                           ? const Center(
                               child: CircularProgressIndicator.adaptive())
-                          : ListView.builder(
-                              padding: EdgeInsets.only(top: 20.h),
-                              itemCount:
-                                  addContactController.contactModelList.length,
-                              itemBuilder: (context, index) {
-                                print(addContactController
-                                    .contactModelList[index].firstName);
-                                return ContactListCard2(
-                                    author: addContactController
-                                            .contactModelList[index]
-                                            .firstName ??
-                                        "",
-                                    photo: addContactController
-                                            .contactModelList[index].photo ??
-                                        "",
-                                    phoneNumber: addContactController
-                                            .contactModelList[index]
-                                            .mobilePhone ??
-                                        "",
-                                    email: addContactController
-                                            .contactModelList[index]
-                                            .personalEmail ??
-                                        "",
-                                    go: "",
-                                    connect: "");
-                                // return ContactListCard2(
-                                //   author:
-                                //       "${addContactController.contactModelList[index].firstName}",
-                                //   dateTime: noteController.dateTime(
-                                //       addContactController
-                                //               .contactModelList[index]
-                                //               .dateCreated ??
-                                //           ""),
-                                //   description: addContactController
-                                //           .contactModelList[index]
-                                //           .currentOccupation ??
-                                //       "NA",
-                                //   notesTitle: addContactController
-                                //           .contactModelList[index]
-                                //           .mobilePhone ??
-                                //       "NA",
-                                //   onSeleted: (p0) {},
-                                // );
-                              },
-                            ))),
+                          : addContactController.contactModelList.isNotEmpty
+                              ? ListView.builder(
+                                  padding: EdgeInsets.only(top: 20.h),
+                                  itemCount: addContactController
+                                      .contactModelList.length,
+                                  itemBuilder: (context, index) {
+                                    return ContactListCard2(
+                                        author:
+                                            "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
+                                        photo: addContactController
+                                                .contactModelList[index]
+                                                .photo ??
+                                            "",
+                                        phoneNumber: addContactController
+                                                .contactModelList[index]
+                                                .mobilePhone ??
+                                            "",
+                                        email: addContactController
+                                                .contactModelList[index]
+                                                .personalEmail ??
+                                            "",
+                                        go: "",
+                                        goPress: () {
+                                          addContactController.launchMap(
+                                              addContactController
+                                                      .contactModelList[index]
+                                                      .homeAddress ??
+                                                  "");
+                                        },
+                                        connect: "");
+                                    // return ContactListCard2(
+                                    //   author:
+                                    //       "${addContactController.contactModelList[index].firstName}",
+                                    //   dateTime: noteController.dateTime(
+                                    //       addContactController
+                                    //               .contactModelList[index]
+                                    //               .dateCreated ??
+                                    //           ""),
+                                    //   description: addContactController
+                                    //           .contactModelList[index]
+                                    //           .currentOccupation ??
+                                    //       "NA",
+                                    //   notesTitle: addContactController
+                                    //           .contactModelList[index]
+                                    //           .mobilePhone ??
+                                    //       "NA",
+                                    //   onSeleted: (p0) {},
+                                    // );
+                                  },
+                                )
+                              : const Center(
+                                  child: Text("No contact"),
+                                ))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

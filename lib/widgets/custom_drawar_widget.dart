@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,10 +9,12 @@ import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/custom_expation_tile.dart';
 import 'package:get/get.dart';
+
 import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
 import '../Feature/Connection/Presentation/connection_list.dart';
 import '../Feature/Connection/Presentation/connection_main_screen.dart';
+import '../Feature/Wallet/My Wallet/my_wallet.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   CustomDrawerWidget({super.key, required this.myProfileController});
@@ -271,6 +271,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           myProfileController.updateSelectedField(7);
+                          Get.to(const MyWalletScreen());
                         },
                         child: Items(
                           icon: ImageConstant.myWallet,
