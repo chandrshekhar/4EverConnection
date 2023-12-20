@@ -107,7 +107,7 @@ class AddContactController extends GetxController {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-
+      
       var response = await dio.get("${ApiPath.getContact}?search=$search");
       if (response.statusCode == 200) {
         final List<ContactListModel> data = (response.data as List)

@@ -21,11 +21,13 @@ class ConnectionController extends GetxController {
   var additionalController = TextEditingController().obs;
   RxInt serviceId = (-1).obs;
   RxInt partnerId = (-1).obs;
+  RxInt contactId = (-1).obs;
   RxList<ConnectionModel> connectionList = <ConnectionModel>[].obs;
   RxList<ConnectionModel> acceptedConnectionList = <ConnectionModel>[].obs;
   RxList<ConnectionModel> pendingConnectionList = <ConnectionModel>[].obs;
   var searchServiceController = TextEditingController().obs;
   var searchPartnerController = TextEditingController().obs;
+  var contactController = TextEditingController().obs;
 
   //connection list loading
   RxBool isLoading = false.obs;
@@ -62,6 +64,10 @@ class ConnectionController extends GetxController {
 
   setPartnerId(int id) {
     partnerId.value = id;
+  }
+
+    setContactId(int id) {
+    contactId.value = id;
   }
 
   //loading button

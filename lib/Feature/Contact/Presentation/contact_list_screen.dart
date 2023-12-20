@@ -30,7 +30,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   @override
   void initState() {
-    addContactController.getContactList();
+    addContactController.getContactList(search: "");
     super.initState();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_validation.dart';
+import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
@@ -11,13 +12,11 @@ import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
-
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
-
 
 // ignore_for_file: must_be_immutable
 class CreateConnectionScreen extends StatefulWidget {
@@ -31,6 +30,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
   final requestServiceController = Get.put(RequestServiceController());
   final connectionController = Get.put(ConnectionController());
   final validationController = Get.put(ConnectionValidationController());
+  final contactControllers = Get.put(AddContactController());
 
   final firstNameKey = GlobalKey<FormState>();
   final lastNameKey = GlobalKey<FormState>();
@@ -46,6 +46,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
     // Initialize the selected value
     requestServiceController.getServiceProfssional();
     connectionController.clearAllField();
+    contactControllers.getContactList(search: "");
   }
 
   @override
@@ -89,6 +90,12 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               margin: EdgeInsets.only(top: 25.v, right: 15)),
                           Expanded(
                             child: SearchDropDownWidget(
+                              onClearPressed: () {
+                                connectionController
+                                    .searchServiceController.value
+                                    .clear();
+                                connectionController.serviceId(-1);
+                              },
                               fromWhere: "service",
                               lableName: "Service need",
                               list: requestServiceController.listOfServices,
@@ -132,6 +139,12 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 Expanded(
                                   child: Obx(
                                     () => SearchDropDownWidget(
+                                      onClearPressed: () {
+                                        connectionController
+                                            .searchPartnerController.value
+                                            .clear();
+                                        connectionController.setPartnerId(-1);
+                                      },
                                       fromWhere: "partner",
                                       lableName: "Select Partner",
                                       list:
@@ -162,7 +175,52 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               ],
                             ),
                     ),
+
                     SizedBox(height: 15.v),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgUser,
+                            height: 19.v,
+                            width: 17.h,
+                            margin: EdgeInsets.only(top: 25.v, right: 15)),
+                        Expanded(
+                          child: Obx(
+                            () => SearchDropDownWidget(
+                              onClearPressed: () {
+                                connectionController.contactController.value
+                                    .clear();
+                                connectionController.setContactId(-1);
+                              },
+                              fromWhere: "contact",
+                              lableName: "Select Contact",
+                              list: contactControllers.contactModelList,
+                              controller:
+                                  connectionController.contactController.value,
+                              suggestionsCallback: (pattern) {
+                                return contactControllers.contactModelList
+                                    .where((item) =>
+                                        (item.firstName! + item.lastName!)
+                                            .toLowerCase()
+                                            .contains(pattern.toLowerCase()))
+                                    .toList();
+                              },
+                              onSuggestionSelected: (suggestion) async {
+                                connectionController
+                                    .setContactId(suggestion.id);
+                                connectionController
+                                        .contactController.value.text =
+                                    "${suggestion.firstName} ${suggestion.lastName}";
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
                     Form(
                       key: firstNameKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -338,7 +396,6 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                             margin: EdgeInsets.only(top: 18.v, right: 15)),
                         Expanded(
                           child: CustomTextFormField(
-                          
                               controller: connectionController
                                   .businessNameController.value,
 
@@ -368,7 +425,6 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                           Expanded(
                             child: CustomTextFormField(
                                 readOnly: true,
-                               
                                 onTap: () async {
                                   // generate a new token here
                                   final sessionToken = const Uuid().v4();
@@ -385,11 +441,9 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                         .value.text = result.description;
                                     connectionController.zipController.value
                                         .text = placeDetails.zipCode ?? "";
-                                        
                                   }
-                                   // ignore: use_build_context_synchronously
-                                   FocusScope.of(context).requestFocus(focus);
-                                  
+                                  // ignore: use_build_context_synchronously
+                                  FocusScope.of(context).requestFocus(focus);
                                 },
                                 controller: connectionController
                                     .homeAddressController.value,
