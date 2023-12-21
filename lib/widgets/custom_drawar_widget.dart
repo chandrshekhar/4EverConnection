@@ -156,13 +156,11 @@ class CustomDrawerWidget extends StatelessWidget {
                     initiallyExpanded: false,
                     backgroundColor: Colors.blue[50],
                     onExpansionChanged: (value) {
-                      if (value) {
-                        // personalDetailsController
-                        //     .markettingExpansionTile.value!
-                        //     .collapse();
-                        // personalDetailsController.toolsExpansionTile.value!
-                        //     .collapse();
-                      }
+                      // personalDetailsController
+                      //     .markettingExpansionTile.value!
+                      //     .collapse();
+                      // personalDetailsController.toolsExpansionTile.value!
+                      //     .collapse();
                     },
                     title: "USER",
                     children: [
@@ -236,13 +234,11 @@ class CustomDrawerWidget extends StatelessWidget {
                   CustomExpansionPanel(
                     collapsedBackgroundColor: AppColors.darkBlue,
                     onExpansionChanged: (val) {
-                      if (val) {
-                        // personalDetailsController.userExpansionTile.value!
-                        //     .collapse();
+                      // personalDetailsController.userExpansionTile.value!
+                      //     .collapse();
 
-                        // personalDetailsController.toolsExpansionTile.value!
-                        //     .collapse();
-                      }
+                      // personalDetailsController.toolsExpansionTile.value!
+                      //     .collapse();
                     },
                     leading: const Icon(Icons.handshake_outlined),
                     initiallyExpanded: false,
@@ -291,16 +287,7 @@ class CustomDrawerWidget extends StatelessWidget {
                     ],
                   ),
                   CustomExpansionPanel(
-                    onExpansionChanged: (val) {
-                      if (val) {
-                        // personalDetailsController
-                        //     .markettingExpansionTile.value!
-                        //     .collapse();
-
-                        // personalDetailsController.userExpansionTile.value!
-                        //     .collapse();
-                      }
-                    },
+                    onExpansionChanged: (val) {},
                     leading: const Icon(Icons.construction_outlined),
                     collapsedBackgroundColor: AppColors.darkBlue,
                     initiallyExpanded: false,
