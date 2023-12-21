@@ -96,6 +96,13 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                       Expanded(
                                         child: Obx(
                                           () => SearchDropDownWidget(
+                                            onClearPressed: () {
+                                              requestServiceController
+                                                  .serviceSearchController.value
+                                                  .clear();
+                                              requestServiceController
+                                                  .serviceNeedId.value = (-1);
+                                            },
                                             fromWhere: "service",
                                             lableName: "Select Service Needed",
                                             list: requestServiceController
@@ -151,6 +158,14 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                             Expanded(
                                               child: Obx(
                                                 () => SearchDropDownWidget(
+                                                  onClearPressed: () {
+                                                    requestServiceController
+                                                        .partnerSearchController
+                                                        .value
+                                                        .clear();
+                                                    requestServiceController
+                                                        .partnerId.value = (-1);
+                                                  },
                                                   fromWhere: "partner",
                                                   lableName:
                                                       "Select Professional (Optional)",

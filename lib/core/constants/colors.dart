@@ -12,4 +12,7 @@ class AppColors {
   static Color grayColor = const Color(0xffEBEEF0);
   static Color darkBlue = const Color(0xff0C4777);
   static Color buttonColor2 = const Color(0xFFD28300);
+  static Color appBarTextColor = const Color(0xff1A5581);
+  static Color withAvailbleInfoColor = const Color(0xff187C4A);
+  static Color cardColorBg = const Color(0xffF5F5F5);
 }

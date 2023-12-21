@@ -5,7 +5,7 @@ import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
-import '../Documents Vault controller/documents_vault_controller.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../routes/app_routes.dart';
 import '../../../widgets/app_bar/appbar_image.dart';
@@ -14,10 +14,11 @@ import '../../../widgets/app_bar/appbar_title.dart';
 import '../../../widgets/custom_bottom_modal_sheet.dart';
 import '../../../widgets/custom_elevated_button.dart';
 import '../../../widgets/custom_image_view.dart';
+import '../Documents Vault controller/documents_vault_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class DocumentVaultScreen extends StatefulWidget {
-  DocumentVaultScreen({Key? key}) : super(key: key);
+  const DocumentVaultScreen({Key? key}) : super(key: key);
 
   @override
   State<DocumentVaultScreen> createState() => _DocumentVaultScreenState();
@@ -89,6 +90,13 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
                             Expanded(
                               child: Obx(
                                 () => SearchDropDownWidget(
+                                  onClearPressed: () {
+                                    documentVaultController
+                                        .searchForDocumentController.value
+                                        .clear();
+
+                                    documentVaultController.setDocumentId(-1);
+                                  },
                                   fromWhere: "service",
                                   lableName: "Select Document Type",
                                   list: documentVaultController.documentTypes,
@@ -262,7 +270,7 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
                                             documentVaultController
                                                 .addFileDocumentVault();
                                           }
-                                        : () => null,
+                                        : () {},
                                     width: 150.h,
                                     buttonStyle: ButtonStyle(
                                         foregroundColor:

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/widgets/custom_elevated_button.dart';
-
-import '../../../widgets/custom_popup_widget.dart';
 
 // ignore: must_be_immutable
 class UserexperienceItemWidget extends StatelessWidget {
@@ -14,12 +10,16 @@ class UserexperienceItemWidget extends StatelessWidget {
   String? buttonName;
   void Function()? ontap;
   void Function()? onIconClick;
+  Color? infoButtonColor;
+  double? infoButtonSize;
   UserexperienceItemWidget(
       {Key? key,
       this.title,
       this.buttonName,
       this.ontap,
       this.leftImagePath,
+      this.infoButtonColor,
+      this.infoButtonSize,
       required this.onIconClick})
       : super(
           key: key,
@@ -71,8 +71,8 @@ class UserexperienceItemWidget extends StatelessWidget {
                 onPressed: onIconClick,
                 icon: Icon(
                   Icons.info_outline,
-                  size: 30.adaptSize,
-                  color: AppColors.floatingActionButtonColor
+                  size: infoButtonSize?? 30.adaptSize,
+                  color: infoButtonColor?? AppColors.floatingActionButtonColor
                       .withOpacity(0.8.adaptSize),
                 ))
             // InkWell(

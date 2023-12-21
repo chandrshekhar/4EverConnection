@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AddContactController extends GetxController {
   var selectedDate = DateTime.now().obs;
@@ -86,7 +87,18 @@ class AddContactController extends GetxController {
     return outputFormat.format(inputDate);
   }
 
-  Future<void> getContactList() async {
+  Future<void> launchMap(String address) async {
+    final String googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$address';
+    final String appleMapsUrl = 'https://maps.apple.com/?q=$address';
+    if (Platform.isAndroid) {
+      await launchUrl(Uri.parse(googleMapsUrl));
+    } else {
+      await launchUrl(Uri.parse(appleMapsUrl));
+    }
+  }
+
+  Future<void> getContactList({String? search}) async {
     var token = await SharedPref().getUserToken();
     try {
       isContactListLoading(true);
@@ -95,8 +107,8 @@ class AddContactController extends GetxController {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-
-      var response = await dio.get(ApiPath.getContact);
+      
+      var response = await dio.get("${ApiPath.getContact}?search=$search");
       if (response.statusCode == 200) {
         final List<ContactListModel> data = (response.data as List)
             .map((json) => ContactListModel.fromJson(json))
@@ -283,7 +295,6 @@ class AddContactController extends GetxController {
         await contactController.uploadContactsHelper(newContact, files.value);
 
     if (response) {
-    
       ToastWidget.successToast(success: "Contact added successfully!");
       clearAllControllers();
       Get.back();

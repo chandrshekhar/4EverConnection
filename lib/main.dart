@@ -14,7 +14,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-        
+
   runApp(MyApp());
 }
 
