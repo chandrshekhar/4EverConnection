@@ -1,17 +1,17 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
+import 'package:forever_connection/Feature/Contact/Model/contact_model.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget2.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
-import 'package:forever_connection/widgets/custom_expation_tile.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../widgets/app_bar/appbar_image.dart';
 import '../../../widgets/app_bar/appbar_image_1.dart';
@@ -60,7 +60,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
         elevation: 0.5,
         leading: AppbarImage(
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 24.h, top: 22, bottom: 28),
+            margin: EdgeInsets.only(left: 10.h, top: 22, bottom: 28),
             onTap: () {
               Navigator.pop(context);
             }),
@@ -117,99 +117,39 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                   addContactController.contactModelList.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  child: Obx(() => CustomExpansionPanel(
-                                          index: index,
-                                          initiallyExpanded:
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Obx(() => ContactListCard2(
+                                        viewDetails: () {
+                                          _showBottomSheet(
+                                              context: context,
+                                              connectionModel:
+                                                  addContactController
+                                                      .contactModelList[index]);
+                                        },
+                                        author:
+                                            "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
+                                        photo: addContactController
+                                                .contactModelList[index]
+                                                .photo ??
+                                            "",
+                                        phoneNumber: addContactController
+                                                .contactModelList[index]
+                                                .mobilePhone ??
+                                            "",
+                                        email: addContactController
+                                                .contactModelList[index]
+                                                .personalEmail ??
+                                            "",
+                                        go: "",
+                                        goPress: () {
+                                          addContactController.launchMap(
                                               addContactController
-                                                      .openPanelIndex.value ==
-                                                  index,
-                                          onExpansionChanged: (v) {
-                                            addContactController
-                                                .setExpantion(index);
-                                          },
-                                          collapsedBackgroundColor:
-                                              AppColors.darkBlue,
-                                          backgroundColor: Colors.blue[50],
-                                          leading: SizedBox(
-                                            width: 40.w,
-                                            height: 40.w,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(80),
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: addContactController
-                                                          .contactModelList[
-                                                              index]
-                                                          .photo ??
-                                                      "",
-                                                  errorWidget: (
-                                                    context,
-                                                    url,
-                                                    error,
-                                                  ) =>
-                                                      Container(
-                                                    color: Colors.white,
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      addContactController
-                                                          .contactModelList[
-                                                              index]
-                                                          .firstName![0]
-                                                          .toUpperCase(),
-                                                      style: TextStyle(
-                                                          color: AppColors
-                                                              .darkBlue),
-                                                    ),
-                                                  ),
-                                                  progressIndicatorBuilder: (
-                                                    context,
-                                                    url,
-                                                    downloadProgress,
-                                                  ) =>
-                                                      Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                            value:
-                                                                downloadProgress
-                                                                    .progress),
-                                                  ),
-                                                )),
-                                          ),
-                                          title:
-                                              "${   addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
-                                          children: [
-                                            ContactListCard2(
-                                                author:
-                                                    "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
-                                                photo: addContactController
-                                                        .contactModelList[index]
-                                                        .photo ??
-                                                    "",
-                                                phoneNumber:
-                                                    addContactController
-                                                            .contactModelList[
-                                                                index]
-                                                            .mobilePhone ??
-                                                        "",
-                                                email: addContactController
-                                                        .contactModelList[index]
-                                                        .personalEmail ??
-                                                    "",
-                                                go: "",
-                                                goPress: () {
-                                                  addContactController.launchMap(
-                                                      addContactController
-                                                              .contactModelList[
-                                                                  index]
-                                                              .homeAddress ??
-                                                          "");
-                                                },
-                                                connect: ""),
-                                          ])),
-                                );
+                                                      .contactModelList[index]
+                                                      .homeAddress ??
+                                                  "");
+                                        },
+                                        connect: "")));
 
                                 // return ContactListCard2(
                                 //   author:
@@ -315,4 +255,141 @@ class _ContactListScreenState extends State<ContactListScreen> {
       ),
     );
   }
+}
+
+void _showBottomSheet(
+    {required BuildContext context,
+    required ContactListModel connectionModel}) {
+  showModalBottomSheet(
+    useSafeArea: true,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.sp), topRight: Radius.circular(15.sp))),
+    context: context,
+    builder: (BuildContext context) {
+      return SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              _bottomSheetWidget(
+                  lableName: "Created Date",
+                  value: DateFormat("yyyy-MM-dd").format(
+                      DateTime.parse(connectionModel.dateCreated ?? ""))),
+              _bottomSheetWidget(
+                  lableName: "First Name",
+                  value: connectionModel.firstName ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Middle Name",
+                  value: connectionModel.middleName ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Last Name",
+                  value: connectionModel.lastName ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Mobile Phone",
+                  value: connectionModel.mobilePhone ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Email",
+                  value: connectionModel.personalEmail ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Date of Birth",
+                  value: connectionModel.dateOfBirth ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Connection created",
+                  value: connectionModel.connectionCreated ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Gender", value: connectionModel.gender ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Home Address",
+                  value: connectionModel.homeAddress ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Apt", value: connectionModel.homeApartment ?? ""),
+              _bottomSheetWidget(
+                  lableName: "ZIP", value: connectionModel.homeZipCode ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Position", value: connectionModel.position ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Current Occupation",
+                  value: connectionModel.currentOccupation ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Ideal Occupation",
+                  value: connectionModel.idealOccupation ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Life Partner Name",
+                  value: connectionModel.liferPartnerName ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Life Partner Phone",
+                  value: connectionModel.lifePartnerPhone ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Business Name",
+                  value: connectionModel.businessName ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Business Email",
+                  value: connectionModel.businessEmail ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Business Fax",
+                  value: connectionModel.businessFax ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Website",
+                  value: connectionModel.businessWebsite ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Business Address",
+                  value: connectionModel.businessAddress ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Business Apt",
+                  value: connectionModel.businessApartment ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Business Zip",
+                  value: connectionModel.businessZipCode ?? ""),
+              _bottomSheetWidget(
+                  lableName: "Additional Information",
+                  value: connectionModel.additional ?? ""),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+_bottomSheetWidget({
+  required String lableName,
+  required String value,
+}) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        lableName,
+        style: TextStyle(
+            color: AppColors.floatingActionButtonColor,
+            fontWeight: FontWeight.w500,
+            fontSize: 18.sp),
+      ),
+      SizedBox(
+        height: 5.h,
+      ),
+      Container(
+        height: lableName.contains("Additional Information") ? 100 : 48,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.zero,
+            color: AppColors.greyTextColor.withOpacity(0.03),
+            border: Border.all(color: AppColors.greyTextColor, width: 1)),
+        child: Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.sp, top: 18.sp),
+              child: Text(
+                value,
+              ),
+            )),
+      ),
+      SizedBox(
+        height: 10.h,
+      ),
+    ],
+  );
 }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/constants/colors.dart';
@@ -14,6 +15,7 @@ class ContactListCard2 extends StatelessWidget {
   String? go;
   String? connect;
   VoidCallback? goPress;
+  VoidCallback? viewDetails;
 
   ContactListCard2(
       {super.key,
@@ -23,7 +25,7 @@ class ContactListCard2 extends StatelessWidget {
       required this.phoneNumber,
       this.go,
       this.goPress,
-      this.connect});
+      this.connect,this.viewDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -39,76 +41,89 @@ class ContactListCard2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Container(
-          //   padding: EdgeInsets.only(
-          //       top: 10.h, bottom: 10.h, left: 15.w, right: 15.w),
-          //   alignment: Alignment.center,
-          //   decoration: AppDecoration.fillLightBlue.copyWith(
-          //     borderRadius: BorderRadius.only(
-          //       topLeft: Radius.circular(9.r),
-          //       topRight: Radius.circular(9.r),
-          //     ),
-          //   ),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.start,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //       SizedBox(
-          //         width: 40.w,
-          //         height: 40.w,
-          //         child: ClipRRect(
-          //             borderRadius: BorderRadius.circular(80),
-          //             child: CachedNetworkImage(
-          //               fit: BoxFit.cover,
-          //               imageUrl: photo,
-          //               errorWidget: (
-          //                 context,
-          //                 url,
-          //                 error,
-          //               ) =>
-          //                   Container(
-          //                 color: Colors.white,
-          //                 alignment: Alignment.center,
-          //                 child: Text(author[0].toUpperCase()),
-          //               ),
-          //               progressIndicatorBuilder: (
-          //                 context,
-          //                 url,
-          //                 downloadProgress,
-          //               ) =>
-          //                   Center(
-          //                 child: CircularProgressIndicator(
-          //                     value: downloadProgress.progress),
-          //               ),
-          //             )),
-          //       ),
-          //       SizedBox(width: 10.w),
-          //       Expanded(
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               author,
-          //               style: TextStyle(
-          //                   color: Colors.white,
-          //                   fontSize: 18.sp,
-          //                   fontWeight: FontWeight.w400),
-          //             ),
-          //             Text(
-          //               "connected by other",
-          //               style: TextStyle(height: 1.2.h, color: Colors.white),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //       Icon(
-          //         Icons.keyboard_arrow_down_outlined,
-          //         color: Colors.white,
-          //         size: 30.sp,
-          //       )
-          //     ],
-          //   ),
-          // ),
+          Container(
+            padding: EdgeInsets.only(
+                top: 10.h, bottom: 10.h, left: 15.w, right: 15.w),
+            alignment: Alignment.center,
+            decoration: AppDecoration.fillLightBlue.copyWith(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(9.r),
+                topRight: Radius.circular(9.r),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 40.w,
+                  height: 40.w,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(80),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: photo,
+                        errorWidget: (
+                          context,
+                          url,
+                          error,
+                        ) =>
+                            Container(
+                          color: Colors.white,
+                          alignment: Alignment.center,
+                          child: Text(author[0].toUpperCase()),
+                        ),
+                        progressIndicatorBuilder: (
+                          context,
+                          url,
+                          downloadProgress,
+                        ) =>
+                            Center(
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress),
+                        ),
+                      )),
+                ),
+                SizedBox(width: 10.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        author,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        "connected by other",
+                        style: TextStyle(height: 1.2.h, color: Colors.white),
+                      )
+                    ],
+                  ),
+                ),
+                InkWell(
+                  onTap: viewDetails,
+                  child: CircleAvatar(
+                    radius: 10,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.edit,
+                      color: AppColors.darkBlue,
+                      size: 15.sp,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  color: Colors.white,
+                  size: 30.sp,
+                )
+              ],
+            ),
+          ),
           Padding(
             padding: EdgeInsets.all(12.sp),
             child: Row(
