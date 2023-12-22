@@ -154,11 +154,15 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                                     color: Colors.white,
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                        addContactController
-                                                            .contactModelList[
-                                                                index]
-                                                            .firstName![0]
-                                                            .toUpperCase()),
+                                                      addContactController
+                                                          .contactModelList[
+                                                              index]
+                                                          .firstName![0]
+                                                          .toUpperCase(),
+                                                      style: TextStyle(
+                                                          color: AppColors
+                                                              .darkBlue),
+                                                    ),
                                                   ),
                                                   progressIndicatorBuilder: (
                                                     context,
@@ -175,7 +179,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                                 )),
                                           ),
                                           title:
-                                              "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
+                                              "${   addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
                                           children: [
                                             ContactListCard2(
                                                 author:
