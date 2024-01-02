@@ -45,13 +45,13 @@ class WithdrawalHistoryScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  richTextStyl(amount: "0", titile: "    Total\nWithdraw"),
+                  richTextStyl(amount: "0", titile: "Total\nWithdraw"),
                   Container(
                     height: 93.h,
                     color: Colors.white,
                     width: 1,
                   ),
-                  richTextStyl(amount: "0", titile: "    YTD\nWithdraw"),
+                  richTextStyl(amount: "0", titile: "YTD\nWithdraw"),
                 ],
               ),
             ),
@@ -85,7 +85,7 @@ class WithdrawalHistoryScreen extends StatelessWidget {
                               height: 12.h,
                             ),
                             titleTypeText(
-                                leadingText: "Reference:", value: "ABCD"),
+                                leadingText: "Method:", value: "ABCD"),
                           ],
                         ),
                       );
@@ -103,6 +103,7 @@ class WithdrawalHistoryScreen extends StatelessWidget {
       children: [
         Text(
           titile,
+          textAlign: TextAlign.center,
           style: TextStyle(
               color: Colors.white,
               fontSize: 16.sp,

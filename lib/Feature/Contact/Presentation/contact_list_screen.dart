@@ -2,7 +2,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
+import 'package:forever_connection/Feature/Contact/Model/contact_model.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget2.dart';
+import 'package:forever_connection/Feature/Contact/Presentation/add_contact.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
@@ -98,6 +100,19 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                       .contactModelList.length,
                                   itemBuilder: (context, index) {
                                     return ContactListCard2(
+                                        editIconClick: () {
+                                          addContactController.setEditValue(
+                                              contactListModel:
+                                                  addContactController
+                                                      .contactModelList[index]);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const AddContactScreen(
+                                                        isCommingFromEdit: true,
+                                                      )));
+                                        },
                                         author:
                                             "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
                                         photo: addContactController
@@ -150,8 +165,14 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   Expanded(
                     child: CustomIconButton(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, AppRoutes.addContactScreen);
+                        addContactController.setEditValue(
+                            contactListModel: ContactListModel());
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const AddContactScreen(
+                                      isCommingFromEdit: false,
+                                    )));
                       },
                       decoration: BoxDecoration(
                           color: const Color(0xffD3991B),

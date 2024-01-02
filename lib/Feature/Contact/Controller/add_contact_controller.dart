@@ -41,6 +41,34 @@ class AddContactController extends GetxController {
   var businessAddressController = TextEditingController().obs;
   var businessAptController = TextEditingController().obs;
   var businessZipController = TextEditingController().obs;
+  RxString networkImage = "".obs;
+  setEditValue({required ContactListModel contactListModel}) {
+    firstNameController.value.text = contactListModel.firstName ?? "";
+    middleNameController.value.text = contactListModel.middleName ?? "";
+    lastNameController.value.text = contactListModel.lastName ?? "";
+    dateOfBirth.value.text = contactListModel.dateOfBirth ?? "";
+    postionController.value.text = contactListModel.position ?? "";
+    occupationController.value.text = contactListModel.currentOccupation ?? "";
+    idealOccupationController.value.text =
+        contactListModel.idealOccupation ?? "";
+    mobilePhoneController.value.text = contactListModel.mobilePhone ?? "";
+    lifePartnerName.value.text = contactListModel.liferPartnerName ?? "";
+    lifePartnerPhone.value.text = contactListModel.lifePartnerPhone ?? "";
+    homePhone.value.text = contactListModel.homePhone ?? "";
+    personalEmail.value.text = contactListModel.personalEmail ?? '';
+    businessNameController.value.text = contactListModel.businessName ?? "";
+    businessEmail.value.text = contactListModel.businessEmail ?? "";
+    businessFax.value.text = contactListModel.businessFax ?? "";
+    webSiteController.value.text = contactListModel.businessWebsite ?? "";
+    aptController.value.text = contactListModel.homeApartment ?? "";
+    zipController.value.text = contactListModel.homeZipCode ?? "";
+    businessAddressController.value.text =
+        contactListModel.businessAddress ?? "";
+    businessAptController.value.text = contactListModel.businessApartment ?? "";
+    businessZipController.value.text = contactListModel.businessZipCode ?? "";
+    gender.value = contactListModel.gender ?? "";
+    networkImage.value = contactListModel.photo ?? "";
+  }
 
   RxString gender = "Select Gender".obs;
   RxBool isUploadingContact = false.obs;
@@ -107,7 +135,7 @@ class AddContactController extends GetxController {
         'Content-Type': 'application/json',
         'Authorization': "Bearer $token"
       };
-      
+
       var response = await dio.get("${ApiPath.getContact}?search=$search");
       if (response.statusCode == 200) {
         final List<ContactListModel> data = (response.data as List)
@@ -146,9 +174,9 @@ class AddContactController extends GetxController {
       final images = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (images != null) {
         final fileName = images.path.split("/").last;
-
         choosenFilename.value = fileName;
         files.value = File(images.path);
+        networkImage.value = images.path;
       } else {
         // User canceled the picker
       }
@@ -188,6 +216,7 @@ class AddContactController extends GetxController {
     }
     if (gender.value != "Select Gender") {
       // no gender property for contact found in flutter contacts
+     
     }
     if (dateOfBirth.value.text.isNotEmpty) {
       // no dob property for contact found in flutter contacts

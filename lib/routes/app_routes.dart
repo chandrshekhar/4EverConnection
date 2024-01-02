@@ -111,7 +111,7 @@ class AppRoutes {
     myNotesListScreen: (context) => MyNotesListScreen(),
     addNotesScreen: (context) => AddNoteScreen(),
     contactList: (context) => const ContactListScreen(),
-    addContactScreen: (context) => const AddContactScreen(),
+    
     authOptionScreen: (context) => const AuthOptionScreen()
   };
 }

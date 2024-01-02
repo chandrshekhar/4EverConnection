@@ -21,7 +21,12 @@ import '../Controller/contact_text_validation.dart';
 
 // ignore_for_file: must_be_immutable
 class AddContactScreen extends StatefulWidget {
-  const AddContactScreen({Key? key}) : super(key: key);
+  final bool isCommingFromEdit;
+
+  const AddContactScreen({
+    Key? key,
+    required this.isCommingFromEdit,
+  }) : super(key: key);
 
   @override
   State<AddContactScreen> createState() => _AddContactScreenState();
@@ -80,7 +85,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 Navigator.pop(context);
               }),
           centerTitle: true,
-          title: AppbarTitle(text: "Create Contact"),
+          title: AppbarTitle(
+              text:
+                  widget.isCommingFromEdit ? "Edit Contact" : "Create Contact"),
           styleType: Style.bgShadow),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -103,9 +110,15 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(3),
                           border: Border.all(color: Colors.grey),
-                          image: addController.choosenFilename.value.isNotEmpty
+                          image: addController.networkImage.value.isNotEmpty
                               ? DecorationImage(
-                                  image: FileImage(addController.files.value!),
+                                  image: addController.networkImage.value
+                                          .contains("https://")
+                                      ? NetworkImage(
+                                              addController.networkImage.value)
+                                          as ImageProvider
+                                      : FileImage(File(
+                                          addController.files.value!.path)),
                                   fit: BoxFit.cover)
                               : const DecorationImage(
                                   image: AssetImage("assets/images/user.png"),
@@ -160,185 +173,149 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       ),
                     ),
                     SizedBox(height: 29.v),
-                    Form(
+                    iconWithTextField(
                       key: firstNameKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          controller: addController.firstNameController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 0.v, right: 12.h),
-                          // hintText: "First name *",
-                          labelText: "First name *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          // contentPadding: EdgeInsets.symmetric(
-                          //     horizontal: 11.h, vertical: 7.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            formValidation.setFirstNameValidation(value);
-                            formValidation.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "First name can't be empty.";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
+                      lableText: "First name *",
+                      controller: addController.firstNameController.value,
+                      icon: ImageConstant.imgUser,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "First name can't be empty.";
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.middleNameController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 5.v, right: 12.h),
-                        // hintText: "Middle name (if Any)",
-                        labelText: "Middle name (if Any)",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      lableText: "Middle name (if Any)",
+                      controller: addController.middleNameController.value,
+                      icon: ImageConstant.imgUser,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
 
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    Form(
-                      key: lastNameKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          controller: addController.lastNameController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 5.v, right: 12.h),
-                          // hintText: "Last name *",
-                          labelText: "Last name *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          // contentPadding: EdgeInsets.symmetric(
-                          //     horizontal: 11.h, vertical: 7.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            formValidation.checkButtonValidation();
-                          },
-                          fillColor: theme.colorScheme.primary),
-                    ),
-                    SizedBox(
-                      height: 16.adaptSize,
-                    ),
-                    CustomDropDown(
-                      borderDecoration: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey)),
-                      margin: const EdgeInsets.only(left: 14, right: 14),
-                      // contentPadding:
-                      //     const EdgeInsets.only(top: 10, bottom: 10, left: 10),
-                      items: const ["Male", "Female", "Other"],
-                      onChanged: (value) {
-                        addController.gender.value = value;
+
+                    iconWithTextField(
+                      lableText: "Last name *",
+                      controller: addController.lastNameController.value,
+                      icon: ImageConstant.imgUser,
+                      validator: (value) {
+                        return null;
                       },
-                      hintText: "Select gender",
                     ),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.dateOfBirth.value,
-                        onTap: () {
-                          addController.selectDate(context);
-                        },
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Date of Birth",
-                        labelText: "Date of Birth",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgUser,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 18.v, right: 15)),
+                        Expanded(
+                          child: CustomDropDown(
+                            borderDecoration: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            // margin: const EdgeInsets.only(left: 14, right: 14),
+                            // contentPadding:
+                            //     const EdgeInsets.only(top: 10, bottom: 10, left: 10),
+                            items: const ["Male", "Female", "Other"],
+                            onChanged: (value) {
+                              addController.gender.value = value;
+                            },
+                            hintText: "Select gender",
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.companyController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Company Name",
-                        labelText: "Company Name",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      readOnly: true,
+                      textFieldTap: () {
+                        addController.selectDate(context);
+                      },
+                      lableText: "Date of Birth",
+                      controller: addController.dateOfBirth.value,
+                      icon: ImageConstant.imgCalendar,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.postionController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Position",
-                        labelText: "Position",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      lableText: "Company Name",
+                      controller: addController.companyController.value,
+                      icon: ImageConstant.myBusinessProfile,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.occupationController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Occupation",
-                        labelText: "Occupation",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+
+                    iconWithTextField(
+                      lableText: "Position",
+                      controller: addController.postionController.value,
+                      icon: ImageConstant.imgUser,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller:
-                            addController.idealOccupationController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Ideal Occupation",
-                        labelText: "Ideal Occupation",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+
+                    iconWithTextField(
+                      lableText: "Occupation",
+                      controller: addController.occupationController.value,
+                      icon: ImageConstant.imgCarGray600,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
+                    SizedBox(
+                      height: 16.adaptSize,
+                    ),
+
+                    iconWithTextField(
+                      lableText: "Ideal Occupation",
+                      controller: addController.idealOccupationController.value,
+                      icon: ImageConstant.imgCarGray600,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
 
                     Row(
                       children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgCall,
+                            height: 15.adaptSize,
+                            width: 15.adaptSize,
+                            margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
@@ -409,26 +386,22 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     // SizedBox(
                     //   height: 16.adaptSize,
                     // ),
-                    CustomTextFormField(
-                        controller: addController.lifePartnerName.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Life Partner Name",
-                        labelText: "Life Partner Name",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
-                    // SizedBox(
-                    //   height: 16.adaptSize,
-                    // ),
+                    iconWithTextField(
+                      lableText: "Life Partner Name",
+                      controller: addController.lifePartnerName.value,
+                      icon: ImageConstant.imgUser,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
 
                     Row(
                       children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgCall,
+                            height: 15.adaptSize,
+                            width: 15.adaptSize,
+                            margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
@@ -466,6 +439,11 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
                     Row(
                       children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgCall,
+                            height: 15.adaptSize,
+                            width: 15.adaptSize,
+                            margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
@@ -500,268 +478,253 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.personalEmail.value,
-                        textInputType: TextInputType.emailAddress,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Personal Email",
-                        labelText: "Personal Email",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      lableText: "Personal Email",
+                      controller: addController.personalEmail.value,
+                      icon: ImageConstant.imgVector,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.businessNameController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Business Name",
-                        labelText: "Business Name",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      lableText: "Business Name",
+                      controller: addController.businessNameController.value,
+                      icon: ImageConstant.myBusinessProfile,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.businessEmail.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Business Email",
-                        labelText: "Business Email",
-                        textInputType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      lableText: "Business Email",
+                      controller: addController.businessEmail.value,
+                      icon: ImageConstant.imgVector,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.businessFax.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Business Fax",
-                        labelText: "Business Fax",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+                    iconWithTextField(
+                      lableText: "Business Fax",
+                      controller: addController.businessFax.value,
+                      icon: ImageConstant.imgVideocamera,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    CustomTextFormField(
-                        controller: addController.webSiteController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                        // hintText: "Website",
-                        labelText: "Website",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {},
-                        fillColor: theme.colorScheme.primary),
+
+                    iconWithTextField(
+                      lableText: "Website",
+                      controller: addController.webSiteController.value,
+                      icon: ImageConstant.imgGlobe,
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 16.adaptSize,
+                    ),
+
                     Form(
                       key: homeKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: CustomTextFormField(
-                          onTap: () async {
-                            // generate a new token here
-                            final sessionToken = const Uuid().v4();
-                            final Suggestion? result = await showSearch(
-                              context: context,
-                              delegate: AddressSearch(sessionToken),
-                            );
-                            // This will change the text displayed in the TextField
-                            if (result != null) {
-                              final placeDetails =
-                                  await PlaceApiProvider(sessionToken)
-                                      .getPlaceDetailFromId(result.placeId);
-                              addController.homeAddressController.value.text =
-                                  result.description;
-                              addController.zipController.value.text =
-                                  placeDetails.zipCode ?? "";
-                            }
-                            // ignore: use_build_context_synchronously
-                            FocusScope.of(context).requestFocus(focus);
-                          },
-                          controller: addController.homeAddressController.value,
-                          margin: EdgeInsets.only(
-                              left: 12.h, top: 15.v, right: 12.h),
-                          // hintText: "Home Address *",
-                          labelText: "Home Address *",
-                          textInputAction: TextInputAction.done,
-                          maxLines: 1,
-                          // contentPadding: EdgeInsets.symmetric(
-                          //     horizontal: 11.h, vertical: 7.v),
-                          borderDecoration: const OutlineInputBorder(),
-                          filled: false,
-                          onChange: (value) {
-                            formValidation.setHomeAddressValidation(value);
-                            formValidation.checkButtonValidation();
-                          },
-                          validator: (value) {
-                            if (value!.length < 8) {
-                              return "Home address must have atlease 8 character";
-                            } else {
-                              return null;
-                            }
-                          },
-                          fillColor: theme.colorScheme.primary),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomTextFormField(
-                              controller: addController.aptController.value,
-                              focusNode: focus,
+                      child: Row(
+                        children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgLocation,
+                              height: 15.adaptSize,
+                              width: 15.adaptSize,
                               margin: EdgeInsets.only(
-                                  left: 12.h, top: 15.v, right: 12.h),
-                              // hintText: "Apt, Ste",
-                              labelText: "Apt, Ste",
-                              textInputAction: TextInputAction.done,
-                              maxLines: 1,
-                              // contentPadding: EdgeInsets.symmetric(
-                              //     horizontal: 11.h, vertical: 7.v),
-                              borderDecoration: const OutlineInputBorder(),
-                              filled: false,
-                              onChange: (value) {},
-                              fillColor: theme.colorScheme.primary),
-                        ),
-                        Expanded(
-                          child: Form(
-                            key: zipKey,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                                  top: 8.v, bottom: 13.v, right: 15)),
+                          Expanded(
                             child: CustomTextFormField(
-                                controller: addController.zipController.value,
-                                margin: EdgeInsets.only(
-                                    left: 12.h, top: 15.v, right: 12.h),
-                                // hintText: "ZIP *",
-                                labelText: "ZIP *",
+                                onTap: () async {
+                                  // generate a new token here
+                                  final sessionToken = const Uuid().v4();
+                                  final Suggestion? result = await showSearch(
+                                    context: context,
+                                    delegate: AddressSearch(sessionToken),
+                                  );
+                                  // This will change the text displayed in the TextField
+                                  if (result != null) {
+                                    final placeDetails = await PlaceApiProvider(
+                                            sessionToken)
+                                        .getPlaceDetailFromId(result.placeId);
+                                    addController.homeAddressController.value
+                                        .text = result.description;
+                                    addController.zipController.value.text =
+                                        placeDetails.zipCode ?? "";
+                                  }
+                                  // ignore: use_build_context_synchronously
+                                  FocusScope.of(context).requestFocus(focus);
+                                },
+                                controller:
+                                    addController.homeAddressController.value,
+                                // margin: EdgeInsets.only(
+                                //     left: 12.h, top: 15.v, right: 12.h),
+                                // hintText: "Home Address *",
+                                labelText: "Home Address *",
                                 textInputAction: TextInputAction.done,
-                                textInputType: TextInputType.number,
                                 maxLines: 1,
                                 // contentPadding: EdgeInsets.symmetric(
                                 //     horizontal: 11.h, vertical: 7.v),
                                 borderDecoration: const OutlineInputBorder(),
                                 filled: false,
                                 onChange: (value) {
-                                  formValidation.setZipValidation(value);
+                                  formValidation
+                                      .setHomeAddressValidation(value);
                                   formValidation.checkButtonValidation();
                                 },
                                 validator: (value) {
-                                  if (value!.length < 4) {
-                                    return "Enter valid zip code";
+                                  if (value!.length < 8) {
+                                    return "Home address must have atlease 8 character";
                                   } else {
                                     return null;
                                   }
                                 },
                                 fillColor: theme.colorScheme.primary),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    CustomTextFormField(
-                        onTap: () async {
-                          // generate a new token here
-                          final sessionToken = const Uuid().v4();
-                          final Suggestion? result = await showSearch(
-                            context: context,
-                            delegate: AddressSearch(sessionToken),
-                          );
-                          // This will change the text displayed in the TextField
-                          if (result != null) {
-                            final placeDetails =
-                                await PlaceApiProvider(sessionToken)
-                                    .getPlaceDetailFromId(result.placeId);
-                            addController.businessAddressController.value.text =
-                                result.description;
-                            addController.businessZipController.value.text =
-                                placeDetails.zipCode ?? "";
-                          }
-                          // ignore: use_build_context_synchronously
-                          FocusScope.of(context).requestFocus(focus2);
-                        },
-                        controller:
-                            addController.businessAddressController.value,
-                        margin:
-                            EdgeInsets.only(left: 12.h, top: 15.v, right: 12.h),
-                        // hintText: "Business Address *",
-                        labelText: "Business Address *",
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
-                        // contentPadding: EdgeInsets.symmetric(
-                        //     horizontal: 11.h, vertical: 7.v),
-                        borderDecoration: const OutlineInputBorder(),
-                        filled: false,
-                        onChange: (value) {
-                          formValidation.setHomeAddressValidation(value);
-                          formValidation.checkButtonValidation();
-                        },
-                        validator: (value) {
-                          if (value!.length < 8) {
-                            return "Home address must have atlease 8 character";
-                          } else {
-                            return null;
-                          }
-                        },
-                        fillColor: theme.colorScheme.primary),
+                    SizedBox(
+                      height: 10.h,
+                    ),
                     Row(
                       children: [
                         Expanded(
-                          child: CustomTextFormField(
-                              focusNode: focus2,
-                              controller:
-                                  addController.businessAptController.value,
-                              margin: EdgeInsets.only(
-                                  left: 12.h, top: 5.v, right: 12.h),
-                              // hintText: "Apt, Ste",
-                              labelText: "Apt, Ste",
-                              textInputAction: TextInputAction.done,
-                              maxLines: 1,
-                              // contentPadding: EdgeInsets.symmetric(
-                              //     horizontal: 11.h, vertical: 7.v),
-                              borderDecoration: const OutlineInputBorder(),
-                              filled: false,
-                              onChange: (value) {},
-                              fillColor: theme.colorScheme.primary),
+                          child: Row(
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgLocation,
+                                  height: 15.adaptSize,
+                                  width: 15.adaptSize,
+                                  margin: EdgeInsets.only(
+                                      top: 8.v, bottom: 13.v, right: 15)),
+                              Expanded(
+                                child: CustomTextFormField(
+                                    controller:
+                                        addController.aptController.value,
+                                    focusNode: focus,
+                                    // margin: EdgeInsets.only(
+                                    //     left: 12.h, top: 15.v, right: 12.h),
+                                    // hintText: "Apt, Ste",
+                                    labelText: "Apt, Ste",
+                                    textInputAction: TextInputAction.done,
+                                    maxLines: 1,
+                                    // contentPadding: EdgeInsets.symmetric(
+                                    //     horizontal: 11.h, vertical: 7.v),
+                                    borderDecoration:
+                                        const OutlineInputBorder(),
+                                    filled: false,
+                                    onChange: (value) {},
+                                    fillColor: theme.colorScheme.primary),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.adaptSize,
                         ),
                         Expanded(
+                          child: Row(
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgLocation,
+                                  height: 15.adaptSize,
+                                  width: 15.adaptSize,
+                                  margin: EdgeInsets.only(
+                                    top: 8.v,
+                                    bottom: 13.v,
+                                  )),
+                              Expanded(
+                                child: Form(
+                                  key: zipKey,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  child: CustomTextFormField(
+                                      controller:
+                                          addController.zipController.value,
+                                      margin: EdgeInsets.only(
+                                        left: 12.h,
+                                      ),
+                                      // hintText: "ZIP *",
+                                      labelText: "ZIP *",
+                                      textInputAction: TextInputAction.done,
+                                      textInputType: TextInputType.number,
+                                      maxLines: 1,
+                                      // contentPadding: EdgeInsets.symmetric(
+                                      //     horizontal: 11.h, vertical: 7.v),
+                                      borderDecoration:
+                                          const OutlineInputBorder(),
+                                      filled: false,
+                                      onChange: (value) {
+                                        formValidation.setZipValidation(value);
+                                        formValidation.checkButtonValidation();
+                                      },
+                                      validator: (value) {
+                                        if (value!.length < 4) {
+                                          return "Enter valid zip code";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      fillColor: theme.colorScheme.primary),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgLocation,
+                            height: 15.adaptSize,
+                            width: 15.adaptSize,
+                            margin: EdgeInsets.only(top: 8.v, bottom: 13.v)),
+                        Expanded(
                           child: CustomTextFormField(
+                              onTap: () async {
+                                // generate a new token here
+                                final sessionToken = const Uuid().v4();
+                                final Suggestion? result = await showSearch(
+                                  context: context,
+                                  delegate: AddressSearch(sessionToken),
+                                );
+                                // This will change the text displayed in the TextField
+                                if (result != null) {
+                                  final placeDetails =
+                                      await PlaceApiProvider(sessionToken)
+                                          .getPlaceDetailFromId(result.placeId);
+                                  addController.businessAddressController.value
+                                      .text = result.description;
+                                  addController.businessZipController.value
+                                      .text = placeDetails.zipCode ?? "";
+                                }
+                                // ignore: use_build_context_synchronously
+                                FocusScope.of(context).requestFocus(focus2);
+                              },
                               controller:
-                                  addController.businessZipController.value,
-                              margin: EdgeInsets.only(
-                                  left: 12.h, top: 5.v, right: 12.h),
-                              // hintText: "ZIP *",
-                              labelText: "ZIP *",
-                              textInputType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
+                                  addController.businessAddressController.value,
+                              margin: EdgeInsets.only(left: 12.h, top: 15.v),
+                              // hintText: "Business Address *",
+                              labelText: "Business Address *",
                               textInputAction: TextInputAction.done,
                               maxLines: 1,
                               // contentPadding: EdgeInsets.symmetric(
@@ -769,17 +732,103 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               borderDecoration: const OutlineInputBorder(),
                               filled: false,
                               onChange: (value) {
-                                formValidation.setZipValidation(value);
+                                formValidation.setHomeAddressValidation(value);
                                 formValidation.checkButtonValidation();
                               },
                               validator: (value) {
-                                if (value!.length < 4) {
-                                  return "Enter valid zip code";
+                                if (value!.length < 8) {
+                                  return "Home address must have atlease 8 character";
                                 } else {
                                   return null;
                                 }
                               },
                               fillColor: theme.colorScheme.primary),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgLocation,
+                                  height: 15.adaptSize,
+                                  width: 15.adaptSize,
+                                  margin: EdgeInsets.only(
+                                      top: 8.v, bottom: 13.v, right: 15)),
+                              Expanded(
+                                child: CustomTextFormField(
+                                    focusNode: focus2,
+                                    controller: addController
+                                        .businessAptController.value,
+                                    // margin: EdgeInsets.only(
+                                    //     left: 12.h, top: 5.v, right: 12.h),
+                                    // hintText: "Apt, Ste",
+                                    labelText: "Apt, Ste",
+                                    textInputAction: TextInputAction.done,
+                                    maxLines: 1,
+                                    // contentPadding: EdgeInsets.symmetric(
+                                    //     horizontal: 11.h, vertical: 7.v),
+                                    borderDecoration:
+                                        const OutlineInputBorder(),
+                                    filled: false,
+                                    onChange: (value) {},
+                                    fillColor: theme.colorScheme.primary),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.adaptSize,
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgLocation,
+                                  height: 15.adaptSize,
+                                  width: 15.adaptSize,
+                                  margin: EdgeInsets.only(
+                                      top: 8.v, bottom: 13.v, right: 15)),
+                              Expanded(
+                                child: CustomTextFormField(
+                                    controller: addController
+                                        .businessZipController.value,
+                                    // margin: EdgeInsets.only(
+                                    //   left: 12.h,
+                                    // ),
+                                    // hintText: "ZIP *",
+                                    labelText: "ZIP *",
+                                    textInputType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    textInputAction: TextInputAction.done,
+                                    maxLines: 1,
+                                    // contentPadding: EdgeInsets.symmetric(
+                                    //     horizontal: 11.h, vertical: 7.v),
+                                    borderDecoration:
+                                        const OutlineInputBorder(),
+                                    filled: false,
+                                    onChange: (value) {
+                                      formValidation.setZipValidation(value);
+                                      formValidation.checkButtonValidation();
+                                    },
+                                    validator: (value) {
+                                      if (value!.length < 4) {
+                                        return "Enter valid zip code";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    fillColor: theme.colorScheme.primary),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -794,13 +843,15 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             )
                           : CustomElevatedButton(
                               onTap: () {
-                                if (firstNameKey.currentState!.validate() &&
-                                    lastNameKey.currentState!.validate() &&
-                                    phoneKey.currentState!.validate()) {
+                                // addController.addContact();
+                                if (widget.isCommingFromEdit) {
+                                } else {
                                   addController.addContact();
                                 }
                               },
-                              text: "Create Contact",
+                              text: widget.isCommingFromEdit
+                                  ? "Save"
+                                  : "Create Contact",
                               buttonStyle: const ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll(
                                       AppColors.buttonColor)),
@@ -822,6 +873,53 @@ class _AddContactScreenState extends State<AddContactScreen> {
           )
         ]),
       ),
+    );
+  }
+
+  Widget iconWithTextField(
+      {required String lableText,
+      required TextEditingController controller,
+      required String icon,
+      required FormFieldValidator validator,
+      GlobalKey? key,
+      bool? readOnly,
+      VoidCallback? textFieldTap}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomImageView(
+            svgPath: icon,
+            height: 18.adaptSize,
+            width: 18.adaptSize,
+            color: Colors.black,
+            margin: EdgeInsets.only(top: 18.v, right: 15)),
+        Expanded(
+          child: Form(
+            key: key,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: CustomTextFormField(
+                readOnly: readOnly ?? false,
+                onTap: textFieldTap,
+                controller: controller,
+                // margin: EdgeInsets.only(
+                //     left: 12.h, top: 0.v, right: 12.h),
+                // hintText: "First name *",
+                labelText: lableText,
+                textInputAction: TextInputAction.done,
+                maxLines: 1,
+                // contentPadding: EdgeInsets.symmetric(
+                //     horizontal: 11.h, vertical: 7.v),
+                borderDecoration: const OutlineInputBorder(),
+                filled: false,
+                onChange: (value) {
+                  formValidation.setFirstNameValidation(value);
+                  formValidation.checkButtonValidation();
+                },
+                validator: validator,
+                fillColor: theme.colorScheme.primary),
+          ),
+        ),
+      ],
     );
   }
 }

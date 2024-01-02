@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:forever_connection/Models/user_profile_model.dart';
 import 'package:http_parser/http_parser.dart';
 
@@ -118,7 +117,7 @@ class UserProfileService {
   }
 
   Future<Map> uploadContacts(
-      Map<String, dynamic> requestModel,  File? file) async {
+      Map<String, dynamic> requestModel, File? file) async {
     Response response;
     var token = await SharedPref().getUserToken();
     //log("token is $token");
@@ -143,7 +142,7 @@ class UserProfileService {
           MapEntry(
             "photo",
             await MultipartFile.fromFile(
-              file!.path,
+              file.path,
               filename: file.path.split("/").last,
               // contact.photo!,
 
@@ -167,7 +166,7 @@ class UserProfileService {
         throw Exception("Faild to upload data");
       }
     } catch (e) {
-      log(e.toString());
+      log("Faild to upload contact ${e.toString()}");
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -175,7 +174,7 @@ class UserProfileService {
             e.type == DioExceptionType.unknown) {
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-          log("${e.response.toString()}");
+          log(e.response.toString());
           throw Exception("Faild to load data");
         }
       }
