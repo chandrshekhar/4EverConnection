@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
+import 'package:forever_connection/Feature/Connection/Presentation/create_connection.dart';
 import 'package:forever_connection/Feature/Connection/Repository/create_connection_repo.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,33 @@ class ConnectionController extends GetxController {
 
   //connection list loading
   RxBool isLoading = false.obs;
+  RxBool isContactUploding = false.obs;
+
+  userContactConnect(BuildContext context) async {
+    try {
+      var reqModel = {
+        "service": serviceId.value,
+        "partner": partnerId.value,
+        "contact": contactId.value,
+      };
+      isContactUploding(true);
+      var res = await _connectionRepo.uplodConnection(reqModel: reqModel);
+      ToastWidget.successToast(success: res['message']);
+      isContactUploding(false);
+
+      serviceId.value = -1;
+      partnerId.value = -1;
+      contactId.value = -1;
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const CreateConnectionScreen()),
+          (route) => false);
+    } catch (e) {
+      // ToastWidget.errorToast(error: e.toString());
+      isContactUploding(false);
+    }
+  }
 
   getConnection() async {
     try {
@@ -66,7 +94,7 @@ class ConnectionController extends GetxController {
     partnerId.value = id;
   }
 
-    setContactId(int id) {
+  setContactId(int id) {
     contactId.value = id;
   }
 

@@ -1,7 +1,10 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
 import 'package:forever_connection/core/utils/shared_pref_services.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
+
 import '../../../core/constants/api_path.dart';
 
 class ConnectionRepo {
@@ -22,7 +25,6 @@ class ConnectionRepo {
       log("response ${response.statusCode}");
 
       if (response.statusCode == 201) {
-      
         return response.data;
       } else {
         throw Exception("Faild to load data");
@@ -33,11 +35,47 @@ class ConnectionRepo {
             e.type == DioExceptionType.sendTimeout ||
             e.type == DioExceptionType.receiveTimeout ||
             e.type == DioExceptionType.unknown) {
-     
           throw Exception("No Internet connection or network error");
         } else if (e.type == DioExceptionType.badResponse) {
-        
           throw Exception(e.response!.data['error']);
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+  Future<Map> uplodConnection({required Map<String, dynamic> reqModel}) async {
+    log("Add connection service running...");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      log(reqModel.toString());
+      response =
+          await dio.post(ApiPath.uploadConnectionContact, data: reqModel);
+      log("Add connection response ${response.data.toString()}");
+      log("response ${response.statusCode.toString()}");
+
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          print(e.response!.data);
+          ToastWidget.errorToast(error: e.response!.data['message'].toString());
+          // throw Exception(e.response!.data['message']);
         }
       }
       throw Exception("Faild to make api the request : $e");

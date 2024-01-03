@@ -76,6 +76,14 @@ class AddContactController extends GetxController {
   RxBool isContactListLoading = false.obs;
   RxList<ContactListModel> contactModelList = <ContactListModel>[].obs;
 
+  RxBool iSExpanded = false.obs;
+
+  RxInt openPanelIndex = (-1).obs;
+
+  void setExpantion(int index) {
+    openPanelIndex.value = index;
+  }
+
   Dio dio = Dio();
 
   RxString choosenFilename = RxString("");
