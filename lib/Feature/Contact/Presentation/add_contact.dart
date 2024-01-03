@@ -233,7 +233,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             onChanged: (value) {
                               addController.gender.value = value;
                             },
-                            hintText: "Select gender",
+                            hintText: addController.gender.value.isEmpty
+                                ? "Select gender"
+                                : addController.gender.value,
                           ),
                         ),
                       ],
@@ -247,7 +249,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         addController.selectDate(context);
                       },
                       lableText: "Date of Birth",
-                      controller: addController.dateOfBirth.value,
+                      controller: addController.dateOfBirthController.value,
                       icon: ImageConstant.imgCalendar,
                       validator: (value) {
                         return null;
@@ -257,28 +259,33 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    iconWithTextField(
-                      lableText: "Company Name",
-                      controller: addController.companyController.value,
-                      icon: ImageConstant.myBusinessProfile,
-                      validator: (value) {
-                        return null;
-                      },
+                  
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        CustomImageView(
+                            svgPath: ImageConstant.imgUser,
+                            height: 18.adaptSize,
+                            width: 18.adaptSize,
+                            color: Colors.black,
+                            margin: EdgeInsets.only(top: 18.v, right: 15)),
+                        Expanded(
+                          child: CustomDropDown(
+                            borderDecoration: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            items: addController.positionList,
+                            onChanged: (value) {
+                              addController.postionController.value.text =
+                                  value;
+                            },
+                            hintText: addController
+                                    .postionController.value.text.isNotEmpty
+                                ? addController.postionController.value.text
+                                : "Select position",
+                          ),
+                        ),
+                      ],
                     ),
-
-                    SizedBox(
-                      height: 16.adaptSize,
-                    ),
-
-                    iconWithTextField(
-                      lableText: "Position",
-                      controller: addController.postionController.value,
-                      icon: ImageConstant.imgUser,
-                      validator: (value) {
-                        return null;
-                      },
-                    ),
-
                     SizedBox(
                       height: 16.adaptSize,
                     ),
@@ -457,24 +464,6 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       ],
                     ),
 
-                    // CustomTextFormField(
-                    //     controller: addController.homePhone.value,
-                    //     margin:
-                    //         EdgeInsets.only(left: 12.h, top: 0.v, right: 12.h),
-                    //     hintText: "Home Phone",
-                    //     labelText: "Home Phone",
-                    //     textInputAction: TextInputAction.done,
-                    //     textInputType: TextInputType.phone,
-                    //     inputFormatters: [
-                    //       FilteringTextInputFormatter.digitsOnly
-                    //     ],
-                    //     maxLines: 1,
-                    //     contentPadding: EdgeInsets.symmetric(
-                    //         horizontal: 11.h, vertical: 17.v),
-                    //     borderDecoration: const OutlineInputBorder(),
-                    //     filled: false,
-                    //     onChange: (value) {},
-                    //     fillColor: theme.colorScheme.primary),
                     SizedBox(
                       height: 16.adaptSize,
                     ),
@@ -504,7 +493,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     ),
                     iconWithTextField(
                       lableText: "Business Email",
-                      controller: addController.businessEmail.value,
+                      controller: addController.businessEmailController.value,
                       icon: ImageConstant.imgVector,
                       validator: (value) {
                         return null;
@@ -516,7 +505,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     ),
                     iconWithTextField(
                       lableText: "Business Fax",
-                      controller: addController.businessFax.value,
+                      controller: addController.businessFaxController.value,
                       icon: ImageConstant.imgVideocamera,
                       validator: (value) {
                         return null;

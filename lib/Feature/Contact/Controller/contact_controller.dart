@@ -12,6 +12,8 @@ import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../Model/contact_model.dart';
+
 class ContactController extends GetxController {
   var searchController = TextEditingController().obs;
   RxString selectedString = "".obs;
@@ -101,12 +103,12 @@ class ContactController extends GetxController {
   }
 
   Future<bool> uploadContactsHelper(Contact contact, File? file) async {
+    log("Adding api calling...");
     try {
       Map<String, dynamic> requestModel = {
         "first_name": contact.name.first.isNotEmpty ? contact.name.first : "NA",
         "last_name": contact.name.last.isNotEmpty ? contact.name.last : "NA",
         "mobile_phone": contact.phones[0].number.toString(),
-        
         "additional_json": jsonEncode(contact),
       };
       log("Contact ${jsonEncode(contact)}");
@@ -116,6 +118,50 @@ class ContactController extends GetxController {
           .then((value) async {
         await addContactController.getContactList(search: "");
         contact.insert();
+      });
+      return true;
+    } catch (e) {
+      log("Error is ${e.toString()}");
+      return false;
+    }
+  }
+
+  Future<bool> addContact(ContactListModel contactListModel, File? file) async {
+    log("Adding api calling...");
+    try {
+      Map<String, dynamic> requestModel = {
+        "first_name": contactListModel.firstName ?? "",
+        "last_name": contactListModel.lastName ?? "",
+        "middle_name": contactListModel.middleName ?? "",
+        "mobile_phone": contactListModel.mobilePhone ?? "",
+        "business_name": contactListModel.businessName ?? "",
+        "position": contactListModel.position ?? "",
+        "current_occupation": contactListModel.currentOccupation ?? "",
+        "ideal_occupation": contactListModel.idealOccupation ?? "",
+        "lifer_partner_name": contactListModel.liferPartnerName ?? "",
+        "life_partner_phone": contactListModel.lifePartnerPhone ?? "",
+        "home_phone": contactListModel.homePhone ?? "",
+        "personal_email": contactListModel.personalEmail ?? "",
+        "business_phone": contactListModel.businessPhone ?? "",
+        "business_email": contactListModel.businessEmail ?? "",
+        "business_fax": contactListModel.businessFax ?? "",
+        "business_website": contactListModel.businessWebsite ?? "",
+        "home_address": contactListModel.homeAddress ?? "",
+        "home_apartment": contactListModel.homeApartment ?? "",
+        "home_zip_code": contactListModel.homeZipCode ?? "",
+        "business_address": contactListModel.businessAddress ?? "",
+        "business_apartment": contactListModel.businessApartment ?? "",
+        "business_zip_code": contactListModel.businessZipCode ?? "",
+        "date_of_birth": contactListModel.dateOfBirth ?? "",
+        "gender": contactListModel.gender ?? "",
+      };
+
+      log("request model is ${requestModel.toString()}");
+      await userProfileService
+          .uploadContacts(requestModel, file)
+          .then((value) async {
+        await addContactController.getContactList(search: "");
+        // contactListModel.insert();
       });
       return true;
     } catch (e) {

@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Model/contact_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
@@ -21,7 +20,7 @@ class AddContactController extends GetxController {
   var firstNameController = TextEditingController().obs;
   var middleNameController = TextEditingController().obs;
   var lastNameController = TextEditingController().obs;
-  var dateOfBirth = TextEditingController().obs;
+  var dateOfBirthController = TextEditingController().obs;
   var companyController = TextEditingController().obs;
   var postionController = TextEditingController().obs;
   var occupationController = TextEditingController().obs;
@@ -32,8 +31,8 @@ class AddContactController extends GetxController {
   var homePhone = TextEditingController().obs;
   var personalEmail = TextEditingController().obs;
   var businessNameController = TextEditingController().obs;
-  var businessEmail = TextEditingController().obs;
-  var businessFax = TextEditingController().obs;
+  var businessEmailController = TextEditingController().obs;
+  var businessFaxController = TextEditingController().obs;
   var webSiteController = TextEditingController().obs;
   var homeAddressController = TextEditingController().obs;
   var aptController = TextEditingController().obs;
@@ -46,19 +45,20 @@ class AddContactController extends GetxController {
     firstNameController.value.text = contactListModel.firstName ?? "";
     middleNameController.value.text = contactListModel.middleName ?? "";
     lastNameController.value.text = contactListModel.lastName ?? "";
-    dateOfBirth.value.text = contactListModel.dateOfBirth ?? "";
+    dateOfBirthController.value.text = contactListModel.dateOfBirth ?? "";
     postionController.value.text = contactListModel.position ?? "";
     occupationController.value.text = contactListModel.currentOccupation ?? "";
     idealOccupationController.value.text =
         contactListModel.idealOccupation ?? "";
+    homeAddressController.value.text = contactListModel.homeAddress ?? "";
     mobilePhoneController.value.text = contactListModel.mobilePhone ?? "";
     lifePartnerName.value.text = contactListModel.liferPartnerName ?? "";
     lifePartnerPhone.value.text = contactListModel.lifePartnerPhone ?? "";
     homePhone.value.text = contactListModel.homePhone ?? "";
     personalEmail.value.text = contactListModel.personalEmail ?? '';
     businessNameController.value.text = contactListModel.businessName ?? "";
-    businessEmail.value.text = contactListModel.businessEmail ?? "";
-    businessFax.value.text = contactListModel.businessFax ?? "";
+    businessEmailController.value.text = contactListModel.businessEmail ?? "";
+    businessFaxController.value.text = contactListModel.businessFax ?? "";
     webSiteController.value.text = contactListModel.businessWebsite ?? "";
     aptController.value.text = contactListModel.homeApartment ?? "";
     zipController.value.text = contactListModel.homeZipCode ?? "";
@@ -70,7 +70,7 @@ class AddContactController extends GetxController {
     networkImage.value = contactListModel.photo ?? "";
   }
 
-  RxString gender = "Select Gender".obs;
+  RxString gender = "".obs;
   RxBool isUploadingContact = false.obs;
 
   RxBool isContactListLoading = false.obs;
@@ -112,14 +112,14 @@ class AddContactController extends GetxController {
         }));
     if (pickedDate != null && pickedDate != selectedDate.value) {
       selectedDate.value = pickedDate;
-      dateOfBirth.value.text = convertAndFormatDate(pickedDate);
+      dateOfBirthController.value.text = convertAndFormatDate(pickedDate);
     }
   }
 
   String convertAndFormatDate(DateTime inputDate) {
     // final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
     // final parsedDate = originalFormat.parse(inputDate);
-    final outputFormat = DateFormat("MM/dd/yyyy");
+    final outputFormat = DateFormat("yyyy-MM-DD");
     return outputFormat.format(inputDate);
   }
 
@@ -195,142 +195,101 @@ class AddContactController extends GetxController {
     }
   }
 
-  // Future<void> saveContact() async {
-  //   // Check and request permission if needed
-  //   if (!(await Permission.contacts.request().isGranted)) {
-  //     return;
-  //   }
-  //   final newContact = Contact()
-  //     ..name.first = firstNameController.value.text
-  //     ..name.last = lastNameController.value.text
-  //     ..name.middle = middleNameController.value.text
-  //     ..phones = [Phone(mobilePhoneController.value.text)];
-  //   await newContact.insert();
-  //   print("add contact--> $newContact");
-  // }
+  RxList<String> positionList = <String>[
+    "Owner",
+    "President",
+    "Vice President",
+    'Supervisor',
+    "Manager",
+    "Assistant Manager",
+    "Assistant",
+    "Labor",
+    "Other"
+  ].obs;
 
   void addContact() async {
-    final newContact = Contact();
     isUploadingContact(true);
-
+    final newContact = ContactListModel();
     if (firstNameController.value.text.isNotEmpty) {
-      newContact.name.first = firstNameController.value.text;
+      newContact.firstName = firstNameController.value.text;
     }
     if (middleNameController.value.text.isNotEmpty) {
-      newContact.name.middle = middleNameController.value.text;
+      newContact.middleName = middleNameController.value.text;
     }
     if (lastNameController.value.text.isNotEmpty) {
-      newContact.name.last = lastNameController.value.text;
+      newContact.lastName = lastNameController.value.text;
     }
     if (gender.value != "Select Gender") {
       // no gender property for contact found in flutter contacts
-     
+      newContact.gender = gender.value;
     }
-    if (dateOfBirth.value.text.isNotEmpty) {
+    if (dateOfBirthController.value.text.isNotEmpty) {
       // no dob property for contact found in flutter contacts
+      newContact.dateOfBirth = dateOfBirthController.value.text;
     }
 
-    if (companyController.value.text.isNotEmpty) {
-      Organization organization = Organization();
-      organization.company = companyController.value.text;
-
-      if (postionController.value.text.isNotEmpty) {
-        organization.jobDescription = postionController.value.text;
-      }
-      if (occupationController.value.text.isNotEmpty) {
-        organization.department = occupationController.value.text;
-      }
-      newContact.organizations = [organization];
+    if (postionController.value.text.isNotEmpty) {
+      newContact.position = postionController.value.text;
     }
-
+    if (occupationController.value.text.isNotEmpty) {
+      newContact.currentOccupation = occupationController.value.text;
+    }
     if (idealOccupationController.value.text.isNotEmpty) {
-      // no ideal occupation property for contact found in flutter contacts
+      newContact.idealOccupation = idealOccupationController.value.text;
     }
 
     if (mobilePhoneController.value.text.isNotEmpty) {
-      newContact.phones = [Phone(mobilePhoneController.value.text)];
+      newContact.mobilePhone = mobilePhoneController.value.text;
     }
 
     if (lifePartnerName.value.text.isNotEmpty) {
+      newContact.liferPartnerName = lifePartnerName.value.text;
       // no life parntner name property for contact found in flutter contacts
     }
     if (lifePartnerPhone.value.text.isNotEmpty) {
-      newContact.phones.add(Phone(lifePartnerPhone.value.text));
+      newContact.lifePartnerPhone = lifePartnerPhone.value.text;
     }
     if (homePhone.value.text.isNotEmpty) {
-      newContact.phones.add(Phone(homePhone.value.text));
+      newContact.homePhone = homePhone.value.text;
     }
     if (personalEmail.value.text.isNotEmpty) {
-      newContact.emails = [Email(personalEmail.value.text)];
+      newContact.personalEmail = personalEmail.value.text;
     }
-
-    if (businessEmail.value.text.isNotEmpty) {
-      newContact.emails.add(Email(businessEmail.value.text));
+    if (businessNameController.value.text.isNotEmpty) {
+      newContact.businessName = businessNameController.value.text;
     }
-    if (businessFax.value.text.isNotEmpty) {
-      // no business fax property for contact found in flutter contacts
+    if (businessEmailController.value.text.isNotEmpty) {
+      newContact.businessEmail = businessEmailController.value.text;
+    }
+    if (businessFaxController.value.text.isNotEmpty) {
+      newContact.businessFax = businessFaxController.value.text;
     }
     if (webSiteController.value.text.isNotEmpty) {
-      newContact.websites = [Website(webSiteController.value.text)];
+      newContact.businessWebsite = webSiteController.value.text;
     }
 
-    Address? address;
     if (homeAddressController.value.text.isNotEmpty) {
-      address = Address(
-        homeAddressController.value.text,
-      );
+      newContact.homeAddress = homeAddressController.value.text;
       if (aptController.value.text.isNotEmpty) {
-        address.subLocality = aptController.value.text;
+        newContact.homeApartment = aptController.value.text;
       }
       if (zipController.value.text.isNotEmpty) {
-        address.postalCode = zipController.value.text;
+        newContact.homeZipCode = zipController.value.text;
       }
-
-      address.label = AddressLabel.home;
-
-      newContact.addresses = [address];
-    }
-
-    if (businessNameController.value.text.isNotEmpty) {
-      if (newContact.organizations.isNotEmpty) {
-        newContact.organizations.add(
-          Organization(
-            company: businessNameController.value.text,
-          ),
-        );
-      } else {
-        newContact.organizations = [
-          Organization(
-            company: businessNameController.value.text,
-          ),
-        ];
+      if (businessAddressController.value.text.isNotEmpty) {
+        newContact.businessAddress = businessAddressController.value.text;
       }
-    }
-
-    if (businessAddressController.value.text.isNotEmpty) {
-      address = Address(
-        businessAddressController.value.text,
-      );
       if (businessAptController.value.text.isNotEmpty) {
-        address.subLocality = businessAptController.value.text;
+        newContact.businessApartment = businessAptController.value.text;
       }
       if (businessZipController.value.text.isNotEmpty) {
-        address.postalCode = businessZipController.value.text;
+        newContact.businessZipCode = businessZipController.value.text;
       }
-
-      address.label = AddressLabel.work;
-
-      newContact.addresses.add(address);
     }
 
-    if (choosenFilename.value.isNotEmpty) {
-      newContact.photo = files.value?.readAsBytesSync();
-    }
     final contactController = Get.put(ContactController());
     //  await  saveContact();
-    var response =
-        await contactController.uploadContactsHelper(newContact, files.value);
-
+    var response = await contactController.addContact(newContact, files.value);
     if (response) {
       ToastWidget.successToast(success: "Contact added successfully!");
       clearAllControllers();
@@ -344,7 +303,7 @@ class AddContactController extends GetxController {
     firstNameController.value.clear();
     middleNameController.value.clear();
     lastNameController.value.clear();
-    dateOfBirth.value.clear();
+    dateOfBirthController.value.clear();
     companyController.value.clear();
     postionController.value.clear();
     occupationController.value.clear();
@@ -355,8 +314,8 @@ class AddContactController extends GetxController {
     homePhone.value.clear();
     personalEmail.value.clear();
     businessNameController.value.clear();
-    businessEmail.value.clear();
-    businessFax.value.clear();
+    businessEmailController.value.clear();
+    businessFaxController.value.clear();
     webSiteController.value.clear();
     homeAddressController.value.clear();
     aptController.value.clear();
