@@ -162,7 +162,7 @@ class SignupController extends GetxController {
           TostWidget()
               .errorToast(title: "Error!", message: "Please check internet");
         } else if (e.type == DioErrorType.badResponse) {
-          log(e.response!.data);
+          //log(e.response!.data);
           TostWidget().errorToast(
               title: "Invalid!", message: "${e.response!.data["message"]}");
         } else {

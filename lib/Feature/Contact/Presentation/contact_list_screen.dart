@@ -150,7 +150,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                                       .homeAddress ??
                                                   "");
                                         },
-                                        connect: "")));
+                                        connect: "");
 
                                 // return ContactListCard2(
                                 //   author:

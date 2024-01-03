@@ -26,7 +26,8 @@ class ContactListCard2 extends StatelessWidget {
       required this.phoneNumber,
       this.go,
       this.goPress,
-      this.connect,this.viewDetails});
+      this.connect,
+      this.viewDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -111,23 +112,7 @@ class ContactListCard2 extends StatelessWidget {
                     color: Colors.white,
                     size: 30.sp,
                   ),
-                  onTap: viewDetails,
-                  child: CircleAvatar(
-                    radius: 10,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.edit,
-                      color: AppColors.darkBlue,
-                      size: 15.sp,
-                    ),
-                  ),
                 ),
-                const SizedBox(width: 10),
-                Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                  color: Colors.white,
-                  size: 30.sp,
-                )
               ],
             ),
           ),

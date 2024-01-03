@@ -34,7 +34,7 @@ class CustomDrawerWidget extends StatelessWidget {
               Container(
                 color: AppColors.darkBlue,
                 padding: EdgeInsets.only(
-                    top: 20.h, left: 18.w, right: 18.w, bottom: 12.h),
+                    top: 20.h, left: 18.w, right: 16.w, bottom: 12.h),
                 // margin: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   children: [
@@ -56,10 +56,10 @@ class CustomDrawerWidget extends StatelessWidget {
                                 const CircularProgressIndicator.adaptive(
                                     backgroundColor: AppColors
                                         .appBackgroundColor), // Placeholder widget
-                            errorWidget: (context, url, error) => const Icon(
+                            errorWidget: (context, url, error) => Icon(
                               Icons.person,
                               color: Colors.white,
-                              size: 60,
+                              size: 60.sp,
                             ), // Widget to display when an error occurs
                           ),
                           SizedBox(width: 10.w),
