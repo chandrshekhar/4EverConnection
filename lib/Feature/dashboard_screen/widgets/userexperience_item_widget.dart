@@ -71,9 +71,10 @@ class UserexperienceItemWidget extends StatelessWidget {
                 onPressed: onIconClick,
                 icon: Icon(
                   Icons.info_outline,
-                  size: infoButtonSize?? 30.adaptSize,
-                  color: infoButtonColor?? AppColors.floatingActionButtonColor
-                      .withOpacity(0.8.adaptSize),
+                  size: infoButtonSize ?? 30.adaptSize,
+                  color: infoButtonColor ??
+                      AppColors.floatingActionButtonColor
+                          .withOpacity(0.8.adaptSize),
                 ))
             // InkWell(
             //   onTap: onIconClick,

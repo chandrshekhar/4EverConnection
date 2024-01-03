@@ -5,6 +5,7 @@ import 'package:forever_connection/Feature/Contact/Controller/add_contact_contro
 import 'package:forever_connection/Feature/Contact/Controller/contact_controller.dart';
 import 'package:forever_connection/Feature/Contact/Model/contact_model.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/Widget/contact_list_card_widget2.dart';
+import 'package:forever_connection/Feature/Contact/Presentation/add_contact.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
@@ -103,29 +104,29 @@ class _ContactListScreenState extends State<ContactListScreen> {
                     obscureText: false),
               ),
               Expanded(
-                  child: Obx(() => addContactController
-                              .isContactListLoading.value ==
-                          true
-                      ? const Center(
-                          child: CircularProgressIndicator.adaptive())
-                      : addContactController.contactModelList.isNotEmpty
-                          ? ListView.builder(
-                              padding: EdgeInsets.only(
-                                top: 20.h,
-                              ),
-                              itemCount:
-                                  addContactController.contactModelList.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    child: Obx(() => ContactListCard2(
-                                        viewDetails: () {
-                                          _showBottomSheet(
-                                              context: context,
-                                              connectionModel:
+                  child: Obx(() =>
+                      addContactController.isContactListLoading.value == true
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive())
+                          : addContactController.contactModelList.isNotEmpty
+                              ? ListView.builder(
+                                  padding: EdgeInsets.only(top: 20.h),
+                                  itemCount: addContactController
+                                      .contactModelList.length,
+                                  itemBuilder: (context, index) {
+                                    return ContactListCard2(
+                                        editIconClick: () {
+                                          addContactController.setEditValue(
+                                              contactListModel:
                                                   addContactController
                                                       .contactModelList[index]);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const AddContactScreen(
+                                                        isCommingFromEdit: true,
+                                                      )));
                                         },
                                         author:
                                             "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
@@ -180,8 +181,14 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   Expanded(
                     child: CustomIconButton(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, AppRoutes.addContactScreen);
+                        addContactController.setEditValue(
+                            contactListModel: ContactListModel());
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const AddContactScreen(
+                                      isCommingFromEdit: false,
+                                    )));
                       },
                       decoration: BoxDecoration(
                           color: const Color(0xffD3991B),

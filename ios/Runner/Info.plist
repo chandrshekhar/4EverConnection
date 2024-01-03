@@ -7,11 +7,9 @@
     <key>UIFileSharingEnabled</key>
     <true/>
     <key>NSCameraUsageDescription</key>
-    <string>Please grant camera access</string>
+    <string>This app requires access to the photo library to upload photo.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Please grant microphone access</string>
-    <key>NSContactsUsageDescription</key>
-    <string>Reason we need access to the contact list</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -46,12 +44,10 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Please grant camera access</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Reason we need access to the contact list</string>
+	<string>This app requires access to the contact list for make connection</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app require permission to access gallery</string>
+	<string>This app requires access to the photo library to upload your photo</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -44,102 +44,141 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        padding: EdgeInsets.only(top: 41.h),
-        itemCount: myWalletController.myWalletList.length,
-        itemBuilder: (context, index) {
-          return UserexperienceItemWidget(
-            title: myWalletController.myWalletList[index]['name'],
-            leftImagePath: myWalletController.myWalletList[index]['image'],
-            infoButtonColor: AppColors.buttonColor,
-            infoButtonSize: 20.sp,
-            onIconClick: () {
-              // if (index == 0) {
-              //   showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) {
-              //       return Dialog(
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(
-              //               16), // Set the border radius for the dialog
-              //         ),
-              //         child: const CustomPopupContent(
-              //             title: "Connect",
-              //             content: "assets/images/connect-tooltips.png"),
-              //       );
-              //     },
-              //   );
-              // } else if (index == 1) {
-              //   showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) {
-              //       return Dialog(
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(
-              //               16), // Set the border radius for the dialog
-              //         ),
-              //         child: const CustomPopupContent(
-              //           title: "Request Service",
-              //           content: "assets/images/request-tooltips.png",
-              //         ),
-              //       );
-              //     },
-              //   );
-              // } else if (index == 2) {
-              //   showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) {
-              //       return Dialog(
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(
-              //               16), // Set the border radius for the dialog
-              //         ),
-              //         child: const CustomPopupContent(
-              //             title: "View & Collaborate",
-              //             content: "assets/images/collaborate-tooltips.png"),
-              //       );
-              //     },
-              //   );
-              // } else if (index == 3) {
-              //   showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) {
-              //       return Dialog(
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(
-              //               16), // Set the border radius for the dialog
-              //         ),
-              //         child: const CustomPopupContent(
-              //             title: "Access My Vault",
-              //             content: "assets/images/access-my-vault.png"),
-              //       );
-              //     },
-              //   );
-              // }
-            },
-            ontap: () {
-              if (index == 2) {
-                Get.to(const WithdrawAvailableFundsScreen());
-              } else if (index == 1) {
-                Get.to(const WithdrawalHistoryScreen());
-              } else if (index == 0) {
-                Get.to(const EarningHistoryScreen());
-              }
-              // else if (index == 1) {
-              //   Navigator.pushNamed(
-              //       context, AppRoutes.requestServiceOneScreen);
-              // } else if (index == 2) {
-              //   Navigator.pushNamed(
-              //       context, AppRoutes.myServicesScreen);
-              // } else if (index == 3) {
-              //   Navigator.pushNamed(
-              //       context, AppRoutes.documentVaultScreen);
-              // }
-            },
-          );
-        },
+      body: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.115,
+            margin: EdgeInsets.only(
+                bottom: 10.h, left: 25.w, right: 25.w, top: 30.h),
+            color: AppColors.darkBlue,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Available Funds",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Poppins",
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
+                Text(
+                  "\$${0}",
+                  style: TextStyle(
+                    color: AppColors.buttonColor2,
+                    fontFamily: "Poppins",
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.only(top: 20.h),
+              itemCount: myWalletController.myWalletList.length,
+              itemBuilder: (context, index) {
+                return UserexperienceItemWidget(
+                  title: myWalletController.myWalletList[index]['name'],
+                  leftImagePath: myWalletController.myWalletList[index]
+                      ['image'],
+                  infoButtonColor: AppColors.buttonColor,
+                  infoButtonSize: 20.sp,
+                  onIconClick: () {
+                    // if (index == 0) {
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return Dialog(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(
+                    //               16), // Set the border radius for the dialog
+                    //         ),
+                    //         child: const CustomPopupContent(
+                    //             title: "Connect",
+                    //             content: "assets/images/connect-tooltips.png"),
+                    //       );
+                    //     },
+                    //   );
+                    // } else if (index == 1) {
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return Dialog(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(
+                    //               16), // Set the border radius for the dialog
+                    //         ),
+                    //         child: const CustomPopupContent(
+                    //           title: "Request Service",
+                    //           content: "assets/images/request-tooltips.png",
+                    //         ),
+                    //       );
+                    //     },
+                    //   );
+                    // } else if (index == 2) {
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return Dialog(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(
+                    //               16), // Set the border radius for the dialog
+                    //         ),
+                    //         child: const CustomPopupContent(
+                    //             title: "View & Collaborate",
+                    //             content: "assets/images/collaborate-tooltips.png"),
+                    //       );
+                    //     },
+                    //   );
+                    // } else if (index == 3) {
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return Dialog(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(
+                    //               16), // Set the border radius for the dialog
+                    //         ),
+                    //         child: const CustomPopupContent(
+                    //             title: "Access My Vault",
+                    //             content: "assets/images/access-my-vault.png"),
+                    //       );
+                    //     },
+                    //   );
+                    // }
+                  },
+                  ontap: () {
+                    if (index == 0) {
+                      Get.to(const WithdrawAvailableFundsScreen());
+                    } else if (index == 2) {
+                      Get.to(const WithdrawalHistoryScreen());
+                    } else if (index == 1) {
+                      Get.to(const EarningHistoryScreen());
+                    }
+                    // else if (index == 1) {
+                    //   Navigator.pushNamed(
+                    //       context, AppRoutes.requestServiceOneScreen);
+                    // } else if (index == 2) {
+                    //   Navigator.pushNamed(
+                    //       context, AppRoutes.myServicesScreen);
+                    // } else if (index == 3) {
+                    //   Navigator.pushNamed(
+                    //       context, AppRoutes.documentVaultScreen);
+                    // }
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -15,11 +15,12 @@ class ContactListCard2 extends StatelessWidget {
   String? go;
   String? connect;
   VoidCallback? goPress;
+  VoidCallback? editIconClick;
   VoidCallback? viewDetails;
-
   ContactListCard2(
       {super.key,
       required this.email,
+      this.editIconClick,
       required this.author,
       required this.photo,
       required this.phoneNumber,
@@ -104,6 +105,12 @@ class ContactListCard2 extends StatelessWidget {
                   ),
                 ),
                 InkWell(
+                  onTap: editIconClick,
+                  child: Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: Colors.white,
+                    size: 30.sp,
+                  ),
                   onTap: viewDetails,
                   child: CircleAvatar(
                     radius: 10,

@@ -10,7 +10,6 @@ import 'package:forever_connection/Feature/Contact/Controller/add_contact_contro
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ContactController extends GetxController {
@@ -41,11 +40,11 @@ class ContactController extends GetxController {
           contentPadding: EdgeInsets.only(left: 30.w, bottom: 20.h),
           content: Row(
             children: [
-              CircularProgressIndicator(),
+              const CircularProgressIndicator(),
               SizedBox(
                 width: 10.w,
               ),
-              Text(" Please wait"),
+              const Text(" Please wait"),
             ],
           ),
           middleText: "Please wait..",
@@ -90,7 +89,7 @@ class ContactController extends GetxController {
           }
         }
         Get.back();
-        addContactController.getContactList();
+
         ToastWidget.successToast(success: "Contacts uploaded successfully");
       }
 
@@ -107,15 +106,20 @@ class ContactController extends GetxController {
         "first_name": contact.name.first.isNotEmpty ? contact.name.first : "NA",
         "last_name": contact.name.last.isNotEmpty ? contact.name.last : "NA",
         "mobile_phone": contact.phones[0].number.toString(),
+        
         "additional_json": jsonEncode(contact),
       };
+      log("Contact ${jsonEncode(contact)}");
       log("request model is $requestModel");
       await userProfileService
           .uploadContacts(requestModel, file)
-          .then((value) => contact.insert());
+          .then((value) async {
+        await addContactController.getContactList(search: "");
+        contact.insert();
+      });
       return true;
     } catch (e) {
-      ToastWidget.errorToast(error: e.toString());
+      log("Error is ${e.toString()}");
       return false;
     }
   }

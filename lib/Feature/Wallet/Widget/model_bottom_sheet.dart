@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/Wallet/Withdraw%20Available%20Funds/Controller/withdraw_availabl_funds.dart';
+import 'package:get/get.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../widgets/custom_drop_down.dart';
 import '../../../widgets/custom_icon_button.dart';
 import '../../../widgets/custom_text_form_field.dart';
 
-class MyBottomSheetContent extends StatelessWidget {
+class MyBottomSheetContent extends StatefulWidget {
   const MyBottomSheetContent({super.key});
+
+  @override
+  State<MyBottomSheetContent> createState() => _MyBottomSheetContentState();
+}
+
+class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
+  final withdrawController = Get.put(WithdrawFundsController());
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -47,9 +56,11 @@ class MyBottomSheetContent extends StatelessWidget {
                   CustomDropDown(
                     contentPadding: const EdgeInsets.only(
                         left: 10, top: 10, bottom: 10, right: 10),
-                    hintText: "Select payment mode",
+                    hintText: "Zelle",
                     items: const ["Zelle", "PayPal", "Venmo", "E-Check"],
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      withdrawController.setPaymentMethod(val);
+                    },
                     validator: (value) {
                       return null;
                     },
@@ -61,9 +72,11 @@ class MyBottomSheetContent extends StatelessWidget {
                   CustomDropDown(
                     contentPadding: const EdgeInsets.only(
                         left: 10, top: 10, bottom: 10, right: 10),
-                    hintText: "Select Account",
+                    hintText: "Mobile Number",
                     items: const ["Mobile Number", "Email address"],
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      withdrawController.setAccountAssociateValue(val);
+                    },
                     validator: (value) {
                       return null;
                     },
@@ -71,17 +84,33 @@ class MyBottomSheetContent extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
-                  richTextForLable(title: "Mobile Number"),
-                  CustomTextFormField(
-                    hintText: "Mobile Number",
-                    validator: (v) {
-                      if (v.toString().isEmpty) {
-                        return "Enter valid mobile number";
-                      } else {
-                        return null;
-                      }
-                    },
+                  Obx(
+                    () => richTextForLable(
+                        title: withdrawController
+                                .accountAssociateSelectedValue.value
+                                .contains("Email address")
+                            ? "Email address"
+                            : "Mobile Number"),
                   ),
+                  Obx(() => CustomTextFormField(
+                        onChange: (value) {
+                          withdrawController.setEmailPhone(value);
+                        },
+                        controller:
+                            withdrawController.phoneEmailController.value,
+                        hintText: withdrawController
+                                .accountAssociateSelectedValue.value
+                                .contains("Email address")
+                            ? "Email address"
+                            : "Mobile Number",
+                        validator: (v) {
+                          if (v.toString().isEmpty) {
+                            return "Enter valid mobile number";
+                          } else {
+                            return null;
+                          }
+                        },
+                      )),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -89,6 +118,15 @@ class MyBottomSheetContent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomIconButton(
+                          onTap: () {
+                            Get.back();
+                            withdrawController.phoneEmailController.value
+                                .clear();
+                            withdrawController
+                                .accountAssociateSelectedValue("Mobile Number");
+                            withdrawController
+                                .paymentTypeSelectedValue("Zelle");
+                          },
                           height: 54.h,
                           width: 150.w,
                           decoration: const BoxDecoration(
@@ -101,12 +139,21 @@ class MyBottomSheetContent extends StatelessWidget {
                                   fontSize: 17.sp, fontWeight: FontWeight.w500),
                             ),
                           )),
-                      CustomIconButton(
+                      Obx(() => CustomIconButton(
+                          onTap: withdrawController
+                                  .phoneEmailString.value.isNotEmpty
+                              ? () {
+                                  print("object");
+                                }
+                              : null,
                           height: 45.h,
                           width: 120.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.zero,
-                              color: AppColors.appBarTextColor),
+                              color: withdrawController
+                                      .phoneEmailString.value.isNotEmpty
+                                  ? AppColors.appBarTextColor
+                                  : Colors.grey),
                           child: Center(
                             child: Text(
                               "Add Method",
@@ -115,7 +162,7 @@ class MyBottomSheetContent extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white),
                             ),
-                          )),
+                          ))),
                     ],
                   )
                 ],
