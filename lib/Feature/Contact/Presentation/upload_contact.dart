@@ -26,6 +26,7 @@ class _MyContactsScreenState extends State<MyContactsScreen>
   @override
   void initState() {
     contactController.search("");
+    contactController.getContactFromPhone();
     super.initState();
   }
 

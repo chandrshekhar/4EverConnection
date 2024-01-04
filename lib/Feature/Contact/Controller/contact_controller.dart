@@ -110,9 +110,13 @@ class ContactController extends GetxController {
         "last_name": contact.name.last.isNotEmpty ? contact.name.last : "",
         "middle_name":
             contact.name.middle.isNotEmpty ? contact.name.middle : "",
-        "mobile_phone": contact.phones[0].number.toString(),
-        "business_name": contact.organizations[0].company.isNotEmpty
-            ? contact.organizations[0].company
+        "mobile_phone": contact.phones.isNotEmpty
+            ? contact.phones[0].number.toString()
+            : "",
+        "business_name": contact.organizations.isNotEmpty
+            ? contact.organizations[0].company.isNotEmpty
+                ? contact.organizations[0].company
+                : ""
             : "",
         "personal_email": contact.emails.isNotEmpty
             ? contact.emails[0].address.isNotEmpty
@@ -134,11 +138,12 @@ class ContactController extends GetxController {
                 ? contact.addresses[0].postalCode
                 : ""
             : "",
-        "date_of_birth": contact.events.isNotEmpty
-            ? "${contact.events[0].day}-${contact.events[0].month}-${contact.events[0].year}"
-            : "",
+        // "date_of_birth": contact.events.isNotEmpty
+        //     ? "${contact.events[0].day}-${contact.events[0].month}-${contact.events[0].year}"
+        //     : "",
         "additional_json": jsonEncode(contact),
       };
+      log(jsonDecode(contact.events.toString()));
       log("Contact ${jsonEncode(contact)}");
       log("request model is $requestModel");
       await userProfileService
@@ -270,9 +275,7 @@ class ContactController extends GetxController {
       seachedContactList(contacts.value);
       // log(contacts[0].toString());
       stopwatch.stop();
-
       log("length of contacts = ${contacts.length} and time taken = ${stopwatch.elapsed}");
-
       isLoading(false);
     }
   }

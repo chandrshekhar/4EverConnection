@@ -12,6 +12,7 @@ class AuthOptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         color: Colors.white,
         height: double.infinity,
@@ -68,63 +69,70 @@ class AuthOptionScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: Padding(
-        padding: EdgeInsets.only(bottom: 50.h, right: 40.w, left: 40.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => LoginScreen()),
-                      (route) => false);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.buttonColor2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.r), // <-- Radius
+      bottomSheet: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 30.h, right: 40.w, left: 40.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => LoginScreen()),
+                        (route) => false);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.buttonColor2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6.r), // <-- Radius
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
-                  child: Text(
-                    'Login',
-                    style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: 30.w),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => const SignUpScreen()),
-                      (route) => false);
-                },
-                style: ElevatedButton.styleFrom(
-                  // maximumSize: Size(150.w, 100.h),
-                  // minimumSize: Size(150.w, 60.h),
-                  backgroundColor: AppColors.dashBoardColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.r), // <-- Radius
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
-                  child: Text(
-                    'Register',
-                    style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(width: 30.w),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SignUpScreen()),
+                        (route) => false);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    // maximumSize: Size(150.w, 100.h),
+                    // minimumSize: Size(150.w, 60.h),
+                    backgroundColor: AppColors.dashBoardColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6.r), // <-- Radius
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
+                    child: Text(
+                      'Register',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
