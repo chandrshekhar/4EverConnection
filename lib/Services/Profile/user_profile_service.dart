@@ -181,4 +181,72 @@ class UserProfileService {
       throw Exception("Faild to make api the request : $e");
     }
   }
+
+  Future<Map> editContact(
+      int contactId, Map<String, dynamic> requestModel, File? file) async {
+    Response response;
+    var token = await SharedPref().getUserToken();
+    //log("token is $token");
+    //log(requestModel.toString());
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': "Bearer $token"
+      };
+      FormData formData = FormData.fromMap(requestModel);
+
+      // FormData formData = FormData();
+      // formData.fields.addAll([
+      //   MapEntry("first_name", "gaurav"),
+      //   MapEntry('last_name', "desc"),
+      //   MapEntry('mobile_phone', "435345345"),
+      // ]);
+
+      if (file != null) {
+        formData.files.add(
+          MapEntry(
+            "photo",
+            await MultipartFile.fromFile(
+              file.path,
+              filename: file.path.split("/").last,
+              // contact.photo!,
+
+              contentType: MediaType("images", "jpeg"),
+
+              //contentType: MediaType("images", "jpeg")),
+            ),
+          ),
+        );
+      } else {
+        log("no photo");
+      }
+      //log("form data--> ${formData.fields}");
+
+      response = await dio.put(
+          "https://4everconnection.com/api/user-contacts/$contactId/",
+          data: formData);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        log("response after contact edit -- ${response.data}");
+
+        return response.data;
+      } else {
+        throw Exception("Faild to upload data");
+      }
+    } catch (e) {
+      log("Faild to upload contact ${e.toString()}");
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          log(e.response.toString());
+          throw Exception("Faild to load data");
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
 }

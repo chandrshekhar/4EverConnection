@@ -152,29 +152,29 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                         },
                                         connect: "");
 
-                                // return ContactListCard2(
-                                //   author:
-                                //       "${addContactController.contactModelList[index].firstName}",
-                                //   dateTime: noteController.dateTime(
-                                //       addContactController
-                                //               .contactModelList[index]
-                                //               .dateCreated ??
-                                //           ""),
-                                //   description: addContactController
-                                //           .contactModelList[index]
-                                //           .currentOccupation ??
-                                //       "NA",
-                                //   notesTitle: addContactController
-                                //           .contactModelList[index]
-                                //           .mobilePhone ??
-                                //       "NA",
-                                //   onSeleted: (p0) {},
-                                // );
-                              },
-                            )
-                          : const Center(
-                              child: Text("No contact"),
-                            ))),
+                                    // return ContactListCard2(
+                                    //   author:
+                                    //       "${addContactController.contactModelList[index].firstName}",
+                                    //   dateTime: noteController.dateTime(
+                                    //       addContactController
+                                    //               .contactModelList[index]
+                                    //               .dateCreated ??
+                                    //           ""),
+                                    //   description: addContactController
+                                    //           .contactModelList[index]
+                                    //           .currentOccupation ??
+                                    //       "NA",
+                                    //   notesTitle: addContactController
+                                    //           .contactModelList[index]
+                                    //           .mobilePhone ??
+                                    //       "NA",
+                                    //   onSeleted: (p0) {},
+                                    // );
+                                  },
+                                )
+                              : const Center(
+                                  child: Text("No contact"),
+                                ))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

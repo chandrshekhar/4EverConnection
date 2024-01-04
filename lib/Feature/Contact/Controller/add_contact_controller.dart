@@ -40,8 +40,10 @@ class AddContactController extends GetxController {
   var businessAddressController = TextEditingController().obs;
   var businessAptController = TextEditingController().obs;
   var businessZipController = TextEditingController().obs;
+  RxInt contactId = (-1).obs;
   RxString networkImage = "".obs;
   setEditValue({required ContactListModel contactListModel}) {
+    contactId.value = contactListModel.id ?? -1;
     firstNameController.value.text = contactListModel.firstName ?? "";
     middleNameController.value.text = contactListModel.middleName ?? "";
     lastNameController.value.text = contactListModel.lastName ?? "";
@@ -293,6 +295,71 @@ class AddContactController extends GetxController {
     if (response) {
       ToastWidget.successToast(success: "Contact added successfully!");
       clearAllControllers();
+      Get.back();
+    }
+
+    isUploadingContact(false);
+  }
+
+  void editContact() async {
+    isUploadingContact(true);
+    final newContact = ContactListModel();
+
+    newContact.firstName = firstNameController.value.text;
+
+    newContact.middleName = middleNameController.value.text;
+
+    newContact.lastName = lastNameController.value.text;
+
+    // no gender property for contact found in flutter contacts
+    newContact.gender = gender.value;
+
+    // no dob property for contact found in flutter contacts
+    newContact.dateOfBirth = dateOfBirthController.value.text;
+
+    newContact.position = postionController.value.text;
+
+    newContact.currentOccupation = occupationController.value.text;
+
+    newContact.idealOccupation = idealOccupationController.value.text;
+
+    newContact.mobilePhone = mobilePhoneController.value.text;
+
+    newContact.liferPartnerName = lifePartnerName.value.text;
+    // no life parntner name property for contact found in flutter contacts
+
+    newContact.lifePartnerPhone = lifePartnerPhone.value.text;
+
+    newContact.homePhone = homePhone.value.text;
+
+    newContact.personalEmail = personalEmail.value.text;
+
+    newContact.businessName = businessNameController.value.text;
+
+    newContact.businessEmail = businessEmailController.value.text;
+
+    newContact.businessFax = businessFaxController.value.text;
+
+    newContact.businessWebsite = webSiteController.value.text;
+
+    newContact.homeAddress = homeAddressController.value.text;
+
+    newContact.homeApartment = aptController.value.text;
+
+    newContact.homeZipCode = zipController.value.text;
+
+    newContact.businessAddress = businessAddressController.value.text;
+
+    newContact.businessApartment = businessAptController.value.text;
+
+    newContact.businessZipCode = businessZipController.value.text;
+
+    final contactController = Get.put(ContactController());
+    //  await  saveContact();
+    var response = await contactController.editContact(
+        contactId.value, newContact, files.value);
+    if (response) {
+      ToastWidget.successToast(success: "Contact added successfully!");
       Get.back();
     }
 

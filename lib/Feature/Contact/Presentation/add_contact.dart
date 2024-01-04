@@ -229,7 +229,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             // margin: const EdgeInsets.only(left: 14, right: 14),
                             // contentPadding:
                             //     const EdgeInsets.only(top: 10, bottom: 10, left: 10),
-                            items: const ["Male", "Female", "Other"],
+                            items: const ["Male", "Female", "Unknown"],
                             onChanged: (value) {
                               addController.gender.value = value;
                             },
@@ -255,11 +255,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         return null;
                       },
                     ),
-
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                  
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -834,6 +832,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               onTap: () {
                                 // addController.addContact();
                                 if (widget.isCommingFromEdit) {
+                                  addController.editContact();
                                 } else {
                                   addController.addContact();
                                 }
