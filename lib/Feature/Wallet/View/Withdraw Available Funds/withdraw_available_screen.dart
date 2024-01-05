@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/Wallet/Withdraw%20Available%20Funds/Controller/withdraw_availabl_funds.dart';
+import 'package:forever_connection/Feature/Wallet/Controller/withdraw_availabl_funds.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 

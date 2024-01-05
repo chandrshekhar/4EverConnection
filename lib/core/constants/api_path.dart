@@ -70,4 +70,7 @@ class ApiPath {
 
   //user contacts
   static const uploadContacts = "$baseUrl/api/user-contacts/";
+
+  //Wallet Service
+  static const getWalletData = "$baseUrl/api/wallet/";
 }

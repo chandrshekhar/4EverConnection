@@ -3,9 +3,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../Controller/mywallet_cotroller.dart';
 
-class WithdrawalHistoryScreen extends StatelessWidget {
+class WithdrawalHistoryScreen extends StatefulWidget {
   const WithdrawalHistoryScreen({super.key});
+
+  @override
+  State<WithdrawalHistoryScreen> createState() =>
+      _WithdrawalHistoryScreenState();
+}
+
+class _WithdrawalHistoryScreenState extends State<WithdrawalHistoryScreen> {
+  final myWalletController = Get.put(MyWalletController());
+  @override
+  void initState() {
+    super.initState();
+    callGetWalletAfterDelay();
+  }
+
+  void callGetWalletAfterDelay() async {
+    await Future.delayed(const Duration(seconds: 1), () async {
+      await myWalletController.getWalletData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +62,32 @@ class WithdrawalHistoryScreen extends StatelessWidget {
               color: AppColors.appBarTextColor,
               padding: EdgeInsets.only(
                   left: 17.w, right: 17.w, top: 24.h, bottom: 24.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  richTextStyl(amount: "0", titile: "Total\nWithdraw"),
-                  Container(
-                    height: 93.h,
-                    color: Colors.white,
-                    width: 1,
-                  ),
-                  richTextStyl(amount: "0", titile: "YTD\nWithdraw"),
-                ],
-              ),
+              child: Obx(() => myWalletController.isDataLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator.adaptive(
+                        backgroundColor: Colors.white,
+                      ),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        richTextStyl(
+                            amount: myWalletController
+                                .walletModel.value.totalWithdrawn
+                                .toString(),
+                            titile: "Total\nWithdraw"),
+                        Container(
+                          height: 93.h,
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                        richTextStyl(
+                            amount: myWalletController
+                                .walletModel.value.yearToDateTotalWithdrawn
+                                .toString(),
+                            titile: "YTD\nWithdraw"),
+                      ],
+                    )),
             ),
             SizedBox(
               height: 27.h,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/Wallet/My%20Wallet/Controller/controller.dart';
+import 'package:forever_connection/Feature/Wallet/Model/wallet_model.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:get/get.dart';
 
-import '../../dashboard_screen/widgets/userexperience_item_widget.dart';
-import '../Earning History/View/earning_history.dart';
-import '../Withdraw Available Funds/View/withdraw_available_screen.dart';
-import '../Withdrawal History/View/withdrawal_history_screen.dart';
+import '../../../dashboard_screen/widgets/userexperience_item_widget.dart';
+import '../../Controller/mywallet_cotroller.dart';
+import '../Earning History/earning_history.dart';
+import '../Withdraw Available Funds/withdraw_available_screen.dart';
+import '../Withdrawal History/withdrawal_history_screen.dart';
 
 class MyWalletScreen extends StatefulWidget {
   const MyWalletScreen({super.key});
@@ -18,6 +19,13 @@ class MyWalletScreen extends StatefulWidget {
 
 class _MyWalletScreenState extends State<MyWalletScreen> {
   final myWalletController = Get.put(MyWalletController());
+  @override
+  void initState() {
+    myWalletController.walletModel.value = WalletModel();
+    myWalletController.getWalletData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,37 +55,43 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.115,
-            margin: EdgeInsets.only(
-                bottom: 10.h, left: 25.w, right: 25.w, top: 30.h),
-            color: AppColors.darkBlue,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Available Funds",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Poppins",
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(
-                  width: 5.w,
-                ),
-                Text(
-                  "\$${0}",
-                  style: TextStyle(
-                    color: AppColors.buttonColor2,
-                    fontFamily: "Poppins",
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
+              height: MediaQuery.of(context).size.height * 0.115,
+              margin: EdgeInsets.only(
+                  bottom: 10.h, left: 25.w, right: 25.w, top: 30.h),
+              color: AppColors.darkBlue,
+              child: Obx(
+                () => myWalletController.isDataLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive(
+                            backgroundColor: Colors.white),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Available Funds",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Poppins",
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            "\$${myWalletController.walletModel.value.accountBalance.toString()}",
+                            style: TextStyle(
+                              color: AppColors.buttonColor2,
+                              fontFamily: "Poppins",
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+              )),
           Expanded(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
@@ -157,11 +171,22 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
                   },
                   ontap: () {
                     if (index == 0) {
-                      Get.to(const WithdrawAvailableFundsScreen());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  const WithdrawAvailableFundsScreen()));
+                      //Get.to(const WithdrawAvailableFundsScreen());
                     } else if (index == 2) {
-                      Get.to(const WithdrawalHistoryScreen());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const WithdrawalHistoryScreen()));
                     } else if (index == 1) {
-                      Get.to(const EarningHistoryScreen());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const EarningHistoryScreen()));
                     }
                     // else if (index == 1) {
                     //   Navigator.pushNamed(

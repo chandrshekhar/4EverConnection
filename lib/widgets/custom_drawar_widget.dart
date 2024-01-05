@@ -14,7 +14,7 @@ import '../Controllers/Auth Controller/login_controller.dart';
 import '../Controllers/User Profile Controller/user_profile_controller.dart';
 import '../Feature/Connection/Presentation/connection_list.dart';
 import '../Feature/Connection/Presentation/connection_main_screen.dart';
-import '../Feature/Wallet/My Wallet/my_wallet.dart';
+import '../Feature/Wallet/View/My Wallet/my_wallet.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   CustomDrawerWidget({super.key, required this.myProfileController});
