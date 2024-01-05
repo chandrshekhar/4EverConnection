@@ -8,6 +8,7 @@ import '../../../../core/constants/colors.dart';
 import '../../Widget/add_fund_widget.dart';
 import '../../Widget/got_it_widget.dart';
 import '../../Widget/model_bottom_sheet.dart';
+import '../../Widget/withdraw_method.dart';
 
 class WithdrawAvailableFundsScreen extends StatefulWidget {
   const WithdrawAvailableFundsScreen({super.key});
@@ -19,7 +20,7 @@ class WithdrawAvailableFundsScreen extends StatefulWidget {
 
 class _WithdrawAvailableFundsScreenState
     extends State<WithdrawAvailableFundsScreen> {
-      final withdraController = Get.put(WithdrawFundsController());
+  final withdraController = Get.put(WithdrawFundsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +82,29 @@ class _WithdrawAvailableFundsScreenState
                 height: 42.h,
               ),
               CustomTextFormField(
+                  // suffixConstraints:
+                  //     BoxConstraints(maxHeight: 30.h, maxWidth: 60.w),
+                  suffix: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const WithdrawMethodScreen()));
+                    },
+                    child: Container(
+                      width: 30.w,
+                      padding: EdgeInsets.all(5.sp),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: AppColors.darkBlue,
+                          borderRadius: BorderRadius.circular(5.r)),
+                      child: const Text(
+                        "Edit",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                   readOnly: true,
                   labelText: "Method",
                   contentPadding: EdgeInsets.only(left: 10.w, right: 10.w)),

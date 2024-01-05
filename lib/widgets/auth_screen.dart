@@ -48,7 +48,7 @@ class AuthOptionScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             Text(
-              "Creating Lifetime Connectins!",
+              "Creating Lifetime Connections!",
               style: TextStyle(
                   height: 0.5.h,
                   fontSize: 20.sp,
