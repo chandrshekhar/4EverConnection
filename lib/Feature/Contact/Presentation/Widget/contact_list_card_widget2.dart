@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/theme/app_decoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -131,7 +133,7 @@ class ContactListCard2 extends StatelessWidget {
                   } catch (e) {
                     log(e.toString());
                   }
-                }),
+                }, ""),
                 _buildLable("Text", Icons.message_outlined, () {
                   try {
                     final Uri phoneLaunchUri =
@@ -140,16 +142,16 @@ class ContactListCard2 extends StatelessWidget {
                   } catch (e) {
                     log(e.toString());
                   }
-                }),
+                }, ""),
                 _buildLable("Email", Icons.email_outlined, () {
                   final Uri emailLaunchUri = Uri(
                     scheme: 'mailto',
                     path: email.trim(),
                   );
                   launchUrl(emailLaunchUri);
-                }),
-                _buildLable("Go", Icons.location_on_outlined, goPress),
-                _buildLable("Connect", Icons.connected_tv, () {}),
+                }, ""),
+                _buildLable("Go", Icons.location_on_outlined, goPress, ""),
+                _buildLable("Connect", Icons.connected_tv, () {}, "true"),
               ],
             ),
           ),
@@ -158,8 +160,8 @@ class ContactListCard2 extends StatelessWidget {
     );
   }
 
-  Widget _buildLable(
-      String lableName, IconData lableIcon, void Function()? onTap) {
+  Widget _buildLable(String lableName, IconData lableIcon,
+      void Function()? onTap, String iconString) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -170,7 +172,14 @@ class ContactListCard2 extends StatelessWidget {
             borderRadius: BorderRadiusDirectional.circular(6.r)),
         child: Column(
           children: [
-            Icon(lableIcon, size: 18.sp, color: AppColors.darkBlue),
+            iconString.isNotEmpty
+                ? SvgPicture.asset(
+                    ImageConstant.connectIcon,
+                    height: 18.h,
+                    width: 18.w,
+                    color: AppColors.darkBlue,
+                  )
+                : Icon(lableIcon, size: 18.sp, color: AppColors.darkBlue),
             SizedBox(
               height: 5.h,
             ),

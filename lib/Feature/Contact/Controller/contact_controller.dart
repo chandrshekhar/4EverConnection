@@ -106,36 +106,37 @@ class ContactController extends GetxController {
     log("Uplaod api calling...");
     try {
       Map<String, dynamic> requestModel = {
-        "first_name": contact.name.first.isNotEmpty ? contact.name.first : "",
-        "last_name": contact.name.last.isNotEmpty ? contact.name.last : "",
-        "middle_name":
-            contact.name.middle.isNotEmpty ? contact.name.middle : "",
+        "first_name": contact.name.first.isNotEmpty ? contact.name.first : "NA",
+        "last_name": contact.name.last.isNotEmpty ? contact.name.last : "NA",
+        "middle_name": contact.name.middle.isNotEmpty
+            ? contact.name.middle.toString()
+            : "",
         "mobile_phone": contact.phones.isNotEmpty
             ? contact.phones[0].number.toString()
             : "",
         "business_name": contact.organizations.isNotEmpty
             ? contact.organizations[0].company.isNotEmpty
-                ? contact.organizations[0].company
+                ? contact.organizations[0].company.toString()
                 : ""
             : "",
         "personal_email": contact.emails.isNotEmpty
             ? contact.emails[0].address.isNotEmpty
-                ? contact.emails[0].address
+                ? contact.emails[0].address.toString()
                 : ""
             : "",
         "home_address": contact.addresses.isNotEmpty
             ? contact.addresses[0].address.isNotEmpty
-                ? contact.addresses[0].address
+                ? contact.addresses[0].address.toString()
                 : ""
             : "",
         "home_apartment": contact.addresses.isNotEmpty
             ? contact.addresses[0].street.isNotEmpty
-                ? contact.addresses[0].street
+                ? contact.addresses[0].street.toString()
                 : ""
             : "",
         "home_zip_code": contact.addresses.isNotEmpty
             ? contact.addresses[0].postalCode.isNotEmpty
-                ? contact.addresses[0].postalCode
+                ? contact.addresses[0].postalCode.toString()
                 : ""
             : "",
         // "date_of_birth": contact.events.isNotEmpty
@@ -143,8 +144,6 @@ class ContactController extends GetxController {
         //     : "",
         "additional_json": jsonEncode(contact),
       };
-      log(jsonDecode(contact.events.toString()));
-      log("Contact ${jsonEncode(contact)}");
       log("request model is $requestModel");
       await userProfileService
           .uploadContacts(requestModel, file)

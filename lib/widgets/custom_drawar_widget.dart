@@ -67,12 +67,15 @@ class CustomDrawerWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                userName,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold),
+                              FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text(
+                                  userName,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                               SizedBox(height: 5.h),
                               InkWell(

@@ -114,6 +114,18 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                   itemCount: addContactController
                                       .contactModelList.length,
                                   itemBuilder: (context, index) {
+                                    String lastName = "";
+
+// Check if the last name is "NA" and display an empty string if true
+                                    if (addContactController
+                                            .contactModelList[index].lastName ==
+                                        "NA") {
+                                      lastName = "";
+                                    } else {
+                                      lastName = addContactController
+                                          .contactModelList[index].lastName!;
+                                    }
+
                                     return ContactListCard2(
                                         editIconClick: () {
                                           addContactController.setEditValue(
@@ -129,7 +141,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                                                       )));
                                         },
                                         author:
-                                            "${addContactController.contactModelList[index].firstName} ${addContactController.contactModelList[index].lastName}",
+                                            "${addContactController.contactModelList[index].firstName} $lastName",
                                         photo: addContactController
                                                 .contactModelList[index]
                                                 .photo ??

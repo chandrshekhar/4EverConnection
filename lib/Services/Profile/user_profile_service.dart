@@ -159,7 +159,7 @@ class UserProfileService {
 
       response = await dio.post(ApiPath.uploadContacts, data: formData);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log("response after contact upload -- ${response.data}");
+        log("response after contact upload -- ${response.data.toString()}");
 
         return response.data;
       } else {
