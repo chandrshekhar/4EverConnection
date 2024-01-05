@@ -129,11 +129,11 @@ class ContactController extends GetxController {
                 ? contact.addresses[0].address.toString()
                 : ""
             : "",
-        "home_apartment": contact.addresses.isNotEmpty
-            ? contact.addresses[0].street.isNotEmpty
-                ? contact.addresses[0].street.toString()
-                : ""
-            : "",
+        // "home_apartment": contact.addresses.isNotEmpty
+        //     ? contact.addresses[0].street.isNotEmpty
+        //         ? contact.addresses[0].street.toString()
+        //         : ""
+        //     : "",
         "home_zip_code": contact.addresses.isNotEmpty
             ? contact.addresses[0].postalCode.isNotEmpty
                 ? contact.addresses[0].postalCode.toString()

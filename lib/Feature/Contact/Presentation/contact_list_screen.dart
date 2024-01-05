@@ -61,7 +61,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
         elevation: 0.5,
         leading: AppbarImage(
             svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 10.h, top: 22, bottom: 10),
+            margin: EdgeInsets.only(left: 15.h, top: 22, bottom: 10),
             onTap: () {
               Navigator.pop(context);
             }),
