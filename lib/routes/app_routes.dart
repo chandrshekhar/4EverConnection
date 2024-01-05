@@ -10,7 +10,7 @@ import 'package:forever_connection/Feature/forgot_password_screen/forgot_passwor
 import 'package:forever_connection/Feature/health_profile_screen/health_profile_screen.dart';
 import 'package:forever_connection/Feature/login_screen/login_screen.dart';
 import 'package:forever_connection/Feature/my_profile_screen/my_profile_screen.dart';
-import 'package:forever_connection/Feature/my_services_screen/my_services_screen.dart';
+import 'package:forever_connection/Feature/My%20Service/Presentation/my_services_screen.dart';
 import 'package:forever_connection/Feature/password_security_screen/password_security_screen.dart';
 import 'package:forever_connection/Feature/personal_details_screen/personal_details_screen.dart';
 import 'package:forever_connection/Feature/professional_profile_screen/professional_profile_screen.dart';

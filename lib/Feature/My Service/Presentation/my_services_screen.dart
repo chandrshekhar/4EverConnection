@@ -8,10 +8,9 @@ import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_outlined_button.dart';
-
-import 'package:forever_connection/widgets/service_table_widget.dart';
+import 'package:forever_connection/Feature/My%20Service/Widgets/service_table_widget.dart';
+import 'package:forever_connection/Feature/My%20Service/Widgets/user_service_inprogress_table.dart';
 import 'package:get/get.dart';
-
 
 // ignore_for_file: must_be_immutable
 class MyServicesScreen extends StatefulWidget {
@@ -68,19 +67,20 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               CustomOutlinedButton(
                   buttonStyle: CustomButtonStyles.fillLightBlueTL20,
                   buttonTextStyle: const TextStyle(color: Colors.white),
-                  width: 160.h,
+                  width: 167.h,
                   text: "Services in Progress"),
               Container(
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
-                height: MediaQuery.of(context).size.height * 0.36,
+                height: MediaQuery.of(context).size.height * 0.3,
                 child: Obx(
                   () => userServiceController.isServiceLoading == true
-                      ?const Center(child:  CircularProgressIndicator.adaptive())
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
                       : userServiceController.userServicesPendingList.isEmpty
                           ? const Center(
                               child: Text("No data"),
                             )
-                          : UserServiceDataTable(
+                          : UserServiceInProgressDataTable(
                               userServiceModel:
                                   userServiceController.userServicesPendingList,
                             ),
@@ -97,7 +97,8 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
                 child: Obx(
                   () => userServiceController.isServiceLoading == true
-                      ? const Center(child:  CircularProgressIndicator.adaptive())
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
                       : userServiceController.userServicesCompletedList.isEmpty
                           ? const Center(
                               child: Text("No Data"),

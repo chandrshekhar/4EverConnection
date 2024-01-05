@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
-  WebViewScreen({
+  const WebViewScreen({
     super.key,
     required this.webViewUrl,
   });
@@ -17,8 +18,10 @@ class WebViewScreen extends StatefulWidget {
 
 // ignore: always_specify_types
 class _WebViewScreenState extends State<WebViewScreen> {
+  final loaderController = Get.put(LoaderController());
   @override
   void initState() {
+    loaderController.isLaoding(true);
     super.initState();
   }
 
@@ -27,7 +30,14 @@ class _WebViewScreenState extends State<WebViewScreen> {
     WebViewController webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.white)
-      ..clearCache()
+      ..setNavigationDelegate(NavigationDelegate(
+        onProgress: (int progress) {
+          // Update loading bar.
+        },
+        onPageFinished: (String url) {
+          loaderController.setLaoderValue();
+        },
+      ))
       // ..setNavigationDelegate(
       //   NavigationDelegate(
       //     onPageFinished: (String url) {
@@ -61,11 +71,21 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 color: AppColors.floatingActionButtonColor,
               ),
             )),
-        body: SafeArea(
-          child: WebViewWidget(controller: webViewController),
-        ),
+        body: Obx(() => SafeArea(
+              child: loaderController.isLaoding.value
+                  ? const Center(child: CircularProgressIndicator.adaptive())
+                  : WebViewWidget(controller: webViewController),
+            )),
         // ),
       ),
     );
+  }
+}
+
+class LoaderController extends GetxController {
+  RxBool isLaoding = true.obs;
+
+  setLaoderValue() {
+    isLaoding.value = false;
   }
 }

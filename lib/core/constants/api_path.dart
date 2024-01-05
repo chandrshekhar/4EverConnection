@@ -6,6 +6,8 @@ class ApiPath {
 
   static const profile = "/api/user/profile";
 
+  static const payServiceFee = "https://swipesimple.com/links/lnk_ff671edb";
+
   //Authentication
   static const registerUrl = "$baseUrl/api/user/";
   static const checkClient = "$baseUrl/api/user/check";
