@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Services/user_service_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
+import 'package:forever_connection/Feature/My%20Service/Widgets/service_table_widget.dart';
+import 'package:forever_connection/Feature/My%20Service/Widgets/user_service_inprogress_table.dart';
 import 'package:forever_connection/Models/user_services_model.dart';
-import 'package:forever_connection/core/app_export.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
+import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
+import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/theme/app_decoration.dart';
+import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
-import 'package:forever_connection/widgets/custom_outlined_button.dart';
-import 'package:forever_connection/Feature/My%20Service/Widgets/service_table_widget.dart';
-import 'package:forever_connection/Feature/My%20Service/Widgets/user_service_inprogress_table.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:get/get.dart';
 
 // ignore_for_file: must_be_immutable
@@ -33,6 +37,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
 
   final userServiceController = Get.put(UserServicesController());
   final connectionController = Get.put(ConnectionController());
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +45,26 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         //backgroundColor: const Color(0xFFE4F5FF),
+        key: _key,
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
             leadingWidth: 44.h,
-            leading: AppbarImage(
-                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin: EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
-                onTap: () {
-                  Navigator.pop(context);
-                }),
+            // leading: InkWell(
+            //   onTap: () {
+            //     _key.currentState!.openEndDrawer();
+            //   },
+            //   child: Icon(
+            //     Icons.menu,
+            //     color: AppColors.darkBlue,
+            //     size: 30.sp,
+            //   ),
+            // ),
+            // leading: AppbarImage(
+            //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+            //     margin: EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
+            //     onTap: () {
+            //       Navigator.pop(context);
+            //     }),
             centerTitle: true,
             title: AppbarTitle(text: "My Services"),
             actions: [
@@ -57,18 +73,39 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                     Navigator.pushNamed(context, AppRoutes.notificationsScreen);
                   },
                   svgPath: ImageConstant.imgCart,
-                  margin: EdgeInsets.fromLTRB(24.h, 1.v, 24.h, 6.v))
+                  margin: EdgeInsets.fromLTRB(24.h, 1.h, 24.w, 6.h)),
+              InkWell(
+                onTap: () {
+                  _key.currentState!.openEndDrawer();
+                },
+                child: Icon(
+                  Icons.menu,
+                  color: AppColors.darkBlue,
+                  size: 30.sp,
+                ),
+              ),
             ]),
+        endDrawer: CustomDrawerWidget(),
         body: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 10.h),
-              CustomOutlinedButton(
-                  buttonStyle: CustomButtonStyles.fillLightBlueTL20,
-                  buttonTextStyle: const TextStyle(color: Colors.white),
-                  width: 167.h,
-                  text: "Services in Progress"),
+              Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                    color: AppColors.darkBlue,
+                    borderRadius: BorderRadius.circular(5.r)),
+                child: const Text(
+                  "Services in Progress",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              // CustomOutlinedButton(
+              //     buttonStyle: CustomButtonStyles.fillLightBlueTL20,
+              //     buttonTextStyle: const TextStyle(color: Colors.white),
+              //     width: 180.h,
+              //     text: "Services in Progress"),
               Container(
                 margin: EdgeInsets.only(top: 1.h, bottom: 20.h),
                 height: MediaQuery.of(context).size.height * 0.3,
@@ -86,11 +123,16 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                             ),
                 ),
               ),
-              CustomOutlinedButton(
-                  buttonStyle: CustomButtonStyles.fillLightBlueTL20,
-                  buttonTextStyle: const TextStyle(color: Colors.white),
-                  width: 167.h,
-                  text: "Completed Services"),
+              Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                    color: AppColors.darkBlue,
+                    borderRadius: BorderRadius.circular(5.r)),
+                child: const Text(
+                  "Completed Services",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
               SizedBox(height: 1.h),
               Container(
                 height: MediaQuery.of(context).size.height * 0.35,
@@ -115,13 +157,13 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
       {required UserServicesModel userServicesModel,
       Function(String)? onSeleted}) {
     return Container(
-      margin: EdgeInsets.only(left: 8.v, right: 8.v, bottom: 15.v),
+      margin: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 15.h),
       decoration: BoxDecoration(
-          color: theme.cardColor, borderRadius: BorderRadius.circular(9.v)),
+          color: theme.cardColor, borderRadius: BorderRadius.circular(9.w)),
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 12.v),
+            padding: EdgeInsets.only(left: 12.w),
             decoration: AppDecoration.fillLightBlue.copyWith(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(9.h),
@@ -137,7 +179,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
-                        fontSize: 18.v),
+                        fontSize: 18.sp),
                   ),
                 ),
                 Expanded(
@@ -177,7 +219,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
           ),
           Padding(
             padding: EdgeInsets.all(
-              12.v,
+              12.sp,
             ),
             child: Column(
               children: [
@@ -190,7 +232,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
-                            fontSize: 18.v),
+                            fontSize: 18.sp),
                       ),
                     ),
                     // Expanded(
@@ -212,7 +254,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
-                            fontSize: 18.v),
+                            fontSize: 18.sp),
                       ),
                     ),
                     Expanded(
@@ -243,7 +285,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                 //     const Spacer(),
                 //   ],
                 // ),
-                SizedBox(height: 6.v),
+                SizedBox(height: 6.h),
                 Row(
                   children: [
                     Expanded(
@@ -253,21 +295,17 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
-                            fontSize: 18.v),
+                            fontSize: 18.sp),
                       ),
                     ),
                     Expanded(
                         flex: 2,
                         child: Container(
                             padding: EdgeInsets.only(
-                                left: 10.adaptSize,
-                                top: 5.adaptSize,
-                                bottom: 5.adaptSize,
-                                right: 10.adaptSize),
+                                left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
                             decoration: BoxDecoration(
                                 border: Border.all(width: 0.1),
-                                borderRadius:
-                                    BorderRadius.circular(5.adaptSize),
+                                borderRadius: BorderRadius.circular(5.r),
                                 color: Colors.grey.shade100),
                             child: Row(
                               children: [
@@ -277,7 +315,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                                       color: Color(0xFF6B6B6B), fontSize: 15),
                                 ),
                                 SizedBox(
-                                  width: 10.adaptSize,
+                                  width: 10.w,
                                 ),
                                 Container(
                                   color: Colors.grey,
@@ -285,7 +323,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                                   width: 1,
                                 ),
                                 SizedBox(
-                                  width: 10.adaptSize,
+                                  width: 10.w,
                                 ),
                                 Text(
                                   userServicesModel.balance.toString(),
@@ -298,7 +336,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 10.v,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
@@ -309,17 +347,14 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
-                            fontSize: 18.v),
+                            fontSize: 18.sp),
                       ),
                     ),
                     Expanded(
                         flex: 2,
                         child: Container(
                             padding: EdgeInsets.only(
-                                left: 10.adaptSize,
-                                top: 5.adaptSize,
-                                bottom: 5.adaptSize,
-                                right: 10.adaptSize),
+                                left: 10.w, top: 5.h, bottom: 5.h, right: 10.r),
                             decoration: BoxDecoration(
                                 border: Border.all(width: 0.1),
                                 borderRadius:

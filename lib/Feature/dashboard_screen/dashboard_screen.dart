@@ -35,9 +35,7 @@ class DashboardScreen extends StatelessWidget {
       key: _key,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      endDrawer: CustomDrawerWidget(
-        myProfileController: myProfileController,
-      ),
+      endDrawer: CustomDrawerWidget(),
       body: Obx(
         () => myProfileController.isLoadingProfileData == true
             ? const Center(
@@ -295,7 +293,6 @@ class DashboardScreen extends StatelessWidget {
                       },
                     ),
                   ),
-               
                 ],
               ),
       ),

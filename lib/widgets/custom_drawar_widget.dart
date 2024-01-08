@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
+import 'package:forever_connection/Feature/dashboard_screen/dashboard_screen.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
@@ -17,9 +18,13 @@ import '../Feature/Connection/Presentation/connection_main_screen.dart';
 import '../Feature/Wallet/View/My Wallet/my_wallet.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
-  CustomDrawerWidget({super.key, required this.myProfileController});
-  final UserProfileController myProfileController;
+  CustomDrawerWidget({
+    super.key,
+  });
+
   final personalDetailsController = Get.put(PersonalDetailsController());
+
+  final myProfileController = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -353,6 +358,30 @@ class CustomDrawerWidget extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashboardScreen()),
+                          (route) => false);
+                    },
+                    leading: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
+                    title: Transform.translate(
+                      offset: Offset(-15.w, 0),
+                      child: Text(
+                        "Back to Dashboard",
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                   ListTile(
                     onTap: () {

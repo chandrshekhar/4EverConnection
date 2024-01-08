@@ -21,7 +21,7 @@ class UserServiceDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalDataTable(
       leftHandSideColumnWidth: 0,
-      rightHandSideColumnWidth: 640.w,
+      rightHandSideColumnWidth: 785.w,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
@@ -42,7 +42,8 @@ class UserServiceDataTable extends StatelessWidget {
     return [
       _getTitleItemWidget('Termination', 0),
       _getTitleItemWidget("Service #", 100),
-      _getTitleItemWidget('Start Date', 120),
+      _getTitleItemWidget('Completed Date', 120),
+      _getTitleItemWidget("Service", 140),
       _getTitleItemWidget('Details', 120),
       _getTitleItemWidget('Fee', 120),
       _getTitleItemWidget('Status', 120),
@@ -82,8 +83,16 @@ class UserServiceDataTable extends StatelessWidget {
             width: 120.w,
             height: 30.h,
             alignment: Alignment.center,
-            child: Text(DateFormat("yyyy-MM-dd").format(
-                DateTime.parse(userServiceModel[index].dateCreated ?? ""))),
+            child: Text(userServiceModel[index].completedOn != null
+                ? DateFormat("yyyy-MM-dd").format(
+                    DateTime.parse(userServiceModel[index].completedOn ?? ""))
+                : ""),
+          ),
+          Container(
+            width: 140.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(userServiceModel[index].serviceName ?? ""),
           ),
           InkWell(
             onTap: () {
@@ -165,7 +174,7 @@ class UserServiceDataTable extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => WebViewScreen(
+                      builder: (_) => const WebViewScreen(
                             webViewUrl: ApiPath.payServiceFee,
                           )));
             },

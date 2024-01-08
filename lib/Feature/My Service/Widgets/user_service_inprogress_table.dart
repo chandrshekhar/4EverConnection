@@ -20,7 +20,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalDataTable(
       leftHandSideColumnWidth: 0,
-      rightHandSideColumnWidth: 670.w,
+      rightHandSideColumnWidth: 810.w,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
@@ -42,6 +42,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
       _getTitleItemWidget('Termination', 0),
       _getTitleItemWidget("Service #", 100),
       _getTitleItemWidget('Start Date', 120),
+      _getTitleItemWidget("Service", 140),
       _getTitleItemWidget('Collaborate', 140),
       _getTitleItemWidget('Fee', 120),
       _getTitleItemWidget('Status', 130),
@@ -83,6 +84,12 @@ class UserServiceInProgressDataTable extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(DateFormat("yyyy-MM-dd").format(
                 DateTime.parse(userServiceModel[index].dateCreated ?? ""))),
+          ),
+          Container(
+            width: 140.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(userServiceModel[index].serviceName ?? ""),
           ),
           InkWell(
             onTap: () {
@@ -151,12 +158,16 @@ class UserServiceInProgressDataTable extends StatelessWidget {
                       border: Border.all(width: 0.1),
                       borderRadius: BorderRadiusDirectional.circular(1),
                       color: Colors.grey.shade100),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: Text("In progress")),
-                      Icon(Icons.expand_more)
+                      FittedBox(
+                          child: Text(
+                        "In progress",
+                        style: TextStyle(fontSize: 15.sp),
+                      )),
+                      const Icon(Icons.expand_more)
                     ],
                   ))),
           SizedBox(
@@ -271,8 +282,6 @@ class UserServiceInProgressDataTable extends StatelessWidget {
                   ];
                 }),
           ),
-     
-     
         ],
       ),
     );

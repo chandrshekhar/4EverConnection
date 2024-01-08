@@ -24,6 +24,7 @@ class UserServicesModel {
   String? serviceName;
   String? preferredPartnerName;
   String? preferredAssignedName;
+  String? completedOn;
 
   UserServicesModel(
       {this.identifier,
@@ -46,12 +47,15 @@ class UserServicesModel {
       this.smsNotificationSend,
       this.balance,
       this.extraInfo,
-      this.statusDescription, this.error, this.serviceName, this.preferredAssignedName, this.preferredPartnerName});
+      this.statusDescription,
+      this.error,
+      this.serviceName,
+      this.preferredAssignedName,
+      this.preferredPartnerName, this.completedOn});
 
-      UserServicesModel.withError(String errorMsg){
-        error = errorMsg;
-
-      }
+  UserServicesModel.withError(String errorMsg) {
+    error = errorMsg;
+  }
 
   UserServicesModel.fromJson(Map<String, dynamic> json) {
     identifier = json['identifier'];
@@ -75,8 +79,9 @@ class UserServicesModel {
     balance = json['balance'];
     extraInfo = json['extra_info'];
     statusDescription = json['status_description'];
-    serviceName=json['service_name'];
-    preferredAssignedName= json['partner_assigned_name'];
+    serviceName = json['service_name'];
+    preferredAssignedName = json['partner_assigned_name'];
     preferredPartnerName = json['preferred_partner_name'];
+    completedOn=json['completed_on'];
   }
 }
