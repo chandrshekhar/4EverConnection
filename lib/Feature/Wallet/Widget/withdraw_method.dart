@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/Wallet/Controller/withdraw_method_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:get/get.dart';
@@ -12,13 +13,20 @@ class WithdrawMethodScreen extends StatefulWidget {
 }
 
 class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
+  final withdrawMethodController = Get.put(WithdrawMethodController());
+  @override
+  void initState() {
+    withdrawMethodController.getWithdrawalMethodList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.darkBlue,
         title: Text(
-          "Earning History",
+          "Withdraw Method",
           style: TextStyle(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
@@ -59,14 +67,41 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
               color: Colors.black,
             ),
             Expanded(
-              child: Column(
-                children: [
-                  methodCard(),
-                  methodCard(),
-                  methodCard(),
-                ],
-              ),
-            ),
+                child: Obx(
+                    () => withdrawMethodController.isWithdrawMethodLoading.value
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          )
+                        : withdrawMethodController.withdrawMethodList.isNotEmpty
+                            ? ListView.builder(
+                                itemCount: withdrawMethodController
+                                    .withdrawMethodList.length,
+                                itemBuilder: (context, index) {
+                                  var item = withdrawMethodController
+                                      .withdrawMethodList[index];
+                                  return methodCard(
+                                      methodNamem: item.method ?? "",
+                                      phoneNumber: item.identification ?? "",
+                                      switchWidget: Obx(() => Switch.adaptive(
+                                            activeTrackColor:
+                                                AppColors.darkBlue,
+                                            inactiveTrackColor: Colors.white,
+                                            trackOutlineColor:
+                                                const MaterialStatePropertyAll<
+                                                    Color>(Colors.grey),
+                                            inactiveThumbColor: Colors.grey,
+                                            value: item.defaults.value,
+                                            onChanged: (bool value1) {
+                                              item.defaults.value = value1;
+                                            },
+                                          )),
+                                      onDeletePress: () {},
+                                      onEditPress: () {});
+                                },
+                              )
+                            : const Center(
+                                child: Text("No Method found"),
+                              ))),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -115,7 +150,12 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
     );
   }
 
-  Widget methodCard() {
+  Widget methodCard(
+      {required String methodNamem,
+      required String phoneNumber,
+      required Widget switchWidget,
+      required VoidCallback onEditPress,
+      required VoidCallback onDeletePress}) {
     return Column(
       children: [
         SizedBox(
@@ -123,16 +163,11 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
         ),
         Row(
           children: [
-            const Expanded(child: Text("PayPal")),
-            const Expanded(child: Text("911246-4155")),
+            Expanded(child: Text(methodNamem)),
+            Expanded(child: Text(phoneNumber)),
             Expanded(
                 child: Transform.scale(
-              scale: 1.0,
-              child: Switch(
-                value: true,
-                onChanged: (bool value1) {},
-              ),
-            )),
+                    scaleY: 0.8, scaleX: 0.9, child: switchWidget)),
             PopupMenuButton<String>(
                 padding: EdgeInsets.zero,
                 // position: PopupMenuPosition.under,
@@ -145,7 +180,7 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                   return <PopupMenuEntry<String>>[
                     // Define the menu items
                     PopupMenuItem<String>(
-                      onTap: () async {},
+                      onTap: onEditPress,
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,
                       child: Row(
@@ -164,7 +199,7 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                       ),
                     ),
                     PopupMenuItem<String>(
-                      onTap: () async {},
+                      onTap: onDeletePress,
                       padding: const EdgeInsets.only(left: 5, right: 0),
                       height: 40.h,
                       child: Row(

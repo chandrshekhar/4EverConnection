@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Wallet/Controller/withdraw_availabl_funds.dart';
+import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../Controller/mywallet_cotroller.dart';
 import '../../Widget/add_fund_widget.dart';
 import '../../Widget/got_it_widget.dart';
 import '../../Widget/model_bottom_sheet.dart';
@@ -21,6 +24,19 @@ class WithdrawAvailableFundsScreen extends StatefulWidget {
 class _WithdrawAvailableFundsScreenState
     extends State<WithdrawAvailableFundsScreen> {
   final withdraController = Get.put(WithdrawFundsController());
+  final myWalletController = Get.put(MyWalletController());
+  @override
+  void initState() {
+    callGetWalletAfterDelay();
+    super.initState();
+  }
+
+  void callGetWalletAfterDelay() async {
+    await Future.delayed(const Duration(seconds: 1), () async {
+      await myWalletController.getWalletData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,19 +81,20 @@ class _WithdrawAvailableFundsScreenState
               SizedBox(
                 height: 20.h,
               ),
-              AddFundWidget(
-                onPress: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled:
-                        true, // This makes the bottom sheet take up the full screen height
-                    builder: (BuildContext context) {
-                      return const MyBottomSheetContent();
+              Obx(() => AddFundWidget(
+                    onPress: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled:
+                            true, // This makes the bottom sheet take up the full screen height
+                        builder: (BuildContext context) {
+                          return const MyBottomSheetContent();
+                        },
+                      );
                     },
-                  );
-                },
-                amount: "10.25",
-              ),
+                    amount: myWalletController.walletModel.value.accountBalance
+                        .toString(),
+                  )),
               SizedBox(
                 height: 42.h,
               ),
@@ -118,6 +135,32 @@ class _WithdrawAvailableFundsScreenState
           ),
         ),
       ),
+      bottomSheet: KeyboardVisibilityBuilder(builder: (context, isVisible) {
+        return isVisible
+            ? const SizedBox.shrink()
+            : Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: CustomIconButton(
+                  height: 45.h,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: AppColors.darkBlue),
+                  onTap: () {},
+                  child: Center(
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Poppins",
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+      }),
     );
   }
 }

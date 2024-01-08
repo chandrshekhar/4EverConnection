@@ -73,4 +73,9 @@ class ApiPath {
 
   //Wallet Service
   static const getWalletData = "$baseUrl/api/wallet/";
+  static const withdrawMethodListApi =
+      "$baseUrl/api/wallet/withdrawal-methods/";
+  static const earningHistoryListApi = "$baseUrl/api/wallet/earning-history/";
+  static const withdrawHistoryListApi =
+      "$baseUrl/api/wallet/withdrawal-requests/";
 }

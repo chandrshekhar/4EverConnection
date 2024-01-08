@@ -4,6 +4,7 @@ import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../Controller/earning_history_controller.dart';
 import '../../Controller/mywallet_cotroller.dart';
 import '../../Widget/got_it_widget.dart';
 
@@ -16,10 +17,12 @@ class EarningHistoryScreen extends StatefulWidget {
 
 class _EarningHistoryScreenState extends State<EarningHistoryScreen> {
   final myWalletController = Get.put(MyWalletController());
+  final earningHistoryController = Get.put(EarningHistoryController());
   @override
   void initState() {
     super.initState();
     callGetWalletAfterDelay();
+    earningHistoryController.getEarningHinstoryList();
   }
 
   void callGetWalletAfterDelay() async {
@@ -140,39 +143,65 @@ class _EarningHistoryScreenState extends State<EarningHistoryScreen> {
                             ],
                           ),
                   )),
-              Column(
-                children: List.generate(
-                    10,
-                    (index) => Container(
-                          margin: EdgeInsets.only(bottom: 13.h),
-                          padding: EdgeInsets.only(
-                              left: 17.w, right: 17.w, top: 24.h, bottom: 24.h),
-                          color: AppColors.cardColorBg,
-                          child: Column(
-                            children: [
-                              titleTypeText(
-                                  leadingText: "Date:", value: "12.10.2023"),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              titleTypeText(
-                                  leadingText: "M\$ Earned:", value: "\$500"),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              titleTypeText(
-                                  leadingText: "Client Name:",
-                                  value: "Adam Smit"),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              titleTypeText(
-                                  leadingText: "Related Service:",
-                                  value: "Lorem Ipsum Service"),
-                            ],
+              Obx(() => earningHistoryController.isEarningHistoryLoading.value
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 30.h),
+                      child: const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
+                    )
+                  : earningHistoryController.earningHistoryList.isNotEmpty
+                      ? Column(
+                          children: List.generate(
+                              earningHistoryController
+                                  .earningHistoryList.length,
+                              (index) => Container(
+                                    margin: EdgeInsets.only(bottom: 13.h),
+                                    padding: EdgeInsets.only(
+                                        left: 17.w,
+                                        right: 17.w,
+                                        top: 24.h,
+                                        bottom: 24.h),
+                                    color: AppColors.cardColorBg,
+                                    child: Column(
+                                      children: [
+                                        titleTypeText(
+                                            leadingText: "Date:",
+                                            value: earningHistoryController
+                                                    .earningHistoryList[index]
+                                                    .date ??
+                                                ""),
+                                        SizedBox(
+                                          height: 12.h,
+                                        ),
+                                        titleTypeText(
+                                            leadingText: "M\$ Earned:",
+                                            value:
+                                                "\$${earningHistoryController.earningHistoryList[index].earned}"),
+                                        SizedBox(
+                                          height: 12.h,
+                                        ),
+                                        titleTypeText(
+                                            leadingText: "Client Name:",
+                                            value: earningHistoryController
+                                  .earningHistoryList[index].client??""),
+                                        SizedBox(
+                                          height: 12.h,
+                                        ),
+                                        titleTypeText(
+                                            leadingText: "Related Service:",
+                                            value: earningHistoryController
+                                  .earningHistoryList[index].service??""),
+                                      ],
+                                    ),
+                                  )),
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(top: 30.h),
+                          child: const Center(
+                            child: Text("No earning history found"),
                           ),
-                        )),
-              )
+                        ))
             ],
           ),
         ),

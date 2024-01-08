@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../Controller/mywallet_cotroller.dart';
+import '../../Controller/withdraw_list_controller.dart';
+import '../../Controller/withdraw_method_controller.dart';
 
 class WithdrawalHistoryScreen extends StatefulWidget {
   const WithdrawalHistoryScreen({super.key});
@@ -15,9 +17,12 @@ class WithdrawalHistoryScreen extends StatefulWidget {
 
 class _WithdrawalHistoryScreenState extends State<WithdrawalHistoryScreen> {
   final myWalletController = Get.put(MyWalletController());
+  final withdrawController = Get.put(WithdrawMethodController());
+  final withdawHistoryController = Get.put(WithdrawHistoryController());
   @override
   void initState() {
     super.initState();
+    withdawHistoryController.getWithdrawHistoryList();
     callGetWalletAfterDelay();
   }
 
@@ -93,37 +98,51 @@ class _WithdrawalHistoryScreenState extends State<WithdrawalHistoryScreen> {
               height: 27.h,
             ),
             Expanded(
-                child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(bottom: 13.h),
-                        padding: EdgeInsets.only(
-                            left: 17.w, right: 17.w, top: 24.h, bottom: 24.h),
-                        color: AppColors.cardColorBg,
-                        child: Column(
-                          children: [
-                            titleTypeText(
-                                leadingText: "Reference:", value: "ABCD"),
-                            SizedBox(
-                              height: 12.h,
-                            ),
-                            titleTypeText(
-                                leadingText: "Date:", value: "12.10.2023"),
-                            SizedBox(
-                              height: 12.h,
-                            ),
-                            titleTypeText(
-                                leadingText: "Amount:", value: "\$500"),
-                            SizedBox(
-                              height: 12.h,
-                            ),
-                            titleTypeText(
-                                leadingText: "Method:", value: "ABCD"),
-                          ],
-                        ),
-                      );
-                    }))
+              child: Obx(() => withdawHistoryController.isHistoryLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    )
+                  : withdawHistoryController.withdrawHistoryList.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(bottom: 13.h),
+                              padding: EdgeInsets.only(
+                                  left: 17.w,
+                                  right: 17.w,
+                                  top: 24.h,
+                                  bottom: 24.h),
+                              color: AppColors.cardColorBg,
+                              child: Column(
+                                children: [
+                                  titleTypeText(
+                                      leadingText: "Reference:", value: "ABCD"),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  titleTypeText(
+                                      leadingText: "Date:",
+                                      value: "12.10.2023"),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  titleTypeText(
+                                      leadingText: "Amount:", value: "\$500"),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  titleTypeText(
+                                      leadingText: "Method:", value: "ABCD"),
+                                ],
+                              ),
+                            );
+                          },
+                        )
+                      : const Center(
+                          child: Text("No withdraw request history found"),
+                        )),
+            )
           ],
         ),
       ),
