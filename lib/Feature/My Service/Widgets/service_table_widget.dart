@@ -131,10 +131,9 @@ class UserServiceDataTable extends StatelessWidget {
                     SizedBox(
                       width: 10.w,
                     ),
-                    Text(
-                      userServiceModel[index].serviceFee.toString() ?? "0",
-                      style: const TextStyle(
-                          color: Color(0xFF6B6B6B), fontSize: 15),
+                    const Text(
+                      "",
+                      style: TextStyle(color: Color(0xFF6B6B6B), fontSize: 15),
                     )
                   ],
                 )),

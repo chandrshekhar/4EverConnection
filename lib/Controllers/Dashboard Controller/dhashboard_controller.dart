@@ -24,14 +24,14 @@ class DashboardController extends GetxController {
     },
     {
       "imagePath": ImageConstant.newServiceIcon,
-      "title": "New Service\nRequest",
+      "title": "Request\nNew Service",
       // "buttonName": "Request Service",
       "buttonTap": () {
         Navigator.pushNamed(Get.context!, AppRoutes.requestServiceOneScreen);
       }
     },
     {
-      "title": "View My\nServices",
+      "title": "View\nMy Services",
       "imagePath": ImageConstant.viewMyServiceIcon,
       // "buttonName": "View & Collaborate",
       "buttonTap": () {}
