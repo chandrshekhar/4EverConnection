@@ -3,12 +3,13 @@ import 'package:forever_connection/Feature/document_vault/Presentation/Widgets/d
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../routes/app_routes.dart';
-import '../../../widgets/app_bar/appbar_image.dart';
 import '../../../widgets/app_bar/appbar_image_1.dart';
 import '../../../widgets/app_bar/appbar_title.dart';
 import '../../../widgets/custom_bottom_modal_sheet.dart';
@@ -37,19 +38,27 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
     super.initState();
   }
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
+        key: _key,
+        endDrawer: CustomDrawerWidget(),
         appBar: CustomAppBar(
             height: 60.v,
             leadingWidth: 44.h,
-            leading: AppbarImage(
-                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin: EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
-                onTap: () {
-                  Navigator.pop(context);
-                }),
+            leading: CustomMenuButtonWidget(
+              globalKey: _key,
+            ),
+
+            // leading: AppbarImage(
+            //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+            //     margin: EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
+            //     onTap: () {
+            //       Navigator.pop(context);
+            //     }),
             centerTitle: true,
             title: AppbarTitle(text: "Document Vault"),
             actions: [

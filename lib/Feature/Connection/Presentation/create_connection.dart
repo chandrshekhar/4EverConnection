@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_validation.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
-import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/address_search.dart';
 import 'package:forever_connection/core/utils/place_service.dart';
+import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/theme/app_decoration.dart';
+import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
+import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
+import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
@@ -57,20 +63,28 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
           leadingWidth: 44.h,
           leading: AppbarImage(
               svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-              margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+              margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 28.h),
               onTap: () {
                 Navigator.pop(context);
               }),
+          actions: [
+            AppbarImage1(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                },
+                svgPath: ImageConstant.imgCart,
+                margin: EdgeInsets.fromLTRB(24.w, 1.h, 24.w, 6.h)),
+          ],
           centerTitle: true,
           title: AppbarTitle(text: "Create Connection"),
           styleType: Style.bgShadow),
       body: SingleChildScrollView(
         child: Column(children: [
-          SizedBox(height: 12.v),
+          SizedBox(height: 12.h),
           Padding(
-            padding: EdgeInsets.only(left: 12.h, right: 12.h, bottom: 5.v),
+            padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 5.h),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 10.v),
+              padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 10.h),
               decoration: AppDecoration.outlineBlack
                   .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
               child: Column(
@@ -84,10 +98,10 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                         children: [
                           CustomImageView(
                               svgPath: ImageConstant.myservice,
-                              height: 18.adaptSize,
-                              width: 18.adaptSize,
+                              height: 18.h,
+                              width: 18.w,
                               color: Colors.black,
-                              margin: EdgeInsets.only(top: 25.v, right: 15)),
+                              margin: EdgeInsets.only(top: 25.h, right: 15.w)),
                           Expanded(
                             child: SearchDropDownWidget(
                               onClearPressed: () {
@@ -132,10 +146,10 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                               children: [
                                 CustomImageView(
                                     svgPath: ImageConstant.imgUser,
-                                    height: 19.v,
+                                    height: 19.h,
                                     width: 17.h,
-                                    margin:
-                                        EdgeInsets.only(top: 25.v, right: 15)),
+                                    margin: EdgeInsets.only(
+                                        top: 25.h, right: 15.w)),
                                 Expanded(
                                   child: Obx(
                                     () => SearchDropDownWidget(
@@ -176,15 +190,15 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                             ),
                     ),
 
-                    SizedBox(height: 15.v),
+                    SizedBox(height: 15.h),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomImageView(
                             svgPath: ImageConstant.imgUser,
-                            height: 19.v,
-                            width: 17.h,
-                            margin: EdgeInsets.only(top: 25.v, right: 15)),
+                            height: 19.h,
+                            width: 17.w,
+                            margin: EdgeInsets.only(top: 25.h, right: 15.w)),
                         Expanded(
                           child: Obx(
                             () => SearchDropDownWidget(
@@ -235,11 +249,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     children: [
                                       CustomImageView(
                                           svgPath: ImageConstant.imgUser,
-                                          height: 18.adaptSize,
-                                          width: 18.adaptSize,
+                                          height: 18.h,
+                                          width: 18.w,
                                           color: Colors.black,
                                           margin: EdgeInsets.only(
-                                              top: 18.v, right: 15)),
+                                              top: 18.h, right: 15.w)),
                                       Expanded(
                                         child: CustomTextFormField(
                                             controller: connectionController
@@ -274,16 +288,16 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 20.v),
+                                SizedBox(height: 20.h),
                                 Row(
                                   children: [
                                     CustomImageView(
                                         svgPath: ImageConstant.imgUser,
-                                        height: 18.adaptSize,
-                                        width: 18.adaptSize,
+                                        height: 18.h,
+                                        width: 18.w,
                                         color: Colors.black,
                                         margin: EdgeInsets.only(
-                                            top: 18.v, right: 15)),
+                                            top: 18.h, right: 15)),
                                     Expanded(
                                       child: CustomTextFormField(
                                           controller: connectionController
@@ -301,7 +315,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20.v),
+                                SizedBox(height: 20.h),
                                 Form(
                                   key: lastNameKey,
                                   autovalidateMode:
@@ -310,11 +324,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     children: [
                                       CustomImageView(
                                           svgPath: ImageConstant.imgUser,
-                                          height: 18.adaptSize,
-                                          width: 18.adaptSize,
+                                          height: 18.h,
+                                          width: 18.w,
                                           color: Colors.black,
                                           margin: EdgeInsets.only(
-                                              top: 18.v, right: 15)),
+                                              top: 18.h, right: 15.w)),
                                       Expanded(
                                         child: CustomTextFormField(
                                             controller: connectionController
@@ -345,16 +359,16 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 10.v),
+                                SizedBox(height: 10.h),
                                 Row(
                                   children: [
                                     CustomImageView(
                                         svgPath: ImageConstant.imgCall,
-                                        height: 18.adaptSize,
-                                        width: 18.adaptSize,
+                                        height: 18.h,
+                                        width: 18.w,
                                         color: Colors.black,
                                         margin: EdgeInsets.only(
-                                            top: 18.v, right: 15)),
+                                            top: 18.h, right: 15.w)),
                                     Expanded(
                                       child: PhoneNumberTextFieldWidget(
                                           c: 1,
@@ -365,7 +379,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10.v),
+                                SizedBox(height: 10.h),
                                 Form(
                                   key: emailKey,
                                   autovalidateMode:
@@ -374,11 +388,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     children: [
                                       CustomImageView(
                                           svgPath: ImageConstant.imgVector,
-                                          height: 18.adaptSize,
-                                          width: 18.adaptSize,
+                                          height: 18.h,
+                                          width: 18.w,
                                           color: Colors.black,
                                           margin: EdgeInsets.only(
-                                              top: 18.v, right: 15)),
+                                              top: 18.h, right: 15.w)),
                                       Expanded(
                                         child: CustomTextFormField(
                                             textInputType:
@@ -413,17 +427,17 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 20.v),
+                                SizedBox(height: 20.h),
                                 Row(
                                   children: [
                                     CustomImageView(
                                         svgPath:
                                             ImageConstant.myBusinessProfile,
-                                        height: 18.adaptSize,
-                                        width: 18.adaptSize,
+                                        height: 18.h,
+                                        width: 18.w,
                                         color: Colors.black,
                                         margin: EdgeInsets.only(
-                                            top: 18.v, right: 15)),
+                                            top: 18.h, right: 15)),
                                     Expanded(
                                       child: CustomTextFormField(
                                           controller: connectionController
@@ -441,7 +455,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20.v),
+                                SizedBox(height: 20.h),
                                 Form(
                                   key: homeKey,
                                   autovalidateMode:
@@ -450,11 +464,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     children: [
                                       CustomImageView(
                                           svgPath: ImageConstant.imgLocation,
-                                          height: 18.adaptSize,
-                                          width: 18.adaptSize,
+                                          height: 18.h,
+                                          width: 18.w,
                                           color: Colors.black,
                                           margin: EdgeInsets.only(
-                                              top: 18.v, right: 15)),
+                                              top: 18.h, right: 15.w)),
                                       Expanded(
                                         child: CustomTextFormField(
                                             readOnly: true,
@@ -523,16 +537,16 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 20.v),
+                                SizedBox(height: 20.h),
                                 Row(
                                   children: [
                                     CustomImageView(
                                         svgPath: ImageConstant.imgLocation,
-                                        height: 18.adaptSize,
-                                        width: 18.adaptSize,
+                                        height: 18.h,
+                                        width: 18.w,
                                         color: Colors.black,
                                         margin: EdgeInsets.only(
-                                            top: 18.v, right: 15)),
+                                            top: 18.h, right: 15.w)),
                                     Expanded(
                                       child: CustomTextFormField(
                                           focusNode: focus,
@@ -589,16 +603,16 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20.v),
+                                SizedBox(height: 20.h),
                                 Row(
                                   children: [
                                     CustomImageView(
                                         svgPath: ImageConstant.imgEdit,
-                                        height: 18.adaptSize,
-                                        width: 18.adaptSize,
+                                        height: 18.h,
+                                        width: 18.w,
                                         color: Colors.black,
                                         margin: EdgeInsets.only(
-                                            top: 18.v, right: 15)),
+                                            top: 18.h, right: 15.w)),
                                     Expanded(
                                       child: CustomTextFormField(
                                           controller: connectionController
@@ -637,7 +651,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                     ),
 
                     SizedBox(
-                      height: 20.adaptSize,
+                      height: 20.h,
                     ),
                     Obx(() => connectionController.contactId.value == -1
                         ? connectionController.isConnectionLoading.value
@@ -662,7 +676,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                             ? Colors.grey
                                             : AppColors.buttonColor)),
                                 margin: EdgeInsets.only(
-                                    left: 24.h, right: 24.h, bottom: 22.v),
+                                    left: 24.w, right: 24.w, bottom: 22.h),
                                 rightIcon: Container(
                                   margin: EdgeInsets.only(left: 16.h),
                                   child: CustomImageView(
@@ -684,7 +698,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     backgroundColor: MaterialStatePropertyAll(
                                         AppColors.buttonColor)),
                                 margin: EdgeInsets.only(
-                                    left: 24.h, right: 24.h, bottom: 22.v),
+                                    left: 24.w, right: 24.w, bottom: 22.h),
                                 rightIcon: Container(
                                   margin: EdgeInsets.only(left: 16.h),
                                   child: CustomImageView(
@@ -696,7 +710,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
             ),
           ),
           SizedBox(
-            height: 20.adaptSize,
+            height: 20.h,
           )
         ]),
       ),

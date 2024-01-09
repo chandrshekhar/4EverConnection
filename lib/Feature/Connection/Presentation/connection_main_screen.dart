@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
@@ -5,13 +7,14 @@ import 'package:forever_connection/Feature/Connection/Presentation/connection_li
 import 'package:forever_connection/Feature/Connection/Presentation/create_connection.dart';
 import 'package:forever_connection/Feature/Connection/Widget/card_widget.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
+import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
-import 'package:forever_connection/widgets/custom_elevated_button.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import 'package:forever_connection/core/app_export.dart';
 
 // ignore: must_be_immutable
 class ConnectionMainScreen extends StatelessWidget {
@@ -33,17 +36,28 @@ class ConnectionMainScreen extends StatelessWidget {
     connectionCotroller.getConnection();
     serviceController.getServiceProfssional();
     return Scaffold(
+      endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
-          leadingWidth: 44.h,
-          leading: AppbarImage(
-              svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-              margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+        leadingWidth: 44.h,
+        leading: CustomMenuButtonWidget(globalKey: _key),
+        // leading: AppbarImage(
+        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+        //     margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+        //     onTap: () {
+        //       Navigator.pop(context);
+        //     }),
+        centerTitle: true,
+        title: AppbarTitle(text: "My Connection"),
+        styleType: Style.bgShadow,
+        actions: [
+          AppbarImage1(
               onTap: () {
-                Navigator.pop(context);
-              }),
-          centerTitle: true,
-          title: AppbarTitle(text: "My Connection"),
-          styleType: Style.bgShadow),
+                Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+              },
+              svgPath: ImageConstant.imgCart,
+              margin: EdgeInsets.fromLTRB(24.w, 1.h, 24.w, 6.h)),
+        ],
+      ),
       key: _key,
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFEAF7FE),
@@ -62,12 +76,12 @@ class ConnectionMainScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 17.v),
+                            SizedBox(height: 17.h),
                             Text(
                               "Welcome ${myProfileController.userProfileModel.value.personalData?.firstName ?? ""}!",
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 18.adaptSize,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
@@ -75,14 +89,13 @@ class ConnectionMainScreen extends StatelessWidget {
                             ),
                             Container(
                               padding: EdgeInsets.only(
-                                  left: 10.adaptSize,
-                                  right: 10.adaptSize,
-                                  top: 10.adaptSize,
-                                  bottom: 10.adaptSize),
+                                  left: 10.w,
+                                  right: 10.w,
+                                  top: 10.h,
+                                  bottom: 10.h),
                               decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(15.adaptSize)),
+                                  borderRadius: BorderRadius.circular(15.r)),
                               child: Column(
                                 children: [
                                   // ConnectionCardWidget(

@@ -14,6 +14,7 @@ import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:get/get.dart';
 
 // ignore_for_file: must_be_immutable
@@ -49,6 +50,9 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
             leadingWidth: 44.h,
+            leading: CustomMenuButtonWidget(
+              globalKey: _key,
+            ),
             // leading: InkWell(
             //   onTap: () {
             //     _key.currentState!.openEndDrawer();
@@ -74,16 +78,6 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                   },
                   svgPath: ImageConstant.imgCart,
                   margin: EdgeInsets.fromLTRB(24.h, 1.h, 24.w, 6.h)),
-              InkWell(
-                onTap: () {
-                  _key.currentState!.openEndDrawer();
-                },
-                child: Icon(
-                  Icons.menu,
-                  color: AppColors.darkBlue,
-                  size: 30.sp,
-                ),
-              ),
             ]),
         endDrawer: CustomDrawerWidget(),
         body: Column(

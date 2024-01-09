@@ -163,13 +163,13 @@ class CustomDrawerWidget extends StatelessWidget {
                     collapsedBackgroundColor: AppColors.darkBlue,
                     initiallyExpanded: false,
                     backgroundColor: Colors.blue[50],
-                    onExpansionChanged: (value) {
-                      // personalDetailsController
-                      //     .markettingExpansionTile.value!
-                      //     .collapse();
-                      // personalDetailsController.toolsExpansionTile.value!
-                      //     .collapse();
-                    },
+                    // onExpansionChanged: (value) {
+                    // personalDetailsController
+                    //     .markettingExpansionTile.value!
+                    //     .collapse();
+                    // personalDetailsController.toolsExpansionTile.value!
+                    //     .collapse();
+                    // },
                     title: "USER",
                     children: [
                       InkWell(
@@ -241,13 +241,6 @@ class CustomDrawerWidget extends StatelessWidget {
                   ),
                   CustomExpansionPanel(
                     collapsedBackgroundColor: AppColors.darkBlue,
-                    onExpansionChanged: (val) {
-                      // personalDetailsController.userExpansionTile.value!
-                      //     .collapse();
-
-                      // personalDetailsController.toolsExpansionTile.value!
-                      //     .collapse();
-                    },
                     leading: const Icon(Icons.handshake_outlined),
                     initiallyExpanded: false,
                     title: "MARKETING PARTNER",
@@ -265,7 +258,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           myProfileController.updateSelectedField(6);
-                          Get.to(ConnectionListScreen());
+                          Get.to(const ConnectionListScreen());
                         },
                         child: Items(
                           icon: ImageConstant.myConnection,
@@ -295,7 +288,7 @@ class CustomDrawerWidget extends StatelessWidget {
                     ],
                   ),
                   CustomExpansionPanel(
-                    onExpansionChanged: (val) {},
+                    // onExpansionChanged: (val) {},
                     leading: const Icon(Icons.construction_outlined),
                     collapsedBackgroundColor: AppColors.darkBlue,
                     initiallyExpanded: false,
@@ -376,8 +369,8 @@ class CustomDrawerWidget extends StatelessWidget {
                       child: Text(
                         "Back to Dashboard",
                         style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
                       ),
@@ -396,7 +389,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       child: Text(
                         "Logout",
                         style: TextStyle(
-                          fontSize: 18.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),

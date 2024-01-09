@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/login_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:get/get.dart';
+
 import '../../Controllers/User Profile Controller/user_profile_controller.dart';
 
 class MyProfileScreen extends StatelessWidget {
@@ -16,18 +18,23 @@ class MyProfileScreen extends StatelessWidget {
   final myProfileController = Get.put(UserProfileController());
   final authController = Get.put(LoginController());
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: appTheme.lightBlue50,
+        key: _key,
+        endDrawer: CustomDrawerWidget(),
         appBar: CustomAppBar(
             leadingWidth: 44.h,
-            leading: AppbarImage(
-                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-                margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
-                onTap: () {
-                  Navigator.pop(context);
-                }),
+            leading: CustomMenuButtonWidget(globalKey: _key),
+            // leading: AppbarImage(
+            //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+            //     margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+            //     onTap: () {
+            //       Navigator.pop(context);
+            //     }),
             centerTitle: true,
             title: AppbarTitle(text: "My Profile"),
             actions: [
@@ -115,7 +122,12 @@ class MyProfileScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(height: 9.v),
                                                   Text(
-                                                      myProfileController.userProfileModel.value.personalData?.firstName ?? "",
+                                                      myProfileController
+                                                              .userProfileModel
+                                                              .value
+                                                              .personalData
+                                                              ?.firstName ??
+                                                          "",
                                                       style: CustomTextStyles
                                                           .titleLargePrimary),
                                                   SizedBox(height: 1.v),

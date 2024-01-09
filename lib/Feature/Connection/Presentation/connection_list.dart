@@ -5,10 +5,11 @@ import 'package:forever_connection/Feature/Connection/Widget/connection_list_car
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,7 @@ import 'package:intl/intl.dart';
 import '../../../widgets/custom_outlined_button.dart';
 
 class ConnectionListScreen extends StatefulWidget {
-  ConnectionListScreen({super.key});
+  const ConnectionListScreen({super.key});
 
   @override
   State<ConnectionListScreen> createState() => _ConnectionListScreenState();
@@ -29,19 +30,24 @@ class _ConnectionListScreenState extends State<ConnectionListScreen> {
 
   int tapIndex = 0;
 
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     connectionController.getConnection();
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
+      key: _globalKey,
+      endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
         leadingWidth: 44.h,
-        leading: AppbarImage(
-            svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
-            onTap: () {
-              Navigator.pop(context);
-            }),
+        leading: CustomMenuButtonWidget(globalKey: _globalKey),
+        // leading: AppbarImage(
+        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+        //     margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
+        //     onTap: () {
+        //       Navigator.pop(context);
+        //     }),
         centerTitle: true,
         title: AppbarTitle(text: "My Connections"),
         actions: [

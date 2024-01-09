@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/constants/colors.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import '../../Controllers/Notification Controller/notification_controller.dart';
-import '../../core/constants/image_constant.dart';
 import '../../theme/theme_helper.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 
@@ -17,23 +18,30 @@ class NotificationsScreen extends StatelessWidget {
 
   final notificationController = Get.put(NotificationController());
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     notificationController.getNotification();
     // final profileImage = userProfileController.userProfileModel.value.personalData.
     return Scaffold(
       backgroundColor: appTheme.lightBlue50,
+      key: _key,
       appBar: CustomAppBar(
         leadingWidth: 44.h,
-        leading: AppbarImage(
-            svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 25.h),
-            onTap: () {
-              Navigator.pop(context);
-            }),
+        leading: CustomMenuButtonWidget(
+          globalKey: _key,
+        ),
+        // leading: AppbarImage(
+        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+        //     margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 25.h),
+        //     onTap: () {
+        //       Navigator.pop(context);
+        //     }),
         centerTitle: true,
         title: AppbarTitle(text: "Notifications"),
       ),
+      endDrawer: CustomDrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Obx(

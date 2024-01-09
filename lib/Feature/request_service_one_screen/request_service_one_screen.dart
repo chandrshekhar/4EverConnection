@@ -3,11 +3,12 @@ import 'package:forever_connection/Feature/request_service_one_screen/Controller
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
-import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
@@ -39,19 +40,17 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
     // Initialize the selected value
   }
 
+  GlobalKey<ScaffoldState> globalKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.lightBlue50,
+      key: globalKey,
+      endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
           leadingWidth: 44.h,
-          leading: AppbarImage(
-              svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-              margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
-              onTap: () {
-                Navigator.pop(context);
-              }),
+          leading: CustomMenuButtonWidget(globalKey: globalKey),
           centerTitle: true,
           title: AppbarTitle(text: "Request Service"),
           actions: [
@@ -60,7 +59,10 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                   Navigator.pushNamed(context, AppRoutes.notificationsScreen);
                 },
                 svgPath: ImageConstant.imgCart,
-                margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
+                margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v)),
+            const SizedBox(
+              width: 10,
+            )
           ],
           styleType: Style.bgShadow),
       body: Column(children: [

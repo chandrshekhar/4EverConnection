@@ -10,11 +10,12 @@ import 'package:forever_connection/Feature/Contact/Presentation/upload_contact.d
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/widgets/custom_drawar_widget.dart';
+import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../widgets/app_bar/appbar_image.dart';
 import '../../../widgets/app_bar/appbar_image_1.dart';
 import '../../../widgets/app_bar/appbar_title.dart';
 import '../../../widgets/custom_icon_button.dart';
@@ -51,20 +52,25 @@ class _ContactListScreenState extends State<ContactListScreen> {
   //   });
   // }
 
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: AppColors.appBackgroundColor,
+      key: _globalKey,
+      endDrawer: CustomDrawerWidget(),
       appBar: AppBar(
         leadingWidth: 44.h,
         backgroundColor: AppColors.appBackgroundColor,
         elevation: 0.5,
-        leading: AppbarImage(
-            svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            margin: EdgeInsets.only(left: 15.h, top: 22, bottom: 10),
-            onTap: () {
-              Navigator.pop(context);
-            }),
+        leading: CustomMenuButtonWidget(globalKey: _globalKey),
+        // leading: AppbarImage(
+        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+        //     margin: EdgeInsets.only(left: 15.h, top: 22, bottom: 10),
+        //     onTap: () {
+        //       Navigator.pop(context);
+        //     }),
         centerTitle: true,
         title: AppbarTitle(text: "Contact List"),
         actions: [

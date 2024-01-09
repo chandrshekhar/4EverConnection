@@ -5,7 +5,7 @@ import '../core/constants/colors.dart';
 
 // ignore: must_be_immutable
 class CustomExpansionPanel extends StatelessWidget {
-  void Function(int)? onExpansionChanged;
+  // void Function(int)? onExpansionChanged;
   bool initiallyExpanded;
   String title;
   List<Widget> children;
@@ -13,18 +13,19 @@ class CustomExpansionPanel extends StatelessWidget {
   Color? backgroundColor;
   Color? collapsedBackgroundColor;
   Widget? leading;
-  int? index;
-  CustomExpansionPanel(
-      {super.key,
-      required this.title,
-      required this.onExpansionChanged,
-      required this.initiallyExpanded,
-      required this.children,
-      this.titleStyle,
-      this.backgroundColor,
-      this.collapsedBackgroundColor,
-      this.leading,
-      this.index});
+  // int? index;
+  CustomExpansionPanel({
+    super.key,
+    required this.title,
+    // required this.onExpansionChanged,
+    required this.initiallyExpanded,
+    required this.children,
+    this.titleStyle,
+    this.backgroundColor,
+    this.collapsedBackgroundColor,
+    this.leading,
+    // this.index
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +53,9 @@ class CustomExpansionPanel extends StatelessWidget {
           offset: Offset(-15.w, 0),
           child: Text(title, style: const TextStyle()),
         ),
-        onExpansionChanged: (bool isExpanded) {
-          onExpansionChanged!(index!);
-        },
+        // onExpansionChanged: (bool isExpanded) {
+        //   onExpansionChanged!(index!);
+        // },
         initiallyExpanded: initiallyExpanded,
         children: children);
   }
