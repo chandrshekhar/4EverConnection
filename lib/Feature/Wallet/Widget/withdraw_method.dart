@@ -5,6 +5,8 @@ import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:get/get.dart';
 
+import '../Controller/withdraw_availabl_funds.dart';
+
 class WithdrawMethodScreen extends StatefulWidget {
   const WithdrawMethodScreen({super.key});
 
@@ -14,6 +16,7 @@ class WithdrawMethodScreen extends StatefulWidget {
 
 class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
   final withdrawMethodController = Get.put(WithdrawMethodController());
+  final withdrawAvailableFund = Get.put(WithdrawFundsController());
   @override
   void initState() {
     withdrawMethodController.getWithdrawalMethodList();
@@ -67,41 +70,60 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
               color: Colors.black,
             ),
             Expanded(
-                child: Obx(
-                    () => withdrawMethodController.isWithdrawMethodLoading.value
-                        ? const Center(
-                            child: CircularProgressIndicator.adaptive(),
+                child: Obx(() => withdrawMethodController
+                        .isWithdrawMethodLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      )
+                    : withdrawMethodController.withdrawMethodList.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: withdrawMethodController
+                                .withdrawMethodList.length,
+                            itemBuilder: (context, index) {
+                              var item = withdrawMethodController
+                                  .withdrawMethodList[index];
+                              return methodCard(
+                                  methodNamem: item.method ?? "",
+                                  phoneNumber: item.identification ?? "",
+                                  switchWidget: Obx(() => Switch.adaptive(
+                                        activeTrackColor: AppColors.darkBlue,
+                                        inactiveTrackColor: Colors.white,
+                                        trackOutlineColor:
+                                            const MaterialStatePropertyAll<
+                                                Color>(Colors.grey),
+                                        inactiveThumbColor: Colors.grey,
+                                        value: item.defaults.value,
+                                        onChanged: (bool value1) {
+                                          withdrawAvailableFund
+                                              .methodController.value
+                                              .clear();
+                                          withdrawAvailableFund.methodIds(-1);
+                                          item.defaults.value = value1;
+                                          withdrawAvailableFund.addModelData(
+                                              methodId: item.id ?? -1,
+                                              methodName: item.method ?? "");
+                                          for (int i = 0;
+                                              i <
+                                                  withdrawMethodController
+                                                      .withdrawMethodList
+                                                      .length;
+                                              i++) {
+                                            if (i != index) {
+                                              withdrawMethodController
+                                                  .withdrawMethodList[i]
+                                                  .defaults
+                                                  .value = false;
+                                            }
+                                          }
+                                        },
+                                      )),
+                                  onDeletePress: () {},
+                                  onEditPress: () {});
+                            },
                           )
-                        : withdrawMethodController.withdrawMethodList.isNotEmpty
-                            ? ListView.builder(
-                                itemCount: withdrawMethodController
-                                    .withdrawMethodList.length,
-                                itemBuilder: (context, index) {
-                                  var item = withdrawMethodController
-                                      .withdrawMethodList[index];
-                                  return methodCard(
-                                      methodNamem: item.method ?? "",
-                                      phoneNumber: item.identification ?? "",
-                                      switchWidget: Obx(() => Switch.adaptive(
-                                            activeTrackColor:
-                                                AppColors.darkBlue,
-                                            inactiveTrackColor: Colors.white,
-                                            trackOutlineColor:
-                                                const MaterialStatePropertyAll<
-                                                    Color>(Colors.grey),
-                                            inactiveThumbColor: Colors.grey,
-                                            value: item.defaults.value,
-                                            onChanged: (bool value1) {
-                                              item.defaults.value = value1;
-                                            },
-                                          )),
-                                      onDeletePress: () {},
-                                      onEditPress: () {});
-                                },
-                              )
-                            : const Center(
-                                child: Text("No Method found"),
-                              ))),
+                        : const Center(
+                            child: Text("No Method found"),
+                          ))),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -110,7 +132,9 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                   width: 100.w,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.zero, color: Colors.white),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Center(
                     child: Text(
                       "Cancel",
@@ -129,7 +153,9 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
                       color: AppColors.darkBlue),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Center(
                     child: Text(
                       "Save",

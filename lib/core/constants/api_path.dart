@@ -78,4 +78,6 @@ class ApiPath {
   static const earningHistoryListApi = "$baseUrl/api/wallet/earning-history/";
   static const withdrawHistoryListApi =
       "$baseUrl/api/wallet/withdrawal-requests/";
+  static const withdrawRequestPostAp =
+      "$baseUrl/api/wallet/withdrawal-request/";
 }

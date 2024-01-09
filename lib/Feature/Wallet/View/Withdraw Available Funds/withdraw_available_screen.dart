@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Wallet/Controller/withdraw_availabl_funds.dart';
+import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
@@ -25,9 +26,13 @@ class _WithdrawAvailableFundsScreenState
     extends State<WithdrawAvailableFundsScreen> {
   final withdraController = Get.put(WithdrawFundsController());
   final myWalletController = Get.put(MyWalletController());
+  final amountKey = GlobalKey<FormState>();
   @override
   void initState() {
     callGetWalletAfterDelay();
+    withdraController.amountController.value.clear();
+    withdraController.methodController.value.clear();
+    withdraController.methodIds(-1);
     super.initState();
   }
 
@@ -98,7 +103,8 @@ class _WithdrawAvailableFundsScreenState
               SizedBox(
                 height: 42.h,
               ),
-              CustomTextFormField(
+              Obx(() => CustomTextFormField(
+                  controller: withdraController.methodController.value,
                   // suffixConstraints:
                   //     BoxConstraints(maxHeight: 30.h, maxWidth: 60.w),
                   suffix: InkWell(
@@ -124,13 +130,26 @@ class _WithdrawAvailableFundsScreenState
                   ),
                   readOnly: true,
                   labelText: "Method",
-                  contentPadding: EdgeInsets.only(left: 10.w, right: 10.w)),
+                  contentPadding: EdgeInsets.only(left: 10.w, right: 10.w))),
               SizedBox(
                 height: 31.h,
               ),
-              CustomTextFormField(
-                  labelText: "Enter Amount",
-                  contentPadding: EdgeInsets.only(left: 10.w, right: 10.w)),
+              Form(
+                key: amountKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: CustomTextFormField(
+                    validator: (value) {
+                      if (value.toString().isEmpty) {
+                        return 'Amount is required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    textInputType: TextInputType.number,
+                    controller: withdraController.amountController.value,
+                    labelText: "Enter Amount",
+                    contentPadding: EdgeInsets.only(left: 10.w, right: 10.w)),
+              ),
             ],
           ),
         ),
@@ -146,7 +165,15 @@ class _WithdrawAvailableFundsScreenState
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
                       color: AppColors.darkBlue),
-                  onTap: () {},
+                  onTap: () {
+                    if (amountKey.currentState!.validate() &&
+                        withdraController.methodIds.value != -1) {
+                      withdraController.submitWithdrawRequest();
+                    } else {
+                      ToastWidget.errorToast(
+                          error: "Method should be selected");
+                    }
+                  },
                   child: Center(
                     child: Text(
                       "Submit",

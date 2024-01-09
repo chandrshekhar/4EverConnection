@@ -82,7 +82,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
             width: 120.w,
             height: 30.h,
             alignment: Alignment.center,
-            child: Text(DateFormat("yyyy-MM-dd").format(
+            child: Text(DateFormat("MM/dd/yyyy").format(
                 DateTime.parse(userServiceModel[index].dateCreated ?? ""))),
           ),
           Container(

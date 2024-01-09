@@ -84,7 +84,7 @@ class UserServiceDataTable extends StatelessWidget {
             height: 30.h,
             alignment: Alignment.center,
             child: Text(userServiceModel[index].completedOn != null
-                ? DateFormat("yyyy-MM-dd").format(
+                ? DateFormat("MM/dd/yyyy").format(
                     DateTime.parse(userServiceModel[index].completedOn ?? ""))
                 : ""),
           ),
