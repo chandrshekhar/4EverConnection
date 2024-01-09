@@ -6,6 +6,7 @@ import 'package:forever_connection/Feature/Contact/Controller/add_contact_contro
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/address_search.dart';
+import 'package:forever_connection/core/utils/dob_formater.dart';
 import 'package:forever_connection/core/utils/place_service.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -244,9 +245,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       height: 16.adaptSize,
                     ),
                     iconWithTextField(
-                      readOnly: true,
+                      // readOnly: true,
+                      inputFormate: [
+                        FilteringTextInputFormatter.allow(RegExp("[0-9/]")),
+                        LengthLimitingTextInputFormatter(10),
+                        CustomDateTextFormatter(),
+                      ],
                       textFieldTap: () {
-                        addController.selectDate(context);
+                        // addController.selectDate(context);
                       },
                       lableText: "Date of Birth",
                       controller: addController.dateOfBirthController.value,
@@ -871,7 +877,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
       required FormFieldValidator validator,
       GlobalKey? key,
       bool? readOnly,
-      VoidCallback? textFieldTap}) {
+      VoidCallback? textFieldTap,
+      List<TextInputFormatter>? inputFormate}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -893,6 +900,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 //     left: 12.h, top: 0.v, right: 12.h),
                 // hintText: "First name *",
                 labelText: lableText,
+                inputFormatters: inputFormate,
                 textInputAction: TextInputAction.done,
                 maxLines: 1,
                 // contentPadding: EdgeInsets.symmetric(

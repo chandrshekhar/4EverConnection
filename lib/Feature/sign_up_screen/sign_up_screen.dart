@@ -1,11 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
 import 'package:forever_connection/Services/Auth%20Services/auth_services.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/address_search.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
+import 'package:forever_connection/core/utils/dob_formater.dart';
 import 'package:forever_connection/core/utils/place_service.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
@@ -323,8 +327,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 Expanded(
                                   child: CustomTextFormField(
-                                    onTap: () =>
-                                        signUpController.selectDate(context),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[0-9/]")),
+                                      LengthLimitingTextInputFormatter(10),
+                                      CustomDateTextFormatter(),
+                                    ],
+                                    onChange: (value) {
+                                      // signUpController.dobFormate(value,"/");
+                                    },
+                                    // onTap: () =>
+                                    //     signUpController.selectDate(context),
                                     controller:
                                         signUpController.dobController.value,
                                     margin: EdgeInsets.only(left: 22.h),
@@ -796,3 +809,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
+
+

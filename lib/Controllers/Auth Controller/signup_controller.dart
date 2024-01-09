@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
-import 'dart:developer';
-
+import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
@@ -38,7 +37,7 @@ class SignupController extends GetxController {
 
   void sourceOption(int value) {
     selectedSourceType.value = value;
-    log(selectedSourceType.toString());
+    debugPrint(selectedSourceType.toString());
   }
 
   RxString isAlreadyAccount = "".obs;
@@ -69,7 +68,7 @@ class SignupController extends GetxController {
   Future<List<String>> getLocation(String query) async {
     try {
       suggestions = await authServices.searchLocations(query);
-       log(suggestions[0]);
+      debugPrint(suggestions[0]);
       return suggestions;
     } catch (e) {
       if (e is DioError) {
@@ -193,33 +192,61 @@ class SignupController extends GetxController {
     selectedlanguage.value = "";
   }
 
-  //pic date and time
-  Future<void> selectDate(BuildContext context) async {
-    var pickedDate = await showDatePicker(
-        context: context,
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        initialDate: selectedDate.value,
-        firstDate: DateTime(1900, 8),
-        lastDate: DateTime.now(),
-        fieldHintText: '',
-        useRootNavigator: false,
-        builder: ((context, child) {
-          return Theme(
-              data: ThemeData.light().copyWith(
-                datePickerTheme: const DatePickerThemeData(
-                  dayStyle: TextStyle(fontSize: 20),
-                  headerHeadlineStyle: TextStyle(fontSize: 20),
-                  headerHelpStyle: TextStyle(fontSize: 20),
-                  weekdayStyle: TextStyle(fontSize: 20),
-                ),
-              ),
-              child: child!);
-        }));
-    if (pickedDate != null && pickedDate != selectedDate.value) {
-      selectedDate.value = pickedDate;
-      dobController.value.text = convertAndFormatDate(pickedDate);
+  // formate date
+  dobFormate(String value, String seperator) {
+    value = value.replaceAll(seperator, '');
+    var newString = '';
+
+    if (value.length == 1 && int.parse(value) > 1) {
+      value = "0$value";
+    } else if (value.length == 4 && int.parse(value) > 3) {
+      var sub = value.substring(3, 4);
+      value.replaceRange(3, 3, value[value.length]);
     }
+    // if (value.length == 4 && int.parse(value) > 1) {
+    //   var temp = value[value.length - 1];
+    //   value.removeLast();
+    //   value += "0$temp";
+    // }
+
+    for (int i = 0; i < min(value.length, 8); i++) {
+      newString += value[i];
+      if ((i == 1 || i == 3) && i != value.length - 1) {
+        newString += seperator;
+      }
+    }
+    dobController.value.text = newString;
   }
+
+  // pic date and time
+  // Future<void> selectDate(BuildContext context) async {
+  //   var pickedDate = await showDatePicker(
+  //       context: context,
+  //       initialEntryMode: DatePickerEntryMode.calendarOnly,
+  //       initialDate: selectedDate.value,
+  //       firstDate: DateTime(1900, 8),
+  //       lastDate: DateTime.now(),
+  //       fieldHintText: '',
+  //       useRootNavigator: false,
+  //       builder: ((context, child) {
+  //         return Theme(
+  //             data: ThemeData.light().copyWith(
+  //               datePickerTheme: const DatePickerThemeData(
+  //                 dayStyle: TextStyle(fontSize: 20),
+  //                 headerHeadlineStyle: TextStyle(fontSize: 20),
+  //                 headerHelpStyle: TextStyle(fontSize: 20),
+  //                 weekdayStyle: TextStyle(fontSize: 20),
+  //               ),
+  //             ),
+  //             child: child!);
+  //       }));
+  //   if (pickedDate != null && pickedDate != selectedDate.value) {
+  //     selectedDate.value = pickedDate;
+  //     dobController.value.text = convertAndFormatDate(pickedDate);
+  //   }
+  // }
+
+
 
   //format date time as per requirement
   String convertAndFormatDate(DateTime inputDate) {
