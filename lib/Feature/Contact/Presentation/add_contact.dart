@@ -18,6 +18,7 @@ import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../core/utils/validate_dob.dart';
 import '../Controller/contact_text_validation.dart';
 
 // ignore_for_file: must_be_immutable
@@ -42,6 +43,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
   final emailKey = GlobalKey<FormState>();
   final homeKey = GlobalKey<FormState>();
   final zipKey = GlobalKey<FormState>();
+  final dobKey = GlobalKey<FormState>();
   final focus = FocusNode();
   final focus2 = FocusNode();
 
@@ -244,24 +246,36 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     SizedBox(
                       height: 16.adaptSize,
                     ),
-                    iconWithTextField(
-                      // readOnly: true,
-                      inputFormate: [
-                        FilteringTextInputFormatter.allow(RegExp("[0-9/]")),
-                        LengthLimitingTextInputFormatter(10),
-                        CustomDateTextFormatter(),
-                      ],
-                      hintText: "MM/DD/YYYYY",
-                      textFieldTap: () {
-                        // addController.selectDate(context);
-                      },
-                      lableText: "Date of Birth",
+                    Form(
+                      key: dobKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: iconWithTextField(
+                        // readOnly: true,
+                        inputFormate: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9/]")),
+                          LengthLimitingTextInputFormatter(10),
+                          CustomDateTextFormatter(),
+                        ],
+                        hintText: "MM/DD/YYYYY",
+                        textFieldTap: () {
+                          // addController.selectDate(context);
+                        },
+                        lableText: "Date of Birth",
 
-                      controller: addController.dateOfBirthController.value,
-                      icon: ImageConstant.imgCalendar,
-                      validator: (value) {
-                        return null;
-                      },
+                        controller: addController.dateOfBirthController.value,
+                        icon: ImageConstant.imgCalendar,
+                        validator: (value) {
+                          bool isValid =
+                              DobValidator.isValidDate(value.toString());
+                          if (value.toString().isEmpty) {
+                            return "Date of birth is required field";
+                          } else if (!isValid) {
+                            return "Invalid date format";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
                     ),
                     SizedBox(
                       height: 16.adaptSize,
@@ -760,7 +774,6 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                 child: CustomTextFormField(
                                     focusNode: focus2,
                                     maxLength: 10,
-                                    
                                     controller: addController
                                         .businessAptController.value,
                                     // margin: EdgeInsets.only(
@@ -903,6 +916,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 onTap: textFieldTap,
                 controller: controller,
                 hintText: hintText,
+
                 // margin: EdgeInsets.only(
                 //     left: 12.h, top: 0.v, right: 12.h),
                 // hintText: "First name *",

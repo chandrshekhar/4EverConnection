@@ -6,11 +6,11 @@ import '../Model/withdrawal_method_model.dart';
 class WithdrawMethodController extends GetxController {
   final MyWalletRepo _myWalletRepo = MyWalletRepo();
   RxList<WithdrawalMethod> withdrawMethodList = <WithdrawalMethod>[].obs;
-  RxInt selectedIndex=(-1).obs;
+  RxInt selectedIndex = (-1).obs;
   RxBool isWithdrawMethodLoading = false.obs;
-  getWithdrawalMethodList() async {
+  getWithdrawalMethodList({bool isLoadingShow = true}) async {
     try {
-      isWithdrawMethodLoading(true);
+      isLoadingShow ? isWithdrawMethodLoading(true) : null;
       var res = await _myWalletRepo.getWithdrawalMethodList();
       if (res.isNotEmpty) {
         withdrawMethodList.value = res;

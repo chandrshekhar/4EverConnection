@@ -8,6 +8,7 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
 import 'package:forever_connection/Services/Profile/user_profile_service.dart';
+import 'package:forever_connection/core/utils/remove_emoj.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -60,7 +61,7 @@ class ContactController extends GetxController {
             file = await saveUint8ListAsTempFile(
                 contacts[i].photo!, "temp_img$i.jpg");
           }
-          response = await uploadContactsHelper(contacts[i], file);
+          response = await uploadContactsHelper(contacts[i], file, false);
           if (!response) {
             Get.back();
             isUploadingContacts(false);
@@ -81,7 +82,8 @@ class ContactController extends GetxController {
             file = await saveUint8ListAsTempFile(
                 contacts[i].photo!, "temp_img$i.jpg");
           }
-          response = await uploadContactsHelper(selectedContactList[i], file);
+          response =
+              await uploadContactsHelper(selectedContactList[i], file, false);
           if (!response) {
             isUploadingContacts(false);
             Get.back();
@@ -102,14 +104,19 @@ class ContactController extends GetxController {
     }
   }
 
-  Future<bool> uploadContactsHelper(Contact contact, File? file) async {
+  Future<bool> uploadContactsHelper(
+      Contact contact, File? file, bool isContactAddInLocal) async {
     log("Uplaod api calling...");
     try {
       Map<String, dynamic> requestModel = {
-        "first_name": contact.name.first.isNotEmpty ? contact.name.first : "NA",
-        "last_name": contact.name.last.isNotEmpty ? contact.name.last : "NA",
+        "first_name": contact.name.first.isNotEmpty
+            ? removeEmojis(contact.name.first)
+            : "NA",
+        "last_name": contact.name.last.isNotEmpty
+            ? removeEmojis(contact.name.last)
+            : "NA",
         "middle_name": contact.name.middle.isNotEmpty
-            ? contact.name.middle.toString()
+            ? removeEmojis(contact.name.middle.toString())
             : "",
         "mobile_phone": contact.phones.isNotEmpty
             ? contact.phones[0].number.toString()
@@ -149,8 +156,9 @@ class ContactController extends GetxController {
           .uploadContacts(requestModel, file)
           .then((value) async {
         await addContactController.getContactList(search: "");
-        contact.insert();
       });
+      isContactAddInLocal ? contact.insert() : null;
+
       return true;
     } catch (e) {
       log("Error is ${e.toString()}");
@@ -162,9 +170,9 @@ class ContactController extends GetxController {
     log("Adding api calling...");
     try {
       Map<String, dynamic> requestModel = {
-        "first_name": contactListModel.firstName ?? "",
-        "last_name": contactListModel.lastName ?? "",
-        "middle_name": contactListModel.middleName ?? "",
+        "first_name": removeEmojis(contactListModel.firstName ?? ""),
+        "last_name": removeEmojis(contactListModel.lastName ?? ""),
+        "middle_name": removeEmojis(contactListModel.middleName ?? ""),
         "mobile_phone": contactListModel.mobilePhone ?? "",
         "business_name": contactListModel.businessName ?? "",
         "position": contactListModel.position ?? "",
@@ -207,9 +215,9 @@ class ContactController extends GetxController {
     log("Edit api calling...");
     try {
       Map<String, dynamic> requestModel = {
-        "first_name": contactListModel.firstName ?? "",
-        "last_name": contactListModel.lastName ?? "",
-        "middle_name": contactListModel.middleName ?? "",
+        "first_name": removeEmojis(contactListModel.firstName ?? ""),
+        "last_name": removeEmojis(contactListModel.lastName ?? ""),
+        "middle_name": removeEmojis(contactListModel.middleName ?? ""),
         "mobile_phone": contactListModel.mobilePhone ?? "",
         "business_name": contactListModel.businessName ?? "",
         "position": contactListModel.position ?? "",

@@ -9,7 +9,10 @@ import '../../../widgets/custom_icon_button.dart';
 import '../../../widgets/custom_text_form_field.dart';
 
 class MyBottomSheetContent extends StatefulWidget {
-  const MyBottomSheetContent({super.key});
+  final bool isCommingFromEdit;
+  final int? id;
+  const MyBottomSheetContent(
+      {super.key, required this.isCommingFromEdit, this.id});
 
   @override
   State<MyBottomSheetContent> createState() => _MyBottomSheetContentState();
@@ -38,7 +41,7 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                       topRight: Radius.circular(20.r))),
               child: Center(
                 child: Text(
-                  "Add Method",
+                  widget.isCommingFromEdit ? "Edit Method" : "Add Method",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.sp,
@@ -53,18 +56,21 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   richTextForLable(title: "Available Pay Methods"),
-                  CustomDropDown(
-                    contentPadding: const EdgeInsets.only(
-                        left: 10, top: 10, bottom: 10, right: 10),
-                    hintText: "Zelle",
-                    items: const ["Zelle", "PayPal", "Venmo", "E-Check"],
-                    onChanged: (val) {
-                      withdrawController.setPaymentMethod(val);
-                    },
-                    validator: (value) {
-                      return null;
-                    },
-                  ),
+                  Obx(() => CustomDropDown(
+                        contentPadding: const EdgeInsets.only(
+                            left: 10, top: 10, bottom: 10, right: 10),
+                        hintText: withdrawController
+                                .paymentTypeSelectedValue.value.isNotEmpty
+                            ? withdrawController.paymentTypeSelectedValue.value
+                            : "Zelle",
+                        items: const ["Zelle", "PayPal", "Venmo", "E-Check"],
+                        onChanged: (val) {
+                          withdrawController.setPaymentMethod(val);
+                        },
+                        validator: (value) {
+                          return null;
+                        },
+                      )),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -72,8 +78,11 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                   CustomDropDown(
                     contentPadding: const EdgeInsets.only(
                         left: 10, top: 10, bottom: 10, right: 10),
-                    hintText: "Mobile Number",
-                    items: const ["Mobile Number", "Email address"],
+                    hintText: withdrawController
+                            .accountAssociateSelectedValue.value.isNotEmpty
+                        ? withdrawController.accountAssociateSelectedValue.value
+                        : "Phone",
+                    items: const ["Phone", "Email"],
                     onChanged: (val) {
                       withdrawController.setAccountAssociateValue(val);
                     },
@@ -88,9 +97,9 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                     () => richTextForLable(
                         title: withdrawController
                                 .accountAssociateSelectedValue.value
-                                .contains("Email address")
-                            ? "Email address"
-                            : "Mobile Number"),
+                                .contains("Email")
+                            ? "Email"
+                            : "Mobile"),
                   ),
                   Obx(() => CustomTextFormField(
                         onChange: (value) {
@@ -100,9 +109,9 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                             withdrawController.phoneEmailController.value,
                         hintText: withdrawController
                                 .accountAssociateSelectedValue.value
-                                .contains("Email address")
-                            ? "Email address"
-                            : "Mobile Number",
+                                .contains("Email")
+                            ? "Email"
+                            : "Mobile",
                         validator: (v) {
                           if (v.toString().isEmpty) {
                             return "Enter valid mobile number";
@@ -123,7 +132,7 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                             withdrawController.phoneEmailController.value
                                 .clear();
                             withdrawController
-                                .accountAssociateSelectedValue("Mobile Number");
+                                .accountAssociateSelectedValue("Phone");
                             withdrawController
                                 .paymentTypeSelectedValue("Zelle");
                           },
@@ -139,30 +148,40 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                                   fontSize: 17.sp, fontWeight: FontWeight.w500),
                             ),
                           )),
-                      Obx(() => CustomIconButton(
-                          onTap: withdrawController
-                                  .phoneEmailString.value.isNotEmpty
-                              ? () {
-                                  print("object");
-                                }
-                              : null,
-                          height: 45.h,
-                          width: 120.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.zero,
-                              color: withdrawController
+                      Obx(() => withdrawController.isEditLoading.value
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            )
+                          : CustomIconButton(
+                              onTap: withdrawController
                                       .phoneEmailString.value.isNotEmpty
-                                  ? AppColors.appBarTextColor
-                                  : Colors.grey),
-                          child: Center(
-                            child: Text(
-                              "Add Method",
-                              style: TextStyle(
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white),
-                            ),
-                          ))),
+                                  ? () {
+                                      if (widget.isCommingFromEdit == true) {
+                                        withdrawController.editMethodService(
+                                            id: widget.id!.toInt(),
+                                            context: context);
+                                      }
+                                    }
+                                  : null,
+                              height: 45.h,
+                              width: 120.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.zero,
+                                  color: withdrawController
+                                          .phoneEmailString.value.isNotEmpty
+                                      ? AppColors.appBarTextColor
+                                      : Colors.grey),
+                              child: Center(
+                                child: Text(
+                                  widget.isCommingFromEdit
+                                      ? "Edit Method"
+                                      : "Add Method",
+                                  style: TextStyle(
+                                      fontSize: 17.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white),
+                                ),
+                              ))),
                     ],
                   )
                 ],

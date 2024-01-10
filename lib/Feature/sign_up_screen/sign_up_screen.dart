@@ -9,6 +9,7 @@ import 'package:forever_connection/core/utils/address_search.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';
 import 'package:forever_connection/core/utils/dob_formater.dart';
 import 'package:forever_connection/core/utils/place_service.dart';
+import 'package:forever_connection/core/utils/validate_dob.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_radio_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
@@ -32,6 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AuthServices authServices = AuthServices();
   final signUpController = Get.put(SignupController());
+  final dobKey = GlobalKey<FormState>();
 
   final zipCodeFocus = FocusNode();
 
@@ -324,23 +326,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   margin: EdgeInsets.symmetric(vertical: 6.v),
                                 ),
                                 Expanded(
-                                  child: CustomTextFormField(
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp("[0-9/]")),
-                                      LengthLimitingTextInputFormatter(10),
-                                      CustomDateTextFormatter(),
-                                    ],
-                                    onChange: (value) {
-                                      // signUpController.dobFormate(value,"/");
-                                    },
-                                    // onTap: () =>
-                                    //     signUpController.selectDate(context),
-                                    controller:
-                                        signUpController.dobController.value,
-                                    margin: EdgeInsets.only(left: 22.h),
-                                    hintText: "MM/DD/YYYY",
-                                    labelText: "Date of Birth ",
+                                  child: Form(
+                                    key: dobKey,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    child: CustomTextFormField(
+                                      validator: (value) {
+                                        bool isValid = DobValidator.isValidDate(
+                                            value.toString());
+                                        if (value.toString().isEmpty) {
+                                          return "Date of birth is required field";
+                                        } else if (!isValid) {
+                                          return "Invalid date format";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp("[0-9/]")),
+                                        LengthLimitingTextInputFormatter(10),
+                                        CustomDateTextFormatter(),
+                                      ],
+                                      onChange: (value) {
+                                        // signUpController.dobFormate(value,"/");
+                                      },
+                                      // onTap: () =>
+                                      //     signUpController.selectDate(context),
+                                      controller:
+                                          signUpController.dobController.value,
+                                      margin: EdgeInsets.only(left: 22.h),
+                                      hintText: "MM/DD/YYYY",
+                                      labelText: "Date of Birth ",
+                                    ),
                                   ),
                                 ),
                               ],

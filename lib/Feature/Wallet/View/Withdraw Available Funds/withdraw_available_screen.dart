@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../Controller/mywallet_cotroller.dart';
+import '../../Controller/withdraw_method_controller.dart';
 import '../../Widget/add_fund_widget.dart';
 import '../../Widget/got_it_widget.dart';
 import '../../Widget/model_bottom_sheet.dart';
@@ -29,6 +30,7 @@ class _WithdrawAvailableFundsScreenState
     extends State<WithdrawAvailableFundsScreen> {
   final withdraController = Get.put(WithdrawFundsController());
   final myWalletController = Get.put(MyWalletController());
+  final withdrawMethodController = Get.put(WithdrawMethodController());
   final amountKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -36,7 +38,19 @@ class _WithdrawAvailableFundsScreenState
     withdraController.amountController.value.clear();
     withdraController.methodController.value.clear();
     withdraController.methodIds(-1);
+
+    getDefaultMethod();
     super.initState();
+  }
+
+  getDefaultMethod() async {
+    await withdrawMethodController.getWithdrawalMethodList();
+    for (var element in withdrawMethodController.withdrawMethodList) {
+      if (element.defaults.value == true) {
+        withdraController.addModelData(
+            methodId: element.id!, methodName: element.method.toString());
+      }
+    }
   }
 
   void callGetWalletAfterDelay() async {
@@ -99,12 +113,20 @@ class _WithdrawAvailableFundsScreenState
               ),
               Obx(() => AddFundWidget(
                     onPress: () {
+                      withdraController.phoneEmailController.value.clear();
+                      withdraController.phoneEmailString.value = "";
+                      withdraController.accountAssociateSelectedValue.value =
+                          "Mobile";
+                      withdraController.paymentTypeSelectedValue.value =
+                          "Zelle";
                       showModalBottomSheet(
                         context: context,
                         isScrollControlled:
                             true, // This makes the bottom sheet take up the full screen height
                         builder: (BuildContext context) {
-                          return const MyBottomSheetContent();
+                          return const MyBottomSheetContent(
+                            isCommingFromEdit: false,
+                          );
                         },
                       );
                     },
@@ -186,16 +208,25 @@ class _WithdrawAvailableFundsScreenState
                     }
                   },
                   child: Center(
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Poppins",
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                      child: Obx(
+                    () => withdraController.isSubmitLoading.value
+                        ? SizedBox(
+                            height: 20.h,
+                            width: 20.w,
+                            child: const CircularProgressIndicator.adaptive(
+                              backgroundColor: Colors.white,
+                            ),
+                          )
+                        : Text(
+                            "Submit",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Poppins",
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                  )),
                 ),
               );
       }),

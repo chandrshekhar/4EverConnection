@@ -1,6 +1,8 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Wallet/Controller/withdraw_method_controller.dart';
+import 'package:forever_connection/Feature/Wallet/Widget/model_bottom_sheet.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:get/get.dart';
@@ -117,8 +119,40 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                                           }
                                         },
                                       )),
-                                  onDeletePress: () {},
-                                  onEditPress: () {});
+                                  onDeletePress: () {
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.question,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Delete',
+                                      titleTextStyle: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w600),
+                                      desc: 'Are you want to delete?',
+                                      btnCancelOnPress: () {},
+                                      btnOkOnPress: () async {
+                                        await withdrawAvailableFund
+                                            .deleteMethodService(
+                                                id: item.id!, index: index);
+                                      },
+                                    ).show();
+                                  },
+                                  onEditPress: () {
+                                    withdrawAvailableFund
+                                        .setPrefiledEditValue(item);
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled:
+                                          true, // This makes the bottom sheet take up the full screen height
+                                      builder: (BuildContext context) {
+                                        return MyBottomSheetContent(
+                                          isCommingFromEdit: true,
+                                          id: item.id,
+                                        );
+                                      },
+                                    );
+                                  });
                             },
                           )
                         : const Center(
@@ -195,6 +229,7 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                 child: Transform.scale(
                     scaleY: 0.8, scaleX: 0.9, child: switchWidget)),
             PopupMenuButton<String>(
+                position: PopupMenuPosition.under,
                 padding: EdgeInsets.zero,
                 // position: PopupMenuPosition.under,
                 onSelected: null,

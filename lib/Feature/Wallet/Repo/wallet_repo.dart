@@ -204,4 +204,111 @@ class MyWalletRepo {
       throw Exception("Faild to make api the request : $e");
     }
   }
+
+  //add method post api
+  Future<Map> addMethod({required Map<String, dynamic> reqModel}) async {
+    log("add method api hiting...");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      response = await dio.post(ApiPath.addMethodApi, data: reqModel);
+      log("add method response ${response.data.toString()}");
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        // print(userServicesList);
+        return response.data;
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      log("Add method error: ${e.toString()}");
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          ToastWidget.errorToast(error: e.response!.data['error']);
+          throw Exception(e.response!.data['error']);
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+  Future<Map> editMethod(
+      {required Map<String, dynamic> reqModel, required int id}) async {
+    log("Edit method api hiting...");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      response =
+          await dio.put("${ApiPath.editMethodApi}/$id/edit/", data: reqModel);
+      log("Edit method response ${response.data.toString()}");
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      log("Edit method error: ${e.toString()}");
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          ToastWidget.errorToast(error: e.response!.data['error']);
+          throw Exception(e.response!.data['error']);
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
+
+  Future<String> deleteMethod({required int id}) async {
+    log("Delete method api hiting...");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      response = await dio.delete("${ApiPath.deleteMethodApi}/$id/delete/");
+      log("Delete method response ${response.data.toString()}");
+      if (response.statusCode == 204) {
+        ToastWidget.successToast(success: "Method deleted successfully");
+        return response.data.toString();
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      log("Delete method error: ${e.toString()}");
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          ToastWidget.errorToast(error: e.response!.data['error']);
+          throw Exception(e.response!.data['error']);
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
 }

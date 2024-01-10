@@ -128,6 +128,7 @@ class UserProfileService {
         'Content-Type': 'multipart/form-data',
         'Authorization': "Bearer $token"
       };
+
       FormData formData = FormData.fromMap(requestModel);
 
       // FormData formData = FormData();
@@ -155,7 +156,7 @@ class UserProfileService {
       } else {
         log("no photo");
       }
-      //log("form data--> ${formData.fields}");
+      log("form data--> ${formData.fields}");
 
       response = await dio.post(ApiPath.uploadContacts, data: formData);
       if (response.statusCode == 200 || response.statusCode == 201) {

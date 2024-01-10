@@ -80,4 +80,7 @@ class ApiPath {
       "$baseUrl/api/wallet/withdrawal-requests/";
   static const withdrawRequestPostAp =
       "$baseUrl/api/wallet/withdrawal-request/";
+  static const addMethodApi = "$baseUrl/api/wallet/withdrawal-methods/";
+  static const editMethodApi = "$baseUrl/api/wallet/withdrawal-methods";
+  static const deleteMethodApi = "$baseUrl/api/wallet/withdrawal-methods";
 }
