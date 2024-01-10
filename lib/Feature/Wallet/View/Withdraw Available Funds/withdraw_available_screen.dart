@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Wallet/Controller/withdraw_availabl_funds.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
+import 'package:forever_connection/routes/app_routes.dart';
+import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/custom_icon_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
@@ -51,7 +54,7 @@ class _WithdrawAvailableFundsScreenState
         title: Text(
           "Withdraw Available Funds",
           style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w500,
               fontFamily: "Poppins",
               color: AppColors.appBarTextColor),
@@ -68,6 +71,14 @@ class _WithdrawAvailableFundsScreenState
             size: 20.sp,
           ),
         ),
+        actions: [
+          AppbarImage1(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+              },
+              svgPath: ImageConstant.imgCart,
+              margin: EdgeInsets.fromLTRB(24.h, 1.h, 24.w, 6.h)),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.only(

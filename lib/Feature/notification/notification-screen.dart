@@ -27,6 +27,7 @@ class NotificationsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: appTheme.lightBlue50,
       key: _key,
+       endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
         leadingWidth: 44.h,
         leading: CustomMenuButtonWidget(
@@ -38,10 +39,13 @@ class NotificationsScreen extends StatelessWidget {
         //     onTap: () {
         //       Navigator.pop(context);
         //     }),
+        actions:const [
+          SizedBox()
+        ],
         centerTitle: true,
         title: AppbarTitle(text: "Notifications"),
       ),
-      endDrawer: CustomDrawerWidget(),
+     
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Obx(
