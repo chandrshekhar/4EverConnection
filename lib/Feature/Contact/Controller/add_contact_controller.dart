@@ -47,7 +47,15 @@ class AddContactController extends GetxController {
     firstNameController.value.text = contactListModel.firstName ?? "";
     middleNameController.value.text = contactListModel.middleName ?? "";
     lastNameController.value.text = contactListModel.lastName ?? "";
-    dateOfBirthController.value.text = contactListModel.dateOfBirth ?? "";
+    if (contactListModel.dateOfBirth != null &&
+        contactListModel.dateOfBirth!.isNotEmpty) {
+      DateTime dateTime =
+          DateFormat('yyyy-dd-MM').parse(contactListModel.dateOfBirth!);
+      dateOfBirthController.value.text =
+          DateFormat("dd/MM/yyyy").format(dateTime);
+    } else {
+      dateOfBirthController.value.text = '';
+    }
     postionController.value.text = contactListModel.position ?? "";
     occupationController.value.text = contactListModel.currentOccupation ?? "";
     idealOccupationController.value.text =
@@ -91,32 +99,32 @@ class AddContactController extends GetxController {
   RxString choosenFilename = RxString("");
   Rx<File?> files = Rx<File?>(null);
 
-  Future<void> selectDate(BuildContext context) async {
-    var pickedDate = await showDatePicker(
-        context: context,
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        initialDate: selectedDate.value,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now(),
-        fieldHintText: '',
-        useRootNavigator: false,
-        builder: ((context, child) {
-          return Theme(
-              data: ThemeData.light().copyWith(
-                datePickerTheme: const DatePickerThemeData(
-                  dayStyle: TextStyle(fontSize: 20),
-                  headerHeadlineStyle: TextStyle(fontSize: 20),
-                  headerHelpStyle: TextStyle(fontSize: 20),
-                  weekdayStyle: TextStyle(fontSize: 20),
-                ),
-              ),
-              child: child!);
-        }));
-    if (pickedDate != null && pickedDate != selectedDate.value) {
-      selectedDate.value = pickedDate;
-      dateOfBirthController.value.text = convertAndFormatDate(pickedDate);
-    }
-  }
+  // Future<void> selectDate(BuildContext context) async {
+  //   var pickedDate = await showDatePicker(
+  //       context: context,
+  //       initialEntryMode: DatePickerEntryMode.calendarOnly,
+  //       initialDate: selectedDate.value,
+  //       firstDate: DateTime(1900),
+  //       lastDate: DateTime.now(),
+  //       fieldHintText: '',
+  //       useRootNavigator: false,
+  //       builder: ((context, child) {
+  //         return Theme(
+  //             data: ThemeData.light().copyWith(
+  //               datePickerTheme: const DatePickerThemeData(
+  //                 dayStyle: TextStyle(fontSize: 20),
+  //                 headerHeadlineStyle: TextStyle(fontSize: 20),
+  //                 headerHelpStyle: TextStyle(fontSize: 20),
+  //                 weekdayStyle: TextStyle(fontSize: 20),
+  //               ),
+  //             ),
+  //             child: child!);
+  //       }));
+  //   if (pickedDate != null && pickedDate != selectedDate.value) {
+  //     selectedDate.value = pickedDate;
+  //     dateOfBirthController.value.text = convertAndFormatDate(pickedDate);
+  //   }
+  // }
 
   String convertAndFormatDate(DateTime inputDate) {
     // final originalFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS-HH:mm");
@@ -227,7 +235,9 @@ class AddContactController extends GetxController {
     }
     if (dateOfBirthController.value.text.isNotEmpty) {
       // no dob property for contact found in flutter contacts
-      newContact.dateOfBirth = dateOfBirthController.value.text;
+      DateTime dateTime =
+          DateFormat('dd/MM/yyyy').parse(dateOfBirthController.value.text);
+      newContact.dateOfBirth = DateFormat("yyyy-dd-MM").format(dateTime);
     }
 
     if (postionController.value.text.isNotEmpty) {
@@ -315,7 +325,13 @@ class AddContactController extends GetxController {
     newContact.gender = gender.value;
 
     // no dob property for contact found in flutter contacts
-    newContact.dateOfBirth = dateOfBirthController.value.text;
+    if (dateOfBirthController.value.text.isNotEmpty) {
+      DateTime dateTime =
+          DateFormat('dd/MM/yyyy').parse(dateOfBirthController.value.text);
+      newContact.dateOfBirth = DateFormat("yyyy-dd-MM").format(dateTime);
+    } else {
+      newContact.dateOfBirth = "";
+    }
 
     newContact.position = postionController.value.text;
 
@@ -359,7 +375,7 @@ class AddContactController extends GetxController {
     var response = await contactController.editContact(
         contactId.value, newContact, files.value);
     if (response) {
-      ToastWidget.successToast(success: "Contact added successfully!");
+      ToastWidget.successToast(success: "Contact update successfully!");
       Get.back();
     }
 

@@ -131,6 +131,7 @@ class CustomTextFormField extends StatelessWidget {
   InputDecoration get decoration => InputDecoration(
         hintText: hintText ?? "",
         labelText: labelText ?? "",
+        counterText: "",
         hintStyle: hintStyle ??
             const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
         labelStyle:

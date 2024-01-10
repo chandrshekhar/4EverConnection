@@ -251,10 +251,12 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         LengthLimitingTextInputFormatter(10),
                         CustomDateTextFormatter(),
                       ],
+                      hintText: "MM/DD/YYYYY",
                       textFieldTap: () {
                         // addController.selectDate(context);
                       },
                       lableText: "Date of Birth",
+
                       controller: addController.dateOfBirthController.value,
                       icon: ImageConstant.imgCalendar,
                       validator: (value) {
@@ -616,6 +618,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                     // margin: EdgeInsets.only(
                                     //     left: 12.h, top: 15.v, right: 12.h),
                                     // hintText: "Apt, Ste",
+                                    maxLength: 10,
                                     labelText: "Apt, Ste",
                                     textInputAction: TextInputAction.done,
                                     maxLines: 1,
@@ -756,6 +759,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               Expanded(
                                 child: CustomTextFormField(
                                     focusNode: focus2,
+                                    maxLength: 10,
+                                    
                                     controller: addController
                                         .businessAptController.value,
                                     // margin: EdgeInsets.only(
@@ -877,6 +882,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
       required FormFieldValidator validator,
       GlobalKey? key,
       bool? readOnly,
+      String? hintText,
       VoidCallback? textFieldTap,
       List<TextInputFormatter>? inputFormate}) {
     return Row(
@@ -896,6 +902,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 readOnly: readOnly ?? false,
                 onTap: textFieldTap,
                 controller: controller,
+                hintText: hintText,
                 // margin: EdgeInsets.only(
                 //     left: 12.h, top: 0.v, right: 12.h),
                 // hintText: "First name *",

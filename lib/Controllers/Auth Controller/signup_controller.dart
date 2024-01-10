@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
 import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import '../../Services/Auth Services/auth_services.dart';
 import '../../core/utils/toast_widget.dart';
 
@@ -126,6 +128,8 @@ class SignupController extends GetxController {
   }
 
   register(BuildContext context) async {
+    DateTime dateTime =
+        DateFormat('dd/MM/yyyy').parse(dobController.value.text);
     try {
       Map<String, dynamic> reqModel = {
         "first_name": firstNameController.value.text.trim(),
@@ -133,7 +137,7 @@ class SignupController extends GetxController {
         "mobile_number": mobileNumberController.value.text,
         "email": emailController.value.text,
         "gender": selectedGender.value,
-        "date_of_birth": dobController.value.text,
+        "date_of_birth": DateFormat("yyyy-dd-MM").format(dateTime),
         "occupation": occupationController.value.text.trim(),
         "address": addressController.value.text.trim(),
         "apt": aptController.value.text.trim(),
@@ -154,6 +158,7 @@ class SignupController extends GetxController {
             context, AppRoutes.loginScreen, (route) => false);
       }
     } catch (e) {
+      debugPrint(e.toString());
       if (e is DioError) {
         if (e.type == DioErrorType.connectionTimeout ||
             e.type == DioErrorType.receiveTimeout ||
@@ -245,8 +250,6 @@ class SignupController extends GetxController {
   //     dobController.value.text = convertAndFormatDate(pickedDate);
   //   }
   // }
-
-
 
   //format date time as per requirement
   String convertAndFormatDate(DateTime inputDate) {

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -341,7 +339,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     controller:
                                         signUpController.dobController.value,
                                     margin: EdgeInsets.only(left: 22.h),
-                                    hintText: "Date of Birth ",
+                                    hintText: "MM/DD/YYYY",
                                     labelText: "Date of Birth ",
                                   ),
                                 ),
@@ -669,7 +667,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             Obx(
-                              () => signUpController.isRegisterLoadng == true
+                              () => signUpController.isRegisterLoadng.value ==
+                                      true
                                   ? const Center(
                                       child:
                                           CircularProgressIndicator.adaptive())
@@ -677,6 +676,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       onTap: () {
                                         if (_formKey.currentState!.validate()) {
                                           signUpController.register(context);
+                                        } else {
+                                          print("pandey");
                                         }
                                       },
                                       text: "Register",
@@ -809,5 +810,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
-
-
