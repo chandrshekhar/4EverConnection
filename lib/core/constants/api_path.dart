@@ -83,4 +83,5 @@ class ApiPath {
   static const addMethodApi = "$baseUrl/api/wallet/withdrawal-methods/";
   static const editMethodApi = "$baseUrl/api/wallet/withdrawal-methods";
   static const deleteMethodApi = "$baseUrl/api/wallet/withdrawal-methods";
+  static const toggleMethodAsDefault = "$baseUrl/api/wallet/withdrawal-methods";
 }

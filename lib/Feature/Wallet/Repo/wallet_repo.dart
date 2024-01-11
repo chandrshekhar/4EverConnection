@@ -311,4 +311,42 @@ class MyWalletRepo {
       throw Exception("Faild to make api the request : $e");
     }
   }
+
+  Future<Map> toggleMethod({required int id}) async {
+    log("Toggle method api hiting...");
+    Response response;
+    var token = await SharedPref().getUserToken();
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token"
+      };
+      Map<String, dynamic> reqModel = {"method_id": id};
+      response = await dio.patch(
+          "${ApiPath.toggleMethodAsDefault}/$id/toggle-default/",
+          data: reqModel);
+      log("Toggle method response ${response.data.toString()}");
+      if (response.statusCode == 200) {
+        ToastWidget.successToast(success: "Method deleted successfully");
+        return response.data;
+      } else {
+        throw Exception("Faild to load data");
+      }
+    } catch (e) {
+      log("Toggle method error: ${e.toString()}");
+      if (e is DioException) {
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.sendTimeout ||
+            e.type == DioExceptionType.receiveTimeout ||
+            e.type == DioExceptionType.unknown) {
+          throw Exception("No Internet connection or network error");
+        } else if (e.type == DioExceptionType.badResponse) {
+          ToastWidget.errorToast(error: e.response!.data['error']);
+          throw Exception(e.response!.data['error']);
+        }
+      }
+      throw Exception("Faild to make api the request : $e");
+    }
+  }
 }

@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Wallet/Repo/wallet_repo.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
@@ -71,18 +73,29 @@ class WithdrawFundsController extends GetxController {
     }
   }
 
+  RxBool isAddMethodLoading = false.obs;
   //add method controller service
-  addMethodService() async {
+  addMethodService(BuildContext context) async {
     try {
+      isAddMethodLoading(true);
       Map<String, dynamic> reqModel = {
-        "method": "Method",
-        "type": paymentTypeSelectedValue.value.toString(),
-        "identification": accountAssociateSelectedValue.value.toString(),
-        "default": "false"
+        "method": paymentTypeSelectedValue.value,
+        "type": accountAssociateSelectedValue.value,
+        "identification": phoneEmailController.value.text.toString(),
+        "default": false
       };
+      log("Req Model ${reqModel.toString()}");
       var res = await _walletRepo.addMethod(reqModel: reqModel);
+      if (res.isNotEmpty) {
+        ToastWidget.successToast(success: "Add method successfully added");
+        Navigator.pop(context);
+        isAddMethodLoading(false);
+      } else {
+        ToastWidget.errorToast(error: "Faild to add method");
+        isAddMethodLoading(false);
+      }
     } catch (e) {
-      print(e);
+      isAddMethodLoading(false);
     }
   }
 
@@ -118,6 +131,21 @@ class WithdrawFundsController extends GetxController {
       withdrawMethodController.withdrawMethodList.removeAt(index);
     } catch (e) {
       print(e);
+    }
+  }
+
+  toggleMethod(int id) async {
+    try {
+      var res = await _walletRepo.toggleMethod(id: id);
+      if (res.isNotEmpty) {
+        ToastWidget.successToast(success: "Your method mark as default");
+        await withdrawMethodController.getWithdrawalMethodList(
+            isLoadingShow: false);
+      } else {
+        ToastWidget.errorToast(error: "Faild to mark as default");
+      }
+    } catch (e) {
+      ToastWidget.errorToast(error: e.toString());
     }
   }
 }

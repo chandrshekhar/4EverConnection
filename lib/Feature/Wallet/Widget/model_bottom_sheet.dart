@@ -4,9 +4,12 @@ import 'package:forever_connection/Feature/Wallet/Controller/withdraw_availabl_f
 import 'package:get/get.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/constants/image_constant.dart';
 import '../../../widgets/custom_drop_down.dart';
 import '../../../widgets/custom_icon_button.dart';
+import '../../../widgets/custom_image_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
+import '../../../widgets/phone_number_formating_widget.dart';
 
 class MyBottomSheetContent extends StatefulWidget {
   final bool isCommingFromEdit;
@@ -20,6 +23,7 @@ class MyBottomSheetContent extends StatefulWidget {
 
 class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
   final withdrawController = Get.put(WithdrawFundsController());
+  final phoneKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -85,6 +89,7 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                     items: const ["Phone", "Email"],
                     onChanged: (val) {
                       withdrawController.setAccountAssociateValue(val);
+                      withdrawController.phoneEmailController.value.clear();
                     },
                     validator: (value) {
                       return null;
@@ -101,25 +106,69 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                             ? "Email"
                             : "Mobile"),
                   ),
-                  Obx(() => CustomTextFormField(
-                        onChange: (value) {
-                          withdrawController.setEmailPhone(value);
-                        },
-                        controller:
-                            withdrawController.phoneEmailController.value,
-                        hintText: withdrawController
-                                .accountAssociateSelectedValue.value
-                                .contains("Email")
-                            ? "Email"
-                            : "Mobile",
-                        validator: (v) {
-                          if (v.toString().isEmpty) {
-                            return "Enter valid mobile number";
-                          } else {
-                            return null;
-                          }
-                        },
-                      )),
+                  Obx(
+                    () => withdrawController.accountAssociateSelectedValue.value
+                            .contains("Email")
+                        ? CustomTextFormField(
+                            onChange: (value) {
+                              withdrawController.setEmailPhone(value);
+                            },
+                            controller:
+                                withdrawController.phoneEmailController.value,
+                            hintText: "Email",
+                            validator: (v) {
+                              if (v.toString().isEmpty) {
+                                return "Enter valid email id";
+                              } else {
+                                return null;
+                              }
+                            },
+                          )
+                        : Row(
+                            children: [
+                              CustomImageView(
+                                  svgPath: ImageConstant.imgCall,
+                                  height: 15.h,
+                                  width: 15.w,
+                                  margin:
+                                      EdgeInsets.only(top: 8.h, bottom: 13.h)),
+                              Expanded(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 12.h),
+                                  child: Obx(() => Form(
+                                        key: phoneKey,
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                        child: PhoneNumberTextFieldWidget(
+                                            onChange: (value) {
+                                              // formValidation
+                                              //     .setPhoneNameValidation(
+                                              //         value);
+                                              // formValidation
+                                              //     .checkButtonValidation();
+                                              withdrawController
+                                                  .phoneEmailString
+                                                  .value = value;
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return "Number is required";
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            c: 1,
+                                            ignore: false,
+                                            phoneController: withdrawController
+                                                .phoneEmailController.value,
+                                            lable: "Mobile Number"),
+                                      )),
+                                ),
+                              ),
+                            ],
+                          ),
+                  ),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -148,7 +197,8 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                                   fontSize: 17.sp, fontWeight: FontWeight.w500),
                             ),
                           )),
-                      Obx(() => withdrawController.isEditLoading.value
+                      Obx(() => withdrawController.isEditLoading.value ||
+                              withdrawController.isAddMethodLoading.value
                           ? const Center(
                               child: CircularProgressIndicator.adaptive(),
                             )
@@ -160,6 +210,9 @@ class _MyBottomSheetContentState extends State<MyBottomSheetContent> {
                                         withdrawController.editMethodService(
                                             id: widget.id!.toInt(),
                                             context: context);
+                                      } else {
+                                        withdrawController
+                                            .addMethodService(context);
                                       }
                                     }
                                   : null,

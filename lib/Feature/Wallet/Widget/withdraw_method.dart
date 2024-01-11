@@ -101,22 +101,28 @@ class _WithdrawMethodScreenState extends State<WithdrawMethodScreen> {
                                               .clear();
                                           withdrawAvailableFund.methodIds(-1);
                                           item.defaults.value = value1;
-                                          withdrawAvailableFund.addModelData(
-                                              methodId: item.id ?? -1,
-                                              methodName: item.method ?? "");
-                                          for (int i = 0;
-                                              i <
-                                                  withdrawMethodController
-                                                      .withdrawMethodList
-                                                      .length;
-                                              i++) {
-                                            if (i != index) {
-                                              withdrawMethodController
-                                                  .withdrawMethodList[i]
-                                                  .defaults
-                                                  .value = false;
-                                            }
-                                          }
+                                          withdrawAvailableFund
+                                              .toggleMethod(item.id!);
+                                          item.defaults.value
+                                              ? withdrawAvailableFund
+                                                  .addModelData(
+                                                      methodId: item.id ?? -1,
+                                                      methodName:
+                                                          item.method ?? "")
+                                              : null;
+                                          // for (int i = 0;
+                                          //     i <
+                                          //         withdrawMethodController
+                                          //             .withdrawMethodList
+                                          //             .length;
+                                          //     i++) {
+                                          //   if (i != index) {
+                                          //     withdrawMethodController
+                                          //         .withdrawMethodList[i]
+                                          //         .defaults
+                                          //         .value = false;
+                                          //   }
+                                          //    }
                                         },
                                       )),
                                   onDeletePress: () {
