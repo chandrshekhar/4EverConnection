@@ -52,16 +52,18 @@ class CustomPopupContent extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.r)),
-              margin: EdgeInsets.only(top: 10.h),
-              padding: EdgeInsets.all(15.sp),
-              child: Image.asset(
-                content,
-                fit: BoxFit.cover,
-              ))
+          Expanded(
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16.r)),
+                margin: EdgeInsets.only(top: 10.h),
+                padding: EdgeInsets.all(15.sp),
+                child: Image.asset(
+                  content,
+                  fit: BoxFit.fill,
+                )),
+          )
         ],
       ),
     );

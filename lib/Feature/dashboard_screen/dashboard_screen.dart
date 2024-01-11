@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/connection_main_screen.dart';
+import 'package:forever_connection/Feature/Webview/web_view.dart';
 import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
@@ -212,8 +213,8 @@ class DashboardScreen extends StatelessWidget {
                                 builder: (BuildContext context) {
                                   return Dialog(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          16), // Set the border radius for the dialog
+                                      borderRadius: BorderRadius.circular(16
+                                          .r), // Set the border radius for the dialog
                                     ),
                                     child: const CustomPopupContent(
                                         title: "Connect",
@@ -299,26 +300,37 @@ class DashboardScreen extends StatelessWidget {
       bottomSheet: Container(
         color: const Color(0xFFEAF7FE),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.sp),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.play_circle,
-                color: AppColors.floatingActionButtonColor,
-              ),
-              SizedBox(
-                width: 6.sp,
-              ),
-              Text(
-                "Video Introduction",
-                style: TextStyle(
-                    color: AppColors.floatingActionButtonColor,
-                    // decoration: TextDecoration.underline,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w700),
-              ),
-            ],
+          padding: EdgeInsets.symmetric(vertical: 15.sp),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const WebViewScreen(
+                            webViewUrl:
+                                "https://www.youtube.com/watch?v=ehipTnJaNr8",
+                          )));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.play_circle,
+                  color: AppColors.floatingActionButtonColor,
+                ),
+                SizedBox(
+                  width: 6.sp,
+                ),
+                Text(
+                  "Video Introduction",
+                  style: TextStyle(
+                      color: AppColors.floatingActionButtonColor,
+                      // decoration: TextDecoration.underline,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -17,56 +17,58 @@ class AuthOptionScreen extends StatelessWidget {
         color: Colors.white,
         height: double.infinity,
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.55,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/background.png"),
-                    fit: BoxFit.cover
-                    // fit: BoxFit.cover,
-                    ),
-              ),
-              child: Center(
-                child: Image.asset(
-                  ImageConstant.appLogo,
-                  height: 180.h,
-                  width: 180.w,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.52,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/background.png"),
+                      fit: BoxFit.fill
+                      // fit: BoxFit.cover,
+                      ),
+                ),
+                child: Center(
+                  child: Image.asset(
+                    ImageConstant.appLogo,
+                    height: 180.h,
+                    width: 180.w,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              '"The Effect of Quality"',
-              style: TextStyle(
-                  height: 4.h,
-                  fontSize: 24.sp,
-                  color: AppColors.buttonColor2,
-                  fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "Creating Lifetime Connections!",
-              style: TextStyle(
-                  height: 0.5.h,
-                  fontSize: 20.sp,
-                  color: AppColors.darkBlue,
-                  fontWeight: FontWeight.w400),
-            ),
-            SizedBox(
-              height: 30.h,
-            ),
-            Text(
-              "Your Virtual office with a\n 100% Free Income Opportunity",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-            ),
-            SizedBox(
-              height: 40.h,
-            ),
-          ],
+              Text(
+                '"The Effect of Quality"',
+                style: TextStyle(
+                    height: 4.h,
+                    fontSize: 24.sp,
+                    color: AppColors.buttonColor2,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "Creating Lifetime Connections!",
+                style: TextStyle(
+                    height: 0.5.h,
+                    fontSize: 20.sp,
+                    color: AppColors.darkBlue,
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              Text(
+                "Your Virtual office with a\n 100% Free Income Opportunity",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 40.h,
+              ),
+            ],
+          ),
         ),
       ),
       bottomSheet: Container(

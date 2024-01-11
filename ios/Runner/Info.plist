@@ -43,11 +43,13 @@
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
-	<string>We need your permission to access your contact list for uploading contact</string>
+	<string>We need your permission to access your contact list for uploading contact for reference</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please grant microphone access</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need your permission to access device gallary for upload photo</string>
+	<string>We need your permission to access device gallary for uploading document and photo</string>
+	<key>NSCameraUsageDescription</key>
+    <string>We need your permission to access your camera to capture photos</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIFileSharingEnabled</key>
