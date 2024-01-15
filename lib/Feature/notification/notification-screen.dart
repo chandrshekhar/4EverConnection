@@ -27,25 +27,26 @@ class NotificationsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: appTheme.lightBlue50,
       key: _key,
-       endDrawer: CustomDrawerWidget(),
+      endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
         leadingWidth: 44.h,
-        leading: CustomMenuButtonWidget(
-          globalKey: _key,
-        ),
-        // leading: AppbarImage(
-        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-        //     margin: EdgeInsets.only(left: 24.h, top: 22.h, bottom: 25.h),
-        //     onTap: () {
-        //       Navigator.pop(context);
-        //     }),
-        actions:const [
-          SizedBox()
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomMenuButtonWidget(globalKey: _key),
+          ),
         ],
         centerTitle: true,
         title: AppbarTitle(text: "Notifications"),
       ),
-     
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Obx(

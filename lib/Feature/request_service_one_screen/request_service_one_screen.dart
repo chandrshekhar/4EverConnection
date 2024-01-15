@@ -50,19 +50,24 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
       endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
           leadingWidth: 44.h,
-          leading: CustomMenuButtonWidget(globalKey: globalKey),
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.pop(context)),
           centerTitle: true,
           title: AppbarTitle(text: "Request Service"),
           actions: [
             AppbarImage1(
-                onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.notificationsScreen);
-                },
-                svgPath: ImageConstant.imgCart,
-                margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v)),
-            const SizedBox(
-              width: 10,
-            )
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+              },
+              svgPath: ImageConstant.imgCart,
+
+              // margin: EdgeInsets.fromLTRB(10.h, 14.v, 15.h, 15.v)
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.h),
+              child: CustomMenuButtonWidget(globalKey: globalKey),
+            ),
           ],
           styleType: Style.bgShadow),
       body: Column(children: [

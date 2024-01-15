@@ -28,22 +28,29 @@ class MyProfileScreen extends StatelessWidget {
         endDrawer: CustomDrawerWidget(),
         appBar: CustomAppBar(
             leadingWidth: 44.h,
-            leading: CustomMenuButtonWidget(globalKey: _key),
-            // leading: AppbarImage(
-            //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            //     margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
-            //     onTap: () {
-            //       Navigator.pop(context);
-            //     }),
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                )),
             centerTitle: true,
             title: AppbarTitle(text: "My Profile"),
             actions: [
               AppbarImage1(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
-                  },
-                  svgPath: ImageConstant.imgCart,
-                  margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                },
+                svgPath: ImageConstant.imgCart,
+
+                // margin: EdgeInsets.fromLTRB(10.h, 14.v, 15.h, 15.v)
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.h),
+                child: CustomMenuButtonWidget(globalKey: _key),
+              ),
             ],
             styleType: Style.bgShadow),
         body: Obx(

@@ -39,7 +39,6 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
       key: _key,
       appBar: AppBar(
         backgroundColor: AppColors.bgColor,
-
         title: Text(
           "My Wallet",
           style: TextStyle(
@@ -50,24 +49,25 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
         ),
         centerTitle: true,
         elevation: 3,
-        leading: CustomMenuButtonWidget(globalKey: _key),
-        // leading: IconButton(
-        //   onPressed: () {
-        //     Get.back();
-        //   },
-        //   icon: Icon(
-        //     Icons.arrow_back_ios,
-        //     color: AppColors.appBarTextColor,
-        //     size: 20.sp,
-        //   ),
-        // ),
+        leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context)),
         actions: [
-           AppbarImage1(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
-                  },
-                  svgPath: ImageConstant.imgCart,
-                  margin: EdgeInsets.fromLTRB(24.h, 1.h, 24.w, 6.h)),
+          AppbarImage1(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+            },
+            svgPath: ImageConstant.imgCart,
+
+            // margin: EdgeInsets.fromLTRB(10.h, 14.v, 15.h, 15.v)
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomMenuButtonWidget(globalKey: _key),
+          ),
         ],
       ),
       endDrawer: CustomDrawerWidget(),

@@ -64,22 +64,28 @@ class _ContactListScreenState extends State<ContactListScreen> {
         leadingWidth: 44.h,
         backgroundColor: AppColors.appBackgroundColor,
         elevation: 0.5,
-        leading: CustomMenuButtonWidget(globalKey: _globalKey),
-        // leading: AppbarImage(
-        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-        //     margin: EdgeInsets.only(left: 15.h, top: 22, bottom: 10),
-        //     onTap: () {
-        //       Navigator.pop(context);
-        //     }),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
         centerTitle: true,
         title: AppbarTitle(text: "Contact List"),
         actions: [
           AppbarImage1(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.notificationsScreen);
-              },
-              svgPath: ImageConstant.imgCart,
-              margin: EdgeInsets.fromLTRB(24.h, 14, 24.h, 25))
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+            },
+            svgPath: ImageConstant.imgCart,
+
+            // margin: EdgeInsets.fromLTRB(10.h, 14.v, 15.h, 15.v)
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomMenuButtonWidget(globalKey: _globalKey),
+          ),
         ],
       ),
       body: SafeArea(

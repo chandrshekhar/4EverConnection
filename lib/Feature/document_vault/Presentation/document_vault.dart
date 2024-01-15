@@ -49,25 +49,29 @@ class _DocumentVaultScreenState extends State<DocumentVaultScreen> {
         appBar: CustomAppBar(
             height: 60.v,
             leadingWidth: 44.h,
-            leading: CustomMenuButtonWidget(
-              globalKey: _key,
-            ),
-
-            // leading: AppbarImage(
-            //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-            //     margin: EdgeInsets.only(left: 24.h, top: 6.v, bottom: 12.v),
-            //     onTap: () {
-            //       Navigator.pop(context);
-            //     }),
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                )),
             centerTitle: true,
             title: AppbarTitle(text: "Document Vault"),
             actions: [
               AppbarImage1(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
-                  },
-                  svgPath: ImageConstant.imgCart,
-                  margin: EdgeInsets.fromLTRB(24.h, 1.v, 24.h, 6.v))
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                },
+                svgPath: ImageConstant.imgCart,
+
+                // margin: EdgeInsets.fromLTRB(10.h, 14.v, 15.h, 15.v)
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.h),
+                child: CustomMenuButtonWidget(globalKey: _key),
+              ),
             ]),
         backgroundColor: const Color(0xFFE4F5FF),
         body: Padding(

@@ -5,7 +5,6 @@ import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_contro
 import 'package:forever_connection/Feature/My%20Notes/Presentation/edit_notes.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_details_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Widget/note_card_widget.dart';
-import 'package:forever_connection/Feature/notification/notification-screen.dart';
 import 'package:forever_connection/core/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
@@ -42,25 +41,24 @@ class MyNotesListScreen extends StatelessWidget {
       endDrawer: CustomDrawerWidget(),
       appBar: CustomAppBar(
         leadingWidth: 44.h,
-        leading: CustomMenuButtonWidget(globalKey: _globalKey),
-        // leading: AppbarImage(
-        //     svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-        //     margin: EdgeInsets.only(left: 24.h, top: 22.v, bottom: 28.v),
-        //     onTap: () {
-        //       Navigator.pop(context);
-        //     }),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.pop(context)),
         centerTitle: true,
         title: AppbarTitle(text: "My Notes"),
         actions: [
           AppbarImage1(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NotificationsScreen()));
-              },
-              svgPath: ImageConstant.imgCart,
-              margin: EdgeInsets.fromLTRB(24.h, 14.v, 24.h, 25.v))
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+            },
+            svgPath: ImageConstant.imgCart,
+
+            // margin: EdgeInsets.fromLTRB(10.h, 14.v, 15.h, 15.v)
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomMenuButtonWidget(globalKey: _globalKey),
+          ),
         ],
       ),
       body: Column(
