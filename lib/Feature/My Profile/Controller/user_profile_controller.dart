@@ -12,9 +12,15 @@ import '../../../Services/Profile/user_profile_service.dart';
 import '../../../core/utils/toast_widget.dart';
 
 class UserProfileController extends GetxController {
+  RxInt selectedTile = (-1).obs;
   RxBool isLoadingProfileData = false.obs;
   Rx<UserProfileModel> userProfileModel = UserProfileModel().obs;
   UserProfileService userProfileService = UserProfileService();
+
+  void setIndex(int value) {
+    selectedTile.value = value;
+  }
+
   getUserProfileData() async {
     try {
       isLoadingProfileData(true);
@@ -84,8 +90,6 @@ class UserProfileController extends GetxController {
     }
   }
 
-  
-
   getMagicLinkSupport(BuildContext context) async {
     try {
       isLoadingSupport(true);
@@ -114,7 +118,8 @@ class UserProfileController extends GetxController {
     try {
       isLoadingSupport(true);
       var res = await userProfileService.getMagicLink(
-          navigateTo: "https://4everconnection.com/user-dashboard/?make-a-wish=True");
+          navigateTo:
+              "https://4everconnection.com/user-dashboard/?make-a-wish=True");
 
       if (res.isNotEmpty) {
         Navigator.push(

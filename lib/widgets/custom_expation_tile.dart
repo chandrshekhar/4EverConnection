@@ -5,7 +5,7 @@ import '../core/constants/colors.dart';
 
 // ignore: must_be_immutable
 class CustomExpansionPanel extends StatelessWidget {
-  // void Function(int)? onExpansionChanged;
+  void Function(bool)? onExpansionChanged;
   bool initiallyExpanded;
   String title;
   List<Widget> children;
@@ -17,7 +17,7 @@ class CustomExpansionPanel extends StatelessWidget {
   CustomExpansionPanel({
     super.key,
     required this.title,
-    // required this.onExpansionChanged,
+    required this.onExpansionChanged,
     required this.initiallyExpanded,
     required this.children,
     this.titleStyle,
@@ -53,9 +53,7 @@ class CustomExpansionPanel extends StatelessWidget {
           offset: Offset(-15.w, 0),
           child: Text(title, style: const TextStyle()),
         ),
-        // onExpansionChanged: (bool isExpanded) {
-        //   onExpansionChanged!(index!);
-        // },
+        onExpansionChanged: onExpansionChanged,
         initiallyExpanded: initiallyExpanded,
         children: children);
   }
