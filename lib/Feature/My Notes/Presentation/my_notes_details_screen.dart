@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
+import 'package:forever_connection/Feature/My%20Profile/Controller/user_profile_controller.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
-import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';
 import 'package:get/get.dart';
 

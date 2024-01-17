@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:forever_connection/Models/user_profile_model.dart';
+import 'package:forever_connection/Feature/My%20Profile/Models/user_profile_model.dart';
 import 'package:http_parser/http_parser.dart';
 
 import '../../core/constants/api_path.dart';

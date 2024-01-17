@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Presentation/collaboration_page.dart';
-import 'package:forever_connection/Models/user_services_model.dart';
+import 'package:forever_connection/Feature/My%20Service/Model/user_services_model.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
-import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
+import 'package:forever_connection/Feature/My%20Profile/Controller/user_profile_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/connection_list.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/create_connection.dart';
 import 'package:forever_connection/Feature/Connection/Widget/card_widget.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
+import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';

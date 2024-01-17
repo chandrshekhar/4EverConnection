@@ -1,11 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Controllers/User%20Profile%20Controller/user_profile_controller.dart';
+import 'package:forever_connection/Feature/My%20Profile/Controller/user_profile_controller.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/edit_notes.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_details_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Widget/note_card_widget.dart';
-import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';

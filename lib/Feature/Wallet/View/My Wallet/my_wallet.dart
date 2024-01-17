@@ -9,7 +9,7 @@ import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:get/get.dart';
 
-import '../../../dashboard_screen/widgets/userexperience_item_widget.dart';
+import '../../../Dashboard/widgets/userexperience_item_widget.dart';
 import '../../Controller/mywallet_cotroller.dart';
 import '../Earning History/earning_history.dart';
 import '../Withdraw Available Funds/withdraw_available_screen.dart';

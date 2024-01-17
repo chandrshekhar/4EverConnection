@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
-import 'package:forever_connection/Feature/request_service_one_screen/Controller/reqiest_service_controller.dart';
+import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
@@ -273,6 +273,42 @@ class CustomAlretDialogs {
       btnCancelOnPress: () {
         //  Navigator.pop(context);
       },
+    ).show();
+  }
+
+  void deleteAccount(
+    BuildContext context,
+  ) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.question,
+      animType: AnimType.scale,
+      dismissOnTouchOutside: false,
+      btnOkText: "Yes",
+      btnCancelText: "No",
+      // btnCancel: (){},
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Waring",
+            style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.sp),
+            child: Text(
+              "Are you sure to delete Account?\nIf you will delete account all data will be removed",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+            ),
+          ),
+        ],
+      ),
+      btnCancelOnPress: () {
+        //  Navigator.pop(context);
+      },
+      btnOkOnPress: () {},
+      btnOkColor: AppColors.darkBlue,
     ).show();
   }
 }

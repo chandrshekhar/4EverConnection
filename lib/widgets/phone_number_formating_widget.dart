@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
-import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 
 class PhoneNumberTextFieldWidget extends StatefulWidget {
   final String lable;

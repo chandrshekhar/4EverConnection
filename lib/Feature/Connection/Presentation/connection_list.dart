@@ -3,7 +3,7 @@ import 'package:forever_connection/Feature/Connection/Controller/connection_cont
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
 import 'package:forever_connection/Feature/Connection/Widget/connection_list_card_widget.dart';
 import 'package:forever_connection/Feature/My%20Notes/Controller/my_notes_controller.dart';
-import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';

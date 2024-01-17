@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

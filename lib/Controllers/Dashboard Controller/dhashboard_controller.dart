@@ -1,12 +1,10 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Model/Dashboard/tooltips_model.dart';
-import 'package:forever_connection/core/app_export.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:get/get.dart';
-
+import '../../Feature/Dashboard/Models/tooltips_model.dart';
 import '../../core/utils/shared_pref_services.dart';
 
 class DashboardController extends GetxController {

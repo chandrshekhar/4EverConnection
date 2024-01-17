@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Models/user_services_model.dart';
+import 'package:forever_connection/Feature/My%20Service/Model/user_services_model.dart';
 import 'package:get/get.dart';
 
 import '../../Services/User Services/user_services.dart';

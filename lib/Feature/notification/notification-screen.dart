@@ -8,10 +8,9 @@ import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:forever_connection/widgets/custom_menu_button.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-import '../../Controllers/Notification Controller/notification_controller.dart';
 import '../../theme/theme_helper.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
+import '../Notification/Controller/notification_controller.dart';
 
 class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:forever_connection/Models/notification_model.dart';
+import 'package:forever_connection/Feature/Notification/Models/notification_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import '../../core/utils/shared_pref_services.dart';
 

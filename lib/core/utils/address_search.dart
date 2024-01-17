@@ -27,7 +27,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
   Widget buildLeading(BuildContext context) {
     return IconButton(
       tooltip: 'Back',
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         Navigator.pop(context);
         close(context, null!);
@@ -51,7 +51,6 @@ class AddressSearch extends SearchDelegate<Suggestion> {
           ? const Center(child: Text("Search Location"))
           : snapshot.hasData
               ? ListView.separated(
-               
                   separatorBuilder: (context, index) => const Divider(
                     color: Colors.black,
                   ),
@@ -64,7 +63,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
                   ),
                   itemCount: snapshot.data!.length,
                 )
-              :const Center(child:  Text('Loading...')),
+              : const Center(child: Text('Loading...')),
     );
   }
 }
