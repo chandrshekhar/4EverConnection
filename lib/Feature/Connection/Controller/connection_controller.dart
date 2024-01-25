@@ -2,11 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Connection/Model/connection_model.dart';
+import 'package:forever_connection/Feature/Connection/Presentation/connection_list.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/create_connection.dart';
 import 'package:forever_connection/Feature/Connection/Repository/create_connection_repo.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../Contact/Model/contact_model.dart';
 
 class ConnectionController extends GetxController {
   final ConnectionRepo _connectionRepo = ConnectionRepo();
@@ -34,6 +37,34 @@ class ConnectionController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isContactUploding = false.obs;
 
+  setValueAfterSelectContact(ContactListModel contactListModel) {
+    contactController.value.text =
+        "${contactListModel.firstName} ${contactListModel.lastName}";
+    firstNameController.value.text = contactListModel.firstName ?? "";
+    middleNameController.value.text = contactListModel.middleName ?? "";
+    lastNameController.value.text = contactListModel.lastName ?? "";
+    phoneController.value.text = contactListModel.mobilePhone ?? "";
+    personalEmailController.value.text = contactListModel.personalEmail ?? "";
+    businessNameController.value.text = contactListModel.businessName ?? "";
+    homeAddressController.value.text = contactListModel.homeAddress ?? "";
+    aptController.value.text = contactListModel.homeApartment ?? "";
+    zipController.value.text = contactListModel.homeZipCode ?? "";
+    additionalController.value.text = contactListModel.additional ?? "";
+  }
+
+  clearValueAfterSelectContact() {
+    firstNameController.value.clear();
+    middleNameController.value.clear();
+    lastNameController.value.clear();
+    phoneController.value.clear();
+    personalEmailController.value.clear();
+    businessNameController.value.clear();
+    homeAddressController.value.clear();
+    aptController.value.clear();
+    zipController.value.clear();
+    additionalController.value.clear();
+  }
+
   userContactConnect(BuildContext context) async {
     try {
       var reqModel = {
@@ -52,7 +83,10 @@ class ConnectionController extends GetxController {
       // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => const CreateConnectionScreen()),
+          MaterialPageRoute(
+              builder: (_) => const CreateConnectionScreen(
+                    isCommingFromContact: false,
+                  )),
           (route) => false);
     } catch (e) {
       // ToastWidget.errorToast(error: e.toString());
@@ -117,18 +151,17 @@ class ConnectionController extends GetxController {
         "home_zip": zipController.value.text,
         "additional": additionalController.value.text
       };
-
       isConnectionLoading(true);
       var res = await _connectionRepo.addConnection(reqModel: reqModel);
       if (res.isNotEmpty) {
         isConnectionLoading(false);
         ToastWidget.successToast(success: "Connection added successfully");
         // ignore: use_build_context_synchronously
-        Navigator.pop(context);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => const ConnectionListScreen()));
       } else {
         isConnectionLoading(false);
         ToastWidget.errorToast(error: "Faild to add connection");
-        Get.back();
       }
     } catch (e) {
       ToastWidget.errorToast(error: e.toString());
@@ -169,6 +202,7 @@ class ConnectionController extends GetxController {
   clearAllField() {
     serviceId(-1);
     partnerId(-1);
+    contactController.value.clear();
     searchPartnerController.value.clear();
     searchServiceController.value.clear();
     firstNameController.value.clear();

@@ -19,6 +19,7 @@ class ContactListCard2 extends StatelessWidget {
   VoidCallback? goPress;
   VoidCallback? editIconClick;
   VoidCallback? viewDetails;
+  VoidCallback? onConnetPress;
   ContactListCard2(
       {super.key,
       required this.email,
@@ -29,7 +30,8 @@ class ContactListCard2 extends StatelessWidget {
       this.go,
       this.goPress,
       this.connect,
-      this.viewDetails});
+      this.viewDetails,
+      this.onConnetPress});
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +153,8 @@ class ContactListCard2 extends StatelessWidget {
                   launchUrl(emailLaunchUri);
                 }, ""),
                 _buildLable("Go", Icons.location_on_outlined, goPress, ""),
-                _buildLable("Connect", Icons.connected_tv, () {}, "true"),
+                _buildLable(
+                    "Connect", Icons.connected_tv, onConnetPress, "true"),
               ],
             ),
           ),

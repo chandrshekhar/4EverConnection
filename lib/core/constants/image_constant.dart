@@ -160,4 +160,8 @@ class ImageConstant {
   static String earningHistory = "assets/images/earning_history.svg";
   static String withdrawHistory = "assets/images/with_history.svg";
   static String withdraw = "assets/images/withdraw_avai_fund.svg";
+  static String helpCompanyAddress = "assets/images/company_address.svg";
+  static String helpEmailIcon = "assets/images/email_icon.svg";
+  static String helpFaxIcon = "assets/images/fax_icon.svg";
+  static String helpPhoneIcon = "assets/images/phone_icon.svg";
 }

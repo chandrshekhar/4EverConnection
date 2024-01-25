@@ -40,24 +40,26 @@ class ProtectionController extends GetxController {
     deathBenefitController.value.text = currency(
             context: context, amount: dataModel.currentDeathBenefit ?? "00") ??
         "";
-    premimusController.value.text =
-        currency(context: context, amount: dataModel.currentPremiums ?? "00") ??
-            "";
+
+    print("permimus data ${dataModel.currentPremiums}");
+    if (dataModel.currentPremiums == null || dataModel.currentPremiums == "") {
+    } else {
+      premimusController.value.text = currency(
+              context: context, amount: dataModel.currentPremiums ?? "00") ??
+          "";
+    }
   }
 
-  String? currency({BuildContext? context, required String amount}) {
+  String? currency({BuildContext? context, String? amount}) {
     // Locale locale = Localizations.localeOf(context!);
     var format = NumberFormat.simpleCurrency(locale: Platform.localeName);
     String? formattedAmount = NumberFormat.currency(
             locale: Platform.localeName, symbol: format.currencySymbol)
-        .format(double.parse(amount));
+        .format(double.parse(amount!));
     return formattedAmount;
   }
 
   Future<void> getUserRelationshipData() async {
-
-
-    
     var token = await SharedPref().getUserToken();
     try {
       isprotectionDataLoading(true);

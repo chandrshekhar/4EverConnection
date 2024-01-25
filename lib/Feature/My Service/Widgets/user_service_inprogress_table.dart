@@ -20,7 +20,8 @@ class UserServiceInProgressDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalDataTable(
       leftHandSideColumnWidth: 0,
-      rightHandSideColumnWidth: 810.w,
+      rightHandSideColumnWidth: 680.w,
+      //rightHandSideColumnWidth: 810.w,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
@@ -45,7 +46,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
       _getTitleItemWidget("Service", 140),
       _getTitleItemWidget('Collaborate', 140),
       _getTitleItemWidget('Fee', 120),
-      _getTitleItemWidget('Status', 130),
+      //      _getTitleItemWidget('Status', 130),
       _getTitleItemWidget('Action', 60),
     ];
   }
@@ -146,30 +147,30 @@ class UserServiceInProgressDataTable extends StatelessWidget {
                   ],
                 )),
           ),
-          Container(
-              width: 130.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Container(
-                  padding: EdgeInsets.only(
-                      left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.1),
-                      borderRadius: BorderRadiusDirectional.circular(1),
-                      color: Colors.grey.shade100),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FittedBox(
-                          child: Text(
-                        "In progress",
-                        style: TextStyle(fontSize: 15.sp),
-                      )),
-                      const Icon(Icons.expand_more)
-                    ],
-                  ))),
+          // Container(
+          //     width: 130.w,
+          //     height: 30.h,
+          //     alignment: Alignment.center,
+          //     padding: const EdgeInsets.only(left: 5, right: 5),
+          //     child: Container(
+          //         padding: EdgeInsets.only(
+          //             left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
+          //         decoration: BoxDecoration(
+          //             border: Border.all(width: 0.1),
+          //             borderRadius: BorderRadiusDirectional.circular(1),
+          //             color: Colors.grey.shade100),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             FittedBox(
+          //                 child: Text(
+          //               "In progress",
+          //               style: TextStyle(fontSize: 15.sp),
+          //             )),
+          //             const Icon(Icons.expand_more)
+          //           ],
+          //         ))),
           SizedBox(
             height: 30.h,
             width: 60.w,

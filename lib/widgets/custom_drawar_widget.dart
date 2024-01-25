@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forever_connection/Controllers/Personal%20Details%20Controller/personal_details-controller.dart';
+import 'package:forever_connection/Feature/Help%20and%20support/help_support.dart';
 import 'package:forever_connection/Feature/dashboard_screen/dashboard_screen.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
@@ -306,16 +307,13 @@ class CustomDrawerWidget extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          myProfileController.updateSelectedField(11);
-                          // Navigator.pop(context);
-                          myProfileController.getMagicLinkSupport(context);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (_) => WebViewScreen(
-                          //               webViewUrl:
-                          //                   "https://4everconnection.com/help/",
-                          //             )));
+                          // myProfileController.updateSelectedField(11);
+                          // // Navigator.pop(context);
+                          // myProfileController.getMagicLinkSupport(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => HelpAndSupportScreen()));
                         },
                         child: Items(
                           icon: ImageConstant.support,

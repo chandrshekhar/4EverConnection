@@ -21,7 +21,8 @@ class UserServiceDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalDataTable(
       leftHandSideColumnWidth: 0,
-      rightHandSideColumnWidth: 785.w,
+      rightHandSideColumnWidth: 700.w,
+      //rightHandSideColumnWidth: 785.w,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
@@ -46,8 +47,9 @@ class UserServiceDataTable extends StatelessWidget {
       _getTitleItemWidget("Service", 140),
       _getTitleItemWidget('Details', 120),
       _getTitleItemWidget('Fee', 120),
-      _getTitleItemWidget('Status', 120),
-      _getTitleItemWidget('Payment', 60),
+      //   _getTitleItemWidget('Status', 120),
+
+      _getTitleItemWidget('Payment', 120),
     ];
   }
 
@@ -147,28 +149,29 @@ class UserServiceDataTable extends StatelessWidget {
                   ],
                 )),
           ),
-          Container(
-              width: 120.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Container(
-                  padding: EdgeInsets.only(
-                      left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.1),
-                      borderRadius: BorderRadiusDirectional.circular(1),
-                      color: Colors.grey.shade100),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Text(
-                              userServiceModel[index].statusDescription ?? "")),
-                      const Icon(Icons.expand_more)
-                    ],
-                  ))),
+          const Spacer(),
+          // Container(
+          //     width: 120.w,
+          //     height: 30.h,
+          //     alignment: Alignment.center,
+          //     padding: const EdgeInsets.only(left: 5, right: 5),
+          //     child: Container(
+          //         padding: EdgeInsets.only(
+          //             left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
+          //         decoration: BoxDecoration(
+          //             border: Border.all(width: 0.1),
+          //             borderRadius: BorderRadiusDirectional.circular(1),
+          //             color: Colors.grey.shade100),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Expanded(
+          //                 child: Text(
+          //                     userServiceModel[index].statusDescription ?? "")),
+          //             const Icon(Icons.expand_more)
+          //           ],
+          //         ))),
           InkWell(
             onTap: () {
               Navigator.push(
@@ -201,6 +204,9 @@ class UserServiceDataTable extends StatelessWidget {
                   ],
                 )),
           ),
+          SizedBox(
+            width: 5.w,
+          )
         ],
       ),
     );

@@ -72,8 +72,14 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                       child: Obx(
                         () => personalDetailsController.isLoadingPersonalData ==
                                 true
-                            ? const Center(
-                                child: CircularProgressIndicator.adaptive())
+                            ? Center(
+                                child: Padding(
+                                padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.4),
+                                child:
+                                    const CircularProgressIndicator.adaptive(),
+                              ))
                             : Column(children: [
                                 Container(
                                     padding: EdgeInsets.all(11.h),
@@ -474,16 +480,17 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                         children: [
                                           Row(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.center,
                                               children: [
-                                                CustomImageView(
-                                                    svgPath:
-                                                        ImageConstant.imgCall,
-                                                    height: 15.adaptSize,
-                                                    width: 15.adaptSize,
-                                                    margin: EdgeInsets.only(
-                                                        top: 6.v,
-                                                        bottom: 13.v)),
+                                                const Icon(Icons.credit_card),
+                                                // CustomImageView(
+                                                //     svgPath:
+                                                //         ImageConstant.imgCall,
+                                                //     height: 15.adaptSize,
+                                                //     width: 15.adaptSize,
+                                                //     margin: EdgeInsets.only(
+                                                //         top: 6.v,
+                                                //         bottom: 13.v)),
                                                 Expanded(
                                                     child: CustomTextFormField(
                                                         readOnly: true,
