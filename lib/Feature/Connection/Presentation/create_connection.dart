@@ -20,6 +20,7 @@ import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/phone_number_formating_widget.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
+import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
@@ -623,9 +624,24 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                       phoneKey.currentState!.validate() &&
                                       emailKey.currentState!.validate() &&
                                       homeKey.currentState!.validate() &&
-                                      zipKey.currentState!.validate()) {
+                                      zipKey.currentState!.validate() &&
+                                      connectionController
+                                          .searchServiceController
+                                          .value
+                                          .text
+                                          .isNotEmpty &&
+                                      connectionController
+                                          .searchPartnerController
+                                          .value
+                                          .text
+                                          .isNotEmpty) {
                                     connectionController.addConnection(context);
-                                  } else {}
+                                  } else {
+                                    TostWidget().errorToast(
+                                        title: "Error",
+                                        message:
+                                            "Please field all mandatory filed");
+                                  }
                                 },
                                 text: "Create Connection",
                                 buttonStyle: const ButtonStyle(

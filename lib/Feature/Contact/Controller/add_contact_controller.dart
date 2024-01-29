@@ -373,7 +373,9 @@ class AddContactController extends GetxController {
     final contactController = Get.put(ContactController());
     //  await  saveContact();
     var response = await contactController.editContact(
-        contactId.value, newContact, files.value);
+        contactId: contactId.value,
+        contactListModel: newContact,
+        file: files.value);
     if (response) {
       ToastWidget.successToast(success: "Contact update successfully!");
       Get.back();

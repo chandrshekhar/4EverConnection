@@ -211,7 +211,7 @@ class ContactController extends GetxController {
   }
 
   Future<bool> editContact(
-      int contactId, ContactListModel contactListModel, File? file) async {
+      {required int contactId, required ContactListModel contactListModel, File? file}) async {
     log("Edit api calling...");
     try {
       Map<String, dynamic> requestModel = {

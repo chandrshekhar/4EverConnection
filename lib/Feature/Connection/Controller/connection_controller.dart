@@ -9,6 +9,7 @@ import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Contact/Controller/contact_controller.dart';
 import '../../Contact/Model/contact_model.dart';
 
 class ConnectionController extends GetxController {
@@ -154,8 +155,9 @@ class ConnectionController extends GetxController {
       isConnectionLoading(true);
       var res = await _connectionRepo.addConnection(reqModel: reqModel);
       if (res.isNotEmpty) {
-        isConnectionLoading(false);
+        contactId.value == -1 ? null : await updateContactFromConnection();
         ToastWidget.successToast(success: "Connection added successfully");
+        isConnectionLoading(false);
         // ignore: use_build_context_synchronously
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const ConnectionListScreen()));
@@ -167,6 +169,27 @@ class ConnectionController extends GetxController {
       ToastWidget.errorToast(error: e.toString());
       isConnectionLoading(false);
     }
+  }
+
+  updateContactFromConnection() async {
+    final contactController = Get.put(ContactController());
+    //  await  saveContact();
+
+    var response = await contactController.editContact(
+      contactId: contactId.value,
+      contactListModel: ContactListModel(
+        firstName: firstNameController.value.text,
+        middleName: middleNameController.value.text,
+        lastName: lastNameController.value.text,
+        mobilePhone: phoneController.value.text,
+        personalEmail: personalEmailController.value.text,
+        businessName: businessNameController.value.text,
+        homeAddress: homeAddressController.value.text,
+        homeApartment: aptController.value.text,
+        homeZipCode: zipController.value.text,
+        additional: additionalController.value.text,
+      ),
+    );
   }
 
   resedConnection(int id) async {
