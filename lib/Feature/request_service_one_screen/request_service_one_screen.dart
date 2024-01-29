@@ -13,6 +13,7 @@ import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:forever_connection/widgets/search_drpdown.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../request_service_one_screen/widgets/timedisplay_item_widget.dart';
 
 // ignore_for_file: must_be_immutable
@@ -409,6 +410,9 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                     );
                                   })
                               : const SizedBox())),
+                      SizedBox(
+                        height: 18.h,
+                      ),
                       Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.h, vertical: 10.v),
