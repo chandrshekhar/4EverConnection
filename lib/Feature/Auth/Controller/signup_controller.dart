@@ -8,8 +8,8 @@ import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../Services/Auth Services/auth_services.dart';
-import '../../core/utils/toast_widget.dart';
+import '../../../Services/Auth Services/auth_services.dart';
+import '../../../core/utils/toast_widget.dart';
 
 class SignupController extends GetxController {
   final firstNameController = TextEditingController().obs;

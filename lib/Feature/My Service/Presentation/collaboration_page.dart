@@ -20,28 +20,25 @@ class _ServiceCollaboratationPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBar(
-          leadingWidth: 44.h,
-          leading: AppbarImage(
-              svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
-              margin: EdgeInsets.only(left: 24.h, top: 6.h, bottom: 12.w),
-              onTap: () {
-                Navigator.pop(context);
-              }),
-          centerTitle: true,
-          title: AppbarTitle(text: "Collaboration Page"),
-          actions: [
-            AppbarImage1(
+        backgroundColor: Colors.white,
+        appBar: CustomAppBar(
+            leadingWidth: 44.h,
+            leading: AppbarImage(
+                svgPath: ImageConstant.imgArrowleftOnerrorcontainer,
+                margin: EdgeInsets.only(left: 24.h, top: 6.h, bottom: 12.w),
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.notificationsScreen);
-                },
-                svgPath: ImageConstant.imgCart,
-                margin: EdgeInsets.fromLTRB(24.h, 1.h, 24.h, 6.h))
-          ]),
-      body: const Center(
-        child: Text("Comming Soon..."),
-      ),
-    );
+                  Navigator.pop(context);
+                }),
+            centerTitle: true,
+            title: AppbarTitle(text: "Collaboration Page"),
+            actions: [
+              AppbarImage1(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.notificationsScreen);
+                  },
+                  svgPath: ImageConstant.imgCart,
+                  margin: EdgeInsets.fromLTRB(24.h, 1.h, 24.h, 6.h))
+            ]),
+        body: const Column(children: [TextField()]));
   }
 }

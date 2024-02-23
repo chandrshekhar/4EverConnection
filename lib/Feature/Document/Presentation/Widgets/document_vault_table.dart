@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/document_vault/Presentation/Widgets/document_viewer.dart';
+import 'package:forever_connection/Feature/Document/Presentation/Widgets/document_viewer.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/theme/theme_helper.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';

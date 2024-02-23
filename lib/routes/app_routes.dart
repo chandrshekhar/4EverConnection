@@ -6,7 +6,7 @@ import 'package:forever_connection/Feature/Auth/Presentation/password_security_s
 import 'package:forever_connection/Feature/Auth/Presentation/reset_password_screen.dart';
 import 'package:forever_connection/Feature/Auth/Presentation/sign_up_screen.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/contact_list_screen.dart';
-import 'package:forever_connection/Feature/Dashboard/dashboard_screen.dart';
+import 'package:forever_connection/Feature/Dashboard/Presentation/dashboard_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/add_note_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_list.dart';
 import 'package:forever_connection/Feature/My%20Profile/Presentation/financial_profile_screen.dart';
@@ -21,7 +21,7 @@ import 'package:forever_connection/Feature/My%20Service/Presentation/my_services
 import 'package:forever_connection/Feature/Request%20Service/request_service_one_screen.dart';
 import 'package:forever_connection/Feature/Welcome/auth_screen.dart';
 import 'package:forever_connection/Feature/Welcome/splash_screen.dart';
-import 'package:forever_connection/Feature/document_vault/Presentation/document_vault.dart';
+import 'package:forever_connection/Feature/Document/Presentation/document_vault.dart';
 
 import '../Feature/Notification/notification-screen.dart';
 

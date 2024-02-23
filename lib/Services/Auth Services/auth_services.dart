@@ -48,7 +48,6 @@ class AuthServices {
     }
   }
 
-
   Future<Map> checkApi({required Map<String, dynamic> reqModel}) async {
     dio.options.headers = {
       'Accept': 'application/json',
@@ -118,17 +117,35 @@ class AuthServices {
     }
   }
 
-  // Future<Map> verifyOtp({required Map<String, dynamic> reqModel}) async {
-  //   Response response;
-  //   try {
-  //     dio.options.headers = {
-  //       'Accept': 'application/json',
-  //       'Conent-Type': 'application/json',
-  //     };
-  //     response = await dio.post("", data: reqModel);
-  //     return response.data;
-  //   } catch (error) {
-  //     return {'status': 1, "message": "Please check your internet connection"};
-  //   }
-  // }
+  Future<Map> deleteAccount() async {
+    Response response;
+    try {
+      dio.options.headers = {
+        'Accept': 'application/json',
+        'Conent-Type': 'application/json',
+      
+      };
+     
+      response = await dio.post(ApiPath.deleteAccount);
+      log("pandey->${response.data}");
+      if (response.statusCode == 200) {
+        return {
+          'status': response.statusCode,
+          "message": response.data['message']
+        };
+      } else if (response.statusCode == 401) {
+        return {
+          'status': response.statusCode,
+          "message": response.data['detail']
+        };
+      } else {
+        return {
+          'status': response.statusCode,
+          "message": response.data['message']
+        };
+      }
+    } catch (error) {
+      return {'status': 1, "message": "Please check your internet connection"};
+    }
+  }
 }

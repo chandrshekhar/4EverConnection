@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/My%20Service/Presentation/collaboration_page.dart';
 import 'package:forever_connection/Feature/My%20Service/Model/user_services_model.dart';
+import 'package:forever_connection/Feature/My%20Service/Presentation/collaboration_page.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -89,7 +89,12 @@ class UserServiceInProgressDataTable extends StatelessWidget {
             width: 140.w,
             height: 30.h,
             alignment: Alignment.center,
-            child: Text(userServiceModel[index].serviceName ?? ""),
+            child: Text(
+              userServiceModel[index].serviceName ?? "",
+              maxLines: 1,
+              
+              style: TextStyle(fontSize: 15.sp),
+            ),
           ),
           InkWell(
             onTap: () {
@@ -105,7 +110,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 "Collaboration Page",
-                style: TextStyle(color: AppColors.darkBlue),
+                style: TextStyle(color: AppColors.darkBlue, fontSize: 15.sp),
               ),
             ),
           ),
@@ -165,7 +170,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
                       FittedBox(
                           child: Text(
                         "In progress",
-                        style: TextStyle(fontSize: 15.sp),
+                        style: TextStyle(fontSize: 13.sp),
                       )),
                       const Icon(Icons.expand_more)
                     ],

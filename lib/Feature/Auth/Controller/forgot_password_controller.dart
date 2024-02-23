@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../Services/Auth Services/auth_services.dart';
-import '../../core/utils/toast_widget.dart';
-import '../../routes/app_routes.dart';
+import '../../../Services/Auth Services/auth_services.dart';
+import '../../../core/utils/toast_widget.dart';
+import '../../../routes/app_routes.dart';
 
 class ForgotPasswordController extends GetxController {
   var emailController = TextEditingController().obs;

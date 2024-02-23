@@ -12,6 +12,8 @@ class UserexperienceItemWidget extends StatelessWidget {
   void Function()? onIconClick;
   Color? infoButtonColor;
   double? infoButtonSize;
+  EdgeInsetsGeometry? margin;
+  double? height;
   UserexperienceItemWidget(
       {Key? key,
       this.title,
@@ -20,7 +22,9 @@ class UserexperienceItemWidget extends StatelessWidget {
       this.leftImagePath,
       this.infoButtonColor,
       this.infoButtonSize,
-      required this.onIconClick})
+      required this.onIconClick,
+      this.margin,
+      this.height})
       : super(
           key: key,
         );
@@ -30,9 +34,10 @@ class UserexperienceItemWidget extends StatelessWidget {
     return InkWell(
       onTap: ontap,
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.115,
-        margin: EdgeInsets.only(
-            bottom: 25.adaptSize, left: 25.adaptSize, right: 25.adaptSize),
+        height: height ?? MediaQuery.of(context).size.height * 0.115,
+        margin: margin ??
+            EdgeInsets.only(
+                bottom: 25.adaptSize, left: 25.adaptSize, right: 25.adaptSize),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(5.adaptSize),

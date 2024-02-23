@@ -15,6 +15,7 @@ class ApiPath {
   static const forgotPasswordSendEmail = "$baseUrl/api/user/reset-password";
   static const getUserService = "$baseUrl/api/user-services/";
   static const getUserProfile = "$baseUrl/api/user/profile";
+  static const deleteAccount = "$baseUrl/api/user/delete-account'";
 
   // profile
   static const personaUserData = "$baseUrl$profile/personal";

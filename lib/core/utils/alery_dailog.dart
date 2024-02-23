@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
+import 'package:forever_connection/Feature/Auth/Controller/signup_controller.dart';
 import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
@@ -307,7 +307,9 @@ class CustomAlretDialogs {
       btnCancelOnPress: () {
         //  Navigator.pop(context);
       },
-      btnOkOnPress: () {},
+      btnOkOnPress: () {
+         
+      },
       btnOkColor: AppColors.darkBlue,
     ).show();
   }

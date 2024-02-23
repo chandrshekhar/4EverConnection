@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:get/get.dart';
-import '../../Feature/Dashboard/Models/tooltips_model.dart';
-import '../../core/utils/shared_pref_services.dart';
+import '../Models/tooltips_model.dart';
+import '../../../core/utils/shared_pref_services.dart';
 
 class DashboardController extends GetxController {
   Dio dio = Dio();

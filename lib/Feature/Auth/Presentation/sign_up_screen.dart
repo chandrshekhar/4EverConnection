@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:forever_connection/Controllers/Auth%20Controller/signup_controller.dart';
+import 'package:forever_connection/Feature/Auth/Controller/signup_controller.dart';
 import 'package:forever_connection/Services/Auth%20Services/auth_services.dart';
 import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';

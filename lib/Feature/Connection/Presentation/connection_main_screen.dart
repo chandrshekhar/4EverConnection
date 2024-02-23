@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
+import 'package:forever_connection/Feature/Dashboard/Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Feature/My%20Profile/Controller/user_profile_controller.dart';
 import 'package:forever_connection/Feature/Connection/Controller/connection_controller.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/connection_list.dart';

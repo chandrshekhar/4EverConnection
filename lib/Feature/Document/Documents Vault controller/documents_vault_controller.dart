@@ -9,8 +9,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
-import 'package:forever_connection/Feature/document_vault/Repo/document_repo.dart';
+import 'package:forever_connection/Feature/Document/Model/document_vault_list_model.dart';
+import 'package:forever_connection/Feature/Document/Repo/document_repo.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,10 +35,8 @@ class DocumentsVaultController extends GetxController {
   RxString choosenFilename = RxString("");
   final documentDescControler = TextEditingController().obs;
 
-  final TextEditingController documentSearchController = TextEditingController();
-
-
-
+  final TextEditingController documentSearchController =
+      TextEditingController();
 
   RxBool uplodDocument = false.obs;
   // RxString files = ''.obs;
@@ -88,7 +86,7 @@ class DocumentsVaultController extends GetxController {
   getVaultDocumentList({String? query}) async {
     isLoadingDocumentList(true);
     try {
-      var resp = await _documentRepo.getDocumentVaultList(query??"");
+      var resp = await _documentRepo.getDocumentVaultList(query ?? "");
       if (kDebugMode) {
         log(resp.toString());
       }
@@ -183,7 +181,7 @@ class DocumentsVaultController extends GetxController {
       return file.path;
     } catch (error) {
       // Handle errors, for example, print the error message
-     
+
       throw error; // Propagate the error to the calling code
     }
   }
@@ -194,12 +192,11 @@ class DocumentsVaultController extends GetxController {
           await saveNetworkImageToLocalTempFileWithDio(imageUrl);
 
       // Do something with the image path, for example, print it
-     
+
       final pdf = await rootBundle.load(imagePath);
       await Printing.layoutPdf(onLayout: (_) => pdf.buffer.asUint8List());
     } catch (error) {
       // Handle errors, for example, print the error message
-     
     }
   }
 
@@ -220,7 +217,7 @@ class DocumentsVaultController extends GetxController {
               return status! < 500;
             }),
       );
-     
+
       File file = File(savePath);
       var raf = file.openSync(mode: FileMode.write);
       raf.writeFromSync(response.data);
@@ -339,7 +336,7 @@ class DocumentsVaultController extends GetxController {
   void showDownloadProgress(received, total) {
     if (total != -1) {
       // ToastWidget.successToast(success: "Downloading");
-    
+
       ToastWidget.successToast(success: "downloaded");
     }
   }
@@ -348,7 +345,6 @@ class DocumentsVaultController extends GetxController {
 
   bool loading = false;
   double progress = 0;
-
   Future<bool> saveFile(String url, String fileName) async {
     Directory directory;
     try {
@@ -357,7 +353,7 @@ class DocumentsVaultController extends GetxController {
             await _requestPermission(Permission.accessMediaLocation) &&
             await _requestPermission(Permission.manageExternalStorage)) {
           directory = (await getExternalStorageDirectory())!;
-         
+
           String newPath = "";
           List<String> folders = directory.path.split("/");
           for (int x = 1; x < folders.length; x++) {
@@ -370,7 +366,7 @@ class DocumentsVaultController extends GetxController {
           }
           newPath = newPath + "/4everConnection";
           directory = Directory(newPath);
-         
+
           return true;
         } else {
           return false;
@@ -438,8 +434,7 @@ class DocumentsVaultController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
       final fileName = file.path!.split("/").last;
-     
-      
+
       choosenFilename.value = fileName;
       files.value = File(file.path!);
     } else {
@@ -452,11 +447,10 @@ class DocumentsVaultController extends GetxController {
       final images = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (images != null) {
         final fileName = images.path.split("/").last;
-        
+
         choosenFilename.value = fileName;
         files.value = File(images.path);
       } else {
-       
         // User canceled the picker
       }
     } on PlatformException catch (e) {

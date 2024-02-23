@@ -11,7 +11,7 @@ import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 
-import '../../../Controllers/Auth Controller/forgot_password_controller.dart';
+import '../Controller/forgot_password_controller.dart';
 
 // ignore: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {

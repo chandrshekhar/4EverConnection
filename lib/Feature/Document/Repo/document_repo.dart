@@ -1,11 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:forever_connection/Feature/document_vault/Documents%20Vault%20controller/documents_vault_controller.dart';
-import 'package:forever_connection/Feature/document_vault/Model/document_type_model.dart';
-import 'package:forever_connection/Feature/document_vault/Model/document_vault_list_model.dart';
+import 'package:forever_connection/Feature/Document/Model/document_type_model.dart';
+import 'package:forever_connection/Feature/Document/Model/document_vault_list_model.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Controllers/Auth%20Controller/login_controller.dart';
+import 'package:forever_connection/Feature/Auth/Controller/login_controller.dart';
 import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/alery_dailog.dart';

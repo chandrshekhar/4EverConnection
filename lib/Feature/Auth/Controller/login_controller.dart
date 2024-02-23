@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/toast_widget.dart';
 import 'package:get/get.dart';
-import '../../Services/Auth Services/auth_services.dart';
-import '../../core/utils/shared_pref_services.dart';
+
+import '../../../Services/Auth Services/auth_services.dart';
+import '../../../core/utils/shared_pref_services.dart';
 
 class LoginController extends GetxController {
   var userNameController = TextEditingController().obs;
@@ -60,7 +61,7 @@ class LoginController extends GetxController {
         } else if (e.type == DioErrorType.badResponse) {
           log("bad-> ${e.response!.data}");
           TostWidget().errorToast(
-             title: "Invalid!",
+              title: "Invalid!",
               message: "${e.response!.data["non_field_errors"][0]}");
         } else {
           TostWidget().errorToast(
@@ -84,5 +85,13 @@ class LoginController extends GetxController {
 
     Navigator.pushNamedAndRemoveUntil(
         context, AppRoutes.loginScreen, (route) => false);
+  }
+
+  deleteAccount() async {
+    isLoginLoading(true);
+    var res = await authServices.deleteAccount();
+    if (res['status'] == 200) {
+      print("delete account res---> ${res['status']}");
+    }
   }
 }

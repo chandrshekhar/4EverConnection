@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Controllers/Dashboard%20Controller/dhashboard_controller.dart';
+import 'package:forever_connection/Feature/Dashboard/Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/connection_main_screen.dart';
 import 'package:forever_connection/core/utils/web_view.dart';
 import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
@@ -11,11 +11,9 @@ import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:get/get.dart';
-
-import '../My Profile/Controller/user_profile_controller.dart';
-import '../../widgets/custom_popup_widget.dart';
-import 'widgets/userexperience_item_widget.dart';
-
+import '../../My Profile/Controller/user_profile_controller.dart';
+import '../../../widgets/custom_popup_widget.dart';
+import '../widgets/userexperience_item_widget.dart';
 
 // ignore: must_be_immutable
 class DashboardScreen extends StatelessWidget {

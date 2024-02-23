@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forever_connection/Feature/document_vault/Presentation/Widgets/document_vault_table.dart';
+import 'package:forever_connection/Feature/Document/Presentation/Widgets/document_vault_table.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/core/utils/size_utils.dart';
 import 'package:forever_connection/widgets/app_bar/custom_app_bar.dart';

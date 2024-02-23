@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:forever_connection/Feature/Dashboard/dashboard_screen.dart';
+import 'package:forever_connection/Feature/Dashboard/Presentation/dashboard_screen.dart';
 import 'package:forever_connection/Feature/My%20Profile/Controller/personal_details-controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
@@ -11,10 +11,11 @@ import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/custom_expation_tile.dart';
 import 'package:get/get.dart';
 
-import '../Controllers/Auth Controller/login_controller.dart';
+import '../Feature/Auth/Controller/login_controller.dart';
 import '../Feature/Connection/Presentation/connection_list.dart';
 import '../Feature/Connection/Presentation/connection_main_screen.dart';
 import '../Feature/My Profile/Controller/user_profile_controller.dart';
+import '../Feature/Partner/Presentation/dashboard_main_screen.dart';
 import '../Feature/Wallet/View/My Wallet/my_wallet.dart';
 
 class CustomDrawerWidget extends StatefulWidget {
@@ -581,7 +582,31 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                 title: Transform.translate(
                   offset: Offset(-15.w, 0),
                   child: Text(
-                    "Back to Dashboard",
+                    "Dashboard",
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PartnerDashboarMaindScreen()),
+                      (route) => false);
+                },
+                leading: Icon(
+                  Icons.handshake_outlined,
+                  color: AppColors.cardColorBg,
+                ),
+                title: Transform.translate(
+                  offset: Offset(-15.w, 0),
+                  child: Text(
+                    "Partner",
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
