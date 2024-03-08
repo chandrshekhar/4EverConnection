@@ -70,7 +70,7 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
           ),
         ],
       ),
-      endDrawer: CustomDrawerWidget(),
+      endDrawer: const CustomDrawerWidget(),
       body: Column(
         children: [
           Container(

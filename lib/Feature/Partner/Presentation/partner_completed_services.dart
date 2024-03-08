@@ -5,9 +5,8 @@ import 'package:forever_connection/Feature/Partner/Widgets/partner-appbar.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 
-class PartnerDeskScreen extends StatelessWidget {
-  PartnerDeskScreen({super.key});
-
+class PartnerCompletedServiceScreen extends StatelessWidget {
+  PartnerCompletedServiceScreen({super.key});
   List<Map<String, dynamic>> connectionTableTitle = [
     {'title': "blackfield", "width": "0"},
     {'title': "Action", "width": "120"},

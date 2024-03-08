@@ -7,6 +7,7 @@ import 'package:forever_connection/Feature/Auth/Presentation/reset_password_scre
 import 'package:forever_connection/Feature/Auth/Presentation/sign_up_screen.dart';
 import 'package:forever_connection/Feature/Contact/Presentation/contact_list_screen.dart';
 import 'package:forever_connection/Feature/Dashboard/Presentation/dashboard_screen.dart';
+import 'package:forever_connection/Feature/Document/Presentation/document_vault.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/add_note_screen.dart';
 import 'package:forever_connection/Feature/My%20Notes/Presentation/my_notes_list.dart';
 import 'package:forever_connection/Feature/My%20Profile/Presentation/financial_profile_screen.dart';
@@ -18,10 +19,14 @@ import 'package:forever_connection/Feature/My%20Profile/Presentation/protection_
 import 'package:forever_connection/Feature/My%20Profile/Presentation/relationships_screen.dart';
 import 'package:forever_connection/Feature/My%20Profile/Presentation/snapshot_screen.dart';
 import 'package:forever_connection/Feature/My%20Service/Presentation/my_services_screen.dart';
+import 'package:forever_connection/Feature/Partner/Presentation/partner_dashboard.dart';
+import 'package:forever_connection/Feature/Partner/Presentation/partner_desk_screen.dart';
+import 'package:forever_connection/Feature/Partner/Presentation/partner_lobby_screen.dart';
+import 'package:forever_connection/Feature/Partner/Presentation/partner_receivables-screen.dart';
+import 'package:forever_connection/Feature/Partner/Presentation/partner_register-screen.dart';
 import 'package:forever_connection/Feature/Request%20Service/request_service_one_screen.dart';
 import 'package:forever_connection/Feature/Welcome/auth_screen.dart';
 import 'package:forever_connection/Feature/Welcome/splash_screen.dart';
-import 'package:forever_connection/Feature/Document/Presentation/document_vault.dart';
 
 import '../Feature/Notification/notification-screen.dart';
 
@@ -86,6 +91,13 @@ class AppRoutes {
 
   static const String authOptionScreen = "/authoptionScreen";
 
+  /// partner
+  static const String partnerDashboard = "/partnerDashboard";
+  static const String partnerLobby = "/partnerLobbey";
+  static const String partnerDesk = "/partnerDesk";
+  static const String partnerRegister = "/partnerRegistor";
+  static const String partnerReceivable = "/partnerReceivable";
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => LoginScreen(),
@@ -110,6 +122,13 @@ class AppRoutes {
     myNotesListScreen: (context) => MyNotesListScreen(),
     addNotesScreen: (context) => AddNoteScreen(),
     contactList: (context) => const ContactListScreen(),
-    authOptionScreen: (context) => const AuthOptionScreen()
+    authOptionScreen: (context) => const AuthOptionScreen(),
+
+    /// partner
+    partnerDashboard: (context) => PartnerDashboardScreen(),
+    partnerLobby: (context) => PartnerLobbyScreen(),
+    partnerDesk: (context) => PartnerDeskScreen(),
+    partnerRegister: (context) => partnerRegisterScreen(),
+    partnerReceivable: (context) =>  PartnerReceivableScreen()
   };
 }

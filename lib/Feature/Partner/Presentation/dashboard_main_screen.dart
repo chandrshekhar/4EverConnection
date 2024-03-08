@@ -1,17 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/Connection/Presentation/connection_main_screen.dart';
 import 'package:forever_connection/Feature/Partner/Controller/main_dashboard_controller.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_drawer.dart';
 import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
-import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
-import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
-
 import '../../../widgets/custom_popup_widget.dart';
 import '../../Dashboard/widgets/userexperience_item_widget.dart';
 import '../../My Profile/Controller/user_profile_controller.dart';
@@ -24,7 +22,7 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
         );
 
   TextEditingController searchController = TextEditingController();
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final GlobalKey<ScaffoldState> _partnerkey = GlobalKey();
   final partnerMainDashboardController =
       Get.put(PartnerMainDashboardController());
   final serviceController = Get.put(RequestServiceController());
@@ -34,10 +32,10 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
     serviceController.getServiceProfssional();
     myProfileController.getUserProfileData();
     return Scaffold(
-      key: _key,
+      key: _partnerkey,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      endDrawer: const CustomDrawerWidget(),
+      endDrawer: const PartnerDrawer(),
       body: Obx(
         () => myProfileController.isLoadingProfileData == true
             ? const Center(
@@ -47,7 +45,7 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    height: 160.h,
+                    // height: 160.h,
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     decoration: const BoxDecoration(
@@ -86,7 +84,7 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      _key.currentState!.openEndDrawer();
+                                      _partnerkey.currentState!.openEndDrawer();
                                     },
                                     child: Icon(
                                       Icons.menu,
@@ -97,7 +95,7 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 8.h,
+                                height: 10.h,
                               ),
                               Row(
                                 children: [
@@ -152,7 +150,7 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                                         "", // Replace with the actual image URL
                                     imageBuilder: (context, imageProvider) =>
                                         CircleAvatar(
-                                      radius: 25.r,
+                                      radius: 20.r,
                                       backgroundColor: Colors.white,
                                       // Adjust the radius as needed
                                       backgroundImage: imageProvider,
@@ -186,39 +184,8 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          contanerWithBorder(
-                              child: const Icon(
-                            Icons.menu,
-                            color: AppColors.dashBoardColor,
-                          )),
-                          contanerWithBorder(
-                              child: SizedBox(
-                                  height: 30.h,
-                                  width: 200.w,
-                                  child: CustomTextFormField(
-                                    borderDecoration: InputBorder.none,
-                                    contentPadding: EdgeInsets.zero,
-                                    hintText: "Search 4ever contacts",
-                                    prefix: const Icon(Icons.search),
-                                  ))),
-                          contanerWithBorder(
-                              child: const Icon(
-                            Icons.contact_page,
-                            color: AppColors.dashBoardColor,
-                          )),
-                          contanerWithBorder(
-                              child: const Icon(
-                            Icons.filter_2_outlined,
-                            color: AppColors.dashBoardColor,
-                          ))
-                        ]),
-                  ),
+                  const PartnerContactWidget(),
+                  SizedBox(height: 20.h),
                   Expanded(
                     // flex: 1,
                     child: ListView.builder(
@@ -304,16 +271,20 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                           },
                           ontap: () {
                             if (index == 0) {
-                              Get.to(ConnectionMainScreen());
+                              Navigator.pushNamed(
+                                  context, AppRoutes.partnerDashboard);
                             } else if (index == 1) {
                               Navigator.pushNamed(
-                                  context, AppRoutes.requestServiceOneScreen);
+                                  context, AppRoutes.partnerLobby);
                             } else if (index == 2) {
                               Navigator.pushNamed(
-                                  context, AppRoutes.myServicesScreen);
+                                  context, AppRoutes.partnerDesk);
                             } else if (index == 3) {
                               Navigator.pushNamed(
-                                  context, AppRoutes.documentVaultScreen);
+                                  context, AppRoutes.partnerRegister);
+                            } else if (index == 3) {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.partnerReceivable);
                             }
                           },
                           buttonName: partnerMainDashboardController
@@ -327,14 +298,5 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
               ),
       ),
     );
-  }
-
-  Widget contanerWithBorder({Widget? child}) {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 0.5.sp),
-            borderRadius: BorderRadius.circular(2.r)),
-        padding: EdgeInsets.all(5.sp),
-        child: child);
   }
 }
