@@ -24,7 +24,7 @@ class PartnerReceivableScreen extends StatelessWidget {
       top: false,
       child: Scaffold(
         appBar: PartnerAppBar(
-          title: "Partner Desk",
+          title: "Partner Receivables",
         ),
         body: SingleChildScrollView(
           child: Padding(

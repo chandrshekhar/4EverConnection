@@ -14,7 +14,7 @@ class PartnerMainDashboardController extends GetxController {
 
   List<Map<String, dynamic>> partnerMainDashboardListData = [
     {
-      "imagePath": ImageConstant.connectIcon,
+      "imagePath": ImageConstant.partnerDashboard,
       "title": "Partner\nDashboard",
       // "buttonName": "Connect",
       "buttonTap": () {
@@ -31,19 +31,19 @@ class PartnerMainDashboardController extends GetxController {
     },
     {
       "title": "Partner\nDesk",
-      "imagePath": ImageConstant.viewMyServiceIcon,
+      "imagePath": ImageConstant.partnerDesk,
       // "buttonName": "View & Collaborate",
       "buttonTap": () {}
     },
     {
       "title": "Partner\nRegister",
-      "imagePath": ImageConstant.viewUploadDocument,
+      "imagePath": ImageConstant.partnerRegister,
       // "buttonName": "Access My Vault",
       "buttonTap": () {}
     },
     {
       "title": "Partner\nReceivables",
-      "imagePath": ImageConstant.viewUploadDocument,
+      "imagePath": ImageConstant.partnerReceivable,
       // "buttonName": "Access My Vault",
       "buttonTap": () {}
     },

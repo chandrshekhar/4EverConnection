@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DismissKeyBoard(
+    return DismissKeyBoard(   
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
         minTextAdapt: true,

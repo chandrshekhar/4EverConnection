@@ -45,8 +45,9 @@ class PartnerDashboardCard extends StatelessWidget {
           color: const Color(0XFFD9D9D9).withOpacity(0.5.sp),
         ),
         child: Row(
-          // mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.sp),
@@ -63,66 +64,47 @@ class PartnerDashboardCard extends StatelessWidget {
             ),
             SizedBox(width: 15.sp),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(height: 6.h),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title ?? "Partner lobby",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          color: AppColors.floatingActionButtonColor,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Icon(
-                      Icons.info_outline,
-                      size: 15.sp,
-                      color: infoButtonColor ??
-                          AppColors.floatingActionButtonColor
-                              .withOpacity(0.5.sp),
-                    )
-                  ]),
+              // SizedBox(height: 6.h),
+              Text(
+                title ?? "Partner lobby",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    color: AppColors.floatingActionButtonColor,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600),
+              ),
               SizedBox(
                 height: 15.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RichText(
-                      text: TextSpan(
-                          text: "\$0\n",
-                          style: TextStyle(
-                              color: AppColors.floatingActionButtonColor,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600),
-                          children: [
-                        TextSpan(
-                            text: "Active",
-                            style: TextStyle(
-                                color: AppColors.greyTextColor,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w400))
-                      ])),
-                  RichText(
-                      text: TextSpan(
-                          text: "1\n",
-                          style: TextStyle(
-                              color: AppColors.floatingActionButtonColor,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600),
-                          children: [
-                        TextSpan(
-                            text: "Expired",
-                            style: TextStyle(
-                                color: AppColors.greyTextColor,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400))
-                      ])),
-                ],
-              )
-            ])
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text("\$0",
+                    style: TextStyle(
+                        color: AppColors.floatingActionButtonColor,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600)),
+                Text("1",
+                    style: TextStyle(
+                        color: AppColors.floatingActionButtonColor,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600))
+              ]),
+              Row(children: [
+                Text("Active",
+                    style: TextStyle(
+                        color: AppColors.greyTextColor,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w400))
+              ])
+            ]),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.info_outline,
+                size: 15.sp,
+                color: infoButtonColor ??
+                    AppColors.floatingActionButtonColor.withOpacity(0.5.sp),
+              ),
+            )
           ],
         ),
       ),

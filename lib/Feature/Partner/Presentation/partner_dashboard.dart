@@ -15,13 +15,41 @@ class PartnerDashboardScreen extends StatelessWidget {
   PartnerDashboardScreen({super.key});
 
   List<Map<String, dynamic>> partnerDashboard = [
-    {"title": 'Partner Lobby', 'navigaTo': PartnerLobbyScreen()},
-    {"title": "Partner Desk", 'navigaTo': PartnerDeskScreen()},
-    {"title": "Partner Registration", 'navigaTo': partnerRegisterScreen()},
-    {"title": "Partner Receivables", 'navigaTo': PartnerReceivableScreen()},
-    {"title": "Earnings", 'navigaTo': PartnerReceivableScreen()},
-    {"title": "Standby", 'navigaTo': PartnerStandByScreen()},
-    {"title": "Complete Service", 'navigaTo': PartnerCompletedServiceScreen()}
+    {
+      "title": 'Partner Lobby',
+      'navigaTo': PartnerLobbyScreen(),
+      "icons": ImageConstant.newServiceIcon
+    },
+    {
+      "title": "Partner Desk",
+      'navigaTo': PartnerDeskScreen(),
+      "icons": ImageConstant.partnerDesk
+    },
+    {
+      "title": "Partner Registration",
+      'navigaTo': partnerRegisterScreen(),
+      "icons": ImageConstant.partnerRegister
+    },
+    {
+      "title": "Partner Receivables",
+      'navigaTo': PartnerReceivableScreen(),
+      "icons": ImageConstant.partnerReceivable
+    },
+    {
+      "title": "Earnings",
+      'navigaTo': PartnerReceivableScreen(),
+      "icons": ImageConstant.earnings
+    },
+    {
+      "title": "Standby",
+      'navigaTo': PartnerStandByScreen(),
+      "icons": ImageConstant.handIcons
+    },
+    {
+      "title": "Complete Service",
+      'navigaTo': PartnerCompletedServiceScreen(),
+      "icons": ImageConstant.completeSrv
+    }
   ];
 
   @override
@@ -49,7 +77,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                               builder: (context) =>
                                   partnerDashboard[index]['navigaTo']));
                     },
-                    leftImagePath: ImageConstant.newServiceIcon);
+                    leftImagePath: partnerDashboard[index]['icons']);
               },
             ),
           )

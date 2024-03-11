@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/constants/image_constant.dart';
+import 'package:forever_connection/widgets/custom_image_view.dart';
 
 class PartnerContactWidget extends StatelessWidget {
   const PartnerContactWidget({super.key});
@@ -28,21 +30,25 @@ class PartnerContactWidget extends StatelessWidget {
                     )),
               ))),
       contanerWithBorder(
-          child: const Icon(
-        Icons.contact_page,
-        color: AppColors.dashBoardColor,
+          child: CustomImageView(
+        height: 24.h,
+        width: 24.w,
+        svgPath: ImageConstant.addContact,
       )),
       contanerWithBorder(
-          child: const Icon(
-        Icons.filter_2_outlined,
-        color: AppColors.dashBoardColor,
-      ))
+          color: AppColors.dashBoardColor,
+          child: CustomImageView(
+            height: 24.h,
+            width: 24.w,
+            svgPath: ImageConstant.filter,
+          ))
     ]);
   }
 
-  contanerWithBorder({required Widget child}) {
+  contanerWithBorder({required Widget child, Color? color}) {
     return Container(
       decoration: BoxDecoration(
+          color: color ?? Colors.white,
           border: Border.all(width: 0.5, color: AppColors.lightBlue)),
       padding: EdgeInsets.all(5.sp),
       child: child,

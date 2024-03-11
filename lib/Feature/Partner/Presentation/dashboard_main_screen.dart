@@ -10,6 +10,7 @@ import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:get/get.dart';
+
 import '../../../widgets/custom_popup_widget.dart';
 import '../../Dashboard/widgets/userexperience_item_widget.dart';
 import '../../My Profile/Controller/user_profile_controller.dart';
@@ -283,6 +284,9 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                               Navigator.pushNamed(
                                   context, AppRoutes.partnerRegister);
                             } else if (index == 3) {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.partnerReceivable);
+                            } else if (index == 4) {
                               Navigator.pushNamed(
                                   context, AppRoutes.partnerReceivable);
                             }
