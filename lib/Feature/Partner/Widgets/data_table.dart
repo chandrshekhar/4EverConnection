@@ -68,11 +68,137 @@ class UserDataTable extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Row(
         children: <Widget>[
-          Container(
-            width: 100.w,
+          SizedBox(
             height: 30.h,
-            alignment: Alignment.center,
-            child: const Text("text1"),
+            width: 100.w,
+            child: PopupMenuButton<String>(
+                padding: EdgeInsets.zero,
+                // position: PopupMenuPosition.under,
+                surfaceTintColor: Colors.white,
+                onSelected: null,
+                icon: const Icon(
+                  Icons.more_vert,
+                  color: Colors.blueGrey,
+                ), // Icon for the button
+                itemBuilder: (BuildContext context) {
+                  return <PopupMenuEntry<String>>[
+                    // Define the menu items
+                    PopupMenuItem<String>(
+                      onTap: () async {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.remove_red_eye,
+                            color: AppColors.lightBlue,
+                            size: 15.sp,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'View',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      onTap: () async {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.download,
+                            size: 15.sp,
+                            color: AppColors.lightBlue,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'Download',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      onTap: () async {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.email,
+                            size: 15.sp,
+                            color: AppColors.lightBlue,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'Email',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      onTap: () {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.print,
+                            size: 15.sp,
+                            color: AppColors.lightBlue,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'Print',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      onTap: () {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            size: 15.sp,
+                            color: AppColors.lightBlue,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'Edit',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      onTap: () {},
+                      padding: const EdgeInsets.only(left: 5, right: 0),
+                      height: 40.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.delete,
+                            size: 15.sp,
+                            color: AppColors.lightBlue,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            'Delete',
+                            style: TextStyle(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ];
+                }),
           ),
           Container(
             width: 120.w,

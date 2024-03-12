@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/data_table.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner-appbar.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_drawer.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 
 class partnerRegisterScreen extends StatelessWidget {
@@ -12,18 +13,23 @@ class partnerRegisterScreen extends StatelessWidget {
     {'title': "blackfield", "width": "0"},
     {'title': "Action", "width": "120"},
     {'title': "Service #", "width": "120"},
-    {'title': "Name", "width": "120"},
-    {'title': "Service", "width": "120"},
-    {'title': "Partner Assigned", "width": "150"},
-    {'title': "Contact Effort", "width": "150"},
-    {'title': "Remaining Time", "width": "150"},
-    {'title': "Source", "width": "120"},
+    {'title': 'Payment Date', "width": '150'},
+    {'title': "User's Name", "width": "150"},
+    {'title': "Service Name", "width": "150"},
+    {'title': "Net Fee", "width": "150"},
+    {'title': "payment", "width": "150"},
+    {'title': "Method", "width": "150"},
+    {'title': "Verified", "width": "120"},
+    {'title': "Paid to", "width": "120"},
   ];
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
+        key: scaffoldKey,
+        endDrawer: const PartnerDrawer(),
         appBar: PartnerAppBar(
           title: "Partner Register",
         ),
@@ -33,7 +39,7 @@ class partnerRegisterScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const PartnerContactWidget(),
+                 PartnerContactWidget(),
                 SizedBox(height: 20.h),
                 Container(
                   padding: EdgeInsets.all(10.w),

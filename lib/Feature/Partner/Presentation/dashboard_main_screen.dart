@@ -185,7 +185,7 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  const PartnerContactWidget(),
+                  PartnerContactWidget(),
                   SizedBox(height: 20.h),
                   Expanded(
                     // flex: 1,

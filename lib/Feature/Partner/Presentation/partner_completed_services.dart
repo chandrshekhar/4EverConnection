@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/data_table.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner-appbar.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_drawer.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 
 class PartnerCompletedServiceScreen extends StatelessWidget {
@@ -18,13 +19,16 @@ class PartnerCompletedServiceScreen extends StatelessWidget {
     {'title': "Remaining Time", "width": "150"},
     {'title': "Source", "width": "120"},
   ];
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
+        key: scaffoldKey,
+        endDrawer: const PartnerDrawer(),
         appBar: PartnerAppBar(
-          title: "Partner Desk",
+          title: "Completed Services",
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -32,7 +36,7 @@ class PartnerCompletedServiceScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const PartnerContactWidget(),
+                PartnerContactWidget(),
                 SizedBox(height: 20.h),
                 Container(
                   padding: EdgeInsets.all(10.w),

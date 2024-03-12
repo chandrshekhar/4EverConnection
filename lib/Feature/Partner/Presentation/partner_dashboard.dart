@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/Partner/Presentation/earings_screen.dart';
 import 'package:forever_connection/Feature/Partner/Presentation/partner_completed_services.dart';
 import 'package:forever_connection/Feature/Partner/Presentation/partner_desk_screen.dart';
 import 'package:forever_connection/Feature/Partner/Presentation/partner_lobby_screen.dart';
@@ -9,6 +10,7 @@ import 'package:forever_connection/Feature/Partner/Presentation/standby-screen.d
 import 'package:forever_connection/Feature/Partner/Widgets/partner-appbar.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_dashboard_card_widget.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_drawer.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 
 class PartnerDashboardScreen extends StatelessWidget {
@@ -37,7 +39,7 @@ class PartnerDashboardScreen extends StatelessWidget {
     },
     {
       "title": "Earnings",
-      'navigaTo': PartnerReceivableScreen(),
+      'navigaTo': PartnerEarningsScreen(),
       "icons": ImageConstant.earnings
     },
     {
@@ -52,16 +54,24 @@ class PartnerDashboardScreen extends StatelessWidget {
     }
   ];
 
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      endDrawer: const PartnerDrawer(),
       appBar: PartnerAppBar(
         title: "Partner Dashboard",
       ),
       body: Column(
         children: [
           SizedBox(height: 20.h),
-          const PartnerContactWidget(),
+          PartnerContactWidget(
+              // onTap: () {
+              //   debugPrint("calling scafold--> $scaffoldKey");
+              //   scaffoldKey.currentState!.openEndDrawer();
+              // },
+              ),
           SizedBox(height: 20.h),
           Expanded(
             child: ListView.builder(

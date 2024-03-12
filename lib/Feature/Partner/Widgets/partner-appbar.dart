@@ -13,14 +13,14 @@ class PartnerAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.appBackgroundColor,
       title: Text(
         title ?? "",
         style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
             fontFamily: "Poppins",
-            color: AppColors.appBarTextColor),
+            color: AppColors.floatingActionButtonColor),
       ),
       centerTitle: true,
       elevation: 0.5,

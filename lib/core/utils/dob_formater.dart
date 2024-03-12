@@ -1,3 +1,6 @@
+
+
+import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -19,9 +22,9 @@ String _format(String value, String seperator, TextEditingValue old) {
   var mm = '';
   var yyy = '';
   var oldVal = old.text;
-  print('<------------------------- start---------------------------->');
-  print('oldVal -> $oldVal');
-  print('value -> $value');
+  debugPrint('<------------------------- start---------------------------->');
+  debugPrint('oldVal -> $oldVal');
+  debugPrint('value -> $value');
   var temp_oldVal = oldVal;
   var temp_value = value;
   if (!oldVal.contains(seperator) ||

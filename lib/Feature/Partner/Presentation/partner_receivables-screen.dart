@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/data_table.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner-appbar.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_drawer.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 
 class PartnerReceivableScreen extends StatelessWidget {
@@ -11,18 +12,21 @@ class PartnerReceivableScreen extends StatelessWidget {
     {'title': "blackfield", "width": "0"},
     {'title': "Action", "width": "120"},
     {'title': "Service #", "width": "120"},
-    {'title': "Name", "width": "120"},
+    {'title': "User's Name", "width": "120"},
     {'title': "Service", "width": "120"},
-    {'title': "Partner Assigned", "width": "150"},
-    {'title': "Contact Effort", "width": "150"},
-    {'title': "Remaining Time", "width": "150"},
-    {'title': "Source", "width": "120"},
+    {'title': "Balance Due", "width": "150"},
+    {'title': "Payment", "width": "150"},
+    {'title': "Status", "width": "150"},
   ];
+
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
+        key: scaffoldKey,
+        endDrawer: const PartnerDrawer(),
         appBar: PartnerAppBar(
           title: "Partner Receivables",
         ),
@@ -32,7 +36,7 @@ class PartnerReceivableScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const PartnerContactWidget(),
+                 PartnerContactWidget(),
                 SizedBox(height: 20.h),
                 Container(
                   padding: EdgeInsets.all(10.w),

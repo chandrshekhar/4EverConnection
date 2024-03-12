@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Controller/user_service_controller.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner-appbar.dart';
 import 'package:forever_connection/Feature/Partner/Widgets/partner_contact_widget.dart';
+import 'package:forever_connection/Feature/Partner/Widgets/partner_drawer.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:get/get.dart';
 
@@ -47,11 +48,14 @@ class PartnerLobbyScreen extends StatelessWidget {
     {'title': "Source", "width": "120"},
   ];
 
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
+        key: scaffoldKey,
+        endDrawer: const PartnerDrawer(),
         appBar: PartnerAppBar(
           title: "Partner Lobby",
         ),
@@ -61,7 +65,7 @@ class PartnerLobbyScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const PartnerContactWidget(),
+                PartnerContactWidget(),
                 SizedBox(height: 20.h),
                 Container(
                   padding: EdgeInsets.all(10.w),
@@ -123,8 +127,5 @@ class PartnerLobbyScreen extends StatelessWidget {
         ),
       ),
     );
-  
-  
-  
   }
 }

@@ -317,6 +317,9 @@ class DocumentVaultDataTable extends StatelessWidget {
                           ];
                         }),
                   ),
+              
+              
+              
                   Container(
                     width: 150.w,
                     height: 30.h,

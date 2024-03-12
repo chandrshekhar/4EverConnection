@@ -5,15 +5,28 @@ import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
 
 class PartnerContactWidget extends StatelessWidget {
-  const PartnerContactWidget({super.key});
+  PartnerContactWidget({super.key});
+
+  // final GlobalKey<ScaffoldState> scaffoldKey;
+
+  List<String> dropDownList = [
+    "Quickly Search",
+    "Recent users",
+    "Credit Card payment",
+    "Complete Services",
+    "M\$ Dollar",
+    "Quick Entry",
+    "Calendar"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       contanerWithBorder(
-          child: const Icon(
-        Icons.menu,
-        color: AppColors.dashBoardColor,
+          child: CustomImageView(
+        height: 24.h,
+        width: 24.w,
+        svgPath: ImageConstant.addContact,
       )),
       contanerWithBorder(
           child: SizedBox(
@@ -29,20 +42,57 @@ class PartnerContactWidget extends StatelessWidget {
                       size: 25.sp,
                     )),
               ))),
-      contanerWithBorder(
-          child: CustomImageView(
-        height: 24.h,
-        width: 24.w,
-        svgPath: ImageConstant.addContact,
-      )),
-      contanerWithBorder(
-          color: AppColors.dashBoardColor,
-          child: CustomImageView(
-            height: 24.h,
-            width: 24.w,
-            svgPath: ImageConstant.filter,
-          ))
+      PopupMenuButton(
+        color: Colors.white,
+        onSelected: (value) {
+          // your logic
+        },
+        padding: EdgeInsets.zero,
+        surfaceTintColor: Colors.white,
+        icon: contanerWithBorder(
+            color: AppColors.dashBoardColor,
+            child: CustomImageView(
+              height: 24.h,
+              width: 24.w,
+              svgPath: ImageConstant.filter,
+            )),
+        itemBuilder: (BuildContext bc) {
+          return List.generate(
+              dropDownList.length,
+              (index) =>
+                  dropDownWidget(title: dropDownList[index], index: index));
+        },
+      )
     ]);
+  }
+
+  dropDownWidget({required String title, required int index}) {
+    return PopupMenuItem(
+      padding: EdgeInsets.zero,
+      onTap: () {
+        print("index--> $index");
+      },
+      value: '$index',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                left: 15.w, top: 15.h, bottom: 8.h, right: 20.w),
+            child: Text(
+              title,
+              style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.darkBlue),
+            ),
+          ),
+          index != 6
+              ? Container(height: 0.5, color: AppColors.darkBlue)
+              : const SizedBox.shrink()
+        ],
+      ),
+    );
   }
 
   contanerWithBorder({required Widget child, Color? color}) {
