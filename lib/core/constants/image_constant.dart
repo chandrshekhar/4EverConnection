@@ -169,4 +169,8 @@ class ImageConstant {
   static String earnings = "assets/images/earnings.svg";
   static String handIcons = "assets/images/hand_icon.svg";
   static String completeSrv = "assets/images/complete_srv.svg";
+  static String helpCompanyAddress = "assets/images/company_address.svg";
+  static String helpEmailIcon = "assets/images/email_icon.svg";
+  static String helpFaxIcon = "assets/images/fax_icon.svg";
+  static String helpPhoneIcon = "assets/images/phone_icon.svg";
 }

@@ -362,7 +362,7 @@ _bottomSheetWidget({
         height: 5.h,
       ),
       Container(
-        height: lableName.contains("Additional Information") ? 100 : 48,
+        // height: lableName.contains("Additional Information") ? 100 : 48,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.zero,
@@ -371,7 +371,8 @@ _bottomSheetWidget({
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.only(left: 10.adaptSize, top: 18.adaptSize),
+              padding: EdgeInsets.only(
+                  left: 10.adaptSize, top: 10.adaptSize, bottom: 10.adaptSize),
               child: Text(
                 value,
               ),

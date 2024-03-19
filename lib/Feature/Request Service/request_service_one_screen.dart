@@ -409,24 +409,33 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                     );
                                   })
                               : const SizedBox())),
-
-                      Obx(
-                        () => CustomTextFormField(
-                            controller: requestServiceController
-                                .commentController.value,
-                            margin: EdgeInsets.only(
-                                left: 12.h, top: 40.v, right: 12.h, bottom: 20),
-                            labelText: "Write your comments (optional)",
-                            textInputAction: TextInputAction.newline,
-                            textInputType: TextInputType.multiline,
-                            maxLines: 4,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 11.h, vertical: 10.v),
-                            borderDecoration: const OutlineInputBorder(),
-                            filled: false,
-                            fillColor: theme.colorScheme.primary),
+                      SizedBox(
+                        height: 18.h,
                       ),
-                      // SizedBox(height: 10.h),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.h, vertical: 10.v),
+                        decoration: AppDecoration.outlineBlack.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder16),
+                        child: Obx(
+                          () => CustomTextFormField(
+                              controller: requestServiceController
+                                  .commentController.value,
+                              margin: EdgeInsets.only(
+                                  left: 12.h, right: 12.h, bottom: 20),
+                              labelText: "Write your comments (optional)",
+                              textInputAction: TextInputAction.newline,
+                              textInputType: TextInputType.multiline,
+                              maxLines: 4,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 11.h,
+                              ),
+                              borderDecoration: const OutlineInputBorder(),
+                              filled: false,
+                              fillColor: theme.colorScheme.primary),
+                        ),
+                      ),
+                      SizedBox(height: 10.h),
                       Obx(
                         () => requestServiceController.isAddServiceLoading.value
                             ? const Center(

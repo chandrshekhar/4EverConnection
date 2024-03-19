@@ -19,6 +19,8 @@ import 'package:intl/intl.dart';
 import '../../../widgets/app_bar/appbar_image_1.dart';
 import '../../../widgets/app_bar/appbar_title.dart';
 import '../../../widgets/custom_icon_button.dart';
+import '../../Connection/Controller/connection_controller.dart';
+import '../../Connection/Presentation/create_connection.dart';
 
 class ContactListScreen extends StatefulWidget {
   const ContactListScreen({super.key});
@@ -33,6 +35,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
   // final noteController = Get.put(MyNotesController());
 
   final addContactController = Get.put(AddContactController());
+  final connectionController = Get.put(ConnectionController());
 
   @override
   void initState() {
@@ -116,89 +119,101 @@ class _ContactListScreenState extends State<ContactListScreen> {
                     obscureText: false),
               ),
               Expanded(
-                  child: Obx(() =>
-                      addContactController.isContactListLoading.value == true
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive())
-                          : addContactController.contactModelList.isNotEmpty
-                              ? ListView.builder(
-                                  padding: EdgeInsets.only(top: 20.h),
-                                  itemCount: addContactController
-                                      .contactModelList.length,
-                                  itemBuilder: (context, index) {
-                                    String lastName = "";
+                  child: Obx(() => addContactController
+                              .isContactListLoading.value ==
+                          true
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
+                      : addContactController.contactModelList.isNotEmpty
+                          ? ListView.builder(
+                              padding: EdgeInsets.only(top: 20.h),
+                              itemCount:
+                                  addContactController.contactModelList.length,
+                              itemBuilder: (context, index) {
+                                String lastName = "";
 
 // Check if the last name is "NA" and display an empty string if true
-                                    if (addContactController
-                                            .contactModelList[index].lastName ==
-                                        "NA") {
-                                      lastName = "";
-                                    } else {
-                                      lastName = addContactController
-                                          .contactModelList[index].lastName!;
-                                    }
+                                if (addContactController
+                                        .contactModelList[index].lastName ==
+                                    "NA") {
+                                  lastName = "";
+                                } else {
+                                  lastName = addContactController
+                                      .contactModelList[index].lastName!;
+                                }
 
-                                    return ContactListCard2(
-                                        editIconClick: () {
-                                          addContactController.setEditValue(
-                                              contactListModel:
-                                                  addContactController
-                                                      .contactModelList[index]);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      const AddContactScreen(
-                                                        isCommingFromEdit: true,
-                                                      )));
-                                        },
-                                        author:
-                                            "${addContactController.contactModelList[index].firstName} $lastName",
-                                        photo: addContactController
-                                                .contactModelList[index]
-                                                .photo ??
-                                            "",
-                                        phoneNumber: addContactController
-                                                .contactModelList[index]
-                                                .mobilePhone ??
-                                            "",
-                                        email: addContactController
-                                                .contactModelList[index]
-                                                .personalEmail ??
-                                            "",
-                                        go: "",
-                                        goPress: () {
-                                          addContactController.launchMap(
+                                return ContactListCard2(
+                                    onConnetPress: () {
+                                      connectionController
+                                          .setValueAfterSelectContact(
                                               addContactController
-                                                      .contactModelList[index]
-                                                      .homeAddress ??
-                                                  "");
-                                        },
-                                        connect: "");
+                                                  .contactModelList[index]);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const CreateConnectionScreen(
+                                                    isCommingFromContact: true,
+                                                  )));
+                                    },
+                                    editIconClick: () {
+                                      addContactController.setEditValue(
+                                          contactListModel: addContactController
+                                              .contactModelList[index]);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const AddContactScreen(
+                                                    isCommingFromEdit: true,
+                                                  )));
+                                    },
+                                    author:
+                                        "${addContactController.contactModelList[index].firstName} $lastName",
+                                    photo: addContactController
+                                            .contactModelList[index].photo ??
+                                        "",
+                                    phoneNumber: addContactController
+                                            .contactModelList[index]
+                                            .mobilePhone ??
+                                        "",
+                                    email: addContactController
+                                            .contactModelList[index]
+                                            .personalEmail ??
+                                        "",
+                                    go: "",
+                                    goPress: () {
+                                      addContactController.launchMap(
+                                          addContactController
+                                                  .contactModelList[index]
+                                                  .homeAddress ??
+                                              "");
+                                    },
+                                    connect: "");
 
-                                    // return ContactListCard2(
-                                    //   author:
-                                    //       "${addContactController.contactModelList[index].firstName}",
-                                    //   dateTime: noteController.dateTime(
-                                    //       addContactController
-                                    //               .contactModelList[index]
-                                    //               .dateCreated ??
-                                    //           ""),
-                                    //   description: addContactController
-                                    //           .contactModelList[index]
-                                    //           .currentOccupation ??
-                                    //       "NA",
-                                    //   notesTitle: addContactController
-                                    //           .contactModelList[index]
-                                    //           .mobilePhone ??
-                                    //       "NA",
-                                    //   onSeleted: (p0) {},
-                                    // );
-                                  },
-                                )
-                              : const Center(
-                                  child: Text("No contact"),
-                                ))),
+                                // return ContactListCard2(
+                                //   author:
+                                //       "${addContactController.contactModelList[index].firstName}",
+                                //   dateTime: noteController.dateTime(
+                                //       addContactController
+                                //               .contactModelList[index]
+                                //               .dateCreated ??
+                                //           ""),
+                                //   description: addContactController
+                                //           .contactModelList[index]
+                                //           .currentOccupation ??
+                                //       "NA",
+                                //   notesTitle: addContactController
+                                //           .contactModelList[index]
+                                //           .mobilePhone ??
+                                //       "NA",
+                                //   onSeleted: (p0) {},
+                                // );
+                              },
+                            )
+                          : const Center(
+                              child: Text("No contact"),
+                            ))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

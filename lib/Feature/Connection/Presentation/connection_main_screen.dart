@@ -118,7 +118,7 @@ class ConnectionMainScreen extends StatelessWidget {
                                   ),
                                   ConnectionCardWidget(
                                     onTap: () {
-                                      Get.to(const CreateConnectionScreen());
+                                      Get.to(const CreateConnectionScreen(isCommingFromContact: false,));
                                     },
                                     buttonName: "Connect",
                                     title: "Connections",

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Model/user_services_model.dart';
+
 import 'package:forever_connection/Feature/My%20Service/Presentation/collaboration_page.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/constants/colors.dart';
+import '../Controller/user_service_controller.dart';
 
 // ignore: must_be_immutable
 class UserServiceInProgressDataTable extends StatelessWidget {
@@ -20,7 +22,8 @@ class UserServiceInProgressDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalDataTable(
       leftHandSideColumnWidth: 0,
-      rightHandSideColumnWidth: 810.w,
+      rightHandSideColumnWidth: 710.w,
+      //rightHandSideColumnWidth: 810.w,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
@@ -40,13 +43,13 @@ class UserServiceInProgressDataTable extends StatelessWidget {
   List<Widget> _getTitleWidget() {
     return [
       _getTitleItemWidget('Termination', 0),
+      _getTitleItemWidget('Action', 60),
       _getTitleItemWidget("Service #", 100),
-      _getTitleItemWidget('Start Date', 120),
+      _getTitleItemWidget('Date Created', 120),
       _getTitleItemWidget("Service", 140),
       _getTitleItemWidget('Collaborate', 140),
       _getTitleItemWidget('Fee', 120),
-      _getTitleItemWidget('Status', 130),
-      _getTitleItemWidget('Action', 60),
+      //      _getTitleItemWidget('Status', 130),
     ];
   }
 
@@ -72,109 +75,6 @@ class UserServiceInProgressDataTable extends StatelessWidget {
       // padding: EdgeInsets.symmetric(vertical: (index % 2 != 0) ? 4.h : 0),
       child: Row(
         children: <Widget>[
-          Container(
-            width: 100.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            child: Text(userServiceModel[index].identifier ?? ""),
-          ),
-          Container(
-            width: 120.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            child: Text(DateFormat("MM/dd/yyyy").format(DateTime.parse(
-                userServiceModel[index].actionScheduledOn ?? ""))),
-          ),
-          Container(
-            width: 140.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            child: Text(
-              userServiceModel[index].serviceName ?? "",
-              maxLines: 1,
-              
-              style: TextStyle(fontSize: 15.sp),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const ServiceCollaboratationPage()));
-            },
-            child: Container(
-              width: 140.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              child: Text(
-                "Collaboration Page",
-                style: TextStyle(color: AppColors.darkBlue, fontSize: 15.sp),
-              ),
-            ),
-          ),
-          Container(
-            width: 120.w,
-            height: 30.h,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(left: 5, right: 5),
-            child: Container(
-                padding: EdgeInsets.only(
-                    left: 10.w, top: 3.h, bottom: 3.h, right: 10.w),
-                decoration: BoxDecoration(
-                    border: Border.all(width: 0.1),
-                    borderRadius: BorderRadius.circular(2.r),
-                    color: Colors.grey.shade100),
-                child: Row(
-                  children: [
-                    const Text(
-                      "\$",
-                      style: TextStyle(color: Color(0xFF6B6B6B), fontSize: 15),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Container(
-                      color: Colors.grey,
-                      height: 15,
-                      width: 1,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      userServiceModel[index].serviceFee.toString() ?? "0",
-                      style: const TextStyle(
-                          color: Color(0xFF6B6B6B), fontSize: 15),
-                    )
-                  ],
-                )),
-          ),
-          Container(
-              width: 130.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Container(
-                  padding: EdgeInsets.only(
-                      left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.1),
-                      borderRadius: BorderRadiusDirectional.circular(1),
-                      color: Colors.grey.shade100),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FittedBox(
-                          child: Text(
-                        "In progress",
-                        style: TextStyle(fontSize: 13.sp),
-                      )),
-                      const Icon(Icons.expand_more)
-                    ],
-                  ))),
           SizedBox(
             height: 30.h,
             width: 60.w,
@@ -287,6 +187,103 @@ class UserServiceInProgressDataTable extends StatelessWidget {
                   ];
                 }),
           ),
+
+          Container(
+            width: 100.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(userServiceModel[index].identifier ?? ""),
+          ),
+          Container(
+            width: 120.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(DateFormat("MM/dd/yyyy").format(DateTime.parse(
+                userServiceModel[index].actionScheduledOn ?? ""))),
+          ),
+          Container(
+            width: 170.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(userServiceModel[index].serviceName ?? ""),
+          ),
+          InkWell(
+            onTap: () {
+              // print(userServiceModel[index].identifier.toString().substring(2));
+              UserServicesController().getCollaborationPage(context,
+                  userServiceModel[index].identifier.toString().substring(2));
+            },
+            child: Container(
+              width: 140.w,
+              height: 30.h,
+              alignment: Alignment.center,
+              child: Text(
+                "Collaborate",
+                style: TextStyle(color: AppColors.darkBlue),
+              ),
+            ),
+          ),
+          Container(
+            width: 120.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Container(
+                padding: EdgeInsets.only(
+                    left: 10.w, top: 3.h, bottom: 3.h, right: 10.w),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 0.1),
+                    borderRadius: BorderRadius.circular(2.r),
+                    color: Colors.grey.shade100),
+                child: Row(
+                  children: [
+                    const Text(
+                      "\$",
+                      style: TextStyle(color: Color(0xFF6B6B6B), fontSize: 15),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      height: 15,
+                      width: 1,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Text(
+                      userServiceModel[index].serviceFee.toString() ?? "0",
+                      style: const TextStyle(
+                          color: Color(0xFF6B6B6B), fontSize: 15),
+                    )
+                  ],
+                )),
+          ),
+          // Container(
+          //     width: 130.w,
+          //     height: 30.h,
+          //     alignment: Alignment.center,
+          //     padding: const EdgeInsets.only(left: 5, right: 5),
+          //     child: Container(
+          //         padding: EdgeInsets.only(
+          //             left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
+          //         decoration: BoxDecoration(
+          //             border: Border.all(width: 0.1),
+          //             borderRadius: BorderRadiusDirectional.circular(1),
+          //             color: Colors.grey.shade100),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             FittedBox(
+          //                 child: Text(
+          //               "In progress",
+          //               style: TextStyle(fontSize: 15.sp),
+          //             )),
+          //             const Icon(Icons.expand_more)
+          //           ],
+          //         ))),
         ],
       ),
     );

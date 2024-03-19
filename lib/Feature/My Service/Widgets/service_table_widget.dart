@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Model/user_services_model.dart';
-import 'package:forever_connection/Feature/My%20Service/Presentation/service_details.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/web_view.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/constants/colors.dart';
+import '../Controller/user_service_controller.dart';
 
 // ignore: must_be_immutable
 class UserServiceDataTable extends StatelessWidget {
@@ -21,7 +21,8 @@ class UserServiceDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalDataTable(
       leftHandSideColumnWidth: 0,
-      rightHandSideColumnWidth: 785.w,
+      rightHandSideColumnWidth: 760.w,
+      //rightHandSideColumnWidth: 785.w,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
@@ -43,11 +44,12 @@ class UserServiceDataTable extends StatelessWidget {
       _getTitleItemWidget('Termination', 0),
       _getTitleItemWidget("Service #", 100),
       _getTitleItemWidget('Completed Date', 120),
-      _getTitleItemWidget("Service", 140),
+      _getTitleItemWidget("Service", 200),
       _getTitleItemWidget('Details', 120),
       _getTitleItemWidget('Fee', 120),
-      _getTitleItemWidget('Status', 120),
-      _getTitleItemWidget('Payment', 60),
+      //   _getTitleItemWidget('Status', 120),
+
+      _getTitleItemWidget('Payment', 120),
     ];
   }
 
@@ -89,9 +91,9 @@ class UserServiceDataTable extends StatelessWidget {
                 : ""),
           ),
           Container(
-            width: 140.w,
+            width: 200.w,
             height: 30.h,
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             child: Text(
               userServiceModel[index].serviceName ?? "",
               maxLines: 1,
@@ -100,10 +102,8 @@ class UserServiceDataTable extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyServiceDetailsScreen()));
+              UserServicesController().getServiceDetails(context,
+                  userServiceModel[index].identifier.toString().substring(2));
             },
             child: Container(
               width: 120.w,
@@ -151,28 +151,29 @@ class UserServiceDataTable extends StatelessWidget {
                   ],
                 )),
           ),
-          Container(
-              width: 120.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Container(
-                  padding: EdgeInsets.only(
-                      left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.1),
-                      borderRadius: BorderRadiusDirectional.circular(1),
-                      color: Colors.grey.shade100),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Text(
-                              userServiceModel[index].statusDescription ?? "")),
-                      const Icon(Icons.expand_more)
-                    ],
-                  ))),
+          const Spacer(),
+          // Container(
+          //     width: 120.w,
+          //     height: 30.h,
+          //     alignment: Alignment.center,
+          //     padding: const EdgeInsets.only(left: 5, right: 5),
+          //     child: Container(
+          //         padding: EdgeInsets.only(
+          //             left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
+          //         decoration: BoxDecoration(
+          //             border: Border.all(width: 0.1),
+          //             borderRadius: BorderRadiusDirectional.circular(1),
+          //             color: Colors.grey.shade100),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Expanded(
+          //                 child: Text(
+          //                     userServiceModel[index].statusDescription ?? "")),
+          //             const Icon(Icons.expand_more)
+          //           ],
+          //         ))),
           InkWell(
             onTap: () {
               Navigator.push(
@@ -205,6 +206,9 @@ class UserServiceDataTable extends StatelessWidget {
                   ],
                 )),
           ),
+          SizedBox(
+            width: 5.w,
+          )
         ],
       ),
     );
