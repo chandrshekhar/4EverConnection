@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Controllers/Services/user_service_controller.dart';
 import 'package:forever_connection/Feature/My%20Service/Presentation/service_details.dart';
 import 'package:forever_connection/Feature/Webview/web_view.dart';
 import 'package:forever_connection/Models/user_services_model.dart';
@@ -98,10 +99,8 @@ class UserServiceDataTable extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyServiceDetailsScreen()));
+              UserServicesController().getServiceDetails(context,
+                  userServiceModel[index].identifier.toString().substring(2));
             },
             child: Container(
               width: 120.w,

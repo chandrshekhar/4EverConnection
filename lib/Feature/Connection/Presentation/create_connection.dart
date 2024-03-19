@@ -25,6 +25,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../core/utils/toast_widget.dart';
+
 // ignore_for_file: must_be_immutable
 class CreateConnectionScreen extends StatefulWidget {
   final bool isCommingFromContact;
@@ -637,10 +639,9 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                           .isNotEmpty) {
                                     connectionController.addConnection(context);
                                   } else {
-                                    TostWidget().errorToast(
-                                        title: "Error",
-                                        message:
-                                            "Please field all mandatory filed");
+                                    ToastWidget.errorToast(
+                                        error:
+                                            "Please select service and parner");
                                   }
                                 },
                                 text: "Create Connection",
