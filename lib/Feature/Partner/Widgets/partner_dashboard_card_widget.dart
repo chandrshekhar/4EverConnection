@@ -65,10 +65,10 @@ class PartnerDashboardCard extends StatelessWidget {
               child: CustomImageView(
                 svgPath: leftImagePath,
                 height: 45.h,
-                width: 45.w,
+                width: 40.w,
               ),
             ),
-            SizedBox(width: 15.sp),
+            SizedBox(width: 10.sp),
             Expanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,11 +106,13 @@ class PartnerDashboardCard extends StatelessWidget {
                                   color: AppColors.floatingActionButtonColor,
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w600)),
-                       value2!=null?   Text("${value2 ?? 0}",
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w600)): const SizedBox.shrink()
+                          value2 != null
+                              ? Text("${value2 ?? 0}",
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w600))
+                              : const SizedBox.shrink()
                         ]),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,11 +122,13 @@ class PartnerDashboardCard extends StatelessWidget {
                                   color: AppColors.greyTextColor,
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w400)),
-                        subTitle12 !=null?  Text(subTitle12 ?? "",
-                              style: TextStyle(
-                                  color: AppColors.greyTextColor,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400)):const SizedBox.shrink()
+                          subTitle12 != null
+                              ? Text(subTitle12 ?? "",
+                                  style: TextStyle(
+                                      color: AppColors.greyTextColor,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w400))
+                              : const SizedBox.shrink()
                         ])
                   ]),
             ),

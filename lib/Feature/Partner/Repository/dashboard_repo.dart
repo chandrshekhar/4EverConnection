@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:forever_connection/Feature/Partner/Model/partner_dashboard_model.dart';
 import 'package:forever_connection/Feature/Partner/Model/partner_lobby_expired.dart';
@@ -11,9 +12,10 @@ class PartnerRepo {
   //earning history list service
   final Dio dio = Dio();
   Future<PartnerDashboardModel> getPartnerDashboard() async {
-    log("get earning history list api hit...");
+    log("getPartnerDashboard list api hit...");
     Response response;
     var token = await SharedPref().getUserToken();
+    log("tokkjsdfjf $token");
     try {
       dio.options.headers = {
         'Accept': 'application/json',
@@ -21,14 +23,14 @@ class PartnerRepo {
         'Authorization': "Bearer $token"
       };
       response = await dio.get(ApiPath.partnerDashboard);
-      log("get earning history list response ${response.data.toString()}");
+      log("getPartnerDashboard history list response ${response.data.toString()}");
       if (response.statusCode == 200) {
         return PartnerDashboardModel.fromJson(response.data);
       } else {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      log("Error while fetch get earning history list api data ${e.toString()}");
+      log("Error while fetch get getPartnerDashboard list api data ${e.toString()}");
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -46,7 +48,7 @@ class PartnerRepo {
 
   Future<PartnerDashboardLobbyRequestServiceModel>
       getPartnerLobbyServiceRequests() async {
-    log("get earning history list api hit...");
+    log("get getPartnerLobbyServiceRequests list api hit...");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -56,14 +58,14 @@ class PartnerRepo {
         'Authorization': "Bearer $token"
       };
       response = await dio.get(ApiPath.partnerDashboardLobbyRequest);
-      log("get earning history list response ${response.data.toString()}");
+      log("get getPartnerLobbyServiceRequests list response ${response.data.toString()}");
       if (response.statusCode == 200) {
         return PartnerDashboardLobbyRequestServiceModel.fromJson(response.data);
       } else {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      log("Error while fetch get earning history list api data ${e.toString()}");
+      log("Error while fetch get getPartnerLobbyServiceRequests list api data ${e.toString()}");
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -81,7 +83,7 @@ class PartnerRepo {
 
   Future<PartnerDashboardLobbyConnectionModel>
       getPartnerLobbyConnections() async {
-    log("get earning history list api hit...");
+    log("get getPartnerLobbyConnections list api hit...");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -91,14 +93,14 @@ class PartnerRepo {
         'Authorization': "Bearer $token"
       };
       response = await dio.get(ApiPath.partnerDashboardLobbyConnection);
-      log("get earning history list response ${response.data.toString()}");
+      log("get getPartnerLobbyConnections list response ${response.data.toString()}");
       if (response.statusCode == 200) {
         return PartnerDashboardLobbyConnectionModel.fromJson(response.data);
       } else {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      log("Error while fetch get earning history list api data ${e.toString()}");
+      log("Error while fetch get getPartnerLobbyConnections list api data ${e.toString()}");
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||
@@ -115,7 +117,7 @@ class PartnerRepo {
   }
 
   Future<PartnerDashboardLobbyExpiredModel> getPartnerLobbyExpired() async {
-    log("get earning history list api hit...");
+    log("get getPartnerLobbyExpired list api hit...");
     Response response;
     var token = await SharedPref().getUserToken();
     try {
@@ -125,14 +127,14 @@ class PartnerRepo {
         'Authorization': "Bearer $token"
       };
       response = await dio.get(ApiPath.partnerDashboardLobbyExpired);
-      log("get earning history list response ${response.data.toString()}");
+      log("get getPartnerLobbyExpired list response ${response.data.toString()}");
       if (response.statusCode == 200) {
         return PartnerDashboardLobbyExpiredModel.fromJson(response.data);
       } else {
         throw Exception("Faild to load data");
       }
     } catch (e) {
-      log("Error while fetch get earning history list api data ${e.toString()}");
+      log("Error while fetch get getPartnerLobbyExpired list api data ${e.toString()}");
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionTimeout ||
             e.type == DioExceptionType.sendTimeout ||

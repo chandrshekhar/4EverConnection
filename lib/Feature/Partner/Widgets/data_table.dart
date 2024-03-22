@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Presentation/service_details.dart';
-import 'package:forever_connection/Feature/Partner/Model/partner_request_service.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/web_view.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
