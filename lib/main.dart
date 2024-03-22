@@ -19,7 +19,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   final contactController = Get.put(ContactController());
-
   @override
   Widget build(BuildContext context) {
     return DismissKeyBoard(
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         child: GetMaterialApp(
           theme: ThemeData.light(),
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.light,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
           title: 'forever_connection',
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splashScreen,

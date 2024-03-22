@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Model/user_services_model.dart';
-
-import 'package:forever_connection/Feature/My%20Service/Presentation/collaboration_page.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -204,7 +202,7 @@ class UserServiceInProgressDataTable extends StatelessWidget {
           Container(
             width: 170.w,
             height: 30.h,
-            alignment: Alignment.center,
+            alignment: Alignment.centerLeft,
             child: Text(userServiceModel[index].serviceName ?? ""),
           ),
           InkWell(

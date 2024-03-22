@@ -93,7 +93,7 @@ class UserServiceDataTable extends StatelessWidget {
           Container(
             width: 200.w,
             height: 30.h,
-            alignment: Alignment.topCenter,
+            alignment: Alignment.topLeft,
             child: Text(
               userServiceModel[index].serviceName ?? "",
               maxLines: 1,

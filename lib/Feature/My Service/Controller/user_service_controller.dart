@@ -70,7 +70,7 @@ class UserServicesController extends GetxController {
       serviceDetailsLoding(true);
       var res = await userProfileService.getMagicLink(
           navigateTo: "https://4everconnection.com/service-details/$id/");
-      // print("res $res");
+      print("res $res");
       if (res.isNotEmpty) {
         Navigator.push(
             context,
