@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forever_connection/Feature/My%20Service/Presentation/service_details.dart';
+import 'package:forever_connection/Feature/Partner/Model/partner_request_service.dart';
 import 'package:forever_connection/core/constants/api_path.dart';
 import 'package:forever_connection/core/utils/web_view.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
@@ -9,8 +10,10 @@ import '../../../../../core/constants/colors.dart';
 
 // ignore: must_be_immutable
 class UserDataTable extends StatelessWidget {
-  UserDataTable({Key? key, required this.titleList}) : super(key: key);
+  UserDataTable({Key? key, required this.titleList, this.data})
+      : super(key: key);
   List<Map<String, dynamic>> titleList;
+  List<dynamic>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class UserDataTable extends StatelessWidget {
               width: double.parse(titleList[index]['width'].toString()))),
       leftSideItemBuilder: _generateFirstColumnRow,
       rightSideItemBuilder: _generateRightHandSideColumnRow,
-      itemCount: 5,
+      itemCount: data != null ? data!.length : 0,
       // rowSeparatorWidget: const Divider(
       //   color: Colors.black38,
       //   height: 1.0,
@@ -208,7 +211,7 @@ class UserDataTable extends StatelessWidget {
             //     ? DateFormat("MM/dd/yyyy").format(
             //         DateTime.parse(userServiceModel[index].completedOn ?? ""))
             //     : ""),
-            child: const Text("text2"),
+            child: Text(data?[index].identifier),
           ),
           Container(
             width: 140.w,

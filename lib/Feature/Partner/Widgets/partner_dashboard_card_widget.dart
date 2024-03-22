@@ -8,7 +8,10 @@ import 'package:forever_connection/widgets/custom_image_view.dart';
 class PartnerDashboardCard extends StatelessWidget {
   String? title;
   String? leftImagePath;
-  String? buttonName;
+  String? subTitle1;
+  String? subTitle12;
+  int? value1;
+  int? value2;
   void Function()? ontap;
   void Function()? onIconClick;
   Color? infoButtonColor;
@@ -18,14 +21,17 @@ class PartnerDashboardCard extends StatelessWidget {
   PartnerDashboardCard(
       {Key? key,
       this.title,
-      this.buttonName,
       this.ontap,
       this.leftImagePath,
       this.infoButtonColor,
       this.infoButtonSize,
       required this.onIconClick,
       this.margin,
-      this.height})
+      this.height,
+      this.value1,
+      this.value2,
+      this.subTitle1,
+      this.subTitle12})
       : super(
           key: key,
         );
@@ -35,9 +41,10 @@ class PartnerDashboardCard extends StatelessWidget {
     return InkWell(
       onTap: ontap,
       child: Container(
-        height: height ?? MediaQuery.of(context).size.height * 0.11,
-        margin:
-            margin ?? EdgeInsets.only(bottom: 25.sp, left: 25.sp, right: 25.sp),
+        height: height ?? MediaQuery.of(context).size.height * 0.14,
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+        padding: EdgeInsets.only(right: 10.w),
+        width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(5.sp),
@@ -45,7 +52,6 @@ class PartnerDashboardCard extends StatelessWidget {
           color: const Color(0XFFD9D9D9).withOpacity(0.5.sp),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -63,48 +69,65 @@ class PartnerDashboardCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 15.sp),
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              // SizedBox(height: 6.h),
-              Text(
-                title ?? "Partner lobby",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: AppColors.floatingActionButtonColor,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text("\$0",
-                    style: TextStyle(
-                        color: AppColors.floatingActionButtonColor,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600)),
-                Text("1",
-                    style: TextStyle(
-                        color: AppColors.floatingActionButtonColor,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600))
-              ]),
-              Row(children: [
-                Text("Active",
-                    style: TextStyle(
-                        color: AppColors.greyTextColor,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w400))
-              ])
-            ]),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.info_outline,
-                size: 15.sp,
-                color: infoButtonColor ??
-                    AppColors.floatingActionButtonColor.withOpacity(0.5.sp),
-              ),
-            )
+            Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // SizedBox(height: 6.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          title ?? "Partner lobby",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: AppColors.floatingActionButtonColor,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        // SizedBox(width: 5.w),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.info_outline,
+                            size: 20.sp,
+                            color: infoButtonColor ??
+                                AppColors.floatingActionButtonColor
+                                    .withOpacity(0.5.sp),
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("${value1 ?? 0}",
+                              style: TextStyle(
+                                  color: AppColors.floatingActionButtonColor,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w600)),
+                       value2!=null?   Text("${value2 ?? 0}",
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w600)): const SizedBox.shrink()
+                        ]),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(subTitle1 ?? '',
+                              style: TextStyle(
+                                  color: AppColors.greyTextColor,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400)),
+                        subTitle12 !=null?  Text(subTitle12 ?? "",
+                              style: TextStyle(
+                                  color: AppColors.greyTextColor,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400)):const SizedBox.shrink()
+                        ])
+                  ]),
+            ),
           ],
         ),
       ),

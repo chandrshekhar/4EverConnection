@@ -85,4 +85,13 @@ class ApiPath {
   static const editMethodApi = "$baseUrl/api/wallet/withdrawal-methods";
   static const deleteMethodApi = "$baseUrl/api/wallet/withdrawal-methods";
   static const toggleMethodAsDefault = "$baseUrl/api/wallet/withdrawal-methods";
+
+  // partner
+  static const partnerDashboard = "$baseUrl/api/partner-dashboard/";
+   // partner
+  static const partnerDashboardLobbyRequest = "$baseUrl/api/partner-lobby/service-requests/";
+   // partner
+  static const partnerDashboardLobbyExpired = "$baseUrl/api/partner-lobby/expired/";
+   // partner
+  static const partnerDashboardLobbyConnection = "$baseUrl/api/partner-lobby/connections/";
 }
