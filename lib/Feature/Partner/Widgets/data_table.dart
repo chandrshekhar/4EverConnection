@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/My%20Service/Presentation/service_details.dart';
-import 'package:forever_connection/core/constants/api_path.dart';
-import 'package:forever_connection/core/utils/web_view.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../core/constants/colors.dart';
 
@@ -13,6 +11,8 @@ class UserDataTable extends StatelessWidget {
       : super(key: key);
   List<Map<String, dynamic>> titleList;
   List<dynamic>? data;
+
+  String? noData;
 
   @override
   Widget build(BuildContext context) {
@@ -213,117 +213,45 @@ class UserDataTable extends StatelessWidget {
             child: Text(data?[index].identifier),
           ),
           Container(
-            width: 140.w,
+            width: 200.w,
             height: 30.h,
             alignment: Alignment.center,
-            child: const Text("text2"),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyServiceDetailsScreen()));
-            },
-            child: Container(
-              width: 120.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              child: Text(
-                "View Details",
-                style: TextStyle(color: AppColors.darkBlue),
-              ),
-            ),
+            child: Text(data?[index].preferredPartnerName),
           ),
           Container(
-            width: 120.w,
+            width: 200.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(data?[index].serviceName),
+          ),
+          Container(
+            width: 200.w,
             height: 30.h,
             alignment: Alignment.center,
             padding: const EdgeInsets.only(left: 5, right: 5),
-            child: Container(
-                padding: EdgeInsets.only(
-                    left: 10.w, top: 3.h, bottom: 3.h, right: 10.w),
-                decoration: BoxDecoration(
-                    border: Border.all(width: 0.1),
-                    borderRadius: BorderRadius.circular(2.r),
-                    color: Colors.grey.shade100),
-                child: Row(
-                  children: [
-                    const Text(
-                      "\$",
-                      style: TextStyle(color: Color(0xFF6B6B6B), fontSize: 15),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Container(
-                      color: Colors.grey,
-                      height: 15,
-                      width: 1,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    const Text(
-                      "",
-                      style: TextStyle(color: Color(0xFF6B6B6B), fontSize: 15),
-                    )
-                  ],
-                )),
+            child: Text(data?[index].partnerAssignedName),
           ),
           Container(
-              width: 120.w,
-              height: 30.h,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Container(
-                  padding: EdgeInsets.only(
-                      left: 10.w, top: 5.h, bottom: 5.h, right: 10.w),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.1),
-                      borderRadius: BorderRadiusDirectional.circular(1),
-                      color: Colors.grey.shade100),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text("text2"),
-                      ),
-                      Icon(Icons.expand_more)
-                    ],
-                  ))),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => const WebViewScreen(
-                            webViewUrl: ApiPath.payServiceFee,
-                          )));
-            },
-            child: Container(
-                width: 60.w,
-                padding: EdgeInsets.all(5.sp),
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(width: 0.5.sp, color: AppColors.darkBlue),
-                    borderRadius: BorderRadius.circular(2.r)),
-                child: Row(
-                  children: [
-                    Icon(Icons.payment, size: 13.sp, color: Colors.green),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text(
-                      "Pay",
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.green,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
-                )),
+            width: 200.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Text(data?[index].statusDescription),
+          ),
+          Container(
+            width: 200.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(data?[index].source != null
+                ? DateFormat('MMM. d, y, h a').format(
+                    DateTime.parse(data?[index].actionScheduledOn ?? ""))
+                : ""),
+          ),
+          Container(
+            width: 100.w,
+            height: 30.h,
+            alignment: Alignment.center,
+            child: Text(data?[index].source),
           ),
         ],
       ),

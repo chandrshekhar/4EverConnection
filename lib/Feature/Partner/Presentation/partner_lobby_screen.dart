@@ -23,24 +23,24 @@ class _PartnerLobbyScreenState extends State<PartnerLobbyScreen> {
     {'title': "blackfield", "width": "0"},
     {'title': "Action", "width": "120"},
     {'title': "Service #", "width": "120"},
-    {'title': "Name", "width": "120"},
-    {'title': "Service", "width": "120"},
-    {'title': "Partner Assigned", "width": "150"},
+    {'title': "Name", "width": "200"},
+    {'title': "Service", "width": "200"},
+    {'title': "Partner Assigned", "width": "200"},
     {'title': "Contact Effort", "width": "150"},
     {'title': "Remaining Time", "width": "150"},
-    {'title': "Source", "width": "120"},
+    {'title': "Source", "width": "100"},
   ];
 
   List<Map<String, dynamic>> serviceRequestTableTitle = [
     {'title': "blackfield", "width": "0"},
     {'title': "Action", "width": "120"},
     {'title': "Service #", "width": "120"},
-    {'title': "Name", "width": "120"},
-    {'title': "Service", "width": "120"},
-    {'title': "Partner Assigned", "width": "150"},
-    {'title': "Status", "width": "150"},
-    {'title': "Date Time", "width": "150"},
-    {'title': "Source", "width": "120"},
+    {'title': "Name", "width": "200"},
+    {'title': "Service", "width": "200"},
+    {'title': "Partner Assigned", "width": "200"},
+    {'title': "Status", "width": "200"},
+    {'title': "Date Time", "width": "200"},
+    {'title': "Source", "width": "100"},
   ];
 
   List<Map<String, dynamic>> expiredTableTitle = [
@@ -129,14 +129,16 @@ class _PartnerLobbyScreenState extends State<PartnerLobbyScreen> {
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
-                        Container(
-                          color: Colors.black,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          child: UserDataTable(
-                              titleList: serviceRequestTableTitle,
-                              data: partnerDashboardController
-                                  .partnerDashboardLobbyRequest.value.services),
-                        ),
+                        Obx(() => Container(
+                              color: Colors.black,
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              child: UserDataTable(
+                                  titleList: serviceRequestTableTitle,
+                                  data: partnerDashboardController
+                                      .partnerDashboardLobbyRequest
+                                      .value
+                                      .services),
+                            )),
                         Container(
                           padding: EdgeInsets.all(10.w),
                           decoration: BoxDecoration(
