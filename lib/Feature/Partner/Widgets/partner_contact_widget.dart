@@ -1,14 +1,27 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:forever_connection/Feature/Partner/Controller/partner_contact_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
+import 'package:get/get.dart';
 
-class PartnerContactWidget extends StatelessWidget {
-  PartnerContactWidget({super.key});
+import '../Presentation/partner_contact_list.dart';
 
+class PartnerContactWidget extends StatefulWidget {
+  final bool isContactAddShowingn;
+  ValueChanged? onChanged;
+  PartnerContactWidget(
+      {super.key, this.isContactAddShowingn = true, this.onChanged});
+
+  @override
+  State<PartnerContactWidget> createState() => _PartnerContactWidgetState();
+}
+
+class _PartnerContactWidgetState extends State<PartnerContactWidget> {
+  final partnerContacController = Get.put(PartnerContactController());
   // final GlobalKey<ScaffoldState> scaffoldKey;
-
   List<String> dropDownList = [
     "Quickly Search",
     "Recent users",
@@ -19,30 +32,63 @@ class PartnerContactWidget extends StatelessWidget {
     "Calendar"
   ];
 
+  List<String> contactList = ["Add Contact", "View Contact"];
+
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      contanerWithBorder(
-          child: CustomImageView(
-        height: 24.h,
-        width: 24.w,
-        svgPath: ImageConstant.addContact,
-      )),
-      contanerWithBorder(
-          child: SizedBox(
-              height: 24.h,
-              width: 200.w,
-              child: TextField(
-                maxLines: 1,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(bottom: 10.h),
-                    border: InputBorder.none,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 25.sp,
-                    )),
-              ))),
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      widget.isContactAddShowingn
+          ? PopupMenuButton(
+              position: PopupMenuPosition.under,
+              color: Colors.white,
+              onSelected: (value) {
+                if (value.toString() == "1") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const PartnerContactListScreen()));
+                }
+              },
+              padding: EdgeInsets.zero,
+              surfaceTintColor: Colors.white,
+              icon: contanerWithBorder(
+                  child: CustomImageView(
+                height: 34.h,
+                width: 34.w,
+                svgPath: ImageConstant.addContact,
+              )),
+              itemBuilder: (BuildContext bc) {
+                return List.generate(
+                    contactList.length,
+                    (index) => dropDownWidget(
+                        title: contactList[index], index: index));
+              },
+            )
+          : SizedBox(),
+      SizedBox(
+        width: widget.isContactAddShowingn ? 10.w : 0,
+      ),
+      Expanded(
+        child: contanerWithBorder(
+            child: SizedBox(
+                height: 34.h,
+                child: TextField(
+                  onChanged: widget.onChanged,
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(bottom: 18.h),
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        size: 25.sp,
+                      )),
+                ))),
+      ),
+      SizedBox(
+        width: 10.w,
+      ),
       PopupMenuButton(
+        position: PopupMenuPosition.under,
         color: Colors.white,
         onSelected: (value) {
           // your logic
@@ -52,8 +98,8 @@ class PartnerContactWidget extends StatelessWidget {
         icon: contanerWithBorder(
             color: AppColors.dashBoardColor,
             child: CustomImageView(
-              height: 24.h,
-              width: 24.w,
+              height: 34.h,
+              width: 34.w,
               svgPath: ImageConstant.filter,
             )),
         itemBuilder: (BuildContext bc) {

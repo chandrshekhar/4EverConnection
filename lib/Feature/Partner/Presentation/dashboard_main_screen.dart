@@ -185,7 +185,10 @@ class PartnerDashboarMaindScreen extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  PartnerContactWidget(),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 18.w),
+                    child: PartnerContactWidget(),
+                  ),
                   SizedBox(height: 20.h),
                   Expanded(
                     // flex: 1,

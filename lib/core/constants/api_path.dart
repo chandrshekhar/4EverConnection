@@ -88,10 +88,15 @@ class ApiPath {
 
   // partner
   static const partnerDashboard = "$baseUrl/api/partner-dashboard/";
-   // partner
-  static const partnerDashboardLobbyRequest = "$baseUrl/api/partner-lobby/service-requests/";
-   // partner
-  static const partnerDashboardLobbyExpired = "$baseUrl/api/partner-lobby/expired/";
-   // partner
-  static const partnerDashboardLobbyConnection = "$baseUrl/api/partner-lobby/connections/";
+  // partner
+  static const partnerDashboardLobbyRequest =
+      "$baseUrl/api/partner-lobby/service-requests/";
+  // partner
+  static const partnerDashboardLobbyExpired =
+      "$baseUrl/api/partner-lobby/expired/";
+  // partner
+  static const partnerDashboardLobbyConnection =
+      "$baseUrl/api/partner-lobby/connections/";
+  //partner contact list
+  static const partnerContactListAp = "$baseUrl/api/4ever-contacts/";
 }
