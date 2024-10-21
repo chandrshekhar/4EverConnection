@@ -1,12 +1,12 @@
 class ProtectionDataModel {
   int? id;
-  int? user;
+  dynamic user;
   String? policyNumber;
   String? policyType;
   String? issueDate;
   String? companyName;
   String? companyPhone;
-  String? currentDeathBenefit;
+  dynamic currentDeathBenefit;
   String? currentPremiums;
   String? type;
 
@@ -34,6 +34,4 @@ class ProtectionDataModel {
     currentPremiums = json['current_premiums'];
     type = json['type'];
   }
-
-  
 }

@@ -37,27 +37,30 @@ class ProtectionController extends GetxController {
     issueDateController.value.text = dataModel.issueDate ?? "";
     companyPhoneController.value.text = dataModel.companyPhone ?? "";
     companynameController.value.text = dataModel.companyName ?? "";
-    deathBenefitController.value.text = currency(
-            context: context, amount: dataModel.currentDeathBenefit ?? "00") ??
-        "";
-    premimusController.value.text =
-        currency(context: context, amount: dataModel.currentPremiums ?? "00") ??
-            "";
+    if (dataModel.currentDeathBenefit != null) {
+      deathBenefitController.value.text =
+          currency(context: context, amount: dataModel.currentDeathBenefit.toString()) ?? "";
+    } else {
+      deathBenefitController.value.text = "";
+    }
+    if (dataModel.currentPremiums != null && dataModel.currentPremiums.toString().isNotEmpty) {
+      premimusController.value.text =
+          currency(context: context, amount: dataModel.currentPremiums ?? "00") ?? "";
+    } else {
+      premimusController.value.text = "";
+    }
   }
 
   String? currency({BuildContext? context, required String amount}) {
     // Locale locale = Localizations.localeOf(context!);
     var format = NumberFormat.simpleCurrency(locale: Platform.localeName);
-    String? formattedAmount = NumberFormat.currency(
-            locale: Platform.localeName, symbol: format.currencySymbol)
-        .format(double.parse(amount));
+    String? formattedAmount =
+        NumberFormat.currency(locale: Platform.localeName, symbol: format.currencySymbol)
+            .format(double.parse(amount));
     return formattedAmount;
   }
 
   Future<void> getUserRelationshipData() async {
-
-
-    
     var token = await SharedPref().getUserToken();
     try {
       isprotectionDataLoading(true);
@@ -69,9 +72,8 @@ class ProtectionController extends GetxController {
 
       var response = await dio.get(ApiPath.protection);
       if (response.statusCode == 200) {
-        final List<ProtectionDataModel> data = (response.data as List)
-            .map((json) => ProtectionDataModel.fromJson(json))
-            .toList();
+        final List<ProtectionDataModel> data =
+            (response.data as List).map((json) => ProtectionDataModel.fromJson(json)).toList();
 
         protectionDataList.value = data;
 

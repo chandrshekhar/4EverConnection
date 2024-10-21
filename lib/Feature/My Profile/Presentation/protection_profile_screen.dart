@@ -17,8 +17,7 @@ class ProtectionProfileScreen extends StatefulWidget {
   const ProtectionProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProtectionProfileScreen> createState() =>
-      _ProtectionProfileScreenState();
+  State<ProtectionProfileScreen> createState() => _ProtectionProfileScreenState();
 }
 
 class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
@@ -64,33 +63,26 @@ class _ProtectionProfileScreenState extends State<ProtectionProfileScreen> {
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.only(bottom: 7.h),
-                        decoration: const BoxDecoration(
-                            color: AppColors.floatingActionButtonColor),
+                        decoration: const BoxDecoration(color: AppColors.floatingActionButtonColor),
                         child: ListTile(
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 10),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                           title: Text(
-                            capitalizeWords(protectionController
-                                    .protectionDataList[index].type!) ??
+                            capitalizeWords(protectionController.protectionDataList[index].type!) ??
                                 "",
                             style: const TextStyle(color: Colors.white),
                           ),
-                          trailing: const Icon(Icons.arrow_drop_down,
-                              color: Colors.white),
+                          trailing: const Icon(Icons.arrow_drop_down, color: Colors.white),
                           onTap: () {
                             protectionController.updateControllerData(
-                                protectionController.protectionDataList[index],
-                                context);
+                                protectionController.protectionDataList[index], context);
+                            
 
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProtectionDetailsScreen(
-                                            protectionType: capitalizeWords(
-                                                protectionController
-                                                    .protectionDataList[index]
-                                                    .type!))));
+                                    builder: (context) => ProtectionDetailsScreen(
+                                        protectionType: capitalizeWords(protectionController
+                                            .protectionDataList[index].type!))));
                           },
                         ),
                       );

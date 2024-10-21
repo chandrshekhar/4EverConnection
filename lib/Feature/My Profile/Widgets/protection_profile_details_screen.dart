@@ -27,11 +27,8 @@ class ProtectionDetailsScreen extends StatelessWidget {
   final protectionController = Get.put(ProtectionController());
   final personalDetailsController = Get.put(PersonalDetailsController());
 
-
   @override
   Widget build(BuildContext context) {
-   
-
     return Scaffold(
       backgroundColor: appTheme.lightBlue50,
       appBar: CustomAppBar(
@@ -55,98 +52,95 @@ class ProtectionDetailsScreen extends StatelessWidget {
           styleType: Style.bgShadow),
       body: Obx(
         () => Container(
-          margin:
-              EdgeInsets.only(left: 12.w, right: 12.w, bottom: 25.h, top: 15.h),
+          margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 25.h, top: 15.h),
           padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 12.h),
-          decoration: AppDecoration.outlineBlack
-              .copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
-          child: Column(
-            children: [
-              rowWidget(
-                controller: protectionController.policeNumberController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Policy Number",
-              ),
-              rowWidget(
-                  controller: protectionController.policyTypeController.value,
+          decoration:
+              AppDecoration.outlineBlack.copyWith(borderRadius: BorderRadiusStyle.roundedBorder16),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                rowWidget(
+                  controller: protectionController.policeNumberController.value,
                   svgpath: ImageConstant.imgUser,
-                  labelText: "Policy Type"),
-              rowWidget(
-                  controller: protectionController.issueDateController.value,
+                  labelText: "Policy Number",
+                ),
+                rowWidget(
+                    controller: protectionController.policyTypeController.value,
+                    svgpath: ImageConstant.imgUser,
+                    labelText: "Policy Type"),
+                rowWidget(
+                    controller: protectionController.issueDateController.value,
+                    svgpath: ImageConstant.imgUser,
+                    labelText: "Issue Date"),
+                rowWidget(
+                    controller: protectionController.companynameController.value,
+                    svgpath: ImageConstant.imgUser,
+                    labelText: "Company Name"),
+                rowWidget(
+                  controller: protectionController.companyPhoneController.value,
                   svgpath: ImageConstant.imgUser,
-                  labelText: "Issue Date"),
-              rowWidget(
-                  controller: protectionController.companynameController.value,
-                  svgpath: ImageConstant.imgUser,
-                  labelText: "Company Name"),
-              rowWidget(
-                controller: protectionController.companyPhoneController.value,
-                svgpath: ImageConstant.imgUser,
-                labelText: "Company Phone",
-                suffix: InkWell(
-                  onTap: () async {
-                    try {
-                      final Uri phoneLaunchUri = Uri(
-                          scheme: 'tel',
-                          path: protectionController
-                              .policeNumberController.value.text);
+                  labelText: "Company Phone",
+                  suffix: InkWell(
+                    onTap: () async {
+                      try {
+                        final Uri phoneLaunchUri = Uri(
+                            scheme: 'tel',
+                            path: protectionController.policeNumberController.value.text);
 
-                      launchUrl(phoneLaunchUri);
-                      // launchUrl(Uri.parse(url));
-                    } catch (e) {
-                      log(e.toString());
-                    }
-                  },
-                  child: Container(
-                      color: AppColors.floatingActionButtonColor,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.h),
-                      child: const Icon(
-                        Icons.call,
-                        color: Colors.white,
-                        size: 15,
-                      )),
+                        launchUrl(phoneLaunchUri);
+                        // launchUrl(Uri.parse(url));
+                      } catch (e) {
+                        log(e.toString());
+                      }
+                    },
+                    child: Container(
+                        color: AppColors.floatingActionButtonColor,
+                        padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.h),
+                        child: const Icon(
+                          Icons.call,
+                          color: Colors.white,
+                          size: 15,
+                        )),
+                  ),
                 ),
-              ),
-              rowWidget(
-                  controller: protectionController.deathBenefitController.value,
-                  svgpath: ImageConstant.imgUser,
-                  labelText: "Current Death Benefit"),
-              rowWidget(
-                  controller: protectionController.premimusController.value,
-                  svgpath: ImageConstant.imgUser,
-                  labelText: "Current Premiums"),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(width: 5),
-                    Obx(
-                      () => personalDetailsController.isLoadingEdit.value
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            )
-                          : Expanded(
-                              child: CustomElevatedButton(
-                                  onTap: () async {
-                                    await personalDetailsController
-                                        .getMagicLink(context);
-                                  },
-                                  text: "Edit",
-                                  buttonTextStyle: TextStyle(fontSize: 22.sp),
-                                  rightIcon: Container(
-                                      margin: EdgeInsets.only(left: 16.h),
-                                      child: CustomImageView(
-                                          svgPath: ImageConstant
-                                              .imgArrowrightPrimary))),
-                            ),
-                    )
-                  ],
+                rowWidget(
+                    controller: protectionController.deathBenefitController.value,
+                    svgpath: ImageConstant.imgUser,
+                    labelText: "Current Death Benefit"),
+                rowWidget(
+                    controller: protectionController.premimusController.value,
+                    svgpath: ImageConstant.imgUser,
+                    labelText: "Current Premiums"),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(width: 5),
+                      Obx(
+                        () => personalDetailsController.isLoadingEdit.value
+                            ? const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              )
+                            : Expanded(
+                                child: CustomElevatedButton(
+                                    onTap: () async {
+                                      await personalDetailsController.getMagicLink(context);
+                                    },
+                                    text: "Edit",
+                                    buttonTextStyle: TextStyle(fontSize: 22.sp),
+                                    rightIcon: Container(
+                                        margin: EdgeInsets.only(left: 16.h),
+                                        child: CustomImageView(
+                                            svgPath: ImageConstant.imgArrowrightPrimary))),
+                              ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-            ],
+                const SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),
@@ -154,10 +148,7 @@ class ProtectionDetailsScreen extends StatelessWidget {
   }
 
   Widget rowWidget(
-      {String? svgpath,
-      String? labelText,
-      TextEditingController? controller,
-      Widget? suffix}) {
+      {String? svgpath, String? labelText, TextEditingController? controller, Widget? suffix}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h),
       child: CustomTextFormField(

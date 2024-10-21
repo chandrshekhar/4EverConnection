@@ -22,8 +22,7 @@ class CustomAlretDialogs {
     {"id": "11", "name": "Newspaper"},
     {"id": "12", "name": "Other"}
   ];
-  void openDialogforCheckClient(
-      BuildContext context, SignupController signupController) {
+  void openDialogforCheckClient(BuildContext context, SignupController signupController) {
     AwesomeDialog(
             btnOkColor: AppColors.floatingActionButtonColor,
             context: context,
@@ -50,8 +49,7 @@ class CustomAlretDialogs {
                   ),
                   SizedBox(height: 10.h),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
                     child: CustomTextFormField(
                         controller: signupController.firstNameController.value,
                         contentPadding: const EdgeInsets.all(5),
@@ -64,8 +62,7 @@ class CustomAlretDialogs {
                         obscureText: false),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
                     child: CustomTextFormField(
                         controller: signupController.lastnameController.value,
                         contentPadding: const EdgeInsets.all(5),
@@ -78,8 +75,7 @@ class CustomAlretDialogs {
                         obscureText: false),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10),
                     child: CustomTextFormField(
                         controller: signupController.emailController.value,
                         contentPadding: const EdgeInsets.all(5),
@@ -108,15 +104,13 @@ class CustomAlretDialogs {
               signupController.checkClient(context);
             },
             barrierColor: AppColors.lightBlue.withOpacity(0.3),
-            descTextStyle:
-                const TextStyle(color: AppColors.buttonColor, fontSize: 15),
-            titleTextStyle: const TextStyle(
-                color: Colors.red, fontWeight: FontWeight.w600, fontSize: 16))
+            descTextStyle: const TextStyle(color: AppColors.buttonColor, fontSize: 15),
+            titleTextStyle:
+                const TextStyle(color: Colors.red, fontWeight: FontWeight.w600, fontSize: 16))
         .show();
   }
 
-  void openDialogForNoClient(
-      BuildContext context, SignupController signupController) {
+  void openDialogForNoClient(BuildContext context, SignupController signupController) {
     AwesomeDialog(
       btnOkColor: AppColors.floatingActionButtonColor,
       context: context,
@@ -152,18 +146,16 @@ class CustomAlretDialogs {
             itemCount: sourceType.length, // total number of items
             itemBuilder: (context, index) {
               return Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.grey.withOpacity(0.5))),
                   child: Row(
                     children: [
                       Obx(
                         () => Radio(
                             value: int.parse(sourceType[index]["id"]),
-                            groupValue:
-                                signupController.selectedSourceType.value,
+                            groupValue: signupController.selectedSourceType.value,
                             onChanged: (v) {
-                              signupController.sourceOption(
-                                  int.parse(sourceType[index]["id"]));
+                              signupController.sourceOption(int.parse(sourceType[index]["id"]));
                               Navigator.pop(context);
                             }),
                       ),
@@ -211,15 +203,13 @@ class CustomAlretDialogs {
               children: [
                 Text(
                   error.replaceFirst(error[0], error[0].toUpperCase()),
-                  style:
-                      TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: EdgeInsets.all(12.sp),
                   child: Text(
                     message,
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
                   ),
                 )
               ],
@@ -236,10 +226,9 @@ class CustomAlretDialogs {
               serviceController.addServiceRequest(context);
             },
             barrierColor: AppColors.lightBlue.withOpacity(0.3),
-            descTextStyle:
-                const TextStyle(color: AppColors.buttonColor, fontSize: 15),
-            titleTextStyle: const TextStyle(
-                color: Colors.red, fontWeight: FontWeight.w600, fontSize: 16))
+            descTextStyle: const TextStyle(color: AppColors.buttonColor, fontSize: 15),
+            titleTextStyle:
+                const TextStyle(color: Colors.red, fontWeight: FontWeight.w600, fontSize: 16))
         .show();
   }
 
@@ -307,9 +296,7 @@ class CustomAlretDialogs {
       btnCancelOnPress: () {
         //  Navigator.pop(context);
       },
-      btnOkOnPress: () {
-         
-      },
+      btnOkOnPress: () {},
       btnOkColor: AppColors.darkBlue,
     ).show();
   }
