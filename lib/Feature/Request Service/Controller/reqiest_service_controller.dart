@@ -82,6 +82,18 @@ class RequestServiceController extends GetxController {
     forceIdDuplicate.value = false;
   }
 
+  clearInitialValue() {
+    partnerList.clear();
+    setLocalListToEmpty();
+    activeIndex.value = -1;
+    selectedDate.value = DateTime.now();
+    selectDateController.value.clear();
+    serviceSearchController.value.clear();
+    partnerSearchController.value.clear();
+    commentController.value.clear();
+    selectedValue.value = "";
+  }
+
   requistServiceEnableMethod() {
     if (selectDateController.value.text.isNotEmpty &&
         selectedValue.value.isNotEmpty &&

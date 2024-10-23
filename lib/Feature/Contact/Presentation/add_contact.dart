@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forever_connection/Feature/Contact/Controller/add_contact_controller.dart';
-import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/utils/address_search.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/utils/dob_formater.dart';
 import 'package:forever_connection/core/utils/place_service.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image.dart';
@@ -256,6 +256,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           LengthLimitingTextInputFormatter(10),
                           CustomDateTextFormatter(),
                         ],
+
                         hintText: "MM/DD/YYYYY",
                         textFieldTap: () {
                           // addController.selectDate(context);
@@ -314,6 +315,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       lableText: "Occupation",
                       controller: addController.occupationController.value,
                       icon: ImageConstant.imgCarGray600,
+                      textInputType: TextInputType.text,
                       validator: (value) {
                         return null;
                       },
@@ -490,6 +492,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     iconWithTextField(
                       lableText: "Personal Email",
                       controller: addController.personalEmail.value,
+                      textInputType: TextInputType.emailAddress,
                       icon: ImageConstant.imgVector,
                       validator: (value) {
                         return null;
@@ -514,6 +517,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     iconWithTextField(
                       lableText: "Business Email",
                       controller: addController.businessEmailController.value,
+                      textInputType: TextInputType.emailAddress,
                       icon: ImageConstant.imgVector,
                       validator: (value) {
                         return null;
@@ -865,7 +869,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                   ? "Save"
                                   : "Create Contact",
                               buttonStyle: const ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
+                                  backgroundColor: WidgetStatePropertyAll(
                                       AppColors.buttonColor)),
                               margin: EdgeInsets.only(
                                   left: 24.h, right: 24.h, bottom: 22.v),
@@ -897,6 +901,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
       bool? readOnly,
       String? hintText,
       VoidCallback? textFieldTap,
+      TextInputType? textInputType,
       List<TextInputFormatter>? inputFormate}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -916,7 +921,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 onTap: textFieldTap,
                 controller: controller,
                 hintText: hintText,
-
+                textInputType: textInputType,
                 // margin: EdgeInsets.only(
                 //     left: 12.h, top: 0.v, right: 12.h),
                 // hintText: "First name *",

@@ -43,6 +43,7 @@ class ConnectionController extends GetxController {
       };
       isContactUploding(true);
       var res = await _connectionRepo.uplodConnection(reqModel: reqModel);
+      print("connection-->$res");
       ToastWidget.successToast(success: res['message']);
       isContactUploding(false);
 
@@ -54,6 +55,7 @@ class ConnectionController extends GetxController {
           context,
           MaterialPageRoute(builder: (_) => const CreateConnectionScreen()),
           (route) => false);
+      getConnection();
     } catch (e) {
       // ToastWidget.errorToast(error: e.toString());
       isContactUploding(false);

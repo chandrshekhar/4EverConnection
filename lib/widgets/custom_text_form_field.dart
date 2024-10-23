@@ -108,6 +108,7 @@ class CustomTextFormField extends StatelessWidget {
           focusNode: focusNode,
           inputFormatters: inputFormatters,
           textCapitalization: TextCapitalization.sentences,
+         
           maxLength: maxLength,
           readOnly: readOnly,
           controller: controller,

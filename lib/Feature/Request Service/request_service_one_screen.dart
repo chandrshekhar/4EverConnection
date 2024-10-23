@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/Feature/Request%20Service/widgets/timedisplay_item_widget.dart';
-import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/utils/toast_widget.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_image_1.dart';
 import 'package:forever_connection/widgets/app_bar/appbar_title.dart';
@@ -28,15 +28,9 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
   final requestServiceController = Get.put(RequestServiceController());
   @override
   void initState() {
-    requestServiceController.partnerList.clear();
-    requestServiceController.setLocalListToEmpty();
-    requestServiceController.activeIndex.value = -1;
-    requestServiceController.selectedDate.value = DateTime.now();
-    requestServiceController.selectDateController.value.clear();
-    requestServiceController.serviceSearchController.value.clear();
-    requestServiceController.partnerSearchController.value.clear();
     super.initState();
     // Initialize the selected value
+    requestServiceController.clearInitialValue();
   }
 
   GlobalKey<ScaffoldState> globalKey = GlobalKey();
@@ -46,7 +40,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.lightBlue50,
       key: globalKey,
-      endDrawer: CustomDrawerWidget(),
+      endDrawer: const CustomDrawerWidget(),
       appBar: CustomAppBar(
           leadingWidth: 44.h,
           leading: IconButton(
@@ -288,7 +282,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                 Obx(() => Row(
                                       children: <Widget>[
                                         Radio(
-                                          fillColor: MaterialStateProperty.all(
+                                          fillColor: WidgetStateProperty.all(
                                               Colors.blue),
                                           value: 'In-Person',
                                           groupValue: requestServiceController
@@ -301,9 +295,8 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                         const Text('In person'),
                                         SizedBox(width: 20.v),
                                         Radio(
-                                            fillColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.blue),
+                                            fillColor: WidgetStateProperty.all(
+                                                Colors.blue),
                                             value: 'Phone',
                                             groupValue: requestServiceController
                                                 .selectedValue.value,
@@ -315,7 +308,7 @@ class _RequestServiceOneScreenState extends State<RequestServiceOneScreen> {
                                         const Text('Phone'),
                                         SizedBox(width: 20.v),
                                         Radio(
-                                          fillColor: MaterialStateProperty.all(
+                                          fillColor: WidgetStateProperty.all(
                                               Colors.blue),
                                           value: 'Video',
                                           groupValue: requestServiceController

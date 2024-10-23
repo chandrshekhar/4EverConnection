@@ -208,7 +208,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 connectionController.setContactId(-1);
                               },
                               fromWhere: "contact",
-                              lableName: "Select Contact",
+                              lableName: "Select from my contact",
                               list: contactControllers.contactModelList,
                               controller:
                                   connectionController.contactController.value,
@@ -221,7 +221,6 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                     .toList();
                               },
                               onSuggestionSelected: (suggestion) async {
-                                print("PANDEY");
                                 connectionController
                                     .setContactId(suggestion.id);
                                 connectionController
@@ -669,7 +668,7 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                       },
                                 text: "Create Connection",
                                 buttonStyle: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
+                                    backgroundColor: WidgetStatePropertyAll(
                                         validationController.isButtonStateChange
                                                     .value ==
                                                 false
@@ -692,10 +691,11 @@ class _CreateConnectionScreenState extends State<CreateConnectionScreen> {
                                 onTap: () {
                                   connectionController
                                       .userContactConnect(context);
+                                      
                                 },
                                 text: "Create Connection",
                                 buttonStyle: const ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
+                                    backgroundColor: WidgetStatePropertyAll(
                                         AppColors.buttonColor)),
                                 margin: EdgeInsets.only(
                                     left: 24.w, right: 24.w, bottom: 22.h),
