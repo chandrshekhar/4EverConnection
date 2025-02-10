@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 
 // ignore: must_be_immutable
 class UserexperienceItemWidget extends StatelessWidget {
@@ -78,8 +78,7 @@ class UserexperienceItemWidget extends StatelessWidget {
                   Icons.info_outline,
                   size: infoButtonSize ?? 30.adaptSize,
                   color: infoButtonColor ??
-                      AppColors.floatingActionButtonColor
-                          .withOpacity(0.8.adaptSize),
+                      AppColors.floatingActionButtonColor.withOpacity(0.8),
                 ))
             // InkWell(
             //   onTap: onIconClick,

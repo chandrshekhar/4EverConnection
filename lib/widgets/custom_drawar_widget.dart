@@ -216,6 +216,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
     return SafeArea(
       child: Drawer(
         backgroundColor: AppColors.darkBlue,
+        width: MediaQuery.of(context).size.width * 0.7,
         child: SingleChildScrollView(
           child: Column(
             children: [

@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:forever_connection/Feature/Dashboard/Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Feature/Connection/Presentation/connection_main_screen.dart';
-import 'package:forever_connection/core/utils/web_view.dart';
+import 'package:forever_connection/Feature/Dashboard/Controller/dhashboard_controller.dart';
 import 'package:forever_connection/Feature/Request%20Service/Controller/reqiest_service_controller.dart';
 import 'package:forever_connection/core/constants/colors.dart';
 import 'package:forever_connection/core/constants/image_constant.dart';
@@ -11,8 +10,10 @@ import 'package:forever_connection/routes/app_routes.dart';
 import 'package:forever_connection/widgets/custom_drawar_widget.dart';
 import 'package:forever_connection/widgets/custom_image_view.dart';
 import 'package:get/get.dart';
-import '../../My Profile/Controller/user_profile_controller.dart';
+
+import '../../../core/utils/web_view.dart';
 import '../../../widgets/custom_popup_widget.dart';
+import '../../My Profile/Controller/user_profile_controller.dart';
 import '../widgets/userexperience_item_widget.dart';
 
 // ignore: must_be_immutable
@@ -35,7 +36,7 @@ class DashboardScreen extends StatelessWidget {
       key: _key,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      endDrawer: CustomDrawerWidget(),
+      endDrawer: const CustomDrawerWidget(),
       body: Obx(
         () => myProfileController.isLoadingProfileData == true
             ? const Center(
@@ -293,45 +294,46 @@ class DashboardScreen extends StatelessWidget {
                       },
                     ),
                   ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    color: const Color(0xFFEAF7FE),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 15.sp),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const WebViewScreen(
+                                        webViewUrl:
+                                            "https://www.youtube.com/watch?v=ehipTnJaNr8",
+                                      )));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.play_circle,
+                              color: AppColors.floatingActionButtonColor,
+                            ),
+                            SizedBox(
+                              width: 6.sp,
+                            ),
+                            Text(
+                              "Video Introduction",
+                              style: TextStyle(
+                                  color: AppColors.floatingActionButtonColor,
+                                  // decoration: TextDecoration.underline,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-      ),
-      bottomSheet: Container(
-        color: const Color(0xFFEAF7FE),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.sp),
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => const WebViewScreen(
-                            webViewUrl:
-                                "https://www.youtube.com/watch?v=ehipTnJaNr8",
-                          )));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.play_circle,
-                  color: AppColors.floatingActionButtonColor,
-                ),
-                SizedBox(
-                  width: 6.sp,
-                ),
-                Text(
-                  "Video Introduction",
-                  style: TextStyle(
-                      color: AppColors.floatingActionButtonColor,
-                      // decoration: TextDecoration.underline,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w700),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

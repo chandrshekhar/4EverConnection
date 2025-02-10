@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forever_connection/Feature/Auth/Controller/login_controller.dart';
-import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/core/constants/colors.dart';
+import 'package:forever_connection/core/utils/app_export.dart';
 import 'package:forever_connection/widgets/custom_elevated_button.dart';
 import 'package:forever_connection/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
@@ -211,7 +211,7 @@ class LoginScreen extends StatelessWidget {
                                 ? const CircularProgressIndicator.adaptive()
                                 : Container(),
                             buttonStyle: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll(
+                                backgroundColor: WidgetStatePropertyAll(
                                     AppColors.buttonColor2)),
                             buttonTextStyle: CustomTextStyles.bodyLargePrimary,
                           ),

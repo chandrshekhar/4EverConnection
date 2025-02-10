@@ -43,7 +43,7 @@ class AuthOptionScreen extends StatelessWidget {
               Text(
                 '"The Effect of Quality"',
                 style: TextStyle(
-                    height: 4.h,
+                    height: 1.5.h,
                     fontSize: 24.sp,
                     color: AppColors.buttonColor2,
                     fontWeight: FontWeight.bold),
@@ -57,7 +57,7 @@ class AuthOptionScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400),
               ),
               SizedBox(
-                height: 30.h,
+                height: 20.h,
               ),
               Text(
                 "Your Virtual office with a\n 100% Free Income Opportunity",
@@ -67,69 +67,74 @@ class AuthOptionScreen extends StatelessWidget {
               SizedBox(
                 height: 40.h,
               ),
-            ],
-          ),
-        ),
-      ),
-      bottomSheet: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 30.h, right: 40.w, left: 40.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_) => LoginScreen()),
-                        (route) => false);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.buttonColor2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.r), // <-- Radius
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 30.w),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignUpScreen()),
-                        (route) => false);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // maximumSize: Size(150.w, 100.h),
-                    // minimumSize: Size(150.w, 60.h),
-                    backgroundColor: AppColors.dashBoardColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.r), // <-- Radius
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
-                    ),
+              Container(
+                color: Colors.white,
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(bottom: 30.h, right: 40.w, left: 40.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => LoginScreen()),
+                                (route) => false);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.buttonColor2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(6.r), // <-- Radius
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.h),
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 30.w),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const SignUpScreen()),
+                                (route) => false);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            // maximumSize: Size(150.w, 100.h),
+                            // minimumSize: Size(150.w, 60.h),
+                            backgroundColor: AppColors.dashBoardColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(6.r), // <-- Radius
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.h),
+                            child: Text(
+                              'Register',
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
